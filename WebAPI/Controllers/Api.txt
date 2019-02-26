@@ -1,0 +1,2 @@
+ public ActionResult<List<Chengji>> GetCourseInfo(string classid, string subid)
+ public ActionResult<List<Chengji>> GetCourseInfoByTestId(string classid, string subid, string TestId)
