@@ -10,8 +10,22 @@ namespace Education.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
+
+        [HttpGet("QueryByStudentId")]
+        public ActionResult<List<Student>> QueryByStudentId(string Id){
+            var baseInfo = Dataset.StudentList.Where(x => x.ID.Equals(Id)).ToList();
+            return baseInfo;
+        }
+
+        [HttpGet("QueryByClassId")]
+        public ActionResult<List<Student>> QueryByClassId(string Id){
+            var baseInfo = Dataset.StudentList.Where(x => x.ClassId.Equals(Id)).ToList();
+            return baseInfo;
+        }
+
+
         /// <summary>
-        /// 获得学生信息
+        /// 获得学生详细信息
         /// /// </summary>
         /// <returns></returns>
         [HttpGet("GetStudentInfo")]
@@ -19,22 +33,22 @@ namespace Education.Controllers
         {
             Console.WriteLine("StudentID:" + Id);
             //获得基础信息
-            var baseInfo = Dataset.StudentList.Where(x => x.bf_StudentID.Equals(Id));
+            var baseInfo = Dataset.StudentList.Where(x => x.ID.Equals(Id));
             if (baseInfo.Count() == 1)
             {
                 //应该仅有一条记录
                 var info = new StudentInfo();
                 info.BaseInfo = baseInfo.First();
                 //教师记录
-                info.Teachers = Dataset.TeacherList.Where(x => x.cla_id == info.BaseInfo.cla_id).ToList();
+                info.Teachers = Dataset.TeacherList.Where(x => x.cla_id == info.BaseInfo.ClassId).ToList();
                 //考勤记录
-                info.Kaoqins = Dataset.KaoqinList.Where(x => x.bf_studentID == info.BaseInfo.bf_StudentID).ToList();
+                info.Kaoqins = Dataset.KaoqinList.Where(x => x.bf_studentID == info.BaseInfo.ID).ToList();
                 //成绩记录
-                info.Chengjis = Dataset.ChengjiList.Where(x => x.mes_StudentID == info.BaseInfo.bf_StudentID).ToList();
+                info.Chengjis = Dataset.ChengjiList.Where(x => x.mes_StudentID == info.BaseInfo.ID).ToList();
                 //成绩件数
                 info.ChengjiCnt = info.Chengjis.Count;
                 //消费记录
-                info.Consumptions = Dataset.ConsumptionList.Where(x => x.bf_studentID == info.BaseInfo.bf_StudentID).ToList();
+                info.Consumptions = Dataset.ConsumptionList.Where(x => x.bf_studentID == info.BaseInfo.ID).ToList();
                 //消费件数
                 info.ConsumptionCnt = info.Consumptions.Count;
                 return info;

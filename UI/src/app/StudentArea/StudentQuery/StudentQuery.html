@@ -1,1 +1,43 @@
-<button (click)="Query()">检索</button> 
+学号：<input type="text" [(ngModel)]="this.StudentId" />
+<button class="btn btn-primary" (click)="QueryByStudentId()">检索</button>
+
+班级：<input type="text" [(ngModel)]="this.ClassId" />
+<button class="btn btn-primary" (click)="QueryByClassId()">检索</button>
+<br />
+<br />
+<p-table [value]="QueryResult" [scrollable]="true" scrollHeight="800px" [style]="{'width':'100%','min-width':'1200px'}"> 
+    <ng-template pTemplate="header"> 
+      <tr>
+        <th>ID</th>
+        <th>班级</th>
+        <th>学期</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>出生年</th>        
+        <th>政治面貌</th>
+        <th>民族</th>
+        <th>出生地</th>
+        <th>家庭类型</th>
+        <th>是否住校</th>
+        <th>宿舍号</th>
+        <th>是否退学</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-itemData>
+      <tr>
+        <td>{{itemData.id}}</td>
+        <td>{{itemData.className}}</td>
+        <td>{{itemData.classTerm}}</td>
+        <td>{{itemData.name}}</td>
+        <td>{{itemData.sex}}</td>
+        <td>{{itemData.bornDate}}</td>
+        <td>{{itemData.policy}}</td>
+        <td>{{itemData.nation}}</td>
+        <td>{{itemData.nativePlace}}</td>
+        <td>{{itemData.residenceType}}</td>
+        <td>{{itemData.liveAtSchool}}</td>
+        <td>{{itemData.liveRoomNo}}</td>
+        <td>{{itemData.leaveSchool}}</td>
+      </tr>
+    </ng-template>
+  </p-table>

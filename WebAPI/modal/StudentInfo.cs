@@ -29,7 +29,7 @@ public class StudentInfo
     /// 成绩信息件数
     /// </summary>
     /// <value></value>
-    public int ChengjiCnt{get;set;}
+    public int ChengjiCnt { get; set; }
 
     /// <summary>
     /// 消费信息
@@ -41,7 +41,7 @@ public class StudentInfo
     /// 消费信息件数
     /// </summary>
     /// <value></value>
-    public int ConsumptionCnt{get;set;}
+    public int ConsumptionCnt { get; set; }
 
 
 }

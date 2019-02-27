@@ -1,17 +1,33 @@
 import { Component } from '@angular/core';
 import { StudentService } from '../Student.service';
-
+import { IStudent } from '../student.model';
+import { CommonFunction } from '../../common'
 @Component({
   templateUrl: 'StudentQuery.html',
 })
 export class StudentQueryComponent {
   constructor(
-    public studentSerice: StudentService
+    public studentSerice: StudentService,
   ) { }
-  Query() {
-    this.studentSerice.GetStudentInfoByID("14454").then(
+
+
+  public StudentId: string;
+  public ClassId: string;
+
+  public QueryResult: IStudent[];
+
+
+  QueryByStudentId() {
+    this.studentSerice.QueryByStudentId(this.StudentId).then(
       r => {
-        console.log(r.baseInfo.bf_Name);
+        this.QueryResult = r;
+      }
+    )
+  }
+  QueryByClassId() {
+    this.studentSerice.QueryByClassId(this.ClassId).then(
+      r => {
+        this.QueryResult = r;
       }
     )
   }

@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { StudentQueryComponent } from './StudentQuery/StudentQuery.component';
 import { StudentService } from './Student.service';
-import { HttpModule } from '@angular/http';
+import { FormsModule} from '@angular/forms';
+
+import { TableModule } from 'primeng/table';
 @NgModule({
   declarations: [
     StudentQueryComponent
   ],
   imports: [
-    HttpModule
+    FormsModule,
+    TableModule
   ],
   providers: [StudentService],
 })
