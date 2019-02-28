@@ -3,6 +3,9 @@
 
 班级：<input type="text" [(ngModel)]="this.ClassId" />
 <button class="btn btn-primary" (click)="QueryByClassId()">检索</button>
+
+<button class="btn btn-primary" (click)="StudentOverview()">详细</button> 
+
 <br />
 <br />
 <p-table [value]="QueryResult" [scrollable]="true" scrollHeight="800px" [style]="{'width':'100%','min-width':'1200px'}"> 

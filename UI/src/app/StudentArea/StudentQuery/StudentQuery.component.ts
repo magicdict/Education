@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { StudentService } from '../Student.service';
 import { IStudent } from '../student.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: 'StudentQuery.html',
@@ -8,6 +9,8 @@ import { IStudent } from '../student.model';
 export class StudentQueryComponent {
   constructor(
     public studentSerice: StudentService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
 
@@ -30,5 +33,8 @@ export class StudentQueryComponent {
         this.QueryResult = r;
       }
     )
+  }
+  StudentOverview() {
+    this.router.navigate(['overview'], { relativeTo: this.route });
   }
 }
