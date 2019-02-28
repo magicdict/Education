@@ -6,6 +6,12 @@ public class Consumption
     /// </summary>
     /// <value></value>
     public string DealTime { get; set; }
+
+    public string DealTimeYear { get; set; }
+    public string DealTimeMonth { get; set; }
+    public string DealTimeDay { get; set; }
+    public string DealTimeHour { get; set; }
+
     /// <summary>
     /// 消费金额
     /// </summary>
@@ -15,7 +21,7 @@ public class Consumption
     /// 对应学生信息表studentid
     /// </summary>
     /// <value></value>
-    public string bf_studentID { get; set; }
+    public string StudentID { get; set; }
     /// <summary>
     /// 姓名
     /// </summary>
@@ -31,8 +37,12 @@ public class Consumption
     {
         var Items = RawData.Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray();
         DealTime = Items[0];
+        DealTimeYear = DealTime.Split(" ")[0].Split("/")[0];
+        DealTimeMonth = DealTime.Split(" ")[0].Split("/")[1];
+        DealTimeDay = DealTime.Split(" ")[0].Split("/")[2];
+        DealTimeHour = DealTime.Split(" ")[1].Split(":")[0];
         MonDeal = Items[1];
-        bf_studentID = Items[2];
+        StudentID = Items[2];
         AccName = Items[3];
         PerSex = Items[4];
     }

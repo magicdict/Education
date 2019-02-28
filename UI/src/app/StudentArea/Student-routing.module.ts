@@ -4,7 +4,7 @@ import { StudentOverviewComponent } from './StudentOverview/StudentOverview.comp
 import { StudentService } from './Student.service';
 const routes: Routes = [
   {
-    path: 'student/overview',
+    path: 'student/overview/:id',
     component: StudentOverviewComponent,
     resolve: {
       studentinfo: StudentService

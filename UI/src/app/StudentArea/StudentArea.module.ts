@@ -5,6 +5,7 @@ import { StudentRoutingModule } from './Student-routing.module'
 import { StudentService } from './Student.service';
 import { FormsModule} from '@angular/forms';
 import { TableModule } from 'primeng/table';
+import { NgxEchartsModule } from '@twp0217/ngx-echarts';
 @NgModule({
   declarations: [
     StudentQueryComponent,
@@ -13,6 +14,7 @@ import { TableModule } from 'primeng/table';
   imports: [
     FormsModule,
     TableModule,
+    NgxEchartsModule,
     StudentRoutingModule
   ],
   providers: [StudentService],

@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { CommonFunction } from '../common';
-import { IStudent } from './student.model';
+import { IStudent, IStudentInfo } from './student.model';
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 @Injectable()
-export class StudentService implements Resolve<IStudent[]>{
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): IStudent[] | Observable<IStudent[]> | Promise<IStudent[]> {
-        //let id = route.paramMap.get('id');
-        let id = "14151";
-        return this.QueryByStudentId(id);
+export class StudentService implements Resolve<IStudentInfo>{
+    resolve(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): IStudentInfo | Observable<IStudentInfo> | Promise<IStudentInfo> {
+        let id = route.paramMap.get('id');
+        return this.GetStudentInfoByID(id);
     }
 
     constructor(public commonFunction: CommonFunction) {
@@ -20,7 +19,7 @@ export class StudentService implements Resolve<IStudent[]>{
     public QueryByClassId(StudentId: string): Promise<IStudent[]> {
         return this.commonFunction.httpRequest<any>('Student/QueryByClassId?ID=' + StudentId);
     }
-    public GetStudentInfoByID(StudentId: string): Promise<any> {
+    public GetStudentInfoByID(StudentId: string): Promise<IStudentInfo> {
         return this.commonFunction.httpRequest<any>('Student/GetStudentInfo?ID=' + StudentId);
     }
 }

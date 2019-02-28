@@ -1,1 +1,29 @@
-<img [src]="CurrentStudent.sex == '男' ? '/assets/male.png' : '/assets/female.png'  " />
+<h1>{{CurrentStudent.name}} 学生画像</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <img [src]="CurrentStudent.sex == '男' ? '/assets/male.png' : '/assets/female.png'  " />
+            <ul class="list-group">
+                <li class="list-group-item active">
+                    基本信息
+                </li>
+                <li class="list-group-item">
+                    {{CurrentStudent.name}}
+                </li>
+                <li class="list-group-item">
+                    {{CurrentStudent.sex}}
+                </li>
+                <li class="list-group-item">
+                    {{CurrentStudent.nation}}
+                </li>
+            </ul>
+        </div>
+        <div class="col">
+            <ngx-echarts [option]="option" style="width:400px;height:400px;"></ngx-echarts>
+        </div>
+        <div class="col">
+            <ngx-echarts [option]="option2" style="width:400px;height:400px;"></ngx-echarts>
+        </div>
+    </div>
+</div>

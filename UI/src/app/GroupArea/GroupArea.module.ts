@@ -7,7 +7,6 @@ import { NgxEchartsModule } from '@twp0217/ngx-echarts';
 @NgModule({
   declarations: [
     GroupOverViewComponent,
-    
   ],
   imports: [
     FormsModule,

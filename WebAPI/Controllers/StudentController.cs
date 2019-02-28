@@ -48,7 +48,7 @@ namespace Education.Controllers
                 //成绩件数
                 info.ChengjiCnt = info.Chengjis.Count;
                 //消费记录
-                info.Consumptions = Dataset.ConsumptionList.Where(x => x.bf_studentID == info.BaseInfo.ID).ToList();
+                info.Consumptions = Dataset.ConsumptionList.Where(x => x.StudentID == info.BaseInfo.ID).ToList();
                 //消费件数
                 info.ConsumptionCnt = info.Consumptions.Count;
                 return info;

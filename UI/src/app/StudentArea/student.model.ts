@@ -12,5 +12,24 @@ export interface IStudent {
     classTerm: string;
     liveAtSchool: string;
     leaveSchool: string;
-    liveRoomNo: string;
+    liveRoomNo: string; 
+}
+
+export interface IConsumption{
+    dealTime : string;
+    dealTimeYear : string;
+    dealTimeMonth : string;
+    dealTimeDay : string;
+    dealTimeHour : string;
+    monDeal : number;
+    studentID:string;
+    accName:string;
+    perSex:string;
+}
+
+
+export interface IStudentInfo{
+    baseInfo:IStudent;
+    consumptions:IConsumption[];
+    consumptionCnt:number;
 }

@@ -35,6 +35,6 @@ export class StudentQueryComponent {
     )
   }
   StudentOverview() {
-    this.router.navigate(['overview'], { relativeTo: this.route });
+    this.router.navigate(['overview', this.StudentId], { relativeTo: this.route });
   }
 }
