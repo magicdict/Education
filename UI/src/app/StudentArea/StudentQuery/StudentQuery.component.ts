@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { StudentService } from '../Student.service';
 import { IStudent } from '../student.model';
-import { CommonFunction } from '../../common'
+
 @Component({
   templateUrl: 'StudentQuery.html',
 })

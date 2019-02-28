@@ -1,0 +1,20 @@
+[Unit]
+Description=Example for .NET Core WebApp with systemd
+DefaultDependencies=no
+Wants=network.target # network is required
+After=network.target
+ 
+[Service]
+ExecStart=/root/dotnet/dotnet Education.dll
+WorkingDirectory=/root/Education/publish/
+Restart=always
+RestartSec=10   # Restart service after 10 seconds if dotnet service crashes
+SyslogIdentifier=dotnet-example
+User=root
+Group=root
+PrivateTmp=true
+Environment=ASPNETCORE_ENVIRONMENT=Production # specify environment variable for environment
+#Environment=ASPNETCORE_URLS=http://*:5000 # specify environement variable for listening port
+ 
+[Install]
+WantedBy = multi-user.target
