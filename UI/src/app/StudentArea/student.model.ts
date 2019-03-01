@@ -42,15 +42,18 @@ export interface IScore {
     id: string;
     number: string;
     numberName: string;
-    subId: String;
-    subName: String;
+    subId: string;
+    subName: string;
     term: string;
     type: string;
     sdate: string;
+    sdateYear: string;
+    sdateMonth: string;
+    sdateDay: string;
     studentId: string;
-    score: string;
+    score: number;
     zScore: string;
-    tScore: string;
+    tScore: number;
     dengdi: string;
 }
 
@@ -75,7 +78,7 @@ export interface IStudentInfo {
     baseInfo: IStudent;
     consumptions: IConsumption[];
     kaoqins: IKaoqin[];
-    scores: IScore[];
+    chengjis: IScore[];
     consumptionCnt: number;
     chengjiCnt: number;
     teachers:ITeacher[];

@@ -42,6 +42,11 @@ public class Chengji
     /// </summary>
     /// <value></value>
     public string Sdate { get; set; }
+
+    public string SdateYear { get; set; }
+    public string SdateMonth { get; set; }
+    public string SdateDay { get; set; }
+
     /// <summary>
     /// 学生id
     /// </summary>
@@ -78,7 +83,10 @@ public class Chengji
         SubName = Items[4];
         Term = Items[5];
         Type = Items[6];
-        Sdate = Items[7];
+        Sdate = Utility.FormatTime(Items[7]);
+        SdateYear = Sdate.Split(" ")[0].Split("/")[0];
+        SdateMonth = Sdate.Split(" ")[0].Split("/")[1];
+        SdateDay = Sdate.Split(" ")[0].Split("/")[2];
         StudentID = Items[8];
         Score = Items[9];
         ZScore = Items[10];

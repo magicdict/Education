@@ -53,6 +53,12 @@ namespace Education.Controllers
                 );
                 //成绩记录
                 info.Chengjis = Dataset.ChengjiList.Where(x => x.StudentID == info.BaseInfo.ID).ToList();
+                info.Chengjis.Sort(
+                    (x, y) =>
+                    {
+                        return x.Sdate.CompareTo(y.Sdate);
+                    }
+                );
                 //成绩件数
                 info.ChengjiCnt = info.Chengjis.Count;
                 //消费记录
