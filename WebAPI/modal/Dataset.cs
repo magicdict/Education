@@ -63,20 +63,6 @@ public static class Dataset
         sr.Close();
         Console.WriteLine("读取学生基本信息件数：" + StudentList.Count);
 
-        //导入考勤信息 3_kaoqin.csv
-        fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "3_kaoqin.csv";
-        sr = new StreamReader(fullfilepath);
-        sr.ReadLine();  //读取标题栏
-        KaoqinList.Clear();
-        while (!sr.EndOfStream)
-        {
-            var line = sr.ReadLine();
-            KaoqinList.Add(new Kaoqin(line));
-        }
-        sr.Close();
-        Console.WriteLine("读取考勤信息件数：" + KaoqinList.Count);
-
-
         //导入考勤类型信息 4_kaoqintype.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "4_kaoqintype.csv";
         sr = new StreamReader(fullfilepath);
@@ -91,6 +77,19 @@ public static class Dataset
         sr.Close();
         Console.WriteLine("读取考勤类型信息件数：" + KaoqinTypeDic.Count);
 
+
+        //导入考勤信息 3_kaoqin.csv
+        fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "3_kaoqin.csv";
+        sr = new StreamReader(fullfilepath);
+        sr.ReadLine();  //读取标题栏
+        KaoqinList.Clear();
+        while (!sr.EndOfStream)
+        {
+            var line = sr.ReadLine();
+            KaoqinList.Add(new Kaoqin(line));
+        }
+        sr.Close();
+        Console.WriteLine("读取考勤信息件数：" + KaoqinList.Count);
 
         //导入学生成绩信息 5_chengji.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "5_chengji.csv";

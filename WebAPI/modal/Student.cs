@@ -105,9 +105,5 @@ public class Student
         }else{
             LiveRoomNo = "-";
         }
-
-
     }
-
-
 }

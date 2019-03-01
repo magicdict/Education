@@ -5,17 +5,30 @@ public class Kaoqin
     /// 考勤ID
     /// </summary>
     /// <value></value>
-    public string kaoqin_id { get; set; }
+    public string Id { get; set; }
     /// <summary>
     /// 学期
     /// </summary>
     /// <value></value>
-    public string qj_term { get; set; }
+    public string Term { get; set; }
     /// <summary>
     /// 时间和日期
     /// </summary>
     /// <value></value>
-    public string DataDateTime { get; set; }
+    public string RecDateTime { get; set; }
+
+
+    public string RecDateTimeYear { get; set; }
+
+
+    public string RecDateTimeMonth { get; set; }
+
+
+    public string RecDateTimeDay { get; set; }
+
+    public string RecDateTimeHour { get; set; }
+
+
     /// <summary>
     /// 对应考勤类型表里的ControllerID
     /// </summary>
@@ -25,47 +38,51 @@ public class Kaoqin
     /// 考勤名称
     /// </summary>
     /// <value></value>
-    public string controler_name { get; set; }
+    public string ControllerName { get; set; }
     /// <summary>
     /// 对应考勤类型表里的control_task_order_id
     /// </summary>
     /// <value></value>
-    public string control_task_order_id { get; set; }
+    public string DetailId { get; set; }
     /// <summary>
     /// 学生ID，对应学生信息表
     /// </summary>
     /// <value></value>
-    public string bf_studentID { get; set; }
+    public string StudentID { get; set; }
     /// <summary>
     /// 学生姓名
     /// </summary>
     /// <value></value>
-    public string bf_Name { get; set; }
+    public string StudentName { get; set; }
     /// <summary>
     /// 班级名
     /// </summary>
     /// <value></value>
-    public string cla_Name { get; set; }
+    public string ClassName { get; set; }
     /// <summary>
     /// 班级ID
     /// </summary>
     /// <value></value>
-    public string bf_classid { get; set; }
+    public string ClassId { get; set; }
 
 
-public Kaoqin(string RawData)
+    public Kaoqin(string RawData)
     {
         var Items = RawData.Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray();
-        kaoqin_id = Items[0];
-        qj_term = Items[1];
-        DataDateTime = Items[2];
+        Id = Items[0];
+        Term = Items[1];
+        RecDateTime = Utility.FormatTime(Items[2]);
+        RecDateTimeYear = RecDateTime.Split(" ")[0].Split("/")[0];
+        RecDateTimeMonth = RecDateTime.Split(" ")[0].Split("/")[1];
+        RecDateTimeDay = RecDateTime.Split(" ")[0].Split("/")[2];
+        RecDateTimeHour = RecDateTime.Split(" ")[1].Split(":")[0];
         ControllerID = Items[3];
-        controler_name = Items[4];
-        control_task_order_id = Items[5];
-        bf_studentID = Items[6];
-        bf_Name = Items[7];
-        cla_Name = Items[8];
-        bf_classid = Items[9];
+        ControllerName = Items[4];
+        DetailId = Items[5];
+        StudentID = Items[6];
+        StudentName = Items[7];
+        ClassName = Items[8];
+        ClassId = Items[9];
     }
 
 }

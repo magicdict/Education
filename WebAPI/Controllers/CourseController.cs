@@ -21,7 +21,7 @@ namespace Education.Controllers
             Console.WriteLine("Sub Id:" + subid);
             //获得班级的学生信息
             var students = Dataset.StudentList.Where(x => x.ClassId.Equals(classid)).Select(y => y.ID).ToList();
-            return Dataset.ChengjiList.Where(x => x.mes_sub_id.Equals(subid) && students.Contains(x.mes_StudentID)).ToList();
+            return Dataset.ChengjiList.Where(x => x.SubId.Equals(subid) && students.Contains(x.StudentID)).ToList();
         }
 
         [HttpGet("GetCourseInfoByTestId")]
@@ -32,7 +32,7 @@ namespace Education.Controllers
             Console.WriteLine("Test Id:" + TestId);
             //获得班级的学生信息
             var students = Dataset.StudentList.Where(x => x.ClassId.Equals(classid)).Select(y => y.ID).ToList();
-            return Dataset.ChengjiList.Where(x => x.mes_TestID == TestId && x.mes_sub_id.Equals(subid) && students.Contains(x.mes_StudentID)).ToList();
+            return Dataset.ChengjiList.Where(x => x.Id == TestId && x.SubId.Equals(subid) && students.Contains(x.StudentID)).ToList();
         }
 
 

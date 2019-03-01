@@ -9,21 +9,60 @@
                     基本信息
                 </li>
                 <li class="list-group-item">
-                    {{CurrentStudent.name}}
+                    ID: {{CurrentStudent.id}}
                 </li>
                 <li class="list-group-item">
-                    {{CurrentStudent.sex}}
+                    班级: {{CurrentStudent.className}}
                 </li>
                 <li class="list-group-item">
-                    {{CurrentStudent.nation}}
+                    学期: {{CurrentStudent.classTerm}}
+                </li>
+                <li class="list-group-item">
+                    姓名: {{CurrentStudent.name}}
+                </li>
+                <li class="list-group-item">
+                    性别: {{CurrentStudent.sex}}
+                </li>
+                <li class="list-group-item">
+                    出生年: {{CurrentStudent.bornDate}}
+                </li>
+                <li class="list-group-item">
+                    政治面貌: {{CurrentStudent.policy}}
+                </li>
+                <li class="list-group-item">
+                    民族: {{CurrentStudent.nation}}
+                </li>
+                <li class="list-group-item">
+                    出生地: {{CurrentStudent.nativePlace}}
+                </li>
+
+                <li class="list-group-item">
+                    家庭类型: {{CurrentStudent.residenceType}}
+                </li>
+                <li class="list-group-item">
+                    是否住校: {{CurrentStudent.liveAtSchool}}
+                </li>
+                <li class="list-group-item">
+                    宿舍号: {{CurrentStudent.liveRoomNo}}
+                </li>
+                <li class="list-group-item">
+                    是否退学: {{CurrentStudent.leaveSchool}}
                 </li>
             </ul>
         </div>
         <div class="col">
-            <ngx-echarts [option]="option" style="width:400px;height:400px;"></ngx-echarts>
+            <ul class="list-group">
+                <li class="list-group-item active">
+                    任课老师
+                </li>
+                <li class="list-group-item" *ngFor="let teacher of Teachers">
+                   {{teacher.subName}} : {{teacher.name}}
+                </li>
+            </ul>
         </div>
         <div class="col">
-            <ngx-echarts [option]="option2" style="width:400px;height:400px;"></ngx-echarts>
+            <ngx-echarts [option]="CompumptionGraph" style="width:400px;height:400px;"></ngx-echarts>
+            <ngx-echarts [option]="KaoqinGraph" style="width:400px;height:400px;"></ngx-echarts>
         </div>
     </div>
 </div>

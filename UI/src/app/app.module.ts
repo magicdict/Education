@@ -9,14 +9,12 @@ import { CommonFunction } from './common';
 
 @NgModule({
   declarations: [
-    
     AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-
     StudentAreaModule,
     GroupAreaModule
   ],

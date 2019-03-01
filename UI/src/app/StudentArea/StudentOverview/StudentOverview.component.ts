@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../Student.service';
-import { IStudent, IStudentInfo, IConsumption } from '../student.model';
+import { IStudent, IStudentInfo, IConsumption, ITeacher } from '../student.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { from } from 'rxjs';
@@ -11,14 +11,12 @@ import { CommonFunction } from 'src/app/common';
 })
 export class StudentOverviewComponent implements OnInit {
   ngOnInit(): void {
-    this.ConsumptionMonth = [];
-    this.ConsumptionMonthMoney = [];
-
     this.route.data
       .subscribe((data: { studentinfo: IStudentInfo }) => {
         this.CurrentStudent = data.studentinfo.baseInfo;
-        this.ConsumptionRecords = data.studentinfo.consumptions;
-        from(this.ConsumptionRecords).pipe(
+        this.Teachers = data.studentinfo.teachers;
+        
+        from(data.studentinfo.consumptions).pipe(
           groupBy(x => x.dealTimeYear + "/" + x.dealTimeMonth),
           mergeMap(x => x.pipe(toArray()))
         ).subscribe(
@@ -27,9 +25,21 @@ export class StudentOverviewComponent implements OnInit {
             this.ConsumptionMonthMoney.push(Number(CommonFunction.roundvalue(r.map(x => -x.monDeal).reduce((sum, current) => sum + current))));
           }
         )
-        this.option.xAxis.data = this.ConsumptionMonth;
-        this.option.series[0].data = this.ConsumptionMonthMoney;
+        this.CompumptionGraph.xAxis.data = this.ConsumptionMonth;
+        this.CompumptionGraph.series[0].data = this.ConsumptionMonthMoney;
 
+
+        from(data.studentinfo.kaoqins).pipe(
+          groupBy(x => x.recDateTimeYear + "/" + x.recDateTimeMonth),
+          mergeMap(x => x.pipe(toArray()))
+        ).subscribe(
+          r => {
+            this.KaoqinMonth.push(r[0].recDateTimeYear + "/" + r[0].recDateTimeMonth);
+            this.KaoqinMonthCnt.push(r.length);
+          }
+        )
+        this.KaoqinGraph.xAxis.data = this.KaoqinMonth;
+        this.KaoqinGraph.series[0].data = this.KaoqinMonthCnt;
       });
   }
   constructor(
@@ -41,14 +51,14 @@ export class StudentOverviewComponent implements OnInit {
   }
 
   public CurrentStudent: IStudent;
-  public ConsumptionRecords: IConsumption[];
+  public Teachers:ITeacher[];
 
-  public ConsumptionMonth: string[];
-  public ConsumptionMonthMoney: number[];
+  public ConsumptionMonth: string[] = [];
+  public ConsumptionMonthMoney: number[] = [];
 
-  option = {
+  CompumptionGraph = {
     title: {
-      text: '消费记录'
+      text: "消费记录（月度）"
     },
     tooltip: {},
     legend: {
@@ -65,22 +75,25 @@ export class StudentOverviewComponent implements OnInit {
     }]
   };
 
-  option2 = {
+  public KaoqinMonth: string[] = [];
+  public KaoqinMonthCnt: number[] = [];
+
+  KaoqinGraph = {
     title: {
-      text: '学习成绩'
+      text: '考勤（月度）'
     },
     tooltip: {},
     legend: {
-      data: ['销量']
+      data: ['次数']
     },
     xAxis: {
-      data: this.ConsumptionMonth
+      data: this.KaoqinMonth
     },
     yAxis: {},
     series: [{
-      name: '销量',
+      name: '次数',
       type: 'bar',
-      data: this.ConsumptionMonthMoney
+      data: this.KaoqinMonthCnt
     }]
   };
 

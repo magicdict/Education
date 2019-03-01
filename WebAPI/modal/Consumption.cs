@@ -36,7 +36,7 @@ public class Consumption
     public Consumption(string RawData)
     {
         var Items = RawData.Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray();
-        DealTime = Items[0];
+        DealTime = Utility.FormatTime(Items[0]);
         DealTimeYear = DealTime.Split(" ")[0].Split("/")[0];
         DealTimeMonth = DealTime.Split(" ")[0].Split("/")[1];
         DealTimeDay = DealTime.Split(" ")[0].Split("/")[2];

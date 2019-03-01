@@ -16,9 +16,11 @@ export class StudentQueryComponent {
 
   public StudentId: string;
   public ClassId: string;
-
   public QueryResult: IStudent[];
 
+  onRowSelect(event) {
+    this.router.navigate(['overview', event.data.id], { relativeTo: this.route });
+  }
 
   QueryByStudentId() {
     this.studentSerice.QueryByStudentId(this.StudentId).then(
@@ -33,8 +35,5 @@ export class StudentQueryComponent {
         this.QueryResult = r;
       }
     )
-  }
-  StudentOverview() {
-    this.router.navigate(['overview', this.StudentId], { relativeTo: this.route });
   }
 }
