@@ -1,4 +1,5 @@
 # Education
+
 "数智教育"数据可视化创新大赛
 
 - UI ： Angular代码
@@ -7,3 +8,9 @@
 - nginx.conf : Nginx服务配置 UI和WebAPI都需要配置
 
 Host URL：http://39.105.206.6
+
+Release Step:
+1.dotnet publish
+2.ng build
+3.upload
+4.systemctl restart

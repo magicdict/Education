@@ -1,5 +1,3 @@
-<h1>{{CurrentStudent.name}} 学生画像</h1>
-
 <div class="container">
     <div class="row">
         <div class="col">
@@ -52,10 +50,15 @@
         </div>
         <div class="col">
             <ngx-echarts [option]="ScoreGraph" style="width:400px;height:400px;"></ngx-echarts>
+            <button class="btn btn-primary" style="float:right">详细</button>
+            <br />
+            <br />
+                            
             <ul class="list-group">
                 <li class="list-group-item active">
                     任课老师
                 </li>
+
                 <li class="list-group-item" *ngFor="let teacher of Teachers">
                    {{teacher.subName}} : {{teacher.name}}
                 </li>
@@ -63,7 +66,14 @@
         </div>
         <div class="col">
             <ngx-echarts [option]="CompumptionGraph" style="width:400px;height:400px;"></ngx-echarts>
+            <button class="btn btn-primary" style="float:right" (click)="JumpTo('compumption')" >详细</button>
+            
+            <br />
+            <br />
+
             <ngx-echarts [option]="KaoqinGraph" style="width:400px;height:400px;"></ngx-echarts>
+            <button class="btn btn-primary" style="float:right">详细</button>
+
         </div>
     </div>
 </div>

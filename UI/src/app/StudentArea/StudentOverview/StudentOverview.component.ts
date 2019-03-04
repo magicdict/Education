@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../Student.service';
-import { IStudent, IStudentInfo, IConsumption, ITeacher } from '../student.model';
+import { IStudent, IStudentInfo, ITeacher } from '../student.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { from } from 'rxjs';
@@ -10,6 +10,15 @@ import { CommonFunction } from 'src/app/common';
   templateUrl: 'StudentOverview.html',
 })
 export class StudentOverviewComponent implements OnInit {
+
+  constructor(
+    public studentSerice: StudentService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+
+  }
+
   ngOnInit(): void {
     this.route.data
       .subscribe((data: { studentinfo: IStudentInfo }) => {
@@ -90,12 +99,11 @@ export class StudentOverviewComponent implements OnInit {
 
       });
   }
-  constructor(
-    public studentSerice: StudentService,
-    private route: ActivatedRoute,
-  ) {
-
+  
+  JumpTo(url:string){
+    this.router.navigate([url], { relativeTo: this.route });
   }
+
 
   public CurrentStudent: IStudent;
   public Teachers: ITeacher[];
