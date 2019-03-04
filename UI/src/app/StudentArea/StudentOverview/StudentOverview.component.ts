@@ -22,6 +22,10 @@ export class StudentOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.route.data
       .subscribe((data: { studentinfo: IStudentInfo }) => {
+
+        //缓存数据
+        this.studentSerice.CurrentStudentInfo = data.studentinfo;
+
         this.CurrentStudent = data.studentinfo.baseInfo;
         this.Teachers = data.studentinfo.teachers;
 

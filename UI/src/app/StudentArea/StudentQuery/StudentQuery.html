@@ -1,44 +1,51 @@
-学号：<input type="text" [(ngModel)]="this.StudentId" />
+学号：<input type="text" [(ngModel)]="this.StudentId" placeholder="输入一个学号" />
 <button class="btn btn-primary" (click)="QueryByStudentId()">检索</button>
 
-班级：<input type="text" [(ngModel)]="this.ClassId" />
+班级：
+<p-dropdown [options]="classopt" [(ngModel)]="this.ClassId" [style]="{'width':'150px'}" placeholder="选择一个班级"
+  [group]="true">
+  <ng-template let-group pTemplate="group">
+    <span style="margin-left:.25em"><b>{{group.label}}</b></span>
+  </ng-template>
+</p-dropdown>
 <button class="btn btn-primary" (click)="QueryByClassId()">检索</button>
 
 <br />
 <br />
-<p-table [value]="QueryResult" [scrollable]="true" (onRowSelect)="onRowSelect($event)" selectionMode="single" scrollHeight="800px" [style]="{'width':'100%','min-width':'1200px'}"> 
-    <ng-template pTemplate="header"> 
-      <tr>
-        <th>ID</th>
-        <th>班级</th>
-        <th>学期</th>
-        <th>姓名</th>
-        <th>性别</th>
-        <th>出生年</th>        
-        <th>政治面貌</th>
-        <th>民族</th>
-        <th>出生地</th>
-        <th>家庭类型</th>
-        <th>是否住校</th>
-        <th>宿舍号</th>
-        <th>是否退学</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-itemData>
-      <tr [pSelectableRow]="itemData">
-        <td>{{itemData.id}}</td>
-        <td>{{itemData.className}}</td>
-        <td>{{itemData.classTerm}}</td>
-        <td>{{itemData.name}}</td>
-        <td>{{itemData.sex}}</td>
-        <td>{{itemData.bornDate}}</td>
-        <td>{{itemData.policy}}</td>
-        <td>{{itemData.nation}}</td>
-        <td>{{itemData.nativePlace}}</td>
-        <td>{{itemData.residenceType}}</td>
-        <td>{{itemData.liveAtSchool}}</td>
-        <td>{{itemData.liveRoomNo}}</td>
-        <td>{{itemData.leaveSchool}}</td>
-      </tr>
-    </ng-template>
-  </p-table>
+<p-table [value]="QueryResult" [scrollable]="true" (onRowSelect)="onRowSelect($event)" selectionMode="single"
+  scrollHeight="800px" [style]="{'width':'100%','min-width':'1200px'}">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>ID</th>
+      <th>班级</th>
+      <th>学期</th>
+      <th>姓名</th>
+      <th>性别</th>
+      <th>出生年</th>
+      <th>政治面貌</th>
+      <th>民族</th>
+      <th>出生地</th>
+      <th>家庭类型</th>
+      <th>是否住校</th>
+      <th>宿舍号</th>
+      <th>是否退学</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-itemData>
+    <tr [pSelectableRow]="itemData">
+      <td>{{itemData.id}}</td>
+      <td>{{itemData.className}}</td>
+      <td>{{itemData.classTerm}}</td>
+      <td>{{itemData.name}}</td>
+      <td>{{itemData.sex}}</td>
+      <td>{{itemData.bornDate}}</td>
+      <td>{{itemData.policy}}</td>
+      <td>{{itemData.nation}}</td>
+      <td>{{itemData.nativePlace}}</td>
+      <td>{{itemData.residenceType}}</td>
+      <td>{{itemData.liveAtSchool}}</td>
+      <td>{{itemData.liveRoomNo}}</td>
+      <td>{{itemData.leaveSchool}}</td>
+    </tr>
+  </ng-template>
+</p-table>

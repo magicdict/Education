@@ -31,7 +31,7 @@ export interface IConsumption {
     dealTimeYear: string;
     dealTimeMonth: string;
     dealTimeDay: string;
-    dealTimeHour: string;
+    dealTimeHour: number;
     monDeal: number;
     studentID: string;
     accName: string;

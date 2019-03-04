@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { GroupOverViewComponent } from './GroupOverView/GroupOverView.component'
 import { TableModule } from 'primeng/table';
 import { NgxEchartsModule } from '@twp0217/ngx-echarts';
-
+import { GroupService } from "./Group.service";
 @NgModule({
   declarations: [
     GroupOverViewComponent,
@@ -13,6 +13,6 @@ import { NgxEchartsModule } from '@twp0217/ngx-echarts';
     TableModule,
     NgxEchartsModule
   ],
-  providers: [],
+  providers: [GroupService],
 })
 export class GroupAreaModule { }
