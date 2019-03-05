@@ -7,4 +7,5 @@ export interface IGroupInfo {
     femaleGrade3: number;
     maleTotal: number;
     femaleTotal: number;
+    geoOptions: { name: string, value: number }[];
 }

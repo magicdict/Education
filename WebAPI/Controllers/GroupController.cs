@@ -22,6 +22,14 @@ namespace Education.Controllers
             public int maleTotal { get; set; }
             public int femaleTotal { get; set; }
 
+            public List<GeoItem> GeoOptions { get; set; }
+        }
+
+        public class GeoItem
+        {
+            public string name { get; set; }
+            public int value { get; set; }
+
         }
 
         /// <summary>
@@ -40,6 +48,34 @@ namespace Education.Controllers
             o.femaleGrade2 = Dataset.StudentList.Count(x => x.Sex == "女" && x.ClassName.Contains("高二"));
             o.maleGrade3 = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassName.Contains("高三"));
             o.femaleGrade3 = Dataset.StudentList.Count(x => x.Sex == "女" && x.ClassName.Contains("高三"));
+            //获得地理信息
+            var geodic = new Dictionary<string, int>();
+            foreach (var province in Utility.Provinces)
+            {
+                geodic.Add(province, 0);
+            }
+            foreach (var item in Dataset.StudentList)
+            {
+                var x = Utility.GetProvince(item.NativePlace);
+                if (!string.IsNullOrEmpty(x))
+                {
+                    geodic[x]++;
+                }
+                else
+                {
+                    //对于宁波的修正
+                    if (item.NativePlace.Contains("宁波"))
+                    {
+                        geodic["浙江"]++;
+                    }
+                }
+            }
+            o.GeoOptions = new List<GeoItem>();
+            foreach (var k in geodic.Keys)
+            {
+                o.GeoOptions.Add(new GeoItem() { name = k, value = geodic[k] });
+            }
+
             return o;
         }
     }

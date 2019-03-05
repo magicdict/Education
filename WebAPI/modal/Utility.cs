@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public static class Utility
 {
     public static string FormatTime(string DealTime)
@@ -15,5 +17,50 @@ public static class Utility
         if (DealTimeSecond.Length == 1) DealTimeSecond = "0" + DealTimeSecond;
 
         return DealTimeYear + "/" + DealTimeMonth + "/" + DealTimeDay + " " + DealTimeHour + ":" + DealTimeMinute + ":" + DealTimeSecond;
+    }
+
+    public static List<string> Provinces = new List<string>(){
+        "北京",
+        "天津",
+        "重庆",
+        "上海",
+        "湖南",
+        "广东",
+        "福建",
+        "江西",
+        "四川",
+        "广西",
+        "新疆",
+        "西藏",
+        "青海",
+        "甘肃",
+        "宁夏",
+        "内蒙古",
+        "海南",
+        "山西",
+        "陕西",
+        "云南",
+        "贵州",
+        "湖北",
+        "浙江",
+        "安徽",
+        "河南",
+        "山东",
+        "江苏",
+        "河北",
+        "辽宁",
+        "吉林",
+        "黑龙江",
+        "台湾"
+    };
+
+
+    public static string GetProvince(string Geo)
+    {
+        foreach (var province in Provinces)
+        {
+            if (Geo.Contains(province)) return province;
+        }
+        return string.Empty;
     }
 }
