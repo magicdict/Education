@@ -13,6 +13,7 @@ export interface IStudent {
     liveAtSchool: string;
     leaveSchool: string;
     liveRoomNo: string;
+    optionCourse:string[];
 }
 
 export interface ITeacher{
@@ -71,7 +72,7 @@ export interface IKaoqin {
     studentID: string;
     studentName: string;
     className: string;
-    cClassId: string;
+    classId: string;
 }
 
 export interface IStudentInfo {

@@ -42,6 +42,4 @@ public class StudentInfo
     /// </summary>
     /// <value></value>
     public int ConsumptionCnt { get; set; }
-
-
 }

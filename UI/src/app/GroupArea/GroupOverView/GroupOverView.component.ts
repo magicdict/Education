@@ -30,6 +30,10 @@ export class GroupOverViewComponent implements OnInit {
 
 
   regionOptions = {
+    title: {
+      text: '生源地图',
+      left: 10
+    },
     tooltip: {
       trigger: 'item',
       formatter: '{b}：{c}'

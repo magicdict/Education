@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StudentAreaModule} from './StudentArea/StudentArea.module'
-import { GroupAreaModule} from './GroupArea/GroupArea.module'
+import { StudentAreaModule } from './StudentArea/StudentArea.module';
+import { GroupAreaModule } from './GroupArea/GroupArea.module';
+import { CourseAreaModule } from './CourseArea/CourseArea.module';
 import { CommonFunction } from './common';
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CommonFunction } from './common';
     AppRoutingModule,
     HttpModule,
     StudentAreaModule,
-    GroupAreaModule
+    GroupAreaModule,
+    CourseAreaModule
   ],
   providers: [CommonFunction],
   bootstrap: [AppComponent]

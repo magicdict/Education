@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using static Utility;
 
 namespace Education.Controllers
 {
@@ -10,7 +11,9 @@ namespace Education.Controllers
     [ApiController]
     public class GroupController : ControllerBase
     {
-
+        /// <summary>
+        /// 概要
+        /// </summary>
         public class Overview
         {
             public int maleGrade1 { get; set; }
@@ -22,15 +25,10 @@ namespace Education.Controllers
             public int maleTotal { get; set; }
             public int femaleTotal { get; set; }
 
-            public List<GeoItem> GeoOptions { get; set; }
+            public List<NameValueSet> GeoOptions { get; set; }
         }
 
-        public class GeoItem
-        {
-            public string name { get; set; }
-            public int value { get; set; }
 
-        }
 
         /// <summary>
         /// 获得班级某科目成绩信息
@@ -70,10 +68,10 @@ namespace Education.Controllers
                     }
                 }
             }
-            o.GeoOptions = new List<GeoItem>();
+            o.GeoOptions = new List<NameValueSet>();
             foreach (var k in geodic.Keys)
             {
-                o.GeoOptions.Add(new GeoItem() { name = k, value = geodic[k] });
+                o.GeoOptions.Add(new NameValueSet() { name = k, value = geodic[k] });
             }
 
             return o;

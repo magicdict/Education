@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 public class Chengji
 {
@@ -56,7 +57,7 @@ public class Chengji
     /// 考试成绩(-1为作弊，-2为缺考，-3为免考)
     /// </summary>
     /// <value></value>
-    public string Score { get; set; }
+    public float Score { get; set; }
     /// <summary>
     /// 换算成Z-score
     /// </summary>
@@ -73,6 +74,39 @@ public class Chengji
     /// <value></value>
     public string Dengdi { get; set; }
 
+    /// <summary>
+    /// 必修课
+    /// </summary>
+    /// <typeparam name="string"></typeparam>
+    /// <returns></returns>
+    public static List<string> MustSelect = new List<string>() { "语文", "数学", "英语" };
+    /// <summary>
+    /// 选修课
+    /// </summary>
+    /// <typeparam name="string"></typeparam>
+    /// <returns></returns>
+    public static List<string> OptionalSelect = new List<string>() { "政治", "历史", "地理", "物理", "化学", "生物", "技术" };
+
+    /// <summary>
+    /// 必修选修标记
+    /// </summary>
+    /// <value></value>
+    public int Flag
+    {
+        get
+        {
+            if (MustSelect.Contains(SubName))
+            {
+                return 2;
+            }
+            if (OptionalSelect.Contains(SubName))
+            {
+                return 1;
+            }
+            return 0;
+        }
+    }
+
     public Chengji(string RawData)
     {
         var Items = RawData.Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray();
@@ -88,10 +122,9 @@ public class Chengji
         SdateMonth = Sdate.Split(" ")[0].Split("/")[1];
         SdateDay = Sdate.Split(" ")[0].Split("/")[2];
         StudentID = Items[8];
-        Score = Items[9];
+        Score = float.Parse(Items[9]);
         ZScore = Items[10];
         TScore = Items[11];
         Dengdi = Items[12];
     }
-
 }

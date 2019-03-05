@@ -71,6 +71,7 @@ namespace Education.Controllers
                 );
                 //消费件数
                 info.ConsumptionCnt = info.Consumptions.Count;
+
                 return info;
             }
             return null;

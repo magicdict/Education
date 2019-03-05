@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 public class Student
 {
@@ -72,7 +73,12 @@ public class Student
     /// <value></value>
     public string LiveRoomNo { get; set; }
 
-
+    /// <summary>
+    /// 高考选课情况
+    /// </summary>
+    /// <value></value>
+    public List<string> OptionCourse { get; set; }
+    
     public Student(string RawData)
     {
         var Items = RawData.Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray();

@@ -104,6 +104,15 @@ public static class Dataset
         sr.Close();
         Console.WriteLine("读取学生成绩信息件数：" + ChengjiList.Count);
 
+        foreach (var student in StudentList)
+        {
+            //选修课
+            if (student.ClassName.Contains("高三"))
+            {
+                student.OptionCourse = Dataset.GetOptionCourse(student.ID);
+            }
+        }
+
 
         //导入考试类型信息 6_exam_type.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "6_exam_type.csv";
@@ -112,11 +121,11 @@ public static class Dataset
         ExamTypeDic.Clear();
         while (!sr.EndOfStream)
         {
-            var line = sr.ReadLine().Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray();;
-            ExamTypeDic.Add(line[0],line[1]);
+            var line = sr.ReadLine().Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray(); ;
+            ExamTypeDic.Add(line[0], line[1]);
         }
         sr.Close();
-        Console.WriteLine("读取考试类型信息件数：" + ExamTypeDic.Count);        
+        Console.WriteLine("读取考试类型信息件数：" + ExamTypeDic.Count);
 
         //导入学生消费信息 7_consumption
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "7_consumption.csv";
@@ -132,4 +141,18 @@ public static class Dataset
         Console.WriteLine("读取学生消费件数：" + ConsumptionList.Count);
 
     }
+
+    /// <summary>
+    /// 通过学号获得选修课列表
+    /// </summary>
+    /// <param name="StudentId"></param>
+    /// <returns></returns>
+    public static List<string> GetOptionCourse(string StudentId)
+    {
+        //选择学生,选修课
+        return Dataset.ChengjiList.Where(x => x.StudentID == StudentId && x.Flag == 1 && x.Score > 0 && x.Type == "6")
+               .Select(x => x.SubName).Distinct().ToList();
+
+    }
+
 }
