@@ -1,5 +1,5 @@
 [Unit]
-Description=Example for .NET Core WebApp with systemd
+Description=Education for .NET Core WebApi with systemd
 DefaultDependencies=no
 Wants=network.target # network is required
 After=network.target
@@ -9,7 +9,7 @@ ExecStart=/root/dotnet/dotnet Education.dll
 WorkingDirectory=/root/Education/publish/
 Restart=always
 RestartSec=10   # Restart service after 10 seconds if dotnet service crashes
-SyslogIdentifier=dotnet-example
+SyslogIdentifier=education-webapi
 User=root
 Group=root
 PrivateTmp=true

@@ -110,6 +110,7 @@ public static class Dataset
             if (student.ClassName.Contains("高三"))
             {
                 student.OptionCourse = Dataset.GetOptionCourse(student.ID);
+                student.OptionCourse.Sort();    //排序
             }
         }
 

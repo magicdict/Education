@@ -8,4 +8,5 @@ export interface IGroupInfo {
     maleTotal: number;
     femaleTotal: number;
     geoOptions: { name: string, value: number }[];
+    geoJson:any;
 }

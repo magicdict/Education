@@ -9,7 +9,7 @@
                     每日平均消费信息
                 </li>
                 <li class="list-group-item">
-                    {{DiaryAvgByTimeRangeInfo1}} 
+                    {{DiaryAvgByTimeRangeInfo1}}
                 </li>
                 <li class="list-group-item">
                     {{DiaryAvgByTimeRangeInfo2}}
@@ -30,7 +30,7 @@
                     每日平均消费信息
                 </li>
                 <li class="list-group-item">
-                    {{TotalByTimeRangeInfo1}} 
+                    {{TotalByTimeRangeInfo1}}
                 </li>
                 <li class="list-group-item">
                     {{TotalByTimeRangeInfo2}}
@@ -41,6 +41,11 @@
             </ul>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <div echarts [options]="DiaryCompumptionOpt"></div>
+        </div>
+    </div>
 </div>
 
-<button class="btn btn-primary" style="float: right" (click)="Return()" >返回</button> 
+<button class="btn btn-primary" style="float: right" (click)="Return()">返回</button>

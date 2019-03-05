@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from '../Student.service';
 import { CommonFunction } from 'src/app/common';
+import { from } from 'rxjs';
+import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 
 @Component({
     templateUrl: 'StudentCompumption.html',
@@ -103,6 +105,20 @@ export class StudentCompumptionComponent implements OnInit {
         this.TotalByTimeRangeOpt.series[0].data[1].value = CommonFunction.roundvalue(Sum2);
         this.TotalByTimeRangeOpt.series[0].data[2].value = CommonFunction.roundvalue(Sum3);
 
+        let diaryDateArray = [];
+        let diaryMoneyArray = [];
+
+        from(Compumptions).pipe(
+            groupBy(x => x.dealTimeYear + "/" + x.dealTimeMonth + "/" + x.dealTimeDay),
+            mergeMap(x => x.pipe(toArray()))
+        ).subscribe(
+            r => {
+                diaryDateArray.push(r[0].dealTimeYear + "/" + r[0].dealTimeMonth + "/" + r[0].dealTimeDay);
+                diaryMoneyArray.push(Number(CommonFunction.roundvalue(r.map(x => -x.monDeal).reduce((sum, current) => sum + current))));
+            }
+        )
+        this.DiaryCompumptionOpt.xAxis.data = diaryDateArray;
+        this.DiaryCompumptionOpt.series[0].data = diaryMoneyArray;
     }
 
     DiaryAvgByTimeRangeInfo1: string;
@@ -112,6 +128,8 @@ export class StudentCompumptionComponent implements OnInit {
     TotalByTimeRangeInfo1: string;
     TotalByTimeRangeInfo2: string;
     TotalByTimeRangeInfo3: string;
+
+
 
     DiaryAvgByTimeRangeOpt = {
         title: {
@@ -183,6 +201,43 @@ export class StudentCompumptionComponent implements OnInit {
                         shadowColor: 'rgba(0, 0, 0, 0.5)'
                     }
                 }
+            }
+        ]
+    };
+
+    DiaryCompumptionOpt = {
+        title: {
+            text: '每日消费',
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            },
+            formatter: '{b}\n{c}'
+        },
+        dataZoom: {
+            show: true,
+            realtime: true,
+            start: 10,
+            end: 90
+        },
+        xAxis: {
+            type: 'category',
+            data: []
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                label: {
+                    normal: {
+                        show: true
+                    }
+                },
+                data: [],
+                type: 'bar'
             }
         ]
     };

@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IGroupInfo } from '../Group.model'
-import { registerMap } from 'echarts';
-import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   templateUrl: 'GroupOverView.html',
 })
 export class GroupOverViewComponent implements OnInit {
   constructor(
-    private http: HttpClient,
     private route: ActivatedRoute
   ) { }
 
@@ -20,10 +18,6 @@ export class GroupOverViewComponent implements OnInit {
         this.option.series[0].data = [-data.groupinfo.maleTotal, -data.groupinfo.maleGrade1, -data.groupinfo.maleGrade2, -data.groupinfo.maleGrade3];
         this.option.series[1].data = [data.groupinfo.femaleTotal, data.groupinfo.femaleGrade1, data.groupinfo.femaleGrade2, data.groupinfo.femaleGrade3];
         this.regionOptions.series[0].data = data.groupinfo.geoOptions;
-      });
-    this.http.get('assets/china.json')
-      .subscribe(geoJson => {
-        registerMap('China', geoJson);
       });
   }
 
@@ -74,7 +68,7 @@ export class GroupOverViewComponent implements OnInit {
           }
         },
         zoom: 1.2,
-        data: [ ]
+        data: []
       }
     ]
   }
