@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StudentService } from '../Student.service';
+import { HomeService } from '../../Home.service';
 import { CommonFunction } from 'src/app/common';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
@@ -11,7 +11,7 @@ import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 export class StudentCompumptionComponent implements OnInit {
 
     constructor(
-        public studentSerice: StudentService,
+        public studentSerice: HomeService,
         private router: Router,
         private route: ActivatedRoute
     ) {

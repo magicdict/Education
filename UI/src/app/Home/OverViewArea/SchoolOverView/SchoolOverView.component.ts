@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IGroupInfo } from '../Group.model'
+import { ActivatedRoute, Router } from '@angular/router';
+import { IGroupInfo,IStudent,classopt } from '../../../Education.model';
+import {  HomeService } from '../../Home.service';
 
 
 @Component({
-  templateUrl: 'GroupOverView.html',
+  templateUrl: 'SchoolOverView.html',
 })
-export class GroupOverViewComponent implements OnInit {
+export class SchoolOverViewComponent implements OnInit {
   constructor(
-    private route: ActivatedRoute
-  ) { }
+    private router: Router,
+    private route: ActivatedRoute,
+    public studentSerice: HomeService
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.route.data
@@ -21,7 +26,31 @@ export class GroupOverViewComponent implements OnInit {
       });
   }
 
+  public StudentId: string;
+  public ClassId: string;
+  public QueryResult: IStudent[];
+  public classlist = classopt;
 
+  QueryByStudentId() {
+    this.studentSerice.QueryByStudentId(this.StudentId).then(
+      r => {
+        this.QueryResult = r;
+        if (r.length === 1) {
+          this.router.navigate(['../student/overview', r[0].id], { relativeTo: this.route });
+        }
+      }
+    )
+  }
+
+  QueryByClassId() {
+    this.studentSerice.QueryByClassId(this.ClassId).then(
+      r => {
+        this.QueryResult = r;
+      }
+    )
+  }
+
+ 
 
   regionOptions = {
     title: {

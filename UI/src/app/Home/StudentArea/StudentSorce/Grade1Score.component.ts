@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentService } from '../Student.service';
+import { HomeService } from '../../Home.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ScoreRadarGraphOption } from '../GraphOption/ScoreOption';
 
@@ -8,7 +8,7 @@ import { ScoreRadarGraphOption } from '../GraphOption/ScoreOption';
 })
 export class Grade1ScoreComponent implements OnInit {
     constructor(
-        public studentSerice: StudentService,
+        public studentSerice: HomeService,
         private router: Router,
         private route: ActivatedRoute
     ) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentService } from '../Student.service';
-import { IStudent, IStudentInfo, ITeacher } from '../student.model';
+import { HomeService } from '../../Home.service';
+import { IStudent, IStudentInfo, ITeacher } from '../../../Education.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { from } from 'rxjs';
@@ -12,13 +12,13 @@ import { ScoreRadarGraphOption } from '../GraphOption/ScoreOption'
 export class StudentOverviewComponent implements OnInit {
 
   constructor(
-    public studentSerice: StudentService,
+    public studentSerice: HomeService,
     private router: Router,
     private route: ActivatedRoute
   ) {
 
   }
-
+ 
   ngOnInit(): void {
     this.route.data
       .subscribe((data: { studentinfo: IStudentInfo }) => {
@@ -53,7 +53,7 @@ export class StudentOverviewComponent implements OnInit {
         )
         this.KaoqinGraph.xAxis.data = this.KaoqinMonth;
         this.KaoqinGraph.series[0].data = this.KaoqinMonthCnt;
-        data.studentinfo.chengjis.sort((x,y)=>{return x.subId.localeCompare(y.subId)});  
+        data.studentinfo.chengjis.sort((x, y) => { return x.subId.localeCompare(y.subId) });
         from(data.studentinfo.chengjis).pipe(
           groupBy(x => x.subId),
           mergeMap(x => x.pipe(toArray()))
@@ -102,12 +102,18 @@ export class StudentOverviewComponent implements OnInit {
         this.ScoreGraph.radar.indicator = this.ScoreName;
         this.ScoreGraph.series[0].data[0].value = this.ScoreAvg;
         this.ScoreGraph.series[0].data[1].value = this.TScoreAvg;
-        this.ScoreGraph =  (JSON.parse(JSON.stringify(ScoreRadarGraphOption)));   
+        this.ScoreGraph = (JSON.parse(JSON.stringify(ScoreRadarGraphOption)));
       });
   }
 
   JumpTo(url: string) {
-    this.router.navigate([url], { relativeTo: this.route });
+    if (url === "grade") {
+      if (this.CurrentStudent.className.indexOf("高一") > 0) {
+        this.router.navigate(["grade1"], { relativeTo: this.route });
+      }
+    } else {
+      this.router.navigate([url], { relativeTo: this.route });
+    }
   }
 
 
@@ -168,6 +174,6 @@ export class StudentOverviewComponent implements OnInit {
 
 
 
-  
+
 
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ICourse } from '../Course.model'
+import { ICourse } from 'src/app/Education.model';
+
 
 @Component({
-  templateUrl: 'CourseOverView.html',
+  templateUrl: 'CourseOverView.html', 
 })
 export class CourseOverViewComponent implements OnInit {
   constructor(
