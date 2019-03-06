@@ -61,6 +61,7 @@ public static class Dataset
             StudentList.Add(new Student(line));
         }
         sr.Close();
+        StudentList.Sort((x,y)=> x.ID.CompareTo(y.ID));
         Console.WriteLine("读取学生基本信息件数：" + StudentList.Count);
 
         //导入考勤类型信息 4_kaoqintype.csv

@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { StudentService } from '../Student.service';
 import { IStudent } from '../student.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SelectItem } from 'primeng/api';
-import { SelectItemGroup } from 'primeng/api';
 
 @Component({
   templateUrl: 'StudentQuery.html',

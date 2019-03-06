@@ -55,7 +55,7 @@ export interface IScore {
     score: number;
     zScore: string;
     tScore: number;
-    dengdi: string;
+    dengdi: number;
 }
 
 export interface IKaoqin {

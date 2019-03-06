@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { from } from 'rxjs';
 import { CommonFunction } from 'src/app/common';
-
+import { ScoreRadarGraphOption } from '../GraphOption/ScoreOption'
 @Component({
   templateUrl: 'StudentOverview.html',
 })
@@ -53,25 +53,26 @@ export class StudentOverviewComponent implements OnInit {
         )
         this.KaoqinGraph.xAxis.data = this.KaoqinMonth;
         this.KaoqinGraph.series[0].data = this.KaoqinMonthCnt;
-
+        data.studentinfo.chengjis.sort((x,y)=>{return x.subId.localeCompare(y.subId)});  
         from(data.studentinfo.chengjis).pipe(
           groupBy(x => x.subId),
           mergeMap(x => x.pipe(toArray()))
         ).subscribe(
           r => {
-            if (!CommonFunction.IsNullOrEmpty(r[0].subName)) {
-              let sum = 0;
-              let cnt = 0;
+            if (!CommonFunction.IsNullOrEmpty(r[0].subName) &&
+              r[0].subName !== "音乐" && r[0].subName !== "体育" && r[0].subName !== "美术") {
+              let sumDengdi = 0;
+              let cntDengdi = 0;
 
               let sumT = 0;
               let cntT = 0;
 
               r.forEach(s => {
                 if (s.numberName.indexOf("平时成绩") < 0) {
-                  if (s.score > 0) {
+                  if (s.dengdi > 0) {
                     //去掉特殊情况
-                    sum += 1 * s.score;
-                    cnt++;
+                    sumDengdi += (1 - s.dengdi) * 100;
+                    cntDengdi++;
                   }
                 }
                 if (!isNaN(s.tScore)) {
@@ -80,11 +81,11 @@ export class StudentOverviewComponent implements OnInit {
                 }
               });
 
-              let avg = CommonFunction.roundvalue(sum / cnt);
-              if (cnt !== 0) {
+              let avg = CommonFunction.roundvalue(sumDengdi / cntDengdi);
+              if (cntDengdi !== 0) {
                 this.ScoreAvg.push(avg);
                 this.ScoreName.push({ name: r[0].subName, max: 100 });
-                
+
                 //T平均分
                 let avgT = CommonFunction.roundvalue(sumT / cntT);
                 if (cntT !== 0) {
@@ -97,14 +98,15 @@ export class StudentOverviewComponent implements OnInit {
             }
           }
         )
+        this.ScoreGraph.title.text = '成绩';
         this.ScoreGraph.radar.indicator = this.ScoreName;
         this.ScoreGraph.series[0].data[0].value = this.ScoreAvg;
         this.ScoreGraph.series[0].data[1].value = this.TScoreAvg;
-
+        this.ScoreGraph =  (JSON.parse(JSON.stringify(ScoreRadarGraphOption)));   
       });
   }
-  
-  JumpTo(url:string){
+
+  JumpTo(url: string) {
     this.router.navigate([url], { relativeTo: this.route });
   }
 
@@ -112,6 +114,13 @@ export class StudentOverviewComponent implements OnInit {
   public CurrentStudent: IStudent;
   public Teachers: ITeacher[];
 
+  //学生成绩
+  public ScoreName: { name: string, max: number }[] = [];
+  public ScoreAvg: number[] = [];
+  public TScoreAvg: number[] = [];
+  ScoreGraph = ScoreRadarGraphOption;
+
+  //消费信息
   public ConsumptionMonth: string[] = [];
   public ConsumptionMonthMoney: number[] = [];
 
@@ -157,45 +166,8 @@ export class StudentOverviewComponent implements OnInit {
   };
 
 
-  public ScoreName: { name: string, max: number }[] = [];
-  public ScoreAvg: number[] = [];
-  public TScoreAvg: number[] = [];
 
-  ScoreGraph = {
-    title: {
-      text: '成绩'
-    },
-    tooltip: {},
-    legend: {
-      data: ['各科平均分','各科T平均分']
-    },
-    radar: {
-      // shape: 'circle',
-      name: {
-        textStyle: {
-          color: '#fff',
-          backgroundColor: '#999',
-          borderRadius: 3,
-          padding: [3, 5]
-        }
-      },
-      indicator:
-        this.ScoreName
-    },
-    series: [{
-      name: '各科平均分',
-      type: 'radar',
-      data: [
-        {
-          value: this.ScoreAvg,
-          name: '各科平均分'
-        },
-        {
-          value: this.TScoreAvg,
-          name: '各科T平均分'
-        }
-      ]
-    }]
-  };
+
+  
 
 }

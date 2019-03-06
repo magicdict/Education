@@ -10,13 +10,15 @@ import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Grade1ScoreComponent } from './StudentSorce/Grade1Score.component';
 
 
 @NgModule({
   declarations: [
     StudentQueryComponent,
     StudentOverviewComponent,
-    StudentCompumptionComponent
+    StudentCompumptionComponent,
+    Grade1ScoreComponent
   ],
   imports: [
     CommonModule,
