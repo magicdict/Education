@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { HomeService } from '../../Home.service';
 import { CommonFunction } from 'src/app/common';
 import { from } from 'rxjs';
@@ -12,19 +12,21 @@ export class StudentCompumptionComponent implements OnInit {
 
     constructor(
         public studentSerice: HomeService,
-        private router: Router,
-        private route: ActivatedRoute
+        private _location: Location
     ) {
 
     }
-
-
-
 
     ngOnInit(): void {
         //1.按照时段进行统计，某个时段，每天平均消费数
         this.GetDiaryAvgByTimeRange();
 
+    }
+
+    Return() {
+        this._location.back();
+        //let id = this.route.snapshot.paramMap.get('id');
+        //this.router.navigate(['../../', id], { relativeTo: this.route });
     }
 
     /** 按照时段进行统计，某个时段，每天平均消费数 */
@@ -241,11 +243,5 @@ export class StudentCompumptionComponent implements OnInit {
             }
         ]
     };
-
-
-    Return() {
-        let id = this.route.snapshot.paramMap.get('id');
-        this.router.navigate(['../../', id], { relativeTo: this.route });
-    }
 
 }

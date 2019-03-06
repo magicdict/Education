@@ -32,4 +32,6 @@ export class HomeService implements Resolve<IStudentInfo>{
     }
     /** 学生信息缓存 */
     CurrentStudentInfo: IStudentInfo;
+
+    CurrentClassInfo: IStudent[];
 }

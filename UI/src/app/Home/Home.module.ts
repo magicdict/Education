@@ -21,6 +21,7 @@ import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentO
 import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/StudentCompumption.component';
 import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.component';
 import { HomeService } from './Home.service';
+import { NavigationComponent } from './OverViewArea/SchoolOverView/Navigation.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { HomeService } from './Home.service';
     StudentQueryComponent,
     StudentOverviewComponent,
     StudentCompumptionComponent,
-    Grade1ScoreComponent
+    Grade1ScoreComponent,
+    NavigationComponent
   ],
   imports: [
     CommonModule,

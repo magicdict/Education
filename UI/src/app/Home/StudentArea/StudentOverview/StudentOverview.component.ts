@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../Home.service';
 import { IStudent, IStudentInfo, ITeacher } from '../../../Education.model';
@@ -5,7 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { from } from 'rxjs';
 import { CommonFunction } from 'src/app/common';
-import { ScoreRadarGraphOption } from '../GraphOption/ScoreOption'
+import { ScoreRadarGraphOption } from '../../GraphOption/ScoreOption'
+
 @Component({
   templateUrl: 'StudentOverview.html',
 })
@@ -14,11 +16,28 @@ export class StudentOverviewComponent implements OnInit {
   constructor(
     public studentSerice: HomeService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _location: Location
   ) {
 
   }
- 
+
+  JumpTo(url: string) {
+    if (url === "grade") {
+      if (this.CurrentStudent.className.indexOf("高一") > 0) {
+        this.router.navigate(["grade1"], { relativeTo: this.route });
+      }
+    } else {
+      this.router.navigate([url], { relativeTo: this.route });
+    }
+  }
+
+  Return() {
+    this._location.back();
+    //let id = this.route.snapshot.paramMap.get('id');
+    //this.router.navigate(['../../', id], { relativeTo: this.route });
+  }
+
   ngOnInit(): void {
     this.route.data
       .subscribe((data: { studentinfo: IStudentInfo }) => {
@@ -106,15 +125,7 @@ export class StudentOverviewComponent implements OnInit {
       });
   }
 
-  JumpTo(url: string) {
-    if (url === "grade") {
-      if (this.CurrentStudent.className.indexOf("高一") > 0) {
-        this.router.navigate(["grade1"], { relativeTo: this.route });
-      }
-    } else {
-      this.router.navigate([url], { relativeTo: this.route });
-    }
-  }
+
 
 
   public CurrentStudent: IStudent;

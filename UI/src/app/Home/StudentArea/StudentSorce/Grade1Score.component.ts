@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../Home.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ScoreRadarGraphOption } from '../GraphOption/ScoreOption';
+import { ScoreRadarGraphOption } from '../../GraphOption/ScoreOption'
+import {Location} from '@angular/common';
 
 @Component({
     templateUrl: 'Grade1Score.html',
@@ -9,8 +9,7 @@ import { ScoreRadarGraphOption } from '../GraphOption/ScoreOption';
 export class Grade1ScoreComponent implements OnInit {
     constructor(
         public studentSerice: HomeService,
-        private router: Router,
-        private route: ActivatedRoute
+        private _location: Location
     ) {
 
     }
@@ -41,7 +40,8 @@ export class Grade1ScoreComponent implements OnInit {
 
     /** 返回 */
     Return() {
-        let id = this.route.snapshot.paramMap.get('id');
-        this.router.navigate(['../../', id], { relativeTo: this.route });
+        this._location.back();
+        //let id = this.route.snapshot.paramMap.get('id');
+        //this.router.navigate(['../../', id], { relativeTo: this.route });
     }
 };  

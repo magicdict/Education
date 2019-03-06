@@ -50,7 +50,9 @@ export class SchoolOverViewComponent implements OnInit {
     )
   }
 
- 
+  JumpTo(url: string) {
+      this.router.navigate([url], { relativeTo: this.route });
+  }
 
   regionOptions = {
     title: {

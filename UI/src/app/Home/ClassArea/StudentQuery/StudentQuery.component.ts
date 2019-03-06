@@ -1,19 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IStudent } from 'src/app/Education.model';
+import { HomeService } from '../../Home.service';
 @Component({
   templateUrl: 'StudentQuery.html',
 })
-export class StudentQueryComponent {
+export class StudentQueryComponent implements OnInit {
+  ngOnInit(): void {
+    this.QueryResult = this.studentSerice.CurrentClassInfo;
+  }
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public studentSerice: HomeService
   ) { }
 
   public QueryResult: IStudent[];
 
   onRowSelect(event: { data: IStudent; }) {
-    this.router.navigate(['overview', event.data.id], { relativeTo: this.route });
+    this.router.navigate(['student/overview', event.data.id]);
   }
 
 }
