@@ -4,7 +4,7 @@ import { HomeService } from '../../Home.service';
 import { CommonFunction } from 'src/app/common';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
-
+import { DiaryAvgByTimeRangeOpt, TotalByTimeRangeOpt,DiaryCompumptionOpt } from '../../GraphOption/CompumptionOption';
 @Component({
     templateUrl: 'StudentCompumption.html',
 })
@@ -28,6 +28,10 @@ export class StudentCompumptionComponent implements OnInit {
         //let id = this.route.snapshot.paramMap.get('id');
         //this.router.navigate(['../../', id], { relativeTo: this.route });
     }
+
+    mDiaryAvgByTimeRangeOpt = DiaryAvgByTimeRangeOpt;
+    mTotalByTimeRangeOpt = TotalByTimeRangeOpt;
+    mDiaryCompumptionOpt = DiaryCompumptionOpt;
 
     /** 按照时段进行统计，某个时段，每天平均消费数 */
     GetDiaryAvgByTimeRange() {
@@ -90,9 +94,9 @@ export class StudentCompumptionComponent implements OnInit {
         if (DayCnt2 !== 0) avg2 = CommonFunction.roundvalue(Sum2 / DayCnt2);
         if (DayCnt3 !== 0) avg3 = CommonFunction.roundvalue(Sum3 / DayCnt3);
 
-        this.DiaryAvgByTimeRangeOpt.series[0].data[0].value = avg1;
-        this.DiaryAvgByTimeRangeOpt.series[0].data[1].value = avg2;
-        this.DiaryAvgByTimeRangeOpt.series[0].data[2].value = avg3;
+        this.mDiaryAvgByTimeRangeOpt.series[0].data[0].value = avg1;
+        this.mDiaryAvgByTimeRangeOpt.series[0].data[1].value = avg2;
+        this.mDiaryAvgByTimeRangeOpt.series[0].data[2].value = avg3;
 
         this.DiaryAvgByTimeRangeInfo1 = "10点之前，每日平均消费：" + avg1 + "元（" + DayCnt1 + "天," + DealCnt1 + "笔) ";
         this.DiaryAvgByTimeRangeInfo2 = "16点之前，每日平均消费：" + avg2 + "元（" + DayCnt2 + "天," + DealCnt2 + "笔) ";
@@ -103,9 +107,9 @@ export class StudentCompumptionComponent implements OnInit {
         this.TotalByTimeRangeInfo3 = "24点之前总共消费金额：" + CommonFunction.roundvalue(Sum3) + "元（" + DayCnt3 + "天," + DealCnt3 + "笔) ";
 
 
-        this.TotalByTimeRangeOpt.series[0].data[0].value = CommonFunction.roundvalue(Sum1);
-        this.TotalByTimeRangeOpt.series[0].data[1].value = CommonFunction.roundvalue(Sum2);
-        this.TotalByTimeRangeOpt.series[0].data[2].value = CommonFunction.roundvalue(Sum3);
+        this.mTotalByTimeRangeOpt.series[0].data[0].value = CommonFunction.roundvalue(Sum1);
+        this.mTotalByTimeRangeOpt.series[0].data[1].value = CommonFunction.roundvalue(Sum2);
+        this.mTotalByTimeRangeOpt.series[0].data[2].value = CommonFunction.roundvalue(Sum3);
 
         let diaryDateArray = [];
         let diaryMoneyArray = [];
@@ -119,8 +123,8 @@ export class StudentCompumptionComponent implements OnInit {
                 diaryMoneyArray.push(Number(CommonFunction.roundvalue(r.map(x => -x.monDeal).reduce((sum, current) => sum + current))));
             }
         )
-        this.DiaryCompumptionOpt.xAxis.data = diaryDateArray;
-        this.DiaryCompumptionOpt.series[0].data = diaryMoneyArray;
+        this.mDiaryCompumptionOpt.xAxis.data = diaryDateArray;
+        this.mDiaryCompumptionOpt.series[0].data = diaryMoneyArray;
     }
 
     DiaryAvgByTimeRangeInfo1: string;
@@ -133,115 +137,6 @@ export class StudentCompumptionComponent implements OnInit {
 
 
 
-    DiaryAvgByTimeRangeOpt = {
-        title: {
-            text: '按照时段统计每日平均消费',
-            subtext: '10点之前，16点之前，24点之前',
-            x: 'center'
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ['10点之前', '16点之前', '24点之前']
-        },
-        series: [
-            {
-                name: '每日平均消费',
-                type: 'pie',
-                radius: '55%',
-                center: ['50%', '60%'],
-                data: [
-                    { value: 0, name: '10点之前' },
-                    { value: 0, name: '16点之前' },
-                    { value: 0, name: '24点之前' },
-                ],
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
-
-    TotalByTimeRangeOpt = {
-        title: {
-            text: '按照时段统计总消费',
-            subtext: '10点之前，16点之前，24点之前',
-            x: 'center'
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ['10点之前', '16点之前', '24点之前']
-        },
-        series: [
-            {
-                name: '总消费',
-                type: 'pie',
-                radius: '55%',
-                center: ['50%', '60%'],
-                data: [
-                    { value: 0, name: '10点之前' },
-                    { value: 0, name: '16点之前' },
-                    { value: 0, name: '24点之前' },
-                ],
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
-
-    DiaryCompumptionOpt = {
-        title: {
-            text: '每日消费',
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            },
-            formatter: '{b}\n{c}'
-        },
-        dataZoom: {
-            show: true,
-            realtime: true,
-            start: 10,
-            end: 90
-        },
-        xAxis: {
-            type: 'category',
-            data: []
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [
-            {
-                label: {
-                    normal: {
-                        show: true
-                    }
-                },
-                data: [],
-                type: 'bar'
-            }
-        ]
-    };
+    
 
 }

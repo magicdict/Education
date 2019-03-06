@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <div echarts [options]="option" style="width:800px;"></div>
+      <div echarts [options]="sexOption" style="width:800px;"></div>
     </div>
     <div class="col">
-      <div echarts [options]="regionOptions" style="width:800px;"></div>
+      <div *ngIf="IsMapReady" echarts [options]="NativePlaceRegionOptions" style="width:800px;"></div>
     </div>
   </div>
 </div>
