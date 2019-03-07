@@ -16,6 +16,8 @@ export class StudentCompumptionComponent implements OnInit {
     ) {
 
     }
+    
+    CurrentStudent = this.studentSerice.CurrentStudentInfo.baseInfo;
 
     ngOnInit(): void {
         //1.按照时段进行统计，某个时段，每天平均消费数

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../Home.service';
 import { ScoreRadarGraphOption } from '../../GraphOption/ScoreOption'
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
+import { IStudent, ITeacher } from 'src/app/Education.model';
 
 @Component({
     templateUrl: 'Grade1Score.html',
@@ -13,14 +14,17 @@ export class Grade1ScoreComponent implements OnInit {
     ) {
 
     }
-
+    public CurrentStudent: IStudent;
+    public Teachers: ITeacher[];
     ScoreGraphFor2Option = ScoreRadarGraphOption;
     ScoreGraphFor19Option = ScoreRadarGraphOption;
 
     ngOnInit(): void {
         //成绩列表
+        this.CurrentStudent = this.studentSerice.CurrentStudentInfo.baseInfo;
+        this.Teachers = this.studentSerice.CurrentStudentInfo.teachers;
         let ScoreList = this.studentSerice.CurrentStudentInfo.chengjis;
-        ScoreList.sort((x,y)=>{return x.subId.localeCompare(y.subId)});
+        ScoreList.sort((x, y) => { return x.subId.localeCompare(y.subId) });
         //初一学生：显示 #19 - 2018-2019新高一7月测试 雷达图
         //初一学生：显示 #2 - 2018-1学期期中考试 雷达图
         let Score2 = ScoreList.filter(x => x.type === "2")

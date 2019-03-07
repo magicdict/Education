@@ -1,14 +1,39 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <div echarts [options]="ScoreGraphFor19Option" style="width:800px;"></div>
+            <img style="width:96px;float: left;"
+                [src]="CurrentStudent.sex == '男' ? '/assets/male.png' : '/assets/female.png'  " />
+            <h1 style="float: left;margin-top: 30px;">&nbsp;&nbsp;&nbsp;{{CurrentStudent.name}}</h1>
+            <button class="btn btn-primary btn-lg" style="float: right;margin-top: 30px;" (click)="Return()">返回</button>
         </div>
     </div>
+    <br />
+    <br />
     <div class="row">
-        <div class="col">
-            <div echarts [options]="ScoreGraphFor2Option" style="width:800px;"></div>
+        <div class="col-3">
+            <!--左侧内容-->
+            <ul class="heroes">
+                <li *ngFor="let teacher of Teachers">
+                    <span class="badge">{{teacher.subName}} </span>{{teacher.name}}
+                </li>
+            </ul>
+        </div>
+        <div class="col-9">
+            <!--右侧内容-->
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div echarts [options]="ScoreGraphFor19Option" style="width:800px;"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div echarts [options]="ScoreGraphFor2Option" style="width:800px;"></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-</div>
 
-<button class="btn btn-primary" style="float: right" (click)="Return()">返回</button>
+</div>

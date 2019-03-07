@@ -9,7 +9,7 @@ import { CommonFunction } from 'src/app/common';
 import { ScoreRadarGraphOption } from '../../GraphOption/ScoreOption'
 
 @Component({
-  templateUrl: 'StudentOverview.html',
+  templateUrl: 'StudentOverview.html'
 })
 export class StudentOverviewComponent implements OnInit {
 

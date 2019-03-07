@@ -1,6 +1,15 @@
-<button class="btn btn-primary" style="float: right" (click)="Return()">返回</button>
-
 <div class="container">
+
+    <div class="row">
+        <div class="col">
+            <img style="width:96px;float: left;"
+                [src]="CurrentStudent.sex == '男' ? '/assets/male.png' : '/assets/female.png'  " />
+            <h1 style="float: left;margin-top: 30px;">&nbsp;&nbsp;&nbsp;{{CurrentStudent.name}}</h1>
+            <button class="btn btn-primary btn-lg" style="float: right;margin-top: 30px;" (click)="Return()">返回</button>
+        </div>
+    </div>
+    <br />
+    <br />
     <div class="row">
         <div class="col">
             <div echarts [options]="mDiaryAvgByTimeRangeOpt" style="width:400px;height:400px;"></div>

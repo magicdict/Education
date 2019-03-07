@@ -1,83 +1,80 @@
-<button class="btn btn-primary" style="float: right" (click)="Return()">返回</button>
-
 <div class="container">
     <div class="row">
         <div class="col">
-            <img [src]="CurrentStudent.sex == '男' ? '/assets/male.png' : '/assets/female.png'  " />
-            <ul class="list-group">
-                <li class="list-group-item active">
-                    基本信息
+            <img style="width:96px;float: left;"
+                [src]="CurrentStudent.sex == '男' ? '/assets/male.png' : '/assets/female.png'  " />
+            <h1 style="float: left;margin-top: 30px;">&nbsp;&nbsp;&nbsp;{{CurrentStudent.name}}</h1>
+            <button class="btn btn-primary btn-lg" style="float: right;margin-top: 30px;" (click)="Return()">返回</button>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-3">
+            <!--左侧内容-->
+            <ul class="heroes">
+                <li>
+                    <span class="badge">ID</span>{{CurrentStudent.id}}
                 </li>
-                <li class="list-group-item">
-                    ID: {{CurrentStudent.id}}
+                <li>
+                    <span class="badge">班级</span>{{CurrentStudent.className}}
                 </li>
-                <li class="list-group-item">
-                    班级: {{CurrentStudent.className}}
+                <li>
+                    <span class="badge">学期</span>{{CurrentStudent.classTerm}}
                 </li>
-                <li class="list-group-item">
-                    学期: {{CurrentStudent.classTerm}}
+                <li>
+                    <span class="badge">姓名</span>{{CurrentStudent.name}}
                 </li>
-                <li class="list-group-item">
-                    姓名: {{CurrentStudent.name}}
+                <li>
+                    <span class="badge">性别</span>{{CurrentStudent.sex}}
                 </li>
-                <li class="list-group-item">
-                    性别: {{CurrentStudent.sex}}
+                <li>
+                    <span class="badge">出生年</span>{{CurrentStudent.bornDate}}
                 </li>
-                <li class="list-group-item">
-                    出生年: {{CurrentStudent.bornDate}}
+                <li>
+                    <span class="badge">政治面貌</span>{{CurrentStudent.policy}}
                 </li>
-                <li class="list-group-item">
-                    政治面貌: {{CurrentStudent.policy}}
+                <li>
+                    <span class="badge">民族</span>{{CurrentStudent.nation}}
                 </li>
-                <li class="list-group-item">
-                    民族: {{CurrentStudent.nation}}
-                </li>
-                <li class="list-group-item">
-                    出生地: {{CurrentStudent.nativePlace}}
+                <li>
+                    <span class="badge">出生地</span>{{CurrentStudent.nativePlace}}
                 </li>
 
-                <li class="list-group-item">
-                    家庭类型: {{CurrentStudent.residenceType}}
+                <li>
+                    <span class="badge">家庭类型</span>{{CurrentStudent.residenceType}}
                 </li>
-                <li class="list-group-item">
-                    是否住校: {{CurrentStudent.liveAtSchool}}
+                <li>
+                    <span class="badge">是否住校</span>{{CurrentStudent.liveAtSchool}}
                 </li>
-                <li class="list-group-item">
-                    宿舍号: {{CurrentStudent.liveRoomNo}}
+                <li>
+                    <span class="badge">宿舍号</span>{{CurrentStudent.liveRoomNo}}
                 </li>
-                <li class="list-group-item">
-                    是否退学: {{CurrentStudent.leaveSchool}}
+                <li>
+                    <span class="badge">是否退学</span>{{CurrentStudent.leaveSchool}}
                 </li>
             </ul>
         </div>
-        <div class="col">
-            <div echarts [options]="ScoreGraph" style="width:400px;height:400px;"></div>
-            <button class="btn btn-primary" style="float:right" (click)="JumpTo('grade')">详细</button>
-            <br />
-            <br />
-                            
-            <ul class="list-group">
-                <li class="list-group-item active">
-                    任课老师
-                </li>
-
-                <li class="list-group-item" *ngFor="let teacher of Teachers">
-                   {{teacher.subName}} : {{teacher.name}}
-                </li>
-            </ul>
-        </div>
-        <div class="col">
-            <div echarts [options]="CompumptionGraph" style="width:400px;height:400px;"></div>
-            <button class="btn btn-primary" style="float:right" (click)="JumpTo('compumption')" >详细</button>
-            
-            <br />
-            <br />
-
-            <div echarts [options]="KaoqinGraph" style="width:400px;height:400px;"></div>
-            <button class="btn btn-primary" style="float:right">详细</button>
-
+        <div class="col-9">
+            <!--右侧内容-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <div echarts [options]="ScoreGraph" style="width:350px;height:350px;"></div>
+                        <button class="btn btn-primary" style="float:right" (click)="JumpTo('grade')">详细</button>
+                    </div>
+                    <div class="col-6">
+                        <div echarts [options]="CompumptionGraph" style="width:350px;height:350px;"></div>
+                        <button class="btn btn-primary" style="float:right" (click)="JumpTo('compumption')">详细</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div echarts [options]="KaoqinGraph" style="width:350px;height:350px;"></div>
+                        <button class="btn btn-primary" style="float:right">详细</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-<button class="btn btn-primary" style="float: right" (click)="Return()">返回</button>
