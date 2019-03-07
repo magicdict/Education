@@ -12,7 +12,6 @@ import { HttpClient } from '@angular/common/http';
 export class SchoolOverViewComponent implements OnInit {
   constructor(
     private http: HttpClient,
-    private router: Router,
     private route: ActivatedRoute,
     public studentSerice: HomeService
   ) {
@@ -40,36 +39,4 @@ export class SchoolOverViewComponent implements OnInit {
         this.NativePlaceRegionOptions.series[0].data = data.groupinfo.geoOptions;
       });
   }
-
-  public StudentId: string;
-  public ClassId: string;
-  public QueryResult: IStudent[];
-  public classlist = classopt;
-
-  QueryByStudentId() {
-    this.studentSerice.QueryByStudentId(this.StudentId).then(
-      r => {
-        this.QueryResult = r;
-        if (r.length === 1) {
-          this.router.navigate(['../student/overview', r[0].id], { relativeTo: this.route });
-        }
-      }
-    )
-  }
-
-  QueryByClassId() {
-    this.studentSerice.QueryByClassId(this.ClassId).then(
-      r => {
-        this.QueryResult = r;
-      }
-    )
-  }
-
-  JumpTo(url: string) {
-    this.router.navigate([url], { relativeTo: this.route });
-  }
-
-
-
-
 }

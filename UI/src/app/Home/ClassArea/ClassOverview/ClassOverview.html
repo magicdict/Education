@@ -1,5 +1,16 @@
+<div class="container">
+  <div class="row">
+      <div class="col">
+          <div echarts [options]="mSexRate" style="width:400px;"></div>
+      </div>
+      <div class="col">
+        <div echarts [options]="NativePlaceRegionOptions" style="width:600px;"></div>
+      </div>
+  </div>
+</div>
+
 <p-table [value]="QueryResult" [scrollable]="true" (onRowSelect)="onRowSelect($event)" selectionMode="single"
-  scrollHeight="800px" [style]="{'width':'100%','min-width':'1200px'}">
+  scrollHeight="350px" [style]="{'width':'100%','min-width':'1200px'}">
   <ng-template pTemplate="header">
     <tr>
       <th>ID</th>

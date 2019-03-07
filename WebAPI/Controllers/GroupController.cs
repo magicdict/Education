@@ -31,7 +31,7 @@ namespace Education.Controllers
 
 
         /// <summary>
-        /// 获得班级某科目成绩信息
+        /// 获得概要
         /// /// </summary>
         /// <returns></returns>
         [HttpGet("GetOverview")]
@@ -73,8 +73,59 @@ namespace Education.Controllers
             {
                 o.GeoOptions.Add(new NameValueSet() { name = k, value = geodic[k] });
             }
-
             return o;
         }
+
+        /// <summary>
+        /// 班级概要
+        /// </summary>
+        public class ClassOverview
+        {
+            public int maleCnt { get; set; }
+            public int femaleCnt { get; set; }
+            public List<NameValueSet> GeoOptions { get; set; }
+        }
+
+        /// <summary>
+        /// 获得班级概要
+        /// /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetClassOverview")]
+        public ActionResult<ClassOverview> GetClassOverview(string ClassId)
+        {
+            var o = new ClassOverview();
+            o.maleCnt = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassId == ClassId);
+            o.femaleCnt = Dataset.StudentList.Count(x => x.Sex == "女" && x.ClassId == ClassId);
+            //获得地理信息
+            var geodic = new Dictionary<string, int>();
+            foreach (var province in Utility.Provinces)
+            {
+                geodic.Add(province, 0);
+            }
+            foreach (var item in Dataset.StudentList.Where(x => x.ClassId == ClassId))
+            {
+                var x = Utility.GetProvince(item.NativePlace);
+                if (!string.IsNullOrEmpty(x))
+                {
+                    geodic[x]++;
+                }
+                else
+                {
+                    //对于宁波的修正
+                    if (item.NativePlace.Contains("宁波"))
+                    {
+                        geodic["浙江"]++;
+                    }
+                }
+            }
+            o.GeoOptions = new List<NameValueSet>();
+            foreach (var k in geodic.Keys)
+            {
+                o.GeoOptions.Add(new NameValueSet() { name = k, value = geodic[k] });
+            }
+            return o;
+        }
+
+
     }
 }

@@ -42,7 +42,7 @@ export class NavigationComponent implements OnInit {
         this.QueryResult = r;
         if (r.length !==0){
             this.studentSerice.CurrentClassInfo = r;
-            this.router.navigate(['../class/overview'], { relativeTo: this.route });
+            this.router.navigate(['../class/overview',this.ClassId], { relativeTo: this.route });
         }
       }
     )

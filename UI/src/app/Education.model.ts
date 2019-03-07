@@ -161,7 +161,12 @@ export interface IGroupInfo {
     maleTotal: number;
     femaleTotal: number;
     geoOptions: { name: string, value: number }[];
-    geoJson:any;
+}
+
+export interface IClassInfo {
+  maleCnt: number;
+  femaleCnt: number;
+  geoOptions: { name: string, value: number }[];
 }
 
 export interface ICourse {
