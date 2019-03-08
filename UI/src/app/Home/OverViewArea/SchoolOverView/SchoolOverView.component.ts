@@ -13,7 +13,7 @@ export class SchoolOverViewComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    public studentSerice: HomeService
+    public service: HomeService
   ) {
 
   }

@@ -1,14 +1,5 @@
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <img style="width:96px;float: left;"
-                [src]="CurrentStudent.sex == '男' ? '/assets/male.png' : '/assets/female.png'  " />
-            <h1 style="float: left;margin-top: 30px;">&nbsp;&nbsp;&nbsp;{{CurrentStudent.name}}</h1>
-            <button class="btn btn-primary btn-lg" style="float: right;margin-top: 30px;" (click)="Return()">返回</button>
-        </div>
-    </div>
-    <br />
-    <br />
+    <student-header *ngIf= 'IsHeaderReady'></student-header>
     <div class="row">
         <div class="col-3">
             <!--左侧内容-->
@@ -61,17 +52,17 @@
                 <div class="row">
                     <div class="col-6">
                         <div echarts [options]="ScoreGraph" style="width:350px;height:350px;"></div>
-                        <button class="btn btn-primary" style="float:right" (click)="JumpTo('grade')">详细</button>
+                        <button class="btn btn-primary" style="float:right" (click)="JumpTo('grade')"><i class="fa fas fa-chart-bar"></i> 详细</button>
                     </div>
                     <div class="col-6">
                         <div echarts [options]="CompumptionGraph" style="width:350px;height:350px;"></div>
-                        <button class="btn btn-primary" style="float:right" (click)="JumpTo('compumption')">详细</button>
+                        <button class="btn btn-primary" style="float:right" (click)="JumpTo('compumption')"><i class="fa fas fa-chart-bar"></i> 详细</button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div echarts [options]="KaoqinGraph" style="width:350px;height:350px;"></div>
-                        <button class="btn btn-primary" style="float:right">详细</button>
+                        <button class="btn btn-primary" style="float:right"><i class="fa fas fa-chart-bar"></i> 详细</button>
                     </div>
                 </div>
             </div>

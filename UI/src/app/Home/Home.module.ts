@@ -5,11 +5,15 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /**第三方UI */
 import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { NgxEchartsModule } from 'ngx-echarts';
 /**路由 */
 import { HomeRoutingModule } from './Home-routing.module';
 /** 服务 */
+import { ConfirmationService } from 'primeng/api';
 import { IGroupInfoResolver, ICourseResolver, IClassInfoResolver } from "../Resolver.service";
 import { HomeService } from './Home.service';
 /**组件 */
@@ -19,7 +23,10 @@ import { ClassOverviewComponent } from './ClassArea/ClassOverview/ClassOverview.
 import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentOverview.component';
 import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/StudentCompumption.component';
 import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.component';
-import { NavigationComponent } from './OverViewArea/SchoolOverView/Navigation.component';
+/**共通 */
+import { ErrorMessageDialogComponent } from './Common/error-message-dialog/error-message-dialog.component';
+import { NavigationComponent } from './Common/navigation/Navigation.component';
+import { StudentHeaderComponent } from './Common/studentHeader/StudentHeader.component';
 
 
 @NgModule({
@@ -30,14 +37,19 @@ import { NavigationComponent } from './OverViewArea/SchoolOverView/Navigation.co
     StudentOverviewComponent,
     StudentCompumptionComponent,
     Grade1ScoreComponent,
-    NavigationComponent
+    NavigationComponent,
+    ErrorMessageDialogComponent,
+    StudentHeaderComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     TableModule,
+    DialogModule,
+    ButtonModule,
     BrowserAnimationsModule,
     DropdownModule,
+    ConfirmDialogModule,
     NgxEchartsModule,
     HomeRoutingModule
   ],
@@ -46,6 +58,7 @@ import { NavigationComponent } from './OverViewArea/SchoolOverView/Navigation.co
     ICourseResolver,
     IClassInfoResolver,
     HomeService,
+    ConfirmationService,
     HttpClient
   ],
 })

@@ -8,7 +8,7 @@ import { SexRate,regionOptions } from '../../GraphOption/StudentGraphOption'
 }) 
 export class ClassOverviewComponent implements OnInit {
   ngOnInit(): void {
-    this.QueryResult = this.studentSerice.CurrentClassInfo;
+    this.QueryResult = this.service.CurrentClassInfo;
     this.route.data
       .subscribe((data: { classinfo: IClassInfo }) => {
         this.mSexRate.series[0].data[0].value = data.classinfo.maleCnt;
@@ -19,7 +19,7 @@ export class ClassOverviewComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    public studentSerice: HomeService
+    public service: HomeService
   ) { }
 
   public QueryResult: IStudent[];

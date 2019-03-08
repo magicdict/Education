@@ -3,25 +3,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { IGroupInfoResolver, ICourseResolver, IClassInfoResolver } from "./Resolver.service";
 import { SchoolOverViewComponent } from "./Home/OverViewArea/SchoolOverView/SchoolOverView.component"
 import { CourseOverViewComponent } from './Home/OverViewArea/CourseOverView/CourseOverView.component';
-import { NavigationComponent } from './Home/OverViewArea/SchoolOverView/Navigation.component';
+import { NavigationComponent } from './Home/Common/navigation/Navigation.component';
 import { ClassOverviewComponent } from './Home/ClassArea/ClassOverview/ClassOverview.component';
 const routes: Routes = [
   {
-    path: 'home',
-    component: NavigationComponent,
-    children:
-      [
-        {
-          path: 'school',
-          component: SchoolOverViewComponent,
-          resolve: { groupinfo: IGroupInfoResolver }
-        },
-        {
-          path: 'course',
-          component: CourseOverViewComponent,
-          resolve: { courseInfo: ICourseResolver }
-        }
-      ]
+    path: 'home/school',
+    component: SchoolOverViewComponent,
+    resolve: { groupinfo: IGroupInfoResolver }
+  },
+  {
+    path: 'home/course',
+    component: CourseOverViewComponent,
+    resolve: { courseInfo: ICourseResolver }
   },
   {
     path: 'class/overview/:id',

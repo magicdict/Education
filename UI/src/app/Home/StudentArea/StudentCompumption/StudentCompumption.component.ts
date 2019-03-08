@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { HomeService } from '../../Home.service';
 import { CommonFunction } from 'src/app/common';
 import { from } from 'rxjs';
@@ -11,13 +10,12 @@ import { DiaryAvgByTimeRangeOpt, TotalByTimeRangeOpt,DiaryCompumptionOpt } from 
 export class StudentCompumptionComponent implements OnInit {
 
     constructor(
-        public studentSerice: HomeService,
-        private _location: Location
+        public service: HomeService
     ) {
 
     }
     
-    CurrentStudent = this.studentSerice.CurrentStudentInfo.baseInfo;
+    CurrentStudent = this.service.CurrentStudentInfo.baseInfo;
 
     ngOnInit(): void {
         //1.按照时段进行统计，某个时段，每天平均消费数
@@ -25,11 +23,7 @@ export class StudentCompumptionComponent implements OnInit {
 
     }
 
-    Return() {
-        this._location.back();
-        //let id = this.route.snapshot.paramMap.get('id');
-        //this.router.navigate(['../../', id], { relativeTo: this.route });
-    }
+
 
     mDiaryAvgByTimeRangeOpt = DiaryAvgByTimeRangeOpt;
     mTotalByTimeRangeOpt = TotalByTimeRangeOpt;
@@ -55,7 +49,7 @@ export class StudentCompumptionComponent implements OnInit {
         let DealCnt3 = 0;
 
 
-        let Compumptions = this.studentSerice.CurrentStudentInfo.consumptions;
+        let Compumptions = this.service.CurrentStudentInfo.consumptions;
         let KeyBreak1 = "";
         let KeyBreak2 = "";
         let KeyBreak3 = "";

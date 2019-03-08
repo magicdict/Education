@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../Home.service';
 import { IStudent, IStudentInfo, ITeacher } from '../../../Education.model';
@@ -14,11 +13,9 @@ import { ScoreRadarGraphOption } from '../../GraphOption/ScoreOption'
 export class StudentOverviewComponent implements OnInit {
 
   constructor(
-    public studentSerice: HomeService,
+    public service: HomeService,
     private router: Router,
-    private route: ActivatedRoute,
-    private _location: Location
-  ) {
+    private route: ActivatedRoute) {
 
   }
 
@@ -32,19 +29,15 @@ export class StudentOverviewComponent implements OnInit {
     }
   }
 
-  Return() {
-    this._location.back();
-    //let id = this.route.snapshot.paramMap.get('id');
-    //this.router.navigate(['../../', id], { relativeTo: this.route });
-  }
+  IsHeaderReady = false;
 
   ngOnInit(): void {
     this.route.data
       .subscribe((data: { studentinfo: IStudentInfo }) => {
 
         //缓存数据
-        this.studentSerice.CurrentStudentInfo = data.studentinfo;
-
+        this.service.CurrentStudentInfo = data.studentinfo;
+        this.IsHeaderReady = true;
         this.CurrentStudent = data.studentinfo.baseInfo;
         this.Teachers = data.studentinfo.teachers;
 
