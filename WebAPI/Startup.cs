@@ -19,6 +19,12 @@ namespace Education
         {
             Configuration = configuration;
             Dataset.Load(env);
+            Chengji.OptionalSelect.Sort();
+            foreach (var item in Chengji.OptionalSelect)
+            {
+                Console.WriteLine(item);
+            }
+            
         }
 
         public IConfiguration Configuration { get; }

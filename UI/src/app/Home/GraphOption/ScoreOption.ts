@@ -62,6 +62,59 @@ export const ScoreRadarGraphOption = {
     ]
   };
 
+  export const CourseSelectTwoOption = {
+    title: {
+      text: '高考七选三(两门)',
+    },
+    tooltip: {
+        position: 'top',
+    },
+    animation: false,
+    grid: {
+        height: '50%',
+        y: '10%'
+    },
+    xAxis: {
+        type: 'category',
+        data: [],
+        splitArea: {
+            show: true
+        }
+    },
+    yAxis: {
+        type: 'category',
+        data: [],
+        splitArea: {
+            show: true
+        }
+    },
+    visualMap: {
+        min: 0,
+        max: 200,
+        calculable: true,
+        orient: 'horizontal',
+        left: 'center',
+        bottom: '15%'
+    },
+    series: [{
+        name: '两门课程组合',
+        type: 'heatmap',
+        data: [],
+        label: {
+            normal: {
+                show: true
+            }
+        },
+        itemStyle: {
+            emphasis: {
+                shadowBlur: 10,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+        }
+    }]
+};
+
+
   export const CourseSelectCombineCntOption = {
     title: {
       text: '高考七选三（组合）',

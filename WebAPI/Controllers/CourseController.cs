@@ -49,7 +49,8 @@ namespace Education.Controllers
         public class Overview
         {
             public List<NameValueSet> selectionCourseCnt { get; set; }
-            public List<NameValueSet> SelectionCourseCombineCnt { get; set; }
+            public List<NameValueSet> selectionTwoCourseCnt { get; set; }
+            public List<NameValueSet> SelectionThreeCourseCnt { get; set; }
         }
 
         [HttpGet("GetOverview")]
@@ -57,9 +58,11 @@ namespace Education.Controllers
         {
             var o = new Overview();
             o.selectionCourseCnt = new List<NameValueSet>();
-            o.SelectionCourseCombineCnt = new List<NameValueSet>();
+            o.selectionTwoCourseCnt = new List<NameValueSet>();
+            o.SelectionThreeCourseCnt = new List<NameValueSet>();
 
             var dicSingle = new Dictionary<string, int>();
+            var dicDouble = new Dictionary<string, int>();
             var dicCombine = new Dictionary<string, int>();
             foreach (var item in Chengji.OptionalSelect)
             {
@@ -83,15 +86,47 @@ namespace Education.Controllers
                     {
                         dicCombine.Add(key, 1);
                     }
+
+                    key = student.OptionCourse[0] + "/" + student.OptionCourse[1];
+                    if (dicDouble.ContainsKey(key))
+                    {
+                        dicDouble[key]++;
+                    }
+                    else
+                    {
+                        dicDouble.Add(key, 1);
+                    }
+                    key = student.OptionCourse[0] + "/" + student.OptionCourse[2];
+                    if (dicDouble.ContainsKey(key))
+                    {
+                        dicDouble[key]++;
+                    }
+                    else
+                    {
+                        dicDouble.Add(key, 1);
+                    }
+                    key = student.OptionCourse[1] + "/" + student.OptionCourse[2];
+                    if (dicDouble.ContainsKey(key))
+                    {
+                        dicDouble[key]++;
+                    }
+                    else
+                    {
+                        dicDouble.Add(key, 1);
+                    }
                 }
             }
             foreach (var key in dicSingle.Keys)
             {
                 o.selectionCourseCnt.Add(new NameValueSet() { name = key, value = dicSingle[key] });
             }
+            foreach (var key in dicDouble.Keys)
+            {
+                o.selectionTwoCourseCnt.Add(new NameValueSet() { name = key, value = dicDouble[key] });
+            }
             foreach (var key in dicCombine.Keys)
             {
-                o.SelectionCourseCombineCnt.Add(new NameValueSet() { name = key, value = dicCombine[key] });
+                o.SelectionThreeCourseCnt.Add(new NameValueSet() { name = key, value = dicCombine[key] });
             }
             return o;
         }

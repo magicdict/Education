@@ -12,6 +12,7 @@ export class HomeService implements Resolve<IStudentInfo>
     }
 
     IsFirstRun = false;
+    IsFullScreen = false;
     constructor(public commonFunction: CommonFunction) {
 
     }

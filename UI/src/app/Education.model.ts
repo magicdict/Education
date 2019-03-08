@@ -171,5 +171,6 @@ export interface IClassInfo {
 
 export interface ICourse {
     selectionCourseCnt: { name: string, value: number }[];
-    selectionCourseCombineCnt: { name: string, value: number }[];
+    selectionTwoCourseCnt: { name: string, value: number }[];
+    selectionThreeCourseCnt: { name: string, value: number }[];
 }

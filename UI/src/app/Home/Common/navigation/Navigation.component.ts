@@ -19,6 +19,7 @@ export class NavigationComponent implements OnInit {
 
   }
 
+  /**全屏模式 */
   fullScreen() {
     let el = document.documentElement as any;
     let rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;
@@ -31,6 +32,7 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.service.IsFirstRun === false) {
+      this.service.IsFirstRun = true;
       this.confirmationService.confirm({
         message: '推荐在全屏模式下进行数据展示以获得最佳视觉效果，是否启用全屏模式？',
         acceptLabel: '确定',
@@ -39,6 +41,7 @@ export class NavigationComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
             this.fullScreen();
+            this.service.IsFullScreen = true;
             return;
         },
         reject: () => {
