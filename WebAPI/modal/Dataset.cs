@@ -13,6 +13,7 @@ public static class Dataset
 
     public static readonly Char QMark = (char)34;
 
+   public static List<Weather> WeatherList = new List<Weather>();
 
     public static List<Teacher> TeacherList = new List<Teacher>();
 
@@ -36,6 +37,7 @@ public static class Dataset
         var fullpath = hostingEnvironment.ContentRootPath + System.IO.Path.DirectorySeparatorChar + datasetPath;
         Console.WriteLine("数据库路径:" + fullpath);
 
+
         //导入教师信息 5_chengji.csv
         var fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "1_teacher.csv";
         var sr = new StreamReader(fullfilepath);
@@ -48,6 +50,20 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine("读取教师信息件数：" + TeacherList.Count);
+
+
+        //导入天气基本信息 宁波历史天气数据.csv
+        fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "宁波历史天气数据.csv";
+        sr = new StreamReader(fullfilepath);
+        sr.ReadLine();  //读取标题栏
+        WeatherList.Clear();
+        while (!sr.EndOfStream)
+        {
+            var line = sr.ReadLine();
+            WeatherList.Add(new Weather(line));
+        }
+        sr.Close();
+        Console.WriteLine("读取天气基本信息件数：" + WeatherList.Count);
 
 
         //导入学生基本信息 2_student_info.csv

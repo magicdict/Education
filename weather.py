@@ -54,14 +54,14 @@ def get_weather_historic_data(city, *years):
 
 st = time.time()
 
-# ningbo指的是宁波，2011是起始年份，2018是终止年份，即爬取2011到2018年宁波天气数据
+# ningbo指的是宁波，2011是起始年份，2019是终止年份，即爬取2011到2019年宁波天气数据
 
-df = get_weather_historic_data('ningbo', 2011, 2018)
+df = get_weather_historic_data('ningbo', 2011, 2019)
 
 # 保存成本地excel文件
 
 #你想要保存文件的位置
-df.to_csv(r'F:\Education\宁波历史天气数据.csv')
+df.to_csv(r'F:\Education\WebAPI\education_data\宁波历史天气数据.csv')
 
 
 print('完成,用时', round(time.time() - st, 3), 's')
