@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 public class Chengji
@@ -85,7 +86,28 @@ public class Chengji
     /// </summary>
     /// <typeparam name="string"></typeparam>
     /// <returns></returns>
-    public static List<string> OptionalSelect = new List<string>() { "政治", "历史", "地理", "物理", "化学", "生物", "技术" };
+    public static List<string> OptionalSelect = new List<string>() { "地理", "化学", "技术", "历史", "生物", "物理", "政治" };
+
+    /// <summary>
+    /// 不同操作系统下面的Sort是不一样的，这里强制排序
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
+    public static Func<string, string, int> OptionalSelectSort =
+        (string x, string y) =>
+        {
+            var x1 = -1;
+            var y1 = -1;
+            for (int i = 0; i < OptionalSelect.Count; i++)
+            {
+                if (x == OptionalSelect[i]) x1 = i;
+                if (y == OptionalSelect[i]) y1 = i;
+            }
+            return x1 - y1;
+        };
+
+
 
     /// <summary>
     /// 必修选修标记

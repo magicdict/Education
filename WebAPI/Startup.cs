@@ -15,16 +15,15 @@ namespace Education
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration,IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
             Dataset.Load(env);
-            Chengji.OptionalSelect.Sort();
+            Chengji.OptionalSelect.Sort((x, y) => { return Chengji.OptionalSelectSort(x, y); });
             foreach (var item in Chengji.OptionalSelect)
             {
                 Console.WriteLine(item);
             }
-            
         }
 
         public IConfiguration Configuration { get; }

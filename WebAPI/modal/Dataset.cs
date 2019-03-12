@@ -61,7 +61,7 @@ public static class Dataset
             StudentList.Add(new Student(line));
         }
         sr.Close();
-        StudentList.Sort((x,y)=> x.ID.CompareTo(y.ID));
+        StudentList.Sort((x, y) => x.ID.CompareTo(y.ID));
         Console.WriteLine("读取学生基本信息件数：" + StudentList.Count);
 
         //导入考勤类型信息 4_kaoqintype.csv
@@ -111,7 +111,7 @@ public static class Dataset
             if (student.ClassName.Contains("高三"))
             {
                 student.OptionCourse = Dataset.GetOptionCourse(student.ID);
-                student.OptionCourse.Sort();    //排序
+                student.OptionCourse.Sort((x, y) => { return Chengji.OptionalSelectSort(x, y); });    //排序
             }
         }
 
