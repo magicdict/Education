@@ -14,10 +14,10 @@ Release Step:
 
 - 0.common.ts 中代码需要修改一下
 
-'''
+```typescript
 let webapiurl = "<http://39.105.206.6:8080/api/">
 //let webapiurl = "<http://localhost:5000/api/">
-'''
+```
 
 - 1.dotnet publish (WebApi目录下执行)
 

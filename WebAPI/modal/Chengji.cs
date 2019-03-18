@@ -109,23 +109,30 @@ public class Chengji
 
 
 
+    public enum enumSubType
+    {
+        MustSelect = 2,
+        OptionalSelect = 1,
+        Misc = 0
+    }
+
     /// <summary>
     /// 必修选修标记
     /// </summary>
     /// <value></value>
-    public int Flag
+    public enumSubType SubType
     {
         get
         {
             if (MustSelect.Contains(SubName))
             {
-                return 2;
+                return enumSubType.MustSelect;
             }
             if (OptionalSelect.Contains(SubName))
             {
-                return 1;
+                return enumSubType.OptionalSelect;
             }
-            return 0;
+            return enumSubType.Misc;
         }
     }
 

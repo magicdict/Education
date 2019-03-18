@@ -1,11 +1,20 @@
 <div class="container">
+
   <div class="row">
-      <div class="col">
-          <div echarts [options]="mSexRate" style="width:400px;"></div>
+    <div class="col">
+      <div style="float: right;margin-top: 30px;">
+        <button class="btn btn-primary btn-lg" (click)="Home()"><i class="fa fas fa-home"></i> 首页</button>&nbsp;&nbsp;
+        <button class="btn btn-primary btn-lg" (click)="Return()"><i class="fa fa-arrow-left"></i> 返回</button>
       </div>
-      <div class="col">
-        <div echarts [options]="NativePlaceRegionOptions" style="width:600px;"></div>
-      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div echarts [options]="mSexRate" style="width:400px;"></div>
+    </div>
+    <div class="col">
+      <div echarts [options]="NativePlaceRegionOptions" style="width:600px;"></div>
+    </div>
   </div>
 </div>
 
@@ -19,7 +28,7 @@
       <th>姓名</th>
       <th>性别</th>
       <th>出生年</th>
-      <th>政治面貌</th> 
+      <th>政治面貌</th>
       <th>民族</th>
       <th>出生地</th>
       <th>家庭类型</th>

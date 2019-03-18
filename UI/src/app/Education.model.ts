@@ -178,6 +178,7 @@ export interface ICourse {
 
 export interface ISchoolConsumptionInfo {
   monthlyConsumption: { name: string, value: number }[];
+  weekDayConsumption: { name: string, value: number }[];
 }
 
 /**天气 */

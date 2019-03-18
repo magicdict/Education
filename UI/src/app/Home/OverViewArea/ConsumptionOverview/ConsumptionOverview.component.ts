@@ -10,7 +10,8 @@ export class ConsumptionOverviewComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  monthlyOpt = MonthlyCompumptionOpt;
+  monthlyOpt =  (JSON.parse(JSON.stringify(MonthlyCompumptionOpt)));
+  weekdayOpt =  (JSON.parse(JSON.stringify(MonthlyCompumptionOpt)));
 
   ngOnInit(): void {
     this.route.data
@@ -18,6 +19,10 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.monthlyOpt.title.text = "整体月消费金额";
         this.monthlyOpt.xAxis.data = data.consumptionInfo.monthlyConsumption.map(x=>x.name);
         this.monthlyOpt.series[0].data = data.consumptionInfo.monthlyConsumption;
+
+        this.weekdayOpt.title.text = "整体星期别消费金额";
+        this.weekdayOpt.xAxis.data = data.consumptionInfo.weekDayConsumption.map(x=>x.name);
+        this.weekdayOpt.series[0].data = data.consumptionInfo.weekDayConsumption;
       });
   }
 

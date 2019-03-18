@@ -1,6 +1,5 @@
+using System;
 using System.Linq;
-using System.Collections.Generic;
-using static Utility;
 
 public class Consumption
 {
@@ -35,6 +34,15 @@ public class Consumption
     /// </summary>
     /// <value></value>
     public string PerSex { get; set; }
+
+    public DayOfWeek DayOfWeek
+    {
+        get
+        {
+            var day = new System.DateTime(int.Parse(DealTimeYear), int.Parse(DealTimeMonth), int.Parse(DealTimeDay));
+            return day.DayOfWeek;
+        }
+    }
 
     public Consumption(string RawData)
     {

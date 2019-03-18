@@ -134,6 +134,8 @@ namespace Education.Controllers
         public class SchoolConsumptionInfo
         {
             public List<NameValueSet> MonthlyConsumption = new List<NameValueSet>();
+
+            public List<NameValueSet> WeekDayConsumption = new List<NameValueSet>();
         }
 
         /// <summary>
@@ -154,6 +156,16 @@ namespace Education.Controllers
                 var sum = Dataset.ConsumptionList.Where(x => x.DealTimeYear == mon.Substring(0, 4) && x.DealTimeMonth == mon.Substring(4, 2)).Sum(x => Single.Parse(x.MonDeal));
                 info.MonthlyConsumption.Add(new NameValueSet() { name = mon, value = -(Int32)sum });
             }
+
+            info.WeekDayConsumption.Add(new NameValueSet() { name = "周一", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Monday).Sum(x => Single.Parse(x.MonDeal)) });
+            info.WeekDayConsumption.Add(new NameValueSet() { name = "周二", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Tuesday).Sum(x => Single.Parse(x.MonDeal)) });
+            info.WeekDayConsumption.Add(new NameValueSet() { name = "周三", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Wednesday).Sum(x => Single.Parse(x.MonDeal)) });
+            info.WeekDayConsumption.Add(new NameValueSet() { name = "周四", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Thursday).Sum(x => Single.Parse(x.MonDeal)) });
+            info.WeekDayConsumption.Add(new NameValueSet() { name = "周五", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Friday).Sum(x => Single.Parse(x.MonDeal)) });
+            info.WeekDayConsumption.Add(new NameValueSet() { name = "周六", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Saturday).Sum(x => Single.Parse(x.MonDeal)) });
+            info.WeekDayConsumption.Add(new NameValueSet() { name = "周日", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Sunday).Sum(x => Single.Parse(x.MonDeal)) });
+
+
             return info;
         }
 
