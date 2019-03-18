@@ -65,7 +65,13 @@ public class Kaoqin
     /// <value></value>
     public string ClassId { get; set; }
 
-
+    public Weather weather
+    {
+        get
+        {
+            return Dataset.GetWeatherByDate(RecDateTimeYear, RecDateTimeMonth, RecDateTimeDay);
+        }
+    }
     public Kaoqin(string RawData)
     {
         var Items = RawData.Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray();

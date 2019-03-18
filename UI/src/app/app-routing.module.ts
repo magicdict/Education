@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IGroupInfoResolver, ICourseResolver, IClassInfoResolver } from "./Resolver.service";
+import { IGroupInfoResolver, ICourseResolver, IClassInfoResolver, ISchoolConsumptionResolver } from "./Resolver.service";
 import { SchoolOverViewComponent } from "./Home/OverViewArea/SchoolOverView/SchoolOverView.component"
 import { CourseOverViewComponent } from './Home/OverViewArea/CourseOverView/CourseOverView.component';
-import { NavigationComponent } from './Home/Common/navigation/Navigation.component';
+import { ConsumptionOverviewComponent } from './Home/OverViewArea/ConsumptionOverview/ConsumptionOverview.component';
 import { ClassOverviewComponent } from './Home/ClassArea/ClassOverview/ClassOverview.component';
 const routes: Routes = [
   {
@@ -15,6 +15,11 @@ const routes: Routes = [
     path: 'home/course',
     component: CourseOverViewComponent,
     resolve: { courseInfo: ICourseResolver }
+  },
+  {
+    path: 'home/consumption',
+    component: ConsumptionOverviewComponent,
+    resolve: { consumptionInfo: ISchoolConsumptionResolver }
   },
   {
     path: 'class/overview/:id',

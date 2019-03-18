@@ -4,13 +4,8 @@ import { IStudent, IStudentInfo } from '../Education.model';
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 @Injectable()
-export class HomeService implements Resolve<IStudentInfo>
+export class HomeService
 {
-    resolve(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): IStudentInfo | Observable<IStudentInfo> | Promise<IStudentInfo> {
-        let id = route.paramMap.get('id');
-        return this.GetStudentInfoByID(id);
-    }
-
     IsFirstRun = false;
     IsFullScreen = false;
     constructor(public commonFunction: CommonFunction) {

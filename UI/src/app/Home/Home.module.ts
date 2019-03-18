@@ -7,18 +7,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { NgxEchartsModule } from 'ngx-echarts';
 /**路由 */
 import { HomeRoutingModule } from './Home-routing.module';
 /** 服务 */
 import { ConfirmationService } from 'primeng/api';
-import { IGroupInfoResolver, ICourseResolver, IClassInfoResolver } from "../Resolver.service";
+import {
+  IGroupInfoResolver, ICourseResolver, IClassInfoResolver, IStudentInfoResolver,
+  ISchoolConsumptionResolver
+} from "../Resolver.service";
 import { HomeService } from './Home.service';
 /**组件 */
 import { CourseOverViewComponent } from './OverViewArea/CourseOverView/CourseOverView.component';
 import { SchoolOverViewComponent } from './OverViewArea/SchoolOverView/SchoolOverView.component';
+import { ConsumptionOverviewComponent } from './OverViewArea/ConsumptionOverview/ConsumptionOverview.component';
 import { ClassOverviewComponent } from './ClassArea/ClassOverview/ClassOverview.component';
 import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentOverview.component';
 import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/StudentCompumption.component';
@@ -33,6 +37,7 @@ import { StudentHeaderComponent } from './Common/studentHeader/StudentHeader.com
   declarations: [
     SchoolOverViewComponent,
     CourseOverViewComponent,
+    ConsumptionOverviewComponent,
     ClassOverviewComponent,
     StudentOverviewComponent,
     StudentCompumptionComponent,
@@ -57,6 +62,8 @@ import { StudentHeaderComponent } from './Common/studentHeader/StudentHeader.com
     IGroupInfoResolver,
     ICourseResolver,
     IClassInfoResolver,
+    IStudentInfoResolver,
+    ISchoolConsumptionResolver,
     HomeService,
     ConfirmationService,
     HttpClient

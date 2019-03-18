@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IStudent, IClassInfo } from 'src/app/Education.model';
 import { HomeService } from '../../Home.service';
-import { SexRate,regionOptions } from '../../GraphOption/StudentGraphOption'
+import { SexRateOption,regionOptions } from '../../GraphOption/StudentGraphOption'
 @Component({
   templateUrl: 'ClassOverview.html',
 }) 
@@ -23,7 +23,7 @@ export class ClassOverviewComponent implements OnInit {
   ) { }
 
   public QueryResult: IStudent[];
-  mSexRate = SexRate;
+  mSexRate = SexRateOption;
   NativePlaceRegionOptions = regionOptions;
 
   onRowSelect(event: { data: IStudent; }) {

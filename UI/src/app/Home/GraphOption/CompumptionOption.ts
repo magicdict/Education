@@ -35,7 +35,7 @@ export const DiaryAvgByTimeRangeOpt = {
     ]
 };
 
-export const  TotalByTimeRangeOpt = {
+export const TotalByTimeRangeOpt = {
     title: {
         text: '按照时段统计总消费',
         subtext: '10点之前，16点之前，24点之前',
@@ -72,7 +72,7 @@ export const  TotalByTimeRangeOpt = {
     ]
 };
 
-export const  DiaryCompumptionOpt = {
+export const DiaryCompumptionOpt = {
     title: {
         text: '每日消费',
     },
@@ -88,6 +88,37 @@ export const  DiaryCompumptionOpt = {
         realtime: true,
         start: 10,
         end: 90
+    },
+    xAxis: {
+        type: 'category',
+        data: []
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            label: {
+                normal: {
+                    show: true
+                }
+            },
+            data: [],
+            type: 'bar'
+        }
+    ]
+};
+
+export const MonthlyCompumptionOpt = {
+    title: {
+        text: '每日消费',
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        },
+        formatter: '{b}:\n{c}元'
     },
     xAxis: {
         type: 'category',

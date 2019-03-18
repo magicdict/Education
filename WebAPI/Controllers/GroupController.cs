@@ -127,5 +127,35 @@ namespace Education.Controllers
         }
 
 
+
+        /// <summary>
+        /// 学校整体消费信息
+        /// </summary>
+        public class SchoolConsumptionInfo
+        {
+            public List<NameValueSet> MonthlyConsumption = new List<NameValueSet>();
+        }
+
+        /// <summary>
+        /// 获得整个学校消费的统计信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetSchoolConsumptionInfo")]
+        public ActionResult<SchoolConsumptionInfo> GetSchoolConsumptionInfo()
+        {
+            var info = new SchoolConsumptionInfo();
+            //月度整体消费统计
+            //2018/07 -> 2019/01 
+            info.MonthlyConsumption.Clear();
+
+            var MonthTitle = new string[] { "201807", "201808", "201809", "201810", "201811", "201812", "201901" };
+            foreach (var mon in MonthTitle)
+            {
+                var sum = Dataset.ConsumptionList.Where(x => x.DealTimeYear == mon.Substring(0, 4) && x.DealTimeMonth == mon.Substring(4, 2)).Sum(x => Single.Parse(x.MonDeal));
+                info.MonthlyConsumption.Add(new NameValueSet() { name = mon, value = -(Int32)sum });
+            }
+            return info;
+        }
+
     }
 }

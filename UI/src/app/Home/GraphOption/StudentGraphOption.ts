@@ -44,12 +44,11 @@ export const regionOptions = {
       },
       zoom: 1.2,
       data: []
-    }
-  ]
+    }]
 }
 
 export const SchoolSexOption = {
-  color: ['blue', 'red'],
+  color: ['lightblue', 'pink'],
   title: {
     text: '男女比例',
     left: 10
@@ -107,7 +106,7 @@ export const SchoolSexOption = {
   ]
 };
 
-export const SexRate = {
+export const SexRateOption = {
   title: {
     text: '男女比例',
     x: 'center'
@@ -127,6 +126,7 @@ export const SexRate = {
       type: 'pie',
       radius: '55%',
       center: ['50%', '60%'],
+      color: ['lightblue', 'pink'],
       data: [
         { value: 0, name: '男' },
         { value: 0, name: '女' },
@@ -141,3 +141,4 @@ export const SexRate = {
     }
   ]
 };
+

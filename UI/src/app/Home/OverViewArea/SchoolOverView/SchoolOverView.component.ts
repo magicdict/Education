@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { IGroupInfo, IStudent, classopt } from '../../../Education.model';
-import { HomeService } from '../../Home.service';
+import { ActivatedRoute } from '@angular/router';
+import { IGroupInfo } from '../../../Education.model';
 import { SchoolSexOption, regionOptions } from '../../GraphOption/StudentGraphOption';
+import { SexRateOption} from '../../GraphOption/StudentGraphOption'
 import { registerMap } from 'echarts';
 import { HttpClient } from '@angular/common/http';
 
@@ -12,15 +12,16 @@ import { HttpClient } from '@angular/common/http';
 export class SchoolOverViewComponent implements OnInit {
   constructor(
     private http: HttpClient,
-    private route: ActivatedRoute,
-    public service: HomeService
+    private route: ActivatedRoute
   ) {
 
   }
 
   IsMapReady = false;
-  sexOption = SchoolSexOption;
   NativePlaceRegionOptions = regionOptions;
+  
+  sexOption = SchoolSexOption;
+  schoolSexRateOption = SexRateOption;
 
   ngOnInit(): void {
 
@@ -33,10 +34,16 @@ export class SchoolOverViewComponent implements OnInit {
 
     this.route.data
       .subscribe((data: { groupinfo: IGroupInfo }) => {
+
+        this.NativePlaceRegionOptions.series[0].data = data.groupinfo.geoOptions;
+
         //'整体', '高一', '高二', '高三'
         this.sexOption.series[0].data = [-data.groupinfo.maleTotal, -data.groupinfo.maleGrade1, -data.groupinfo.maleGrade2, -data.groupinfo.maleGrade3];
         this.sexOption.series[1].data = [data.groupinfo.femaleTotal, data.groupinfo.femaleGrade1, data.groupinfo.femaleGrade2, data.groupinfo.femaleGrade3];
-        this.NativePlaceRegionOptions.series[0].data = data.groupinfo.geoOptions;
+        this.schoolSexRateOption.title.text = "全校整体男女学生比例"
+        this.schoolSexRateOption.series[0].data[0].value = data.groupinfo.maleTotal; 
+        this.schoolSexRateOption.series[0].data[1].value = data.groupinfo.femaleTotal; 
+
       });
   }
 }

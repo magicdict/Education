@@ -13,7 +13,7 @@ public static class Dataset
 
     public static readonly Char QMark = (char)34;
 
-   public static List<Weather> WeatherList = new List<Weather>();
+    public static List<Weather> WeatherList = new List<Weather>();
 
     public static List<Teacher> TeacherList = new List<Teacher>();
 
@@ -164,13 +164,31 @@ public static class Dataset
     /// 通过学号获得选修课列表
     /// </summary>
     /// <param name="StudentId"></param>
-    /// <returns></returns>
+    /// /// <returns></returns>
     public static List<string> GetOptionCourse(string StudentId)
     {
         //选择学生,选修课
-        return Dataset.ChengjiList.Where(x => x.StudentID == StudentId && x.Flag == 1 && x.Score > 0 && x.Type == "6")
+        //return Dataset.ChengjiList.Where(x => x.StudentID == StudentId && x.Flag == 1 && x.Score > 0 && x.Type == "6")
+        //       .Select(x => x.SubName).Distinct().ToList();
+        return Dataset.ChengjiList.Where(x => x.StudentID == StudentId && x.Flag == 1 && x.Score > 0 && x.Term=="2018-2019-1")
                .Select(x => x.SubName).Distinct().ToList();
 
     }
 
+    /// <summary>
+    /// 根据日期获得天气情况
+    /// </summary>
+    /// <param name="year"></param>
+    /// <param name="month"></param>
+    /// <param name="day"></param>
+    /// <returns></returns>
+    public static Weather GetWeatherByDate(string year, string month, string day)
+    {
+        var r = Dataset.WeatherList.Where(x => x.Year == year && x.Month == month && x.Day == day).ToList();
+        if (r.Count == 1)
+        {
+            return r[0];
+        }
+        return null;
+    }
 }

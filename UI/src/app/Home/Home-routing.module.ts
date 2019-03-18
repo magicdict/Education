@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentOverview.component';
 import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/StudentCompumption.component';
-import { HomeService } from './Home.service';
+import { IStudentInfoResolver } from '../Resolver.service';
 import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.component';
 const routes: Routes = [
   {
     path: 'student/overview/:id',
     component: StudentOverviewComponent,
     resolve: {
-      studentinfo: HomeService
+      studentinfo: IStudentInfoResolver
     }
   },
   {
