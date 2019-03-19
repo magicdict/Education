@@ -26,13 +26,13 @@
     "echarts": "^4.1.0",
     "ngx-echarts": "^4.1.0",
     "primeicons": "^1.0.0",
-    "primeng": "^7.0.5",
+    "primeng": "^7.1.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.13.5",
+    "@angular-devkit/build-angular": "^0.13.6",
     "@angular/cli": "^7.3.6",
     "@angular/compiler-cli": "~7.2.9",
     "@angular/language-service": "~7.2.9",

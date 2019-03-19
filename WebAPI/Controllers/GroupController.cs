@@ -24,8 +24,19 @@ namespace Education.Controllers
             public int femaleGrade3 { get; set; }
             public int maleTotal { get; set; }
             public int femaleTotal { get; set; }
-
+            /// <summary>
+            /// 生源地
+            /// </summary>
+            /// <value></value>
             public List<NameValueSet> GeoOptions { get; set; }
+            /// <summary>
+            /// 教师数
+            /// </summary>
+            /// <value></value>
+            public int TeacherCnt { get; set; }
+            public int StudentCnt { get; set; }
+            public int StudentIBCnt { get; set; }
+
         }
 
 
@@ -38,6 +49,10 @@ namespace Education.Controllers
         public ActionResult<Overview> GetOverview()
         {
             var o = new Overview();
+            //只选择2018-2019-1学年的教师，教师可能会教多个班级，所以需要Distinct一下
+            o.TeacherCnt = Dataset.TeacherList.Where(x => x.Term == "2018-2019-1").Select(x => x.Id).Distinct().Count();
+            o.StudentCnt = Dataset.StudentList.Count;
+            o.StudentIBCnt = Dataset.StudentList.Count(x=>x.ClassName.Contains("IB"));
             o.maleTotal = Dataset.StudentList.Count(x => x.Sex == "男");
             o.femaleTotal = Dataset.StudentList.Count(x => x.Sex == "女");
             o.maleGrade1 = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassName.Contains("高一"));

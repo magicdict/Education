@@ -1,4 +1,4 @@
-export const regionOptions = {
+export const regionMapOptions = {
   title: {
     text: '生源地图',
     left: 10
@@ -47,10 +47,10 @@ export const regionOptions = {
     }]
 }
 
-export const SchoolSexOption = {
+export const SchoolSexBarOption = {
   color: ['lightblue', 'pink'],
   title: {
-    text: '男女比例',
+    text: '性别比例',
     left: 10
   },
   tooltip: {
@@ -106,14 +106,14 @@ export const SchoolSexOption = {
   ]
 };
 
-export const SexRateOption = {
+export const SexRatePieOption = {
   title: {
-    text: '男女比例',
+    text: '性别比例',
     x: 'center'
   },
   tooltip: {
     trigger: 'item',
-    formatter: "{a} <br/>{b} : {c} ({d}%)"
+    formatter: "{b} : {c} ({d}%)"
   },
   legend: {
     orient: 'vertical',
@@ -122,10 +122,15 @@ export const SexRateOption = {
   },
   series: [
     {
-      name: '男女比例',
+      name: '性别比例',
       type: 'pie',
       radius: '55%',
       center: ['50%', '60%'],
+      label: {
+        normal: {
+          position: 'inner'
+        }
+      },
       color: ['lightblue', 'pink'],
       data: [
         { value: 0, name: '男' },
@@ -142,3 +147,82 @@ export const SexRateOption = {
   ]
 };
 
+
+export const SexRateSunburstOption = {
+  title: {
+    text: '性别比例',
+    left: 10
+  },
+  label:{
+    formatter: "{b}\n{c}"
+  },
+  series: {
+    type: 'sunburst',
+    data: [
+      {
+        name: '全校',
+        value: 26,
+        children: [
+          {
+            name: '高一',
+            value: 8,
+            children: [
+              {
+                name: '男生',
+                value: 3,
+                itemStyle: {
+                  color: 'lightblue'
+                }
+              },
+              {
+                name: '女生', value: 5,
+                itemStyle: {
+                  color: 'pink'
+                }
+              }
+            ]
+          },
+          {
+            name: '高二',
+            value: 8,
+            children: [
+              {
+                name: '男生', value: 3,
+                itemStyle: {
+                  color: 'lightblue'
+                }
+              },
+              {
+                name: '女生', value: 5,
+                itemStyle: {
+                  color: 'pink'
+                }
+              }
+            ]
+          },
+          {
+            name: '高三',
+            value: 10,
+            children: [
+              {
+                name: '男生', value: 4,
+                itemStyle: {
+                  color: 'lightblue'
+                }
+              },
+              {
+                name: '女生', value: 6,
+                itemStyle: {
+                  color: 'pink'
+                }
+              }
+            ]
+          }
+        ]
+      }],
+    radius: [0, '90%'],
+    label: {
+      rotate: 'radial'
+    }
+  }
+};

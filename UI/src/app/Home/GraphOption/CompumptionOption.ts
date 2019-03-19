@@ -1,4 +1,4 @@
-export const DiaryAvgByTimeRangeOpt = {
+export const DiaryAvgByTimeRangeOption = {
     title: {
         text: '按照时段统计每日平均消费',
         subtext: '10点之前，16点之前，24点之前',
@@ -35,7 +35,7 @@ export const DiaryAvgByTimeRangeOpt = {
     ]
 };
 
-export const TotalByTimeRangeOpt = {
+export const TotalByTimeRangeOption = {
     title: {
         text: '按照时段统计总消费',
         subtext: '10点之前，16点之前，24点之前',
@@ -72,7 +72,7 @@ export const TotalByTimeRangeOpt = {
     ]
 };
 
-export const DiaryCompumptionOpt = {
+export const DiaryCompumptionOption = {
     title: {
         text: '每日消费',
     },
@@ -109,7 +109,7 @@ export const DiaryCompumptionOpt = {
     ]
 };
 
-export const MonthlyCompumptionOpt = {
+export const MonthlyCompumptionBarOption = {
     title: {
         text: '每日消费',
     },

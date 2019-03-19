@@ -1,24 +1,22 @@
-学号：<input type="text" [(ngModel)]="this.StudentId" placeholder="输入一个学号" />&nbsp;
-<button class="btn btn-primary" (click)="QueryByStudentId()"><i class="fa fa-search"></i>检索</button>
-
-&nbsp;&nbsp;&nbsp;
-
-班级：
-<p-dropdown [options]="classlist" [(ngModel)]="this.ClassId" [style]="{'width':'150px'}" placeholder="选择一个班级"
-  [group]="true">
-  <ng-template let-group pTemplate="group">
-    <span style="margin-left:.25em"><b>{{group.label}}</b></span>
-  </ng-template>
-</p-dropdown>&nbsp;
-<button class="btn btn-primary" (click)="QueryByClassId()"><i class="fa fa-search"></i>检索</button>
-&nbsp;&nbsp;&nbsp;
-<div style="float: right">
-  <button class="btn btn-primary" (click)="JumpTo('home/school')">概要</button>&nbsp;
-  <button class="btn btn-primary" (click)="JumpTo('home/course')">七选三</button>&nbsp;
-  <button class="btn btn-primary" (click)="JumpTo('home/consumption')"><i class="fa fas fa-yen-sign"></i> 消费</button>
+<div style="background: white;margin: 5px 0px 5px 0px">
+  学号：<input type="text" [(ngModel)]="this.StudentId" placeholder="输入一个学号" />&nbsp;
+  <button class="btn btn-primary" (click)="QueryByStudentId()"><i class="fa fa-search"></i>检索</button>
+  &nbsp;&nbsp;&nbsp;
+  班级：
+  <p-dropdown [options]="classlist" [(ngModel)]="this.ClassId" [style]="{'width':'150px'}" placeholder="选择一个班级"
+    [group]="true">
+    <ng-template let-group pTemplate="group">
+      <span style="margin-left:.25em"><b>{{group.label}}</b></span>
+    </ng-template>
+  </p-dropdown>&nbsp;
+  <button class="btn btn-primary" (click)="QueryByClassId()"><i class="fa fa-search"></i>检索</button>
+  &nbsp;&nbsp;&nbsp;
+  <div style="float: right">
+    <button class="btn btn-primary" (click)="JumpTo('home/school')">概要</button>&nbsp;
+    <button class="btn btn-primary" (click)="JumpTo('home/course')">七选三</button>&nbsp;
+    <button class="btn btn-primary" (click)="JumpTo('home/consumption')"><i class="fa fas fa-yen-sign"></i> 消费</button>
+  </div>
 </div>
-<br />
-<br />
 <app-error-message-dialog></app-error-message-dialog>
 <p-confirmDialog [style]="{width: '425px'}"></p-confirmDialog>
 <router-outlet></router-outlet>

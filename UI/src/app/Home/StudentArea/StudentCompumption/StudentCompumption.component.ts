@@ -3,7 +3,7 @@ import { HomeService } from '../../Home.service';
 import { CommonFunction } from 'src/app/common';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
-import { DiaryAvgByTimeRangeOpt, TotalByTimeRangeOpt,DiaryCompumptionOpt } from '../../GraphOption/CompumptionOption';
+import { DiaryAvgByTimeRangeOption, TotalByTimeRangeOption, DiaryCompumptionOption } from '../../GraphOption/CompumptionOption';
 @Component({
     templateUrl: 'StudentCompumption.html',
 })
@@ -14,7 +14,7 @@ export class StudentCompumptionComponent implements OnInit {
     ) {
 
     }
-    
+
     CurrentStudent = this.service.CurrentStudentInfo.baseInfo;
 
     ngOnInit(): void {
@@ -25,9 +25,9 @@ export class StudentCompumptionComponent implements OnInit {
 
 
 
-    mDiaryAvgByTimeRangeOpt = DiaryAvgByTimeRangeOpt;
-    mTotalByTimeRangeOpt = TotalByTimeRangeOpt;
-    mDiaryCompumptionOpt = DiaryCompumptionOpt;
+    mDiaryAvgByTimeRangeOpt = DiaryAvgByTimeRangeOption;
+    mTotalByTimeRangeOpt = TotalByTimeRangeOption;
+    mDiaryCompumptionOpt = DiaryCompumptionOption;
 
     /** 按照时段进行统计，某个时段，每天平均消费数 */
     GetDiaryAvgByTimeRange() {
@@ -133,6 +133,6 @@ export class StudentCompumptionComponent implements OnInit {
 
 
 
-    
+
 
 }

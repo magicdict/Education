@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ISchoolConsumptionInfo } from 'src/app/Education.model';
-import { MonthlyCompumptionOpt} from '../../GraphOption/CompumptionOption'
+import { MonthlyCompumptionBarOption} from '../../GraphOption/CompumptionOption'
 @Component({
   templateUrl: 'ConsumptionOverview.html',
 }) 
@@ -10,8 +10,8 @@ export class ConsumptionOverviewComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  monthlyOpt =  (JSON.parse(JSON.stringify(MonthlyCompumptionOpt)));
-  weekdayOpt =  (JSON.parse(JSON.stringify(MonthlyCompumptionOpt)));
+  monthlyOpt =  (JSON.parse(JSON.stringify(MonthlyCompumptionBarOption)));
+  weekdayOpt =  (JSON.parse(JSON.stringify(MonthlyCompumptionBarOption)));
 
   ngOnInit(): void {
     this.route.data

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IStudent, IClassInfo } from 'src/app/Education.model';
 import { HomeService } from '../../Home.service';
-import { SexRateOption,regionOptions } from '../../GraphOption/StudentGraphOption'
+import { SexRatePieOption,regionMapOptions } from '../../GraphOption/StudentGraphOption'
 import { Location } from '@angular/common';
 
 @Component({
@@ -13,6 +13,7 @@ export class ClassOverviewComponent implements OnInit {
     this.QueryResult = this.service.CurrentClassInfo;
     this.route.data
       .subscribe((data: { classinfo: IClassInfo }) => {
+        this.mSexRate.title.text = "男女比例";
         this.mSexRate.series[0].data[0].value = data.classinfo.maleCnt;
         this.mSexRate.series[0].data[1].value = data.classinfo.femaleCnt;
         this.NativePlaceRegionOptions.series[0].data = data.classinfo.geoOptions;
@@ -27,8 +28,8 @@ export class ClassOverviewComponent implements OnInit {
   ) { }
 
   public QueryResult: IStudent[];
-  mSexRate = SexRateOption;
-  NativePlaceRegionOptions = regionOptions;
+  mSexRate = SexRatePieOption;
+  NativePlaceRegionOptions = regionMapOptions;
 
   onRowSelect(event: { data: IStudent; }) {
     this.router.navigate(['student/overview', event.data.id]);

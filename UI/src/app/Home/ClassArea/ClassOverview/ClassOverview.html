@@ -22,27 +22,27 @@
   scrollHeight="350px" [style]="{'width':'100%','min-width':'1200px'}">
   <ng-template pTemplate="header">
     <tr>
-      <th>ID</th>
-      <th>班级</th>
-      <th>学期</th>
-      <th>姓名</th>
-      <th>性别</th>
-      <th>出生年</th>
-      <th>政治面貌</th>
-      <th>民族</th>
-      <th>出生地</th>
-      <th>家庭类型</th>
-      <th>是否住校</th>
-      <th>宿舍号</th>
-      <th>是否退学</th>
-      <th>高考选课</th>
+      <th  [pSortableColumn]="'id'">ID</th>
+      <th  [pSortableColumn]="'className'">班级</th>
+      <!-- <th  [pSortableColumn]="'classTerm'">学期</th> -->
+      <th  [pSortableColumn]="'name'">姓名</th>
+      <th  [pSortableColumn]="'sex'">性别</th>
+      <th  [pSortableColumn]="'bornDate'">出生年</th>
+      <th  [pSortableColumn]="'policy'">政治面貌</th>
+      <th  [pSortableColumn]="'nation'">民族</th>
+      <th  [pSortableColumn]="'nativePlace'">出生地</th>
+      <th  [pSortableColumn]="'residenceType'">家庭类型</th>
+      <th  [pSortableColumn]="'liveAtSchool'">是否住校</th>
+      <th  [pSortableColumn]="'liveRoomNo'">宿舍号</th>
+      <th  [pSortableColumn]="'leaveSchool'">是否退学</th>
+      <!-- <th  [pSortableColumn]="'optionCourse'">高考选课</th> -->
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-itemData>
     <tr [pSelectableRow]="itemData">
       <td>{{itemData.id}}</td>
       <td>{{itemData.className}}</td>
-      <td>{{itemData.classTerm}}</td>
+      <!-- <td>{{itemData.classTerm}}</td> -->
       <td>{{itemData.name}}</td>
       <td>{{itemData.sex}}</td>
       <td>{{itemData.bornDate}}</td>
@@ -53,7 +53,7 @@
       <td>{{itemData.liveAtSchool}}</td>
       <td>{{itemData.liveRoomNo}}</td>
       <td>{{itemData.leaveSchool}}</td>
-      <td>{{itemData.optionCourse}}</td>
+      <!-- <td>{{itemData.optionCourse}}</td> -->
     </tr>
   </ng-template>
 </p-table>

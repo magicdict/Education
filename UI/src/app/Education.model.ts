@@ -162,6 +162,9 @@ export interface IGroupInfo {
   maleTotal: number;
   femaleTotal: number;
   geoOptions: { name: string, value: number }[];
+  teacherCnt:number;
+  studentCnt:number;
+  studentIBCnt:number;
 }
 
 export interface IClassInfo {
