@@ -1,16 +1,25 @@
 <app-nav></app-nav>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div echarts [options]="mCourseSelectCntOption" style="width:100%;"></div>
+
+<p-tabView>
+    <p-tabPanel header="单门课程" style="width:1140px;">
+        <div class="container" style="width:1140px;">
+            <div class="row">
+                <div class="col">
+                    <div echarts [options]="mCourseSelectRadarGraphOption" style="width:500px;"></div>
+                </div>
+                <div class="col">
+                    <div echarts [options]="mCourseSelectCntOption" style="width:500px;"></div>
+                </div>
+            </div>
         </div>
-        <div class="col">
-            <div echarts [options]="mCourseSelectTwoCntOption" style="width:100%;"></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div echarts [options]="mCourseSelectThreeCntOption" style="width:100%;"></div>
-        </div>
-    </div>
-</div>
+    </p-tabPanel>
+    <p-tabPanel header="两门课程" style="width:100%;">
+        <div echarts [options]="mCourseSelectTwoCntOption" style="width:1140px;height: 600px;"></div>
+    </p-tabPanel>
+    <p-tabPanel header="三门课程" style="width:100%;">
+        <div echarts [options]="mCourseSelectThreeCntOption" style="width:1140px;height: 600px;"></div>
+    </p-tabPanel>
+    <p-tabPanel header="桑基图（Sankey）" style="width:100%;">
+        <div echarts [options]="mSelectCourseSankeyOption" style="width:1140px;height: 1000px;"></div>
+    </p-tabPanel>
+</p-tabView>

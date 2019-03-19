@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /**第三方UI */
 import { TableModule } from 'primeng/table';
+import { TabViewModule } from 'primeng/tabview';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -50,6 +51,7 @@ import { StudentHeaderComponent } from './Common/studentHeader/StudentHeader.com
     CommonModule,
     FormsModule,
     TableModule,
+    TabViewModule,
     DialogModule,
     ButtonModule,
     BrowserAnimationsModule,

@@ -162,9 +162,9 @@ export interface IGroupInfo {
   maleTotal: number;
   femaleTotal: number;
   geoOptions: { name: string, value: number }[];
-  teacherCnt:number;
-  studentCnt:number;
-  studentIBCnt:number;
+  teacherCnt: number;
+  studentCnt: number;
+  studentIBCnt: number;
 }
 
 export interface IClassInfo {
@@ -177,6 +177,7 @@ export interface ICourse {
   selectionCourseCnt: { name: string, value: number }[];
   selectionTwoCourseCnt: { name: string, value: number }[];
   selectionThreeCourseCnt: { name: string, value: number }[];
+  studentCnt: number;
 }
 
 export interface ISchoolConsumptionInfo {

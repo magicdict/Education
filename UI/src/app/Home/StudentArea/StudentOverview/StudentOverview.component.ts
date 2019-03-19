@@ -21,6 +21,7 @@ export class StudentOverviewComponent implements OnInit {
 
   JumpTo(url: string) {
     if (url === "grade") {
+      //这里应该是 !== -1,但是高一都有校区前缀，所以这个判断也不会出现问题
       if (this.CurrentStudent.className.indexOf("高一") > 0) {
         this.router.navigate(["grade1"], { relativeTo: this.route });
       }

@@ -48,6 +48,11 @@ namespace Education.Controllers
         /// </summary>
         public class Overview
         {
+            /// <summary>
+            /// 符合标准人数
+            /// </summary>
+            /// <value></value>
+            public int StudentCnt { get; set; }
             public List<NameValueSet> selectionCourseCnt { get; set; }
             public List<NameValueSet> selectionTwoCourseCnt { get; set; }
             public List<NameValueSet> SelectionThreeCourseCnt { get; set; }
@@ -60,7 +65,7 @@ namespace Education.Controllers
             o.selectionCourseCnt = new List<NameValueSet>();
             o.selectionTwoCourseCnt = new List<NameValueSet>();
             o.SelectionThreeCourseCnt = new List<NameValueSet>();
-
+            o.StudentCnt = Dataset.StudentList.Count(student => student.OptionCourse != null && student.OptionCourse.Count == 3);
             var dicSingle = new Dictionary<string, int>();
             var dicDouble = new Dictionary<string, int>();
             var dicCombine = new Dictionary<string, int>();
