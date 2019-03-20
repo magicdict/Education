@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ICourse } from 'src/app/Education.model';
+import { CommonFunction } from '../../../common'
 import {
   CourseSelectCntOption, CourseSelectTwoCntOption, CourseSelectThreeCntOption,
   CourseSelectRadarGraphOption, SelectCourseSankeyOption
@@ -17,12 +18,18 @@ export class CourseOverViewComponent implements OnInit {
   //单科图
   mCourseSelectRadarGraphOption = CourseSelectRadarGraphOption;
   mCourseSelectCntOption = CourseSelectCntOption;
+  SingleCoursePercent: { name: string, value: number }[];
+
   //两门课程
-  mCourseSelectTwoCntOption = CourseSelectTwoCntOption;
+  mCourseSelectTwoCntOption = (JSON.parse(JSON.stringify(CourseSelectTwoCntOption)));
+  mCourseSelectTwoPercentOption =  (JSON.parse(JSON.stringify(CourseSelectTwoCntOption)));
+
   //三门课程
+  ThreeCoursePercent: { name: string, value: number }[];
   mCourseSelectThreeCntOption = CourseSelectThreeCntOption;
   //桑吉图
   mSelectCourseSankeyOption = SelectCourseSankeyOption;
+
 
   ngOnInit(): void {
     this.route.data
@@ -30,7 +37,10 @@ export class CourseOverViewComponent implements OnInit {
         data.courseInfo.selectionCourseCnt.sort((x, y) => { return y.value - x.value; });
         this.mCourseSelectCntOption.xAxis.data = data.courseInfo.selectionCourseCnt.map(x => x.name);
         this.mCourseSelectCntOption.series[0].data = data.courseInfo.selectionCourseCnt.map(x => x.value);
-
+        this.SingleCoursePercent = data.courseInfo.selectionCourseCnt.map(x => {
+          return { 'name': x.name, 'value': CommonFunction.roundvalue(x.value * 100 / data.courseInfo.studentCnt) }
+        });
+        console.log(this.SingleCoursePercent);
         this.mCourseSelectRadarGraphOption.radar.indicator =
           data.courseInfo.selectionCourseCnt.map(x => { return { 'name': x.name, 'max': data.courseInfo.studentCnt } });
         this.mCourseSelectRadarGraphOption.series[0].data[0].value = data.courseInfo.selectionCourseCnt.map(x => x.value);
@@ -39,8 +49,11 @@ export class CourseOverViewComponent implements OnInit {
         var Course2 = ['化学', '技术', '历史', '生物', '物理', '政治'];
         this.mCourseSelectTwoCntOption.xAxis.data = Course1;
         this.mCourseSelectTwoCntOption.yAxis.data = Course2;
+        this.mCourseSelectTwoPercentOption.xAxis.data = Course1;
+        this.mCourseSelectTwoPercentOption.yAxis.data = Course2;
 
-        var CombineData = [];
+        let CombineData = [];
+        let CombineDataPercent = [];
 
         for (let index = 0; index < 6; index++) {
           for (let index2 = 0; index2 < 6; index2++) {
@@ -50,18 +63,25 @@ export class CourseOverViewComponent implements OnInit {
             let combine = data.courseInfo.selectionTwoCourseCnt.find(x => x.name == key)
             if (combine === undefined) {
               CombineData.push([index, index2, "-"]);
+              CombineDataPercent.push([index, index2, "-"]);
             } else {
               CombineData.push([index, index2, combine.value]);
+              CombineDataPercent.push([index, index2,  CommonFunction.roundvalue(combine.value * 100 / data.courseInfo.studentCnt)]);
             }
           }
         }
         this.mCourseSelectTwoCntOption.series[0].data = CombineData;
+        this.mCourseSelectTwoPercentOption.title.text = "高考七选三（两门百分比）"
+        this.mCourseSelectTwoPercentOption.visualMap.max = 50;
+        this.mCourseSelectTwoPercentOption.series[0].data = CombineDataPercent;
 
         //三门课程
         data.courseInfo.selectionThreeCourseCnt.sort((x, y) => { return y.value - x.value; });
         this.mCourseSelectThreeCntOption.xAxis.data = data.courseInfo.selectionThreeCourseCnt.map(x => x.name);
         this.mCourseSelectThreeCntOption.series[0].data = data.courseInfo.selectionThreeCourseCnt.map(x => x.value);
-
+        this.ThreeCoursePercent = data.courseInfo.selectionThreeCourseCnt.map(x => {
+          return { 'name': x.name, 'value': CommonFunction.roundvalue(x.value * 100 / data.courseInfo.studentCnt) }
+        });
         //桑基图
         //注意：重复数据会导致桑基图出现错误
         this.mSelectCourseSankeyOption.series.data = [];

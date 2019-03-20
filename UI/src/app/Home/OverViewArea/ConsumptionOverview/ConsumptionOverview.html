@@ -9,7 +9,29 @@
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div *ngFor="let item of this.highestRec" class="col">
+            <p-card  header="最高消费" subheader="消费记录" [style]="{width: '300px'}" styleClass="ui-card-shadow">
+                <p-header>
+                    <img src="Card" src="assets/usercard.png">
+                </p-header>
+                <div>
+                    <ul class="heroes" style="width: 240px">
+                        <li>
+                            <span class="badge">消费者</span>{{item.accName}}
+                        </li>
+                        <li>
+                            <span class="badge">发生时间</span>{{item.dealTime}}
+                        </li>
+                        <li>
+                            <span class="badge">金额</span>{{item.monDeal}}元
+                        </li>
+                    </ul>
+                </div>
+                <p-footer>
+                    <button pButton type="button" label="学生详细信息" icon="pi pi-check"
+                        style="margin-right: .25em" (click)="JumpTo(item.studentID)"></button> 
+                </p-footer>
+            </p-card>
         </div>
     </div>
 </div>

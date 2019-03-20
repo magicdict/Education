@@ -8,6 +8,7 @@ import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -53,6 +54,7 @@ import { StudentHeaderComponent } from './Common/studentHeader/StudentHeader.com
     TableModule,
     TabViewModule,
     DialogModule,
+    CardModule,
     ButtonModule,
     BrowserAnimationsModule,
     DropdownModule,

@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ISchoolConsumptionInfo } from 'src/app/Education.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ISchoolConsumptionInfo, IConsumption } from 'src/app/Education.model';
 import { MonthlyCompumptionBarOption} from '../../GraphOption/CompumptionOption'
 @Component({
   templateUrl: 'ConsumptionOverview.html',
 }) 
 export class ConsumptionOverviewComponent implements OnInit {
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   monthlyOpt =  (JSON.parse(JSON.stringify(MonthlyCompumptionBarOption)));
   weekdayOpt =  (JSON.parse(JSON.stringify(MonthlyCompumptionBarOption)));
+  highestRec:IConsumption[];
 
   ngOnInit(): void {
     this.route.data
@@ -23,7 +25,14 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.weekdayOpt.title.text = "整体星期别消费金额";
         this.weekdayOpt.xAxis.data = data.consumptionInfo.weekDayConsumption.map(x=>x.name);
         this.weekdayOpt.series[0].data = data.consumptionInfo.weekDayConsumption;
+
+        this.highestRec = data.consumptionInfo.highestRec;
+
       });
+  }
+
+  JumpTo(studentId:string){
+    this.router.navigate(['student/overview', studentId]);
   }
 
 }

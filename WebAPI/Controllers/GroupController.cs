@@ -52,7 +52,7 @@ namespace Education.Controllers
             //只选择2018-2019-1学年的教师，教师可能会教多个班级，所以需要Distinct一下
             o.TeacherCnt = Dataset.TeacherList.Where(x => x.Term == "2018-2019-1").Select(x => x.Id).Distinct().Count();
             o.StudentCnt = Dataset.StudentList.Count;
-            o.StudentIBCnt = Dataset.StudentList.Count(x=>x.ClassName.Contains("IB"));
+            o.StudentIBCnt = Dataset.StudentList.Count(x => x.ClassName.Contains("IB"));
             o.maleTotal = Dataset.StudentList.Count(x => x.Sex == "男");
             o.femaleTotal = Dataset.StudentList.Count(x => x.Sex == "女");
             o.maleGrade1 = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassName.Contains("高一"));
@@ -151,6 +151,8 @@ namespace Education.Controllers
             public List<NameValueSet> MonthlyConsumption = new List<NameValueSet>();
 
             public List<NameValueSet> WeekDayConsumption = new List<NameValueSet>();
+
+            public List<Consumption> HighestRec { set; get; }
         }
 
         /// <summary>
@@ -180,6 +182,15 @@ namespace Education.Controllers
             info.WeekDayConsumption.Add(new NameValueSet() { name = "周六", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Saturday).Sum(x => Single.Parse(x.MonDeal)) });
             info.WeekDayConsumption.Add(new NameValueSet() { name = "周日", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Sunday).Sum(x => Single.Parse(x.MonDeal)) });
 
+            //最高消费记录
+            Dataset.ConsumptionList.Sort((x, y) =>
+            {
+                var first = Single.Parse(x.MonDeal);
+                var second = Single.Parse(y.MonDeal);
+                return first.CompareTo(second);
+            }
+            );
+            info.HighestRec = Dataset.ConsumptionList.Take(3).ToList();
 
             return info;
         }
