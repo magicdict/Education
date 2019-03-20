@@ -171,6 +171,7 @@ export interface IClassInfo {
   maleCnt: number;
   femaleCnt: number;
   geoOptions: { name: string, value: number }[];
+  teachers : ITeacher[];
 }
 
 export interface ICourse {

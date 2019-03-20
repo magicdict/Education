@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IStudent, IClassInfo } from 'src/app/Education.model';
+import { IStudent, IClassInfo, ITeacher } from 'src/app/Education.model';
 import { HomeService } from '../../Home.service';
 import { SexRatePieOption, regionMapOptions } from '../../GraphOption/StudentGraphOption'
 import { Location } from '@angular/common';
@@ -16,8 +16,9 @@ export class ClassOverviewComponent implements OnInit {
     private _location: Location
   ) { }
 
-  public QueryResult: IStudent[];
+  public QueryResult: IStudent[] = [];
   public StudentCnt: number;
+  public Teachers:ITeacher[] = [];
   public ClassName : string;
   mSexRate = SexRatePieOption;
   NativePlaceRegionOptions = regionMapOptions;
@@ -26,9 +27,9 @@ export class ClassOverviewComponent implements OnInit {
     this.QueryResult = this.service.CurrentClassInfo;
     this.StudentCnt = this.QueryResult.length;
     this.ClassName = this.QueryResult[0].className;
-
     this.route.data
       .subscribe((data: { classinfo: IClassInfo }) => {
+        this.Teachers = data.classinfo.teachers;
         this.mSexRate.title.text = "男女比例";
         this.mSexRate.series[0].data[0].value = data.classinfo.maleCnt;
         this.mSexRate.series[0].data[1].value = data.classinfo.femaleCnt;

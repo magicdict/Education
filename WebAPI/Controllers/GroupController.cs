@@ -99,6 +99,11 @@ namespace Education.Controllers
             public int maleCnt { get; set; }
             public int femaleCnt { get; set; }
             public List<NameValueSet> GeoOptions { get; set; }
+            /// <summary>
+            /// 任课教师
+            /// </summary>
+            /// <value></value>
+            public List<Teacher> Teachers { get; set; }
         }
 
         /// <summary>
@@ -138,6 +143,9 @@ namespace Education.Controllers
             {
                 o.GeoOptions.Add(new NameValueSet() { name = k, value = geodic[k] });
             }
+            //教师记录
+            o.Teachers = Dataset.TeacherList.Where(x => x.ClassId == ClassId).ToList();
+
             return o;
         }
 
