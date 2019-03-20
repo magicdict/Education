@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +11,14 @@ export class AppComponent implements OnInit {
 
   }
   constructor(
-
     private router: Router,
-    private route: ActivatedRoute) { }
+    private _location: Location
+  ) { }
 
-  navTo(url: string) {
-    this.router.navigate([url], { relativeTo: this.route });
+  Return() {
+    this._location.back();
+  }
+  Home() {
+    this.router.navigate(['']);
   }
 }

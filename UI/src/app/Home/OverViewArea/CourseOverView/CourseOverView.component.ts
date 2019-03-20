@@ -62,7 +62,10 @@ export class CourseOverViewComponent implements OnInit {
         this.mCourseSelectThreeCntOption.xAxis.data = data.courseInfo.selectionThreeCourseCnt.map(x => x.name);
         this.mCourseSelectThreeCntOption.series[0].data = data.courseInfo.selectionThreeCourseCnt.map(x => x.value);
 
-        //桑吉图
+        //桑基图
+        //注意：重复数据会导致桑基图出现错误
+        this.mSelectCourseSankeyOption.series.data = [];
+        this.mSelectCourseSankeyOption.series.links = [];
         data.courseInfo.selectionCourseCnt.map(x => { return { 'name': x.name } }).forEach(element => {
           this.mSelectCourseSankeyOption.series.data.push(element);
         });

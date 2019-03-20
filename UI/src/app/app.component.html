@@ -3,7 +3,12 @@
 <div>
     <div style="width:1140px;margin-left: auto;margin-right: auto;">
         <div class="alert alert-primary" role="alert">
-            <h1>宁波效实中学 - 2018-2019上半学期</h1>
+            <label style="font-size:x-large;">宁波效实中学 - 2018-2019上半学期</label>
+            <div style="float: right;">
+                <button class="btn btn-primary btn-lg" (click)="Home()"><i class="fa fas fa-home"></i>
+                    首页</button>&nbsp;&nbsp;
+                <button class="btn btn-primary btn-lg" (click)="Return()"><i class="fa fa-arrow-left"></i> 返回</button>
+            </div>
         </div>
         <div>
             <router-outlet></router-outlet>
