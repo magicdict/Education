@@ -109,7 +109,9 @@ export const DiaryCompumptionOption = {
     ]
 };
 
-export const MonthlyCompumptionBarOption = {
+
+export const MonthlyCompumptionBarOptionTotal = {
+
     title: {
         text: '每日消费',
     },
@@ -134,6 +136,53 @@ export const MonthlyCompumptionBarOption = {
                     show: true
                 }
             },
+            data: [],
+            type: 'bar'
+        }
+    ]
+};
+
+export const MonthlyCompumptionBarOption = {
+    title: {
+        text: '每日消费',
+    },
+    legend: {
+        data: ['住校', '非住校']
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        },
+        formatter: '{b}:\n{c}元'
+    },
+    xAxis: {
+        type: 'category',
+        data: []
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            label: {
+                normal: {
+                    show: true
+                }
+            },
+            name: "住校",
+            stack: '消费额',
+            data: [],
+            type: 'bar'
+        },
+        {
+            label: {
+                normal: {
+                    show: true
+                }
+            },
+            name: "非住校",
+            stack: '消费额',
             data: [],
             type: 'bar'
         }

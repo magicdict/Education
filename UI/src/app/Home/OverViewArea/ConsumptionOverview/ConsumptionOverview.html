@@ -1,37 +1,129 @@
 <app-nav></app-nav>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div echarts [options]="monthlyOpt" style="width:100%;"></div>
-        </div>
-        <div class="col">
-            <div echarts [options]="weekdayOpt" style="width:100%;"></div>
-        </div>
-    </div>
-    <div class="row">
-        <div *ngFor="let item of this.highestRec" class="col">
-            <p-card  header="最高消费" subheader="消费记录" [style]="{width: '300px'}" styleClass="ui-card-shadow">
-                <p-header>
-                    <img src="Card" src="assets/usercard.png">
-                </p-header>
-                <div>
-                    <ul class="heroes" style="width: 240px">
-                        <li>
-                            <span class="badge">消费者</span>{{item.accName}}
-                        </li>
-                        <li>
-                            <span class="badge">发生时间</span>{{item.dealTime}}
-                        </li>
-                        <li>
-                            <span class="badge">金额</span>{{item.monDeal}}元
-                        </li>
-                    </ul>
+
+<p-tabView>
+    <p-tabPanel header="概要" style="width:1140px;">
+        <div class="container" style="width:1140px;">
+            <div class="row">
+                <div class="col">
+                    <div echarts [options]="monthlyTotalOpt" style="width:520px;"></div>
                 </div>
-                <p-footer>
-                    <button pButton type="button" label="学生详细信息" icon="pi pi-check"
-                        style="margin-right: .25em" (click)="JumpTo(item.studentID)"></button> 
-                </p-footer>
-            </p-card>
+                <div class="col">
+                    <div echarts [options]="weekdayTotalOpt" style="width:520px;"></div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-info">
+                住校生 <span class="badge badge-light">{{liveAtSchool}}</span>
+            </button>
+            &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-primary">
+                非住校生 <span class="badge badge-light">{{notLiveAtSchool}}</span>
+            </button>
+            <br />
+            <br />
+            <div class="row">
+                <div class="col">
+                    <div echarts [options]="monthlyOpt" style="width:520px;"></div>
+                </div>
+                <div class="col">
+                    <div echarts [options]="weekdayOpt" style="width:520px;"></div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </p-tabPanel>
+    <p-tabPanel header="消费榜单" style="width:1140px;">
+        <div class="container">
+            <div class="row">
+                <div *ngFor="let item of this.highestRec" class="col">
+                    <p-card header="最高消费" subheader="消费记录" [style]="{width: '320px'}" styleClass="ui-card-shadow">
+                        <p-header>
+                            <img src="Card" src="assets/usercard.png">
+                        </p-header>
+                        <div>
+                            <ul class="heroes" style="width: 280px">
+                                <li>
+                                    <span class="badge">消费者</span>{{item.accName}}
+                                </li>
+                                <li>
+                                    <span class="badge">发生时间</span>{{item.dealTime}}
+                                </li>
+                                <li>
+                                    <span class="badge">金额</span>{{-item.monDeal}}元
+                                </li>
+                                <li>
+                                    <span class="badge">住校</span>{{item.consumpStudent.liveAtSchool?"是":"否"}}
+                                </li>
+                            </ul>
+                        </div>
+                        <p-footer>
+                            <button pButton type="button" label="学生详细信息" icon="pi pi-check" style="margin-right: .25em"
+                                (click)="JumpTo(item.studentID)"></button>
+                        </p-footer>
+                    </p-card>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div *ngFor="let item of this.highestRecLiveAtSchool" class="col">
+                    <p-card header="最高消费(住校)" subheader="消费记录" [style]="{width: '320px'}" styleClass="ui-card-shadow">
+                        <p-header>
+                            <img src="Card" src="assets/usercard.png">
+                        </p-header>
+                        <div>
+                            <ul class="heroes" style="width: 280px">
+                                <li>
+                                    <span class="badge">消费者</span>{{item.accName}}
+                                </li>
+                                <li>
+                                    <span class="badge">发生时间</span>{{item.dealTime}}
+                                </li>
+                                <li>
+                                    <span class="badge">金额</span>{{-item.monDeal}}元
+                                </li>
+                                <li>
+                                    <span class="badge">住校</span>{{item.consumpStudent.liveAtSchool?"是":"否"}}
+
+                                </li>
+                            </ul>
+                        </div>
+                        <p-footer>
+                            <button pButton type="button" label="学生详细信息" icon="pi pi-check" style="margin-right: .25em"
+                                (click)="JumpTo(item.studentID)"></button>
+                        </p-footer>
+                    </p-card>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div *ngFor="let item of this.highestRecNotLiveAtSchool" class="col">
+                    <p-card header="最高消费(非住校)" subheader="消费记录" [style]="{width: '320px'}" styleClass="ui-card-shadow">
+                        <p-header>
+                            <img src="Card" src="assets/usercard.png">
+                        </p-header>
+                        <div>
+                            <ul class="heroes" style="width: 280px">
+                                <li>
+                                    <span class="badge">消费者</span>{{item.accName}}
+                                </li>
+                                <li>
+                                    <span class="badge">发生时间</span>{{item.dealTime}}
+                                </li>
+                                <li>
+                                    <span class="badge">金额</span>{{-item.monDeal}}元
+                                </li>
+                                <li>
+                                    <span class="badge">住校</span>{{item.consumpStudent.liveAtSchool?"是":"否"}}
+
+                                </li>
+                            </ul>
+                        </div>
+                        <p-footer>
+                            <button pButton type="button" label="学生详细信息" icon="pi pi-check" style="margin-right: .25em"
+                                (click)="JumpTo(item.studentID)"></button>
+                        </p-footer>
+                    </p-card>
+                </div>
+            </div>
+        </div>
+    </p-tabPanel>
+</p-tabView>

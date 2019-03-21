@@ -76,8 +76,8 @@ export interface IStudent {
   policy: string;
   classId: string;
   classTerm: string;
-  liveAtSchool: string;
-  leaveSchool: string;
+  liveAtSchool: boolean;
+  leaveSchool: boolean;
   liveRoomNo: string;
   optionCourse: string[];
 }
@@ -103,6 +103,7 @@ export interface IConsumption {
   studentID: string;
   accName: string;
   perSex: string;
+  consumpStudent: IStudent;
 }
 
 export interface IScore {
@@ -171,7 +172,7 @@ export interface IClassInfo {
   maleCnt: number;
   femaleCnt: number;
   geoOptions: { name: string, value: number }[];
-  teachers : ITeacher[];
+  teachers: ITeacher[];
 }
 
 export interface ICourse {
@@ -183,8 +184,16 @@ export interface ICourse {
 
 export interface ISchoolConsumptionInfo {
   monthlyConsumption: { name: string, value: number }[];
+  monthlyConsumptionLiveAtSchool: { name: string, value: number }[];
+  monthlyConsumptionNotLiveAtSchool: { name: string, value: number }[];
   weekDayConsumption: { name: string, value: number }[];
-  highestRec:IConsumption[];
+  weekDayConsumptionLiveAtSchool: { name: string, value: number }[];
+  weekDayConsumptionNotLiveAtSchool: { name: string, value: number }[];
+  highestRec: IConsumption[];
+  highestRecLiveAtSchool: IConsumption[];
+  highestRecNotLiveAtSchool: IConsumption[];
+  liveAtSchoolCnt: number;
+  notLiveAtSchoolCnt: number;
 }
 
 /**天气 */

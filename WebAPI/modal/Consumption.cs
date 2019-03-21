@@ -14,11 +14,13 @@ public class Consumption
     public string DealTimeDay { get; set; }
     public string DealTimeHour { get; set; }
 
+    public string DealYearMonth { get; set; }
+
     /// <summary>
     /// 消费金额
     /// </summary>
     /// <value></value>
-    public string MonDeal { get; set; }
+    public Single MonDeal { get; set; }
     /// <summary>
     /// 对应学生信息表studentid
     /// </summary>
@@ -35,14 +37,9 @@ public class Consumption
     /// <value></value>
     public string PerSex { get; set; }
 
-    public DayOfWeek DayOfWeek
-    {
-        get
-        {
-            var day = new System.DateTime(int.Parse(DealTimeYear), int.Parse(DealTimeMonth), int.Parse(DealTimeDay));
-            return day.DayOfWeek;
-        }
-    }
+    public DayOfWeek DayOfWeek { get; set; }
+
+    public Student ConsumpStudent { get; set; }
 
     public Consumption(string RawData)
     {
@@ -52,10 +49,13 @@ public class Consumption
         DealTimeMonth = DealTime.Split(" ")[0].Split("/")[1];
         DealTimeDay = DealTime.Split(" ")[0].Split("/")[2];
         DealTimeHour = DealTime.Split(" ")[1].Split(":")[0];
-        MonDeal = Items[1];
+        DealYearMonth = DealTimeYear + DealTimeMonth;
+        MonDeal = Single.Parse(Items[1]);
         StudentID = Items[2];
         AccName = Items[3];
         PerSex = Items[4];
+        DayOfWeek = new System.DateTime(int.Parse(DealTimeYear), int.Parse(DealTimeMonth), int.Parse(DealTimeDay)).DayOfWeek;
+        ConsumpStudent = Dataset.StudentList.Where(x => x.ID == StudentID).First();
     }
 
 }

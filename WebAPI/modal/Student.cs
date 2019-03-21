@@ -61,12 +61,12 @@ public class Student
     /// 是否住校
     /// </summary>
     /// <value></value>
-    public string LiveAtSchool { get; set; }
+    public bool LiveAtSchool { get; set; }
     /// <summary>
     /// 是否退学
     /// </summary>
     /// <value></value>
-    public string LeaveSchool { get; set; }
+    public bool LeaveSchool { get; set; }
     /// <summary>
     /// 宿舍号
     /// </summary>
@@ -78,7 +78,7 @@ public class Student
     /// </summary>
     /// <value></value>
     public List<string> OptionCourse { get; set; }
-    
+
     public Student(string RawData)
     {
         var Items = RawData.Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray();
@@ -93,22 +93,29 @@ public class Student
         Policy = Items[8];
         ClassId = Items[9];
         ClassTerm = Items[10];
-        LiveAtSchool = Items[11];
-        if (!string.IsNullOrEmpty(LiveAtSchool)){
-            LiveAtSchool = "是";
-        }else{
-            LiveAtSchool = "否";
+        if (!string.IsNullOrEmpty(Items[11]))
+        {
+            LiveAtSchool = true;
         }
-        LeaveSchool = Items[12];
-        if (!string.IsNullOrEmpty(LeaveSchool)){
-            LeaveSchool = "是";
-        }else{
-            LeaveSchool = "否";
+        else
+        {
+            LiveAtSchool = false;
+        }
+        if (!string.IsNullOrEmpty(Items[12]))
+        {
+            LeaveSchool = true;
+        }
+        else
+        {
+            LeaveSchool = false;
         }
         LiveRoomNo = Items[13];
-        if (!string.IsNullOrEmpty(LiveRoomNo)){
-            LiveRoomNo = LiveRoomNo.Replace(".0","");
-        }else{
+        if (!string.IsNullOrEmpty(LiveRoomNo))
+        {
+            LiveRoomNo = LiveRoomNo.Replace(".0", "");
+        }
+        else
+        {
             LiveRoomNo = "-";
         }
     }
