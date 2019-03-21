@@ -10,6 +10,20 @@ namespace Education.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
+        [HttpGet("QueryTeacher")]
+        public ActionResult<List<Teacher>> QueryTeacher(string GraName, string SubId)
+        {
+
+            if (string.IsNullOrEmpty(GraName) && !string.IsNullOrEmpty(SubId))
+            {
+                return Dataset.TeacherList.Where(x => x.SubId == SubId && x.Term == "2018-2019-1").Distinct(new Teacher()).ToList();
+            }
+            if (!string.IsNullOrEmpty(GraName) && string.IsNullOrEmpty(SubId))
+            {
+                return Dataset.TeacherList.Where(x => x.GraName == GraName && x.Term == "2018-2019-1").Distinct(new Teacher()).ToList();
+            }
+            return Dataset.TeacherList.Where(x => x.GraName == GraName && x.SubId == SubId && x.Term == "2018-2019-1").Distinct(new Teacher()).ToList();
+        }
 
         [HttpGet("QueryByStudentId")]
         public ActionResult<List<Student>> QueryByStudentId(string Id)

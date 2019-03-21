@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IStudent, classopt } from '../../../Education.model';
+import { IStudent, classopt, ITeacher } from '../../../Education.model';
 import { HomeService } from '../../Home.service';
 import { ErrorMessageDialogComponent } from '../error-message-dialog/error-message-dialog.component';
+import { TeacherPickerComponent } from '../teacherPicker/teacherPicker.component'
 import { ConfirmationService } from 'primeng/api';
 
 
@@ -29,6 +30,8 @@ export class NavigationComponent implements OnInit {
     return;
   }
 
+  // 订阅句柄
+  private pickhandler: any;
 
   ngOnInit(): void {
     if (this.service.IsFirstRun === false) {
@@ -40,19 +43,21 @@ export class NavigationComponent implements OnInit {
         header: '确认信息',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-            this.fullScreen();
-            this.service.IsFullScreen = true;
-            return;
+          this.fullScreen();
+          this.service.IsFullScreen = true;
+          return;
         },
         reject: () => {
-            return;
+          return;
         }
-    });
+      });
     }
   }
 
   @ViewChild(ErrorMessageDialogComponent)
   private errMsgDialog: ErrorMessageDialogComponent;
+  @ViewChild(TeacherPickerComponent)
+  private teacherpicker: TeacherPickerComponent;
   public StudentId: string;
   public ClassId: string;
   public QueryResult: IStudent[];
@@ -81,6 +86,17 @@ export class NavigationComponent implements OnInit {
         }
       }
     )
+  }
+
+  TeacherQuery() {
+    if (this.pickhandler != null) {
+      // 需要把上次的订阅取消掉，不然的话，多个订阅会同时发生效果！
+      this.pickhandler.unsubscribe();
+    }
+    this.pickhandler = this.teacherpicker.pick.subscribe((teacher: ITeacher) => {
+      this.errMsgDialog.show("选择了" + teacher.subName + "老师：" + teacher.id);
+    });
+    this.teacherpicker.show();
   }
 
   JumpTo(url: string) {

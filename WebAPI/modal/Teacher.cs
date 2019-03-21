@@ -1,5 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
-public class Teacher
+public class Teacher : IEqualityComparer<Teacher>
 {
     /// <summary>
     /// 学期
@@ -62,4 +64,17 @@ public class Teacher
         Name = Items[7];
     }
 
+    public Teacher()
+    {
+    }
+
+    public bool Equals(Teacher x, Teacher y)
+    {
+        return x.Id.Equals(y.Id);
+    }
+
+    public int GetHashCode(Teacher obj)
+    {
+        return obj.ToString().GetHashCode();
+    }
 }

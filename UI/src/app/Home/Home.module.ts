@@ -33,6 +33,7 @@ import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.com
 import { ErrorMessageDialogComponent } from './Common/error-message-dialog/error-message-dialog.component';
 import { NavigationComponent } from './Common/navigation/Navigation.component';
 import { StudentHeaderComponent } from './Common/studentHeader/StudentHeader.component';
+import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { StudentHeaderComponent } from './Common/studentHeader/StudentHeader.com
     StudentCompumptionComponent,
     Grade1ScoreComponent,
     NavigationComponent,
+    TeacherPickerComponent,
     ErrorMessageDialogComponent,
     StudentHeaderComponent
   ],

@@ -1,0 +1,39 @@
+<p-dialog header="教师查询器" [(visible)]="this.display" modal="modal" [responsive]="true">
+  <div style="height: 480px;width:600px">
+    <div>
+      &nbsp;&nbsp;
+      <b>年级&nbsp;&nbsp;&nbsp;</b>
+      <p-dropdown [options]="Gradelist" [(ngModel)]="SelectGrade" [style]="{'width':'150px'}" placeholder="选择一个年级">
+      </p-dropdown>&nbsp; &nbsp;&nbsp;
+      <b>课程&nbsp;&nbsp;&nbsp;</b>
+      <p-dropdown [options]="Sublist" [(ngModel)]="SelectSub" [style]="{'width':'150px'}" placeholder="选择一门课程">
+      </p-dropdown>
+      <br /><br />
+      <p-table [value]="this.Teachers" selectionMode="single" [(selection)]="this.selectTeacher" [scrollable]="true"
+        scrollHeight="380px">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 50px">员工ID</th>
+            <th style="width: 100px">姓名</th>
+            <th style="width: 100px">年级</th>
+            <th style="width: 150px">学科</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-itemData>
+          <tr [pSelectableRow]="itemData">
+            <td style="width: 50px">{{itemData.id}}</td>
+            <td style="width: 100px">{{itemData.name}}</td>
+            <td style="width: 100px">{{itemData.graName}}</td>
+            <td style="width: 150px">{{itemData.subName}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <p-footer>
+    <button type="button" pButton icon="fa fa-search" (click)="query()" label="查询"></button>
+    <button type="button" pButton icon="fa fa-arrow-left" (click)="close()" label="返回"></button>
+    <button type="button" pButton icon="fa fa-close" (click)="submit()" label="确定"></button> 
+  </p-footer>
+</p-dialog>
+<app-error-message-dialog></app-error-message-dialog>
