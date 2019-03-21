@@ -78,5 +78,8 @@ export class TeacherPickerComponent {
       }
     );
   }
-
+  onRowSelect(event: { data: ITeacher; }) {
+    this.display = false;
+    this.pick.emit(this.selectTeacher);
+  }
 }

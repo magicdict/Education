@@ -1,3 +1,14 @@
 <div class="container">
- 
+    2018-2019-1学期:
+    <ul class="heroes">
+        <li *ngFor="let teacher of this.Current">
+            <span class="badge" style="width:100px">{{teacher.term}} </span>{{teacher.className}}
+        </li>
+    </ul>
+    历史：
+    <ul class="heroes">
+        <li *ngFor="let teacher of this.History">
+            <span class="badge" style="width:100px">{{teacher.term}} </span>{{teacher.className}}
+        </li>
+    </ul>
 </div>

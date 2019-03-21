@@ -10,7 +10,7 @@ export class HomeService {
 
     }
     /** 按学号检索 */
-    public QueryByTeacherId(TeacherId: string): Promise<ITeacher> {
+    public QueryByTeacherId(TeacherId: string): Promise<ITeacher[]> {
         return this.commonFunction.httpRequest<any>('Student/QueryByTeacherId?ID=' + TeacherId);
     }
     /** 按学号检索 */

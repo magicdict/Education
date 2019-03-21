@@ -17,11 +17,11 @@ export class IStudentInfoResolver implements Resolve<IStudentInfo> {
 }
 
 @Injectable()
-export class ITeacherInfoResolver implements Resolve<ITeacher> {
+export class ITeacherInfoResolver implements Resolve<ITeacher[]> {
     constructor(private homeservice: HomeService) {
 
     }
-    resolve(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): ITeacher | Observable<ITeacher> | Promise<ITeacher> {
+    resolve(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): ITeacher[] | Observable<ITeacher[]> | Promise<ITeacher[]> {
         let id = route.paramMap.get('id');
         return this.homeservice.QueryByTeacherId(id);
     }

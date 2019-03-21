@@ -11,11 +11,10 @@ namespace Education.Controllers
     public class StudentController : ControllerBase
     {
         [HttpGet("QueryByTeacherId")]
-        public ActionResult<Teacher> QueryByTeacherId(string Id)
+        public ActionResult<List<Teacher>> QueryByTeacherId(string Id)
         {
             var baseInfo = Dataset.TeacherList.Where(x => x.Id.Equals(Id)).ToList();
-            if (baseInfo.Count() == 0) return null;
-            return baseInfo.First();
+            return baseInfo;
         }
 
         [HttpGet("QueryTeacher")]

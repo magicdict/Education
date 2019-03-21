@@ -14,11 +14,23 @@ export class TeacherOverviewComponent implements OnInit {
 
   }
 
+  Current: ITeacher[];
+  History: ITeacher[];
 
   ngOnInit(): void {
     this.route.data
-      .subscribe((data: { teacherinfo: ITeacher }) => {
-        console.log(data.teacherinfo);
+      .subscribe((data: { teacherinfo: ITeacher[] }) => {
+        this.Current = [];
+        this.History = [];
+        data.teacherinfo.forEach(
+          e => {
+            if (e.term === "2018-2019-1") {
+              this.Current.push(e);
+            } else {
+              this.History.push(e);
+            }
+          }
+        )
       });
   }
 }

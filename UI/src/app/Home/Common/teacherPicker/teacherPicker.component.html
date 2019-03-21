@@ -1,5 +1,5 @@
 <p-dialog header="教师查询器" [(visible)]="this.display" modal="modal" [responsive]="true">
-  <div style="height: 480px;width:600px">
+  <div style="height: 520px;width:600px">
     <div>
       &nbsp;&nbsp;
       <b>年级&nbsp;&nbsp;&nbsp;</b>
@@ -8,9 +8,14 @@
       <b>课程&nbsp;&nbsp;&nbsp;</b>
       <p-dropdown [options]="Sublist" [(ngModel)]="SelectSub" [style]="{'width':'150px'}" placeholder="选择一门课程">
       </p-dropdown>
-      <br /><br />
+      &nbsp; &nbsp;
+      <button type="button" pButton icon="fa fa-search" (click)="query()" label="检索"></button>
+      &nbsp; &nbsp;
+      <button type="button" pButton (click)="close()" label="关闭"></button>
+      <br />
+      <br />
       <p-table [value]="this.Teachers" selectionMode="single" [(selection)]="this.selectTeacher" [scrollable]="true"
-        scrollHeight="380px">
+        scrollHeight="400px" (onRowSelect)="onRowSelect($event)">
         <ng-template pTemplate="header">
           <tr>
             <th style="width: 50px">员工ID</th>
@@ -30,10 +35,10 @@
       </p-table>
     </div>
   </div>
-  <p-footer>
-    <button type="button" pButton icon="fa fa-search" (click)="query()" label="查询"></button>
-    <button type="button" pButton icon="fa fa-arrow-left" (click)="close()" label="返回"></button>
-    <button type="button" pButton icon="fa fa-close" (click)="submit()" label="确定"></button> 
+  <p-footer style="text-align:left">
+    <div class="alert alert-warning" role="alert">
+      这里仅列出2018-2019-1学期任职教师
+    </div>
   </p-footer>
 </p-dialog>
 <app-error-message-dialog></app-error-message-dialog>
