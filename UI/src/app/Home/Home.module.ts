@@ -12,6 +12,7 @@ import { CardModule } from 'primeng/card';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { NgxTimelineModule } from 'ngx-timeline';
 /**路由 */
 import { HomeRoutingModule } from './Home-routing.module';
 /** 服务 */
@@ -65,6 +66,7 @@ import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.com
     DropdownModule,
     ConfirmDialogModule,
     NgxEchartsModule,
+    NgxTimelineModule,
     HomeRoutingModule
   ],
   providers: [
