@@ -65,19 +65,22 @@
     </div>
     <div class="col-5">
       <table>
-        <tr  valign="top">
+        <tr valign="top">
           <td>
             <ul class="heroes">
-              <li *ngFor="let teacher of this.Teachers.slice(0,Teachers.length /2)">
+              <li *ngFor="let teacher of this.Teachers.slice(0,Teachers.length /2)" style="cursor: pointer;"
+                (click)="JumpToTeacher(teacher.id)">
                 <span class="badge" style="width: 100px;">{{teacher.subName}} </span>{{teacher.name}}
+                <i class="fa fa-search"></i>
               </li>
             </ul>
-
           </td>
           <td>
             <ul class="heroes">
-              <li *ngFor="let teacher of this.Teachers.slice(Teachers.length /2)">
+              <li *ngFor="let teacher of this.Teachers.slice(Teachers.length /2)" style="cursor: pointer;"
+                (click)="JumpToTeacher(teacher.id)">
                 <span class="badge" style="width: 100px;">{{teacher.subName}} </span>{{teacher.name}}
+                <i class="fa fa-search"></i>
               </li>
             </ul>
           </td>

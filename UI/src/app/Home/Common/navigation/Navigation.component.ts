@@ -60,15 +60,13 @@ export class NavigationComponent implements OnInit {
   private teacherpicker: TeacherPickerComponent;
   public StudentId: string;
   public ClassId: string;
-  public QueryResult: IStudent[];
   public classlist = classopt;
 
   QueryByStudentId() {
     this.service.QueryByStudentId(this.StudentId).then(
       r => {
-        this.QueryResult = r;
-        if (r.length === 1) {
-          this.router.navigate(['student/overview', r[0].id]);
+        if (r !== null) {
+          this.router.navigate(['student/overview', r.id]);
         } else {
           this.errMsgDialog.show("该学号的学生不存在！");
         }
@@ -79,7 +77,6 @@ export class NavigationComponent implements OnInit {
   QueryByClassId() {
     this.service.QueryByClassId(this.ClassId).then(
       r => {
-        this.QueryResult = r;
         if (r.length !== 0) {
           this.service.CurrentClassInfo = r;
           this.router.navigate(['class/overview', this.ClassId]);
@@ -94,7 +91,7 @@ export class NavigationComponent implements OnInit {
       this.pickhandler.unsubscribe();
     }
     this.pickhandler = this.teacherpicker.pick.subscribe((teacher: ITeacher) => {
-      this.errMsgDialog.show("选择了" + teacher.subName + "老师：" + teacher.id);
+      this.router.navigate(['teacher/overview', teacher.id]);
     });
     this.teacherpicker.show();
   }

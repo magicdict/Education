@@ -175,10 +175,4 @@ export class StudentOverviewComponent implements OnInit {
       data: this.KaoqinMonthCnt
     }]
   };
-
-
-
-
-
-
 }

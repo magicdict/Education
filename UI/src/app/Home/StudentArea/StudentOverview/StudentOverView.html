@@ -1,5 +1,5 @@
 <div class="container">
-    <student-header *ngIf= 'IsHeaderReady'></student-header>
+    <student-header *ngIf='IsHeaderReady'></student-header>
     <div class="row">
         <div class="col-3">
             <!--左侧内容-->
@@ -36,13 +36,13 @@
                     <span class="badge">家庭类型</span>{{CurrentStudent.residenceType}}
                 </li>
                 <li>
-                    <span class="badge">是否住校</span>{{CurrentStudent.liveAtSchool}}
+                    <span class="badge">是否住校</span>{{CurrentStudent.liveAtSchool?"是":"否"}}
                 </li>
                 <li>
                     <span class="badge">宿舍号</span>{{CurrentStudent.liveRoomNo}}
                 </li>
                 <li>
-                    <span class="badge">是否退学</span>{{CurrentStudent.leaveSchool}}
+                    <span class="badge">是否退学</span>{{CurrentStudent.leaveSchool?"是":"否"}}
                 </li>
             </ul>
         </div>
@@ -52,17 +52,20 @@
                 <div class="row">
                     <div class="col-6">
                         <div echarts [options]="ScoreGraph" style="width:350px;height:350px;"></div>
-                        <button class="btn btn-primary" style="float:right" (click)="JumpTo('grade')"><i class="fa fas fa-chart-bar"></i> 详细</button>
+                        <button class="btn btn-primary" style="float:right" (click)="JumpTo('grade')"><i
+                                class="fa fas fa-chart-bar"></i> 详细</button>
                     </div>
                     <div class="col-6">
                         <div echarts [options]="CompumptionGraph" style="width:350px;height:350px;"></div>
-                        <button class="btn btn-primary" style="float:right" (click)="JumpTo('compumption')"><i class="fa fas fa-chart-bar"></i> 详细</button>
+                        <button class="btn btn-primary" style="float:right" (click)="JumpTo('compumption')"><i
+                                class="fa fas fa-chart-bar"></i> 详细</button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div echarts [options]="KaoqinGraph" style="width:350px;height:350px;"></div>
-                        <button class="btn btn-primary" style="float:right"><i class="fa fas fa-chart-bar"></i> 详细</button>
+                        <button class="btn btn-primary" style="float:right"><i class="fa fas fa-chart-bar"></i>
+                            详细</button>
                     </div>
                 </div>
             </div>

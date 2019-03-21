@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { CommonFunction } from '../common';
-import { IStudent, IStudentInfo } from '../Education.model';
-import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import { IStudent, IStudentInfo, ITeacher } from '../Education.model';
+
 @Injectable()
-export class HomeService
-{
+export class HomeService {
     IsFirstRun = false;
     IsFullScreen = false;
     constructor(public commonFunction: CommonFunction) {
 
     }
     /** 按学号检索 */
-    public QueryByStudentId(StudentId: string): Promise<IStudent[]> {
+    public QueryByTeacherId(TeacherId: string): Promise<ITeacher> {
+        return this.commonFunction.httpRequest<any>('Student/QueryByTeacherId?ID=' + TeacherId);
+    }
+    /** 按学号检索 */
+    public QueryByStudentId(StudentId: string): Promise<IStudent> {
         return this.commonFunction.httpRequest<any>('Student/QueryByStudentId?ID=' + StudentId);
     }
     /** 按班级检索 */

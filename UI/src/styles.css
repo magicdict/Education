@@ -10,7 +10,6 @@
     width: 15em;
   }
   .heroes li {
-    cursor: pointer;
     position: relative;
     left: 0;
     background-color: #EEE;

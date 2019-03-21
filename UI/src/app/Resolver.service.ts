@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CommonFunction } from './common';
-import { IGroupInfo, ICourse, IClassInfo, IStudentInfo, ISchoolConsumptionInfo } from './Education.model';
+import { IGroupInfo, ICourse, IClassInfo, IStudentInfo, ISchoolConsumptionInfo, ITeacher } from './Education.model';
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HomeService } from './Home/Home.service'
@@ -13,6 +13,17 @@ export class IStudentInfoResolver implements Resolve<IStudentInfo> {
     resolve(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): IStudentInfo | Observable<IStudentInfo> | Promise<IStudentInfo> {
         let id = route.paramMap.get('id');
         return this.homeservice.GetStudentInfoByID(id);
+    }
+}
+
+@Injectable()
+export class ITeacherInfoResolver implements Resolve<ITeacher> {
+    constructor(private homeservice: HomeService) {
+
+    }
+    resolve(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): ITeacher | Observable<ITeacher> | Promise<ITeacher> {
+        let id = route.paramMap.get('id');
+        return this.homeservice.QueryByTeacherId(id);
     }
 }
 

@@ -18,7 +18,8 @@ import { HomeRoutingModule } from './Home-routing.module';
 import { ConfirmationService } from 'primeng/api';
 import {
   IGroupInfoResolver, ICourseResolver, IClassInfoResolver, IStudentInfoResolver,
-  ISchoolConsumptionResolver
+  ISchoolConsumptionResolver,
+  ITeacherInfoResolver
 } from "../Resolver.service";
 import { HomeService } from './Home.service';
 /**组件 */
@@ -27,6 +28,7 @@ import { SchoolOverViewComponent } from './OverViewArea/SchoolOverView/SchoolOve
 import { ConsumptionOverviewComponent } from './OverViewArea/ConsumptionOverview/ConsumptionOverview.component';
 import { ClassOverviewComponent } from './ClassArea/ClassOverview/ClassOverview.component';
 import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentOverview.component';
+import { TeacherOverviewComponent } from './StudentArea/TeacherOverview/TeacherOverview.component';
 import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/StudentCompumption.component';
 import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.component';
 /**共通 */
@@ -43,6 +45,7 @@ import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.com
     ConsumptionOverviewComponent,
     ClassOverviewComponent,
     StudentOverviewComponent,
+    TeacherOverviewComponent,
     StudentCompumptionComponent,
     Grade1ScoreComponent,
     NavigationComponent,
@@ -69,6 +72,7 @@ import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.com
     ICourseResolver,
     IClassInfoResolver,
     IStudentInfoResolver,
+    ITeacherInfoResolver,
     ISchoolConsumptionResolver,
     HomeService,
     ConfirmationService,

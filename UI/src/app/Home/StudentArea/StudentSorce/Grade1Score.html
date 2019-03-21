@@ -4,8 +4,9 @@
         <div class="col-3">
             <!--左侧内容-->
             <ul class="heroes">
-                <li *ngFor="let teacher of Teachers">
+                <li *ngFor="let teacher of Teachers" style="cursor: pointer;" (click)="JumpToTeacher(teacher.id)">
                     <span class="badge">{{teacher.subName}} </span>{{teacher.name}}
+                    <i class="fa fa-search"></i>
                 </li>
             </ul>
         </div>

@@ -3,12 +3,14 @@ import { HomeService } from '../../Home.service';
 import { ScoreRadarGraphOption } from '../../GraphOption/ScoreOption'
 import { IStudent, ITeacher } from 'src/app/Education.model';
 import { CommonFunction } from 'src/app/common';
+import { Router } from '@angular/router';
 
 @Component({
     templateUrl: 'Grade1Score.html',
 })
 export class Grade1ScoreComponent implements OnInit {
     constructor(
+        private router: Router,
         public service: HomeService
     ) {
 
@@ -39,5 +41,8 @@ export class Grade1ScoreComponent implements OnInit {
         this.ScoreGraphFor19Option.series[0].data[0].value = Score19.map(x => CommonFunction.roundvalue((1 - x.dengdi) * 100));
         this.ScoreGraphFor19Option.series[0].data[1].value = Score19.map(x => CommonFunction.roundvalue(x.tScore));
         this.ScoreGraphFor19Option = (JSON.parse(JSON.stringify(ScoreRadarGraphOption)));
+    }
+    JumpToTeacher(teacherid: string) {
+        this.router.navigate(['teacher/overview', teacherid]);
     }
 };  

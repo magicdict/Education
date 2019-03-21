@@ -10,6 +10,14 @@ namespace Education.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
+        [HttpGet("QueryByTeacherId")]
+        public ActionResult<Teacher> QueryByTeacherId(string Id)
+        {
+            var baseInfo = Dataset.TeacherList.Where(x => x.Id.Equals(Id)).ToList();
+            if (baseInfo.Count() == 0) return null;
+            return baseInfo.First();
+        }
+
         [HttpGet("QueryTeacher")]
         public ActionResult<List<Teacher>> QueryTeacher(string GraName, string SubId)
         {
@@ -26,11 +34,13 @@ namespace Education.Controllers
         }
 
         [HttpGet("QueryByStudentId")]
-        public ActionResult<List<Student>> QueryByStudentId(string Id)
+        public ActionResult<Student> QueryByStudentId(string Id)
         {
             var baseInfo = Dataset.StudentList.Where(x => x.ID.Equals(Id)).ToList();
-            return baseInfo;
+            if (baseInfo.Count() == 0) return null;
+            return baseInfo.First();
         }
+
 
         [HttpGet("QueryByClassId")]
         public ActionResult<List<Student>> QueryByClassId(string Id)
