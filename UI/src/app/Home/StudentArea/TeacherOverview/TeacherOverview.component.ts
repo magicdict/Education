@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../Home.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ITeacher } from 'src/app/Education.model';
+import { ITeacher, ITeacherInfo, IClassExam } from 'src/app/Education.model';
 import { TimelineEvent } from 'ngx-timeline';
+
 
 @Component({
   templateUrl: 'TeacherOverview.html'
@@ -17,34 +18,35 @@ export class TeacherOverviewComponent implements OnInit {
   }
 
   Current: ITeacher[];
-  History: ITeacher[];
-
+  Exams: IClassExam[];
   events: Array<TimelineEvent>;
 
   ngOnInit(): void {
 
     this.events = new Array<TimelineEvent>();
     this.route.data
-      .subscribe((data: { teacherinfo: ITeacher[] }) => {
+      .subscribe((data: { teacherinfo: ITeacherInfo }) => {
         this.Current = [];
-        this.History = [];
         this.events = [];
-        data.teacherinfo.forEach(
+        this.Exams = data.teacherinfo.classExams;
+        data.teacherinfo.records.forEach(
           e => {
             if (e.term === "2018-2019-1") {
               this.Current.push(e);
-            } else {
-              this.History.push(e);
             }
-
-            this.events.push({
-              "date": new Date(),
-              "header": e.term,
-              "body": e.className,
-              "icon": "fa-search"
-            });
           }
         )
+        for (let k in data.teacherinfo.groupByTerm) {
+          var d = new Date();
+          console.log(Number(k.substring(0, 4)));
+          d.setFullYear(Number(k.substring(0, 4)), 8, 1);
+          this.events.push({
+            "date": d,
+            "header": k,
+            "body": data.teacherinfo.groupByTerm[k].join(","),
+            "icon": "fas fa-graduation-cap"
+          });
+        }
       });
   }
 

@@ -55,6 +55,22 @@ public class Chengji
     /// <value></value>
     public string StudentID { get; set; }
     /// <summary>
+    /// 学生班级号
+    /// </summary>
+    /// <value></value>
+    public string ClassID { get; set; }
+    /// <summary>
+    /// 学生班级名称
+    /// </summary>
+    /// <value></value>
+    public string ClassName { get; set; }
+    /// <summary>
+    /// 授课教师
+    /// </summary>
+    /// <value></value>
+    public string TeacherID { get; set; }
+
+    /// <summary>
     /// 考试成绩(-1为作弊，-2为缺考，-3为免考)
     /// </summary>
     /// <value></value>
@@ -151,6 +167,18 @@ public class Chengji
         SdateMonth = Sdate.Split(" ")[0].Split("/")[1];
         SdateDay = Sdate.Split(" ")[0].Split("/")[2];
         StudentID = Items[8];
+        var s = Dataset.StudentList.Where(x => x.ID == StudentID);
+        if (s.Count() == 1)
+        {
+            ClassID = s.First().ClassId;
+            ClassName = s.First().ClassName;
+            //根据班级号，SUBID检索授课教师ID
+            var t = Dataset.TeacherList.Where(x => x.SubId == SubId && x.ClassId == ClassID);
+            if (t.Count() == 1)
+            {
+                TeacherID = t.First().Id;
+            }
+        }
         Score = float.Parse(Items[9]);
         ZScore = Items[10];
         TScore = Items[11];

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CommonFunction } from '../common';
-import { IStudent, IStudentInfo, ITeacher } from '../Education.model';
+import { IStudent, IStudentInfo, ITeacher, ITeacherInfo } from '../Education.model';
 
 @Injectable()
 export class HomeService {
@@ -10,8 +10,8 @@ export class HomeService {
 
     }
     /** 按学号检索 */
-    public QueryByTeacherId(TeacherId: string): Promise<ITeacher[]> {
-        return this.commonFunction.httpRequest<any>('Student/QueryByTeacherId?ID=' + TeacherId);
+    public QueryByTeacherId(TeacherId: string): Promise<ITeacherInfo> {
+        return this.commonFunction.httpRequest<any>('Teacher/QueryByTeacherId?ID=' + TeacherId);
     }
     /** 按学号检索 */
     public QueryByStudentId(StudentId: string): Promise<IStudent> {

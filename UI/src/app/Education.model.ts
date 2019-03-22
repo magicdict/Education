@@ -82,6 +82,16 @@ export interface IStudent {
   optionCourse: string[];
 }
 
+export interface IStudentInfo {
+  baseInfo: IStudent;
+  consumptions: IConsumption[];
+  kaoqins: IKaoqin[];
+  chengjis: IScore[];
+  consumptionCnt: number;
+  chengjiCnt: number;
+  teachers: ITeacher[];
+}
+
 export interface ITeacher {
   id: string;
   name: string;
@@ -91,6 +101,22 @@ export interface ITeacher {
   graName: string;
   subId: string;
   subName: string;
+}
+
+export interface ITeacherInfo {
+  groupByTerm: { [key: string]: string[] };
+  records: ITeacher[];
+  classExams: IClassExam[];
+}
+
+export interface IClassExam {
+  className:string,
+  examName: string,
+  maxScore: number,
+  minScore: number,
+  avgScore: number
+  std:number;
+  var:number;
 }
 
 export interface IConsumption {
@@ -143,15 +169,7 @@ export interface IKaoqin {
   weather: IWeather;
 }
 
-export interface IStudentInfo {
-  baseInfo: IStudent;
-  consumptions: IConsumption[];
-  kaoqins: IKaoqin[];
-  chengjis: IScore[];
-  consumptionCnt: number;
-  chengjiCnt: number;
-  teachers: ITeacher[];
-}
+
 
 export interface IGroupInfo {
   maleGrade1: number;

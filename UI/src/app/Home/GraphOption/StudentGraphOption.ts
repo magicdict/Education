@@ -153,7 +153,7 @@ export const SexRateSunburstOption = {
     text: '性别比例',
     left: 10
   },
-  label:{
+  label: {
     formatter: "{b}\n{c}"
   },
   series: {
@@ -225,4 +225,43 @@ export const SexRateSunburstOption = {
       rotate: 'radial'
     }
   }
+};
+
+
+export const CompumptionBarGraph = {
+  title: {
+    text: "消费记录（月度）"
+  },
+  tooltip: {},
+  legend: {
+    data: ['消费额']
+  },
+  xAxis: {
+    data: []
+  },
+  yAxis: {},
+  series: [{
+    name: '消费额',
+    type: 'bar',
+    data: []
+  }]
+};
+
+export const KaoqinBarGraph = {
+  title: {
+    text: '考勤（月度）'
+  },
+  tooltip: {},
+  legend: {
+    data: ['次数']
+  },
+  xAxis: {
+    data: []
+  },
+  yAxis: {},
+  series: [{
+    name: '次数',
+    type: 'bar',
+    data: []
+  }]
 };

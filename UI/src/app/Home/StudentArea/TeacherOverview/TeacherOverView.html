@@ -1,7 +1,17 @@
 <div class="container">
     <div class="row">
         <div class="col-4">
-            <ngx-timeline [events]="events"></ngx-timeline>
+            <ngx-timeline [events]="events">
+                <ng-template let-event let-index="rowIndex" timelineBody>
+                    <ul class="heroes">
+                        <li *ngFor="let classname of event.body.split(',')" style="width:120px">
+                            <span class="badge" style="width:30px">
+                                <i class="fa fas fa-graduation-cap"></i>
+                            </span> {{classname}}
+                        </li>
+                    </ul>
+                </ng-template>
+            </ngx-timeline>
         </div>
         <div class="col-8">
             <h1>{{this.Current[0].name}} <span class="badge badge-primary">{{this.Current[0].subName}}</span></h1>
@@ -15,6 +25,33 @@
                     <i class="fa fa-search"></i>
                 </li>
             </ul>
+
+            <p-table [value]="this.Exams" selectionMode="single" [(selection)]="this.selectTeacher" [scrollable]="true"
+                scrollHeight="400px" (onRowSelect)="onRowSelect($event)">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 80px">班级名</th>
+                        <th style="width: 200px">考试名称</th>
+                        <th style="width: 50px">最高分</th>
+                        <th style="width: 50px">最低分</th>
+                        <th style="width: 50px">平均分</th>
+                        <th style="width: 50px">标准差</th>
+                        <th style="width: 50px">方差</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-itemData>
+                    <tr [pSelectableRow]="itemData">
+                        <td style="width: 80px">{{itemData.className}}</td>
+                        <td style="width: 200px">{{itemData.examName}}</td>
+                        <td style="width: 50px">{{itemData.maxScore}}</td>
+                        <td style="width: 50px">{{itemData.minScore}}</td>
+                        <td style="width: 50px">{{itemData.avgScore}}</td>
+                        <td style="width: 50px">{{itemData.std}}</td>
+                        <td style="width: 50px">{{itemData.var}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
         </div>
     </div>
 </div>

@@ -6,6 +6,7 @@ import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { from } from 'rxjs';
 import { CommonFunction } from 'src/app/common';
 import { ScoreRadarGraphOption } from '../../GraphOption/ScoreOption'
+import { CompumptionBarGraph, KaoqinBarGraph } from '../../GraphOption/StudentGraphOption';
 
 @Component({
   templateUrl: 'StudentOverview.html'
@@ -19,6 +20,28 @@ export class StudentOverviewComponent implements OnInit {
 
   }
 
+
+  CompumptionGraph = CompumptionBarGraph;
+  KaoqinGraph = KaoqinBarGraph;
+  ScoreGraph = ScoreRadarGraphOption;
+
+
+  public IsHeaderReady = false;
+  public CurrentStudent: IStudent;
+  public Teachers: ITeacher[];
+
+  //学生成绩
+  public ScoreName: { name: string, max: number }[] = [];
+  public ScoreAvg: number[] = [];
+  public TScoreAvg: number[] = [];
+
+  //消费信息
+  public ConsumptionMonth: string[] = [];
+  public ConsumptionMonthMoney: number[] = [];
+
+  public KaoqinMonth: string[] = [];
+  public KaoqinMonthCnt: number[] = [];
+
   JumpTo(url: string) {
     if (url === "grade") {
       //这里应该是 !== -1,但是高一都有校区前缀，所以这个判断也不会出现问题
@@ -30,7 +53,7 @@ export class StudentOverviewComponent implements OnInit {
     }
   }
 
-  IsHeaderReady = false;
+
 
   ngOnInit(): void {
     this.route.data
@@ -121,58 +144,5 @@ export class StudentOverviewComponent implements OnInit {
 
 
 
-
-  public CurrentStudent: IStudent;
-  public Teachers: ITeacher[];
-
-  //学生成绩
-  public ScoreName: { name: string, max: number }[] = [];
-  public ScoreAvg: number[] = [];
-  public TScoreAvg: number[] = [];
-  ScoreGraph = ScoreRadarGraphOption;
-
-  //消费信息
-  public ConsumptionMonth: string[] = [];
-  public ConsumptionMonthMoney: number[] = [];
-
-  CompumptionGraph = {
-    title: {
-      text: "消费记录（月度）"
-    },
-    tooltip: {},
-    legend: {
-      data: ['消费额']
-    },
-    xAxis: {
-      data: this.ConsumptionMonth
-    },
-    yAxis: {},
-    series: [{
-      name: '消费额',
-      type: 'bar',
-      data: this.ConsumptionMonthMoney
-    }]
-  };
-
-  public KaoqinMonth: string[] = [];
-  public KaoqinMonthCnt: number[] = [];
-
-  KaoqinGraph = {
-    title: {
-      text: '考勤（月度）'
-    },
-    tooltip: {},
-    legend: {
-      data: ['次数']
-    },
-    xAxis: {
-      data: this.KaoqinMonth
-    },
-    yAxis: {},
-    series: [{
-      name: '次数',
-      type: 'bar',
-      data: this.KaoqinMonthCnt
-    }]
-  };
+ 
 }

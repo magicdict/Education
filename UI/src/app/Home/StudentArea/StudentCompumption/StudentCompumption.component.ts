@@ -130,9 +130,4 @@ export class StudentCompumptionComponent implements OnInit {
     TotalByTimeRangeInfo1: string;
     TotalByTimeRangeInfo2: string;
     TotalByTimeRangeInfo3: string;
-
-
-
-
-
 }

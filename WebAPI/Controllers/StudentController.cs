@@ -10,36 +10,6 @@ namespace Education.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        [HttpGet("QueryByTeacherId")]
-        public ActionResult<List<Teacher>> QueryByTeacherId(string Id)
-        {
-            var baseInfo = Dataset.TeacherList.Where(x => x.Id.Equals(Id)).ToList();
-            return baseInfo;
-        }
-
-        [HttpGet("QueryTeacher")]
-        public ActionResult<List<Teacher>> QueryTeacher(string GraName, string SubId)
-        {
-
-            if (string.IsNullOrEmpty(GraName) && !string.IsNullOrEmpty(SubId))
-            {
-                return Dataset.TeacherList.Where(x => x.SubId == SubId && x.Term == "2018-2019-1").Distinct(new Teacher()).ToList();
-            }
-            if (!string.IsNullOrEmpty(GraName) && string.IsNullOrEmpty(SubId))
-            {
-                return Dataset.TeacherList.Where(x => x.GraName == GraName && x.Term == "2018-2019-1").Distinct(new Teacher()).ToList();
-            }
-            return Dataset.TeacherList.Where(x => x.GraName == GraName && x.SubId == SubId && x.Term == "2018-2019-1").Distinct(new Teacher()).ToList();
-        }
-
-        [HttpGet("QueryByStudentId")]
-        public ActionResult<Student> QueryByStudentId(string Id)
-        {
-            var baseInfo = Dataset.StudentList.Where(x => x.ID.Equals(Id)).ToList();
-            if (baseInfo.Count() == 0) return null;
-            return baseInfo.First();
-        }
-
 
         [HttpGet("QueryByClassId")]
         public ActionResult<List<Student>> QueryByClassId(string Id)
@@ -48,6 +18,14 @@ namespace Education.Controllers
             return baseInfo;
         }
 
+
+        [HttpGet("QueryByStudentId")]
+        public ActionResult<Student> QueryByStudentId(string Id)
+        {
+            var baseInfo = Dataset.StudentList.Where(x => x.ID.Equals(Id)).ToList();
+            if (baseInfo.Count() == 0) return null;
+            return baseInfo.First();
+        }
 
         /// <summary>
         /// 获得学生详细信息

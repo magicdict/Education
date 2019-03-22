@@ -66,7 +66,7 @@ export class TeacherPickerComponent {
   }
 
   query() {
-    let webapiurl = 'Student/QueryTeacher?GraName=' + String(this.SelectGrade) + '&SubId=' + String(this.SelectSub);
+    let webapiurl = 'Teacher/QueryTeacher?GraName=' + String(this.SelectGrade) + '&SubId=' + String(this.SelectSub);
 
     this.commonfunction.httpRequest<ITeacher[]>(webapiurl).then(
       result => {
