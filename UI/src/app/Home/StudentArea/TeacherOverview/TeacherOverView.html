@@ -26,8 +26,7 @@
                 </li>
             </ul>
 
-            <p-table [value]="this.Exams" selectionMode="single" [(selection)]="this.selectTeacher" [scrollable]="true"
-                scrollHeight="400px" (onRowSelect)="onRowSelect($event)">
+            <p-table [value]="this.Exams" selectionMode="single" [scrollable]="true" scrollHeight="400px">
                 <ng-template pTemplate="header">
                     <tr>
                         <th style="width: 80px">班级名</th>
