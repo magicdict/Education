@@ -29,19 +29,46 @@
             <p-table [value]="this.Exams" selectionMode="single" [scrollable]="true" scrollHeight="400px">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th style="width: 80px">班级名</th>
-                        <th style="width: 200px">考试名称</th>
-                        <th style="width: 50px">最高分</th>
-                        <th style="width: 50px">最低分</th>
-                        <th style="width: 50px">平均分</th>
-                        <th style="width: 50px">标准差</th>
-                        <th style="width: 50px">方差</th>
+                        <th style="width: 100px">班级名</th>
+                        <th style="width: 180px">考试名称</th>
+                        <th style="width: 60px">考试人数</th>
+                        <th style="width: 50px" [pSortableColumn]="'maxScore'">最高分
+                            <p-sortIcon [field]="'sex'" ariaLabel="Activate to sort"
+                                ariaLabelDesc="Activate to sort in descending order"
+                                ariaLabelAsc="Activate to sort in ascending order">
+                            </p-sortIcon>
+                        </th>
+                        <th style="width: 50px" [pSortableColumn]="'minScore'">最低分
+                            <p-sortIcon [field]="'sex'" ariaLabel="Activate to sort"
+                                ariaLabelDesc="Activate to sort in descending order"
+                                ariaLabelAsc="Activate to sort in ascending order">
+                            </p-sortIcon>
+                        </th>
+                        <th style="width: 50px" [pSortableColumn]="'avgScore'">平均分
+                            <p-sortIcon [field]="'sex'" ariaLabel="Activate to sort"
+                                ariaLabelDesc="Activate to sort in descending order"
+                                ariaLabelAsc="Activate to sort in ascending order">
+                            </p-sortIcon>
+                        </th>
+                        <th style="width: 50px" [pSortableColumn]="'std'">标准差
+                            <p-sortIcon [field]="'sex'" ariaLabel="Activate to sort"
+                                ariaLabelDesc="Activate to sort in descending order"
+                                ariaLabelAsc="Activate to sort in ascending order">
+                            </p-sortIcon>
+                        </th>
+                        <th style="width: 50px" [pSortableColumn]="'var'">方差
+                            <p-sortIcon [field]="'sex'" ariaLabel="Activate to sort"
+                                ariaLabelDesc="Activate to sort in descending order"
+                                ariaLabelAsc="Activate to sort in ascending order">
+                            </p-sortIcon>
+                        </th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-itemData>
                     <tr [pSelectableRow]="itemData">
-                        <td style="width: 80px">{{itemData.className}}</td>
-                        <td style="width: 200px">{{itemData.examName}}</td>
+                        <td style="width: 100px">{{itemData.className}}</td>
+                        <td style="width: 180px">{{itemData.examName}}</td>
+                        <td style="width: 60px">{{itemData.avilibleCnt}}/{{itemData.allCnt}}</td>
                         <td style="width: 50px">{{itemData.maxScore}}</td>
                         <td style="width: 50px">{{itemData.minScore}}</td>
                         <td style="width: 50px">{{itemData.avgScore}}</td>

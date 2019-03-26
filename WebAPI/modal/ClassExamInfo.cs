@@ -9,7 +9,7 @@ public class ClassExamInfo
     /// 考试代码
     /// </summary>
     /// <value></value>
-    public List<Chengji> ChengjiList { get; set; }
+    internal List<Chengji> ChengjiList { get; set; }
 
     public string ExamName
     {
@@ -27,11 +27,29 @@ public class ClassExamInfo
         }
     }
 
+    public int AllCnt
+    {
+        get
+        {
+            return ChengjiList.Count();
+        }
+    }
+
+    public int AvilibleCnt
+    {
+        get
+        {
+            return ChengjiList.Where(x => x.Score > 0).Count();
+        }
+    }
+
     public float MaxScore
     {
         get
         {
-            return ChengjiList.Where(x => x.Score > 0).Last().Score;
+            var r = ChengjiList.Where(x => x.Score > 0);
+            if (r.Count() == 0) return -1;
+            return r.Last().Score;
         }
     }
 
@@ -39,8 +57,9 @@ public class ClassExamInfo
     {
         get
         {
-            //去除小于等于0的情况
-            return ChengjiList.Where(x => x.Score > 0).First().Score;
+            var r = ChengjiList.Where(x => x.Score > 0);
+            if (r.Count() == 0) return -1;
+            return r.First().Score;
         }
     }
 
@@ -48,7 +67,9 @@ public class ClassExamInfo
     {
         get
         {
-            return System.Math.Round(ChengjiList.Where(x => x.Score > 0).Average(x => x.Score), 2);
+            var r = ChengjiList.Where(x => x.Score > 0);
+            if (r.Count() == 0) return -1;
+            return System.Math.Round(r.Average(x => x.Score), 2);
         }
     }
 
@@ -56,7 +77,9 @@ public class ClassExamInfo
     {
         get
         {
-            return System.Math.Round((ChengjiList.Where(x => x.Score > 0).Select(x => (double)x.Score).ToList().StandardDeviation()), 2);
+            var r = ChengjiList.Where(x => x.Score > 0);
+            if (r.Count() == 0) return -1;
+            return System.Math.Round((r.Select(x => (double)x.Score).ToList().StandardDeviation()), 2);
         }
     }
 
@@ -64,7 +87,9 @@ public class ClassExamInfo
     {
         get
         {
-            return System.Math.Round((ChengjiList.Where(x => x.Score > 0).Select(x => (double)x.Score).ToList().Variance()), 2);
+            var r = ChengjiList.Where(x => x.Score > 0);
+            if (r.Count() == 0) return -1;
+            return System.Math.Round((r.Select(x => (double)x.Score).ToList().Variance()), 2);
 
         }
     }

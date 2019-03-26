@@ -20,18 +20,22 @@ import { ConfirmationService } from 'primeng/api';
 import {
   IGroupInfoResolver, ICourseResolver, IClassInfoResolver, IStudentInfoResolver,
   ISchoolConsumptionResolver,
-  ITeacherInfoResolver
+  ITeacherInfoResolver,
+  IExamGradeListResolver
 } from "../Resolver.service";
 import { HomeService } from './Home.service';
 /**组件 */
 import { CourseOverViewComponent } from './OverViewArea/CourseOverView/CourseOverView.component';
 import { SchoolOverViewComponent } from './OverViewArea/SchoolOverView/SchoolOverView.component';
+import { ExamOverViewComponent } from './OverViewArea/ExamOverview/ExamOverview.component';
 import { ConsumptionOverviewComponent } from './OverViewArea/ConsumptionOverview/ConsumptionOverview.component';
 import { ClassOverviewComponent } from './ClassArea/ClassOverview/ClassOverview.component';
 import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentOverview.component';
 import { TeacherOverviewComponent } from './StudentArea/TeacherOverview/TeacherOverview.component';
 import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/StudentCompumption.component';
 import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.component';
+import { ExamClassDiffComponent } from './OverViewArea/ExamOverview/ExamClassDiff.component';
+
 /**共通 */
 import { ErrorMessageDialogComponent } from './Common/error-message-dialog/error-message-dialog.component';
 import { NavigationComponent } from './Common/navigation/Navigation.component';
@@ -45,6 +49,8 @@ import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.com
     CourseOverViewComponent,
     ConsumptionOverviewComponent,
     ClassOverviewComponent,
+    ExamOverViewComponent,
+    ExamClassDiffComponent,
     StudentOverviewComponent,
     TeacherOverviewComponent,
     StudentCompumptionComponent,
@@ -76,6 +82,7 @@ import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.com
     IStudentInfoResolver,
     ITeacherInfoResolver,
     ISchoolConsumptionResolver,
+    IExamGradeListResolver,
     HomeService,
     ConfirmationService,
     HttpClient

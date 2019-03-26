@@ -50,7 +50,6 @@ namespace Education.Controllers
                     }
                     foreach (var item in dic.Values)
                     {
-                        if (item.Where(x => x.Score > 0).Count() == 0) continue;
                         item.Sort((x, y) => { return x.Score.CompareTo(y.Score); });
                         baseinfo.ClassExams.Add(new ClassExamInfo() { ChengjiList = item });
                     }

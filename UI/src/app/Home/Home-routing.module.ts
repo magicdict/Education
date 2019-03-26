@@ -5,6 +5,7 @@ import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/St
 import { IStudentInfoResolver, ITeacherInfoResolver } from '../Resolver.service';
 import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.component';
 import { TeacherOverviewComponent } from './StudentArea/TeacherOverview/TeacherOverview.component';
+import { ExamClassDiffComponent } from './OverViewArea/ExamOverview/ExamClassDiff.component';
 const routes: Routes = [
   {
     path: 'student/overview/:id',
@@ -27,8 +28,11 @@ const routes: Routes = [
   {
     path: 'student/overview/:id/grade1',
     component: Grade1ScoreComponent
+  },
+  {
+    path: 'course/classdiff',
+    component: ExamClassDiffComponent
   }
-
 ];
 
 @NgModule({

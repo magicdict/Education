@@ -69,8 +69,6 @@ export class SchoolOverViewComponent implements OnInit {
         this.SexRateSunburstOption.series.data[0].children[2].children[0].value = data.groupinfo.maleGrade3;
         this.SexRateSunburstOption.series.data[0].children[2].children[1].value = data.groupinfo.femaleGrade3;
 
-
-
       });
   }
 }

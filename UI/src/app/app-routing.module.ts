@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IGroupInfoResolver, ICourseResolver, IClassInfoResolver, ISchoolConsumptionResolver } from "./Resolver.service";
+import { IGroupInfoResolver, ICourseResolver, IClassInfoResolver, ISchoolConsumptionResolver, IExamGradeListResolver } from "./Resolver.service";
 import { SchoolOverViewComponent } from "./Home/OverViewArea/SchoolOverView/SchoolOverView.component"
 import { CourseOverViewComponent } from './Home/OverViewArea/CourseOverView/CourseOverView.component';
 import { ConsumptionOverviewComponent } from './Home/OverViewArea/ConsumptionOverview/ConsumptionOverview.component';
 import { ClassOverviewComponent } from './Home/ClassArea/ClassOverview/ClassOverview.component';
+import { ExamOverViewComponent } from './Home/OverViewArea/ExamOverview/ExamOverview.component';
 const routes: Routes = [
   {
     path: 'home/school',
@@ -15,6 +16,11 @@ const routes: Routes = [
     path: 'home/course',
     component: CourseOverViewComponent,
     resolve: { courseInfo: ICourseResolver }
+  },
+  {
+    path: 'home/exam',
+    component: ExamOverViewComponent,
+    resolve: { examgradelist: IExamGradeListResolver }
   },
   {
     path: 'home/consumption',

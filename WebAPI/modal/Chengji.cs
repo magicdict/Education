@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-public class Chengji
+public class Chengji : IEqualityComparer<Chengji>
 {
     /// <summary>
     /// 考试id
@@ -64,6 +64,11 @@ public class Chengji
     /// </summary>
     /// <value></value>
     public string ClassName { get; set; }
+    /// <summary>
+    /// 学生年级
+    /// </summary>
+    /// <value></value>
+    public string Grade { get; set; }
     /// <summary>
     /// 授课教师
     /// </summary>
@@ -157,7 +162,7 @@ public class Chengji
         var Items = RawData.Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray();
         Id = Items[0];
         Number = Items[1];
-        NumberName = Items[2];
+        NumberName = Items[2].Trim();   //部分数据带Tab制表符..
         SubId = Items[3];
         SubName = Items[4];
         Term = Items[5];
@@ -172,6 +177,23 @@ public class Chengji
         {
             ClassID = s.First().ClassId;
             ClassName = s.First().ClassName;
+            if (ClassName.Contains("高一"))
+            {
+                if (Term.StartsWith("2018-2019")) Grade = "高一";
+            }
+
+            if (ClassName.Contains("高二"))
+            {
+                if (Term.StartsWith("2017-2018")) Grade = "高一";
+                if (Term.StartsWith("2018-2019")) Grade = "高二";
+            }
+
+            if (ClassName.Contains("高三"))
+            {
+                if (Term.StartsWith("2016-2017")) Grade = "高一";
+                if (Term.StartsWith("2017-2018")) Grade = "高二";
+                if (Term.StartsWith("2018-2019")) Grade = "高三";
+            }
             //根据班级号，SUBID检索授课教师ID
             var t = Dataset.TeacherList.Where(x => x.SubId == SubId && x.ClassId == ClassID);
             if (t.Count() == 1)
@@ -183,5 +205,19 @@ public class Chengji
         ZScore = Items[10];
         TScore = Items[11];
         Dengdi = Items[12];
+    }
+
+    public Chengji()
+    {
+    }
+
+    bool IEqualityComparer<Chengji>.Equals(Chengji x, Chengji y)
+    {
+        return x.Id.Equals(y.Id);
+    }
+
+    int IEqualityComparer<Chengji>.GetHashCode(Chengji obj)
+    {
+        return obj.ToString().GetHashCode();
     }
 }

@@ -110,13 +110,25 @@ export interface ITeacherInfo {
 }
 
 export interface IClassExam {
-  className:string,
+  className: string,
   examName: string,
+  allCnt: number,
+  avilibleCnt:number,
   maxScore: number,
   minScore: number,
   avgScore: number
-  std:number;
-  var:number;
+  std: number;
+  var: number;
+}
+
+export interface IExamList {
+  [key: string]:
+  {
+    grade: string,
+    number: string,
+    numberName: string,
+    subNameList: string[]
+  }[];
 }
 
 export interface IConsumption {

@@ -1,9 +1,19 @@
 import { Injectable } from '@angular/core';
 import { CommonFunction } from './common';
-import { IGroupInfo, ICourse, IClassInfo, IStudentInfo, ISchoolConsumptionInfo, ITeacher, ITeacherInfo } from './Education.model';
+import { IGroupInfo, ICourse, IClassInfo, IStudentInfo, ISchoolConsumptionInfo, ITeacherInfo, IExamList } from './Education.model';
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HomeService } from './Home/Home.service'
+
+@Injectable()
+export class IExamGradeListResolver implements Resolve<IExamList> {
+    constructor(public commonFunction: CommonFunction) {
+
+    }
+    resolve(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): IExamList | Observable<IExamList> | Promise<IExamList> {
+        return this.commonFunction.httpRequest<IExamList>("course/GetExamNameList");
+    }
+}
 
 @Injectable()
 export class IStudentInfoResolver implements Resolve<IStudentInfo> {

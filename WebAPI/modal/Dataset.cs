@@ -26,6 +26,8 @@ public static class Dataset
 
     public static List<Chengji> ChengjiList = new List<Chengji>();
 
+    public static List<Chengji> LastestTermChangji = new List<Chengji>();
+
     public static List<Consumption> ConsumptionList = new List<Consumption>();
 
     public static Dictionary<string, struKaoqin> KaoqinTypeDic = new Dictionary<string, struKaoqin>();
@@ -159,6 +161,17 @@ public static class Dataset
         sr.Close();
         Console.WriteLine("读取学生消费件数：" + ConsumptionList.Count);
 
+        LastestTermChangji = Dataset.ChengjiList.Distinct(new Chengji()).Where(x => x.Term == "2018-2019-1").ToList();
+
+        //DUMP CHENGJI
+        // var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "5_chengji_dump.csv");
+        // sw.WriteLine("Id,NumberName,Grade,ClassID,ClassName,Term,StudentID,subName");
+        // foreach (var item in Dataset.ChengjiList)
+        // {
+        //     sw.WriteLine(item.Id + "," + item.NumberName + "," + item.Grade + "," + item.ClassID + "," + item.ClassName + "," +
+        //                  item.Term + "," + item.StudentID + "," + item.SubName);
+        // }
+        // sw.Close();
     }
 
     /// <summary>

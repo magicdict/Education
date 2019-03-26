@@ -11,6 +11,68 @@ namespace Education.Controllers
     [ApiController]
     public class CourseController : ControllerBase
     {
+
+        public class ChengjiDataSet
+        {
+            public string Grade { get; set; }
+            public string NumberName { get; set; }
+            public List<String> SubNameList { get; set; }
+        }
+
+
+        [HttpGet("GetExamNameList")]
+        public ActionResult<Dictionary<string, List<ChengjiDataSet>>> GetExamNameList()
+        {
+            var r = new Dictionary<string, List<ChengjiDataSet>>();
+            //各个年级考试的聚集
+            foreach (var grade in new string[] { "高一", "高二", "高三" })
+            {
+                var GradeExam = Dataset.LastestTermChangji.Where(x => x.Grade == grade).ToList();
+                GradeExam.Sort((x, y) => { return x.SubId.CompareTo(y.SubId); });
+                var GradeExamList = new List<ChengjiDataSet>();
+                //Number和NumberName基本上是一一对应的，这里用NumberName是可以的
+                var Grade1NumberNameRec = GradeExam.Select(x => x.NumberName).Distinct();
+                foreach (var NumberName in Grade1NumberNameRec)
+                {
+                    var Grade1ChengjiDataSet = new ChengjiDataSet();
+                    Grade1ChengjiDataSet.Grade = grade;
+                    Grade1ChengjiDataSet.NumberName = NumberName;
+                    Grade1ChengjiDataSet.SubNameList = GradeExam.Where(x => x.NumberName == NumberName && !string.IsNullOrEmpty(x.SubName))
+                                                      .Select(x => x.SubName).Distinct().ToList();
+                    if (Grade1ChengjiDataSet.SubNameList.Count > 0)
+                    {
+                        GradeExamList.Add(Grade1ChengjiDataSet);
+                    }
+                }
+                r.Add(grade, GradeExamList);
+            }
+            return r;
+        }
+
+        [HttpGet("GetExamInfoByNumberAndSubName")]
+        public ActionResult<List<ClassExamInfo>> GetExamInfoByNumberAndSubName(string NumberName, string SubName, string Grade)
+        {
+            var All = Dataset.ChengjiList.Where(x => x.SubName == SubName && x.NumberName == NumberName && x.Grade == Grade).ToList();
+            var dic = new Dictionary<string, List<Chengji>>();
+            foreach (var item in All)
+            {
+                if (!dic.ContainsKey(item.ClassID)) dic.Add(item.ClassID, new List<Chengji>());
+                dic[item.ClassID].Add(item);
+            }
+            var r = new List<ClassExamInfo>();
+            var classidlist = dic.Keys.ToList();
+            classidlist.Sort();
+            foreach (var classid in classidlist)
+            {
+                var chengjis = dic[classid];
+                chengjis.Sort((x, y) => { return x.Score.CompareTo(y.Score); });
+                r.Add(new ClassExamInfo() { ChengjiList = chengjis });
+            }
+            return r;
+        }
+
+
+
         /// <summary>
         /// 获得班级某科目成绩信息
         /// /// </summary>
