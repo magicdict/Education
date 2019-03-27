@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IClassExam } from 'src/app/Education.model';
-import { HomeService } from '../../Home.service';
+import { HomeService } from '../Home.service';
 
 @Component({
     templateUrl: 'ExamClassDiff.html',
@@ -13,4 +13,8 @@ export class ExamClassDiffComponent implements OnInit {
     constructor(
         public service: HomeService
     ) { }
+    
+    onRowSelect(event: { data: IClassExam; }) {
+        console.log(event.data.className);
+    }
 }

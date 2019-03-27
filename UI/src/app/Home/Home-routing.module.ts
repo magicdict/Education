@@ -4,8 +4,8 @@ import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentO
 import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/StudentCompumption.component';
 import { IStudentInfoResolver, ITeacherInfoResolver } from '../Resolver.service';
 import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.component';
-import { TeacherOverviewComponent } from './StudentArea/TeacherOverview/TeacherOverview.component';
-import { ExamClassDiffComponent } from './OverViewArea/ExamOverview/ExamClassDiff.component';
+import { TeacherOverviewComponent } from './TeacherOverview/TeacherOverview.component';
+import { ExamClassDiffComponent } from './ExamArea/ExamClassDiff.component';
 const routes: Routes = [
   {
     path: 'student/overview/:id',

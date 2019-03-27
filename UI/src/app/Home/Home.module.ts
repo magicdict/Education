@@ -31,10 +31,10 @@ import { ExamOverViewComponent } from './OverViewArea/ExamOverview/ExamOverview.
 import { ConsumptionOverviewComponent } from './OverViewArea/ConsumptionOverview/ConsumptionOverview.component';
 import { ClassOverviewComponent } from './ClassArea/ClassOverview/ClassOverview.component';
 import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentOverview.component';
-import { TeacherOverviewComponent } from './StudentArea/TeacherOverview/TeacherOverview.component';
+import { TeacherOverviewComponent } from './TeacherOverview/TeacherOverview.component';
 import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/StudentCompumption.component';
 import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.component';
-import { ExamClassDiffComponent } from './OverViewArea/ExamOverview/ExamClassDiff.component';
+import { ExamClassDiffComponent } from './ExamArea/ExamClassDiff.component';
 
 /**共通 */
 import { ErrorMessageDialogComponent } from './Common/error-message-dialog/error-message-dialog.component';
@@ -42,6 +42,7 @@ import { NavigationComponent } from './Common/navigation/Navigation.component';
 import { StudentHeaderComponent } from './Common/studentHeader/StudentHeader.component';
 import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.component';
 import { ClassExamListComponent } from './Common/ClassExamList/ClassExamList.component';
+import { SingleExamClassComponent } from './ExamArea/SingleExamClass.component';
 
 
 @NgModule({
@@ -50,17 +51,21 @@ import { ClassExamListComponent } from './Common/ClassExamList/ClassExamList.com
     CourseOverViewComponent,
     ConsumptionOverviewComponent,
     ClassOverviewComponent,
-    ExamOverViewComponent,
-    ExamClassDiffComponent,
-    StudentOverviewComponent,
     TeacherOverviewComponent,
+    //学生相关
+    StudentOverviewComponent,
     StudentCompumptionComponent,
     Grade1ScoreComponent,
+    //共通
     NavigationComponent,
     TeacherPickerComponent,
     ErrorMessageDialogComponent,
     StudentHeaderComponent,
-    ClassExamListComponent
+    ClassExamListComponent,
+    //考试相关
+    SingleExamClassComponent,
+    ExamClassDiffComponent,
+    ExamOverViewComponent,
   ],
   imports: [
     CommonModule,

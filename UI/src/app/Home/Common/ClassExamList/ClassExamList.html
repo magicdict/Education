@@ -1,7 +1,7 @@
-<p-table [value]="this.Exams" selectionMode="single" [scrollable]="true" scrollHeight="400px">
+<p-table [value]="this.Exams" selectionMode="single" [scrollable]="true" scrollHeight="400px" (onRowSelect)="onRowSelect($event)"> 
     <ng-template pTemplate="header">
       <tr>
-        <th style="width: 100px" [pSortableColumn]="'className'">班级名
+        <th style="width: 100px" [pSortableColumn]="'className'">班级名 
           <p-sortIcon [field]="'className'">
           </p-sortIcon>
         </th>
