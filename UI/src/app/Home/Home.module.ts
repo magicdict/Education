@@ -21,7 +21,8 @@ import {
   IGroupInfoResolver, ICourseResolver, IClassInfoResolver, IStudentInfoResolver,
   ISchoolConsumptionResolver,
   ITeacherInfoResolver,
-  IExamGradeListResolver
+  IExamGradeListResolver,
+  ISingleExamInfoResolver
 } from "../Resolver.service";
 import { HomeService } from './Home.service';
 /**组件 */
@@ -30,11 +31,13 @@ import { SchoolOverViewComponent } from './OverViewArea/SchoolOverView/SchoolOve
 import { ExamOverViewComponent } from './OverViewArea/ExamOverview/ExamOverview.component';
 import { ConsumptionOverviewComponent } from './OverViewArea/ConsumptionOverview/ConsumptionOverview.component';
 import { ClassOverviewComponent } from './ClassArea/ClassOverview/ClassOverview.component';
-import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentOverview.component';
+import { ExamClassDiffComponent } from './ExamArea/ExamClassDiff.component';
+import { SingleExamClassComponent } from './ExamArea/SingleExamClass.component';
+
 import { TeacherOverviewComponent } from './TeacherOverview/TeacherOverview.component';
+import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentOverview.component';
 import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/StudentCompumption.component';
 import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.component';
-import { ExamClassDiffComponent } from './ExamArea/ExamClassDiff.component';
 
 /**共通 */
 import { ErrorMessageDialogComponent } from './Common/error-message-dialog/error-message-dialog.component';
@@ -42,15 +45,16 @@ import { NavigationComponent } from './Common/navigation/Navigation.component';
 import { StudentHeaderComponent } from './Common/studentHeader/StudentHeader.component';
 import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.component';
 import { ClassExamListComponent } from './Common/ClassExamList/ClassExamList.component';
-import { SingleExamClassComponent } from './ExamArea/SingleExamClass.component';
-
+ 
 
 @NgModule({
   declarations: [
     SchoolOverViewComponent,
     CourseOverViewComponent,
     ConsumptionOverviewComponent,
+    //班级相关
     ClassOverviewComponent,
+    //教师相关
     TeacherOverviewComponent,
     //学生相关
     StudentOverviewComponent,
@@ -90,6 +94,7 @@ import { SingleExamClassComponent } from './ExamArea/SingleExamClass.component';
     ITeacherInfoResolver,
     ISchoolConsumptionResolver,
     IExamGradeListResolver,
+    ISingleExamInfoResolver,
     HomeService,
     ConfirmationService,
     HttpClient

@@ -10,6 +10,19 @@ public class Chengji : IEqualityComparer<Chengji>
     public string Id { get; set; }
 
     /// <summary>
+    /// 班级单位的ID
+    /// </summary>
+    /// <value></value>
+    public string IdForClass
+    {
+        get
+        {
+            //由于ID确定的考试，不能保证是同一个班级的，所以，这里重新设定一个班级单位的ID取代原本的ID
+            return Number + ":" + SubId + ":" + ClassID;
+        }
+    }
+
+    /// <summary>
     /// 考试编码
     /// </summary>
     /// <value></value>
@@ -54,6 +67,8 @@ public class Chengji : IEqualityComparer<Chengji>
     /// </summary>
     /// <value></value>
     public string StudentID { get; set; }
+
+    public string StudentName { get; set; }
     /// <summary>
     /// 学生班级号
     /// </summary>
@@ -175,6 +190,7 @@ public class Chengji : IEqualityComparer<Chengji>
         var s = Dataset.StudentList.Where(x => x.ID == StudentID);
         if (s.Count() == 1)
         {
+            StudentName = s.First().Name;
             ClassID = s.First().ClassId;
             ClassName = s.First().ClassName;
             if (ClassName.Contains("高一"))

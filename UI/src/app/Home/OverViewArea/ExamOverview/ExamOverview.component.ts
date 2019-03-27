@@ -8,27 +8,23 @@ import { HomeService } from '../../Home.service';
     templateUrl: 'ExamOverView.html',
 })
 export class ExamOverViewComponent implements OnInit {
-    Grade1: {
-        grade: string,
-        numberName: string,
-        subNameList: string[]
-    }[];
-    Grade2: {
-        grade: string,
-        numberName: string,
-        subNameList: string[]
-    }[];
-    Grade3: {
-        grade: string,
-        numberName: string,
-        subNameList: string[]
-    }[];
+
+
+    GradeList: {
+        name: string,
+        value: {
+            grade: string,
+            numberName: string,
+            subNameList: string[]
+        }[]
+    }[] = [];
     ngOnInit(): void {
         this.route.data
             .subscribe((data: { examgradelist: IExamList }) => {
-                this.Grade1 = data.examgradelist["高一"];
-                this.Grade2 = data.examgradelist["高二"];
-                this.Grade3 = data.examgradelist["高三"];
+                this.GradeList = [];
+                this.GradeList.push({ name: "高一", value: data.examgradelist["高一"] });
+                this.GradeList.push({ name: "高二", value: data.examgradelist["高二"] });
+                this.GradeList.push({ name: "高三", value: data.examgradelist["高三"] });
             });
     }
     constructor(
@@ -40,12 +36,12 @@ export class ExamOverViewComponent implements OnInit {
 
     JumpToExam(numberName: string, subName: string, Grade: string) {
         var request = "course/GetExamInfoByNumberAndSubName?numberName=" + numberName + "&subName=" + subName + "&Grade=" + Grade;
-        
+
         this.commonFunction.httpRequest<IClassExam[]>(request).then(
             r => {
                 this.service.CourseDiffInfo = r;
                 this.service.CourseDiffInfoTitle = "[" + Grade + "]" + numberName + "(" + subName + ")";
-                this.router.navigate(["course/classdiff"]);
+                this.router.navigate(["exam/classdiff"]);
             }
         );
     }

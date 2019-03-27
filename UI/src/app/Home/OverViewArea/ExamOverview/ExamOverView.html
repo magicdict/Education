@@ -1,7 +1,8 @@
+<app-nav></app-nav>
 <p-tabView>
-    <p-tabPanel header="高一" style="width:1140px;">
+    <p-tabPanel *ngFor="let grade of GradeList" [header]="grade.name" style="width:1140px;">
         <table>
-            <tr *ngFor="let exam of Grade1">
+            <tr *ngFor="let exam of grade.value">
                 <td>
                     <div>
                         <h3><span class="badge badge-info">{{exam.numberName}}</span></h3>
@@ -9,39 +10,11 @@
                     <ul class="heroes" style="cursor: pointer; width: auto;height: auto;">
                         <li *ngFor="let item of exam.subNameList" style="width: 50px;float:left;">
                             <button type="button" class="btn btn-primary"
-                                (click)="JumpToExam(exam.numberName,item,'高一')">{{item}}</button>
+                                (click)="JumpToExam(exam.numberName,item,grade.name)">{{item}}</button>
                         </li>
                     </ul>
                 </td>
             </tr>
         </table>
-    </p-tabPanel>
-    <p-tabPanel header="高二" style="width:1140px;">
-        <div class="container">
-            <div class="row">
-                <div *ngFor="let exam of Grade2" class="col">
-                    <ul class="heroes" style="cursor: pointer">
-                        <li *ngFor="let item of exam.subNameList" style="width: 250px;"
-                            (click)="JumpToExam(exam.numberName,item,'高二')">
-                            <span class="badge" style="width: 40px;">{{item}} </span>{{exam.numberName}}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </p-tabPanel>
-    <p-tabPanel header="高三" style="width:1140px;">
-        <div class="container">
-            <div class="row">
-                <div *ngFor="let exam of Grade3" class="col">
-                    <ul class="heroes" style="cursor: pointer">
-                        <li *ngFor="let item of exam.subNameList" style="width: 250px;"
-                            (click)="JumpToExam(exam.numberName,item,'高三')">
-                            <span class="badge" style="width: 40px;">{{item}} </span>{{exam.numberName}}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
     </p-tabPanel>
 </p-tabView>

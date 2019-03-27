@@ -15,9 +15,10 @@ export class ClassOverviewComponent implements OnInit {
 
   public QueryResult: IStudent[] = [];
   public StudentCnt: number;
-  public Teachers: ITeacher[] = [];
   public ClassName: string;
-  public Exams:IClassExam[];
+  public ClassId: string;
+  public Teachers: ITeacher[] = [];
+  public Exams: IClassExam[];
   mSexRate = SexRatePieOption;
   NativePlaceRegionOptions = regionMapOptions;
 
@@ -25,13 +26,15 @@ export class ClassOverviewComponent implements OnInit {
     this.QueryResult = this.service.CurrentClassInfo;
     this.StudentCnt = this.QueryResult.length;
     this.ClassName = this.QueryResult[0].className;
+    this.ClassId = this.QueryResult[0].classId;
+    
     this.route.data
       .subscribe((data: { classinfo: IClassInfo }) => {
-        this.Teachers = data.classinfo.teachers;
         this.mSexRate.title.text = "男女比例";
         this.mSexRate.series[0].data[0].value = data.classinfo.maleCnt;
         this.mSexRate.series[0].data[1].value = data.classinfo.femaleCnt;
         this.NativePlaceRegionOptions.series[0].data = data.classinfo.geoOptions;
+        this.Teachers = data.classinfo.teachers;
         this.Exams = data.classinfo.exams;
       });
   }
@@ -41,4 +44,8 @@ export class ClassOverviewComponent implements OnInit {
   JumpToTeacher(teacherid: string) {
     this.router.navigate(['teacher/overview', teacherid]);
   }
+  JumpToExam() {
+    this.router.navigate(['class/exam', this.ClassId]);
+  }
+
 }

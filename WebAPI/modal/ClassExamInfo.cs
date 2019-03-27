@@ -19,6 +19,14 @@ public class ClassExamInfo
         }
     }
 
+    public string Id
+    {
+        get
+        {
+            return ChengjiList.First().IdForClass;
+        }
+    }
+
     public string ClassName
     {
         get
@@ -32,6 +40,15 @@ public class ClassExamInfo
         get
         {
             return ChengjiList.First().SubName;
+        }
+    }
+
+
+    public string Term
+    {
+        get
+        {
+            return ChengjiList.First().Term;
         }
     }
 

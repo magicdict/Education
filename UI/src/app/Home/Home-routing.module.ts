@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentOverview.component';
 import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/StudentCompumption.component';
-import { IStudentInfoResolver, ITeacherInfoResolver } from '../Resolver.service';
+import { IStudentInfoResolver, ITeacherInfoResolver, ISingleExamInfoResolver } from '../Resolver.service';
 import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.component';
 import { TeacherOverviewComponent } from './TeacherOverview/TeacherOverview.component';
 import { ExamClassDiffComponent } from './ExamArea/ExamClassDiff.component';
+import { SingleExamClassComponent } from './ExamArea/SingleExamClass.component';
 const routes: Routes = [
   {
     path: 'student/overview/:id',
@@ -30,8 +31,15 @@ const routes: Routes = [
     component: Grade1ScoreComponent
   },
   {
-    path: 'course/classdiff',
+    path: 'exam/classdiff',
     component: ExamClassDiffComponent
+  },
+  {
+    path: 'exam/detail/:id',
+    component: SingleExamClassComponent,
+    resolve: {
+      singleExam: ISingleExamInfoResolver
+    }
   }
 ];
 

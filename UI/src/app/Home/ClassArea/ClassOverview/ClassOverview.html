@@ -1,89 +1,86 @@
-<div class="container">
-  <div class="row">
-    <div class="col-7">
-      <h3>{{this.ClassName}} 人数：{{this.StudentCnt}}</h3>
-      <p-table [value]="QueryResult" [scrollable]="true" (onRowSelect)="onRowSelect($event)" selectionMode="single"
-        scrollHeight="400px" [style]="{'width':'100%','min-width':'600px'}">
-        <ng-template pTemplate="header">
-          <tr>
-            <th [pSortableColumn]="'id'" style="width: 40px">
-              ID
-              <p-sortIcon [field]="'id'">
-              </p-sortIcon>
-            </th>
-            <th [pSortableColumn]="'name'" style="width: 60px">
-              姓名
-              <p-sortIcon [field]="'name'">
-              </p-sortIcon>
-            </th>
-            <th [pSortableColumn]="'sex'" style="width: 50px">
-              性别
-              <p-sortIcon [field]="'sex'">
-              </p-sortIcon>
-            </th>
-            <th [pSortableColumn]="'bornDate'" style="width: 60px">
-              出生年
-              <p-sortIcon [field]="'bornDate'">
-              </p-sortIcon>
-            </th>
-            <th [pSortableColumn]="'policy'" style="width: 80px">
-              政治面貌
-              <p-sortIcon [field]="'policy'">
-              </p-sortIcon>
-            </th>
-            <th [pSortableColumn]="'nation'" style="width: 50px">
-              民族
-              <p-sortIcon [field]="'nation'">
-              </p-sortIcon>
-            </th>
-            <th [pSortableColumn]="'nativePlace'" style="width: 100px">
-              出生地
-              <p-sortIcon [field]="'nativePlace'">
-              </p-sortIcon>
-            </th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-itemData>
-          <tr [pSelectableRow]="itemData">
-            <td style="width: 40px">{{itemData.id}}</td>
-            <td style="width: 60px">{{itemData.name}}</td>
-            <td style="width: 50px">{{itemData.sex}}</td>
-            <td style="width: 60px">{{itemData.bornDate}}</td>
-            <td style="width: 80px">{{itemData.policy}}</td>
-            <td style="width: 50px">{{itemData.nation}}</td>
-            <td style="width: 100px">{{itemData.nativePlace}}</td>
-          </tr>
-        </ng-template>
-      </p-table>
-      <br />
-      <br />
-      <class-exam-list [Exams]="this.Exams"></class-exam-list>
+<app-nav></app-nav>
+<p-tabView>
+  <p-tabPanel header="概要" style="width:1140px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-7">
+          <h3>{{this.ClassName}} 人数：{{this.StudentCnt}}</h3>
+          <p-table [value]="QueryResult" [scrollable]="true" (onRowSelect)="onRowSelect($event)" selectionMode="single"
+            scrollHeight="800px" [style]="{'width':'100%','min-width':'600px'}">
+            <ng-template pTemplate="header">
+              <tr>
+                <th [pSortableColumn]="'id'" style="width: 40px">
+                  ID
+                  <p-sortIcon [field]="'id'">
+                  </p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'name'" style="width: 60px">
+                  姓名
+                  <p-sortIcon [field]="'name'">
+                  </p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'sex'" style="width: 50px">
+                  性别
+                  <p-sortIcon [field]="'sex'">
+                  </p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'bornDate'" style="width: 60px">
+                  出生年
+                  <p-sortIcon [field]="'bornDate'">
+                  </p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'policy'" style="width: 80px">
+                  政治面貌
+                  <p-sortIcon [field]="'policy'">
+                  </p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'nation'" style="width: 50px">
+                  民族
+                  <p-sortIcon [field]="'nation'">
+                  </p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'nativePlace'" style="width: 100px">
+                  出生地
+                  <p-sortIcon [field]="'nativePlace'">
+                  </p-sortIcon>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-itemData>
+              <tr [pSelectableRow]="itemData">
+                <td style="width: 40px">{{itemData.id}}</td>
+                <td style="width: 60px">{{itemData.name}}</td>
+                <td style="width: 50px">{{itemData.sex}}</td>
+                <td style="width: 60px">{{itemData.bornDate}}</td>
+                <td style="width: 80px">{{itemData.policy}}</td>
+                <td style="width: 50px">{{itemData.nation}}</td>
+                <td style="width: 100px">{{itemData.nativePlace}}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <div class="col-5">
+          <div echarts [options]="mSexRate" style="width:300px;height: 300px;"></div>
+          <div echarts [options]="NativePlaceRegionOptions" style="width:300px;height: 300px;"></div>
+        </div>
+      </div>
     </div>
-    <div class="col-5">
-      <table>
-        <tr valign="top">
-          <td>
-            <ul class="heroes">
-              <li *ngFor="let teacher of this.Teachers.slice(0,Teachers.length /2)" style="cursor: pointer;"
-                (click)="JumpToTeacher(teacher.id)">
-                <span class="badge" style="width: 100px;">{{teacher.subName}} </span>{{teacher.name}}
-                <i class="fa fa-search"></i>
-              </li>
-            </ul>
-          </td>
-          <td>
-            <ul class="heroes">
-              <li *ngFor="let teacher of this.Teachers.slice(Teachers.length /2)" style="cursor: pointer;"
-                (click)="JumpToTeacher(teacher.id)">
-                <span class="badge" style="width: 100px;">{{teacher.subName}} </span>{{teacher.name}}
-                <i class="fa fa-search"></i>
-              </li>
-            </ul>
-          </td>
-        </tr>
-      </table>
-      <div echarts [options]="mSexRate" style="width:300px;height: 300px;"></div>
-      <div echarts [options]="NativePlaceRegionOptions" style="width:300px;height: 300px;"></div>
+  </p-tabPanel>
+  <p-tabPanel header="成绩" style="width:1140px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <ul class="heroes">
+            <li *ngFor="let teacher of this.Teachers" style="cursor: pointer;" (click)="JumpToTeacher(teacher.id)">
+              <span class="badge" style="width: 100px;">{{teacher.subName}} </span>{{teacher.name}}
+              <i class="fa fa-search"></i>
+            </li>
+          </ul>
+        </div>
+        <div class="col-9">
+          <class-exam-list [Exams]="this.Exams" [scrollHeight]="'800px'"></class-exam-list>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </p-tabPanel>
+</p-tabView>

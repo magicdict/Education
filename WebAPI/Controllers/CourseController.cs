@@ -11,6 +11,11 @@ namespace Education.Controllers
     [ApiController]
     public class CourseController : ControllerBase
     {
+        [HttpGet("GetExamForSingleExam")]
+        public ActionResult<List<Chengji>> GetExamForSingleExam(string IdForClass)
+        {
+            return Dataset.ChengjiList.Where(x => x.IdForClass == IdForClass).ToList();
+        }
 
         public class ChengjiDataSet
         {

@@ -1,20 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { IClassExam } from 'src/app/Education.model';
-import { HomeService } from '../Home.service';
+import { IScore } from 'src/app/Education.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     templateUrl: 'SingleExamClass.html',
 })
 export class SingleExamClassComponent implements OnInit {
-    Exams: IClassExam[];
+    Scores: IScore[];
     ngOnInit(): void {
-        this.Exams = this.service.CourseDiffInfo; 
+        this.route.data.subscribe((data: { singleExam: IScore[] }) => {
+            this.Scores = data.singleExam;
+        });
     }
     constructor(
-        public service: HomeService
+        private route: ActivatedRoute,
+        private router: Router,
     ) { }
-    
-    onRowSelect(event: { data: IClassExam; }) {
-        console.log(event.data.className);
+
+    onRowSelect(event: { data: IScore; }) {
+        this.router.navigate(['student/overview', event.data.studentID]);
     }
 }
