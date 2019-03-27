@@ -42,11 +42,13 @@ namespace Education.Controllers
                     var dic = new Dictionary<string, List<Chengji>>();
                     foreach (var chengji in chengjiRecs)
                     {
-                        if (!dic.ContainsKey(chengji.Id))
+                        //注意：这里因为有跨班级考试问题，所以，为了以班级为单位输出，主键不能是ExamId
+                        var Key = chengji.Number + ":" + chengji.SubId + ":" + chengji.ClassID;
+                        if (!dic.ContainsKey(Key))
                         {
-                            dic.Add(chengji.Id, new List<Chengji>());
+                            dic.Add(Key, new List<Chengji>());
                         }
-                        dic[chengji.Id].Add(chengji);
+                        dic[Key].Add(chengji);
                     }
                     foreach (var item in dic.Values)
                     {

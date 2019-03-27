@@ -71,8 +71,6 @@ namespace Education.Controllers
             return r;
         }
 
-
-
         /// <summary>
         /// 获得班级某科目成绩信息
         /// /// </summary>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IStudent, IClassInfo, ITeacher } from 'src/app/Education.model';
+import { IStudent, IClassInfo, ITeacher, IClassExam } from 'src/app/Education.model';
 import { HomeService } from '../../Home.service';
 import { SexRatePieOption, regionMapOptions } from '../../GraphOption/StudentGraphOption'
 
@@ -17,6 +17,7 @@ export class ClassOverviewComponent implements OnInit {
   public StudentCnt: number;
   public Teachers: ITeacher[] = [];
   public ClassName: string;
+  public Exams:IClassExam[];
   mSexRate = SexRatePieOption;
   NativePlaceRegionOptions = regionMapOptions;
 
@@ -31,6 +32,7 @@ export class ClassOverviewComponent implements OnInit {
         this.mSexRate.series[0].data[0].value = data.classinfo.maleCnt;
         this.mSexRate.series[0].data[1].value = data.classinfo.femaleCnt;
         this.NativePlaceRegionOptions.series[0].data = data.classinfo.geoOptions;
+        this.Exams = data.classinfo.exams;
       });
   }
   onRowSelect(event: { data: IStudent; }) {

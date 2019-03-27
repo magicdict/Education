@@ -104,6 +104,8 @@ namespace Education.Controllers
             /// </summary>
             /// <value></value>
             public List<Teacher> Teachers { get; set; }
+
+            public List<ClassExamInfo> Exams { get; set; }
         }
 
         /// <summary>
@@ -113,9 +115,9 @@ namespace Education.Controllers
         [HttpGet("GetClassOverview")]
         public ActionResult<ClassOverview> GetClassOverview(string ClassId)
         {
-            var o = new ClassOverview();
-            o.maleCnt = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassId == ClassId);
-            o.femaleCnt = Dataset.StudentList.Count(x => x.Sex == "女" && x.ClassId == ClassId);
+            var overview = new ClassOverview();
+            overview.maleCnt = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassId == ClassId);
+            overview.femaleCnt = Dataset.StudentList.Count(x => x.Sex == "女" && x.ClassId == ClassId);
             //获得地理信息
             var geodic = new Dictionary<string, int>();
             foreach (var province in Utility.Provinces)
@@ -138,15 +140,33 @@ namespace Education.Controllers
                     }
                 }
             }
-            o.GeoOptions = new List<NameValueSet>();
+            overview.GeoOptions = new List<NameValueSet>();
             foreach (var k in geodic.Keys)
             {
-                o.GeoOptions.Add(new NameValueSet() { name = k, value = geodic[k] });
+                overview.GeoOptions.Add(new NameValueSet() { name = k, value = geodic[k] });
             }
             //教师记录
-            o.Teachers = Dataset.TeacherList.Where(x => x.ClassId == ClassId).ToList();
+            overview.Teachers = Dataset.TeacherList.Where(x => x.ClassId == ClassId).ToList();
 
-            return o;
+
+            var All = Dataset.ChengjiList.Where(x => x.ClassID == ClassId).ToList();
+            var dic = new Dictionary<string, List<Chengji>>();
+            foreach (var chengjiRec in All)
+            {
+                var key = chengjiRec.Number + ":" + chengjiRec.SubId;
+                if (!dic.ContainsKey(key)) dic.Add(key, new List<Chengji>());
+                dic[key].Add(chengjiRec);
+            }
+            var r = new List<ClassExamInfo>();
+            foreach (var key in dic.Keys)
+            {
+                var chengjis = dic[key];
+                chengjis.Sort((x, y) => { return x.Score.CompareTo(y.Score); });
+                r.Add(new ClassExamInfo() { ChengjiList = chengjis });
+            }
+            overview.Exams = r;
+
+            return overview;
         }
 
 

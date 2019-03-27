@@ -41,6 +41,7 @@ import { ErrorMessageDialogComponent } from './Common/error-message-dialog/error
 import { NavigationComponent } from './Common/navigation/Navigation.component';
 import { StudentHeaderComponent } from './Common/studentHeader/StudentHeader.component';
 import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.component';
+import { ClassExamListComponent } from './Common/ClassExamList/ClassExamList.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.com
     NavigationComponent,
     TeacherPickerComponent,
     ErrorMessageDialogComponent,
-    StudentHeaderComponent
+    StudentHeaderComponent,
+    ClassExamListComponent
   ],
   imports: [
     CommonModule,

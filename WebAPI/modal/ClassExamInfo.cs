@@ -27,6 +27,14 @@ public class ClassExamInfo
         }
     }
 
+    public string SubName
+    {
+        get
+        {
+            return ChengjiList.First().SubName;
+        }
+    }
+
     public int AllCnt
     {
         get

@@ -112,8 +112,9 @@ export interface ITeacherInfo {
 export interface IClassExam {
   className: string,
   examName: string,
+  subName: string,
   allCnt: number,
-  avilibleCnt:number,
+  avilibleCnt: number,
   maxScore: number,
   minScore: number,
   avgScore: number
@@ -203,6 +204,7 @@ export interface IClassInfo {
   femaleCnt: number;
   geoOptions: { name: string, value: number }[];
   teachers: ITeacher[];
+  exams: IClassExam[];
 }
 
 export interface ICourse {

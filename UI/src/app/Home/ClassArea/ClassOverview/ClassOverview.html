@@ -3,49 +3,42 @@
     <div class="col-7">
       <h3>{{this.ClassName}} 人数：{{this.StudentCnt}}</h3>
       <p-table [value]="QueryResult" [scrollable]="true" (onRowSelect)="onRowSelect($event)" selectionMode="single"
-        scrollHeight="800px" [style]="{'width':'100%','min-width':'600px'}">
+        scrollHeight="400px" [style]="{'width':'100%','min-width':'600px'}">
         <ng-template pTemplate="header">
           <tr>
             <th [pSortableColumn]="'id'" style="width: 40px">
               ID
-              <p-sortIcon [field]="'id'" ariaLabel="Activate to sort"
-                ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+              <p-sortIcon [field]="'id'">
               </p-sortIcon>
             </th>
             <th [pSortableColumn]="'name'" style="width: 60px">
               姓名
-              <p-sortIcon [field]="'name'" ariaLabel="Activate to sort"
-                ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+              <p-sortIcon [field]="'name'">
               </p-sortIcon>
             </th>
             <th [pSortableColumn]="'sex'" style="width: 50px">
               性别
-              <p-sortIcon [field]="'sex'" ariaLabel="Activate to sort"
-                ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+              <p-sortIcon [field]="'sex'">
               </p-sortIcon>
             </th>
             <th [pSortableColumn]="'bornDate'" style="width: 60px">
               出生年
-              <p-sortIcon [field]="'bornDate'" ariaLabel="Activate to sort"
-                ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+              <p-sortIcon [field]="'bornDate'">
               </p-sortIcon>
             </th>
             <th [pSortableColumn]="'policy'" style="width: 80px">
               政治面貌
-              <p-sortIcon [field]="'policy'" ariaLabel="Activate to sort"
-                ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+              <p-sortIcon [field]="'policy'">
               </p-sortIcon>
             </th>
             <th [pSortableColumn]="'nation'" style="width: 50px">
               民族
-              <p-sortIcon [field]="'nation'" ariaLabel="Activate to sort"
-                ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+              <p-sortIcon [field]="'nation'">
               </p-sortIcon>
             </th>
             <th [pSortableColumn]="'nativePlace'" style="width: 100px">
               出生地
-              <p-sortIcon [field]="'nativePlace'" ariaLabel="Activate to sort"
-                ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+              <p-sortIcon [field]="'nativePlace'">
               </p-sortIcon>
             </th>
           </tr>
@@ -62,6 +55,9 @@
           </tr>
         </ng-template>
       </p-table>
+      <br />
+      <br />
+      <class-exam-list [Exams]="this.Exams"></class-exam-list>
     </div>
     <div class="col-5">
       <table>
