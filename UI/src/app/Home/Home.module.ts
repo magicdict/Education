@@ -22,7 +22,8 @@ import {
   ISchoolConsumptionResolver,
   ITeacherInfoResolver,
   IExamGradeListResolver,
-  ISingleExamInfoResolver
+  ISingleExamInfoResolver,
+  IKaoqinInfoResolver
 } from "./Common/Resolver.service";
 import { HomeService } from './Common/Home.service';
 /**组件 */
@@ -38,6 +39,7 @@ import { TeacherOverviewComponent } from './TeacherOverview/TeacherOverview.comp
 import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentOverview.component';
 import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/StudentCompumption.component';
 import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.component';
+import { KaoqinOverviewComponent } from './OverViewArea/KaoqinOverview/KaoqinOverview.component';
 
 /**共通 */
 import { ErrorMessageDialogComponent } from './Common/error-message-dialog/error-message-dialog.component';
@@ -50,7 +52,11 @@ import { ClassExamListComponent } from './Common/ClassExamList/ClassExamList.com
 @NgModule({
   declarations: [
     SchoolOverViewComponent,
+    //考勤
+    KaoqinOverviewComponent,
+    //7选3
     CourseOverViewComponent,
+    //消费
     ConsumptionOverviewComponent,
     //班级相关
     ClassOverviewComponent,
@@ -95,6 +101,7 @@ import { ClassExamListComponent } from './Common/ClassExamList/ClassExamList.com
     ISchoolConsumptionResolver,
     IExamGradeListResolver,
     ISingleExamInfoResolver,
+    IKaoqinInfoResolver,
     HomeService,
     ConfirmationService,
     HttpClient

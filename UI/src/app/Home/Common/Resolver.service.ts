@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CommonFunction } from './common';
-import { IGroupInfo, ICourse, IClassInfo, IStudentInfo, ISchoolConsumptionInfo, ITeacherInfo, IExamList, IScore } from './Education.model';
+import { IGroupInfo, ICourse, IClassInfo, IStudentInfo, ISchoolConsumptionInfo, ITeacherInfo, IExamList, IScore, IKaoqinOverview } from './Education.model';
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HomeService } from './Home.service'
@@ -26,7 +26,15 @@ export class ISingleExamInfoResolver implements Resolve<Array<IScore>> {
     }
 }
 
+@Injectable()
+export class IKaoqinInfoResolver implements Resolve<IKaoqinOverview> {
+    constructor(public commonFunction: CommonFunction) {
 
+    }
+    resolve(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): IKaoqinOverview | Observable<IKaoqinOverview> | Promise<IKaoqinOverview> {
+        return this.commonFunction.httpRequest<IKaoqinOverview>("kaoqin/GetKaoqinOverview");
+    }
+}
 
 @Injectable()
 export class IStudentInfoResolver implements Resolve<IStudentInfo> {

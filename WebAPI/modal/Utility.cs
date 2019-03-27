@@ -54,12 +54,12 @@ public static class Utility
         "台湾"
     };
 
-        public class NameValueSet
-        {
-            public string name { get; set; }
-            public int value { get; set; }
+    public class NameValueSet
+    {
+        public string name { get; set; }
+        public int value { get; set; }
 
-        }
+    }
     public static string GetProvince(string Geo)
     {
         foreach (var province in Provinces)

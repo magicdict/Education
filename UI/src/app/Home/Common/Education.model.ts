@@ -185,6 +185,10 @@ export interface IKaoqin {
   weather: IWeather;
 }
 
+export interface IKaoqinOverview {
+  [key: string]: { name: string, value: number }
+}
+
 export interface IGroupInfo {
   maleGrade1: number;
   femaleGrade1: number;
