@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../Home.service';
+import { HomeService } from '../Common/Home.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ITeacher, ITeacherInfo, IClassExam } from 'src/app/Education.model';
+import { ITeacher, ITeacherInfo, IClassExam } from 'src/app/Home/Common/Education.model';
 import { TimelineEvent } from 'ngx-timeline';
 
 

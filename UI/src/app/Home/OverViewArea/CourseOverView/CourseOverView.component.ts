@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ICourse } from 'src/app/Education.model';
-import { CommonFunction } from '../../../common'
+import { ICourse } from 'src/app/Home/Common/Education.model';
+import { CommonFunction } from '../../Common/common'
 import {
   CourseSelectCntOption, CourseSelectTwoCntOption, CourseSelectThreeCntOption,
   CourseSelectRadarGraphOption, SelectCourseSankeyOption

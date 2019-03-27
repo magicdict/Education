@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './Home/Home.module';
-import { CommonFunction } from './common';
+import { CommonFunction } from './Home/Common/common';
 
 @NgModule({
   declarations: [

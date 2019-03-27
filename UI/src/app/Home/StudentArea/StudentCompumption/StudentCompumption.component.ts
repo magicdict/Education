@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../../Home.service';
-import { CommonFunction } from 'src/app/common';
+import { HomeService } from '../../Common/Home.service';
+import { CommonFunction } from 'src/app/Home/Common/common';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { DiaryAvgByTimeRangeOption, TotalByTimeRangeOption, DiaryCompumptionOption } from '../../GraphOption/CompumptionOption';

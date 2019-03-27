@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IClassExam } from 'src/app/Education.model';
+import { IClassExam } from 'src/app/Home/Common/Education.model';
 import { Router } from '@angular/router';
 
 @Component({

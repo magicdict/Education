@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../../Home.service';
-import { IStudent, IStudentInfo, ITeacher } from '../../../Education.model';
+import { HomeService } from '../../Common/Home.service';
+import { IStudent, IStudentInfo, ITeacher } from '../../Common/Education.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { from } from 'rxjs';
-import { CommonFunction } from 'src/app/common';
+import { CommonFunction } from 'src/app/Home/Common/common';
 import { ScoreRadarGraphOption } from '../../GraphOption/ScoreOption'
 import { CompumptionBarGraph, KaoqinBarGraph } from '../../GraphOption/StudentGraphOption';
 

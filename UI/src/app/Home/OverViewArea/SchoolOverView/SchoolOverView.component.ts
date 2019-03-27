@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IGroupInfo } from '../../../Education.model';
+import { IGroupInfo } from '../../Common/Education.model';
 import { SchoolSexBarOption, regionMapOptions, SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
 import { SexRatePieOption } from '../../GraphOption/StudentGraphOption'
 import { registerMap } from 'echarts';

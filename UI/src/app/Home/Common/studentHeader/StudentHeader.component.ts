@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../../Home.service';
+import { HomeService } from '../Home.service';
 
 @Component({
   selector: 'student-header',

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IGroupInfoResolver, ICourseResolver, IClassInfoResolver, ISchoolConsumptionResolver, IExamGradeListResolver } from "./Resolver.service";
+import { IGroupInfoResolver, ICourseResolver, IClassInfoResolver, ISchoolConsumptionResolver, IExamGradeListResolver } from "./Home/Common/Resolver.service";
 import { SchoolOverViewComponent } from "./Home/OverViewArea/SchoolOverView/SchoolOverView.component"
 import { CourseOverViewComponent } from './Home/OverViewArea/CourseOverView/CourseOverView.component';
 import { ConsumptionOverviewComponent } from './Home/OverViewArea/ConsumptionOverview/ConsumptionOverview.component';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IStudent, IClassInfo, ITeacher, IClassExam } from 'src/app/Education.model';
-import { HomeService } from '../../Home.service';
+import { IStudent, IClassInfo, ITeacher, IClassExam } from 'src/app/Home/Common/Education.model';
+import { HomeService } from '../../Common/Home.service';
 import { SexRatePieOption, regionMapOptions } from '../../GraphOption/StudentGraphOption'
 
 @Component({

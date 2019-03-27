@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IExamList, IClassExam } from 'src/app/Education.model';
-import { CommonFunction } from 'src/app/common';
-import { HomeService } from '../../Home.service';
+import { IExamList, IClassExam } from 'src/app/Home/Common/Education.model';
+import { CommonFunction } from 'src/app/Home/Common/common';
+import { HomeService } from '../../Common/Home.service';
 
 @Component({
     templateUrl: 'ExamOverView.html',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CommonFunction } from '../common';
-import { IStudent, IStudentInfo, ITeacher, ITeacherInfo, IClassExam } from '../Education.model';
+import { CommonFunction } from './common';
+import { IStudent, IStudentInfo, ITeacher, ITeacherInfo, IClassExam } from './Education.model';
 
 @Injectable()
 export class HomeService {

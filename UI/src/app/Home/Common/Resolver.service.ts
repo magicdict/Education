@@ -3,7 +3,7 @@ import { CommonFunction } from './common';
 import { IGroupInfo, ICourse, IClassInfo, IStudentInfo, ISchoolConsumptionInfo, ITeacherInfo, IExamList, IScore } from './Education.model';
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { HomeService } from './Home/Home.service'
+import { HomeService } from './Home.service'
 
 @Injectable()
 export class IExamGradeListResolver implements Resolve<IExamList> {

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentOverview.component';
 import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/StudentCompumption.component';
-import { IStudentInfoResolver, ITeacherInfoResolver, ISingleExamInfoResolver } from '../Resolver.service';
+import { IStudentInfoResolver, ITeacherInfoResolver, ISingleExamInfoResolver } from './Common/Resolver.service';
 import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.component';
 import { TeacherOverviewComponent } from './TeacherOverview/TeacherOverview.component';
 import { ExamClassDiffComponent } from './ExamArea/ExamClassDiff.component';

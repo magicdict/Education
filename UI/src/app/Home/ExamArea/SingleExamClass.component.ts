@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IScore } from 'src/app/Education.model';
+import { IScore } from 'src/app/Home/Common/Education.model';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

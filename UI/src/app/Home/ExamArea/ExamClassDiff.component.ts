@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IClassExam } from 'src/app/Education.model';
-import { HomeService } from '../Home.service';
+import { IClassExam } from 'src/app/Home/Common/Education.model';
+import { HomeService } from '../Common/Home.service';
 
 @Component({
     templateUrl: 'ExamClassDiff.html',

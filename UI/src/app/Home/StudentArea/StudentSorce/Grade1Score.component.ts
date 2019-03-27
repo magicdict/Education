@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../../Home.service';
+import { HomeService } from '../../Common/Home.service';
 import { ScoreRadarGraphOption } from '../../GraphOption/ScoreOption'
-import { IStudent, ITeacher } from 'src/app/Education.model';
-import { CommonFunction } from 'src/app/common';
+import { IStudent, ITeacher } from 'src/app/Home/Common/Education.model';
+import { CommonFunction } from 'src/app/Home/Common/common';
 import { Router } from '@angular/router';
 
 @Component({

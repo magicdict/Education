@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
-import { ITeacher } from '../../../Education.model';
-import { CommonFunction } from '../../../common';
+import { ITeacher } from '../Education.model';
+import { CommonFunction } from '../common';
 import { SelectItem } from 'primeng/api';
 import { ErrorMessageDialogComponent } from '../error-message-dialog/error-message-dialog.component';
 

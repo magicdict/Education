@@ -23,8 +23,8 @@ import {
   ITeacherInfoResolver,
   IExamGradeListResolver,
   ISingleExamInfoResolver
-} from "../Resolver.service";
-import { HomeService } from './Home.service';
+} from "./Common/Resolver.service";
+import { HomeService } from './Common/Home.service';
 /**组件 */
 import { CourseOverViewComponent } from './OverViewArea/CourseOverView/CourseOverView.component';
 import { SchoolOverViewComponent } from './OverViewArea/SchoolOverView/SchoolOverView.component';

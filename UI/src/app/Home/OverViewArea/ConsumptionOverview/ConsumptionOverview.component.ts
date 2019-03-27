@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ISchoolConsumptionInfo, IConsumption } from 'src/app/Education.model';
+import { ISchoolConsumptionInfo, IConsumption } from 'src/app/Home/Common/Education.model';
 import { MonthlyCompumptionBarOption, MonthlyCompumptionBarOptionTotal } from '../../GraphOption/CompumptionOption'
 @Component({
   templateUrl: 'ConsumptionOverview.html',
