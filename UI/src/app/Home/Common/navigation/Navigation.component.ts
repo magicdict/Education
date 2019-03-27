@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IStudent, classopt, ITeacher } from '../Education.model';
+import { classopt, ITeacher } from '../Education.model';
 import { HomeService } from '../Home.service';
 import { ErrorMessageDialogComponent } from '../error-message-dialog/error-message-dialog.component';
 import { TeacherPickerComponent } from '../teacherPicker/teacherPicker.component'

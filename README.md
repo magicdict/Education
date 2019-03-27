@@ -6,6 +6,8 @@
 - WebAPI：WebAPI代码
 - netcore-web-example.service : NetCore WebAPI的CentOS守护进程
 - nginx.conf : Nginx服务配置 UI和WebAPI都需要配置
+  - /usr/local/nginx/conf
+  - ./nginx -s reload (/usr/local/nginx/sbin)
 - weather.py : 天气获得用代码
 
 Host URL：<http://39.105.206.6>

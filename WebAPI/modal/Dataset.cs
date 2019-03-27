@@ -164,14 +164,14 @@ public static class Dataset
         LastestTermChangji = Dataset.ChengjiList.Distinct(new Chengji()).Where(x => x.Term == "2018-2019-1").ToList();
 
         //DUMP CHENGJI
-        var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "5_chengji_dump.csv");
+        /* var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "5_chengji_dump.csv");
         sw.WriteLine("Id,IdForClass,NumberName,Grade,ClassID,ClassName,Term,StudentID,subName");
         foreach (var item in Dataset.ChengjiList)
         {
             sw.WriteLine(item.Id + "," + item.IdForClass + "," + item.NumberName + "," + item.Grade + "," + item.ClassID + "," + item.ClassName + "," +
                          item.Term + "," + item.StudentID + "," + item.SubName);
         }
-        sw.Close();
+        sw.Close(); */
     }
 
     /// <summary>

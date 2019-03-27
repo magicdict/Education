@@ -218,6 +218,10 @@ public class Chengji : IEqualityComparer<Chengji>
             }
         }
         Score = float.Parse(Items[9]);
+        if (Items[9].Length > 6)
+        {
+            Score = (float)Math.Round(Score, 2);
+        }
         ZScore = Items[10];
         TScore = Items[11];
         Dengdi = Items[12];
