@@ -205,21 +205,31 @@ namespace Education.Controllers
 
         }
 
+
+        /// <summary>
+        /// 全体消费信息
+        /// </summary>
+        static SchoolConsumptionInfo info;
+
         /// <summary>
         /// 获得整个学校消费的统计信息
         /// </summary>
-        /// <returns></returns>
+        /// /// <returns></returns>
         [HttpGet("GetSchoolConsumptionInfo")]
         public ActionResult<SchoolConsumptionInfo> GetSchoolConsumptionInfo()
         {
+            return info;
+        }
+        /// <summary>
+        /// 全体消费信息预先统计
+        /// </summary>
+        public static void PrepareSchoolConsumptionInfo()
+        {
             var timer = new System.Diagnostics.Stopwatch();
             timer.Start();
-
+            info = new SchoolConsumptionInfo();
             var LiveAtSchool = Dataset.ConsumptionList.Where(x => x.ConsumpStudent.LiveAtSchool);
             var NotLiveAtSchool = Dataset.ConsumptionList.Where(x => !x.ConsumpStudent.LiveAtSchool);
-
-
-            var info = new SchoolConsumptionInfo();
             //月度整体消费统计
             //2018/07 -> 2019/01 
             info.LiveAtSchoolCnt = Dataset.StudentList.Count(x => x.LiveAtSchool);
@@ -274,8 +284,6 @@ namespace Education.Controllers
             info.HighestRecNotLiveAtSchool = Dataset.ConsumptionList.Where(x => !x.ConsumpStudent.LiveAtSchool).Take(3).ToList();
             Console.WriteLine(timer.Elapsed.ToString());
             timer.Stop();
-            return info;
         }
-
     }
 }

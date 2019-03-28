@@ -11,12 +11,11 @@
                     <div echarts [options]="weekdayTotalOpt" style="width:520px;"></div>
                 </div>
             </div>
-
-            <button type="button" class="btn btn-info">
+            <button type="button" class="btn btn-info" style="cursor: default">
                 住校生 <span class="badge badge-light">{{liveAtSchool}}</span>
             </button>
             &nbsp;&nbsp;&nbsp;
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" style="cursor: default">
                 非住校生 <span class="badge badge-light">{{notLiveAtSchool}}</span>
             </button>
             <br />
@@ -113,7 +112,6 @@
                                 </li>
                                 <li>
                                     <span class="badge">住校</span>{{item.consumpStudent.liveAtSchool?"是":"否"}}
-
                                 </li>
                             </ul>
                         </div>

@@ -12,13 +12,21 @@
   <button class="btn btn-primary" (click)="QueryByClassId()"><i class="fa fa-search"></i>检索</button>
   &nbsp;&nbsp;&nbsp;
   <button class="btn btn-primary" (click)="TeacherQuery()"><i class="fa fa-search"></i>教师检索器</button>
-  <div style="float: right">
-    <button class="btn btn-primary" (click)="JumpTo('home/school')">概要</button>&nbsp;
-    <button class="btn btn-primary" (click)="JumpTo('home/course')">七选三</button>&nbsp;
-    <button class="btn btn-primary" (click)="JumpTo('home/exam')">考试</button>&nbsp;
-    <button class="btn btn-primary" (click)="JumpTo('home/consumption')"><i class="fa fas fa-yen-sign"></i> 消费</button>&nbsp;
-    <button class="btn btn-primary" (click)="JumpTo('home/kaoqin')">考勤</button>&nbsp;
+  &nbsp;&nbsp;&nbsp;
+  <div class="btn-group">
+    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">
+      菜单
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" (click)="JumpTo('home/school')">概要</a>
+      <a class="dropdown-item" (click)="JumpTo('home/course')">七选三</a>
+      <a class="dropdown-item" (click)="JumpTo('home/exam')">考试</a>
+      <a class="dropdown-item" (click)="JumpTo('home/consumption')"><i class="fa fas fa-yen-sign"></i> 消费</a>
+      <a class="dropdown-item" (click)="JumpTo('home/kaoqin')">考勤</a>
+    </div>
   </div>
+
 </div>
 <app-teacherPicker></app-teacherPicker>
 <app-error-message-dialog></app-error-message-dialog>
