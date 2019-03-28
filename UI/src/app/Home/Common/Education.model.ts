@@ -110,7 +110,7 @@ export interface ITeacherInfo {
 }
 
 export interface IClassExam {
-  record:IScore,
+  record: IScore,
   allCnt: number,
   avilibleCnt: number,
   maxScore: number,
@@ -145,14 +145,14 @@ export interface IConsumption {
 
 export interface IScore {
   id: string;
-  idForClass:string;
+  idForClass: string;
   number: string;
   numberName: string;
   subId: string;
   subName: string;
   term: string;
   type: string;
-  typeName:string;
+  typeName: string;
   sdate: string;
   sdateYear: string;
   sdateMonth: string;
@@ -184,7 +184,8 @@ export interface IKaoqin {
 }
 
 export interface IKaoqinOverview {
-  [key: string]: { name: string, value: number }
+  monthDict: { [key: string]: { name: string, value: number } []};
+  overviewDict: { [key: string]: { name: string, value: number } };
 }
 
 export interface IGroupInfo {

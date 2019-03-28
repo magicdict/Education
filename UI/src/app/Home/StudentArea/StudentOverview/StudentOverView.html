@@ -61,11 +61,14 @@
                                 class="fa fas fa-chart-bar"></i> 详细</button>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
+                <div class="row" *ngIf="KaoqinMonthCnt.length >0">
+                    <div class="col-6">
                         <div echarts [options]="KaoqinGraph" style="width:350px;height:350px;"></div>
                         <button class="btn btn-primary" style="float:right"><i class="fa fas fa-chart-bar"></i>
                             详细</button>
+                    </div>
+                    <div class="col-6">
+                        
                     </div>
                 </div>
             </div>

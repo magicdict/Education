@@ -92,7 +92,7 @@ export class ICourseResolver implements Resolve<ICourse>{
 @Injectable()
 export class ISchoolConsumptionResolver implements Resolve<ISchoolConsumptionInfo>{
     resolve(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot): ISchoolConsumptionInfo | Observable<ISchoolConsumptionInfo> | Promise<ISchoolConsumptionInfo> {
-        return this.commonFunction.httpRequest<ISchoolConsumptionInfo>("group/GetSchoolConsumptionInfo");
+        return this.commonFunction.httpRequest<ISchoolConsumptionInfo>("Consumption/GetSchoolConsumptionInfo");
     }
     constructor(public commonFunction: CommonFunction) {
 

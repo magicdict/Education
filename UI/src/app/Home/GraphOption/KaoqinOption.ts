@@ -1,3 +1,4 @@
+/**旭日图 */
 export interface ISunburstOption {
     title: {
         text: string,
@@ -19,4 +20,45 @@ export interface ILeaf {
         color: string
     },
     children?: ILeaf[]
+}
+
+/**堆叠柱状图 */
+export interface IStackBarOption {
+    title: {
+        text: string,
+        left?: number
+    },
+    legend: {
+        data: string[]
+    },
+    label: {
+        formatter?: string
+    },
+    xAxis: {
+        type: string,
+        data: string[]
+    },
+    yAxis: {
+        type: string
+    },
+    dataZoom: {
+        show: boolean,
+        realtime: boolean,
+        start: number,
+        end: number
+    },
+    series: IStack[]
+
+}
+
+export interface IStack {
+    label: {
+        normal: {
+            show: boolean
+        }
+    },
+    name: string,
+    stack: string,
+    data: { name: string, value: number }[],
+    type: string
 }

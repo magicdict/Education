@@ -163,7 +163,7 @@ public static class Dataset
         sr.Close();
         Console.WriteLine("读取学生消费件数：" + ConsumptionList.Count);
         //全体消费信息预先统计
-        Education.Controllers.GroupController.PrepareSchoolConsumptionInfo();
+        Education.Controllers.ConsumptionController.PrepareSchoolConsumptionInfo();
         Console.WriteLine(timer.Elapsed.ToString());
         //DUMP CHENGJI
         /* var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "5_chengji_dump.csv");
