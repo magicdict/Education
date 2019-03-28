@@ -23,7 +23,7 @@ export class ClassExamListComponent {
             this.FunRowSelect(event);
         } else {
             //默认方法
-            this.router.navigate(["exam/detail", event.data.id]);
+            this.router.navigate(["exam/detail", event.data.record.idForClass]);
         }
     }
 }

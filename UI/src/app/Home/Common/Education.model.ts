@@ -110,11 +110,7 @@ export interface ITeacherInfo {
 }
 
 export interface IClassExam {
-  id: string;
-  className: string,
-  examName: string,
-  subName: string,
-  term: string,
+  record:IScore,
   allCnt: number,
   avilibleCnt: number,
   maxScore: number,
@@ -149,12 +145,14 @@ export interface IConsumption {
 
 export interface IScore {
   id: string;
+  idForClass:string;
   number: string;
   numberName: string;
   subId: string;
   subName: string;
   term: string;
   type: string;
+  typeName:string;
   sdate: string;
   sdateYear: string;
   sdateMonth: string;

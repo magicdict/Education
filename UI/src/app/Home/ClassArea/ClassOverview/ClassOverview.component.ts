@@ -23,13 +23,12 @@ export class ClassOverviewComponent implements OnInit {
   NativePlaceRegionOptions = regionMapOptions;
 
   ngOnInit(): void {
-    this.QueryResult = this.service.CurrentClassInfo;
-    this.StudentCnt = this.QueryResult.length;
-    this.ClassName = this.QueryResult[0].className;
-    this.ClassId = this.QueryResult[0].classId;
-    
     this.route.data
       .subscribe((data: { classinfo: IClassInfo }) => {
+        this.QueryResult = this.service.CurrentClassInfo;
+        this.StudentCnt = this.QueryResult.length;
+        this.ClassName = this.QueryResult[0].className;
+        this.ClassId = this.QueryResult[0].classId;
         this.mSexRate.title.text = "男女比例";
         this.mSexRate.series[0].data[0].value = data.classinfo.maleCnt;
         this.mSexRate.series[0].data[1].value = data.classinfo.femaleCnt;

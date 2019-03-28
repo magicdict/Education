@@ -1,21 +1,25 @@
 <p-table [value]="this.Exams" selectionMode="single" [scrollable]="true" [scrollHeight]="scrollHeight"
-  (onRowSelect)="onRowSelect($event)"> 
+  (onRowSelect)="onRowSelect($event)">
   <ng-template pTemplate="header">
     <tr>
-      <th style="width: 100px" [pSortableColumn]="'className'">班级名
-        <p-sortIcon [field]="'className'">
+      <th style="width: 100px" [pSortableColumn]="'record.className'">班级名
+        <p-sortIcon [field]="'record.className'">
         </p-sortIcon>
       </th>
-      <th style="width: 100px" [pSortableColumn]="'examName'">考试名称
-        <p-sortIcon [field]="'examName'">
+      <th style="width: 100px" [pSortableColumn]="'record.numberName'">考试名称
+        <p-sortIcon [field]="'record.numberName'">
         </p-sortIcon>
       </th>
-      <th style="width: 100px" [pSortableColumn]="'term'">学期
-        <p-sortIcon [field]="'term'">
+      <th style="width: 50px" [pSortableColumn]="'record.typeName'">考试类型
+        <p-sortIcon [field]="'record.typeName'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px" [pSortableColumn]="'subName'">学科
-        <p-sortIcon [field]="'subName'">
+      <th style="width: 100px" [pSortableColumn]="'record.term'">学期
+        <p-sortIcon [field]="'record.term'">
+        </p-sortIcon>
+      </th>
+      <th style="width: 50px" [pSortableColumn]="'record.subName'">学科
+        <p-sortIcon [field]="'record.subName'">
         </p-sortIcon>
       </th>
       <th style="width: 60px">考试人数</th>
@@ -43,10 +47,11 @@
   </ng-template>
   <ng-template pTemplate="body" let-itemData>
     <tr [pSelectableRow]="itemData">
-      <td style="width: 100px">{{itemData.className}}</td>
-      <td style="width: 100px">{{itemData.examName}}</td>
-      <td style="width: 100px">{{itemData.term}}</td>
-      <td style="width: 50px">{{itemData.subName}}</td>
+      <td style="width: 100px">{{itemData.record.className}}</td>
+      <td style="width: 100px">{{itemData.record.numberName}}</td>
+      <td style="width: 50px">{{itemData.record.typeName}}</td>
+      <td style="width: 100px">{{itemData.record.term}}</td>
+      <td style="width: 50px">{{itemData.record.subName}}</td>
       <td style="width: 60px">{{itemData.avilibleCnt}}/{{itemData.allCnt}}</td>
       <td style="width: 50px">{{itemData.maxScore}}</td>
       <td style="width: 50px">{{itemData.minScore}}</td>

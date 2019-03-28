@@ -13,8 +13,4 @@ export class ExamClassDiffComponent implements OnInit {
     constructor(
         public service: HomeService
     ) { }
-    
-    onRowSelect(event: { data: IClassExam; }) {
-        console.log(event.data.className);
-    }
 }

@@ -39,7 +39,8 @@ public static class Dataset
     {
         var fullpath = hostingEnvironment.ContentRootPath + System.IO.Path.DirectorySeparatorChar + datasetPath;
         Console.WriteLine("数据库路径:" + fullpath);
-
+        var timer = new System.Diagnostics.Stopwatch();
+        timer.Start();
 
         //导入教师信息 5_chengji.csv
         var fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "1_teacher.csv";
@@ -53,7 +54,7 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine("读取教师信息件数：" + TeacherList.Count);
-
+        Console.WriteLine(timer.Elapsed.ToString());
 
         //导入天气基本信息 宁波历史天气数据.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "宁波历史天气数据.csv";
@@ -67,7 +68,7 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine("读取天气基本信息件数：" + WeatherList.Count);
-
+        Console.WriteLine(timer.Elapsed.ToString());
 
         //导入学生基本信息 2_student_info.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "2_student_info.csv";
@@ -82,7 +83,7 @@ public static class Dataset
         sr.Close();
         StudentList.Sort((x, y) => x.ID.CompareTo(y.ID));
         Console.WriteLine("读取学生基本信息件数：" + StudentList.Count);
-
+        Console.WriteLine(timer.Elapsed.ToString());
         //导入考勤类型信息 4_kaoqintype.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "4_kaoqintype.csv";
         sr = new StreamReader(fullfilepath);
@@ -96,7 +97,7 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine("读取考勤类型信息件数：" + KaoqinTypeDic.Count);
-
+        Console.WriteLine(timer.Elapsed.ToString());
 
         //导入考勤信息 3_kaoqin.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "3_kaoqin.csv";
@@ -110,7 +111,7 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine("读取考勤信息件数：" + KaoqinList.Count);
-
+        Console.WriteLine(timer.Elapsed.ToString());
         //导入学生成绩信息 5_chengji.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "5_chengji.csv";
         sr = new StreamReader(fullfilepath);
@@ -123,7 +124,7 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine("读取学生成绩信息件数：" + ChengjiList.Count);
-
+        Console.WriteLine(timer.Elapsed.ToString());
         foreach (var student in StudentList)
         {
             //选修课
@@ -133,6 +134,7 @@ public static class Dataset
                 student.OptionCourse.Sort((x, y) => { return Chengji.OptionalSelectSort(x, y); });    //排序
             }
         }
+        LastestTermChangji = Dataset.ChengjiList.Distinct(new Chengji()).Where(x => x.Term == "2018-2019-1").ToList();
 
 
         //导入考试类型信息 6_exam_type.csv
@@ -147,7 +149,7 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine("读取考试类型信息件数：" + ExamTypeDic.Count);
-
+        Console.WriteLine(timer.Elapsed.ToString());
         //导入学生消费信息 7_consumption
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "7_consumption.csv";
         sr = new StreamReader(fullfilepath);
@@ -160,9 +162,7 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine("读取学生消费件数：" + ConsumptionList.Count);
-
-        LastestTermChangji = Dataset.ChengjiList.Distinct(new Chengji()).Where(x => x.Term == "2018-2019-1").ToList();
-
+        Console.WriteLine(timer.Elapsed.ToString());
         //DUMP CHENGJI
         /* var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "5_chengji_dump.csv");
         sw.WriteLine("Id,IdForClass,NumberName,Grade,ClassID,ClassName,Term,StudentID,subName");
@@ -172,6 +172,8 @@ public static class Dataset
                          item.Term + "," + item.StudentID + "," + item.SubName);
         }
         sw.Close(); */
+        //Console.WriteLine(timer.Elapsed.ToString());
+        timer.Stop();
     }
 
     /// <summary>

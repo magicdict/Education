@@ -11,44 +11,11 @@ public class ClassExamInfo
     /// <value></value>
     internal List<Chengji> ChengjiList { get; set; }
 
-    public string ExamName
+    public Chengji Record
     {
         get
         {
-            return ChengjiList.First().NumberName;
-        }
-    }
-
-    public string Id
-    {
-        get
-        {
-            return ChengjiList.First().IdForClass;
-        }
-    }
-
-    public string ClassName
-    {
-        get
-        {
-            return ChengjiList.First().ClassName;
-        }
-    }
-
-    public string SubName
-    {
-        get
-        {
-            return ChengjiList.First().SubName;
-        }
-    }
-
-
-    public string Term
-    {
-        get
-        {
-            return ChengjiList.First().Term;
+            return ChengjiList.First();
         }
     }
 

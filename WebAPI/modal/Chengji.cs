@@ -53,6 +53,17 @@ public class Chengji : IEqualityComparer<Chengji>
     /// <value></value>
     public string Type { get; set; }
     /// <summary>
+    /// 考试类型名称
+    /// </summary>
+    /// <value></value>
+    public string TypeName
+    {
+        get
+        {
+            return Dataset.ExamTypeDic[Type];
+        }
+    }
+    /// <summary>
     /// 考试开始时间
     /// </summary>
     /// <value></value>
