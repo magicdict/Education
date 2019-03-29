@@ -25,6 +25,13 @@ namespace Education.Controllers
         [HttpGet("GetKaoqinOverview")]
         public ActionResult<KaoqinOverview> GetKaoqinOverview()
         {
+            return KaoqinOverviewInfo;
+        }
+
+        static KaoqinOverview KaoqinOverviewInfo;
+
+        public static void PrepareKaoqinOverview()
+        {
             var overviewInfo = new KaoqinOverview();
             var OverviewDict = new Dictionary<string, NameValueSet>();
             var MonthDict = new Dictionary<string, List<NameValueSet>>();
@@ -79,7 +86,8 @@ namespace Education.Controllers
             }
             overviewInfo.OverviewDict = OverviewDict;
             overviewInfo.MonthDict = MonthDict;
-            return overviewInfo;
+            KaoqinOverviewInfo = overviewInfo;
         }
+
     }
 }

@@ -2,97 +2,132 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <div *ngIf="IsMapReady" echarts [options]="this.NativePlaceRegionOpt"
-        style="width:755px;height:740px;border-right: 5px dashed whitesmoke;"></div>
+
+      <div class="container">
+        <div class="row">
+          <div *ngIf="IsMapReady" echarts [options]="this.NativePlaceRegionOpt" style="width:755px;height:420px"></div>
+        </div>
+      </div>
+      <br />
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div echarts [options]="SexRateSunburstOption" style="width:300px;height:300px"></div>
+          </div>
+          <div class="col">
+            <div echarts [options]="SexRateSunburstOption" style="width:300px;height:300px"></div>
+          </div>
+        </div>
+      </div>
+
     </div>
     <div class="col-4">
-      <div echarts [options]="SexRateSunburstOption"
-        style="width:370px;height:370px;padding-bottom: 5px; border-bottom: 5px dashed whitesmoke;"></div>
-      <div style="margin: 5px 0px 5px 0px">
-        <button type="button" class="btn btn-info">
-          学生数 <span class="badge badge-light">{{this.schoolinfo.studentCnt}}</span>
-          <span class="sr-only">学生数</span>
-        </button>
-        &nbsp;
-        <button type="button" class="btn btn-info">
-          学生数(IB) <span class="badge badge-light">{{this.schoolinfo.studentIBCnt}}</span>
-          <span class="sr-only">学生数</span>
-        </button>
-        &nbsp;
-        <button type="button" class="btn btn-info">
-          教师数 <span class="badge badge-light">{{this.schoolinfo.teacherCnt}}</span>
-          <span class="sr-only">教师数</span>
-        </button>
-      </div>
-      <div style="margin: 5px 0px 5px 0px">
-        <button type="button" class="btn btn-primary">
-          汉族 <span class="badge badge-light">1750</span>
-          <span class="sr-only">汉族</span>
-        </button>
-        &nbsp;
-        <button type="button" class="btn btn-primary">
-          满族 <span class="badge badge-light">4</span>
-          <span class="sr-only">满族</span>
-        </button>
-        &nbsp;
-        <button type="button" class="btn btn-primary">
-          苗族 <span class="badge badge-light">3</span>
-          <span class="sr-only">苗族</span>
-        </button>
-      </div>
-      <div style="margin: 5px 0px 5px 0px">
-        <button type="button" class="btn btn-primary">
-          土家族 <span class="badge badge-light">3</span>
-          <span class="sr-only">土家族</span>
-        </button>
-        &nbsp;
-        <button type="button" class="btn btn-primary">
-          回族 <span class="badge badge-light">2</span>
-          <span class="sr-only">回族</span>
-        </button>
-        &nbsp;
-        <button type="button" class="btn btn-primary">
-          朝鲜族 <span class="badge badge-light">2</span>
-          <span class="sr-only">朝鲜族</span>
-        </button>
-        &nbsp;
-        <button type="button" class="btn btn-primary">
-          畲族 <span class="badge badge-light">1</span>
-          <span class="sr-only">畲族</span>
-        </button>
-      </div>
+      <p-card header="白杨校区" subheader="宁波市白杨街178号" [style]="{width: '360px',height:'400px'}"
+        styleClass="ui-card-shadow">
+        <p-header [style]="{width: '360px',height:'150px'}">
+          <img src="Card" src="assets/BaiYangCampus.jpg" style="height: 150px">
+        </p-header>
+        <div style="width:360px;height:120px;">
+          <div style="margin: 5px 0px 5px 0px">
+            <button type="button" class="btn btn-info">
+              学生数 <span class="badge badge-light">{{this.schoolinfo.studentCnt}}</span>
+              <span class="sr-only">学生数</span>
+            </button>
+            &nbsp;
+            <button type="button" class="btn btn-info">
+              学生数(IB) <span class="badge badge-light">{{this.schoolinfo.studentIBCnt}}</span>
+              <span class="sr-only">学生数</span>
+            </button>
+            &nbsp;
+            <button type="button" class="btn btn-info">
+              教师数 <span class="badge badge-light">{{this.schoolinfo.teacherCnt}}</span>
+              <span class="sr-only">教师数</span>
+            </button>
+          </div>
+          <div style="margin: 5px 0px 5px 0px">
+            <button type="button" class="btn btn-primary">
+              汉族 <span class="badge badge-light">1750</span>
+              <span class="sr-only">汉族</span>
+            </button>
+            &nbsp;
+            <button type="button" class="btn btn-primary">
+              满族 <span class="badge badge-light">4</span>
+              <span class="sr-only">满族</span>
+            </button>
+            &nbsp;
+            <button type="button" class="btn btn-primary">
+              苗族 <span class="badge badge-light">3</span>
+              <span class="sr-only">苗族</span>
+            </button>
+          </div>
+        </div>
+        <p-footer style="width:360px;height:50px;">
+          <button pButton type="button" label="详细信息" icon="pi pi-check" style="margin-right: .25em"></button>
+        </p-footer>
+      </p-card>
+      <br />
+      <p-card header="东部校区" subheader="宁波市百丈东路1907号" [style]="{width: '360px',height:'400px'}"
+        styleClass="ui-card-shadow">
+        <p-header [style]="{width: '360px',height:'150px'}">
+          <img src="Card" src="assets/EastCampus.jpg" style="height: 150px">
+        </p-header>
+        <div style="width:360px;height:120px;">
+          <div style="margin: 5px 0px 5px 0px">
+            <button type="button" class="btn btn-primary">
+              土家族 <span class="badge badge-light">3</span>
+              <span class="sr-only">土家族</span>
+            </button>
+            &nbsp;
+            <button type="button" class="btn btn-primary">
+              回族 <span class="badge badge-light">2</span>
+              <span class="sr-only">回族</span>
+            </button>
+            &nbsp;
+            <button type="button" class="btn btn-primary">
+              朝鲜族 <span class="badge badge-light">2</span>
+              <span class="sr-only">朝鲜族</span>
+            </button>
+            &nbsp;
+            <button type="button" class="btn btn-primary">
+              畲族 <span class="badge badge-light">1</span>
+              <span class="sr-only">畲族</span>
+            </button>
+          </div>
 
-      <div style="margin: 5px 0px 5px 0px">
-        <button type="button" class="btn btn-danger">
-          共青团员 <span class="badge badge-light">1662</span>
-          <span class="sr-only">共青团员</span>
-        </button>
-        &nbsp;
-        <button type="button" class="btn btn-danger">
-          少先队员 <span class="badge badge-light">23</span>
-          <span class="sr-only">少先队员</span>
-        </button>
-        &nbsp;
-        <button type="button" class="btn btn-danger">
-          一般 <span class="badge badge-light">78</span>
-          <span class="sr-only">一般</span>
-        </button>
-      </div>
+          <div style="margin: 5px 0px 5px 0px">
+            <button type="button" class="btn btn-danger">
+              共青团员 <span class="badge badge-light">1662</span>
+              <span class="sr-only">共青团员</span>
+            </button>
+            &nbsp;
+            <button type="button" class="btn btn-danger">
+              少先队员 <span class="badge badge-light">23</span>
+              <span class="sr-only">少先队员</span>
+            </button>
+            &nbsp;
+            <button type="button" class="btn btn-danger">
+              一般 <span class="badge badge-light">78</span>
+              <span class="sr-only">一般</span>
+            </button>
+          </div>
 
-      <div style="margin: 5px 0px 5px 0px">
-        <button type="button" class="btn btn-danger">
-          共产党党员 <span class="badge badge-light">1</span>
-          <span class="sr-only">共产党党员</span>
-        </button>
-        &nbsp;
-        <button type="button" class="btn btn-danger">
-          民主党派 <span class="badge badge-light">1</span>
-          <span class="sr-only">民主党派</span>
-        </button>
-        &nbsp;
-
-      </div>
-
+          <div style="margin: 5px 0px 5px 0px">
+            <button type="button" class="btn btn-danger">
+              共产党党员 <span class="badge badge-light">1</span>
+              <span class="sr-only">共产党党员</span>
+            </button>
+            &nbsp;
+            <button type="button" class="btn btn-danger">
+              民主党派 <span class="badge badge-light">1</span>
+              <span class="sr-only">民主党派</span>
+            </button>
+            &nbsp;
+          </div>
+        </div>
+        <p-footer style="width:360px;height:50px;">
+          <button pButton type="button" label="详细信息" icon="pi pi-check" style="margin-right: .25em"></button>
+        </p-footer>
+      </p-card>
     </div>
   </div>
 </div>

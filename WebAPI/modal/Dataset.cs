@@ -111,6 +111,7 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine("读取考勤信息件数：" + KaoqinList.Count);
+        Education.Controllers.KaoqinController.PrepareKaoqinOverview();
         Console.WriteLine(timer.Elapsed.ToString());
         //导入学生成绩信息 5_chengji.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "5_chengji.csv";
