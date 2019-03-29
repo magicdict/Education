@@ -188,3 +188,61 @@ export const SelectCourseSankeyOption = {
     links: []
   }
 }
+
+
+export const ScoreFunnelOption =
+{
+  title: {
+      text: '',
+      //subtext: ''
+  },
+  tooltip: {
+      trigger: 'item',
+      formatter: "{b} : {c}"
+  },
+  legend: {
+      data: []
+  },
+  calculable: true,
+  series: [
+      {
+          name:'漏斗图',
+          type:'funnel',
+          left: '10%',
+          top: 60,
+          //x2: 80,
+          bottom: 60,
+          width: '80%',
+          // height: {totalHeight} - y - y2,
+          min: 0,
+          max: 50,
+          minSize: '0%',
+          maxSize: '100%',
+          sort: 'none',
+          gap: 2,
+          label: {
+              show: true,
+              position: 'inside'
+          },
+          labelLine: {
+              length: 10,
+              lineStyle: {
+                  width: 1,
+                  type: 'solid'
+              }
+          },
+          itemStyle: {
+              borderColor: '#fff',
+              borderWidth: 1
+          },
+          emphasis: {
+              label: {
+                  fontSize: 20
+              }
+          },
+          data: [
+             
+          ]
+      }
+  ]
+};

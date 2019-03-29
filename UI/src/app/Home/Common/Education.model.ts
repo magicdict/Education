@@ -112,6 +112,7 @@ export interface ITeacherInfo {
 export interface IClassExam {
   record: IScore,
   allCnt: number,
+  funnelDic: { [key: string]: number },
   avilibleCnt: number,
   maxScore: number,
   minScore: number,
@@ -184,7 +185,7 @@ export interface IKaoqin {
 }
 
 export interface IKaoqinOverview {
-  monthDict: { [key: string]: { name: string, value: number } []};
+  monthDict: { [key: string]: { name: string, value: number }[] };
   overviewDict: { [key: string]: { name: string, value: number } };
 }
 
