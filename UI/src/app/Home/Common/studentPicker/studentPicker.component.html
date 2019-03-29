@@ -1,0 +1,70 @@
+<p-dialog header="学生查询器" [(visible)]="this.display" modal="modal" [responsive]="true">
+  <div style="height: 600px;width:600px">
+    <div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-2">
+            学号：
+          </div>
+          <div class="col-4">
+            <input type="text" [(ngModel)]="this.StudentId" placeholder="输入一个学号" style="width: 100px;" />&nbsp;
+            <button class="btn btn-primary" (click)="QueryByStudentId()"><i class="fa fa-search"></i>检索</button>
+          </div>
+          <div class="col-2">
+            宿舍：
+          </div>
+          <div class="col-4">
+            <input type="text" [(ngModel)]="this.RoomNo" placeholder="输入一个宿舍号" style="width: 100px;" />&nbsp;
+            <button class="btn btn-primary" (click)="QueryByLiveRoomNo()"><i class="fa fa-search"></i>检索</button>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-2">
+            民族：
+          </div>
+          <div class="col-4">
+            <p-dropdown [options]="nationlist" [(ngModel)]="this.NationName" [style]="{'width':'150px'}"
+              placeholder="选择一个民族" (onChange)="QueryByNation()"></p-dropdown>
+          </div>
+          <div class="col-2">
+            政治面貌：
+          </div>
+          <div class="col-4">
+            <p-dropdown [options]="policylist" [(ngModel)]="this.PolicyName" [style]="{'width':'150px'}"
+              placeholder="选择一个政治面貌：" (onChange)="QueryByPolicy()"></p-dropdown>
+          </div>
+        </div>
+      </div>
+      <br />
+      <p-table [value]="this.Students" selectionMode="single" [(selection)]="this.selectStudent" [scrollable]="true"
+        scrollHeight="400px" (onRowSelect)="onRowSelect($event)">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 50px">学号</th>
+            <th style="width: 100px">姓名</th>
+            <th style="width: 100px">班级</th>
+            <th style="width: 100px">性别</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-itemData>
+          <tr [pSelectableRow]="itemData">
+            <td style="width: 50px">{{itemData.id}}</td>
+            <td style="width: 100px">{{itemData.name}}</td>
+            <td style="width: 100px">{{itemData.className}}</td>
+            <td style="width: 100px">{{itemData.sex}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <p-footer style="text-align:left">
+    <div class="alert alert-warning" role="alert">
+      这里仅列出2018-2019-1学期学生；<br>
+      共青团员人数较多,所以没有放入政治面貌列表框作为过滤条件。<br />
+      汉族人数较多,所以没有放入民族列表框作为过滤条件。
+    </div>
+  </p-footer>
+</p-dialog>
+<app-error-message-dialog></app-error-message-dialog>

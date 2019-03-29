@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { classopt, ITeacher } from '../Education.model';
+import { classopt, ITeacher, IStudent } from '../Education.model';
 import { HomeService } from '../Home.service';
 import { ErrorMessageDialogComponent } from '../error-message-dialog/error-message-dialog.component';
 import { TeacherPickerComponent } from '../teacherPicker/teacherPicker.component'
 import { ConfirmationService } from 'primeng/api';
-
+import { StudentPickerComponent } from '../studentPicker/studentPicker.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-nav',
@@ -14,6 +15,7 @@ import { ConfirmationService } from 'primeng/api';
 export class NavigationComponent implements OnInit {
   constructor(
     private router: Router,
+    private _location: Location,
     private confirmationService: ConfirmationService,
     public service: HomeService
   ) {
@@ -58,6 +60,8 @@ export class NavigationComponent implements OnInit {
   private errMsgDialog: ErrorMessageDialogComponent;
   @ViewChild(TeacherPickerComponent)
   private teacherpicker: TeacherPickerComponent;
+  @ViewChild(StudentPickerComponent)
+  private studentpicker: StudentPickerComponent;
   public StudentId: string;
   public ClassId: string;
   public classlist = classopt;
@@ -72,6 +76,17 @@ export class NavigationComponent implements OnInit {
         }
       }
     )
+  }
+
+  StudentQuery() {
+    if (this.pickhandler != null) {
+      // 需要把上次的订阅取消掉，不然的话，多个订阅会同时发生效果！
+      this.pickhandler.unsubscribe();
+    }
+    this.pickhandler = this.studentpicker.pick.subscribe((student: IStudent) => {
+      this.router.navigate(['student/overview', student.id]);
+    });
+    this.studentpicker.show();
   }
 
   QueryByClassId() {
@@ -94,6 +109,13 @@ export class NavigationComponent implements OnInit {
       this.router.navigate(['teacher/overview', teacher.id]);
     });
     this.teacherpicker.show();
+  }
+
+  Return() {
+    this._location.back();
+  }
+  Home() {
+    this.router.navigate(['']);
   }
 
   JumpTo(url: string) {

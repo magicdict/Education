@@ -1,3 +1,19 @@
+export const nationopt = [
+  { label: '满族', value: '满族' },
+  { label: '苗族', value: '苗族' },
+  { label: '土家族', value: '土家族' },
+  { label: '回族', value: '回族' },
+  { label: '朝鲜族', value: '朝鲜族' },
+  { label: '畲族', value: '畲族' },
+]
+
+export const policyopt = [
+  { label: '少先队员', value: '少先队员' },
+  { label: '一般', value: '一般' },
+  { label: '共产党党员', value: '共产党党员' },
+  { label: '民主党派', value: '民主党派' },
+]
+
 export const classopt = [
   {
     label: '高一',

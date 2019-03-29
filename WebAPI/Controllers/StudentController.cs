@@ -27,6 +27,30 @@ namespace Education.Controllers
             return baseInfo.First();
         }
 
+        [HttpGet("QueryByLiveRoomNo")]
+        public ActionResult<List<Student>> QueryByLiveRoomNo(string Id)
+        {
+            var baseInfo = Dataset.StudentList.Where(x => x.LiveRoomNo.Equals(Id)).ToList();
+            if (baseInfo.Count() == 0) return null;
+            return baseInfo;
+        }
+
+        [HttpGet("QueryByNation")]
+        public ActionResult<List<Student>> QueryByNation(string Nation)
+        {
+            var baseInfo = Dataset.StudentList.Where(x => x.Nation.Equals(Nation)).ToList();
+            if (baseInfo.Count() == 0) return null;
+            return baseInfo;
+        }
+
+        [HttpGet("QueryByPolicy")]
+        public ActionResult<List<Student>> QueryByPolicy(string Policy)
+        {
+            var baseInfo = Dataset.StudentList.Where(x => x.Policy.Equals(Policy)).ToList();
+            if (baseInfo.Count() == 0) return null;
+            return baseInfo;
+        }
+
         /// <summary>
         /// 获得学生详细信息
         /// /// </summary>

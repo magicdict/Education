@@ -47,6 +47,7 @@ import { NavigationComponent } from './Common/navigation/Navigation.component';
 import { StudentHeaderComponent } from './Common/studentHeader/StudentHeader.component';
 import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.component';
 import { ClassExamListComponent } from './Common/ClassExamList/ClassExamList.component';
+import { StudentPickerComponent } from './Common/studentPicker/studentPicker.component';
  
 
 @NgModule({
@@ -72,6 +73,7 @@ import { ClassExamListComponent } from './Common/ClassExamList/ClassExamList.com
     ErrorMessageDialogComponent,
     StudentHeaderComponent,
     ClassExamListComponent,
+    StudentPickerComponent,
     //考试相关
     SingleExamClassComponent,
     ExamClassDiffComponent,

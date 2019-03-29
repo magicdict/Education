@@ -190,7 +190,7 @@ export const SexRateSunburstOption = {
             name: '高二',
             value: 8,
             itemStyle:{
-              color:'#2f4554'
+              color:'#bda29a'
             },
             children: [
               {

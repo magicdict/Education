@@ -85,7 +85,7 @@ public class Student
         ID = Items[0];
         Name = Items[1];
         Sex = Items[2];
-        Nation = Items[3];
+        Nation = Items[3].Trim();
         BornDate = Items[4];
         ClassName = Items[5];
         NativePlace = Items[6];
