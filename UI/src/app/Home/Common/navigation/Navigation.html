@@ -1,18 +1,19 @@
-<div style="background: white;margin: 5px 0px 5px 0px">
-  <b>班级：</b>
+<div style="background: white;margin: 5px 0px 5px 0px;height: 50px;">
+  &nbsp;&nbsp;&nbsp;<b>班级：</b>
   <p-dropdown [options]="classlist" [(ngModel)]="this.ClassId" [style]="{'width':'150px'}" placeholder="选择一个班级"
-    [group]="true" (onChange)="QueryByClassId()" >
+    [group]="true" (onChange)="QueryByClassId()">
     <ng-template let-group pTemplate="group">
       <span style="margin-left:.25em"><b>{{group.label}}</b></span>
     </ng-template>
   </p-dropdown>
   &nbsp;&nbsp;&nbsp;
-  <button class="btn btn-primary" (click)="StudentQuery()"><i class="fa fa-search"></i>学生检索</button>
+  <button style="margin-top: 10px" class="btn btn-primary" (click)="StudentQuery()"><i
+      class="fa fa-search"></i>学生检索</button>
   &nbsp;&nbsp;&nbsp;
-  <button class="btn btn-primary" (click)="TeacherQuery()"><i class="fa fa-search"></i>教师检索器</button>
-  &nbsp;&nbsp;&nbsp;
-  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="float:right">
+  <button style="margin-top: 10px" class="btn btn-primary" (click)="TeacherQuery()"><i
+      class="fa fa-search"></i>教师检索器</button>
 
+  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="float:right">
     <div class="btn-group mr-2" role="group">
       <button type="button" class="btn btn-info" (click)="JumpTo('home/course')">七选三</button>
       <button type="button" class="btn btn-info" (click)="JumpTo('home/exam')">考试</button>
@@ -20,12 +21,10 @@
         消费</button>
       <button type="button" class="btn btn-info" (click)="JumpTo('home/kaoqin')">考勤</button>
     </div>
-
     <div class="btn-group mr-2" role="group">
       <button type="button" class="btn btn-warning" (click)="Home()"><i class="fa fas fa-home"></i> 首页</button>
       <button type="button" class="btn btn-warning" (click)="Return()"><i class="fa fa-arrow-left"></i> 返回</button>
     </div>
-
   </div>
 </div>
 <app-teacherPicker></app-teacherPicker>

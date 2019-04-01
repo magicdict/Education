@@ -44,9 +44,11 @@ export class SchoolOverViewComponent implements OnInit {
     this.route.data
       .subscribe((data: { schoolInfo: ISchoolInfo }) => {
         this.schoolinfo = data.schoolInfo;
+        this.NativePlaceRegionOpt.title.text = "";
         this.NativePlaceRegionOpt.series[0].data = data.schoolInfo.total.geoOptions;
 
         //旭日图
+        this.SexRateSunburstOption.title.text = "";
         this.SexRateSunburstOption.series.data[0].value = data.schoolInfo.total.totalSexRate.maleCnt + data.schoolInfo.total.totalSexRate.femaleCnt;
 
         this.SexRateSunburstOption.series.data[0].children[0].value = data.schoolInfo.total.grade1SexRate.maleCnt + data.schoolInfo.total.grade1SexRate.femaleCnt;
