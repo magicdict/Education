@@ -33,9 +33,27 @@ public class Student
     /// <value></value>
     public string ClassName { get; set; }
     /// <summary>
-    /// 家庭住址（省市或省）
+    /// /// 家庭住址（省市或省）
     /// </summary>
     /// <value></value>
+
+    public string Campus
+    {
+        get
+        {
+            if (ClassName.Contains("东"))
+            {
+                //新校区
+                return "东";
+            }
+            else
+            {
+                //默认白杨校区
+                return "白";
+            }
+        }
+    }
+
     public string NativePlace { get; set; }
     /// <summary>
     /// 家庭类型

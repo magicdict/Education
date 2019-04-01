@@ -18,7 +18,7 @@ import { HomeRoutingModule } from './Home-routing.module';
 /** 服务 */
 import { ConfirmationService } from 'primeng/api';
 import {
-  IGroupInfoResolver, ICourseResolver, IClassInfoResolver, IStudentInfoResolver,
+  ISchoolInfoResolver, ICourseResolver, IClassInfoResolver, IStudentInfoResolver,
   ISchoolConsumptionResolver,
   ITeacherInfoResolver,
   IExamGradeListResolver,
@@ -95,7 +95,7 @@ import { StudentPickerComponent } from './Common/studentPicker/studentPicker.com
     HomeRoutingModule
   ],
   providers: [
-    IGroupInfoResolver,
+    ISchoolInfoResolver,
     ICourseResolver,
     IClassInfoResolver,
     IStudentInfoResolver,

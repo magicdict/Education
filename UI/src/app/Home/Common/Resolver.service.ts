@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CommonFunction } from './common';
-import { IGroupInfo, ICourse, IClassInfo, IStudentInfo, ISchoolConsumptionInfo, ITeacherInfo, IExamList, IScore, IKaoqinOverview } from './Education.model';
+import { ISchoolInfo, ICourse, IClassInfo, IStudentInfo, ISchoolConsumptionInfo, ITeacherInfo, IExamList, IScore, IKaoqinOverview } from './Education.model';
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HomeService } from './Home.service'
@@ -59,9 +59,9 @@ export class ITeacherInfoResolver implements Resolve<ITeacherInfo> {
 }
 
 @Injectable()
-export class IGroupInfoResolver implements Resolve<IGroupInfo>{
-    resolve(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): IGroupInfo | Observable<IGroupInfo> | Promise<IGroupInfo> {
-        return this.commonFunction.httpRequest<IGroupInfo>("group/GetOverview");
+export class ISchoolInfoResolver implements Resolve<ISchoolInfo>{
+    resolve(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): ISchoolInfo | Observable<ISchoolInfo> | Promise<ISchoolInfo> {
+        return this.commonFunction.httpRequest<ISchoolInfo>("school/GetOverview");
     }
     constructor(public commonFunction: CommonFunction) {
 
@@ -72,7 +72,7 @@ export class IGroupInfoResolver implements Resolve<IGroupInfo>{
 export class IClassInfoResolver implements Resolve<IClassInfo>{
     resolve(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): IClassInfo | Observable<IClassInfo> | Promise<IClassInfo> {
         let id = route.paramMap.get("id");
-        return this.commonFunction.httpRequest<IClassInfo>("group/GetClassOverview?ClassId=" + id);
+        return this.commonFunction.httpRequest<IClassInfo>("class/GetClassOverview?ClassId=" + id);
     }
     constructor(public commonFunction: CommonFunction) {
 

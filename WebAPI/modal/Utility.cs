@@ -60,6 +60,31 @@ public static class Utility
         public int value { get; set; }
 
     }
+
+    public class SexRate
+    {
+        public int maleCnt;
+
+        public int femaleCnt;
+
+        public int malePercent
+        {
+            get
+            {
+                if (maleCnt + femaleCnt == 0) return 0;
+                return maleCnt * 100 / (maleCnt + femaleCnt);
+            }
+        }
+
+        public int femaleCntPercent
+        {
+            get
+            {
+                if (maleCnt + femaleCnt == 0) return 0;
+                return 100 - malePercent;
+            }
+        }
+    }
     public static string GetProvince(string Geo)
     {
         foreach (var province in Provinces)

@@ -205,19 +205,30 @@ export interface IKaoqinOverview {
   overviewDict: { [key: string]: { name: string, value: number } };
 }
 
-export interface IGroupInfo {
-  maleGrade1: number;
-  femaleGrade1: number;
-  maleGrade2: number;
-  femaleGrade2: number;
-  maleGrade3: number;
-  femaleGrade3: number;
-  maleTotal: number;
-  femaleTotal: number;
+export interface ISexRate {
+  maleCnt: number;
+  femaleCnt: number;
+  malePercent: number;
+  femaleCntPercent: number;
+}
+
+export interface ICampus {
+  grade1SexRate: ISexRate;
+  grade2SexRate: ISexRate;
+  grade3SexRate: ISexRate;
+  totalSexRate: ISexRate;
   geoOptions: { name: string, value: number }[];
   teacherCnt: number;
   studentCnt: number;
   studentIBCnt: number;
+  classCnt: number;
+  classIBCnt: number;
+}
+
+export interface ISchoolInfo {
+  baiYang: ICampus;
+  east: ICampus;
+  total: ICampus;
 }
 
 export interface IClassInfo {
