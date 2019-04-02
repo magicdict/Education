@@ -48,6 +48,12 @@ export class StudentPickerComponent {
   public nationlist = nationopt;
   public policylist = policyopt;
 
+  Campus = [
+    { label: '白杨', value: '白' },
+    { label: '东部', value: '东' }
+  ];
+  selectedCampus: string = '白';
+
   QueryByStudentId() {
     this.service.QueryByStudentId(this.StudentId).then(
       result => {
@@ -82,7 +88,7 @@ export class StudentPickerComponent {
     );
   }
   QueryByLiveRoomNo() {
-    this.service.QueryByLiveRoomNo(this.RoomNo).then(
+    this.service.QueryByLiveRoomNo(this.RoomNo,this.selectedCampus).then(
       result => {
         if (result === null) {
           this.errMsgDialog.show("没有找到符合条件的学生！");

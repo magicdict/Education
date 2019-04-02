@@ -3,28 +3,32 @@
     <div>
       <div class="container">
         <div class="row">
-          <div class="col-6">
+          <div class="col">
             学号：
-            <input type="text" [(ngModel)]="this.StudentId" placeholder="输入一个学号" style="width: 100px;" />&nbsp;
+            <input type="text" [(ngModel)]="this.StudentId" placeholder="输入一个学号" />&nbsp;
             <button class="btn btn-primary" (click)="QueryByStudentId()"><i class="fa fa-search"></i>检索</button>
           </div>
-          <div class="col-6">
+        </div>
+        <div class="row">
+          <div class="col">
             民族：
-            <p-dropdown [options]="nationlist" [(ngModel)]="this.NationName" [style]="{'width':'150px'}"
-              placeholder="选择一个民族" (onChange)="QueryByNation()"></p-dropdown>
+            <p-dropdown [options]="nationlist" [(ngModel)]="this.NationName" placeholder="选择一个民族"
+              (onChange)="QueryByNation()"></p-dropdown>
           </div>
         </div>
-        <br />
         <div class="row">
-          <div class="col-6">
+          <div class="col">
             宿舍：
-            <input type="text" [(ngModel)]="this.RoomNo" placeholder="输入一个宿舍号" style="width: 100px;" />&nbsp;
+            <input type="text" [(ngModel)]="this.RoomNo" placeholder="输入一个宿舍号" />&nbsp;
+            <p-selectButton [options]="Campus" [(ngModel)]="selectedCampus"></p-selectButton>&nbsp;
             <button class="btn btn-primary" (click)="QueryByLiveRoomNo()"><i class="fa fa-search"></i>检索</button>
           </div>
-          <div class="col-6">
+        </div>
+        <div class="row">
+          <div class="col">
             政治面貌：
-            <p-dropdown [options]="policylist" [(ngModel)]="this.PolicyName" [style]="{'width':'150px'}"
-              placeholder="选择一个政治面貌：" (onChange)="QueryByPolicy()"></p-dropdown>
+            <p-dropdown [options]="policylist" [(ngModel)]="this.PolicyName" placeholder="选择一个政治面貌"
+              (onChange)="QueryByPolicy()"></p-dropdown>
           </div>
         </div>
       </div>

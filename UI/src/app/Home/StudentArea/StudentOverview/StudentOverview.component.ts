@@ -64,6 +64,15 @@ export class StudentOverviewComponent implements OnInit {
         this.IsHeaderReady = true;
         this.CurrentStudent = data.studentinfo.baseInfo;
         this.Teachers = data.studentinfo.teachers;
+        this.ConsumptionMonth = [];
+        this.ConsumptionMonthMoney = [];
+
+        this.ScoreName = [];
+        this.ScoreAvg = [];
+        this.TScoreAvg =[];
+
+        this.KaoqinMonth = [];
+        this.KaoqinMonthCnt = [];
 
         from(data.studentinfo.consumptions).pipe(
           groupBy(x => x.dealTimeYear + "/" + x.dealTimeMonth),

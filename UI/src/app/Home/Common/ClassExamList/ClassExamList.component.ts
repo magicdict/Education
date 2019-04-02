@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IClassExam } from 'src/app/Home/Common/Education.model';
 import { Router } from '@angular/router';
 import { HomeService } from '../Home.service';
@@ -6,7 +6,10 @@ import { HomeService } from '../Home.service';
     selector: 'class-exam-list',
     templateUrl: 'ClassExamList.html',
 })
-export class ClassExamListComponent {
+export class ClassExamListComponent implements OnInit {
+    ngOnInit(): void {
+        console.log(this.Exams);
+    }
 
     @Input() Exams: IClassExam[];
 

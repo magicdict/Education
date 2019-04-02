@@ -28,9 +28,9 @@ namespace Education.Controllers
         }
 
         [HttpGet("QueryByLiveRoomNo")]
-        public ActionResult<List<Student>> QueryByLiveRoomNo(string Id)
+        public ActionResult<List<Student>> QueryByLiveRoomNo(string Id,string Campus)
         {
-            var baseInfo = Dataset.StudentList.Where(x => x.LiveRoomNo.Equals(Id)).ToList();
+            var baseInfo = Dataset.StudentList.Where(x => x.LiveRoomNo.Equals(Id) && x.Campus == Campus).ToList();
             if (baseInfo.Count() == 0) return null;
             return baseInfo;
         }

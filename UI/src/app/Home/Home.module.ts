@@ -8,6 +8,7 @@ import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { SelectButtonModule } from 'primeng/selectbutton';
 import { CardModule } from 'primeng/card';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
@@ -48,7 +49,7 @@ import { StudentHeaderComponent } from './Common/studentHeader/StudentHeader.com
 import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.component';
 import { ClassExamListComponent } from './Common/ClassExamList/ClassExamList.component';
 import { StudentPickerComponent } from './Common/studentPicker/studentPicker.component';
- 
+
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { StudentPickerComponent } from './Common/studentPicker/studentPicker.com
     DialogModule,
     CardModule,
     ButtonModule,
+    SelectButtonModule,
     BrowserAnimationsModule,
     DropdownModule,
     ConfirmDialogModule,

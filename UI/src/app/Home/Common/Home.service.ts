@@ -17,8 +17,8 @@ export class HomeService {
     public QueryByStudentId(StudentId: string): Promise<IStudent> {
         return this.commonFunction.httpRequest<any>('Student/QueryByStudentId?ID=' + StudentId);
     }
-    public QueryByLiveRoomNo(RoomNo: string): Promise<Array<IStudent>> {
-        return this.commonFunction.httpRequest<any>('Student/QueryByLiveRoomNo?ID=' + RoomNo);
+    public QueryByLiveRoomNo(RoomNo: string,Campus:string): Promise<Array<IStudent>> {
+        return this.commonFunction.httpRequest<any>('Student/QueryByLiveRoomNo?ID=' + RoomNo + "&Campus=" + Campus);
     }
     public QueryByNation(Nation: string): Promise<Array<IStudent>> {
         return this.commonFunction.httpRequest<any>('Student/QueryByNation?Nation=' + Nation);
