@@ -4,15 +4,22 @@
         <table>
             <tr *ngFor="let exam of grade.value">
                 <td>
-                    <div>
-                        <h3><span class="badge badge-info">{{exam.numberName}}</span></h3>
+                    <div class="card card-stats">
+                        <div class="card-header card-header-warning card-header-icon">
+                            {{exam.numberName}}
+                        </div>
+                        <div class="card-body">
+                            <div class="stats">
+                                <ul class="heroes"
+                                    style="cursor: pointer; width: auto;height: auto;padding: 0px;margin: 0px;">
+                                    <li *ngFor="let item of exam.subNameList" style="width: 50px;float:left;">
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="JumpToExam(exam.numberName,item,grade.name)">{{item}}</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="heroes" style="cursor: pointer; width: auto;height: auto;">
-                        <li *ngFor="let item of exam.subNameList" style="width: 50px;float:left;">
-                            <button type="button" class="btn btn-primary"
-                                (click)="JumpToExam(exam.numberName,item,grade.name)">{{item}}</button>
-                        </li>
-                    </ul>
                 </td>
             </tr>
         </table>

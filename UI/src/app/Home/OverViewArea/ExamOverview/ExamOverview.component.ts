@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IExamList, IClassExam } from 'src/app/Home/Common/Education.model';
 import { CommonFunction } from 'src/app/Home/Common/common';
@@ -7,7 +7,7 @@ import { HomeService } from '../../Common/Home.service';
 @Component({
     templateUrl: 'ExamOverView.html',
 })
-export class ExamOverViewComponent implements OnInit {
+export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
 
     GradeList: {
@@ -31,8 +31,15 @@ export class ExamOverViewComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private commonFunction: CommonFunction,
-        public service: HomeService
+        public service: HomeService,
+        private cd: ChangeDetectorRef
     ) { }
+
+    ngAfterViewInit() {
+        //ExpressionChangedAfterItHasBeenCheckedError的对应
+        //因为动态加载了Panel
+        this.cd.detectChanges();
+    }
 
     JumpToExam(numberName: string, subName: string, Grade: string) {
         var request = "course/GetExamInfoByNumberAndSubName?numberName=" + numberName + "&subName=" + subName + "&Grade=" + Grade;

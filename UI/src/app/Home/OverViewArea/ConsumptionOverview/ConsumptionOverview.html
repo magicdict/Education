@@ -5,10 +5,14 @@
         <div class="container" style="width:1140px;">
             <div class="row">
                 <div class="col">
-                    <div echarts [options]="monthlyTotalOpt" style="width:520px;"></div>
+                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                        <div echarts [options]="monthlyTotalOpt" style="width:480px;height:400px;"></div>
+                    </div>
                 </div>
                 <div class="col">
-                    <div echarts [options]="weekdayTotalOpt" style="width:520px;"></div>
+                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                        <div echarts [options]="weekdayTotalOpt" style="width:480px;height:400px;"></div>
+                    </div>
                 </div>
             </div>
             <button type="button" class="btn btn-info" style="cursor: default">
@@ -22,10 +26,15 @@
             <br />
             <div class="row">
                 <div class="col">
-                    <div echarts [options]="monthlyOpt" style="width:520px;"></div>
+                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                        <div echarts [options]="monthlyOpt" style="width:480px;height:400px;">
+                        </div>
+                    </div>
                 </div>
                 <div class="col">
-                    <div echarts [options]="weekdayOpt" style="width:520px;"></div>
+                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                        <div echarts [options]="weekdayOpt" style="width:480px;height:400px;"> </div>
+                    </div>
                 </div>
             </div>
         </div>
