@@ -160,6 +160,15 @@ export interface IConsumption {
   consumpStudent: IStudent;
 }
 
+export interface IStudentMonthlyConsumption {
+  id: string;
+  name: string;
+  sex: string;
+  className: string;
+  month: string;
+  amount: number;
+}
+
 export interface IScore {
   id: string;
   idForClass: string;
@@ -237,6 +246,7 @@ export interface IClassInfo {
   geoOptions: { name: string, value: number }[];
   teachers: ITeacher[];
   exams: IClassExam[];
+  kaoqing: { name: string, value: number }[];
 }
 
 export interface ICourse {

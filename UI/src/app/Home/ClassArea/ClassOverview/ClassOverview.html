@@ -6,7 +6,7 @@
         <div class="col-7">
           <h3>{{this.ClassName}} 人数：{{this.StudentCnt}}</h3>
           <p-table [value]="QueryResult" [scrollable]="true" (onRowSelect)="onRowSelect($event)" selectionMode="single"
-            scrollHeight="800px" [style]="{'width':'100%','min-width':'600px'}">
+            scrollHeight="620px" [style]="{'width':'100%','min-width':'600px'}">
             <ng-template pTemplate="header">
               <tr>
                 <th [pSortableColumn]="'id'" style="width: 40px">
@@ -60,8 +60,38 @@
           </p-table>
         </div>
         <div class="col-5">
-          <div echarts [options]="mSexRate" style="width:300px;height: 300px;"></div>
-          <div echarts [options]="NativePlaceRegionOptions" style="width:300px;height: 300px;"></div>
+          <div class="card card-stats" style="height: 240px;">
+            <div class="card-header card-header-warning card-header-icon">
+              男女比例
+            </div>
+            <div class="card-body"  style="height: 200px;">
+              <div class="stats">
+                <div echarts [options]="mSexRate" style="width:320px;height: 200px;"></div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="card card-stats" style="height: 340px;">
+            <div class="card-header card-header-warning card-header-icon">
+              生源地
+            </div>
+            <div class="card-body"  style="height: 350px;">
+              <div class="stats">
+                <div echarts [options]="NativePlaceRegionOptions" style="width:320px;height: 300px;"></div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div *ngIf="IsShowKaoqinGraph" class="card card-stats"  style="height: 260px;">
+            <div class="card-header card-header-warning card-header-icon">
+              考勤
+            </div>
+            <div class="card-body"  style="height: 220px;">
+              <div class="stats">
+                <div echarts [options]="KaoqinOpt" style="width:320px;height: 220px;"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

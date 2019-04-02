@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ISchoolConsumptionInfo, IConsumption } from 'src/app/Home/Common/Education.model';
+import { ISchoolConsumptionInfo, IConsumption, IStudent, IStudentMonthlyConsumption } from 'src/app/Home/Common/Education.model';
 import { MonthlyCompumptionBarOption, MonthlyCompumptionBarOptionTotal } from '../../GraphOption/CompumptionOption'
+import { HomeService } from '../../Common/Home.service';
 @Component({
   templateUrl: 'ConsumptionOverview.html',
 })
 export class ConsumptionOverviewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public service: HomeService
   ) { }
 
   monthlyOpt = (JSON.parse(JSON.stringify(MonthlyCompumptionBarOption)));
@@ -21,8 +23,22 @@ export class ConsumptionOverviewComponent implements OnInit {
   highestRecLiveAtSchool: IConsumption[];
   highestRecNotLiveAtSchool: IConsumption[];
 
-  liveAtSchool :number;  
-  notLiveAtSchool :number;  
+  liveAtSchool: number;
+  notLiveAtSchool: number;
+
+  //消费预警
+  MonthUpLimitList = [
+    { label: '1000元', value: 1000 },
+    { label: '1100元', value: 1100 },
+    { label: '1200元', value: 1200 },
+    { label: '1300元', value: 1300 },
+    { label: '1400元', value: 1400 },
+  ]
+  MonthUpLimit = 0;
+
+  public Students: IStudentMonthlyConsumption[] = [];
+
+  public selectStudent: IStudentMonthlyConsumption;
 
   ngOnInit(): void {
     this.route.data
@@ -54,6 +70,18 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.notLiveAtSchool = data.consumptionInfo.notLiveAtSchoolCnt;
 
       });
+  }
+
+  QueryByMonthUpLimit() {
+    this.service.GetStudentWithMonthLimit(this.MonthUpLimit).then(
+      r=>{
+        this.Students = r;
+      }
+    );
+  }
+
+  onRowSelect(event: { data: IStudent; }) {
+    this.router.navigate(['student/overview', event.data.id]);
   }
 
   JumpTo(studentId: string) {

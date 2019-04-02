@@ -30,7 +30,7 @@
       </div>
       <br />
       <p-table [value]="this.Students" selectionMode="single" [(selection)]="this.selectStudent" [scrollable]="true"
-        scrollHeight="400px" (onRowSelect)="onRowSelect($event)">
+        scrollHeight="400px" (onRowSelect)="onRowSelect()">
         <ng-template pTemplate="header">
           <tr>
             <th style="width: 50px">学号</th>

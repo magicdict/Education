@@ -25,8 +25,17 @@ namespace Education.Controllers
             /// </summary>
             /// <value></value>
             public List<Teacher> Teachers { get; set; }
-
+            /// <summary>
+            /// 考试成绩
+            /// </summary>
+            /// <value></value>
             public List<ClassExamInfo> Exams { get; set; }
+
+            /// <summary>
+            /// 考勤数据
+            /// </summary>
+            /// <value></value>
+            public List<NameValueSet> Kaoqing { get; set; }
         }
 
         /// <summary>
@@ -87,6 +96,20 @@ namespace Education.Controllers
             }
             overview.Exams = r;
 
+            //班级考勤信息
+            overview.Kaoqing = new List<NameValueSet>();
+            foreach (var key in Dataset.KaoqinTypeDic.Keys)
+            {
+                var cnt = Dataset.KaoqinList.Count(x => x.ClassId == ClassId && x.DetailId == key);
+                if (cnt > 0)
+                {
+                    overview.Kaoqing.Add(new NameValueSet()
+                    {
+                        name = Dataset.KaoqinTypeDic[key].control_task_name,
+                        value = cnt
+                    });
+                }
+            }
             return overview;
         }
     }

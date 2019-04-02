@@ -62,3 +62,18 @@ export interface IStack {
     data: { name: string, value: number }[],
     type: string
 }
+
+
+export interface ISimpleBar {
+    xAxis: {
+        type: 'category',
+        data: string[]
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: number[],
+        type: 'bar'
+    }]
+}

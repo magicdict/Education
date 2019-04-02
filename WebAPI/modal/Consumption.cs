@@ -1,6 +1,20 @@
 using System;
 using System.Linq;
 
+
+/// <summary>
+/// 个人月消费
+/// </summary>
+public class MonthConsumptionStudent
+{
+    public string ID { get; set; }
+    public string Name { get; set; }
+    public string Sex { get; set; }
+    public string ClassName { get; set; }
+    public string Month { get; set; }
+    public float Amount { get; set; }
+}
+
 public class Consumption
 {
     /// <summary>

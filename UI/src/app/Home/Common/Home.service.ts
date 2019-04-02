@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CommonFunction } from './common';
-import { IStudent, IStudentInfo, ITeacherInfo, IClassExam } from './Education.model';
+import { IStudent, IStudentInfo, ITeacherInfo, IClassExam, IStudentMonthlyConsumption } from './Education.model';
 
 @Injectable()
 export class HomeService {
@@ -26,7 +26,10 @@ export class HomeService {
     public QueryByPolicy(Policy: string): Promise<Array<IStudent>> {
         return this.commonFunction.httpRequest<any>('Student/QueryByPolicy?Policy=' + Policy);
     }
-
+    /** 月度消费 */
+    public GetStudentWithMonthLimit(limit: number): Promise<IStudentMonthlyConsumption[]> {
+        return this.commonFunction.httpRequest<any>('Consumption/GetStudentWithMonthLimit?limit=' + limit);
+    }
     /** 按班级检索 */
     public QueryByClassId(ClassId: string): Promise<IStudent[]> {
         return this.commonFunction.httpRequest<any>('Student/QueryByClassId?ID=' + ClassId);

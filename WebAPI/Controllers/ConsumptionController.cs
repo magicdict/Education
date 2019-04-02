@@ -11,6 +11,14 @@ namespace Education.Controllers
     [ApiController]
     public class ConsumptionController : ControllerBase
     {
+
+
+        [HttpGet("GetStudentWithMonthLimit")]
+        public ActionResult<List<MonthConsumptionStudent>> GetStudentWithMonthLimit(int limit)
+        {
+            return Dataset.StudentConsumptionList.Where(x => x.Amount >= limit).ToList();
+        }
+
         /// <summary>
         /// 学校整体消费信息
         /// </summary>

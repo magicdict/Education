@@ -1,7 +1,5 @@
 import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
-import { ITeacher, IStudent, nationopt, policyopt } from '../Education.model';
-import { CommonFunction } from '../common';
-import { SelectItem } from 'primeng/api';
+import { IStudent, nationopt, policyopt } from '../Education.model';
 import { ErrorMessageDialogComponent } from '../error-message-dialog/error-message-dialog.component';
 import { HomeService } from '../Home.service';
 
@@ -22,7 +20,6 @@ export class StudentPickerComponent {
   public selectStudent: IStudent;
 
   constructor(
-    private commonfunction: CommonFunction,
     public service: HomeService
   ) {
 
@@ -96,7 +93,7 @@ export class StudentPickerComponent {
     );
   }
 
-  onRowSelect(event: { data: IStudent; }) {
+  onRowSelect() {
     this.display = false;
     this.pick.emit(this.selectStudent);
   }

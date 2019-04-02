@@ -34,6 +34,8 @@ public static class Dataset
 
     public static Dictionary<string, string> ExamTypeDic = new Dictionary<string, string>();
 
+    public static List<MonthConsumptionStudent> StudentConsumptionList = new List<MonthConsumptionStudent>();
+
     //数据库的导入
     public static void Load(IHostingEnvironment hostingEnvironment)
     {
@@ -166,6 +168,38 @@ public static class Dataset
         //全体消费信息预先统计
         Education.Controllers.ConsumptionController.PrepareSchoolConsumptionInfo();
         Console.WriteLine(timer.Elapsed.ToString());
+        fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "StudentConsumptionMonthList.csv";
+        sr = new StreamReader(fullfilepath);
+        sr.ReadLine();  //读取标题栏
+        while (!sr.EndOfStream)
+        {
+            var line = sr.ReadLine().Split(",");
+            StudentConsumptionList.Add(new MonthConsumptionStudent()
+            {
+                ID = line[0],
+                Name = line[1],
+                Sex = line[2],
+                ClassName = line[3],
+                Month = line[4],
+                Amount = -1 * float.Parse(line[5])
+            });
+        }
+        sr.Close();
+        Console.WriteLine(timer.Elapsed.ToString());
+        /* var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "StudentConsumptionMonthList.csv");
+        sw.WriteLine("Id,Name,Sex,ClassName,Month,Amount");
+        var MonthTitle = new string[] { "201807", "201808", "201809", "201810", "201811", "201812", "201901" };
+        foreach (var student in Dataset.StudentList)
+        {
+            foreach (var mon in MonthTitle)
+            {
+                var sum = Dataset.ConsumptionList.Where(x => x.DealYearMonth == mon && x.StudentID == student.ID).Sum(x => x.MonDeal);
+                sw.WriteLine(student.ID + "," + student.Name + "," + student.Sex + "," +  student.ClassName + "," + mon + "," + sum );
+            }
+        }
+        sw.Close(); 
+        Console.WriteLine(timer.Elapsed.ToString());*/
+
         //DUMP CHENGJI
         /* var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "5_chengji_dump.csv");
         sw.WriteLine("Id,IdForClass,NumberName,Grade,ClassID,ClassName,Term,StudentID,subName");
