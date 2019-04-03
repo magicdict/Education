@@ -1,14 +1,29 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewChild } from '@angular/core';
 import { IClassExam } from 'src/app/Home/Common/Education.model';
 import { Router } from '@angular/router';
 import { HomeService } from '../Home.service';
+import { Table } from 'primeng/table';
+import { Dropdown } from 'primeng/dropdown';
 @Component({
     selector: 'class-exam-list',
     templateUrl: 'ClassExamList.html',
 })
-export class ClassExamListComponent implements OnInit {
-    ngOnInit(): void {
-        console.log(this.Exams);
+export class ClassExamListComponent implements OnChanges {
+    ngOnChanges(): void {
+        this.subName = [];
+        this.subName.push({ label: "全部", value: null });
+        this.Exams.map(x => x.record.subName).forEach(
+            r => {
+                if (this.subName.map(x => x.label).indexOf(r) === -1) {
+                    if (r !== "") {
+                        this.subName.push({ label: r, value: r });
+                    }
+                }
+            }
+        );
+        this.dt.filter("", 'record.subName', 'equals')
+        this.subnamelist.value = null;
+        console.log("成绩列表变更");
     }
 
     @Input() Exams: IClassExam[];
@@ -16,6 +31,12 @@ export class ClassExamListComponent implements OnInit {
     @Input() scrollHeight: string = "400px";
 
     @Input() FunRowSelect: (event: { data: IClassExam; }) => void;
+
+    subName: { label: string, value: string }[] = [];
+
+    @ViewChild("dt") dt: Table;
+
+    @ViewChild("subnamelist") subnamelist: Dropdown;
 
     constructor(
         private router: Router,

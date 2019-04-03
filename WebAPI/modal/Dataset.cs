@@ -4,7 +4,7 @@ using System.Linq;
 using System.IO;
 using System.Collections.Generic;
 using static Chengji;
-
+using System.Threading.Tasks;
 public static class Dataset
 {
     /// <summary>
@@ -36,6 +36,8 @@ public static class Dataset
 
     public static List<MonthConsumptionStudent> StudentConsumptionList = new List<MonthConsumptionStudent>();
 
+    public static List<GradeRank> ExamRankList = new List<GradeRank>();
+
     //数据库的导入
     public static void Load(IHostingEnvironment hostingEnvironment)
     {
@@ -56,6 +58,27 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine("读取教师信息件数：" + TeacherList.Count);
+        Console.WriteLine(timer.Elapsed.ToString());
+
+
+        fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "ScoreRank.csv";
+        sr = new StreamReader(fullfilepath);
+        sr.ReadLine();  //读取标题栏
+        
+        while (!sr.EndOfStream)
+        {
+            var line = sr.ReadLine().Split(",");
+            var Id = line[0];
+            var StudentId = line[7];
+            var Rank = line[9];
+            ExamRankList.Add(new GradeRank()
+            {
+                Id = Id,
+                StudentID = StudentId,
+                Rank = Rank
+            });
+        }
+        sr.Close();
         Console.WriteLine(timer.Elapsed.ToString());
 
         //导入天气基本信息 宁波历史天气数据.csv
@@ -115,6 +138,7 @@ public static class Dataset
         Console.WriteLine("读取考勤信息件数：" + KaoqinList.Count);
         Education.Controllers.KaoqinController.PrepareKaoqinOverview();
         Console.WriteLine(timer.Elapsed.ToString());
+
         //导入学生成绩信息 5_chengji.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "5_chengji.csv";
         sr = new StreamReader(fullfilepath);
@@ -137,8 +161,21 @@ public static class Dataset
                 student.OptionCourse.Sort((x, y) => { return Chengji.OptionalSelectSort(x, y); });    //排序
             }
         }
+
+        //最后一个学期成绩
         LastestTermChangji = Dataset.ChengjiList.Distinct(new Chengji()).Where(x => x.Term == "2018-2019-1").ToList();
 
+        Console.WriteLine("成绩数：" + ChengjiList.Count);
+        Console.WriteLine("年级排行" + ExamRankList.Count);
+        //使用Linq太慢，这里两个数组排序和直接赋值
+        ChengjiList.Sort((x, y) => { return (x.Id + x.StudentID).CompareTo(y.Id + y.StudentID); });
+        ExamRankList.Sort((x, y) => { return (x.Id + x.StudentID).CompareTo(y.Id + y.StudentID); });
+
+        for (int i = 0; i < ChengjiList.Count; i++)
+        {
+            ChengjiList[i].Rank = int.Parse(ExamRankList[i].Rank);
+        }
+        Console.WriteLine(timer.Elapsed.ToString());
 
         //导入考试类型信息 6_exam_type.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "6_exam_type.csv";
@@ -167,6 +204,7 @@ public static class Dataset
         Console.WriteLine("读取学生消费件数：" + ConsumptionList.Count);
         //全体消费信息预先统计
         Education.Controllers.ConsumptionController.PrepareSchoolConsumptionInfo();
+        Console.WriteLine("全体消费信息预先统计");
         Console.WriteLine(timer.Elapsed.ToString());
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "StudentConsumptionMonthList.csv";
         sr = new StreamReader(fullfilepath);
@@ -186,6 +224,10 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine(timer.Elapsed.ToString());
+
+
+
+
         /* var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "StudentConsumptionMonthList.csv");
         sw.WriteLine("Id,Name,Sex,ClassName,Month,Amount");
         var MonthTitle = new string[] { "201807", "201808", "201809", "201810", "201811", "201812", "201901" };
@@ -200,16 +242,38 @@ public static class Dataset
         sw.Close(); 
         Console.WriteLine(timer.Elapsed.ToString());*/
 
+        //Rank
+        /*var ExamUnion = ChengjiList.Where(
+            //历史数据暂时不用，减少运算量
+            x => x.Term.CompareTo("2016-2017-1") >= 0 &&
+            //只计算使用的考试
+            (x.Type == "2" || x.Type == "3" || x.Type == "7" || x.Type == "6")
+        ).Select(x => x.IdForGradeExam).Distinct();
+        //学期，考试类型，科目，年级 分组。获得排名
+        var CntComplete = 0;
+        Parallel.ForEach(ExamUnion, IdForGradeExam =>
+        {
+            var temp = ChengjiList.Where(x => x.IdForGradeExam == IdForGradeExam);
+            foreach (var chengji in temp)
+            {
+                chengji.Rank = temp.Count(x => x.Score > chengji.Score) + 1;    //比这个成绩好的人数 + 1
+            }
+            CntComplete++;
+            Console.WriteLine("Complete:[" + IdForGradeExam + "](" + CntComplete + "/" + ExamUnion.Count() + " OK)");
+        });
+
         //DUMP CHENGJI
-        /* var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "5_chengji_dump.csv");
-        sw.WriteLine("Id,IdForClass,NumberName,Grade,ClassID,ClassName,Term,StudentID,subName");
+        var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "ScoreRank.csv");
+        sw.WriteLine("Id,IdForClass,NumberName,Grade,ClassID,ClassName,Term,StudentID,subName,Rank");
         foreach (var item in Dataset.ChengjiList)
         {
             sw.WriteLine(item.Id + "," + item.IdForClass + "," + item.NumberName + "," + item.Grade + "," + item.ClassID + "," + item.ClassName + "," +
-                         item.Term + "," + item.StudentID + "," + item.SubName);
+                         item.Term + "," + item.StudentID + "," + item.SubName + "," + item.Rank);
         }
-        sw.Close(); */
-        //Console.WriteLine(timer.Elapsed.ToString());
+        sw.Close();
+        Console.WriteLine(timer.Elapsed.ToString());
+        */
+
         timer.Stop();
     }
 

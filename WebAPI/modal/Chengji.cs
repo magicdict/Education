@@ -22,6 +22,9 @@ public class Chengji : IEqualityComparer<Chengji>
         }
     }
 
+    public string IdForGradeExam { get; set; }
+
+
     /// <summary>
     /// 考试编码
     /// </summary>
@@ -121,6 +124,11 @@ public class Chengji : IEqualityComparer<Chengji>
     /// </summary>
     /// <value></value>
     public string Dengdi { get; set; }
+    /// <summary>
+    /// 全校排名
+    /// </summary>
+    /// <value></value>
+    public int Rank { get; set; }
 
     /// <summary>
     /// 必修课
@@ -233,6 +241,7 @@ public class Chengji : IEqualityComparer<Chengji>
         {
             Score = (float)Math.Round(Score, 2);
         }
+        IdForGradeExam = SubId + ":" + Term + ":" + Type + ":" + Grade;
         ZScore = Items[10];
         TScore = Items[11];
         Dengdi = Items[12];
@@ -251,4 +260,14 @@ public class Chengji : IEqualityComparer<Chengji>
     {
         return obj.ToString().GetHashCode();
     }
+}
+
+
+public class GradeRank
+{
+    public string Id { get; set; }
+
+    public string StudentID { get; set; }
+
+    public string Rank { get; set; }
 }

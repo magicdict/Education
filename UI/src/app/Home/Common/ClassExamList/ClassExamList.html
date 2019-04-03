@@ -1,4 +1,9 @@
-<p-table [value]="this.Exams" selectionMode="single" [scrollable]="true" [scrollHeight]="scrollHeight"
+<br />
+科目选择：
+<p-dropdown #subnamelist [options]="subName" (onChange)="dt.filter($event.value, 'record.subName', 'equals')"></p-dropdown>
+<br />
+<br />
+<p-table #dt [value]="this.Exams" selectionMode="single" [scrollable]="true" [scrollHeight]="scrollHeight"
   (onRowSelect)="onRowSelect($event)">
   <ng-template pTemplate="header">
     <tr>

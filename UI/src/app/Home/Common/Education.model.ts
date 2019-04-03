@@ -189,6 +189,7 @@ export interface IScore {
   zScore: string;
   tScore: number;
   dengdi: number;
+  rank:number;
 }
 
 export interface IKaoqin {
