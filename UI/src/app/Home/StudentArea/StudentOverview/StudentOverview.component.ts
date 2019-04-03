@@ -45,8 +45,14 @@ export class StudentOverviewComponent implements OnInit {
   JumpTo(url: string) {
     if (url === "grade") {
       //这里应该是 !== -1,但是高一都有校区前缀，所以这个判断也不会出现问题
-      if (this.CurrentStudent.className.indexOf("高一") > 0) {
+      if (this.CurrentStudent.className.indexOf("高一") >= 0) {
         this.router.navigate(["grade1"], { relativeTo: this.route });
+      }
+      if (this.CurrentStudent.className.indexOf("高二") >= 0) {
+        this.router.navigate(["grade2"], { relativeTo: this.route });
+      }
+      if (this.CurrentStudent.className.indexOf("高三") >= 0) {
+        this.router.navigate(["grade3"], { relativeTo: this.route });
       }
     } else {
       this.router.navigate([url], { relativeTo: this.route });
@@ -69,7 +75,7 @@ export class StudentOverviewComponent implements OnInit {
 
         this.ScoreName = [];
         this.ScoreAvg = [];
-        this.TScoreAvg =[];
+        this.TScoreAvg = [];
 
         this.KaoqinMonth = [];
         this.KaoqinMonthCnt = [];
@@ -153,5 +159,5 @@ export class StudentOverviewComponent implements OnInit {
 
 
 
- 
+
 }

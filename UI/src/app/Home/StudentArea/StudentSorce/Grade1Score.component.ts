@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../Common/Home.service';
 import { ScoreRadarGraphOption } from '../../GraphOption/ScoreOption'
-import { IStudent, ITeacher } from 'src/app/Home/Common/Education.model';
+import { IStudent, ITeacher, IScore } from 'src/app/Home/Common/Education.model';
 import { CommonFunction } from 'src/app/Home/Common/common';
 import { Router } from '@angular/router';
 
@@ -17,6 +17,7 @@ export class Grade1ScoreComponent implements OnInit {
     }
     public CurrentStudent: IStudent;
     public Teachers: ITeacher[];
+    public Scores:IScore[];
     ScoreGraphFor2Option = ScoreRadarGraphOption;
     ScoreGraphFor19Option = ScoreRadarGraphOption;
 
@@ -24,6 +25,8 @@ export class Grade1ScoreComponent implements OnInit {
         //成绩列表
         this.CurrentStudent = this.service.CurrentStudentInfo.baseInfo;
         this.Teachers = this.service.CurrentStudentInfo.teachers;
+        this.Scores = this.service.CurrentStudentInfo.chengjis;
+        
         let ScoreList = this.service.CurrentStudentInfo.chengjis;
         ScoreList.sort((x, y) => { return x.subId.localeCompare(y.subId) });
         //初一学生：显示 #19 - 2018-2019新高一7月测试 雷达图

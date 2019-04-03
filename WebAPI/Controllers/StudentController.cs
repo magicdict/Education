@@ -28,7 +28,7 @@ namespace Education.Controllers
         }
 
         [HttpGet("QueryByLiveRoomNo")]
-        public ActionResult<List<Student>> QueryByLiveRoomNo(string Id,string Campus)
+        public ActionResult<List<Student>> QueryByLiveRoomNo(string Id, string Campus)
         {
             var baseInfo = Dataset.StudentList.Where(x => x.LiveRoomNo.Equals(Id) && x.Campus == Campus).ToList();
             if (baseInfo.Count() == 0) return null;
@@ -81,7 +81,8 @@ namespace Education.Controllers
                 info.Chengjis.Sort(
                     (x, y) =>
                     {
-                        return x.Sdate.CompareTo(y.Sdate);
+                        //不能用SDate比较，这里的日期有问题
+                        return x.Id.CompareTo(y.Id);
                     }
                 );
                 //成绩件数

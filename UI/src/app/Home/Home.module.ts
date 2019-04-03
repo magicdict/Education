@@ -40,6 +40,8 @@ import { TeacherOverviewComponent } from './TeacherOverview/TeacherOverview.comp
 import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentOverview.component';
 import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/StudentCompumption.component';
 import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.component';
+import { Grade2ScoreComponent } from './StudentArea/StudentSorce/Grade2Score.component';
+import { Grade3ScoreComponent } from './StudentArea/StudentSorce/Grade3Score.component';
 import { KaoqinOverviewComponent } from './OverViewArea/KaoqinOverview/KaoqinOverview.component';
 
 /**共通 */
@@ -49,6 +51,7 @@ import { StudentHeaderComponent } from './Common/studentHeader/StudentHeader.com
 import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.component';
 import { ClassExamListComponent } from './Common/ClassExamList/ClassExamList.component';
 import { StudentPickerComponent } from './Common/studentPicker/studentPicker.component';
+import { ExamListComponent } from './Common/ExamList/ExamList.component';
 
 
 @NgModule({
@@ -68,12 +71,15 @@ import { StudentPickerComponent } from './Common/studentPicker/studentPicker.com
     StudentOverviewComponent,
     StudentCompumptionComponent,
     Grade1ScoreComponent,
+    Grade2ScoreComponent,
+    Grade3ScoreComponent,
     //共通
     NavigationComponent,
     TeacherPickerComponent,
     ErrorMessageDialogComponent,
     StudentHeaderComponent,
     ClassExamListComponent,
+    ExamListComponent,
     StudentPickerComponent,
     //考试相关
     SingleExamClassComponent,
