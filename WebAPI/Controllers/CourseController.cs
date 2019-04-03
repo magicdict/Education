@@ -24,15 +24,15 @@ namespace Education.Controllers
             public List<String> SubNameList { get; set; }
         }
 
+        public static Dictionary<string, List<ChengjiDataSet>> ExamNameList;
 
-        [HttpGet("GetExamNameList")]
-        public ActionResult<Dictionary<string, List<ChengjiDataSet>>> GetExamNameList()
-        {
-            var r = new Dictionary<string, List<ChengjiDataSet>>();
+        public static void PrepareExamNameList(){
+            ExamNameList = new Dictionary<string, List<ChengjiDataSet>>();
+            var LastestTermChangji = Dataset.ChengjiList.Distinct(new Chengji()).Where(x => x.Term == "2018-2019-1").ToList();
             //各个年级考试的聚集
             foreach (var grade in new string[] { "高一", "高二", "高三" })
             {
-                var GradeExam = Dataset.LastestTermChangji.Where(x => x.Grade == grade).ToList();
+                var GradeExam = LastestTermChangji.Where(x => x.Grade == grade).ToList();
                 GradeExam.Sort((x, y) => { return x.SubId.CompareTo(y.SubId); });
                 var GradeExamList = new List<ChengjiDataSet>();
                 //Number和NumberName基本上是一一对应的，这里用NumberName是可以的
@@ -49,9 +49,14 @@ namespace Education.Controllers
                         GradeExamList.Add(Grade1ChengjiDataSet);
                     }
                 }
-                r.Add(grade, GradeExamList);
+                ExamNameList.Add(grade, GradeExamList);
             }
-            return r;
+        }
+
+        [HttpGet("GetExamNameList")]
+        public ActionResult<Dictionary<string, List<ChengjiDataSet>>> GetExamNameList()
+        {
+            return ExamNameList;
         }
 
         [HttpGet("GetExamInfoByNumberAndSubName")]

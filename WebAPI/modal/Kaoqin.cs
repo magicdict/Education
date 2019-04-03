@@ -69,7 +69,7 @@ public class Kaoqin
     {
         get
         {
-            return Dataset.GetWeatherByDate(RecDateTimeYear, RecDateTimeMonth, RecDateTimeDay);
+            return Weather.GetWeatherByDate(RecDateTimeYear, RecDateTimeMonth, RecDateTimeDay);
         }
     }
     public Kaoqin(string RawData)

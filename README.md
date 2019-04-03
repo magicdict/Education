@@ -7,6 +7,7 @@
 - netcore-web-example.service : NetCore WebAPI的CentOS守护进程
 - nginx.conf : Nginx服务配置 UI和WebAPI都需要配置
   - /usr/local/nginx/conf
+  - ./nginx 启动 (/usr/local/nginx/sbin)
   - ./nginx -s reload (/usr/local/nginx/sbin)
 - weather.py : 天气获得用代码
 

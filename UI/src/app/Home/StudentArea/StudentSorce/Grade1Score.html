@@ -17,14 +17,11 @@
             <!--右侧内容-->
             <div class="container">
                 <div class="row">
-                    <div class="col">
-                        <div echarts [options]="ScoreGraphFor19Option" style="width:800px;"></div>
+                    <div class="col" *ngIf="IsShowType19">
+                        <div echarts [options]="ScoreGraphFor19Option" style="width:380px;"></div>
                     </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col">
-                        <div echarts [options]="ScoreGraphFor2Option" style="width:800px;"></div>
+                    <div class="col" *ngIf="IsShowType2">
+                        <div echarts [options]="ScoreGraphFor2Option" style="width:380px;"></div>
                     </div>
                 </div>
             </div>

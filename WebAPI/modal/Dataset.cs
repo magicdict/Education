@@ -20,13 +20,9 @@ public static class Dataset
 
     public static List<Student> StudentList = new List<Student>();
 
-
     public static List<Kaoqin> KaoqinList = new List<Kaoqin>();
 
-
     public static List<Chengji> ChengjiList = new List<Chengji>();
-
-    public static List<Chengji> LastestTermChangji = new List<Chengji>();
 
     public static List<Consumption> ConsumptionList = new List<Consumption>();
 
@@ -64,7 +60,7 @@ public static class Dataset
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "ScoreRank.csv";
         sr = new StreamReader(fullfilepath);
         sr.ReadLine();  //读取标题栏
-        
+
         while (!sr.EndOfStream)
         {
             var line = sr.ReadLine().Split(",");
@@ -157,24 +153,27 @@ public static class Dataset
             //选修课
             if (student.ClassName.Contains("高三"))
             {
-                student.OptionCourse = Dataset.GetOptionCourse(student.ID);
+                student.OptionCourse = Chengji.GetOptionCourse(student.ID);
                 student.OptionCourse.Sort((x, y) => { return Chengji.OptionalSelectSort(x, y); });    //排序
             }
         }
-
-        //最后一个学期成绩
-        LastestTermChangji = Dataset.ChengjiList.Distinct(new Chengji()).Where(x => x.Term == "2018-2019-1").ToList();
 
         Console.WriteLine("成绩数：" + ChengjiList.Count);
         Console.WriteLine("年级排行" + ExamRankList.Count);
         //使用Linq太慢，这里两个数组排序和直接赋值
         ChengjiList.Sort((x, y) => { return (x.Id + x.StudentID).CompareTo(y.Id + y.StudentID); });
         ExamRankList.Sort((x, y) => { return (x.Id + x.StudentID).CompareTo(y.Id + y.StudentID); });
-
         for (int i = 0; i < ChengjiList.Count; i++)
         {
             ChengjiList[i].Rank = int.Parse(ExamRankList[i].Rank);
         }
+        //内存优化：2016-2017-1开始考试成绩保留，其他不要了
+        ExamRankList.Clear();
+        ChengjiList = ChengjiList.Where(x => x.Term.CompareTo("2016-2017-1") >= 0).ToList();
+        ChengjiList = ChengjiList.Where(x => !String.IsNullOrEmpty(x.SubName)).ToList();
+        Console.WriteLine("成绩数：" + ChengjiList.Count);
+        Education.Controllers.CourseController.PrepareExamNameList();
+        GC.Collect();
         Console.WriteLine(timer.Elapsed.ToString());
 
         //导入考试类型信息 6_exam_type.csv
@@ -224,11 +223,14 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine(timer.Elapsed.ToString());
+        timer.Stop();
+    }
 
-
-
-
-        /* var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "StudentConsumptionMonthList.csv");
+    public static void Dump(string fullpath)
+    {
+        var timer = new System.Diagnostics.Stopwatch();
+        timer.Start();
+        var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "StudentConsumptionMonthList.csv");
         sw.WriteLine("Id,Name,Sex,ClassName,Month,Amount");
         var MonthTitle = new string[] { "201807", "201808", "201809", "201810", "201811", "201812", "201901" };
         foreach (var student in Dataset.StudentList)
@@ -236,14 +238,14 @@ public static class Dataset
             foreach (var mon in MonthTitle)
             {
                 var sum = Dataset.ConsumptionList.Where(x => x.DealYearMonth == mon && x.StudentID == student.ID).Sum(x => x.MonDeal);
-                sw.WriteLine(student.ID + "," + student.Name + "," + student.Sex + "," +  student.ClassName + "," + mon + "," + sum );
+                sw.WriteLine(student.ID + "," + student.Name + "," + student.Sex + "," + student.ClassName + "," + mon + "," + sum);
             }
         }
-        sw.Close(); 
-        Console.WriteLine(timer.Elapsed.ToString());*/
+        sw.Close();
+        Console.WriteLine(timer.Elapsed.ToString());
 
         //Rank
-        /*var ExamUnion = ChengjiList.Where(
+        var ExamUnion = ChengjiList.Where(
             //历史数据暂时不用，减少运算量
             x => x.Term.CompareTo("2016-2017-1") >= 0 &&
             //只计算使用的考试
@@ -263,7 +265,7 @@ public static class Dataset
         });
 
         //DUMP CHENGJI
-        var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "ScoreRank.csv");
+        sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "ScoreRank.csv");
         sw.WriteLine("Id,IdForClass,NumberName,Grade,ClassID,ClassName,Term,StudentID,subName,Rank");
         foreach (var item in Dataset.ChengjiList)
         {
@@ -272,40 +274,6 @@ public static class Dataset
         }
         sw.Close();
         Console.WriteLine(timer.Elapsed.ToString());
-        */
-
         timer.Stop();
-    }
-
-    /// <summary>
-    /// 通过学号获得选修课列表
-    /// </summary>
-    /// <param name="StudentId"></param>
-    /// /// <returns></returns>
-    public static List<string> GetOptionCourse(string StudentId)
-    {
-        //选择学生,选修课
-        return Dataset.ChengjiList.Where(x => x.StudentID == StudentId && x.SubType == enumSubType.OptionalSelect && x.Score > 0 && x.Type == "6")
-               .Select(x => x.SubName).Distinct().ToList();
-        //return Dataset.ChengjiList.Where(x => x.StudentID == StudentId && x.SubType == enumSubType.OptionalSelect && x.Score > 0 && x.Term=="2018-2019-1")
-        //       .Select(x => x.SubName).Distinct().ToList();
-
-    }
-
-    /// <summary>
-    /// 根据日期获得天气情况
-    /// </summary>
-    /// <param name="year"></param>
-    /// <param name="month"></param>
-    /// <param name="day"></param>
-    /// <returns></returns>
-    public static Weather GetWeatherByDate(string year, string month, string day)
-    {
-        var r = Dataset.WeatherList.Where(x => x.Year == year && x.Month == month && x.Day == day).ToList();
-        if (r.Count == 1)
-        {
-            return r[0];
-        }
-        return null;
     }
 }
