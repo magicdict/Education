@@ -47,7 +47,6 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         this.commonFunction.httpRequest<IClassExam[]>(request).then(
             r => {
                 this.service.CourseDiffInfo = r;
-                this.service.CourseDiffInfoTitle = "[" + Grade + "]" + numberName + "(" + subName + ")";
                 this.router.navigate(["exam/classdiff"]);
             }
         );

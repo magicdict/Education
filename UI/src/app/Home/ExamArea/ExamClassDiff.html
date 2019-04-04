@@ -1,5 +1,12 @@
 <app-nav></app-nav>
-<h1>
-    {{this.service.CourseDiffInfoTitle}}
-</h1>
-<class-exam-list [Exams]="this.Exams"></class-exam-list>
+<br />
+<br />
+<div class="card">
+    <div class="card-header card-header-text card-header-primary">
+        <h4 class="card-title">{{Title}}</h4>
+        <p class="category">{{subTitle}}</p>
+    </div>
+    <div class="card-body">
+        <class-exam-list [Exams]="this.Exams"></class-exam-list>
+    </div>
+</div>

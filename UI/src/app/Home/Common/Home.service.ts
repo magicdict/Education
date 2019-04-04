@@ -50,7 +50,5 @@ export class HomeService {
 
     CourseDiffInfo: IClassExam[];
 
-    CourseDiffInfoTitle: string;
-
     CurrentClassExam: IClassExam;
 }

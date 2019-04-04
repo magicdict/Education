@@ -172,6 +172,8 @@ export interface IStudentMonthlyConsumption {
 export interface IScore {
   id: string;
   idForClass: string;
+  className:string;
+  grade:string;
   number: string;
   numberName: string;
   subId: string;

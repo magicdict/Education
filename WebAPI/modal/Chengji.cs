@@ -214,7 +214,7 @@ public class Chengji : IEqualityComparer<Chengji>
             ClassName = s.First().ClassName;
             if (ClassName.Contains("高一"))
             {
-                if (Term.StartsWith("2018-2019")) Grade = "高一";
+                Grade = "高一";
             }
 
             if (ClassName.Contains("高二"))

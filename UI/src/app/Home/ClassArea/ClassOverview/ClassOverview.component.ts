@@ -43,7 +43,6 @@ export class ClassOverviewComponent implements OnInit {
           this.IsShowKaoqinGraph = false;
         } else {
           this.IsShowKaoqinGraph = true;
-
         }
         this.KaoqinOpt = {
           xAxis: {

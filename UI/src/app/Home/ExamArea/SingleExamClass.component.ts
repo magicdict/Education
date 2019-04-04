@@ -11,9 +11,12 @@ export class SingleExamClassComponent implements OnInit {
     Scores: IScore[];
     CurrentClassExam: IClassExam;
     mScoreFunnelOption = ScoreFunnelOption;
-
+    Title: string;
+    subTitle: string;
     ngOnInit(): void {
         this.route.data.subscribe((data: { singleExam: IScore[] }) => {
+            this.Title = data.singleExam[0].numberName;
+            this.subTitle = data.singleExam[0].grade + " - " + data.singleExam[0].subName;
             this.Scores = data.singleExam;
             this.CurrentClassExam = this.service.CurrentClassExam;
             this.mScoreFunnelOption.legend.data = [];
