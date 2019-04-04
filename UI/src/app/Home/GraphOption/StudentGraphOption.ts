@@ -162,13 +162,13 @@ export const SexRateSunburstOption = {
       {
         name: '全校',
         value: 26,
-        itemStyle:{color:"#d48265"},
+        itemStyle: { color: "#d48265" },
         children: [
           {
             name: '高一',
             value: 8,
-            itemStyle:{
-              color:'#91c7ae'
+            itemStyle: {
+              color: '#91c7ae'
             },
             children: [
               {
@@ -189,8 +189,8 @@ export const SexRateSunburstOption = {
           {
             name: '高二',
             value: 8,
-            itemStyle:{
-              color:'#bda29a'
+            itemStyle: {
+              color: '#bda29a'
             },
             children: [
               {
@@ -210,8 +210,8 @@ export const SexRateSunburstOption = {
           {
             name: '高三',
             value: 10,
-            itemStyle:{
-              color:'#61a0a8'
+            itemStyle: {
+              color: '#61a0a8'
             },
             children: [
               {

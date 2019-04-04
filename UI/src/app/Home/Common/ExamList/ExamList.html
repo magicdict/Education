@@ -7,15 +7,19 @@
 <p-table #dt [value]="this.Scores" selectionMode="single" [scrollable]="true" scrollHeight="400px">
   <ng-template pTemplate="header">
     <tr>
-      <th style="width: 50px" [pSortableColumn]="'studentID'">学号
+      <th *ngIf="Mode !== 'Same'" style="width: 50px" [pSortableColumn]="'studentID'">学号
         <p-sortIcon [field]="'studentID'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px" [pSortableColumn]="'studentName'">姓名
+      <th *ngIf="Mode !== 'Same'" style="width: 50px" [pSortableColumn]="'studentName'">姓名
         <p-sortIcon [field]="'studentName'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px" [pSortableColumn]="'subName'">科目
+      <th *ngIf="Mode === 'Same'" style="width: 50px" [pSortableColumn]="'numberName'">考试名称
+        <p-sortIcon [field]="'numberName'">
+        </p-sortIcon>
+      </th>
+      <th *ngIf="Mode === 'Same'" style="width: 50px" [pSortableColumn]="'subName'">科目
         <p-sortIcon [field]="'subName'">
         </p-sortIcon>
       </th>
@@ -43,9 +47,10 @@
   </ng-template>
   <ng-template pTemplate="body" let-itemData>
     <tr [pSelectableRow]="itemData">
-      <td style="width: 50px">{{itemData.studentID}}</td>
-      <td style="width: 50px">{{itemData.studentName}}</td>
-      <td style="width: 50px">{{itemData.subName}}</td>
+      <td *ngIf="Mode !== 'Same'" style="width: 50px">{{itemData.studentID}}</td>
+      <td *ngIf="Mode !== 'Same'" style="width: 50px">{{itemData.studentName}}</td>
+      <td *ngIf="Mode === 'Same'" style="width: 50px">{{itemData.numberName}}</td>
+      <td *ngIf="Mode === 'Same'" style="width: 50px">{{itemData.subName}}</td>
       <td style="width: 50px">{{itemData.score}}</td>
       <td style="width: 50px">{{itemData.tScore}}</td>
       <td style="width: 50px">{{itemData.zScore}}</td>

@@ -22,8 +22,8 @@ export class SingleExamClassComponent implements OnInit {
             for (let k in this.CurrentClassExam.funnelDic) {
                 this.mScoreFunnelOption.legend.data.push(k);
                 this.mScoreFunnelOption.series[0].data.push({ name: k, value: this.CurrentClassExam.funnelDic[k] });
-                if (this.CurrentClassExam.funnelDic[k] > maxcnt){
-                    maxcnt= this.CurrentClassExam.funnelDic[k];
+                if (this.CurrentClassExam.funnelDic[k] > maxcnt) {
+                    maxcnt = this.CurrentClassExam.funnelDic[k];
                 }
             }
             this.mScoreFunnelOption.series[0].max = maxcnt;

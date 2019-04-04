@@ -23,7 +23,7 @@ export class ClassOverviewComponent implements OnInit {
   mSexRate = SexRatePieOption;
   NativePlaceRegionOptions = regionMapOptions;
   KaoqinOpt: ISimpleBar;
-  IsShowKaoqinGraph:boolean;
+  IsShowKaoqinGraph: boolean;
 
   ngOnInit(): void {
     this.route.data
@@ -39,9 +39,9 @@ export class ClassOverviewComponent implements OnInit {
         this.NativePlaceRegionOptions.series[0].data = data.classinfo.geoOptions;
         this.Teachers = data.classinfo.teachers;
         this.Exams = data.classinfo.exams;
-        if (data.classinfo.kaoqing.length === 0){
+        if (data.classinfo.kaoqing.length === 0) {
           this.IsShowKaoqinGraph = false;
-        }else{
+        } else {
           this.IsShowKaoqinGraph = true;
 
         }

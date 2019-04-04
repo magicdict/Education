@@ -74,7 +74,7 @@ export class ConsumptionOverviewComponent implements OnInit {
 
   QueryByMonthUpLimit() {
     this.service.GetStudentWithMonthLimit(this.MonthUpLimit).then(
-      r=>{
+      r => {
         this.Students = r;
       }
     );

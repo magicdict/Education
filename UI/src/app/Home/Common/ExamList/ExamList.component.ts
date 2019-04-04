@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, OnChanges, ViewChild } from '@angular/core';
-import { IClassExam, IScore } from 'src/app/Home/Common/Education.model';
+import { Component, Input, OnChanges, ViewChild } from '@angular/core';
+import { IScore } from 'src/app/Home/Common/Education.model';
 import { Table } from 'primeng/table';
 import { Dropdown } from 'primeng/dropdown';
 @Component({
@@ -27,6 +27,8 @@ export class ExamListComponent implements OnChanges {
     @Input() Scores: IScore[];
 
     @Input() scrollHeight: string = "400px";
+
+    @Input() Mode: string = "Same";
 
     subName: { label: string, value: string }[] = [];
 

@@ -94,33 +94,33 @@ export class KaoqinOverviewComponent implements OnInit {
                     series: { data: [leaf], type: "sunburst" }
                 }
 
-                var NameArray:string[] = ["默认信息", "早上迟到", "晚到学校"];
-                var CodeArray:string[] = ["100000", "100100", "100200"];
-                var StackName:string = "迟到_晚到";
-                this.Kaoqin10MonthOption = this.CreateOption(NameArray,CodeArray,StackName,data);
+                var NameArray: string[] = ["默认信息", "早上迟到", "晚到学校"];
+                var CodeArray: string[] = ["100000", "100100", "100200"];
+                var StackName: string = "迟到_晚到";
+                this.Kaoqin10MonthOption = this.CreateOption(NameArray, CodeArray, StackName, data);
 
 
-                var NameArray:string[] = ["校徽校服", "请假离校"];
-                var CodeArray:string[] = ["200100", "200200"];
-                var StackName:string = "校徽_早退";
-                this.Kaoqin20MonthOption = this.CreateOption(NameArray,CodeArray,StackName,data);
+                var NameArray: string[] = ["校徽校服", "请假离校"];
+                var CodeArray: string[] = ["200100", "200200"];
+                var StackName: string = "校徽_早退";
+                this.Kaoqin20MonthOption = this.CreateOption(NameArray, CodeArray, StackName, data);
 
-                var NameArray:string[] = ["默认信息", "住宿早晨锻炼","课间操请假"];
-                var CodeArray:string[] = ["300000", "300100","300200"];
-                var StackName:string = "操场考勤机";
-                this.Kaoqin30MonthOption = this.CreateOption(NameArray,CodeArray,StackName,data);
+                var NameArray: string[] = ["默认信息", "住宿早晨锻炼", "课间操请假"];
+                var CodeArray: string[] = ["300000", "300100", "300200"];
+                var StackName: string = "操场考勤机";
+                this.Kaoqin30MonthOption = this.CreateOption(NameArray, CodeArray, StackName, data);
 
 
-                var NameArray:string[] = ["迟到", "校服", "早退", "离校", "进校"];
-                var CodeArray:string[] = ["9900100", "9900200", "9900300", "9900400", "9900500"];
-                var StackName:string = "移动考勤机";
-                this.Kaoqin99MonthOption = this.CreateOption(NameArray,CodeArray,StackName,data);
+                var NameArray: string[] = ["迟到", "校服", "早退", "离校", "进校"];
+                var CodeArray: string[] = ["9900100", "9900200", "9900300", "9900400", "9900500"];
+                var StackName: string = "移动考勤机";
+                this.Kaoqin99MonthOption = this.CreateOption(NameArray, CodeArray, StackName, data);
 
 
             });
     }
 
-    CreateOption(NameArray:string[],CodeArray:string[],StackName:string,data: { kaoqinInfo: IKaoqinOverview }):IStackBarOption {
+    CreateOption(NameArray: string[], CodeArray: string[], StackName: string, data: { kaoqinInfo: IKaoqinOverview }): IStackBarOption {
         var StackArray: IStack[] = [];
         for (let index = 0; index < NameArray.length; index++) {
             let stack: IStack = {

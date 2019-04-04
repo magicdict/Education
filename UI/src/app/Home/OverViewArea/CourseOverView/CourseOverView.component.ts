@@ -22,7 +22,7 @@ export class CourseOverViewComponent implements OnInit {
 
   //两门课程
   mCourseSelectTwoCntOption = (JSON.parse(JSON.stringify(CourseSelectTwoCntOption)));
-  mCourseSelectTwoPercentOption =  (JSON.parse(JSON.stringify(CourseSelectTwoCntOption)));
+  mCourseSelectTwoPercentOption = (JSON.parse(JSON.stringify(CourseSelectTwoCntOption)));
 
   //三门课程
   ThreeCoursePercent: { name: string, value: number }[];
@@ -66,7 +66,7 @@ export class CourseOverViewComponent implements OnInit {
               CombineDataPercent.push([index, index2, "-"]);
             } else {
               CombineData.push([index, index2, combine.value]);
-              CombineDataPercent.push([index, index2,  CommonFunction.roundvalue(combine.value * 100 / data.courseInfo.studentCnt)]);
+              CombineDataPercent.push([index, index2, CommonFunction.roundvalue(combine.value * 100 / data.courseInfo.studentCnt)]);
             }
           }
         }
