@@ -1,7 +1,22 @@
 <app-nav></app-nav>
 <div class="container">
   <div class="row" style="width:1140px">
-    <div class="col">
+
+    <div class="col-8">
+      <div class="card card-stats">
+        <div class="card-header card-header-warning card-header-icon">
+          生源地图
+        </div>
+        <div class="card-body">
+          <div *ngIf="IsMapReady" echarts [options]="this.NativePlaceRegionOpt" style="width:600px;height:600px">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-4">
+
       <div class="card card-stats">
         <div class="card-header card-header-warning card-header-icon">
           概要
@@ -32,8 +47,9 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col">
+
+      <br />
+
       <div class="card card-stats">
         <div class="card-header card-header-warning card-header-icon">
           少数名族
@@ -42,46 +58,44 @@
           <div class="stats">
             <div style="margin: 5px 0px 5px 0px">
               <button type="button" class="btn btn-primary">
-                土家族 <span class="badge badge-light">3</span>
-                <span class="sr-only">土家族</span>
+                畲族 <span class="badge badge-light">1</span>
+                <span class="sr-only">畲族</span>
               </button>
               &nbsp;
               <button type="button" class="btn btn-primary">
                 回族 <span class="badge badge-light">2</span>
                 <span class="sr-only">回族</span>
               </button>
-              <br />
+              &nbsp;
+              <button type="button" class="btn btn-primary">
+                满族 <span class="badge badge-light">4</span>
+                <span class="sr-only">满族</span>
+              </button>
+              &nbsp;
+              <button type="button" class="btn btn-primary">
+                苗族 <span class="badge badge-light">3</span>
+                <span class="sr-only">苗族</span>
+              </button>
               <button type="button" class="btn btn-primary">
                 朝鲜族 <span class="badge badge-light">2</span>
                 <span class="sr-only">朝鲜族</span>
               </button>
               &nbsp;
               <button type="button" class="btn btn-primary">
-                畲族 <span class="badge badge-light">1</span>
-                <span class="sr-only">畲族</span>
+                土家族 <span class="badge badge-light">3</span>
+                <span class="sr-only">土家族</span>
               </button>
-
               <button type="button" class="btn btn-primary">
                 汉族 <span class="badge badge-light">1750</span>
                 <span class="sr-only">汉族</span>
               </button>
-              &nbsp;
-              <button type="button" class="btn btn-primary">
-                满族 <span class="badge badge-light">4</span>
-                <span class="sr-only">满族</span>
-              </button>
-
-              <button type="button" class="btn btn-primary">
-                苗族 <span class="badge badge-light">3</span>
-                <span class="sr-only">苗族</span>
-              </button>
             </div>
           </div>
         </div>
-
       </div>
-    </div>
-    <div class="col">
+
+      <br />
+
       <div class="card card-stats">
         <div class="card-header card-header-warning card-header-icon">
           政治面貌
@@ -116,9 +130,11 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
-  <div class="row">
+
+  <div class="row" style="width:1140px">
     <div class="col">
       <div class="card card-stats">
         <div class="card-header card-header-image">
@@ -145,27 +161,16 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-8">
-      <div class="card card-stats">
-        <div class="card-header card-header-warning card-header-icon">
-          生源地图
-        </div>
-        <div class="card-body">
-          <div *ngIf="IsMapReady" echarts [options]="this.NativePlaceRegionOpt" style="width:600px;height:300px">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-4">
+    <div class="col">
       <div class="card card-stats">
         <div class="card-header card-header-warning card-header-icon">
           性别比例
         </div>
         <div class="card-body">
-          <div echarts [options]="SexRateSunburstOption" style="width:300px;height:300px"></div>
+          <div echarts [options]="SexRateSunburstOption" style="width:300px;height:275px"></div>
         </div>
       </div>
     </div>
   </div>
+
+</div>

@@ -3,7 +3,7 @@
 <p-tabView>
     <p-tabPanel header="单门课程" style="width:1140px;">
         <div class="container" style="width:1140px;">
-            <div class="row">
+            <div class="row" style="border: 2px solid lightgray;padding: 5px;margin: 5px">
                 <div class="col">
                     <div echarts [options]="mCourseSelectRadarGraphOption" style="width:500px;"></div>
                 </div>
@@ -15,17 +15,19 @@
                     </ul>
                 </div>
             </div>
-            <div>
+            <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
                 <div echarts [options]="mCourseSelectCntOption" style="width:500px;"></div>
             </div>
         </div>
     </p-tabPanel>
     <p-tabPanel header="两门课程" style="width:100%;">
-        <div echarts [options]="mCourseSelectTwoCntOption" style="width:800px;height: 400px;"></div>
-        <div echarts [options]="mCourseSelectTwoPercentOption" style="width:800px;height: 400px;"></div>
+        <div echarts [options]="mCourseSelectTwoCntOption"
+            style="width:800px;height: 400px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
+        <div echarts [options]="mCourseSelectTwoPercentOption"
+            style="width:800px;height: 400px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
     </p-tabPanel>
     <p-tabPanel header="三门课程" style="width:1140x;">
-        <div echarts [options]="mCourseSelectThreeCntOption" style="width:1100px;height: 450px;"></div>
+        <div echarts [options]="mCourseSelectThreeCntOption" style="width:1100px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
 
         <div class="container" style="width:1140px;">
             <div class="row">
@@ -61,6 +63,6 @@
         </div>
     </p-tabPanel>
     <p-tabPanel header="桑基图（Sankey）" style="width:100%;">
-        <div echarts [options]="mSelectCourseSankeyOption" style="width:1140px;height: 900px;"></div>
+        <div echarts [options]="mSelectCourseSankeyOption" style="width:1140px;height: 900px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
     </p-tabPanel>
 </p-tabView>

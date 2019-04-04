@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../Common/Home.service';
 import { ISunburstOption, ILeaf, IStackBarOption, IStack } from '../../GraphOption/KaoqinOption';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CommonFunction } from '../../Common/common';
+import { ActivatedRoute } from '@angular/router';
 import { IKaoqinOverview } from '../../Common/Education.model';
 
 @Component({
@@ -16,62 +15,111 @@ export class KaoqinOverviewComponent implements OnInit {
     Kaoqin30MonthOption: IStackBarOption;
     Kaoqin99MonthOption: IStackBarOption;
 
+    KaoqinDateList: { key: string, catalog: string, value: number }[] = [];
+
     ngOnInit(): void {
         this.route.data
             .subscribe((data: { kaoqinInfo: IKaoqinOverview }) => {
+
+                for (let k in data.kaoqinInfo.overviewDict) {
+                    if (k === "100000") {
+                        this.KaoqinDateList.push({ 'key': k, 'catalog': '迟到_晚到', 'value': 0 })
+                    }
+                    if (k === "200100") {
+                        this.KaoqinDateList.push({ 'key': k, 'catalog': '校徽_早退', 'value': 0 })
+                    }
+                    if (k === "300000") {
+                        this.KaoqinDateList.push({ 'key': k, 'catalog': '操场考勤机', 'value': 0 })
+                    }
+                    if (k === "9900100") {
+                        this.KaoqinDateList.push({ 'key': k, 'catalog': '移动考勤机', 'value': 0 })
+                    }
+                    this.KaoqinDateList.push({ 'key': k, 'catalog': data.kaoqinInfo.overviewDict[k].name, 'value': data.kaoqinInfo.overviewDict[k].value })
+                };
                 let totalcnt = 0;
                 let totalcnt_1 = 0;
                 let totalcnt_2 = 0;
                 let totalcnt_3 = 0;
                 let totalcnt_9 = 0;
 
-
                 let leaf: ILeaf = {
                     name: "次数",
                     value: 9999,
+                    itemStyle: {
+                        color: "#ca8622"
+                    },
                     children: []
+
                 };
 
                 let leaf_1: ILeaf = {
                     name: "迟到_晚到",
                     value: 9999,
+                    itemStyle: {
+                        color: '#2f4554'
+                    },
                     children: []
                 };
                 let leaf_2: ILeaf = {
                     name: "校徽_早退",
                     value: 9999,
+                    itemStyle: {
+                        color: '#61a0a8'
+                    },
                     children: []
                 };
                 let leaf_3: ILeaf = {
                     name: "操场考勤机",
                     value: 9999,
+                    itemStyle: {
+                        color: '#d48265'
+                    },
                     children: []
                 };
                 let leaf_9: ILeaf = {
                     name: "移动考勤机",
                     value: 9999,
+                    itemStyle: {
+                        color: '#91c7ae'
+                    },
                     children: []
                 };
 
+                var color = ['#3fb1e3', '#6be6c1', '#626c91', '#a0a7e6', '#c4ebad', "#96dee8"]
+                let color1 = 0;
+                let color2 = 0;
+                let color3 = 0;
+                let color9 = 0;
                 for (let k in data.kaoqinInfo.overviewDict) {
                     let mleaf: ILeaf = {
                         name: data.kaoqinInfo.overviewDict[k].name,
                         value: data.kaoqinInfo.overviewDict[k].value,
+                        itemStyle: {
+                            color: ""
+                        }
                     };
                     if (k.startsWith("1")) {
                         totalcnt_1 += data.kaoqinInfo.overviewDict[k].value;
+                        mleaf.itemStyle.color = color[color1];
+                        color1++;
                         leaf_1.children.push(mleaf);
                     }
                     if (k.startsWith("2")) {
                         totalcnt_2 += data.kaoqinInfo.overviewDict[k].value;
+                        mleaf.itemStyle.color = color[color2];
+                        color2++;
                         leaf_2.children.push(mleaf);
                     }
                     if (k.startsWith("3")) {
                         totalcnt_3 += data.kaoqinInfo.overviewDict[k].value;
+                        mleaf.itemStyle.color = color[color3];
+                        color3++;
                         leaf_3.children.push(mleaf);
                     }
                     if (k.startsWith("9")) {
                         totalcnt_9 += data.kaoqinInfo.overviewDict[k].value;
+                        mleaf.itemStyle.color = color[color9];
+                        color9++;
                         leaf_9.children.push(mleaf);
                     }
                     totalcnt += data.kaoqinInfo.overviewDict[k].value;
@@ -167,8 +215,6 @@ export class KaoqinOverviewComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private router: Router,
-        private commonFunction: CommonFunction,
         public service: HomeService
     ) { }
 } 

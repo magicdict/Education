@@ -1,7 +1,23 @@
 <app-nav></app-nav>
 <p-tabView>
     <p-tabPanel header="概要" style="width:1140px;">
-        <div echarts [options]="KaoqinOption" style="width:800px;height:800px;"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <div echarts [options]="KaoqinOption" style="width:800px;height:800px;"></div>
+
+                </div>
+                <div class="col-4">
+                    <table class="table">
+                        <tr *ngFor="let x of KaoqinDateList">
+                            <td *ngIf="x.value !== 0"> {{x.catalog}} </td>
+                            <td *ngIf="x.value !== 0"> {{x.value}} </td>
+                            <th *ngIf="x.value === 0" colspan=2> {{x.catalog}} </th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </p-tabPanel>
     <p-tabPanel header="迟到_晚到" style="width:1140px;">
         <div class="alert alert-warning" role="alert">
