@@ -30,6 +30,7 @@ import { HomeService } from './Common/Home.service';
 /**组件 */
 import { CourseOverViewComponent } from './OverViewArea/CourseOverView/CourseOverView.component';
 import { SchoolOverViewComponent } from './OverViewArea/SchoolOverView/SchoolOverView.component';
+import { CampusComponent } from './OverViewArea/SchoolOverView/Campus.component';
 import { ExamOverViewComponent } from './OverViewArea/ExamOverview/ExamOverview.component';
 import { ConsumptionOverviewComponent } from './OverViewArea/ConsumptionOverview/ConsumptionOverview.component';
 import { ClassOverviewComponent } from './ClassArea/ClassOverview/ClassOverview.component';
@@ -56,6 +57,7 @@ import { ExamListComponent } from './Common/ExamList/ExamList.component';
 @NgModule({
   declarations: [
     SchoolOverViewComponent,
+    CampusComponent,
     //考勤
     KaoqinOverviewComponent,
     //7选3

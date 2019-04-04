@@ -43,7 +43,7 @@ export class Grade2ScoreComponent implements OnInit {
                     series: [{ data: [], type: 'line' }]
                 };
                 let scoreAvalible = this.Scores.filter(x => x.subName == subname && (x.type === "2" || x.type === "3" || x.type === "6" || x.type === "7"));
-                opt.xAxis.data = scoreAvalible.map(x => x.numberName);
+                opt.xAxis.data = scoreAvalible.map(x => "");
                 opt.series[0].data = scoreAvalible.filter(x => x.subName == subname).map(x => -x.rank);
                 this.LineGraphOption.push(opt);
             }

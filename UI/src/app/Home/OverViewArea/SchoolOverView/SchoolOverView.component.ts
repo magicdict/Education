@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ISchoolInfo } from '../../Common/Education.model';
 import { SchoolSexBarOption, regionMapOptions, SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
 import { SexRatePieOption } from '../../GraphOption/StudentGraphOption'
@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SchoolOverViewComponent implements OnInit {
   constructor(
+    private router: Router,
     private http: HttpClient,
     private route: ActivatedRoute
   ) {
@@ -65,4 +66,9 @@ export class SchoolOverViewComponent implements OnInit {
 
       });
   }
+
+  ShwoCampus(){
+    this.router.navigate(['home/campus']);
+  }
+
 }

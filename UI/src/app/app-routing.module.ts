@@ -7,6 +7,7 @@ import { ConsumptionOverviewComponent } from './Home/OverViewArea/ConsumptionOve
 import { ClassOverviewComponent } from './Home/ClassArea/ClassOverview/ClassOverview.component';
 import { ExamOverViewComponent } from './Home/OverViewArea/ExamOverview/ExamOverview.component';
 import { KaoqinOverviewComponent } from './Home/OverViewArea/KaoqinOverview/KaoqinOverview.component';
+import { CampusComponent } from './Home/OverViewArea/SchoolOverView/Campus.component';
 const routes: Routes = [
   {
     path: 'home/school',
@@ -37,6 +38,10 @@ const routes: Routes = [
     path: 'class/overview/:id',
     component: ClassOverviewComponent,
     resolve: { classinfo: IClassInfoResolver }
+  },
+  {
+    path: 'home/campus',
+    component: CampusComponent
   },
   { path: '', redirectTo: 'home/school', pathMatch: 'full' }
 ];
