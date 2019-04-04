@@ -1,27 +1,45 @@
 <app-nav></app-nav>
-<p-tabView>
-    <p-tabPanel *ngFor="let grade of GradeList" [header]="grade.name" style="width:1140px;">
-        <table>
-            <tr *ngFor="let exam of grade.value">
-                <td>
-                    <div class="card card-stats">
-                        <div class="card-header card-header-warning card-header-icon">
-                            {{exam.numberName}}
-                        </div>
-                        <div class="card-body">
-                            <div class="stats">
-                                <ul class="heroes"
-                                    style="cursor: pointer; width: auto;height: auto;padding: 0px;margin: 0px;">
-                                    <li *ngFor="let item of exam.subNameList" style="width: 50px;float:left;">
-                                        <button type="button" class="btn btn-primary"
-                                            (click)="JumpToExam(exam.numberName,item,grade.name)">{{item}}</button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </p-tabPanel>
-</p-tabView>
+<div class="container">
+    <div class="row">
+        <div class="col-4" style="padding:0px;">
+            <p-tabView>
+                <p-tabPanel *ngFor="let grade of GradeList" [header]="grade.name" style="width:1140px;">
+                    <table>
+                        <tr *ngFor="let exam of grade.value">
+                            <td>
+                                <div class="card card-stats">
+                                    <div class="card-header card-header-warning card-header-icon">
+                                        {{exam.numberName}}
+                                    </div>
+                                    <div class="card-body" style="padding:5px;">
+                                        <div class="stats" >
+                                            <ul class="heroes"
+                                                style="cursor: pointer; width: auto;height: auto;padding: 0px;margin: 0px;">
+                                                <li *ngFor="let item of exam.subNameList"
+                                                    style="width: 50px;float:left;">
+                                                    <button type="button" class="btn btn-primary"
+                                                        (click)="JumpToExam(exam.numberName,item,grade.name)">{{item}}</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+        <div class="col-8">
+            <div class="card">
+                <div class="card-header card-header-text card-header-primary">
+                    <h4 class="card-title">{{Title}}</h4>
+                    <p class="category">{{subTitle}}</p>
+                </div>
+                <div class="card-body">
+                    <class-exam-list [Exams]="this.Exams" [scrollHeight]="'600px'" [IsShowExamName]="false"></class-exam-list>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

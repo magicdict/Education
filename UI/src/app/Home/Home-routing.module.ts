@@ -7,7 +7,6 @@ import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.com
 import { Grade2ScoreComponent } from './StudentArea/StudentSorce/Grade2Score.component';
 import { Grade3ScoreComponent } from './StudentArea/StudentSorce/Grade3Score.component';
 import { TeacherOverviewComponent } from './TeacherOverview/TeacherOverview.component';
-import { ExamClassDiffComponent } from './ExamArea/ExamClassDiff.component';
 import { SingleExamClassComponent } from './ExamArea/SingleExamClass.component';
 const routes: Routes = [
   {
@@ -39,10 +38,6 @@ const routes: Routes = [
   {
     path: 'student/overview/:id/grade3',
     component: Grade3ScoreComponent
-  },
-  {
-    path: 'exam/classdiff',
-    component: ExamClassDiffComponent
   },
   {
     path: 'exam/detail/:id',

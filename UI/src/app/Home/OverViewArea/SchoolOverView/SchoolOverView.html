@@ -1,5 +1,46 @@
 <app-nav></app-nav>
 <div class="container">
+
+  <div class="row" style="width:1140px">
+    <div class="col">
+      <div class="card card-stats">
+        <div class="card-header card-header-image">
+          <img src="Card" src="assets/image/BaiYangCampus.jpg" height="300px">
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            白杨校区
+            宁波市白杨街178号
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card card-stats">
+        <div class="card-header card-header-image">
+          <img src="Card" src="assets/image/EastCampus.jpg" height="300px">
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            东部校区
+            宁波市百丈东路1907号
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card card-stats">
+        <div class="card-header card-header-warning card-header-icon">
+          性别比例
+        </div>
+        <div class="card-body">
+          <div echarts [options]="SexRateSunburstOption" style="width:300px;height:275px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <div class="row" style="width:1140px">
 
     <div class="col-8">
@@ -134,43 +175,5 @@
     </div>
   </div>
 
-  <div class="row" style="width:1140px">
-    <div class="col">
-      <div class="card card-stats">
-        <div class="card-header card-header-image">
-          <img src="Card" src="assets/image/BaiYangCampus.jpg" height="300px">
-        </div>
-        <div class="card-footer">
-          <div class="stats">
-            白杨校区
-            宁波市白杨街178号
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card card-stats">
-        <div class="card-header card-header-image">
-          <img src="Card" src="assets/image/EastCampus.jpg" height="300px">
-        </div>
-        <div class="card-footer">
-          <div class="stats">
-            东部校区
-            宁波市百丈东路1907号
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card card-stats">
-        <div class="card-header card-header-warning card-header-icon">
-          性别比例
-        </div>
-        <div class="card-body">
-          <div echarts [options]="SexRateSunburstOption" style="width:300px;height:275px"></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </div>

@@ -9,6 +9,9 @@ import { HomeService } from '../../Common/Home.service';
 })
 export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
+    Exams: IClassExam[] = [];
+    Title:string;
+    subTitle:string; 
 
     GradeList: {
         name: string,
@@ -29,7 +32,6 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
     }
     constructor(
         private route: ActivatedRoute,
-        private router: Router,
         private commonFunction: CommonFunction,
         public service: HomeService,
         private cd: ChangeDetectorRef
@@ -47,7 +49,9 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         this.commonFunction.httpRequest<IClassExam[]>(request).then(
             r => {
                 this.service.CourseDiffInfo = r;
-                this.router.navigate(["exam/classdiff"]);
+                this.Exams = r;
+                this.Title = this.Exams[0].record.numberName;
+                this.subTitle = this.Exams[0].record.grade + " - " + this.Exams[0].record.subName;
             }
         );
     }

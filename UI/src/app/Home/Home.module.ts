@@ -33,7 +33,6 @@ import { SchoolOverViewComponent } from './OverViewArea/SchoolOverView/SchoolOve
 import { ExamOverViewComponent } from './OverViewArea/ExamOverview/ExamOverview.component';
 import { ConsumptionOverviewComponent } from './OverViewArea/ConsumptionOverview/ConsumptionOverview.component';
 import { ClassOverviewComponent } from './ClassArea/ClassOverview/ClassOverview.component';
-import { ExamClassDiffComponent } from './ExamArea/ExamClassDiff.component';
 import { SingleExamClassComponent } from './ExamArea/SingleExamClass.component';
 
 import { TeacherOverviewComponent } from './TeacherOverview/TeacherOverview.component';
@@ -83,7 +82,6 @@ import { ExamListComponent } from './Common/ExamList/ExamList.component';
     StudentPickerComponent,
     //考试相关
     SingleExamClassComponent,
-    ExamClassDiffComponent,
     ExamOverViewComponent,
   ],
   imports: [

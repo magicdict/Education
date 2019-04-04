@@ -9,6 +9,19 @@ import { Dropdown } from 'primeng/dropdown';
     templateUrl: 'ClassExamList.html',
 })
 export class ClassExamListComponent implements OnChanges {
+
+    @Input() Exams: IClassExam[];
+
+    @Input() scrollHeight: string = "400px";
+
+    @Input() FunRowSelect: (event: { data: IClassExam; }) => void;
+
+    @ViewChild("dt") dt: Table;
+
+    @ViewChild("subnamelist") subnamelist: Dropdown;
+
+    @Input() IsShowExamName:boolean = true;
+
     ngOnChanges(): void {
         this.subName = [];
         this.subName.push({ label: "全部", value: null });
@@ -26,17 +39,8 @@ export class ClassExamListComponent implements OnChanges {
         console.log("成绩列表变更");
     }
 
-    @Input() Exams: IClassExam[];
-
-    @Input() scrollHeight: string = "400px";
-
-    @Input() FunRowSelect: (event: { data: IClassExam; }) => void;
-
+   
     subName: { label: string, value: string }[] = [];
-
-    @ViewChild("dt") dt: Table;
-
-    @ViewChild("subnamelist") subnamelist: Dropdown;
 
     constructor(
         private router: Router,

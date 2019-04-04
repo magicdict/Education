@@ -12,7 +12,7 @@
         <p-sortIcon [field]="'record.className'">
         </p-sortIcon>
       </th>
-      <th style="width: 100px" [pSortableColumn]="'record.numberName'">考试名称
+      <th *ngIf="IsShowExamName" style="width: 100px" [pSortableColumn]="'record.numberName'">考试名称
         <p-sortIcon [field]="'record.numberName'">
         </p-sortIcon>
       </th>
@@ -54,7 +54,7 @@
   <ng-template pTemplate="body" let-itemData>
     <tr [pSelectableRow]="itemData">
       <td style="width: 100px">{{itemData.record.className}}</td>
-      <td style="width: 100px">{{itemData.record.numberName}}</td>
+      <td *ngIf="IsShowExamName" style="width: 100px">{{itemData.record.numberName}}</td>
       <td style="width: 50px">{{itemData.record.typeName}}</td>
       <td style="width: 100px">{{itemData.record.term}}</td>
       <td style="width: 50px">{{itemData.record.subName}}</td>
