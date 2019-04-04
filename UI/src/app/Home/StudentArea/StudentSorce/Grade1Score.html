@@ -1,7 +1,7 @@
 <div class="container">
     <student-header [CurrentStudent]="CurrentStudent"></student-header>
     <div class="row">
-        <div class="col-3">
+        <div class="col-2">
             <!--左侧内容-->
             <ul class="heroes">
                 <li *ngFor="let teacher of Teachers" style="cursor: pointer;" (click)="JumpToTeacher(teacher.id)">
@@ -10,21 +10,25 @@
                 </li>
             </ul>
         </div>
-        <div class="col-9">
-            <exam-list [Scores]="Scores"></exam-list>
-            <br />
-            <br />
+        <div class="col-10">
             <!--右侧内容-->
-            <div class="container">
-                <div class="row">
-                    <div class="col" *ngIf="IsShowType19">
-                        <div echarts [options]="ScoreGraphFor19Option" style="width:380px;"></div>
+            <p-tabView>
+                <p-tabPanel [header]="'成绩列表'">
+                    <exam-list [Scores]="Scores"></exam-list>
+                </p-tabPanel>
+                <p-tabPanel [header]="'各科图表'">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col" *ngIf="IsShowType19">
+                                <div echarts [options]="ScoreGraphFor19Option" style="width:400px;height:450px;"></div>
+                            </div>
+                            <div class="col" *ngIf="IsShowType2">
+                                <div echarts [options]="ScoreGraphFor2Option" style="width:400px;height:450px;"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col" *ngIf="IsShowType2">
-                        <div echarts [options]="ScoreGraphFor2Option" style="width:380px;"></div>
-                    </div>
-                </div>
-            </div>
+                </p-tabPanel>
+            </p-tabView>
         </div>
     </div>
 </div>

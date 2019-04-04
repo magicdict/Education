@@ -1,7 +1,7 @@
 <div class="container">
     <student-header [CurrentStudent]="CurrentStudent"></student-header>
     <div class="row">
-        <div class="col-3">
+        <div class="col-2">
             <!--左侧内容-->
             <ul class="heroes">
                 <li *ngFor="let teacher of Teachers" style="cursor: pointer;" (click)="JumpToTeacher(teacher.id)">
@@ -10,8 +10,52 @@
                 </li>
             </ul>
         </div>
-        <div class="col-9">
-            <exam-list [Scores]="Scores"></exam-list>
+        <div class="col-10">
+            <!--右侧内容-->
+            <p-tabView>
+                <p-tabPanel [header]="'成绩列表'">
+                    <exam-list [Scores]="Scores"></exam-list>
+                </p-tabPanel>
+                <p-tabPanel [header]="'各科图表'">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div echarts [options]="this.LineGraphOption[0]" style="width:250px;height:250px;"></div>
+                            </div>
+                            <div class="col">
+                                <div echarts [options]="this.LineGraphOption[1]" style="width:250px;height:250px;"></div>
+                            </div>
+                            <div class="col">
+                                <div echarts [options]="this.LineGraphOption[2]" style="width:250px;height:250px;"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div echarts [options]="this.LineGraphOption[3]" style="width:250px;height:250px;"></div>
+                            </div>
+                            <div class="col">
+                                <div echarts [options]="this.LineGraphOption[4]" style="width:250px;height:250px;"></div>
+                            </div>
+                            <div class="col">
+                                <div echarts [options]="this.LineGraphOption[5]" style="width:250px;height:250px;"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div echarts [options]="this.LineGraphOption[6]" style="width:250px;height:250px;"></div>
+                            </div>
+                            <div class="col">
+                                <div echarts [options]="this.LineGraphOption[7]" style="width:250px;height:250px;"></div>
+                            </div>
+                            <div class="col">
+                                <div echarts [options]="this.LineGraphOption[8]" style="width:250px;height:250px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
         </div>
     </div>
 </div>

@@ -15,7 +15,7 @@
         <p-sortIcon [field]="'studentName'">
         </p-sortIcon>
       </th>
-      <th *ngIf="Mode === 'Same'" style="width: 50px" [pSortableColumn]="'numberName'">考试名称
+      <th *ngIf="Mode === 'Same'" style="width: 200px" [pSortableColumn]="'numberName'">考试名称
         <p-sortIcon [field]="'numberName'">
         </p-sortIcon>
       </th>
@@ -23,7 +23,7 @@
         <p-sortIcon [field]="'subName'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px" [pSortableColumn]="'score'">分数
+      <th style="width: 40px" [pSortableColumn]="'score'">分数
         <p-sortIcon [field]="'score'">
         </p-sortIcon>
       </th>
@@ -49,9 +49,9 @@
     <tr [pSelectableRow]="itemData">
       <td *ngIf="Mode !== 'Same'" style="width: 50px">{{itemData.studentID}}</td>
       <td *ngIf="Mode !== 'Same'" style="width: 50px">{{itemData.studentName}}</td>
-      <td *ngIf="Mode === 'Same'" style="width: 50px">{{itemData.numberName}}</td>
+      <td *ngIf="Mode === 'Same'" style="width: 200px">{{itemData.numberName}}</td>
       <td *ngIf="Mode === 'Same'" style="width: 50px">{{itemData.subName}}</td>
-      <td style="width: 50px">{{itemData.score}}</td>
+      <td style="width: 40px">{{itemData.score}}</td>
       <td style="width: 50px">{{itemData.tScore}}</td>
       <td style="width: 50px">{{itemData.zScore}}</td>
       <td style="width: 50px">{{itemData.dengdi}}</td>

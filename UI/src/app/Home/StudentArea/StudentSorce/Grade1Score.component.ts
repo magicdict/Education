@@ -43,7 +43,7 @@ export class Grade1ScoreComponent implements OnInit {
 
         let Score19 = ScoreList.filter(x => x.type === "19")
         if (Score19.length === 0) this.IsShowType19 = false;
-        this.ScoreGraphFor19Option.title.text = '2018-2019新高一7月测试';
+        this.ScoreGraphFor19Option.title.text = '2018-2019新高一7月测试'; 
         this.ScoreGraphFor19Option.radar.indicator = Score19.map(x => { return { name: x.subName, 'max': 100 } });
         this.ScoreGraphFor19Option.series[0].data[0].value = Score19.map(x => CommonFunction.roundvalue((1 - x.dengdi) * 100));
         this.ScoreGraphFor19Option.series[0].data[1].value = Score19.map(x => CommonFunction.roundvalue(x.tScore));

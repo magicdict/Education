@@ -19,7 +19,7 @@
                   <p-sortIcon [field]="'name'">
                   </p-sortIcon>
                 </th>
-                <th [pSortableColumn]="'sex'" style="width: 50px">
+                <th [pSortableColumn]="'sex'" style="width: 40px">
                   性别
                   <p-sortIcon [field]="'sex'">
                   </p-sortIcon>
@@ -44,17 +44,23 @@
                   <p-sortIcon [field]="'nativePlace'">
                   </p-sortIcon>
                 </th>
+                <th *ngIf="ClassName.indexOf('高三')>=0"  [pSortableColumn]="'optionCourse'" style="width: 100px">
+                  七选三
+                  <p-sortIcon [field]="'optionCourse'">
+                  </p-sortIcon>
+                </th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-itemData>
               <tr [pSelectableRow]="itemData">
                 <td style="width: 40px">{{itemData.id}}</td>
                 <td style="width: 60px">{{itemData.name}}</td>
-                <td style="width: 50px">{{itemData.sex}}</td>
+                <td style="width: 40px">{{itemData.sex}}</td>
                 <td style="width: 60px">{{itemData.bornDate}}</td>
                 <td style="width: 80px">{{itemData.policy}}</td>
                 <td style="width: 50px">{{itemData.nation}}</td>
                 <td style="width: 100px">{{itemData.nativePlace}}</td>
+                <td *ngIf="ClassName.indexOf('高三')>=0" style="width: 100px">{{itemData.optionCourse}}</td>
               </tr>
             </ng-template>
           </p-table>
