@@ -54,7 +54,7 @@ export class Grade3ScoreComponent implements OnInit {
                 };
                 let scoreAvalible = this.Scores.filter(x => x.subName == subname && (x.type === "2" || x.type === "3" || x.type === "6" || x.type === "7"));
                 opt.xAxis.data = scoreAvalible.map(x => "");
-                opt.series[0].data = scoreAvalible.filter(x => x.subName == subname).map(x => -x.rank);
+                opt.series[0].data = scoreAvalible.filter(x => x.subName == subname).map(x => -x.rankPercent);
                 this.LineGraphOption.push(opt);
             }
         )

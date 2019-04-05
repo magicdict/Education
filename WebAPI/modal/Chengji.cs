@@ -125,11 +125,29 @@ public class Chengji : IEqualityComparer<Chengji>
     /// <value></value>
     public string Dengdi { get; set; }
     /// <summary>
-    /// 全校排名
+    /// 年纪排名
     /// </summary>
     /// <value></value>
     public int Rank { get; set; }
 
+    /// <summary>
+    /// 有效考试人数
+    /// </summary>
+    /// <value></value>
+    public int AvalibleCnt { get; set; }
+
+    /// <summary>
+    /// 有效考试人数
+    /// </summary>
+    /// <value></value>
+    public double RankPercent
+    {
+        get
+        {
+            if (Rank > AvalibleCnt) return 100; //无效分数的人
+            return Math.Round(Rank * 100 / (float)AvalibleCnt, 2);
+        }
+    }
     /// <summary>
     /// 必修课
     /// </summary>
@@ -285,5 +303,7 @@ public class GradeRank
 
     public string StudentID { get; set; }
 
-    public string Rank { get; set; }
+    public int Rank { get; set; }
+
+    public int AvalibleCnt { get; set; }
 }

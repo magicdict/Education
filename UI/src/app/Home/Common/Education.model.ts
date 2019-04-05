@@ -192,6 +192,8 @@ export interface IScore {
   tScore: number;
   dengdi: number;
   rank:number;
+  avalibleCnt:number;
+  rankPercent:number;
 }
 
 export interface IKaoqin {

@@ -3,8 +3,8 @@
 <p-dropdown #subnamelist [options]="subName" (onChange)="dt.filter($event.value, 'subName', 'equals')">
 </p-dropdown>
 <br />
-<br />
-<p-table #dt [value]="this.Scores" selectionMode="single" [scrollable]="true" scrollHeight="400px">
+<br /> 
+<p-table #dt [value]="this.Scores" selectionMode="single" (onRowSelect)="onRowSelect($event)" [scrollable]="true" scrollHeight="400px">
   <ng-template pTemplate="header">
     <tr>
       <th *ngIf="Mode !== 'Same'" style="width: 50px" [pSortableColumn]="'studentID'">学号
@@ -43,6 +43,10 @@
         <p-sortIcon [field]="'rank'">
         </p-sortIcon>
       </th>
+      <th style="width: 50px" [pSortableColumn]="'rankPercent'">年级排名百分比
+        <p-sortIcon [field]="'rank'">
+        </p-sortIcon>
+      </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-itemData>
@@ -56,6 +60,7 @@
       <td style="width: 50px">{{itemData.zScore}}</td>
       <td style="width: 50px">{{itemData.dengdi}}</td>
       <td style="width: 50px">{{itemData.rank}}</td>
+      <td style="width: 50px">{{itemData.rankPercent}}</td>
     </tr>
   </ng-template>
 </p-table>

@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, ViewChild } from '@angular/core';
 import { IScore } from 'src/app/Home/Common/Education.model';
 import { Table } from 'primeng/table';
 import { Dropdown } from 'primeng/dropdown';
+import { Router } from '@angular/router';
 @Component({
     selector: 'exam-list',
     templateUrl: 'ExamList.html',
@@ -36,6 +37,12 @@ export class ExamListComponent implements OnChanges {
 
     @ViewChild("subnamelist") subnamelist: Dropdown;
 
+    onRowSelect(event: { data: IScore; }) {
+        //默认方法
+        this.router.navigate(['student/overview', event.data.studentID]);
+    }
+
     constructor(
+        private router: Router,
     ) { }
 }

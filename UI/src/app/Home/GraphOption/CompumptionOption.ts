@@ -115,6 +115,9 @@ export const MonthlyCompumptionBarOptionTotal = {
     title: {
         text: '每日消费',
     },
+    grid: {
+        left: 100
+    },
     tooltip: {
         trigger: 'axis',
         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -148,6 +151,9 @@ export const MonthlyCompumptionBarOption = {
     },
     legend: {
         data: ['住校', '非住校']
+    },
+    grid: {
+        left: 100
     },
     tooltip: {
         trigger: 'axis',
