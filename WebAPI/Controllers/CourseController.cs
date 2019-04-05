@@ -11,6 +11,11 @@ namespace Education.Controllers
     [ApiController]
     public class CourseController : ControllerBase
     {
+        /// <summary>
+        /// 获得某个班级的某次考试的某个科目的成绩列表
+        /// </summary>
+        /// <param name="IdForClass"></param>
+        /// <returns></returns>
         [HttpGet("GetExamForSingleExam")]
         public ActionResult<List<Chengji>> GetExamForSingleExam(string IdForClass)
         {
@@ -25,8 +30,11 @@ namespace Education.Controllers
         }
 
         public static Dictionary<string, List<ChengjiDataSet>> ExamNameList;
-
-        public static void PrepareExamNameList(){
+        /// <summary>
+        /// 全校各个年级的考试列表
+        /// </summary>
+        public static void PrepareExamNameList()
+        {
             ExamNameList = new Dictionary<string, List<ChengjiDataSet>>();
             var LastestTermChangji = Dataset.ChengjiList.Distinct(new Chengji()).Where(x => x.Term == "2018-2019-1").ToList();
             //各个年级考试的聚集
@@ -52,16 +60,31 @@ namespace Education.Controllers
                 ExamNameList.Add(grade, GradeExamList);
             }
         }
-
         [HttpGet("GetExamNameList")]
         public ActionResult<Dictionary<string, List<ChengjiDataSet>>> GetExamNameList()
         {
             return ExamNameList;
         }
 
-        [HttpGet("GetExamInfoByNumberAndSubName")]
-        public ActionResult<List<ClassExamInfo>> GetExamInfoByNumberAndSubName(string NumberName, string SubName, string Grade)
+
+        public class ExamInfoForNumberAndSubName
         {
+            public List<ClassExamInfo> ClassExamInfoList { set; get; }
+            public List<Chengji> Top10 { set; get; }
+            public List<Chengji> Low10 { set; get; }
+            public ClassExamInfo GradeInfo { set; get; }
+        }
+        /// <summary>
+        /// 某个年级的某次考试的某个科目的班级单位的信息列表
+        /// </summary>
+        /// <param name="NumberName"></param>
+        /// <param name="SubName"></param>
+        /// <param name="Grade"></param>
+        /// <returns></returns>
+        [HttpGet("GetExamInfoByNumberAndSubName")]
+        public ActionResult<ExamInfoForNumberAndSubName> GetExamInfoByNumberAndSubName(string NumberName, string SubName, string Grade)
+        {
+            var Result = new ExamInfoForNumberAndSubName();
             var All = Dataset.ChengjiList.Where(x => x.SubName == SubName && x.NumberName == NumberName && x.Grade == Grade).ToList();
             var dic = new Dictionary<string, List<Chengji>>();
             foreach (var item in All)
@@ -75,10 +98,27 @@ namespace Education.Controllers
             foreach (var classid in classidlist)
             {
                 var chengjis = dic[classid];
-                chengjis.Sort((x, y) => { return x.Score.CompareTo(y.Score); });
-                r.Add(new ClassExamInfo() { ChengjiList = chengjis });
+                r.Add(new ClassExamInfo(chengjis));
             }
-            return r;
+            if (Grade == "高三")
+            {
+                //高三的ClassId混乱,所以按照ClassName再排序
+                r.Sort((x, y) => { return x.Record.ClassName.CompareTo(y.Record.ClassName); });
+            }
+            //获得前10名和后10名
+            All = All.Where(x => x.Score > 0).ToList();
+            var topx = Math.Min(All.Count(), 10);
+            All.Sort((x, y) => { return y.Score.CompareTo(x.Score); });  //降序
+            var Top10 = All.Take(topx).ToList();
+            All.Sort((x, y) => { return x.Score.CompareTo(y.Score); });  //升序
+            var Low10 = All.Take(topx).ToList();
+
+            Result.ClassExamInfoList = r;
+            Result.Top10 = Top10;
+            Result.Low10 = Low10;
+            Result.GradeInfo = new ClassExamInfo(All);
+
+            return Result;
         }
 
         /// <summary>
@@ -96,7 +136,7 @@ namespace Education.Controllers
         }
 
         /// <summary>
-        /// 获得某班级某课程某次考试的信息
+        /// 获得某班级某课程某次考试的成绩列表
         /// </summary>
         /// <param name="classid"></param>
         /// <param name="subid"></param>

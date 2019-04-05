@@ -11,6 +11,11 @@ public class ClassExamInfo
     /// <value></value>
     internal List<Chengji> ChengjiList { get; set; }
 
+    public ClassExamInfo(List<Chengji> chengjis){
+        chengjis.Sort((x, y) => { return x.Score.CompareTo(y.Score); });
+        ChengjiList = chengjis;
+    }
+
     public Chengji Record
     {
         get

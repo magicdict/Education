@@ -91,8 +91,7 @@ namespace Education.Controllers
             foreach (var key in dic.Keys)
             {
                 var chengjis = dic[key];
-                chengjis.Sort((x, y) => { return x.Score.CompareTo(y.Score); });
-                r.Add(new ClassExamInfo() { ChengjiList = chengjis });
+                r.Add(new ClassExamInfo(chengjis));
             }
             overview.Exams = r;
 

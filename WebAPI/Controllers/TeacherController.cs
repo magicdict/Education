@@ -52,8 +52,7 @@ namespace Education.Controllers
                     }
                     foreach (var item in dic.Values)
                     {
-                        item.Sort((x, y) => { return x.Score.CompareTo(y.Score); });
-                        baseinfo.ClassExams.Add(new ClassExamInfo() { ChengjiList = item });
+                        baseinfo.ClassExams.Add(new ClassExamInfo(item));
                     }
                 }
             }

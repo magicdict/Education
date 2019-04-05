@@ -147,6 +147,13 @@ export interface IExamList {
   }[];
 }
 
+export interface IExamInfoForNumberAndSubName {
+  classExamInfoList: IClassExam[];
+  top10: IScore[];
+  low10: IScore[];
+  gradeInfo: IClassExam;
+}
+
 export interface IConsumption {
   dealTime: string;
   dealTimeYear: string;
@@ -172,8 +179,8 @@ export interface IStudentMonthlyConsumption {
 export interface IScore {
   id: string;
   idForClass: string;
-  className:string;
-  grade:string;
+  className: string;
+  grade: string;
   number: string;
   numberName: string;
   subId: string;
@@ -191,9 +198,9 @@ export interface IScore {
   zScore: string;
   tScore: number;
   dengdi: number;
-  rank:number;
-  avalibleCnt:number;
-  rankPercent:number;
+  rank: number;
+  avalibleCnt: number;
+  rankPercent: number;
 }
 
 export interface IKaoqin {

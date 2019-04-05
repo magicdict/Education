@@ -1,17 +1,20 @@
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IExamList, IClassExam } from 'src/app/Home/Common/Education.model';
+import { IExamList, IClassExam, IExamInfoForNumberAndSubName, IScore } from 'src/app/Home/Common/Education.model';
 import { CommonFunction } from 'src/app/Home/Common/common';
 import { HomeService } from '../../Common/Home.service';
-
+import { ScoreFunnelOption } from '../../GraphOption/ScoreOption';
 @Component({
     templateUrl: 'ExamOverView.html',
 })
 export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
     Exams: IClassExam[] = [];
-    Title:string;
-    subTitle:string; 
+    Top10: IScore[] = [];
+    Low10: IScore[] = [];
+    mScoreFunnelOption = ScoreFunnelOption;
+    Title: string;
+    subTitle: string;
 
     GradeList: {
         name: string,
@@ -42,16 +45,37 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         //因为动态加载了Panel
         this.cd.detectChanges();
     }
-
+    //ngx-echarts初始化，获得图表实例
+    echartsInstance:any;
+    onChartInit(event) {
+        this.echartsInstance = event;
+    }
     JumpToExam(numberName: string, subName: string, Grade: string) {
         var request = "course/GetExamInfoByNumberAndSubName?numberName=" + numberName + "&subName=" + subName + "&Grade=" + Grade;
 
-        this.commonFunction.httpRequest<IClassExam[]>(request).then(
+        this.commonFunction.httpRequest<IExamInfoForNumberAndSubName>(request).then(
             r => {
-                this.service.CourseDiffInfo = r;
-                this.Exams = r;
+                this.service.CourseDiffInfo = r.classExamInfoList;
+                r.gradeInfo.record.className = "年级组";
+                this.Exams = r.classExamInfoList;
+                this.Exams.push(r.gradeInfo);
+                this.Top10 = r.top10;
+                this.Low10 = r.low10;
                 this.Title = this.Exams[0].record.numberName;
                 this.subTitle = this.Exams[0].record.grade + " - " + this.Exams[0].record.subName;
+
+                this.mScoreFunnelOption.legend.data = [];
+                this.mScoreFunnelOption.series[0].data = [];
+                let maxcnt = 0;
+                for (let k in r.gradeInfo.funnelDic) {
+                    this.mScoreFunnelOption.legend.data.push(k);
+                    this.mScoreFunnelOption.series[0].data.push({ name: k, value: r.gradeInfo.funnelDic[k] });
+                    if (r.gradeInfo.funnelDic[k] > maxcnt) {
+                        maxcnt = r.gradeInfo.funnelDic[k];
+                    }
+                }
+                this.mScoreFunnelOption.series[0].max = maxcnt;
+                this.echartsInstance.setOption(this.mScoreFunnelOption);
             }
         );
     }

@@ -12,7 +12,7 @@
                                         {{exam.numberName}}
                                     </div>
                                     <div class="card-body" style="padding:5px;">
-                                        <div class="stats" >
+                                        <div class="stats">
                                             <ul class="heroes"
                                                 style="cursor: pointer; width: auto;height: auto;padding: 0px;margin: 0px;">
                                                 <li *ngFor="let item of exam.subNameList"
@@ -31,15 +31,47 @@
             </p-tabView>
         </div>
         <div class="col-8">
-            <div class="card">
-                <div class="card-header card-header-text card-header-primary">
-                    <h4 class="card-title">{{Title}}</h4>
-                    <p class="category">{{subTitle}}</p>
-                </div>
-                <div class="card-body">
-                    <class-exam-list [Exams]="this.Exams" [scrollHeight]="'600px'" [IsShowExamName]="false"></class-exam-list>
-                </div>
-            </div>
+
+            <p-tabView>
+                <p-tabPanel [header]="'概要'">
+                    <div class="card">
+                        <div class="card-header card-header-text card-header-primary">
+                            <h4 class="card-title">{{Title}}</h4>
+                            <p class="category">{{subTitle}}</p>
+                        </div>
+                        <div class="card-body">
+                            <class-exam-list [Exams]="this.Exams" [scrollHeight]="'600px'" [IsShowExamName]="false">
+                            </class-exam-list>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel [header]="'排行榜'">
+
+                    <div class="card">
+                        <div class="card-header card-header-text card-header-primary">
+                            <h4 class="card-title">TOP10</h4>
+                            <p class="category">{{Title}} - {{subTitle}}</p>
+                        </div>
+                        <div class="card-body">
+                            <exam-list [Scores]="Top10"></exam-list>
+                        </div>
+                    </div>
+                    <br /><br />
+                    <div class="card">
+                        <div class="card-header card-header-text card-header-primary">
+                            <h4 class="card-title">LOW10</h4>
+                            <p class="category">{{Title}} - {{subTitle}}</p>
+                        </div>
+                        <div class="card-body">
+                            <exam-list [Scores]="Low10"></exam-list>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel [header]="'分数段人数'">
+                    <div echarts [options]="mScoreFunnelOption" style="width:500px;height:500px;"
+                    (chartInit)="onChartInit($event)"></div> 
+                </p-tabPanel>
+            </p-tabView>
         </div>
     </div>
 </div>
