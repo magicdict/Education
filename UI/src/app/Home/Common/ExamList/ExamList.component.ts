@@ -3,6 +3,7 @@ import { IScore } from 'src/app/Home/Common/Education.model';
 import { Table } from 'primeng/table';
 import { Dropdown } from 'primeng/dropdown';
 import { Router } from '@angular/router';
+import { CommonFunction } from '../common'
 @Component({
     selector: 'exam-list',
     templateUrl: 'ExamList.html',
@@ -36,6 +37,8 @@ export class ExamListComponent implements OnChanges {
     @ViewChild("dt") dt: Table;
 
     @ViewChild("subnamelist") subnamelist: Dropdown;
+
+    roundvalue = CommonFunction.roundvalue;
 
     onRowSelect(event: { data: IScore; }) {
         //默认方法

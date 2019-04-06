@@ -22,6 +22,9 @@ export class ClassExamListComponent implements OnChanges {
 
     @Input() IsShowExamName:boolean = true;
 
+    /**统计条目 */
+    @Input() Footer:IClassExam = null;
+
     ngOnChanges(): void {
         this.subName = [];
         this.subName.push({ label: "全部", value: null });

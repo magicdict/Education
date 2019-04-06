@@ -3,8 +3,9 @@
 <p-dropdown #subnamelist [options]="subName" (onChange)="dt.filter($event.value, 'subName', 'equals')">
 </p-dropdown>
 <br />
-<br /> 
-<p-table #dt [value]="this.Scores" selectionMode="single" (onRowSelect)="onRowSelect($event)" [scrollable]="true" scrollHeight="400px">
+<br />
+<p-table #dt [value]="this.Scores" selectionMode="single" (onRowSelect)="onRowSelect($event)" [scrollable]="true"
+  scrollHeight="400px">
   <ng-template pTemplate="header">
     <tr>
       <th *ngIf="Mode !== 'Same'" style="width: 50px" [pSortableColumn]="'studentID'">学号
@@ -56,9 +57,9 @@
       <td *ngIf="Mode === 'Same'" style="width: 200px">{{itemData.numberName}}</td>
       <td *ngIf="Mode === 'Same'" style="width: 50px">{{itemData.subName}}</td>
       <td style="width: 40px">{{itemData.score}}</td>
-      <td style="width: 50px">{{itemData.tScore}}</td>
-      <td style="width: 50px">{{itemData.zScore}}</td>
-      <td style="width: 50px">{{itemData.dengdi}}</td>
+      <td style="width: 50px">{{roundvalue(itemData.tScore)}}</td>
+      <td style="width: 50px">{{roundvalue(itemData.zScore)}}</td>
+      <td style="width: 50px">{{roundvalue(itemData.dengdi)}}</td>
       <td style="width: 50px">{{itemData.rank}}</td>
       <td style="width: 50px">{{itemData.rankPercent}}</td>
     </tr>

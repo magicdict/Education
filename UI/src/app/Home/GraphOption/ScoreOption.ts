@@ -8,7 +8,7 @@ export const ScoreRadarGraphOption = {
   tooltip: {},
   legend: {
     right: 10,
-    data: ['等第', 'TScore']
+    data: ['等第逆转', 'TScore']
   },
   radar: {
     name: {
@@ -27,7 +27,7 @@ export const ScoreRadarGraphOption = {
     data: [
       {
         value: [],
-        name: '等第'
+        name: '等第逆转'
       },
       {
         value: [],

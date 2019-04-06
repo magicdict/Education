@@ -38,13 +38,24 @@ export class Grade2ScoreComponent implements OnInit {
             subname => {
                 let opt = {
                     title: { text: subname },
+                    legend: {
+                        right: 10,
+                        data: ['年级百分比', '等第']
+                      },
                     xAxis: { type: 'category', data: [] },
                     yAxis: { type: 'value' },
-                    series: [{ data: [], type: 'line' }]
+                    series: [
+                        { data: [], type: 'line',name: '年级百分比' },
+                        { data: [], type: 'line',name: '等第' }
+                    ]
                 };
-                let scoreAvalible = this.Scores.filter(x => x.subName == subname && (x.type === "2" || x.type === "3" || x.type === "6" || x.type === "7"));
+                let scoreAvalible = this.Scores.filter(
+                    x => x.subName == subname && x.score > 0 && 
+                    (x.type === "2" || x.type === "3" || x.type === "6" || x.type === "7"));
                 opt.xAxis.data = scoreAvalible.map(x => "");
-                opt.series[0].data = scoreAvalible.filter(x => x.subName == subname).map(x => -x.rankPercent);
+                opt.series[0].data = scoreAvalible.map(x => -x.rankPercent);
+                opt.series[1].data = scoreAvalible.filter(x => x.dengdi.toString() !== "").map(x => -x.dengdi * 100);
+                //等第可能是空
                 this.LineGraphOption.push(opt);
             }
         )
