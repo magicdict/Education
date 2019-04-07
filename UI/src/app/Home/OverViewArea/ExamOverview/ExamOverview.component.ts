@@ -12,6 +12,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
     Exams: IClassExam[] = [];
     Top10: IScore[] = [];
     Low10: IScore[] = [];
+    FootExam: IClassExam;
     mScoreFunnelOption = ScoreFunnelOption;
     Title: string;
     subTitle: string;
@@ -46,7 +47,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         this.cd.detectChanges();
     }
     //ngx-echarts初始化，获得图表实例
-    echartsInstance:any;
+    echartsInstance: any;
     onChartInit(event) {
         this.echartsInstance = event;
     }
@@ -58,7 +59,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
                 this.service.CourseDiffInfo = r.classExamInfoList;
                 r.gradeInfo.record.className = "年级组";
                 this.Exams = r.classExamInfoList;
-                this.Exams.push(r.gradeInfo);
+                this.FootExam = r.gradeInfo;
                 this.Top10 = r.top10;
                 this.Low10 = r.low10;
                 this.Title = this.Exams[0].record.numberName;

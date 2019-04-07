@@ -1,9 +1,11 @@
 <br />
-科目选择：
-<p-dropdown #subnamelist [options]="subName" (onChange)="dt.filter($event.value, 'record.subName', 'equals')">
-</p-dropdown>
-<br />
-<br />
+<div *ngIf="subName.length > 2">
+  科目选择：
+  <p-dropdown #subnamelist [options]="subName" (onChange)="dt.filter($event.value, 'record.subName', 'equals')">
+  </p-dropdown>
+  <br />
+  <br />
+</div>
 <p-table #dt [value]="this.Exams" selectionMode="single" [scrollable]="true" [scrollHeight]="scrollHeight"
   (onRowSelect)="onRowSelect($event)">
   <ng-template pTemplate="header">
@@ -66,4 +68,19 @@
       <td style="width: 50px">{{itemData.var}}</td>
     </tr>
   </ng-template>
+  <ng-template pTemplate="footer" *ngIf="Footer !==null" > 
+    <tr>
+      <td style="width: 100px">{{Footer.record.className}}</td>
+      <td *ngIf="IsShowExamName" style="width: 100px">{{Footer.record.numberName}}</td>
+      <td style="width: 50px">{{Footer.record.typeName}}</td>
+      <td style="width: 100px">{{Footer.record.term}}</td>
+      <td style="width: 50px">{{Footer.record.subName}}</td>
+      <td style="width: 60px">{{Footer.avilibleCnt}}/{{Footer.allCnt}}</td>
+      <td style="width: 50px">{{Footer.maxScore}}</td>
+      <td style="width: 50px">{{Footer.minScore}}</td>
+      <td style="width: 50px">{{Footer.avgScore}}</td>
+      <td style="width: 50px">{{Footer.std}}</td>
+      <td style="width: 50px">{{Footer.var}}</td>
+    </tr>
+</ng-template>
 </p-table>
