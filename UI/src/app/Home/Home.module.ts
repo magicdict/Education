@@ -47,7 +47,6 @@ import { KaoqinOverviewComponent } from './OverViewArea/KaoqinOverview/KaoqinOve
 /**共通 */
 import { ErrorMessageDialogComponent } from './Common/error-message-dialog/error-message-dialog.component';
 import { NavigationComponent } from './Common/navigation/Navigation.component';
-import { StudentHeaderComponent } from './Common/studentHeader/StudentHeader.component';
 import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.component';
 import { ClassExamListComponent } from './Common/ClassExamList/ClassExamList.component';
 import { StudentPickerComponent } from './Common/studentPicker/studentPicker.component';
@@ -78,7 +77,6 @@ import { ExamListComponent } from './Common/ExamList/ExamList.component';
     NavigationComponent,
     TeacherPickerComponent,
     ErrorMessageDialogComponent,
-    StudentHeaderComponent,
     ClassExamListComponent,
     ExamListComponent,
     StudentPickerComponent,

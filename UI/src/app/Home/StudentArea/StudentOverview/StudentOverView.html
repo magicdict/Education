@@ -1,77 +1,70 @@
+<app-nav></app-nav>
+<div class="card card-profile ml-auto mr-auto" style="width: 256px;float: left;">
+    <div class="card-header card-header-image" style="width:192px;background: transparent">
+        <img class="img" style="width:128px;"
+            [src]="CurrentStudent.sex == '男' ? '/assets/image/male.png' : '/assets/image/female.png'">
+    </div>
+    <div class="card-body ">
+        <h4 class="card-title">{{CurrentStudent.name}}</h4>
+        <h6 class="card-title">{{CurrentStudent.className}}</h6>
+        <ul class="heroes">
+            <li>
+                <span class="badge">ID</span>{{CurrentStudent.id}}
+            </li>
+            <li>
+                <span class="badge">出生年</span>{{CurrentStudent.bornDate}}
+            </li>
+            <li>
+                <span class="badge">政治面貌</span>{{CurrentStudent.policy}}
+            </li>
+            <li>
+                <span class="badge">民族</span>{{CurrentStudent.nation}}
+            </li>
+            <li>
+                <span class="badge">出生地</span>{{CurrentStudent.nativePlace}}
+            </li>
+            <li>
+                <span class="badge">家庭类型</span>{{CurrentStudent.residenceType}}
+            </li>
+            <li>
+                <span class="badge">宿舍号</span>{{CurrentStudent.liveRoomNo}}
+            </li>
+        </ul>
+    </div>
+</div>
 <div class="container">
-    <student-header *ngIf='IsHeaderReady' [CurrentStudent]="CurrentStudent"></student-header>
-    <div class="row">
-        <div class="col-3">
-            <!--左侧内容-->
-            <ul class="heroes">
-                <li>
-                    <span class="badge">ID</span>{{CurrentStudent.id}}
-                </li>
-                <li>
-                    <span class="badge">班级</span>{{CurrentStudent.className}}
-                </li>
-                <li>
-                    <span class="badge">学期</span>{{CurrentStudent.classTerm}}
-                </li>
-                <li>
-                    <span class="badge">姓名</span>{{CurrentStudent.name}}
-                </li>
-                <li>
-                    <span class="badge">性别</span>{{CurrentStudent.sex}}
-                </li>
-                <li>
-                    <span class="badge">出生年</span>{{CurrentStudent.bornDate}}
-                </li>
-                <li>
-                    <span class="badge">政治面貌</span>{{CurrentStudent.policy}}
-                </li>
-                <li>
-                    <span class="badge">民族</span>{{CurrentStudent.nation}}
-                </li>
-                <li>
-                    <span class="badge">出生地</span>{{CurrentStudent.nativePlace}}
-                </li>
-
-                <li>
-                    <span class="badge">家庭类型</span>{{CurrentStudent.residenceType}}
-                </li>
-                <li>
-                    <span class="badge">是否住校</span>{{CurrentStudent.liveAtSchool?"是":"否"}}
-                </li>
-                <li>
-                    <span class="badge">宿舍号</span>{{CurrentStudent.liveRoomNo}}
-                </li>
-                <li>
-                    <span class="badge">是否退学</span>{{CurrentStudent.leaveSchool?"是":"否"}}
-                </li>
-            </ul>
-        </div>
-        <div class="col-9">
-            <!--右侧内容-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-6" *ngIf="ScoreAvg.length !== 0">
-                        <div echarts [options]="ScoreGraph" style="width:350px;height:350px;"></div>
-                        <button class="btn btn-primary" style="float:right" (click)="JumpTo('grade')"><i
-                                class="fa fas fa-chart-bar"></i> 详细</button>
-                    </div>
-                    <div class="col-6" *ngIf="ConsumptionMonth.length !== 0">
-                        <div echarts [options]="CompumptionGraph" style="width:350px;height:350px;"></div>
-                        <button class="btn btn-primary" style="float:right" (click)="JumpTo('compumption')"><i
-                                class="fa fas fa-chart-bar"></i> 详细</button>
-                    </div>
-                </div>
-                <div class="row" *ngIf="KaoqinMonthCnt.length !== 0">
-                    <div class="col-6">
-                        <div echarts [options]="KaoqinGraph" style="width:350px;height:350px;"></div>
-                        <button class="btn btn-primary" style="float:right"><i class="fa fas fa-chart-bar"></i>
-                            详细</button>
-                    </div>
-                    <div class="col-6">
-                        
-                    </div>
+    <div class="row" style="margin-top:5px">
+        <div class="col-6" *ngIf="ScoreAvg.length !== 0">
+            <div class="card text-right" style="width: 100%;margin-top: 35px;margin-bottom: 5px;">
+                <div class="card-body">
+                    <div echarts [options]="ScoreGraph" style="width:350px;height:350px;"></div>
+                    <button class="btn btn-primary" style="float:right" (click)="JumpTo('grade')"><i
+                            class="fa fas fa-chart-bar"></i> 详细</button>
                 </div>
             </div>
+        </div>
+        <div class="col-6" *ngIf="ConsumptionMonth.length !== 0">
+            <div class="card text-right" style="width: 100%;margin-top: 35px;margin-bottom: 5px;">
+                <div class="card-body">
+                    <div echarts [options]="CompumptionGraph" style="width:350px;height:350px;"></div>
+                    <button class="btn btn-primary" style="float:right" (click)="JumpTo('compumption')"><i
+                            class="fa fas fa-chart-bar"></i> 详细</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="KaoqinMonthCnt.length !== 0">
+        <div class="col-6" style="padding-top:0px;">
+            <div class="card text-right" style="width: 100%;margin-top: 10px;">
+                <div class="card-body">
+                    <div echarts [options]="KaoqinGraph" style="width:350px;height:350px;"></div>
+                    <button class="btn btn-primary" style="float:right"><i class="fa fas fa-chart-bar"></i>
+                        详细</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+
         </div>
     </div>
 </div>

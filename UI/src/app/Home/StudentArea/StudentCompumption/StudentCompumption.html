@@ -1,45 +1,47 @@
+<app-nav></app-nav>
 <div class="container">
-    <student-header [CurrentStudent]="CurrentStudent"></student-header>
     <div class="row">
         <div class="col">
-            <div echarts [options]="mDiaryAvgByTimeRangeOpt" style="width:400px;height:400px;"></div>
+            <div class="card text-left" style="width: 100%;margin-top: 10px;">
+                <div class="card-body">
+                    <div echarts [options]="mDiaryAvgByTimeRangeOpt" style="width:400px;height:400px;"></div>
+                    <ul class="list-group">
+                        <li class="list-group-item active">
+                            每日平均消费信息
+                        </li>
+                        <li class="list-group-item">
+                            {{DiaryAvgByTimeRangeInfo1}}
+                        </li>
+                        <li class="list-group-item">
+                            {{DiaryAvgByTimeRangeInfo2}}
+                        </li>
+                        <li class="list-group-item">
+                            {{DiaryAvgByTimeRangeInfo3}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="col">
-            <ul class="list-group">
-                <li class="list-group-item active">
-                    每日平均消费信息
-                </li>
-                <li class="list-group-item">
-                    {{DiaryAvgByTimeRangeInfo1}}
-                </li>
-                <li class="list-group-item">
-                    {{DiaryAvgByTimeRangeInfo2}}
-                </li>
-                <li class="list-group-item">
-                    {{DiaryAvgByTimeRangeInfo3}}
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div echarts [options]="mTotalByTimeRangeOpt" style="width:400px;height:400px;"></div>
-        </div>
-        <div class="col">
-            <ul class="list-group">
-                <li class="list-group-item active">
-                    每日平均消费信息
-                </li>
-                <li class="list-group-item">
-                    {{TotalByTimeRangeInfo1}}
-                </li>
-                <li class="list-group-item">
-                    {{TotalByTimeRangeInfo2}}
-                </li>
-                <li class="list-group-item">
-                    {{TotalByTimeRangeInfo3}}
-                </li>
-            </ul>
+            <div class="card text-left" style="width: 100%;margin-top: 10px;">
+                <div class="card-body">
+                    <div echarts [options]="mTotalByTimeRangeOpt" style="width:400px;height:400px;"></div>
+                    <ul class="list-group">
+                        <li class="list-group-item active">
+                            每日平均消费信息
+                        </li>
+                        <li class="list-group-item">
+                            {{TotalByTimeRangeInfo1}}
+                        </li>
+                        <li class="list-group-item">
+                            {{TotalByTimeRangeInfo2}}
+                        </li>
+                        <li class="list-group-item">
+                            {{TotalByTimeRangeInfo3}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
