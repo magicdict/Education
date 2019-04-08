@@ -17,9 +17,7 @@ export class StudentOverviewComponent implements OnInit {
     public service: HomeService,
     private router: Router,
     private route: ActivatedRoute) {
-
   }
-
 
   CompumptionGraph = CompumptionBarGraph;
   KaoqinGraph = KaoqinBarGraph;
@@ -153,11 +151,7 @@ export class StudentOverviewComponent implements OnInit {
         this.ScoreGraph.radar.indicator = this.ScoreName;
         this.ScoreGraph.series[0].data[0].value = this.ScoreAvg;
         this.ScoreGraph.series[0].data[1].value = this.TScoreAvg;
-        this.ScoreGraph = (JSON.parse(JSON.stringify(ScoreRadarGraphOption)));
+        this.ScoreGraph = CommonFunction.clone(ScoreRadarGraphOption);
       });
   }
-
-
-
-
 }

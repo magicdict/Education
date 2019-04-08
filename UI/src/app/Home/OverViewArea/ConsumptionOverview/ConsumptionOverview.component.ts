@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ISchoolConsumptionInfo, IConsumption, IStudent, IStudentMonthlyConsumption } from 'src/app/Home/Common/Education.model';
 import { MonthlyCompumptionBarOption, MonthlyCompumptionBarOptionTotal } from '../../GraphOption/CompumptionOption'
 import { HomeService } from '../../Common/Home.service';
+import { CommonFunction } from '../../Common/common';
 @Component({
   templateUrl: 'ConsumptionOverview.html',
 })
@@ -13,11 +14,11 @@ export class ConsumptionOverviewComponent implements OnInit {
     public service: HomeService
   ) { }
 
-  monthlyOpt = (JSON.parse(JSON.stringify(MonthlyCompumptionBarOption)));
-  weekdayOpt = (JSON.parse(JSON.stringify(MonthlyCompumptionBarOption)));
+  monthlyOpt = CommonFunction.clone(MonthlyCompumptionBarOption);
+  weekdayOpt = CommonFunction.clone(MonthlyCompumptionBarOption);
 
-  monthlyTotalOpt = (JSON.parse(JSON.stringify(MonthlyCompumptionBarOptionTotal)));
-  weekdayTotalOpt = (JSON.parse(JSON.stringify(MonthlyCompumptionBarOptionTotal)));
+  monthlyTotalOpt = CommonFunction.clone(MonthlyCompumptionBarOptionTotal);
+  weekdayTotalOpt = CommonFunction.clone(MonthlyCompumptionBarOptionTotal);
 
   highestRec: IConsumption[];
   highestRecLiveAtSchool: IConsumption[];

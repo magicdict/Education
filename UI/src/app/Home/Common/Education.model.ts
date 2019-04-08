@@ -172,6 +172,7 @@ export interface IStudentMonthlyConsumption {
   name: string;
   sex: string;
   className: string;
+  liveAtSchool:boolean;
   month: string;
   amount: number;
 }

@@ -243,6 +243,9 @@ export const CompumptionBarGraph = {
     text: "消费记录（月度）"
   },
   tooltip: {},
+  grid: {
+    left: 50
+  },
   legend: {
     data: ['消费额']
   },

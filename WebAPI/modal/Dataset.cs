@@ -212,6 +212,7 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine("读取学生消费件数：" + ConsumptionList.Count);
+        //Dump(fullpath);
         //全体消费信息预先统计
         Education.Controllers.ConsumptionController.PrepareSchoolConsumptionInfo();
         Console.WriteLine("全体消费信息预先统计");
@@ -229,7 +230,8 @@ public static class Dataset
                 Sex = line[2],
                 ClassName = line[3],
                 Month = line[4],
-                Amount = -1 * float.Parse(line[5])
+                Amount = -1 * float.Parse(line[5]),
+                LiveAtSchool = line[6] == "True"
             });
         }
         sr.Close();
@@ -246,14 +248,14 @@ public static class Dataset
         if (true)
         {
             sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "StudentConsumptionMonthList.csv");
-            sw.WriteLine("Id,Name,Sex,ClassName,Month,Amount");
+            sw.WriteLine("Id,Name,Sex,ClassName,Month,Amount,LiveAtSchool");
             var MonthTitle = new string[] { "201807", "201808", "201809", "201810", "201811", "201812", "201901" };
             foreach (var student in Dataset.StudentList)
             {
                 foreach (var mon in MonthTitle)
                 {
                     var sum = Dataset.ConsumptionList.Where(x => x.DealYearMonth == mon && x.StudentID == student.ID).Sum(x => x.MonDeal);
-                    sw.WriteLine(student.ID + "," + student.Name + "," + student.Sex + "," + student.ClassName + "," + mon + "," + sum);
+                    sw.WriteLine(student.ID + "," + student.Name + "," + student.Sex + "," + student.ClassName + "," + mon + "," + sum + "," + student.LiveAtSchool);
                 }
             }
             sw.Close();

@@ -40,124 +40,141 @@
         </div>
     </p-tabPanel>
     <p-tabPanel header="消费预警" style="width:1140px;">
-        月消费上限： <p-dropdown [options]="MonthUpLimitList" [(ngModel)]="MonthUpLimit" [style]="{'width':'150px'}"
-            placeholder="选择一个月消费金额：" (onChange)="QueryByMonthUpLimit()"></p-dropdown>
-        <br />
-        <br />
-        <p-table [value]="this.Students" selectionMode="single" [(selection)]="this.selectStudent" [scrollable]="true"
-            scrollHeight="800px" (onRowSelect)="onRowSelect($event)">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="width: 50px">学号</th>
-                    <th style="width: 100px">姓名</th>
-                    <th style="width: 100px">班级</th>
-                    <th style="width: 100px">性别</th>
-                    <th style="width: 100px">月度</th>
-                    <th style="width: 100px">金额</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-itemData>
-                <tr [pSelectableRow]="itemData">
-                    <td style="width: 50px">{{itemData.id}}</td>
-                    <td style="width: 100px">{{itemData.name}}</td>
-                    <td style="width: 100px">{{itemData.className}}</td>
-                    <td style="width: 100px">{{itemData.sex}}</td>
-                    <td style="width: 100px">{{itemData.month}}</td>
-                    <td style="width: 100px">{{itemData.amount}}</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </p-tabPanel>
-    <p-tabPanel header="个人消费排行榜" style="width:1140px;">
+
         <div class="container">
             <div class="row">
-                <div *ngFor="let item of this.highestRec" class="col">
-                    <p-card header="最高消费" subheader="消费记录" [style]="{width: '320px'}" styleClass="ui-card-shadow">
-                        <p-header>
-                            <img src="Card" src="assets/image/usercard.png">
-                        </p-header>
-                        <div>
-                            <ul class="heroes" style="width: 280px">
-                                <li>
-                                    <span class="badge">消费者</span>{{item.accName}}
-                                </li>
-                                <li>
-                                    <span class="badge">发生时间</span>{{item.dealTime}}
-                                </li>
-                                <li>
-                                    <span class="badge">金额</span>{{-item.monDeal}}元
-                                </li>
-                                <li>
-                                    <span class="badge">住校</span>{{item.consumpStudent.liveAtSchool?"是":"否"}}
-                                </li>
-                            </ul>
-                        </div>
-                        <p-footer>
-                            <button pButton type="button" label="学生详细信息" icon="pi pi-check" style="margin-right: .25em"
-                                (click)="JumpTo(item.studentID)"></button>
-                        </p-footer>
-                    </p-card>
+                <div class="col-7">
+                    月消费上限： <p-dropdown [options]="MonthUpLimitList" [(ngModel)]="MonthUpLimit"
+                        [style]="{'width':'150px'}" placeholder="选择一个月消费金额：" (onChange)="QueryByMonthUpLimit()">
+                    </p-dropdown>
+                    <br />
+                    <br />
+                    <p-table [value]="this.Students" selectionMode="single" [(selection)]="this.selectStudent"
+                        [scrollable]="true" scrollHeight="720px" (onRowSelect)="onRowSelect($event)">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width: 50px">学号</th>
+                                <th style="width: 100px">姓名</th>
+                                <th style="width: 100px">班级</th>
+                                <th style="width: 50px" [pSortableColumn]="'sex'">性别
+                                    <p-sortIcon [field]="'sex'">
+                                    </p-sortIcon>
+                                </th>
+                                <th style="width: 50px" [pSortableColumn]="'liveAtSchool'">是否住校
+                                    <p-sortIcon [field]="'liveAtSchool'">
+                                    </p-sortIcon>
+                                </th>
+                                <th style="width: 100px" [pSortableColumn]="'month'">月度
+                                    <p-sortIcon [field]="'month'">
+                                    </p-sortIcon>
+                                </th>
+                                <th style="width: 100px" [pSortableColumn]="'amount'">金额
+                                    <p-sortIcon [field]="'amount'">
+                                    </p-sortIcon>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-itemData>
+                            <tr [pSelectableRow]="itemData">
+                                <td style="width: 50px">{{itemData.id}}</td>
+                                <td style="width: 100px">{{itemData.name}}</td>
+                                <td style="width: 100px">{{itemData.className}}</td>
+                                <td style="width: 50px">{{itemData.sex}}</td>
+                                <td style="width: 50px">{{itemData.liveAtSchool?"是":"否"}}</td>
+                                <td style="width: 100px">{{itemData.month}}</td>
+                                <td style="width: 100px">{{itemData.amount}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
                 </div>
-            </div>
-            <br />
-            <div class="row">
-                <div *ngFor="let item of this.highestRecLiveAtSchool" class="col">
-                    <p-card header="最高消费(住校)" subheader="消费记录" [style]="{width: '320px'}" styleClass="ui-card-shadow">
-                        <p-header>
-                            <img src="Card" src="assets/image/usercard.png">
-                        </p-header>
-                        <div>
-                            <ul class="heroes" style="width: 280px">
-                                <li>
-                                    <span class="badge">消费者</span>{{item.accName}}
-                                </li>
-                                <li>
-                                    <span class="badge">发生时间</span>{{item.dealTime}}
-                                </li>
-                                <li>
-                                    <span class="badge">金额</span>{{-item.monDeal}}元
-                                </li>
-                                <li>
-                                    <span class="badge">住校</span>{{item.consumpStudent.liveAtSchool?"是":"否"}}
+                <div class="col-5">
+                    <div class="card card-stats">
+                        <div class="card-header card-header-warning card-header-icon">
+                            单笔消费记录
+                        </div>
+                        <div class="card-body" style="padding:5px;">
+                            <div class="stats">
+                                <div class="container">
+                                    <div class="row" *ngFor="let item of this.highestRec">
+                                        <div class="col-2">
+                                            <img class="img" style="width:48px;"
+                                                [src]="item.consumpStudent.sex == '男' ? '/assets/image/male.png' : '/assets/image/female.png'">
+                                        </div>
+                                        <div class="col-7">
+                                            <b>{{item.accName}}
+                                                {{item.monDeal * -1}} 元</b>
+                                            <br />
+                                            {{item.dealTime}}
+                                        </div>
+                                        <div class="col-3">
+                                            <button type="button" class="btn btn-info"
+                                                (click)="JumpTo(item.studentID)">个人信息</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                                </li>
-                            </ul>
+                    <br />
+
+                    <div class="card card-stats">
+                        <div class="card-header card-header-warning card-header-icon">
+                            单笔消费记录[住校]
                         </div>
-                        <p-footer>
-                            <button pButton type="button" label="学生详细信息" icon="pi pi-check" style="margin-right: .25em"
-                                (click)="JumpTo(item.studentID)"></button>
-                        </p-footer>
-                    </p-card>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div *ngFor="let item of this.highestRecNotLiveAtSchool" class="col">
-                    <p-card header="最高消费(非住校)" subheader="消费记录" [style]="{width: '320px'}" styleClass="ui-card-shadow">
-                        <p-header>
-                            <img src="Card" src="assets/image/usercard.png">
-                        </p-header>
-                        <div>
-                            <ul class="heroes" style="width: 280px">
-                                <li>
-                                    <span class="badge">消费者</span>{{item.accName}}
-                                </li>
-                                <li>
-                                    <span class="badge">发生时间</span>{{item.dealTime}}
-                                </li>
-                                <li>
-                                    <span class="badge">金额</span>{{-item.monDeal}}元
-                                </li>
-                                <li>
-                                    <span class="badge">住校</span>{{item.consumpStudent.liveAtSchool?"是":"否"}}
-                                </li>
-                            </ul>
+                        <div class="card-body" style="padding:5px;">
+                            <div class="stats">
+                                <div class="container">
+                                    <div class="row" *ngFor="let item of this.highestRecLiveAtSchool">
+                                        <div class="col-2">
+                                            <img class="img" style="width:48px;"
+                                                [src]="item.consumpStudent.sex == '男' ? '/assets/image/male.png' : '/assets/image/female.png'">
+                                        </div>
+                                        <div class="col-7">
+                                            <b>{{item.accName}}
+                                                {{item.monDeal * -1}} 元</b>
+                                            <br />
+                                            {{item.dealTime}}
+                                        </div>
+                                        <div class="col-3">
+                                            <button type="button" class="btn btn-info"
+                                                (click)="JumpTo(item.studentID)">个人信息</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <p-footer>
-                            <button pButton type="button" label="学生详细信息" icon="pi pi-check" style="margin-right: .25em"
-                                (click)="JumpTo(item.studentID)"></button>
-                        </p-footer>
-                    </p-card>
+                    </div>
+
+                    <br />
+
+                    <div class="card card-stats">
+                        <div class="card-header card-header-warning card-header-icon">
+                            单笔消费记录[非住校]
+                        </div>
+                        <div class="card-body" style="padding:5px;">
+                            <div class="stats">
+                                <div class="container">
+                                    <div class="row" *ngFor="let item of this.highestRecNotLiveAtSchool">
+                                        <div class="col-2">
+                                            <img class="img" style="width:48px;"
+                                                [src]="item.consumpStudent.sex == '男' ? '/assets/image/male.png' : '/assets/image/female.png'">
+                                        </div>
+                                        <div class="col-7">
+                                            <b>{{item.accName}}
+                                                {{item.monDeal * -1}} 元</b>
+                                            <br />
+                                            {{item.dealTime}}
+                                        </div>
+                                        <div class="col-3">
+                                            <button type="button" class="btn btn-info"
+                                                (click)="JumpTo(item.studentID)">个人信息</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

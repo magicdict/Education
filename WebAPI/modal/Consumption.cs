@@ -10,6 +10,11 @@ public class MonthConsumptionStudent
     public string ID { get; set; }
     public string Name { get; set; }
     public string Sex { get; set; }
+    /// <summary>
+    /// 是否住校
+    /// </summary>
+    /// <value></value>
+    public bool LiveAtSchool { get; set; }
     public string ClassName { get; set; }
     public string Month { get; set; }
     public float Amount { get; set; }

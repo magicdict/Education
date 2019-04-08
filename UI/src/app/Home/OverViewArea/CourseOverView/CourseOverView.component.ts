@@ -21,8 +21,8 @@ export class CourseOverViewComponent implements OnInit {
   SingleCoursePercent: { name: string, value: number }[];
 
   //两门课程
-  mCourseSelectTwoCntOption = (JSON.parse(JSON.stringify(CourseSelectTwoCntOption)));
-  mCourseSelectTwoPercentOption = (JSON.parse(JSON.stringify(CourseSelectTwoCntOption)));
+  mCourseSelectTwoCntOption = CommonFunction.clone(CourseSelectTwoCntOption);
+  mCourseSelectTwoPercentOption = CommonFunction.clone(CourseSelectTwoCntOption);
 
   //三门课程
   ThreeCoursePercent: { name: string, value: number }[];
