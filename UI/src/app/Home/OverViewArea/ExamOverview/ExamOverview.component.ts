@@ -56,7 +56,6 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
         this.commonFunction.httpRequest<IExamInfoForNumberAndSubName>(request).then(
             r => {
-                this.service.CourseDiffInfo = r.classExamInfoList;
                 r.gradeInfo.record.className = "年级组";
                 this.Exams = r.classExamInfoList;
                 this.FootExam = r.gradeInfo;

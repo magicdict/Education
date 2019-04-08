@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CommonFunction } from './common';
-import { IStudent, IStudentInfo, ITeacherInfo, IClassExam, IStudentMonthlyConsumption } from './Education.model';
+import { IStudent, IStudentInfo, ITeacherInfo, IClassExam, IStudentMonthlyConsumption, ISchoolInfo } from './Education.model';
 
 @Injectable()
 export class HomeService {
@@ -43,12 +43,14 @@ export class HomeService {
         }
         return this.commonFunction.httpRequest<any>('Student/GetStudentInfo?ID=' + StudentId);
     }
+
+    /** 学校总体信息 */    
+    SchoolOverview:ISchoolInfo;
+
     /** 学生信息缓存 */
     CurrentStudentInfo: IStudentInfo;
 
     CurrentClassInfo: IStudent[];
-
-    CourseDiffInfo: IClassExam[];
 
     CurrentClassExam: IClassExam;
 }

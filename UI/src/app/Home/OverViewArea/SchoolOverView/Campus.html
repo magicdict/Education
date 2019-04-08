@@ -1,3 +1,53 @@
-<app-nav></app-nav>
-
-建设中。。。
+<p-dialog [header]="this.campusfullname" [(visible)]="this.display" modal="modal" [responsive]="true">
+    <div style="height: 400px;width:600px">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card card-stats">
+                        <div class="card-header card-header-warning card-header-icon">
+                            性别比例
+                        </div>
+                        <div class="card-body">
+                            <div *ngIf="this.campusfullname === '东部校区'" echarts [options]="mSexRatePieOption"
+                                style="width:300px;height:310px"></div>
+                            <div *ngIf="this.campusfullname === '白杨校区'" echarts [options]="mSexRateSunburstOption"
+                                style="width:300px;height:310px"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card card-stats">
+                        <div class="card-header card-header-warning card-header-icon">
+                            概要
+                        </div>
+                        <div class="card-body">
+                            <div class="stats">
+                                <div style="margin: 5px 0px 5px 0px">
+                                    <button type="button" class="btn btn-info" style="cursor: default">
+                                        学生数 <span class="badge badge-light">{{this.campusInfo.studentCnt}}</span>
+                                        <span class="sr-only">学生数</span>
+                                    </button>
+                                    &nbsp;
+                                    <button type="button" class="btn btn-info" style="cursor: default">
+                                        学生数(IB) <span class="badge badge-light">{{this.campusInfo.studentIBCnt}}</span>
+                                        <span class="sr-only">学生数</span>
+                                    </button>
+                                    &nbsp;
+                                    <button type="button" class="btn btn-info" style="cursor: default">
+                                        教师数 <span class="badge badge-light">{{this.campusInfo.teacherCnt}}</span>
+                                        <span class="sr-only">教师数</span>
+                                    </button>
+                                    &nbsp;
+                                    <button type="button" class="btn btn-info" style="cursor: default">
+                                        班级数 <span class="badge badge-light">{{this.campusInfo.classCnt}}</span>
+                                        <span class="sr-only">班级数</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</p-dialog>

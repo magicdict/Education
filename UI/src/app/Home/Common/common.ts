@@ -58,10 +58,14 @@ export class CommonFunction {
         return number;
     }
 
+    public static clone<T>(source:T):T
+    {
+        return (JSON.parse(JSON.stringify(source)));
+    }
 
     public httpRequest<T>(serviceUrl: string): Promise<T> {
-        //let webapiurl = "http://39.105.206.6:8080/api/"
-        let webapiurl = "http://localhost:5000/api/"
+        let webapiurl = "http://39.105.206.6:8080/api/"
+        //let webapiurl = "http://localhost:5000/api/"
 
         return this.http.get(
             webapiurl + serviceUrl

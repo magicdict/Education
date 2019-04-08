@@ -44,7 +44,22 @@ public class Teacher : IEqualityComparer<Teacher>
     /// </summary>
     /// <value></value>
     public string Id { get; set; }
-
+    public string Campus
+    {
+        get
+        {
+            if (ClassName.Contains("东"))
+            {
+                //新校区
+                return "东";
+            }
+            else
+            {
+                //默认白杨校区
+                return "白";
+            }
+        }
+    }
     /// <summary>
     /// 教师名
     /// </summary>

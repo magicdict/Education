@@ -15,18 +15,22 @@
             </ngx-timeline>
         </div>
         <div class="col-8">
-            <h1>{{this.Current[0].name}} <span class="badge badge-primary">{{this.Current[0].subName}}</span></h1>
-            <div class="alert alert-warning" role="alert">
-                2018-2019-1学期:
+            <div class="card">
+                <div class="card-header card-header-text card-header-primary">
+                    <h4 class="card-title">{{this.Current[0].name}}</h4>
+                    <p class="category">{{this.Current[0].subName}} - 2018-2019-1学期</p>
+                </div>
+                <div class="card-body" style="padding:0.5em">
+                    <ul class="heroes">
+                        <li *ngFor="let teacher of this.Current" style="cursor: pointer;width: 300px;"
+                            (click)="JumpToClass(teacher.classId)">
+                            <span class="badge" style="width:100px">{{teacher.term}} </span>{{teacher.className}}
+                            <i class="fa fa-search"></i>
+                        </li>
+                    </ul>
+                    <class-exam-list [Exams]="this.Exams"></class-exam-list>
+                </div>
             </div>
-            <ul class="heroes">
-                <li *ngFor="let teacher of this.Current" style="cursor: pointer;width: 300px;"
-                    (click)="JumpToClass(teacher.classId)">
-                    <span class="badge" style="width:100px">{{teacher.term}} </span>{{teacher.className}}
-                    <i class="fa fa-search"></i>
-                </li>
-            </ul>
-            <class-exam-list [Exams]="this.Exams"></class-exam-list>
         </div>
     </div>
 </div>

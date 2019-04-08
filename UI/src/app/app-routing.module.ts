@@ -39,10 +39,6 @@ const routes: Routes = [
     component: ClassOverviewComponent,
     resolve: { classinfo: IClassInfoResolver }
   },
-  {
-    path: 'home/campus',
-    component: CampusComponent
-  },
   { path: '', redirectTo: 'home/school', pathMatch: 'full' }
 ];
 

@@ -104,14 +104,14 @@ namespace Education.Controllers
             SchoolOver.ClassCnt = Dataset.StudentList.Select(x => x.ClassName).Distinct().Count(y => { return !y.Contains("未分班"); });
             SchoolOver.ClassIBCnt = Dataset.StudentList.Select(x => x.ClassName).Distinct().Count(y => { return y.Contains("IB"); });
 
-            //BaiYang.TeacherCnt = Dataset.TeacherList.Where(x => x.Term == "2018-2019-1").Select(x => x.Id).Distinct().Count();
+            BaiYang.TeacherCnt = Dataset.TeacherList.Where(x => x.Term == "2018-2019-1" && x.Campus == "白").Select(x => x.Id).Distinct().Count();
             BaiYang.StudentCnt = Dataset.StudentList.Count(x => x.Campus == "白");
             BaiYang.StudentIBCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.ClassName.Contains("IB"));
             BaiYang.ClassCnt = Dataset.StudentList.Where(z => z.Campus == "白").Select(x => x.ClassName).Distinct().Count(y => { return !y.Contains("未分班"); });
             BaiYang.ClassIBCnt = Dataset.StudentList.Where(z => z.Campus == "白").Select(x => x.ClassName).Distinct().Count(y => { return y.Contains("IB"); });
 
 
-            //East.TeacherCnt = Dataset.TeacherList.Where(x => x.Term == "2018-2019-1").Select(x => x.Id).Distinct().Count();
+            East.TeacherCnt = Dataset.TeacherList.Where(x => x.Term == "2018-2019-1" && x.Campus == "东").Select(x => x.Id).Distinct().Count();
             East.StudentCnt = Dataset.StudentList.Count(x => x.Campus == "东");
             East.StudentIBCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.ClassName.Contains("IB"));
             East.ClassCnt = Dataset.StudentList.Where(z => z.Campus == "东").Select(x => x.ClassName).Distinct().Count(y => { return !y.Contains("未分班"); });

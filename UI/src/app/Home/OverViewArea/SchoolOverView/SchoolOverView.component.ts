@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ISchoolInfo } from '../../Common/Education.model';
 import { SchoolSexBarOption, regionMapOptions, SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
 import { SexRatePieOption } from '../../GraphOption/StudentGraphOption'
 import { registerMap } from 'echarts';
 import { HttpClient } from '@angular/common/http';
+import { HomeService } from '../../Common/Home.service';
+import { CampusComponent } from './Campus.component';
 
 @Component({
   templateUrl: 'SchoolOverView.html',
@@ -13,7 +15,8 @@ export class SchoolOverViewComponent implements OnInit {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private service: HomeService
   ) {
 
   }
@@ -24,14 +27,8 @@ export class SchoolOverViewComponent implements OnInit {
   IsMapReady = false;
   /**地图 */
   NativePlaceRegionOpt = regionMapOptions;
-  /**柱状图 性别比例 */
-  SchoolSexOpt = SchoolSexBarOption;
-  /**饼图 性别比例 */
-  schoolSexRateOpt = SexRatePieOption;
   /**旭日图 性别比例 */
   SexRateSunburstOption = SexRateSunburstOption;
-
-
 
   ngOnInit(): void {
 
@@ -45,6 +42,7 @@ export class SchoolOverViewComponent implements OnInit {
     this.route.data
       .subscribe((data: { schoolInfo: ISchoolInfo }) => {
         this.schoolinfo = data.schoolInfo;
+        this.service.SchoolOverview = this.schoolinfo;
         this.NativePlaceRegionOpt.title.text = "";
         this.NativePlaceRegionOpt.series[0].data = data.schoolInfo.total.geoOptions;
 
@@ -67,8 +65,21 @@ export class SchoolOverViewComponent implements OnInit {
       });
   }
 
-  ShwoCampus(){
-    this.router.navigate(['home/campus']);
-  }
 
+  @ViewChild('baiyang')
+  private baiyangcampus: CampusComponent;
+
+  @ViewChild('dongbu')
+  private dongbucampus: CampusComponent;
+
+  ShwoCampus(campusname: string) {
+    //获得校区信息
+    if (campusname === '白') {
+      this.baiyangcampus.campusname = campusname;
+      this.baiyangcampus.show();
+    } else {
+      this.dongbucampus.campusname = campusname;
+      this.dongbucampus.show();
+    }
+  }
 }
