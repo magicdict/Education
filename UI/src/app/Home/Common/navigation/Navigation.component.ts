@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { classopt, ITeacher, IStudent } from '../Education.model';
 import { HomeService } from '../Home.service';
-import { ErrorMessageDialogComponent } from '../error-message-dialog/error-message-dialog.component';
 import { TeacherPickerComponent } from '../teacherPicker/teacherPicker.component'
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, SelectItem } from 'primeng/api';
 import { StudentPickerComponent } from '../studentPicker/studentPicker.component';
 import { Location } from '@angular/common';
+import { ClassPickerComponent } from '../classPicker/classPicker.component';
 
 @Component({
   selector: 'app-nav',
@@ -56,27 +56,13 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  @ViewChild(ErrorMessageDialogComponent)
-  private errMsgDialog: ErrorMessageDialogComponent;
   @ViewChild(TeacherPickerComponent)
   private teacherpicker: TeacherPickerComponent;
   @ViewChild(StudentPickerComponent)
   private studentpicker: StudentPickerComponent;
-  public StudentId: string;
-  public ClassId: string;
-  public classlist = classopt;
+  @ViewChild(ClassPickerComponent)
+  private classpicker: ClassPickerComponent;
 
-  QueryByStudentId() {
-    this.service.QueryByStudentId(this.StudentId).then(
-      r => {
-        if (r !== null) {
-          this.router.navigate(['student/overview', r.id]);
-        } else {
-          this.errMsgDialog.show("该学号的学生不存在！");
-        }
-      }
-    )
-  }
 
   StudentQuery() {
     if (this.pickhandler != null) {
@@ -89,15 +75,22 @@ export class NavigationComponent implements OnInit {
     this.studentpicker.show();
   }
 
-  QueryByClassId() {
-    this.service.QueryByClassId(this.ClassId).then(
-      r => {
-        if (r.length !== 0) {
-          this.service.CurrentClassInfo = r;
-          this.router.navigate(['class/overview', this.ClassId]);
+  ClassQuery() {
+    if (this.pickhandler != null) {
+      // 需要把上次的订阅取消掉，不然的话，多个订阅会同时发生效果！
+      this.pickhandler.unsubscribe();
+    }
+    this.pickhandler = this.classpicker.pick.subscribe((classitem: SelectItem) => {
+      this.service.QueryByClassId(classitem.value).then(
+        r => {
+          if (r.length !== 0) {
+            this.service.CurrentClassInfo = r;
+            this.router.navigate(['class/overview', classitem.value]);
+          }
         }
-      }
-    )
+      )
+    });
+    this.classpicker.show();
   }
 
   TeacherQuery() {

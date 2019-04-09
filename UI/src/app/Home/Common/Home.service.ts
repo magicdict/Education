@@ -17,7 +17,7 @@ export class HomeService {
     public QueryByStudentId(StudentId: string): Promise<IStudent> {
         return this.commonFunction.httpRequest<any>('Student/QueryByStudentId?ID=' + StudentId);
     }
-    public QueryByLiveRoomNo(RoomNo: string,Campus:string): Promise<Array<IStudent>> {
+    public QueryByLiveRoomNo(RoomNo: string, Campus: string): Promise<Array<IStudent>> {
         return this.commonFunction.httpRequest<any>('Student/QueryByLiveRoomNo?ID=' + RoomNo + "&Campus=" + Campus);
     }
     public QueryByNation(Nation: string): Promise<Array<IStudent>> {
@@ -29,6 +29,10 @@ export class HomeService {
     /** 月度消费 */
     public GetStudentWithMonthLimit(limit: number): Promise<IStudentMonthlyConsumption[]> {
         return this.commonFunction.httpRequest<any>('Consumption/GetStudentWithMonthLimit?limit=' + limit);
+    }
+    /** 月度消费 */
+    public GetStudentMonthlyConsumption(studentId: string): Promise<IStudentMonthlyConsumption[]> {
+        return this.commonFunction.httpRequest<any>('Consumption/GetStudentMonthlyConsumption?studentId=' + studentId);
     }
     /** 按班级检索 */
     public QueryByClassId(ClassId: string): Promise<IStudent[]> {
@@ -44,8 +48,8 @@ export class HomeService {
         return this.commonFunction.httpRequest<any>('Student/GetStudentInfo?ID=' + StudentId);
     }
 
-    /** 学校总体信息 */    
-    SchoolOverview:ISchoolInfo;
+    /** 学校总体信息 */
+    SchoolOverview: ISchoolInfo;
 
     /** 学生信息缓存 */
     CurrentStudentInfo: IStudentInfo;

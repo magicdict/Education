@@ -58,6 +58,8 @@ public class Consumption
 
     public DayOfWeek DayOfWeek { get; set; }
 
+    public Weather Weather{get;set;}
+
     public Student ConsumpStudent { get; set; }
 
     public Consumption(string RawData)
@@ -74,6 +76,7 @@ public class Consumption
         AccName = Items[3];
         PerSex = Items[4];
         DayOfWeek = new System.DateTime(int.Parse(DealTimeYear), int.Parse(DealTimeMonth), int.Parse(DealTimeDay)).DayOfWeek;
+        Weather = Weather.GetWeatherByDate(DealTimeYear,DealTimeMonth,DealTimeDay);
         ConsumpStudent = Dataset.StudentList.Where(x => x.ID == StudentID).First();
     }
 

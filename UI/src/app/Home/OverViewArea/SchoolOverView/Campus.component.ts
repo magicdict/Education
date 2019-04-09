@@ -3,6 +3,7 @@ import { HomeService } from '../../Common/Home.service';
 import { ICampus } from '../../Common/Education.model';
 import { SexRatePieOption, SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
 import { CommonFunction } from '../../Common/common';
+import { ISimpleBar } from '../../GraphOption/KaoqinOption';
 
 
 @Component({
@@ -22,6 +23,9 @@ export class CampusComponent implements OnInit {
     mSexRatePieOption = CommonFunction.clone(SexRatePieOption);
     /**旭日图 性别比例 */
     mSexRateSunburstOption = CommonFunction.clone(SexRateSunburstOption);
+
+    mTeacherSub: ISimpleBar;
+
     ngOnInit(): void {
 
         if (this.campusname === "白") {
@@ -48,6 +52,34 @@ export class CampusComponent implements OnInit {
             this.mSexRatePieOption.series[0].data[0].value = this.campusInfo.totalSexRate.maleCnt;
             this.mSexRatePieOption.series[0].data[1].value = this.campusInfo.totalSexRate.femaleCnt;
         }
+
+        let subnamelist = [];
+        let subcnt = [];
+        for (const key in this.campusInfo.teacherSubCnt) {
+            subnamelist.push(key);
+            subcnt.push(this.campusInfo.teacherSubCnt[key]);
+        }
+
+        this.mTeacherSub = {
+            xAxis: {
+                type: 'category',
+                data: subnamelist
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                label: {
+                    normal: {
+                        show: true
+                    }
+                },
+                data: subcnt,
+                type: 'bar'
+            }]
+        }
+
+
     }
     constructor(
         private service: HomeService

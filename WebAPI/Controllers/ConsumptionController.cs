@@ -12,11 +12,26 @@ namespace Education.Controllers
     public class ConsumptionController : ControllerBase
     {
 
-
+        /// <summary>
+        /// 获得指定月度消费金额的学生列表
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <returns></returns>
         [HttpGet("GetStudentWithMonthLimit")]
         public ActionResult<List<MonthConsumptionStudent>> GetStudentWithMonthLimit(int limit)
         {
             return Dataset.StudentConsumptionList.Where(x => x.Amount >= limit).ToList();
+        }
+
+        /// <summary>
+        /// 根据学号获取月度消费统计记录
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <returns></returns>
+        [HttpGet("GetStudentMonthlyConsumption")]
+        public ActionResult<List<MonthConsumptionStudent>> GetStudentMonthlyConsumption(string studentId)
+        {
+            return Dataset.StudentConsumptionList.Where(x => x.ID == studentId).ToList();
         }
 
         /// <summary>

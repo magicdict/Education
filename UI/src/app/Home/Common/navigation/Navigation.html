@@ -1,11 +1,7 @@
 <div style="background: white;margin: 5px 0px 5px 0px;height: 50px;">
-  &nbsp;&nbsp;&nbsp;<b>班级：</b>
-  <p-dropdown [options]="classlist" [(ngModel)]="this.ClassId" [style]="{'width':'150px'}" placeholder="选择一个班级"
-    [group]="true" (onChange)="QueryByClassId()">
-    <ng-template let-group pTemplate="group">
-      <span style="margin-left:.25em"><b>{{group.label}}</b></span>
-    </ng-template>
-  </p-dropdown>
+  &nbsp;&nbsp;&nbsp;
+  <button style="margin-top: 10px" class="btn btn-primary" (click)="ClassQuery()"><i
+      class="fa fa-search"></i>班级检索</button>
   &nbsp;&nbsp;&nbsp;
   <button style="margin-top: 10px" class="btn btn-primary" (click)="StudentQuery()"><i
       class="fa fa-search"></i>学生检索</button>
@@ -27,6 +23,7 @@
     </div>
   </div>
 </div>
+<app-classPicker></app-classPicker>
 <app-teacherPicker></app-teacherPicker>
 <app-studentPicker></app-studentPicker>
 <app-error-message-dialog></app-error-message-dialog>

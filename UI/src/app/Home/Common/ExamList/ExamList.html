@@ -1,8 +1,10 @@
-<br />
-科目选择：
-<p-dropdown #subnamelist [options]="subName" (onChange)="dt.filter($event.value, 'subName', 'equals')">
-</p-dropdown>
-<br />
+<div *ngIf="subName.length > 2">
+  <br />
+  科目选择：
+  <p-dropdown #subnamelist [options]="subName" (onChange)="dt.filter($event.value, 'subName', 'equals')">
+  </p-dropdown>
+  <br />
+</div>
 <br />
 <p-table #dt [value]="this.Scores" selectionMode="single" (onRowSelect)="onRowSelect($event)" [scrollable]="true"
   scrollHeight="400px">
@@ -40,6 +42,10 @@
         <p-sortIcon [field]="'dengdi'">
         </p-sortIcon>
       </th>
+      <th *ngIf="Mode === 'Same'" style="width: 50px" [pSortableColumn]="'classRank'">班级排名
+        <p-sortIcon [field]="'classRank'">
+        </p-sortIcon>
+      </th>
       <th style="width: 50px" [pSortableColumn]="'rank'">年级排名
         <p-sortIcon [field]="'rank'">
         </p-sortIcon>
@@ -60,6 +66,7 @@
       <td style="width: 50px">{{roundvalue(itemData.tScore)}}</td>
       <td style="width: 50px">{{roundvalue(itemData.zScore)}}</td>
       <td style="width: 50px">{{roundvalue(itemData.dengdi)}}</td>
+      <td *ngIf="Mode === 'Same'" style="width: 50px">{{itemData.classRank}}</td>
       <td style="width: 50px">{{itemData.rank}}</td>
       <td style="width: 50px">{{itemData.rankPercent}}</td>
     </tr>

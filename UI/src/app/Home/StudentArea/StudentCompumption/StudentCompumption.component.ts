@@ -4,6 +4,7 @@ import { CommonFunction } from 'src/app/Home/Common/common';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { DiaryAvgByTimeRangeOption, TotalByTimeRangeOption, DiaryCompumptionOption } from '../../GraphOption/CompumptionOption';
+import { ISimpleBar } from '../../GraphOption/KaoqinOption';
 @Component({
     templateUrl: 'StudentCompumption.html',
 })
@@ -14,21 +15,27 @@ export class StudentCompumptionComponent implements OnInit {
     ) {
 
     }
-
-    CurrentStudent = this.service.CurrentStudentInfo.baseInfo;
-
     ngOnInit(): void {
         //1.按照时段进行统计，某个时段，每天平均消费数
         this.GetDiaryAvgByTimeRange();
+        //2.按照星期统计
+        this.GetDiaryAvgByWeekday();
 
     }
+    ConvertNumberToWeekday = CommonFunction.ConvertNumberToWeekday;
+    Compumptions = this.service.CurrentStudentInfo.consumptions;
 
+    mDiaryAvgByTimeRangeOpt = CommonFunction.clone(DiaryAvgByTimeRangeOption);
+    mTotalByTimeRangeOpt = CommonFunction.clone(TotalByTimeRangeOption);
+    mDiaryCompumptionOpt = CommonFunction.clone(DiaryCompumptionOption);
 
+    DiaryAvgByTimeRangeInfo1: string;
+    DiaryAvgByTimeRangeInfo2: string;
+    DiaryAvgByTimeRangeInfo3: string;
 
-    mDiaryAvgByTimeRangeOpt = DiaryAvgByTimeRangeOption;
-    mTotalByTimeRangeOpt = TotalByTimeRangeOption;
-    mDiaryCompumptionOpt = DiaryCompumptionOption;
-
+    TotalByTimeRangeInfo1: string;
+    TotalByTimeRangeInfo2: string;
+    TotalByTimeRangeInfo3: string;
     /** 按照时段进行统计，某个时段，每天平均消费数 */
     GetDiaryAvgByTimeRange() {
         //00:00-10:00   早餐
@@ -123,11 +130,39 @@ export class StudentCompumptionComponent implements OnInit {
         this.mDiaryCompumptionOpt.series[0].data = diaryMoneyArray;
     }
 
-    DiaryAvgByTimeRangeInfo1: string;
-    DiaryAvgByTimeRangeInfo2: string;
-    DiaryAvgByTimeRangeInfo3: string;
+    /**星期统计 */
+    WeekDayOption: ISimpleBar;
 
-    TotalByTimeRangeInfo1: string;
-    TotalByTimeRangeInfo2: string;
-    TotalByTimeRangeInfo3: string;
+
+    GetDiaryAvgByWeekday() {
+        let Compumptions = this.service.CurrentStudentInfo.consumptions;
+        let WeekArray: number[] = [0, 0, 0, 0, 0, 0, 0];
+        Compumptions.forEach(Compumption => {
+            //按照星期进行统计
+            WeekArray[Compumption.dayOfWeek] += -1 * Compumption.monDeal;
+        });
+        for (let index = 0; index < 7; index++) {
+            WeekArray[index] = CommonFunction.roundvalue(WeekArray[index]);
+        }
+        this.WeekDayOption = {
+            xAxis: {
+                type: 'category',
+                data: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"]
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                label: {
+                    normal: {
+                        show: true
+                    }
+                },
+                data: WeekArray,
+                type: 'bar'
+            }]
+        };
+
+        console.log(WeekArray);
+    }
 }

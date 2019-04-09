@@ -73,6 +73,11 @@ export interface ISimpleBar {
         type: 'value'
     },
     series: [{
+        label?: {
+            normal: {
+                show: boolean
+            }
+        },
         data: number[],
         type: 'bar'
     }]

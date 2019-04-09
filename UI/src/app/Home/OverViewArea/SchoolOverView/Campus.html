@@ -1,5 +1,5 @@
 <p-dialog [header]="this.campusfullname" [(visible)]="this.display" modal="modal" [responsive]="true">
-    <div style="height: 400px;width:600px">
+    <div style="height: 850px;width:650px">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -44,6 +44,19 @@
                                     </button>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="card card-stats">
+                        <div class="card-header card-header-warning card-header-icon">
+                            教师
+                        </div>
+                        <div class="card-body">
+                            <div echarts [options]="mTeacherSub" style="width:550px;height:300px"></div>
                         </div>
                     </div>
                 </div>

@@ -48,6 +48,12 @@ namespace Education.Controllers
             /// <value></value>
             public int TeacherCnt { get; set; }
             /// <summary>
+            /// 按照科目统计老师人数
+            /// </summary>
+            /// <value></value>
+            public Dictionary<string, int> TeacherSubCnt { get; set; }
+
+            /// <summary>
             /// 学生数
             /// </summary>
             /// <value></value>
@@ -69,7 +75,6 @@ namespace Education.Controllers
             /// </summary>
             /// <value></value>
             public int ClassIBCnt { get; set; }
-
         }
 
         /// <summary>
@@ -99,12 +104,26 @@ namespace Education.Controllers
 
             //只选择2018-2019-1学年的教师，教师可能会教多个班级，所以需要Distinct一下
             SchoolOver.TeacherCnt = Dataset.TeacherList.Where(x => x.Term == "2018-2019-1").Select(x => x.Id).Distinct().Count();
+            SchoolOver.TeacherSubCnt = new Dictionary<string, int>();
+            foreach (var teacherid in Dataset.TeacherList.Where(x => x.Term == "2018-2019-1").Select(x => x.Id).Distinct())
+            {
+                var teacher = Dataset.TeacherList.Where(x => x.Id == teacherid).First();
+                if (!SchoolOver.TeacherSubCnt.ContainsKey(teacher.SubName)) SchoolOver.TeacherSubCnt.Add(teacher.SubName, 0);
+                SchoolOver.TeacherSubCnt[teacher.SubName]++;
+            }
             SchoolOver.StudentCnt = Dataset.StudentList.Count;
             SchoolOver.StudentIBCnt = Dataset.StudentList.Count(x => x.ClassName.Contains("IB"));
             SchoolOver.ClassCnt = Dataset.StudentList.Select(x => x.ClassName).Distinct().Count(y => { return !y.Contains("未分班"); });
             SchoolOver.ClassIBCnt = Dataset.StudentList.Select(x => x.ClassName).Distinct().Count(y => { return y.Contains("IB"); });
 
             BaiYang.TeacherCnt = Dataset.TeacherList.Where(x => x.Term == "2018-2019-1" && x.Campus == "白").Select(x => x.Id).Distinct().Count();
+            BaiYang.TeacherSubCnt = new Dictionary<string, int>();
+            foreach (var teacherid in Dataset.TeacherList.Where(x => x.Term == "2018-2019-1" && x.Campus == "白").Select(x => x.Id).Distinct())
+            {
+                var teacher = Dataset.TeacherList.Where(x => x.Id == teacherid).First();
+                if (!BaiYang.TeacherSubCnt.ContainsKey(teacher.SubName)) BaiYang.TeacherSubCnt.Add(teacher.SubName, 0);
+                BaiYang.TeacherSubCnt[teacher.SubName]++;
+            }
             BaiYang.StudentCnt = Dataset.StudentList.Count(x => x.Campus == "白");
             BaiYang.StudentIBCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.ClassName.Contains("IB"));
             BaiYang.ClassCnt = Dataset.StudentList.Where(z => z.Campus == "白").Select(x => x.ClassName).Distinct().Count(y => { return !y.Contains("未分班"); });
@@ -112,12 +131,17 @@ namespace Education.Controllers
 
 
             East.TeacherCnt = Dataset.TeacherList.Where(x => x.Term == "2018-2019-1" && x.Campus == "东").Select(x => x.Id).Distinct().Count();
+            East.TeacherSubCnt = new Dictionary<string, int>();
+            foreach (var teacherid in Dataset.TeacherList.Where(x => x.Term == "2018-2019-1" && x.Campus == "东").Select(x => x.Id).Distinct())
+            {
+                var teacher = Dataset.TeacherList.Where(x => x.Id == teacherid).First();
+                if (!East.TeacherSubCnt.ContainsKey(teacher.SubName)) East.TeacherSubCnt.Add(teacher.SubName, 0);
+                East.TeacherSubCnt[teacher.SubName]++;
+            }
             East.StudentCnt = Dataset.StudentList.Count(x => x.Campus == "东");
             East.StudentIBCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.ClassName.Contains("IB"));
             East.ClassCnt = Dataset.StudentList.Where(z => z.Campus == "东").Select(x => x.ClassName).Distinct().Count(y => { return !y.Contains("未分班"); });
             East.ClassIBCnt = Dataset.StudentList.Where(z => z.Campus == "东").Select(x => x.ClassName).Distinct().Count(y => { return y.Contains("IB"); });
-
-
 
             SchoolOver.TotalSexRate = new SexRate();
             SchoolOver.Grade1SexRate = new SexRate();

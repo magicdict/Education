@@ -49,49 +49,57 @@ export class StudentPickerComponent {
   public policylist = policyopt;
 
   Campus = [
+    { label: '全部', value: '' },
     { label: '白杨', value: '白' },
     { label: '东部', value: '东' }
   ];
-  selectedCampus: string = '白';
+  selectedCampus: string = '';
 
   QueryByStudentId() {
     this.service.QueryByStudentId(this.StudentId).then(
       result => {
         if (result === null) {
           this.errMsgDialog.show("没有找到符合条件的学生！");
+          this.Students = [];
         } else {
           this.Students = [result];
         }
       }
     );
   }
+
   QueryByNation() {
     this.service.QueryByNation(this.NationName).then(
       result => {
         if (result === null) {
           this.errMsgDialog.show("没有找到符合条件的学生！");
+          this.Students = [];
         } else {
           this.Students = result;
         }
       }
     );
   }
+
   QueryByPolicy() {
     this.service.QueryByPolicy(this.PolicyName).then(
       result => {
         if (result === null) {
           this.errMsgDialog.show("没有找到符合条件的学生！");
+          this.Students = [];
         } else {
           this.Students = result;
         }
       }
     );
   }
+  
   QueryByLiveRoomNo() {
     this.service.QueryByLiveRoomNo(this.RoomNo,this.selectedCampus).then(
       result => {
         if (result === null) {
           this.errMsgDialog.show("没有找到符合条件的学生！");
+          this.Students = [];
         } else {
           this.Students = result;
         }

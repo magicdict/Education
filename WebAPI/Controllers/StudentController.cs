@@ -30,9 +30,18 @@ namespace Education.Controllers
         [HttpGet("QueryByLiveRoomNo")]
         public ActionResult<List<Student>> QueryByLiveRoomNo(string Id, string Campus)
         {
-            var baseInfo = Dataset.StudentList.Where(x => x.LiveRoomNo.Equals(Id) && x.Campus == Campus).ToList();
-            if (baseInfo.Count() == 0) return null;
-            return baseInfo;
+            if (!String.IsNullOrEmpty(Campus))
+            {
+                var baseInfo = Dataset.StudentList.Where(x => x.LiveRoomNo.Equals(Id) && x.Campus == Campus).ToList();
+                if (baseInfo.Count() == 0) return null;
+                return baseInfo;
+            }
+            else
+            {
+                var baseInfo = Dataset.StudentList.Where(x => x.LiveRoomNo.Equals(Id)).ToList();
+                if (baseInfo.Count() == 0) return null;
+                return baseInfo;
+            }
         }
 
         [HttpGet("QueryByNation")]

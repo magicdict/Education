@@ -51,6 +51,7 @@ import { TeacherPickerComponent } from './Common/teacherPicker/teacherPicker.com
 import { ClassExamListComponent } from './Common/ClassExamList/ClassExamList.component';
 import { StudentPickerComponent } from './Common/studentPicker/studentPicker.component';
 import { ExamListComponent } from './Common/ExamList/ExamList.component';
+import { ClassPickerComponent } from './Common/classPicker/classPicker.component';
 
 
 @NgModule({
@@ -75,11 +76,12 @@ import { ExamListComponent } from './Common/ExamList/ExamList.component';
     Grade3ScoreComponent,
     //共通
     NavigationComponent,
-    TeacherPickerComponent,
     ErrorMessageDialogComponent,
     ClassExamListComponent,
     ExamListComponent,
+    TeacherPickerComponent,
     StudentPickerComponent,
+    ClassPickerComponent,
     //考试相关
     SingleExamClassComponent,
     ExamOverViewComponent,

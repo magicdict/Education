@@ -165,6 +165,8 @@ export interface IConsumption {
   accName: string;
   perSex: string;
   consumpStudent: IStudent;
+  weather: IWeather;
+  dayOfWeek: number;
 }
 
 export interface IStudentMonthlyConsumption {
@@ -172,7 +174,7 @@ export interface IStudentMonthlyConsumption {
   name: string;
   sex: string;
   className: string;
-  liveAtSchool:boolean;
+  liveAtSchool: boolean;
   month: string;
   amount: number;
 }
@@ -202,6 +204,7 @@ export interface IScore {
   rank: number;
   avalibleCnt: number;
   rankPercent: number;
+  classRank: number;
 }
 
 export interface IKaoqin {
@@ -241,6 +244,7 @@ export interface ICampus {
   totalSexRate: ISexRate;
   geoOptions: { name: string, value: number }[];
   teacherCnt: number;
+  teacherSubCnt: { [key: string]: number }
   studentCnt: number;
   studentIBCnt: number;
   classCnt: number;

@@ -42,6 +42,13 @@ public class Weather
         {
             return r[0];
         }
+        else
+        {
+            //由于资料抓取网站的错误，导致31日的数据为空，这里使用30日近似的代替31日。这里已经手工修正了部分数据
+            if (day == "31") day = "30";
+            r = Dataset.WeatherList.Where(x => x.Year == year && x.Month == month && x.Day == day).ToList();
+            if (r.Count == 1) return r[0];
+        }
         return null;
     }
 

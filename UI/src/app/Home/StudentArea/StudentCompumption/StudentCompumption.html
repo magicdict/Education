@@ -1,52 +1,111 @@
 <app-nav></app-nav>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="card text-left" style="width: 100%;margin-top: 10px;">
-                <div class="card-body">
-                    <div echarts [options]="mDiaryAvgByTimeRangeOpt" style="width:400px;height:400px;"></div>
-                    <ul class="list-group">
-                        <li class="list-group-item active">
-                            每日平均消费信息
-                        </li>
-                        <li class="list-group-item">
-                            {{DiaryAvgByTimeRangeInfo1}}
-                        </li>
-                        <li class="list-group-item">
-                            {{DiaryAvgByTimeRangeInfo2}}
-                        </li>
-                        <li class="list-group-item">
-                            {{DiaryAvgByTimeRangeInfo3}}
-                        </li>
-                    </ul>
+
+<p-tabView>
+    <p-tabPanel header="消费统计">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card text-left" style="width: 100%;margin-top: 10px;">
+                        <div class="card-body">
+                            <div echarts [options]="mDiaryAvgByTimeRangeOpt" style="width:400px;height:400px;"></div>
+                            <ul class="list-group">
+                                <li class="list-group-item active">
+                                    每日平均消费信息
+                                </li>
+                                <li class="list-group-item">
+                                    {{DiaryAvgByTimeRangeInfo1}}
+                                </li>
+                                <li class="list-group-item">
+                                    {{DiaryAvgByTimeRangeInfo2}}
+                                </li>
+                                <li class="list-group-item">
+                                    {{DiaryAvgByTimeRangeInfo3}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-left" style="width: 100%;margin-top: 10px;">
+                        <div class="card-body">
+                            <div echarts [options]="mTotalByTimeRangeOpt" style="width:400px;height:400px;"></div>
+                            <ul class="list-group">
+                                <li class="list-group-item active">
+                                    每日平均消费信息
+                                </li>
+                                <li class="list-group-item">
+                                    {{TotalByTimeRangeInfo1}}
+                                </li>
+                                <li class="list-group-item">
+                                    {{TotalByTimeRangeInfo2}}
+                                </li>
+                                <li class="list-group-item">
+                                    {{TotalByTimeRangeInfo3}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div echarts [options]="WeekDayOption" style="width: 1000px"></div>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card text-left" style="width: 100%;margin-top: 10px;">
-                <div class="card-body">
-                    <div echarts [options]="mTotalByTimeRangeOpt" style="width:400px;height:400px;"></div>
-                    <ul class="list-group">
-                        <li class="list-group-item active">
-                            每日平均消费信息
-                        </li>
-                        <li class="list-group-item">
-                            {{TotalByTimeRangeInfo1}}
-                        </li>
-                        <li class="list-group-item">
-                            {{TotalByTimeRangeInfo2}}
-                        </li>
-                        <li class="list-group-item">
-                            {{TotalByTimeRangeInfo3}}
-                        </li>
-                    </ul>
+    </p-tabPanel>
+    <p-tabPanel header="消费明细">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p-table [value]="Compumptions" selectionMode="single" [scrollable]="true" scrollHeight="400px">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width: 50px" [pSortableColumn]="'dealTime'">时间
+                                    <p-sortIcon [field]="'dealTime'">
+                                    </p-sortIcon>
+                                </th>
+                                <th style="width: 50px" [pSortableColumn]="'monDeal'">金额
+                                    <p-sortIcon [field]="'monDeal'">
+                                    </p-sortIcon>
+                                </th>
+                                <th style="width: 50px" [pSortableColumn]="'dayOfWeek'">星期
+                                    <p-sortIcon [field]="'dayOfWeek'">
+                                    </p-sortIcon>
+                                </th>
+                                <th style="width: 50px" [pSortableColumn]="'weather.high'">最高温度
+                                    <p-sortIcon [field]="'weather.high'">
+                                    </p-sortIcon>
+                                </th>
+                                <th style="width: 50px" [pSortableColumn]="'weather.low'">最低温度
+                                    <p-sortIcon [field]="'weather.low'">
+                                    </p-sortIcon>
+                                </th>
+                                <th style="width: 50px" [pSortableColumn]="'weather.type'">天气
+                                    <p-sortIcon [field]="'weather.type'">
+                                    </p-sortIcon>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-itemData>
+                            <tr [pSelectableRow]="itemData">
+                                <td style="width: 50px">{{itemData.dealTime}}</td>
+                                <td style="width: 50px">{{-1 * itemData.monDeal}}</td>
+                                <td style="width: 50px">{{ConvertNumberToWeekday(itemData.dayOfWeek)}}</td>
+                                <td style="width: 50px">{{itemData.weather.high}}</td>
+                                <td style="width: 50px">{{itemData.weather.low}}</td>
+                                <td style="width: 50px">{{itemData.weather.type}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <div echarts [options]="mDiaryCompumptionOpt" style="width: 1100px;height: 600px;"></div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div echarts [options]="mDiaryCompumptionOpt"></div>
-        </div>
-    </div>
-</div>
+    </p-tabPanel>
+</p-tabView>

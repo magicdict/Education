@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ISchoolConsumptionInfo, IConsumption, IStudent, IStudentMonthlyConsumption } from 'src/app/Home/Common/Education.model';
 import { MonthlyCompumptionBarOption, MonthlyCompumptionBarOptionTotal } from '../../GraphOption/CompumptionOption'
 import { HomeService } from '../../Common/Home.service';
 import { CommonFunction } from '../../Common/common';
+import { StudentPickerComponent } from '../../Common/studentPicker/studentPicker.component';
 @Component({
   templateUrl: 'ConsumptionOverview.html',
 })
@@ -38,7 +39,6 @@ export class ConsumptionOverviewComponent implements OnInit {
   MonthUpLimit = 0;
 
   public Students: IStudentMonthlyConsumption[] = [];
-
   public selectStudent: IStudentMonthlyConsumption;
 
   ngOnInit(): void {
@@ -89,4 +89,23 @@ export class ConsumptionOverviewComponent implements OnInit {
     this.router.navigate(['student/overview', studentId]);
   }
 
+  @ViewChild(StudentPickerComponent)
+  private studentpicker: StudentPickerComponent;
+  // 订阅句柄
+  private pickhandler: any;
+
+  StudentQuery() {
+    if (this.pickhandler != null) {
+      // 需要把上次的订阅取消掉，不然的话，多个订阅会同时发生效果！
+      this.pickhandler.unsubscribe();
+    }
+    this.pickhandler = this.studentpicker.pick.subscribe((student: IStudent) => {
+      this.service.GetStudentMonthlyConsumption(student.id).then(
+        r => {
+          this.Students = r;
+        }
+      );
+    });
+    this.studentpicker.show();
+  }
 }

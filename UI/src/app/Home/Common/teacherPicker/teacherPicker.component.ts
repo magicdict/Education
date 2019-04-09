@@ -21,6 +21,7 @@ export class TeacherPickerComponent {
   public selectTeacher: ITeacher;
 
   Gradelist = [
+    { label: '全部', value: '' },
     { label: '高一', value: '高一' },
     { label: '高二', value: '高二' },
     { label: '高三', value: '高三' }
@@ -66,12 +67,18 @@ export class TeacherPickerComponent {
   }
 
   query() {
-    let webapiurl = 'Teacher/QueryTeacher?GraName=' + String(this.SelectGrade) + '&SubId=' + String(this.SelectSub);
 
+    if(this.SelectSub===""){
+      this.errMsgDialog.show("请选择一种科目！");
+      return;
+    }
+
+    let webapiurl = 'Teacher/QueryTeacher?GraName=' + String(this.SelectGrade) + '&SubId=' + String(this.SelectSub);
     this.commonfunction.httpRequest<ITeacher[]>(webapiurl).then(
       result => {
         if (result.length == 0) {
           this.errMsgDialog.show("没有找到符合条件的教师！");
+          this.Teachers = [];
         } else {
           this.Teachers = result;
         }

@@ -47,6 +47,8 @@
                     月消费上限： <p-dropdown [options]="MonthUpLimitList" [(ngModel)]="MonthUpLimit"
                         [style]="{'width':'150px'}" placeholder="选择一个月消费金额：" (onChange)="QueryByMonthUpLimit()">
                     </p-dropdown>
+                    &nbsp;&nbsp;&nbsp;
+                    <button style="margin-top: 10px" class="btn btn-primary" (click)="StudentQuery()"><i class="fa fa-search"></i>学生检索</button>
                     <br />
                     <br />
                     <p-table [value]="this.Students" selectionMode="single" [(selection)]="this.selectStudent"
@@ -180,3 +182,6 @@
         </div>
     </p-tabPanel>
 </p-tabView>
+
+<app-studentPicker></app-studentPicker>
+<app-error-message-dialog></app-error-message-dialog>
