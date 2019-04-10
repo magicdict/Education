@@ -139,7 +139,7 @@ export class KaoqinOverviewComponent implements OnInit {
                 this.KaoqinOption = {
                     title: { text: "考勤次数", left: 10 },
                     label: { formatter: "{b}\n{c}" },
-                    series: { data: [leaf], type: "sunburst" }
+                    series: { data: [leaf], type: "sunburst",center:["40%","50%"] },
                 }
 
                 var NameArray: string[] = ["默认信息", "早上迟到", "晚到学校"];

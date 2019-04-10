@@ -9,7 +9,8 @@ export interface ISunburstOption {
     }
     series: {
         type: 'sunburst';
-        data: ILeaf[]
+        data: ILeaf[],
+        center?: number[]|string[]
     }
 };
 
