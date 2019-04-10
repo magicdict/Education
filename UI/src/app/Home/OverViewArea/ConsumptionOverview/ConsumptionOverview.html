@@ -48,7 +48,8 @@
                         [style]="{'width':'150px'}" placeholder="选择一个月消费金额：" (onChange)="QueryByMonthUpLimit()">
                     </p-dropdown>
                     &nbsp;&nbsp;&nbsp;
-                    <button style="margin-top: 10px" class="btn btn-primary" (click)="StudentQuery()"><i class="fa fa-search"></i>学生检索</button>
+                    <button style="margin-top: 10px" class="btn btn-primary" (click)="StudentQuery()"><i
+                            class="fa fa-search"></i>学生检索</button>
                     <br />
                     <br />
                     <p-table [value]="this.Students" selectionMode="single" [(selection)]="this.selectStudent"
@@ -97,22 +98,9 @@
                         <div class="card-body" style="padding:5px;">
                             <div class="stats">
                                 <div class="container">
-                                    <div class="row" *ngFor="let item of this.highestRec">
-                                        <div class="col-2">
-                                            <img class="img" style="width:48px;"
-                                                [src]="item.consumpStudent.sex == '男' ? '/assets/image/male.png' : '/assets/image/female.png'">
-                                        </div>
-                                        <div class="col-7">
-                                            <b>{{item.accName}}
-                                                {{item.monDeal * -1}} 元</b>
-                                            <br />
-                                            {{item.dealTime}}
-                                        </div>
-                                        <div class="col-3">
-                                            <button type="button" class="btn btn-info"
-                                                (click)="JumpTo(item.studentID)">个人信息</button>
-                                        </div>
-                                    </div>
+                                    <student-item [Title]="item.accName + ' ' + item.monDeal * -1 + '元'"
+                                        [Sex]="item.consumpStudent.sex" [StudentId]="item.studentID"
+                                        [SubTitle]="item.dealTime" *ngFor="let item of this.highestRec"> </student-item>
                                 </div>
                             </div>
                         </div>
@@ -127,22 +115,10 @@
                         <div class="card-body" style="padding:5px;">
                             <div class="stats">
                                 <div class="container">
-                                    <div class="row" *ngFor="let item of this.highestRecLiveAtSchool">
-                                        <div class="col-2">
-                                            <img class="img" style="width:48px;"
-                                                [src]="item.consumpStudent.sex == '男' ? '/assets/image/male.png' : '/assets/image/female.png'">
-                                        </div>
-                                        <div class="col-7">
-                                            <b>{{item.accName}}
-                                                {{item.monDeal * -1}} 元</b>
-                                            <br />
-                                            {{item.dealTime}}
-                                        </div>
-                                        <div class="col-3">
-                                            <button type="button" class="btn btn-info"
-                                                (click)="JumpTo(item.studentID)">个人信息</button>
-                                        </div>
-                                    </div>
+                                    <student-item [Title]="item.accName + ' ' + item.monDeal * -1 + '元'"
+                                        [Sex]="item.consumpStudent.sex" [StudentId]="item.studentID"
+                                        [SubTitle]="item.dealTime" *ngFor="let item of this.highestRecLiveAtSchool">
+                                    </student-item>
                                 </div>
                             </div>
                         </div>
@@ -157,22 +133,10 @@
                         <div class="card-body" style="padding:5px;">
                             <div class="stats">
                                 <div class="container">
-                                    <div class="row" *ngFor="let item of this.highestRecNotLiveAtSchool">
-                                        <div class="col-2">
-                                            <img class="img" style="width:48px;"
-                                                [src]="item.consumpStudent.sex == '男' ? '/assets/image/male.png' : '/assets/image/female.png'">
-                                        </div>
-                                        <div class="col-7">
-                                            <b>{{item.accName}}
-                                                {{item.monDeal * -1}} 元</b>
-                                            <br />
-                                            {{item.dealTime}}
-                                        </div>
-                                        <div class="col-3">
-                                            <button type="button" class="btn btn-info"
-                                                (click)="JumpTo(item.studentID)">个人信息</button>
-                                        </div>
-                                    </div>
+                                    <student-item [Title]="item.accName + ' ' + item.monDeal * -1 + '元'"
+                                        [Sex]="item.consumpStudent.sex" [StudentId]="item.studentID"
+                                        [SubTitle]="item.dealTime" *ngFor="let item of this.highestRecNotLiveAtSchool">
+                                    </student-item>
                                 </div>
                             </div>
                         </div>

@@ -20,10 +20,10 @@ export class ClassExamListComponent implements OnChanges {
 
     @ViewChild("subnamelist") subnamelist: Dropdown;
 
-    @Input() IsShowExamName:boolean = true;
+    @Input() IsShowExamName: boolean = true;
 
     /**统计条目 */
-    @Input() Footer:IClassExam = null;
+    @Input() Footer: IClassExam = null;
 
     ngOnChanges(): void {
         this.subName = [];
@@ -38,11 +38,13 @@ export class ClassExamListComponent implements OnChanges {
             }
         );
         this.dt.filter("", 'record.subName', 'equals')
-        this.subnamelist.value = null;
+        if (this.subnamelist !== undefined) {
+            this.subnamelist.value = null;
+        }
         console.log("成绩列表变更");
     }
 
-   
+
     subName: { label: string, value: string }[] = [];
 
     constructor(

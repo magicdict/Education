@@ -13,7 +13,6 @@ import { CardModule } from 'primeng/card';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { NgxTimelineModule } from 'ngx-timeline';
 /**路由 */
 import { HomeRoutingModule } from './Home-routing.module';
 /** 服务 */
@@ -52,6 +51,7 @@ import { ClassExamListComponent } from './Common/ClassExamList/ClassExamList.com
 import { StudentPickerComponent } from './Common/studentPicker/studentPicker.component';
 import { ExamListComponent } from './Common/ExamList/ExamList.component';
 import { ClassPickerComponent } from './Common/classPicker/classPicker.component';
+import { StudentItemComponent } from './Common/StudentItem/studentItem.component';
 
 
 @NgModule({
@@ -82,6 +82,7 @@ import { ClassPickerComponent } from './Common/classPicker/classPicker.component
     TeacherPickerComponent,
     StudentPickerComponent,
     ClassPickerComponent,
+    StudentItemComponent,
     //考试相关
     SingleExamClassComponent,
     ExamOverViewComponent,
@@ -99,7 +100,6 @@ import { ClassPickerComponent } from './Common/classPicker/classPicker.component
     DropdownModule,
     ConfirmDialogModule,
     NgxEchartsModule,
-    NgxTimelineModule,
     HomeRoutingModule
   ],
   providers: [

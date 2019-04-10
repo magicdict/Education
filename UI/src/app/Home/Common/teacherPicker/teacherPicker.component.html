@@ -13,7 +13,7 @@
       <br />
       <br />
       <p-table [value]="this.Teachers" selectionMode="single" [(selection)]="this.selectTeacher" [scrollable]="true"
-        scrollHeight="400px" (onRowSelect)="onRowSelect($event)">
+        scrollHeight="400px" (onRowSelect)="onRowSelect()">
         <ng-template pTemplate="header">
           <tr>
             <th style="width: 50px">员工ID</th>

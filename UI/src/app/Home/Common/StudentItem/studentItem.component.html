@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-3" style="width:48px;">
+        <img class="img" style="width:48px;"
+            [src]="Sex == '男' ? '/assets/image/male.png' : '/assets/image/female.png'">
+    </div>
+    <div class="col-5">
+        <b>{{Title}}</b>
+        <br />
+        <b>{{SubTitle}}</b>
+    </div>
+    <div class="col-4" style="width:72px;">
+        <button type="button" class="btn btn-info" (click)="JumpTo(StudentId)">个人信息</button>
+    </div>
+</div>

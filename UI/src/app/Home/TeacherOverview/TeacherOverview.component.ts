@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../Common/Home.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITeacher, ITeacherInfo, IClassExam } from 'src/app/Home/Common/Education.model';
-import { TimelineEvent } from 'ngx-timeline';
 
 
 @Component({
@@ -17,36 +16,35 @@ export class TeacherOverviewComponent implements OnInit {
 
   }
 
-  Current: ITeacher[];
+  CurrentTeachers: ITeacher[];
   Exams: IClassExam[];
-  events: Array<TimelineEvent>;
+  TeacherHistory: { year: string, classname: string[] }[] = []
+  TotalClassCnt = 0;
+  CurrentClassCnt = 0;
 
   ngOnInit(): void {
-
-    this.events = new Array<TimelineEvent>();
     this.route.data
       .subscribe((data: { teacherinfo: ITeacherInfo }) => {
-        this.Current = [];
-        this.events = [];
+        this.CurrentTeachers = [];
         this.Exams = data.teacherinfo.classExams;
         data.teacherinfo.records.forEach(
           e => {
             if (e.term === "2018-2019-1") {
-              this.Current.push(e);
+              this.CurrentTeachers.push(e);
+              this.CurrentClassCnt += 1;
+              this.TotalClassCnt += 1;
             }
           }
         )
+        this.TeacherHistory = [];
         for (let k in data.teacherinfo.groupByTerm) {
-          var d = new Date();
           console.log(Number(k.substring(0, 4)));
-          d.setFullYear(Number(k.substring(0, 4)), 8, 1);
-          this.events.push({
-            "date": d,
-            "header": k,
-            "body": data.teacherinfo.groupByTerm[k].join(","),
-            "icon": "fas fa-graduation-cap"
-          });
+          if (k.substring(0, 4)=="2018") continue;  //本学年的不放入
+          this.TeacherHistory.push({ year: k.substring(0, 4), classname: data.teacherinfo.groupByTerm[k] });
+          this.TotalClassCnt += data.teacherinfo.groupByTerm[k].length;
         }
+        //从现在到过去
+        this.TeacherHistory.reverse();
       });
   }
 
@@ -60,5 +58,4 @@ export class TeacherOverviewComponent implements OnInit {
       }
     )
   }
-
 }

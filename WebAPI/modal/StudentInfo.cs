@@ -42,4 +42,10 @@ public class StudentInfo
     /// </summary>
     /// <value></value>
     public int ConsumptionCnt { get; set; }
+
+    /// <summary>
+    /// 室友
+    /// </summary>
+    /// <value></value>
+    public List<Student> Roommate { get; set; }
 }

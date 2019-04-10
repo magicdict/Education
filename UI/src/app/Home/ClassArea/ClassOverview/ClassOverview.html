@@ -106,8 +106,8 @@
     <div class="container">
       <div class="row">
         <div class="col-3">
-          <ul class="heroes">
-            <li *ngFor="let teacher of this.Teachers" style="cursor: pointer;" (click)="JumpToTeacher(teacher.id)">
+          <ul class="heroes linkheroes">
+            <li *ngFor="let teacher of this.Teachers" (click)="JumpToTeacher(teacher.id)">
               <span class="badge" style="width: 100px;">{{teacher.subName}} </span>{{teacher.name}}
               <i class="fa fa-search"></i>
             </li>

@@ -106,7 +106,14 @@ namespace Education.Controllers
                 );
                 //消费件数
                 info.ConsumptionCnt = info.Consumptions.Count;
-
+                //室友
+                if (info.BaseInfo.LiveAtSchool)
+                {
+                    info.Roommate = Dataset.StudentList.Where(
+                         x => x.Campus == info.BaseInfo.Campus && 
+                         x.Sex == info.BaseInfo.Sex && 
+                         x.LiveRoomNo == info.BaseInfo.LiveRoomNo).ToList();
+                }
                 return info;
             }
             return null;

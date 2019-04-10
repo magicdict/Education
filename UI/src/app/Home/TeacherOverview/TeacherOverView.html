@@ -1,36 +1,43 @@
 <app-nav></app-nav>
-<div class="container" style="background:white;">
-    <div class="row" style="width:1140px;">
-        <div class="col-4">
-            <ngx-timeline [events]="events">
-                <ng-template let-event let-index="rowIndex" timelineBody>
-                    <ul class="heroes">
-                        <li *ngFor="let classname of event.body.split(',')" style="width:120px">
-                            <span class="badge" style="width:30px">
-                                <i class="fa fas fa-graduation-cap"></i>
-                            </span> {{classname}}
-                        </li>
-                    </ul>
-                </ng-template>
-            </ngx-timeline>
-        </div>
-        <div class="col-8">
-            <div class="card">
-                <div class="card-header card-header-text card-header-primary">
-                    <h4 class="card-title">{{this.Current[0].name}}</h4>
-                    <p class="category">{{this.Current[0].subName}} - 2018-2019-1学期</p>
+<br />
+<div class="card">
+    <div class="card-header card-header-text card-header-primary">
+        <h4 class="card-title">{{this.CurrentTeachers[0].name}} - {{this.CurrentTeachers[0].subName}}</h4>
+        <p class="category">本学期班级数：{{CurrentClassCnt}}(包含本学期所有班级数：{{TotalClassCnt}})</p>
+    </div>
+    <div class="card-body" style="padding:0.5em">
+        <p-tabView>
+            <p-tabPanel [header]="'成绩列表'">
+                <class-exam-list [Exams]="this.Exams"></class-exam-list>
+            </p-tabPanel>
+            <p-tabPanel [header]="'本学期班级'">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="heroes linkheroes" style="width: auto;height: auto;padding: 0px;margin: 0px;">
+                            <li *ngFor="let teacher of this.CurrentTeachers" style="width: 300px;float:left;"
+                                (click)="JumpToClass(teacher.classId)">
+                                <span class="badge" style="width:100px">{{teacher.term}}
+                                </span>{{teacher.className}}
+                                <i class="fa fa-search"></i>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="card-body" style="padding:0.5em">
-                    <ul class="heroes">
-                        <li *ngFor="let teacher of this.Current" style="cursor: pointer;width: 300px;"
-                            (click)="JumpToClass(teacher.classId)">
-                            <span class="badge" style="width:100px">{{teacher.term}} </span>{{teacher.className}}
-                            <i class="fa fa-search"></i>
-                        </li>
-                    </ul>
-                    <class-exam-list [Exams]="this.Exams"></class-exam-list>
+            </p-tabPanel>
+            <p-tabPanel [header]="Term.year + '学年班级'" *ngFor="let Term of this.TeacherHistory">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="heroes" style="width: auto;height: auto;padding: 0px;margin: 0px;">
+                            <li *ngFor="let classname of Term.classname" style="width: 300px;float:left;"
+                                (click)="JumpToClass(teacher.classId)">
+                                <span class="badge" style="width:100px">{{Term.year}}
+                                </span>{{classname}}
+                                <i class="fa fa-search"></i>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </p-tabPanel>
+        </p-tabView>
     </div>
 </div>

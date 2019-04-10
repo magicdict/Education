@@ -2,13 +2,13 @@
 
 <div class="container" style="margin:0px">
     <div class="row" style="width:1140px">
-        <div class="col-3">
+        <div class="col-3" style="padding: 0px;">
             <div class="card card-profile ml-auto mr-auto" style="width: 100%;">
                 <div class="card-header card-header-image" style="width:170px;background: transparent">
                     <img class="img" style="width:128px;"
                         [src]="CurrentStudent.sex == '男' ? '/assets/image/male.png' : '/assets/image/female.png'">
                 </div>
-                <div class="card-body ">
+                <div class="card-body">
                     <h4 class="card-title">{{CurrentStudent.name}}</h4>
                     <h6 class="card-title">{{CurrentStudent.className}}</h6>
                     <ul class="heroes">
@@ -39,7 +39,7 @@
         </div>
         <div class="col-9">
             <div class="container">
-                <div class="row" style="margin-top:5px;width:840px;">
+                <div class="row" style="width:840px;">
                     <div class="col-6" *ngIf="ScoreAvg.length !== 0">
                         <div class="card text-right" style="width: 100%;margin-top: 35px;margin-bottom: 5px;">
                             <div class="card-body">
@@ -59,8 +59,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" *ngIf="KaoqinMonthCnt.length !== 0">
-                    <div class="col-6" style="padding-top:0px;">
+                <div class="row" style="width:840px;">
+                    <div class="col-6" style="padding-top:0px;" *ngIf="KaoqinMonthCnt.length !== 0">
                         <div class="card text-right" style="width: 100%;margin-top: 10px;">
                             <div class="card-body">
                                 <div echarts [options]="KaoqinGraph" style="width:350px;height:350px;"></div>
@@ -69,8 +69,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
-
+                    <div class="col-6" *ngIf="CurrentStudent.liveRoomNo !=='-'">
+                        <div class="card text-left" style="width: 100%;margin-top: 10px;height: 415px;">
+                            <div class="card-body">
+                                <h4><b>{{CurrentStudent.liveRoomNo}}{{CurrentStudent.sex}}生宿舍</b></h4>
+                                <div class="container">
+                                    <student-item [Title]="item.name" [Sex]="item.sex" [StudentId]="item.studentID"
+                                        [SubTitle]="item.className"
+                                        *ngFor="let item of this.service.CurrentStudentInfo.roommate">
+                                    </student-item>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

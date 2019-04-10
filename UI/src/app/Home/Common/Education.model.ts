@@ -106,6 +106,7 @@ export interface IStudentInfo {
   consumptionCnt: number;
   chengjiCnt: number;
   teachers: ITeacher[];
+  roommate: IStudent[];
 }
 
 export interface ITeacher {

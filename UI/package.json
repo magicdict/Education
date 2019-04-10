@@ -26,7 +26,6 @@
     "core-js": "^2.5.4",
     "echarts": "^4.2.1",
     "ngx-echarts": "^4.1.0",
-    "ngx-timeline": "^5.0.0",
     "primeicons": "^1.0.0",
     "primeng": "^7.1.0",
     "rxjs": "~6.4.0",
