@@ -135,7 +135,7 @@ public static class Dataset
         ChengjiList = ChengjiList.Where(x => x.Grade.StartsWith("高")).ToList();                //初中成绩
         Console.WriteLine("有效成绩数（高中）：" + ChengjiList.Count);
 
-        Dump(fullpath);
+        //Dump(fullpath);
         if (true)
         {
             //读取成绩
@@ -252,7 +252,7 @@ public static class Dataset
         timer.Start();
 
         StreamWriter sw;
-        if (false)
+        if (true)
         {
             sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "StudentConsumptionMonthList.csv");
             sw.WriteLine("Id,Name,Sex,ClassName,Month,Amount,LiveAtSchool");
