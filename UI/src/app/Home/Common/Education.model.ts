@@ -199,6 +199,8 @@ export interface IScore {
   studentID: string;
   studentName: string;
   score: number;
+  fullScore: number;
+  scorePercent: number;
   zScore: string;
   tScore: number;
   dengdi: number;

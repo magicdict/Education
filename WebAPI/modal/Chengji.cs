@@ -109,6 +109,58 @@ public class Chengji : IEqualityComparer<Chengji>
     /// </summary>
     /// <value></value>
     public float Score { get; set; }
+
+    /// <summary>
+    /// 总分
+    /// </summary>
+    /// <value></value>
+    public float FullScore
+    {
+        get
+        {
+            //规则1：平时分数应该是15分
+            if (Type == "4")
+            {
+                //特殊情况
+                if (Id == "137971" || Id == "137972") return 20;
+                if (SubId == "59")
+                {
+                    if (Score >= 60) return 90; //技术平时分异常情况
+                }
+                return 15;
+            }
+
+            //规则2：高三 五校联考，十校联考，三门主课总分150分
+            if (NumberName.Contains("高三五校联考") || NumberName.Contains("高三十校联考"))
+            {
+                if (SubName == "语文" || SubName == "数学" || SubName == "英语") return 150;
+            }
+
+            //规则3:2018-1学期期中考试 语文150分
+            if (Number == "304")
+            {
+                if (SubName == "语文") return 150;
+            }
+
+            return 100; //默认100;
+        }
+    }
+
+    /// <summary>
+    /// 得分率
+    /// </summary>
+    /// <value></value>
+    public double ScorePercent
+    {
+        get
+        {
+            if (Score <= 0) return 0;
+            if (FullScore == 0) return 100;
+            if (Score >= FullScore) return 100;
+            return Math.Round(Score * 100 / (float)FullScore, 2);
+        }
+    }
+
     /// <summary>
     /// 换算成Z-score
     /// </summary>

@@ -53,7 +53,7 @@
                             <p class="category">{{Title}} - {{subTitle}}</p>
                         </div>
                         <div class="card-body">
-                            <exam-list [Scores]="Top10"></exam-list>
+                            <exam-list [Scores]="Top10" [Mode]="'DIFF'"></exam-list>
                         </div>
                     </div>
                     <br /><br />
@@ -63,12 +63,12 @@
                             <p class="category">{{Title}} - {{subTitle}}</p>
                         </div>
                         <div class="card-body">
-                            <exam-list [Scores]="Low10"></exam-list>
+                            <exam-list [Scores]="Low10" [Mode]="'DIFF'"></exam-list>
                         </div>
                     </div>
                 </p-tabPanel>
                 <p-tabPanel [header]="'分数段人数'">
-                    <div echarts [options]="mScoreFunnelOption" style="width:500px;height:500px;"
+                    <div echarts [options]="mScoreFunnelOption" style="width:650px;height:650px;"
                     (chartInit)="onChartInit($event)"></div> 
                 </p-tabPanel>
             </p-tabView>

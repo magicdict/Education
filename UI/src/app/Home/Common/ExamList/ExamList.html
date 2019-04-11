@@ -30,6 +30,10 @@
         <p-sortIcon [field]="'score'">
         </p-sortIcon>
       </th>
+      <th style="width: 40px" [pSortableColumn]="'scorePercent'">得分率
+        <p-sortIcon [field]="'scorePercent'">
+        </p-sortIcon>
+      </th>
       <th style="width: 50px" [pSortableColumn]="'tScore'">T分数
         <p-sortIcon [field]="'tScore'">
         </p-sortIcon>
@@ -63,6 +67,7 @@
       <td *ngIf="Mode === 'Same'" style="width: 200px">{{itemData.numberName}}</td>
       <td *ngIf="Mode === 'Same'" style="width: 50px">{{itemData.subName}}</td>
       <td style="width: 40px">{{itemData.score}}</td>
+      <td style="width: 40px">{{itemData.scorePercent}}</td>
       <td style="width: 50px">{{roundvalue(itemData.tScore)}}</td>
       <td style="width: 50px">{{roundvalue(itemData.zScore)}}</td>
       <td style="width: 50px">{{roundvalue(itemData.dengdi)}}</td>
