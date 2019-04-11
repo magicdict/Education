@@ -14,7 +14,7 @@ export class KaoqinOverviewComponent implements OnInit {
     Kaoqin20MonthOption: IStackBarOption;
     Kaoqin30MonthOption: IStackBarOption;
     Kaoqin99MonthOption: IStackBarOption;
-
+    KaoqinAbnormalMonthOption: IStackBarOption;
     KaoqinDateList: { key: string, catalog: string, value: number }[] = [];
 
     ngOnInit(): void {
@@ -139,36 +139,70 @@ export class KaoqinOverviewComponent implements OnInit {
                 this.KaoqinOption = {
                     title: { text: "考勤次数", left: 10 },
                     label: { formatter: "{b}\n{c}" },
-                    series: { data: [leaf], type: "sunburst",center:["40%","50%"] },
+                    series: { data: [leaf], type: "sunburst", center: ["40%", "50%"] },
                 }
 
                 var NameArray: string[] = ["默认信息", "早上迟到", "晚到学校"];
                 var CodeArray: string[] = ["100000", "100100", "100200"];
                 var StackName: string = "迟到_晚到";
-                this.Kaoqin10MonthOption = this.CreateOption(NameArray, CodeArray, StackName, data);
+                this.Kaoqin10MonthOption = this.CreateOption(NameArray, CodeArray, StackName, data.kaoqinInfo.monthDict);
 
 
                 var NameArray: string[] = ["校徽校服", "请假离校"];
                 var CodeArray: string[] = ["200100", "200200"];
                 var StackName: string = "校徽_早退";
-                this.Kaoqin20MonthOption = this.CreateOption(NameArray, CodeArray, StackName, data);
+                this.Kaoqin20MonthOption = this.CreateOption(NameArray, CodeArray, StackName, data.kaoqinInfo.monthDict);
 
                 var NameArray: string[] = ["默认信息", "住宿早晨锻炼", "课间操请假"];
                 var CodeArray: string[] = ["300000", "300100", "300200"];
                 var StackName: string = "操场考勤机";
-                this.Kaoqin30MonthOption = this.CreateOption(NameArray, CodeArray, StackName, data);
+                this.Kaoqin30MonthOption = this.CreateOption(NameArray, CodeArray, StackName, data.kaoqinInfo.monthDict);
 
 
                 var NameArray: string[] = ["迟到", "校服", "早退", "离校", "进校"];
                 var CodeArray: string[] = ["9900100", "9900200", "9900300", "9900400", "9900500"];
                 var StackName: string = "移动考勤机";
-                this.Kaoqin99MonthOption = this.CreateOption(NameArray, CodeArray, StackName, data);
+                this.Kaoqin99MonthOption = this.CreateOption(NameArray, CodeArray, StackName, data.kaoqinInfo.monthDict);
 
 
+                //对于违规考勤的统计
+                var NameArray: string[] = ["早上迟到", "晚到学校", "迟到", "校服", "早退", "校徽校服"];
+                var CodeArray: string[] = ["100100", "100200", "9900100", "9900200", "9900300", "200100"];
+                var StackName: string = "违规行为";
+                //各个考勤记录范围不同，需要对于日期重新清洗    
+                let Monthlist: string[] = [];
+                CodeArray.forEach(
+                    code => {
+                        data.kaoqinInfo.monthDict[code].forEach(
+                            month => {
+                                if (Monthlist.indexOf(month.name) === -1 && month.value > 0) {
+                                    Monthlist.push(month.name);
+                                }
+                            }
+                        );
+                    }
+                );
+                Monthlist.sort();
+                let dataSet: { [key: string]: { name: string, value: number }[] } = {};
+                CodeArray.forEach(code => {
+                    let monthcnt: { name: string, value: number }[] = [];
+                    Monthlist.forEach(
+                        month => {
+                            let cnt = data.kaoqinInfo.monthDict[code].find(x => x.name == month);
+                            if (cnt === undefined) {
+                                monthcnt.push({ name: month, value: 0 });
+                            } else {
+                                monthcnt.push(cnt);
+                            }
+                        }
+                    );
+                    dataSet[code] = monthcnt;
+                });
+                this.KaoqinAbnormalMonthOption = this.CreateOption(NameArray, CodeArray, StackName, dataSet, Monthlist);
             });
     }
 
-    CreateOption(NameArray: string[], CodeArray: string[], StackName: string, data: { kaoqinInfo: IKaoqinOverview }): IStackBarOption {
+    CreateOption(NameArray: string[], CodeArray: string[], StackName: string, data: { [key: string]: { name: string, value: number }[] }, Monthlist?: string[]): IStackBarOption {
         var StackArray: IStack[] = [];
         for (let index = 0; index < NameArray.length; index++) {
             let stack: IStack = {
@@ -179,7 +213,7 @@ export class KaoqinOverviewComponent implements OnInit {
                 },
                 name: NameArray[index],
                 stack: StackName,
-                data: data.kaoqinInfo.monthDict[CodeArray[index]],
+                data: data[CodeArray[index]],
                 type: 'bar'
             }
             StackArray.push(stack)
@@ -192,12 +226,21 @@ export class KaoqinOverviewComponent implements OnInit {
             legend: {
                 data: NameArray
             },
+            tooltip : {
+                //默认的就往往就是是最好的！
+            },
             label: {
-                formatter: '{b}:\n{c}'
+                formatter: function(a)
+                {
+                    if (a.value > 0){
+                        return (a.value)
+                    }
+                    return '';
+                }
             },
             xAxis: {
                 type: 'category',
-                data: data.kaoqinInfo.monthDict[CodeArray[0]].map(x => x.name)
+                data: data[CodeArray[0]].map(x => x.name)
             },
             yAxis: {
                 type: 'value'
@@ -210,6 +253,11 @@ export class KaoqinOverviewComponent implements OnInit {
             },
             series: StackArray
         }
+
+        if (Monthlist !== undefined) {
+            KaoqinMonthOption.xAxis.data = Monthlist;
+        }
+
         return KaoqinMonthOption;
     }
 

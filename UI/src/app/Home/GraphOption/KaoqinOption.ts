@@ -10,7 +10,7 @@ export interface ISunburstOption {
     series: {
         type: 'sunburst';
         data: ILeaf[],
-        center?: number[]|string[]
+        center?: number[] | string[]
     }
 };
 
@@ -33,7 +33,7 @@ export interface IStackBarOption {
         data: string[]
     },
     label: {
-        formatter?: string
+        formatter?: any;
     },
     xAxis: {
         type: string,

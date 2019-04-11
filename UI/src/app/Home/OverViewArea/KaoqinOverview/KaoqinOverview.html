@@ -42,4 +42,10 @@
         </div>
         <div echarts [options]="Kaoqin99MonthOption" style="width:1080px;height:800px;"></div>
     </p-tabPanel>
+    <p-tabPanel header="违规行为" style="width:1140px;">
+        <div class="alert alert-warning" role="alert">
+            迟到和晚到是一个意思，不同老师的录入风格不同。
+        </div>
+        <div echarts [options]="KaoqinAbnormalMonthOption" style="width:1080px;height:800px;"></div>
+    </p-tabPanel>
 </p-tabView>
