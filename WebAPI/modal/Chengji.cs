@@ -161,6 +161,11 @@ public class Chengji : IEqualityComparer<Chengji>
         }
     }
 
+    public float GradeAvg { get; set; }
+
+    public float ClassAvg { get; set; }
+
+
     /// <summary>
     /// 换算成Z-score
     /// </summary>
@@ -181,7 +186,7 @@ public class Chengji : IEqualityComparer<Chengji>
     /// 年级组排名
     /// </summary>
     /// <value></value>
-    public int Rank { get; set; }
+    public int GradeRank { get; set; }
 
     /// <summary>
     /// 班级排名
@@ -193,20 +198,35 @@ public class Chengji : IEqualityComparer<Chengji>
     /// 有效考试人数(年级组)
     /// </summary>
     /// <value></value>
-    public int AvalibleCnt { get; set; }
-
+    public int GradeAvalibleCnt { get; set; }
     /// <summary>
-    /// 班级排名百分比
+    /// 有效考试人数(班级)
     /// </summary>
     /// <value></value>
-    public double RankPercent
+    public int ClassAvalibleCnt { get; set; }
+
+    /// <summary>
+    /// 年级排名百分比
+    /// </summary>
+    /// <value></value>
+    public double GradeRankPercent
     {
         get
         {
-            if (Rank > AvalibleCnt) return 100; //无效分数的人
-            return Math.Round(Rank * 100 / (float)AvalibleCnt, 2);
+            if (GradeRank > GradeAvalibleCnt) return 100; //无效分数的人
+            return Math.Round(GradeRank * 100 / (float)GradeAvalibleCnt, 2);
         }
     }
+
+    public double ClassRankPercent
+    {
+        get
+        {
+            if (ClassRank > ClassAvalibleCnt) return 100; //无效分数的人
+            return Math.Round(ClassRank * 100 / (float)ClassAvalibleCnt, 2);
+        }
+    }
+
     /// <summary>
     /// 必修课
     /// </summary>
@@ -361,15 +381,23 @@ public class Chengji : IEqualityComparer<Chengji>
 }
 
 
-public class GradeRank
+public class AddtionalInfo
 {
     public string Id { get; set; }
 
     public string StudentID { get; set; }
 
-    public int Rank { get; set; }
 
-    public int AvalibleCnt { get; set; }
+    public int GradeAvalibleCnt { get; set; }
+
+    public int ClassAvalibleCnt { get; set; }
+    
+    public int GradeRank { get; set; }
 
     public int ClassRank { get; set; }
+
+
+    public float GradeAvg { get; set; }
+
+    public float ClassAvg { get; set; }
 }

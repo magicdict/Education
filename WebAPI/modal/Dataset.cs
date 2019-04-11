@@ -31,7 +31,7 @@ public static class Dataset
 
     public static List<MonthConsumptionStudent> StudentConsumptionList = new List<MonthConsumptionStudent>();
 
-    public static List<GradeRank> ExamRankList = new List<GradeRank>();
+    public static List<AddtionalInfo> ExamRankList = new List<AddtionalInfo>();
 
     //数据库的导入
     public static void Load(IHostingEnvironment hostingEnvironment)
@@ -132,8 +132,10 @@ public static class Dataset
         ChengjiList = ChengjiList.Where(x => x.Term.CompareTo("2016-2017-1") >= 0).ToList();    //2016学年之前的课程
         ChengjiList = ChengjiList.Where(x => !String.IsNullOrEmpty(x.SubName)).ToList();        //无科目的课程
         Console.WriteLine("有效成绩数：" + ChengjiList.Count);
+        ChengjiList = ChengjiList.Where(x => x.Grade.StartsWith("高")).ToList();                //初中成绩
+        Console.WriteLine("有效成绩数（高中）：" + ChengjiList.Count);
 
-        //Dump(fullpath);
+        Dump(fullpath);
         if (true)
         {
             //读取成绩
@@ -144,14 +146,16 @@ public static class Dataset
             while (!sr.EndOfStream)
             {
                 var line = sr.ReadLine().Split(",");
-                ExamRankList.Add(new GradeRank()
+                ExamRankList.Add(new AddtionalInfo()
                 {
                     Id = line[0],
                     StudentID = line[1],
-                    Rank = int.Parse(line[2]),
-                    AvalibleCnt = int.Parse(line[3]),
-                    //line[4]为年级排名比例
-                    ClassRank = int.Parse(line[5])
+                    GradeAvalibleCnt = int.Parse(line[2]),
+                    ClassAvalibleCnt = int.Parse(line[3]),
+                    GradeRank = int.Parse(line[4]),
+                    ClassRank = int.Parse(line[5]),
+                    GradeAvg = float.Parse(line[6]),
+                    ClassAvg = float.Parse(line[7])
                 });
             }
             sr.Close();
@@ -164,15 +168,17 @@ public static class Dataset
         ExamRankList.Sort((x, y) => { return (x.Id + x.StudentID).CompareTo(y.Id + y.StudentID); });
         for (int i = 0; i < ChengjiList.Count; i++)
         {
-            ChengjiList[i].Rank = ExamRankList[i].Rank;
-            ChengjiList[i].AvalibleCnt = ExamRankList[i].AvalibleCnt;
+            ChengjiList[i].GradeRank = ExamRankList[i].GradeRank;
             ChengjiList[i].ClassRank = ExamRankList[i].ClassRank;
+            ChengjiList[i].GradeAvalibleCnt = ExamRankList[i].GradeAvalibleCnt;
+            ChengjiList[i].ClassAvalibleCnt = ExamRankList[i].ClassAvalibleCnt;
+            ChengjiList[i].GradeAvg = ExamRankList[i].GradeAvg;
+            ChengjiList[i].ClassAvg = ExamRankList[i].ClassAvg;            
+
         }
         //内存优化：2016-2017-1开始考试成绩保留，其他不要了
         ExamRankList.Clear();
 
-        ChengjiList = ChengjiList.Where(x => x.Grade.StartsWith("高")).ToList();        //初中成绩
-        Console.WriteLine("有效成绩数（高中）：" + ChengjiList.Count);
         Education.Controllers.CourseController.PrepareExamNameList();
         GC.Collect();
 
@@ -246,7 +252,7 @@ public static class Dataset
         timer.Start();
 
         StreamWriter sw;
-        if (true)
+        if (false)
         {
             sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "StudentConsumptionMonthList.csv");
             sw.WriteLine("Id,Name,Sex,ClassName,Month,Amount,LiveAtSchool");
@@ -272,10 +278,12 @@ public static class Dataset
         {
             var temp = ChengjiList.Where(x => x.IdForGradeExam == IdForGradeExam);
             var AvalibleCnt = temp.Count(x => x.Score > 0);
+            var avg = AvalibleCnt == 0 ? 0 : temp.Where(x => x.Score > 0).Average(x => x.Score);
             foreach (var chengji in temp)
             {
-                chengji.Rank = temp.Count(x => x.Score > chengji.Score) + 1;    //比这个成绩好的人数 + 1
-                chengji.AvalibleCnt = AvalibleCnt;
+                chengji.GradeRank = temp.Count(x => x.Score > chengji.Score) + 1;    //比这个成绩好的人数 + 1
+                chengji.GradeAvalibleCnt = AvalibleCnt;
+                chengji.GradeAvg = avg;
             }
             CntComplete++;
             Console.WriteLine("Complete:[" + IdForGradeExam + "](" + CntComplete + "/" + ExamUnion.Count() + " OK)");
@@ -287,9 +295,13 @@ public static class Dataset
         Parallel.ForEach(ExamUnion, IdForClass =>
         {
             var temp = ChengjiList.Where(x => x.IdForClass == IdForClass);
+            var AvalibleCnt = temp.Count(x => x.Score > 0);
+            var avg = AvalibleCnt == 0 ? 0 : temp.Where(x => x.Score > 0).Average(x => x.Score);
             foreach (var chengji in temp)
             {
                 chengji.ClassRank = temp.Count(x => x.Score > chengji.Score) + 1;    //比这个成绩好的人数 + 1
+                chengji.ClassAvalibleCnt = AvalibleCnt;
+                chengji.ClassAvg = avg;
             }
             CntComplete++;
             Console.WriteLine("Complete:[" + IdForClass + "](" + CntComplete + "/" + ExamUnion.Count() + " OK)");
@@ -297,10 +309,12 @@ public static class Dataset
 
         //DUMP CHENGJI
         sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "ScoreRank.csv");
-        sw.WriteLine("Id,StudentID,Rank,AvalibleCnt,RankPercent,ClassRank");
+        sw.WriteLine("Id,StudentID,GradeAvalibleCnt,ClassAvalibleCnt,GradeRank,ClassRank,GradeAvg,ClassAvg");
         foreach (var item in Dataset.ChengjiList)
         {
-            sw.WriteLine(item.Id + "," + item.StudentID + "," + item.Rank + "," + item.AvalibleCnt + "," + item.RankPercent + "," + item.ClassRank);
+            sw.WriteLine(item.Id + "," + item.StudentID + "," + item.GradeAvalibleCnt + "," +
+            item.ClassAvalibleCnt + "," + item.GradeRank + "," + item.ClassRank + "," + item.GradeAvg + "," +
+            item.ClassAvg);
         }
         sw.Close();
         Console.WriteLine(timer.Elapsed.ToString());

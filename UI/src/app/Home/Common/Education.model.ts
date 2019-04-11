@@ -204,10 +204,15 @@ export interface IScore {
   zScore: string;
   tScore: number;
   dengdi: number;
-  rank: number;
-  avalibleCnt: number;
-  rankPercent: number;
+  gradeAvalibleCnt: number;
+  classAvalibleCnt: number;
+  gradeRankPercent: number;
+  classRankPercent: number;
+  gradeRank: number;
   classRank: number;
+  gradeAvg : number;
+  classAvg: number;
+
 }
 
 export interface IKaoqin {
