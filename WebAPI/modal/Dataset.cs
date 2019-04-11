@@ -170,7 +170,9 @@ public static class Dataset
         }
         //内存优化：2016-2017-1开始考试成绩保留，其他不要了
         ExamRankList.Clear();
-        Console.WriteLine("成绩数：" + ChengjiList.Count);
+
+        ChengjiList = ChengjiList.Where(x => x.Grade.StartsWith("高")).ToList();        //初中成绩
+        Console.WriteLine("有效成绩数（高中）：" + ChengjiList.Count);
         Education.Controllers.CourseController.PrepareExamNameList();
         GC.Collect();
 

@@ -291,21 +291,26 @@ public class Chengji : IEqualityComparer<Chengji>
             ClassName = s.First().ClassName;
             if (ClassName.Contains("高一"))
             {
-                Grade = "高一";
+                if (Term.StartsWith("2016-2017")) Grade = "初二";
+                if (Term.StartsWith("2017-2018")) Grade = "初三";
+                if (Term.StartsWith("2018-2019")) Grade = "高一";
             }
 
             if (ClassName.Contains("高二"))
             {
+                if (Term.StartsWith("2016-2017")) Grade = "初三";
                 if (Term.StartsWith("2017-2018")) Grade = "高一";
                 if (Term.StartsWith("2018-2019")) Grade = "高二";
             }
 
             if (ClassName.Contains("高三"))
             {
+                if (Term.StartsWith("2015-2016")) Grade = "初三";
                 if (Term.StartsWith("2016-2017")) Grade = "高一";
                 if (Term.StartsWith("2017-2018")) Grade = "高二";
                 if (Term.StartsWith("2018-2019")) Grade = "高三";
             }
+            if (String.IsNullOrEmpty(Grade)) Console.WriteLine("学号：" + StudentID + " 学期：" + Term);
             //根据班级号，SUBID检索授课教师ID
             var t = Dataset.TeacherList.Where(x => x.SubId == SubId && x.ClassId == ClassID);
             if (t.Count() == 1)

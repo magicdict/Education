@@ -65,8 +65,4 @@ export class ClassOverviewComponent implements OnInit {
   JumpToTeacher(teacherid: string) {
     this.router.navigate(['teacher/overview', teacherid]);
   }
-  JumpToExam() {
-    this.router.navigate(['class/exam', this.ClassId]);
-  }
-
 }
