@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 public class Kaoqin
 {
@@ -72,6 +73,10 @@ public class Kaoqin
             return Weather.GetWeatherByDate(RecDateTimeYear, RecDateTimeMonth, RecDateTimeDay);
         }
     }
+
+
+    public DayOfWeek DayOfWeek { get; set; }
+
     public Kaoqin(string RawData)
     {
         var Items = RawData.Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray();
@@ -89,6 +94,7 @@ public class Kaoqin
         StudentName = Items[7];
         ClassName = Items[8];
         ClassId = Items[9];
+        DayOfWeek = new System.DateTime(int.Parse(RecDateTimeYear), int.Parse(RecDateTimeMonth), int.Parse(RecDateTimeDay)).DayOfWeek;
     }
 
 }

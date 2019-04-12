@@ -165,6 +165,20 @@ public class Chengji : IEqualityComparer<Chengji>
 
     public float ClassAvg { get; set; }
 
+    public float GradeAvgDiff
+    {
+        get
+        {
+            return Score - GradeAvg;
+        }
+    }
+    public float ClassAvgDiff
+    {
+        get
+        {
+            return Score - ClassAvg;
+        }
+    }
 
     /// <summary>
     /// 换算成Z-score
@@ -391,7 +405,7 @@ public class AddtionalInfo
     public int GradeAvalibleCnt { get; set; }
 
     public int ClassAvalibleCnt { get; set; }
-    
+
     public int GradeRank { get; set; }
 
     public int ClassRank { get; set; }

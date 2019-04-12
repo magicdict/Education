@@ -9,8 +9,12 @@
                         [src]="CurrentStudent.sex == '男' ? '/assets/image/male.png' : '/assets/image/female.png'">
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">{{CurrentStudent.name}}</h4>
-                    <h6 class="card-title">{{CurrentStudent.className}}</h6></a>
+                    <h4 class="card-title">{{CurrentStudent.name}} &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-info" (click)="JumpToClass()">
+                            {{CurrentStudent.className}}
+                        </button>
+                    </h4>
+                    <br />
                     <ul class="heroes">
                         <li>
                             <span class="badge">ID</span>{{CurrentStudent.id}}
@@ -64,7 +68,7 @@
                         <div class="card text-right" style="width: 100%;margin-top: 10px;">
                             <div class="card-body">
                                 <div echarts [options]="KaoqinGraph" style="width:350px;height:350px;"></div>
-                                <button class="btn btn-primary" style="float:right"><i class="fa fas fa-chart-bar"></i>
+                                <button class="btn btn-primary" style="float:right" (click)="JumpTo('kaoqin')"><i class="fa fas fa-chart-bar"></i>
                                     详细</button>
                             </div>
                         </div>

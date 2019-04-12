@@ -57,7 +57,16 @@ export class StudentOverviewComponent implements OnInit {
     }
   }
 
-
+  JumpToClass() {
+    this.service.QueryByClassId(this.CurrentStudent.classId).then(
+      r => {
+        if (r.length !== 0) {
+          this.service.CurrentClassInfo = r;
+          this.router.navigate(['class/overview', this.CurrentStudent.classId]);
+        }
+      }
+    )
+  }
 
   ngOnInit(): void {
     this.route.data
@@ -102,6 +111,7 @@ export class StudentOverviewComponent implements OnInit {
         )
         this.KaoqinGraph.xAxis.data = this.KaoqinMonth;
         this.KaoqinGraph.series[0].data = this.KaoqinMonthCnt;
+        
         data.studentinfo.chengjis.sort((x, y) => { return x.subId.localeCompare(y.subId) });
         from(data.studentinfo.chengjis).pipe(
           groupBy(x => x.subId),

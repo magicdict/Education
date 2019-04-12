@@ -212,7 +212,8 @@ export interface IScore {
   classRank: number;
   gradeAvg : number;
   classAvg: number;
-
+  gradeAvgDiff: number;
+  classAvgDiff: number;
 }
 
 export interface IKaoqin {
@@ -231,6 +232,7 @@ export interface IKaoqin {
   className: string;
   classId: string;
   weather: IWeather;
+  dayOfWeek: number;
 }
 
 export interface IKaoqinOverview {

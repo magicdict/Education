@@ -8,6 +8,8 @@ import { Grade2ScoreComponent } from './StudentArea/StudentSorce/Grade2Score.com
 import { Grade3ScoreComponent } from './StudentArea/StudentSorce/Grade3Score.component';
 import { TeacherOverviewComponent } from './TeacherOverview/TeacherOverview.component';
 import { SingleExamClassComponent } from './ExamArea/SingleExamClass.component';
+import { StudentKaoqinComponent } from './StudentArea/StudentKaoqin/StudentKaoqin.component';
+
 const routes: Routes = [
   {
     path: 'student/overview/:id',
@@ -38,6 +40,10 @@ const routes: Routes = [
   {
     path: 'student/overview/:id/grade3',
     component: Grade3ScoreComponent
+  },
+  {
+    path: 'student/overview/:id/kaoqin',
+    component: StudentKaoqinComponent
   },
   {
     path: 'exam/detail/:id',

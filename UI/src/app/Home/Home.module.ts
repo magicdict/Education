@@ -52,6 +52,7 @@ import { StudentPickerComponent } from './Common/studentPicker/studentPicker.com
 import { ExamListComponent } from './Common/ExamList/ExamList.component';
 import { ClassPickerComponent } from './Common/classPicker/classPicker.component';
 import { StudentItemComponent } from './Common/StudentItem/studentItem.component';
+import { StudentKaoqinComponent } from './StudentArea/StudentKaoqin/StudentKaoqin.component';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { StudentItemComponent } from './Common/StudentItem/studentItem.component
     //学生相关
     StudentOverviewComponent,
     StudentCompumptionComponent,
+    StudentKaoqinComponent,
     Grade1ScoreComponent,
     Grade2ScoreComponent,
     Grade3ScoreComponent,

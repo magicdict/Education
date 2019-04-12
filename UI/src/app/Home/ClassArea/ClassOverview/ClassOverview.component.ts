@@ -4,6 +4,9 @@ import { IStudent, IClassInfo, ITeacher, IClassExam } from 'src/app/Home/Common/
 import { HomeService } from '../../Common/Home.service';
 import { SexRatePieOption, regionMapOptions } from '../../GraphOption/StudentGraphOption'
 import { ISimpleBar } from '../../GraphOption/KaoqinOption';
+import { from } from 'rxjs';
+import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
+import { CommonFunction } from '../../Common/common';
 
 @Component({
   templateUrl: 'ClassOverview.html',
@@ -19,7 +22,7 @@ export class ClassOverviewComponent implements OnInit {
   public ClassName: string;
   public ClassId: string;
   public Teachers: ITeacher[] = [];
-  public Exams: IClassExam[];
+  public Exams: IClassExam[][] = [];
   mSexRate = SexRatePieOption;
   NativePlaceRegionOptions = regionMapOptions;
   KaoqinOpt: ISimpleBar;
@@ -38,7 +41,18 @@ export class ClassOverviewComponent implements OnInit {
         this.NativePlaceRegionOptions.visualMap.max = 25;
         this.NativePlaceRegionOptions.series[0].data = data.classinfo.geoOptions;
         this.Teachers = data.classinfo.teachers;
-        this.Exams = data.classinfo.exams;
+
+        //classTerm划分
+        from(data.classinfo.exams).pipe(
+          groupBy(x => x.record.term),
+          mergeMap(x => x.pipe(toArray()))
+        ).subscribe(
+          r => {
+            this.Exams.push(r);
+          }
+        )
+
+
         if (data.classinfo.kaoqing.length === 0) {
           this.IsShowKaoqinGraph = false;
         } else {
