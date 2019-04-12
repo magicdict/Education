@@ -34,7 +34,7 @@ public static class Dataset
     public static List<AddtionalInfo> ExamRankList = new List<AddtionalInfo>();
 
     //数据库的导入
-    public static void Load(IHostingEnvironment hostingEnvironment)
+    public static void Load(IWebHostEnvironment hostingEnvironment)
     {
         var fullpath = hostingEnvironment.ContentRootPath + System.IO.Path.DirectorySeparatorChar + datasetPath;
         Console.WriteLine("数据库路径:" + fullpath);

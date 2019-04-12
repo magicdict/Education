@@ -2,6 +2,12 @@
 
 "数智教育"数据可视化创新大赛
 
+运行环境
+
+- Linux 7
+- DotNet Core 3.0-Preview3
+- Angular 7.12
+
 - UI ： Angular代码
 - WebAPI：WebAPI代码
 - netcore-web-example.service : NetCore WebAPI的CentOS守护进程
@@ -45,8 +51,9 @@ TODO:
   - 学生成绩趋势图，增加一个按钮，弹出大图
   - 各种表格的排序问题，例如考试画面初始的时候没有按照班级进行排序
   - 高三联考学生3门课程总分排行
-  - 班级，年级离均值
-  - 学生界面到班级界面的跳转
+  - 考试界面，跳转出去之后回来，原来数据丢失，考虑增加记忆功能
+  - 班级，年级离均值[DONE]
+  - 学生界面到班级界面的跳转[DONE]
   - 非链接的标签去除手型和特殊效果[DONE]
   - 得分率[DONE]
   - 班级检索窗体[DONE]

@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { IExamList, IClassExam, IExamInfoForNumberAndSubName, IScore } from 'src/app/Home/Common/Education.model';
 import { CommonFunction } from 'src/app/Home/Common/common';
 import { HomeService } from '../../Common/Home.service';
@@ -48,7 +48,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
     }
     //ngx-echarts初始化，获得图表实例
     echartsInstance: any;
-    onChartInit(event) {
+    onChartInit(event: any) {
         this.echartsInstance = event;
     }
     JumpToExam(numberName: string, subName: string, Grade: string) {
@@ -75,7 +75,9 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
                     }
                 }
                 this.mScoreFunnelOption.series[0].max = maxcnt;
-                this.echartsInstance.setOption(this.mScoreFunnelOption);
+                if (this.echartsInstance !== undefined) {
+                    this.echartsInstance.setOption(this.mScoreFunnelOption);
+                }
             }
         );
     }

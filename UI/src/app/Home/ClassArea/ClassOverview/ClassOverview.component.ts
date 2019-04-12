@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IStudent, IClassInfo, ITeacher, IClassExam } from 'src/app/Home/Common/Education.model';
 import { HomeService } from '../../Common/Home.service';
@@ -6,16 +6,16 @@ import { SexRatePieOption, regionMapOptions } from '../../GraphOption/StudentGra
 import { ISimpleBar } from '../../GraphOption/KaoqinOption';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
-import { CommonFunction } from '../../Common/common';
 
 @Component({
   templateUrl: 'ClassOverview.html',
 })
-export class ClassOverviewComponent implements OnInit {
+export class ClassOverviewComponent implements OnInit, AfterViewInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    public service: HomeService) { }
+    public service: HomeService,
+    private cd: ChangeDetectorRef) { }
 
   public QueryResult: IStudent[] = [];
   public StudentCnt: number;
@@ -27,6 +27,12 @@ export class ClassOverviewComponent implements OnInit {
   NativePlaceRegionOptions = regionMapOptions;
   KaoqinOpt: ISimpleBar;
   IsShowKaoqinGraph: boolean;
+
+  ngAfterViewInit() {
+    //ExpressionChangedAfterItHasBeenCheckedError的对应
+    //因为动态加载了Panel
+    this.cd.detectChanges();
+  }
 
   ngOnInit(): void {
     this.route.data

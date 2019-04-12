@@ -31,8 +31,7 @@
             </p-tabView>
         </div>
         <div class="col-8">
-
-            <p-tabView>
+            <p-tabView *ngIf="this.Exams.length !== 0">
                 <p-tabPanel [header]="'概要'">
                     <div class="card">
                         <div class="card-header card-header-text card-header-primary">
