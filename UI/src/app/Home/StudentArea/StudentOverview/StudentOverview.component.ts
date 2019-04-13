@@ -23,6 +23,20 @@ export class StudentOverviewComponent implements OnInit {
   KaoqinGraph = KaoqinBarGraph;
   ScoreGraph = ScoreRadarGraphOption;
 
+  CompumptionEchartsInstance: any;
+  onCompumptionChartInit(event: any) {
+    this.CompumptionEchartsInstance = event;
+  }
+  
+  ScoreEchartsInstance: any;
+  onScoreChartInit(event: any) {
+    this.ScoreEchartsInstance = event;
+  }
+
+  KaoqinEchartsInstance: any;
+  onKaoqinChartInit(event: any) {
+    this.KaoqinEchartsInstance = event;
+  }
 
   public IsHeaderReady = false;
   public CurrentStudent: IStudent;
@@ -157,11 +171,24 @@ export class StudentOverviewComponent implements OnInit {
             }
           }
         )
+        
+        this.ScoreGraph = CommonFunction.clone(ScoreRadarGraphOption);
         this.ScoreGraph.title.text = '成绩';
         this.ScoreGraph.radar.indicator = this.ScoreName;
         this.ScoreGraph.series[0].data[0].value = this.ScoreAvg;
         this.ScoreGraph.series[0].data[1].value = this.TScoreAvg;
-        this.ScoreGraph = CommonFunction.clone(ScoreRadarGraphOption);
+
+
+        if (this.ScoreEchartsInstance !== undefined) {
+          this.ScoreEchartsInstance.setOption(this.ScoreGraph);
+        }
+        if (this.KaoqinEchartsInstance !== undefined) {
+          this.KaoqinEchartsInstance.setOption(this.KaoqinGraph);
+        }
+        if (this.CompumptionEchartsInstance !== undefined) {
+          this.CompumptionEchartsInstance.setOption(this.CompumptionGraph);
+        }
+
       });
   }
 }

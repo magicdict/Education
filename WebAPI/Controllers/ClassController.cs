@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using static Education.Controllers.SchoolController;
 using static Utility;
 
 namespace Education.Controllers
@@ -17,9 +18,8 @@ namespace Education.Controllers
         /// </summary>
         public class ClassOverview
         {
-            public int maleCnt { get; set; }
-            public int femaleCnt { get; set; }
-            public List<NameValueSet> GeoOptions { get; set; }
+            public StudentGroupProperty Property { get; set; } 
+
             /// <summary>
             /// 任课教师
             /// </summary>
@@ -46,39 +46,9 @@ namespace Education.Controllers
         public ActionResult<ClassOverview> GetClassOverview(string ClassId)
         {
             var overview = new ClassOverview();
-            overview.maleCnt = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassId == ClassId);
-            overview.femaleCnt = Dataset.StudentList.Count(x => x.Sex == "女" && x.ClassId == ClassId);
-            //获得地理信息
-            var geodic = new Dictionary<string, int>();
-            foreach (var province in Utility.Provinces)
-            {
-                geodic.Add(province, 0);
-            }
-            foreach (var item in Dataset.StudentList.Where(x => x.ClassId == ClassId))
-            {
-                var x = Utility.GetProvince(item.NativePlace);
-                if (!string.IsNullOrEmpty(x))
-                {
-                    geodic[x]++;
-                }
-                else
-                {
-                    //对于宁波的修正
-                    if (item.NativePlace.Contains("宁波"))
-                    {
-                        geodic["浙江"]++;
-                    }
-                }
-            }
-            overview.GeoOptions = new List<NameValueSet>();
-            foreach (var k in geodic.Keys)
-            {
-                overview.GeoOptions.Add(new NameValueSet() { name = k, value = geodic[k] });
-            }
+            overview.Property = new StudentGroupProperty(Dataset.StudentList.Where(x => x.ClassId == ClassId).ToList()); 
             //教师记录
             overview.Teachers = Dataset.TeacherList.Where(x => x.ClassId == ClassId).ToList();
-
-
             var All = Dataset.ChengjiList.Where(x => x.ClassID == ClassId).ToList();
             var dic = new Dictionary<string, List<Chengji>>();
             foreach (var chengjiRec in All)

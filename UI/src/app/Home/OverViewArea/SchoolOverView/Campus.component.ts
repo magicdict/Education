@@ -33,7 +33,7 @@ export class CampusComponent implements OnInit {
             this.campusInfo = this.service.SchoolOverview.baiYang;
             //旭日图
             this.mSexRateSunburstOption.title.text = "";
-            this.mSexRateSunburstOption.series.data[0].value = this.campusInfo.totalSexRate.maleCnt + this.campusInfo.totalSexRate.femaleCnt;
+            this.mSexRateSunburstOption.series.data[0].value = this.campusInfo.property.totalSexRate.maleCnt + this.campusInfo.property.totalSexRate.femaleCnt;
 
             this.mSexRateSunburstOption.series.data[0].children[0].value = this.campusInfo.grade1SexRate.maleCnt + this.campusInfo.grade1SexRate.femaleCnt;
             this.mSexRateSunburstOption.series.data[0].children[0].children[0].value = this.campusInfo.grade1SexRate.maleCnt;
@@ -49,8 +49,8 @@ export class CampusComponent implements OnInit {
         } else {
             this.campusfullname = "东部校区";
             this.campusInfo = this.service.SchoolOverview.east;
-            this.mSexRatePieOption.series[0].data[0].value = this.campusInfo.totalSexRate.maleCnt;
-            this.mSexRatePieOption.series[0].data[1].value = this.campusInfo.totalSexRate.femaleCnt;
+            this.mSexRatePieOption.series[0].data[0].value = this.campusInfo.property.totalSexRate.maleCnt;
+            this.mSexRatePieOption.series[0].data[1].value = this.campusInfo.property.totalSexRate.femaleCnt;
         }
 
         let subnamelist = [];

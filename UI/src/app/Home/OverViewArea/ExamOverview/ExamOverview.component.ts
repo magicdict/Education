@@ -33,6 +33,10 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
                 this.GradeList.push({ name: "高二", value: data.examgradelist["高二"] });
                 this.GradeList.push({ name: "高三", value: data.examgradelist["高三"] });
             });
+        if (this.service.CurrentExam !== undefined) {
+            //恢复上次浏览的考试
+            this.CreateEntity(this.service.CurrentExam);
+        }
     }
     constructor(
         private route: ActivatedRoute,
@@ -51,33 +55,38 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
     onChartInit(event: any) {
         this.echartsInstance = event;
     }
+
+    CreateEntity(r: IExamInfoForNumberAndSubName) {
+        r.gradeInfo.record.className = "年级组";
+        this.Exams = r.classExamInfoList;
+        this.FootExam = r.gradeInfo;
+        this.Top10 = r.top10;
+        this.Low10 = r.low10;
+        this.Title = this.Exams[0].record.numberName;
+        this.subTitle = this.Exams[0].record.grade + " - " + this.Exams[0].record.subName;
+
+        this.mScoreFunnelOption.legend.data = [];
+        this.mScoreFunnelOption.series[0].data = [];
+        let maxcnt = 0;
+        for (let k in r.gradeInfo.funnelDic) {
+            this.mScoreFunnelOption.legend.data.push(k);
+            this.mScoreFunnelOption.series[0].data.push({ name: k, value: r.gradeInfo.funnelDic[k] });
+            if (r.gradeInfo.funnelDic[k] > maxcnt) {
+                maxcnt = r.gradeInfo.funnelDic[k];
+            }
+        }
+        this.mScoreFunnelOption.series[0].max = maxcnt;
+        if (this.echartsInstance !== undefined) {
+            this.echartsInstance.setOption(this.mScoreFunnelOption);
+        }
+    }
+
     JumpToExam(numberName: string, subName: string, Grade: string) {
         var request = "course/GetExamInfoByNumberAndSubName?numberName=" + numberName + "&subName=" + subName + "&Grade=" + Grade;
-
         this.commonFunction.httpRequest<IExamInfoForNumberAndSubName>(request).then(
             r => {
-                r.gradeInfo.record.className = "年级组";
-                this.Exams = r.classExamInfoList;
-                this.FootExam = r.gradeInfo;
-                this.Top10 = r.top10;
-                this.Low10 = r.low10;
-                this.Title = this.Exams[0].record.numberName;
-                this.subTitle = this.Exams[0].record.grade + " - " + this.Exams[0].record.subName;
-
-                this.mScoreFunnelOption.legend.data = [];
-                this.mScoreFunnelOption.series[0].data = [];
-                let maxcnt = 0;
-                for (let k in r.gradeInfo.funnelDic) {
-                    this.mScoreFunnelOption.legend.data.push(k);
-                    this.mScoreFunnelOption.series[0].data.push({ name: k, value: r.gradeInfo.funnelDic[k] });
-                    if (r.gradeInfo.funnelDic[k] > maxcnt) {
-                        maxcnt = r.gradeInfo.funnelDic[k];
-                    }
-                }
-                this.mScoreFunnelOption.series[0].max = maxcnt;
-                if (this.echartsInstance !== undefined) {
-                    this.echartsInstance.setOption(this.mScoreFunnelOption);
-                }
+                this.service.CurrentExam = r;
+                this.CreateEntity(r);
             }
         );
     }

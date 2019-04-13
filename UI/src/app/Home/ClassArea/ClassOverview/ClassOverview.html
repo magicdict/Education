@@ -1,40 +1,81 @@
 <app-nav></app-nav>
 <p-tabView>
   <p-tabPanel header="概要" style="width:1140px;">
+    <div class="alert alert-info">{{this.ClassName}} 人数：{{this.StudentCnt}}</div>
     <div class="container" style="margin: 0px;">
       <div class="row">
         <div class="col">
+          <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+              民族
+            </div>
+            <div class="card-body">
+              <div class="stats">
+                <div style="margin: 5px 0px 5px 0px">
+                  <button *ngFor="let x of StudentsInfo.nation" type="button" class="btn btn-primary"
+                    style="cursor: default;margin-left: 10px">
+                    {{x.name}}
+                    <span class="badge badge-light">{{x.value}}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+              政治面貌
+            </div>
+            <div class="card-body">
+              <div class="stats">
+                <div style="margin: 5px 0px 5px 0px">
+                  <button *ngFor="let x of StudentsInfo.policy" type="button" class="btn btn-danger"
+                    style="cursor: default;margin-left: 10px">
+                    {{x.name}}
+                    <span class="badge badge-light">{{x.value}}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <div class="card card-stats" style="width: 640px;">
+            <div class="card-header card-header-warning card-header-icon">
+              生源地
+            </div>
+            <div class="card-body" style="height: 640px;">
+              <div class="stats">
+                <div echarts (chartInit)="onNativePlaceChartInit($event)" [options]="NativePlaceRegionOptions"
+                  style="width:600px;height: 600px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
           <div class="card card-stats" style="width:360px;height: 360px;">
             <div class="card-header card-header-warning card-header-icon">
               男女比例
             </div>
             <div class="card-body" style="height: 350px;">
               <div class="stats">
-                <div echarts [options]="mSexRate" style="width:320px;height: 320px;"></div>
+                <div echarts (chartInit)="onSexRateChartInit($event)" [options]="mSexRate"
+                  style="width:320px;height: 320px;"></div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col">
-          <div class="card card-stats" style="width: 360px;">
-            <div class="card-header card-header-warning card-header-icon">
-              生源地
-            </div>
-            <div class="card-body" style="height: 350px;">
-              <div class="stats">
-                <div echarts [options]="NativePlaceRegionOptions" style="width:320px;height: 320px;"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
+          <br />
           <div *ngIf="IsShowKaoqinGraph" class="card card-stats" style="width: 360px;">
             <div class="card-header card-header-warning card-header-icon">
               考勤
             </div>
             <div class="card-body" style="height: 350px;">
               <div class="stats">
-                <div echarts [options]="KaoqinOpt" style="width:320px;height: 320px;"></div>
+                <div (chartInit)="onKaoqinChartInit($event)" echarts [options]="KaoqinOpt"
+                  style="width:320px;height:320px;"></div>
               </div>
             </div>
           </div>
@@ -43,7 +84,6 @@
     </div>
   </p-tabPanel>
   <p-tabPanel header="学生列表" style="width:1140px;">
-    <h3>{{this.ClassName}} 人数：{{this.StudentCnt}}</h3>
     <p-table [value]="QueryResult" [scrollable]="true" (onRowSelect)="onRowSelect($event)" selectionMode="single"
       scrollHeight="620px" [style]="{'width':'100%','min-width':'600px'}">
       <ng-template pTemplate="header">

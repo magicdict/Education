@@ -210,7 +210,7 @@ export interface IScore {
   classRankPercent: number;
   gradeRank: number;
   classRank: number;
-  gradeAvg : number;
+  gradeAvg: number;
   classAvg: number;
   gradeAvgDiff: number;
   classAvgDiff: number;
@@ -251,14 +251,20 @@ export interface ICampus {
   grade1SexRate: ISexRate;
   grade2SexRate: ISexRate;
   grade3SexRate: ISexRate;
-  totalSexRate: ISexRate;
-  geoOptions: { name: string, value: number }[];
   teacherCnt: number;
   teacherSubCnt: { [key: string]: number }
-  studentCnt: number;
-  studentIBCnt: number;
   classCnt: number;
   classIBCnt: number;
+  property:IStudentGroupProperty;
+}
+
+export interface IStudentGroupProperty {
+  studentCnt: number;
+  studentIBCnt: number;
+  totalSexRate: ISexRate;
+  policy: { name: string, value: number }[];
+  nation: { name: string, value: number }[];
+  nativePlace: { name: string, value: number }[];
 }
 
 export interface ISchoolInfo {
@@ -268,9 +274,7 @@ export interface ISchoolInfo {
 }
 
 export interface IClassInfo {
-  maleCnt: number;
-  femaleCnt: number;
-  geoOptions: { name: string, value: number }[];
+  property: IStudentGroupProperty;
   teachers: ITeacher[];
   exams: IClassExam[];
   kaoqing: { name: string, value: number }[];

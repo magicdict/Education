@@ -13,10 +13,26 @@ namespace Education.Controllers
     {
 
         /// <summary>
+        /// 概要
+        /// </summary>
+        public class Overview
+        {
+            public Campus BaiYang { get; set; }
+
+            public Campus East { get; set; }
+
+            public Campus Total { get; set; }
+
+        }
+
+        /// <summary>
         /// 校区信息    
         /// </summary>
         public class Campus
         {
+
+            public StudentGroupProperty Property { get; set; }
+
             /// <summary>
             /// 性别比例
             /// </summary>
@@ -32,16 +48,7 @@ namespace Education.Controllers
             /// </summary>
             /// <value></value>
             public SexRate Grade3SexRate { get; set; }
-            /// <summary>
-            /// 整体性别比例
-            /// </summary>
-            /// <value></value>
-            public SexRate TotalSexRate { get; set; }
-            /// <summary>
-            /// 生源地
-            /// </summary>
-            /// <value></value>
-            public List<NameValueSet> GeoOptions { get; set; }
+
             /// <summary>
             /// 教师数
             /// </summary>
@@ -52,18 +59,6 @@ namespace Education.Controllers
             /// </summary>
             /// <value></value>
             public Dictionary<string, int> TeacherSubCnt { get; set; }
-
-            /// <summary>
-            /// 学生数
-            /// </summary>
-            /// <value></value>
-            public int StudentCnt { get; set; }
-
-            /// <summary>
-            /// 国际部
-            /// </summary>
-            /// <value></value>
-            public int StudentIBCnt { get; set; }
 
             /// <summary>
             /// 班级数
@@ -78,18 +73,129 @@ namespace Education.Controllers
         }
 
         /// <summary>
-        /// 概要
+        /// 一批学生的基本属性的统计
         /// </summary>
-        public class Overview
+        public class StudentGroupProperty
         {
-            public Campus BaiYang { get; set; }
+            private List<Student> _studentlist;
 
-            public Campus East { get; set; }
+            public StudentGroupProperty(List<Student> students){
+                _studentlist = students;
+            }
 
-            public Campus Total { get; set; }
+            /// <summary>
+            /// 学生数
+            /// </summary>
+            /// <value></value>
+            public int StudentCnt
+            {
+                get
+                {
+                    return _studentlist.Count();
+                }
+            }
+            /// <summary>
+            /// 整体性别比例
+            /// </summary>
+            /// <value></value>
+            public SexRate TotalSexRate
+            {
+                get
+                {
+                    return new SexRate
+                    {
+                        maleCnt = _studentlist.Count(x => x.Sex == "男"),
+                        femaleCnt = _studentlist.Count(x => x.Sex == "女"),
+                    };
+                }
+            }
 
+            /// <summary>
+            /// 国际部
+            /// </summary>
+            /// <value></value>
+            public int StudentIBCnt
+            {
+                get
+                {
+                    return _studentlist.Count(x => x.ClassName.Contains("IB"));
+                }
+            }
+            /// <summary>
+            /// 政治面貌
+            /// </summary>
+            /// <value></value>
+            public List<NameValueSet> Policy
+            {
+                get
+                {
+                    return _studentlist.GroupBy(x => x.Policy).Select(x =>
+                    {
+                        return new NameValueSet()
+                        {
+                            name = x.Key,
+                            value = x.Count()
+                        };
+                    }).ToList();
+                }
+            }
+            /// <summary>
+            /// 民族
+            /// </summary>
+            /// <value></value>
+            public List<NameValueSet> Nation
+            {
+                get
+                {
+                    return _studentlist.GroupBy(x => x.Nation).Select(x =>
+                    {
+                        return new NameValueSet()
+                        {
+                            name = x.Key,
+                            value = x.Count()
+                        };
+                    }).ToList();
+                }
+            }
+            /// <summary>
+            /// 生源地
+            /// </summary>
+            /// <value></value>
+            public List<NameValueSet> NativePlace
+            {
+                get
+                {
+                    //获得地理信息
+                    var geodic = new Dictionary<string, int>();
+                    foreach (var province in Utility.Provinces)
+                    {
+                        geodic.Add(province, 0);
+                    }
+                    foreach (var item in _studentlist)
+                    {
+                        var x = Utility.GetProvince(item.NativePlace);
+                        if (!string.IsNullOrEmpty(x))
+                        {
+                            geodic[x]++;
+                        }
+                        else
+                        {
+                            //对于宁波的修正
+                            if (item.NativePlace.Contains("宁波"))
+                            {
+                                geodic["浙江"]++;
+                            }
+                        }
+                    }
+                    var rtn = new List<NameValueSet>();
+                    foreach (var k in geodic.Keys)
+                    {
+                        rtn.Add(new NameValueSet() { name = k, value = geodic[k] });
+                    }
+                    return rtn;
+                }
+            }
         }
-
 
         /// <summary>
         /// 获得概要
@@ -102,6 +208,11 @@ namespace Education.Controllers
             var BaiYang = new Campus();
             var East = new Campus();
 
+            SchoolOver.Property = new StudentGroupProperty(Dataset.StudentList);
+            BaiYang.Property = new StudentGroupProperty(Dataset.StudentList.Where(z => z.Campus == "白").ToList());
+            East.Property = new StudentGroupProperty(Dataset.StudentList.Where(z => z.Campus == "东").ToList());
+
+
             //只选择2018-2019-1学年的教师，教师可能会教多个班级，所以需要Distinct一下
             SchoolOver.TeacherCnt = Dataset.TeacherList.Where(x => x.Term == "2018-2019-1").Select(x => x.Id).Distinct().Count();
             SchoolOver.TeacherSubCnt = new Dictionary<string, int>();
@@ -111,8 +222,6 @@ namespace Education.Controllers
                 if (!SchoolOver.TeacherSubCnt.ContainsKey(teacher.SubName)) SchoolOver.TeacherSubCnt.Add(teacher.SubName, 0);
                 SchoolOver.TeacherSubCnt[teacher.SubName]++;
             }
-            SchoolOver.StudentCnt = Dataset.StudentList.Count;
-            SchoolOver.StudentIBCnt = Dataset.StudentList.Count(x => x.ClassName.Contains("IB"));
             SchoolOver.ClassCnt = Dataset.StudentList.Select(x => x.ClassName).Distinct().Count(y => { return !y.Contains("未分班"); });
             SchoolOver.ClassIBCnt = Dataset.StudentList.Select(x => x.ClassName).Distinct().Count(y => { return y.Contains("IB"); });
 
@@ -124,8 +233,6 @@ namespace Education.Controllers
                 if (!BaiYang.TeacherSubCnt.ContainsKey(teacher.SubName)) BaiYang.TeacherSubCnt.Add(teacher.SubName, 0);
                 BaiYang.TeacherSubCnt[teacher.SubName]++;
             }
-            BaiYang.StudentCnt = Dataset.StudentList.Count(x => x.Campus == "白");
-            BaiYang.StudentIBCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.ClassName.Contains("IB"));
             BaiYang.ClassCnt = Dataset.StudentList.Where(z => z.Campus == "白").Select(x => x.ClassName).Distinct().Count(y => { return !y.Contains("未分班"); });
             BaiYang.ClassIBCnt = Dataset.StudentList.Where(z => z.Campus == "白").Select(x => x.ClassName).Distinct().Count(y => { return y.Contains("IB"); });
 
@@ -138,17 +245,12 @@ namespace Education.Controllers
                 if (!East.TeacherSubCnt.ContainsKey(teacher.SubName)) East.TeacherSubCnt.Add(teacher.SubName, 0);
                 East.TeacherSubCnt[teacher.SubName]++;
             }
-            East.StudentCnt = Dataset.StudentList.Count(x => x.Campus == "东");
-            East.StudentIBCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.ClassName.Contains("IB"));
             East.ClassCnt = Dataset.StudentList.Where(z => z.Campus == "东").Select(x => x.ClassName).Distinct().Count(y => { return !y.Contains("未分班"); });
             East.ClassIBCnt = Dataset.StudentList.Where(z => z.Campus == "东").Select(x => x.ClassName).Distinct().Count(y => { return y.Contains("IB"); });
 
-            SchoolOver.TotalSexRate = new SexRate();
             SchoolOver.Grade1SexRate = new SexRate();
             SchoolOver.Grade2SexRate = new SexRate();
             SchoolOver.Grade3SexRate = new SexRate();
-            SchoolOver.TotalSexRate.maleCnt = Dataset.StudentList.Count(x => x.Sex == "男");
-            SchoolOver.TotalSexRate.femaleCnt = Dataset.StudentList.Count(x => x.Sex == "女");
             SchoolOver.Grade1SexRate.maleCnt = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassName.Contains("高一"));
             SchoolOver.Grade1SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Sex == "女" && x.ClassName.Contains("高一"));
             SchoolOver.Grade2SexRate.maleCnt = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassName.Contains("高二"));
@@ -157,12 +259,9 @@ namespace Education.Controllers
             SchoolOver.Grade3SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Sex == "女" && x.ClassName.Contains("高三"));
 
 
-            BaiYang.TotalSexRate = new SexRate();
             BaiYang.Grade1SexRate = new SexRate();
             BaiYang.Grade2SexRate = new SexRate();
             BaiYang.Grade3SexRate = new SexRate();
-            BaiYang.TotalSexRate.maleCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "男");
-            BaiYang.TotalSexRate.femaleCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "女");
             BaiYang.Grade1SexRate.maleCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "男" && x.ClassName.Contains("高一"));
             BaiYang.Grade1SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "女" && x.ClassName.Contains("高一"));
             BaiYang.Grade2SexRate.maleCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "男" && x.ClassName.Contains("高二"));
@@ -170,47 +269,11 @@ namespace Education.Controllers
             BaiYang.Grade3SexRate.maleCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "男" && x.ClassName.Contains("高三"));
             BaiYang.Grade3SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "女" && x.ClassName.Contains("高三"));
 
-
-            East.TotalSexRate = new SexRate();
+            //东部校区只有高一，这里简化了
             East.Grade1SexRate = new SexRate();
-            East.Grade2SexRate = new SexRate();
-            East.Grade3SexRate = new SexRate();
-            East.TotalSexRate.maleCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.Sex == "男");
-            East.TotalSexRate.femaleCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.Sex == "女");
             East.Grade1SexRate.maleCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.Sex == "男" && x.ClassName.Contains("高一"));
             East.Grade1SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.Sex == "女" && x.ClassName.Contains("高一"));
-            East.Grade2SexRate.maleCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.Sex == "男" && x.ClassName.Contains("高二"));
-            East.Grade2SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.Sex == "女" && x.ClassName.Contains("高二"));
-            East.Grade3SexRate.maleCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.Sex == "男" && x.ClassName.Contains("高三"));
-            East.Grade3SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.Sex == "女" && x.ClassName.Contains("高三"));
 
-            //获得地理信息
-            var geodic = new Dictionary<string, int>();
-            foreach (var province in Utility.Provinces)
-            {
-                geodic.Add(province, 0);
-            }
-            foreach (var item in Dataset.StudentList)
-            {
-                var x = Utility.GetProvince(item.NativePlace);
-                if (!string.IsNullOrEmpty(x))
-                {
-                    geodic[x]++;
-                }
-                else
-                {
-                    //对于宁波的修正
-                    if (item.NativePlace.Contains("宁波"))
-                    {
-                        geodic["浙江"]++;
-                    }
-                }
-            }
-            SchoolOver.GeoOptions = new List<NameValueSet>();
-            foreach (var k in geodic.Keys)
-            {
-                SchoolOver.GeoOptions.Add(new NameValueSet() { name = k, value = geodic[k] });
-            }
             return new Overview
             {
                 Total = SchoolOver,
@@ -218,7 +281,5 @@ namespace Education.Controllers
                 East = East
             };
         }
-
-
     }
 }

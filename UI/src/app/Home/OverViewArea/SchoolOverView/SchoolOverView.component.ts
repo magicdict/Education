@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ISchoolInfo } from '../../Common/Education.model';
-import { SchoolSexBarOption, regionMapOptions, SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
-import { SexRatePieOption } from '../../GraphOption/StudentGraphOption'
+import { regionMapOptions, SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
 import { registerMap } from 'echarts';
 import { HttpClient } from '@angular/common/http';
 import { HomeService } from '../../Common/Home.service';
@@ -13,7 +12,6 @@ import { CampusComponent } from './Campus.component';
 })
 export class SchoolOverViewComponent implements OnInit {
   constructor(
-    private router: Router,
     private http: HttpClient,
     private route: ActivatedRoute,
     private service: HomeService
@@ -44,11 +42,11 @@ export class SchoolOverViewComponent implements OnInit {
         this.schoolinfo = data.schoolInfo;
         this.service.SchoolOverview = this.schoolinfo;
         this.NativePlaceRegionOpt.title.text = "";
-        this.NativePlaceRegionOpt.series[0].data = data.schoolInfo.total.geoOptions;
+        this.NativePlaceRegionOpt.series[0].data = data.schoolInfo.total.property.nativePlace;
 
         //旭日图
         this.SexRateSunburstOption.title.text = "";
-        this.SexRateSunburstOption.series.data[0].value = data.schoolInfo.total.totalSexRate.maleCnt + data.schoolInfo.total.totalSexRate.femaleCnt;
+        this.SexRateSunburstOption.series.data[0].value = data.schoolInfo.total.property.totalSexRate.maleCnt + data.schoolInfo.total.property.totalSexRate.femaleCnt;
 
         this.SexRateSunburstOption.series.data[0].children[0].value = data.schoolInfo.total.grade1SexRate.maleCnt + data.schoolInfo.total.grade1SexRate.femaleCnt;
         this.SexRateSunburstOption.series.data[0].children[0].children[0].value = data.schoolInfo.total.grade1SexRate.maleCnt;
