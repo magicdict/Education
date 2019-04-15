@@ -26,6 +26,7 @@ namespace Education.Controllers
         {
             public string Grade { get; set; }
             public string NumberName { get; set; }
+            public string Number { get; set; }
             public List<String> SubNameList { get; set; }
         }
 
@@ -44,17 +45,18 @@ namespace Education.Controllers
                 GradeExam.Sort((x, y) => { return x.SubId.CompareTo(y.SubId); });
                 var GradeExamList = new List<ChengjiDataSet>();
                 //Number和NumberName基本上是一一对应的，这里用NumberName是可以的
-                var Grade1NumberNameRec = GradeExam.Select(x => x.NumberName).Distinct();
-                foreach (var NumberName in Grade1NumberNameRec)
+                var GradeNumberRec = GradeExam.Select(x => x.Number).Distinct();
+                foreach (var Number in GradeNumberRec)
                 {
-                    var Grade1ChengjiDataSet = new ChengjiDataSet();
-                    Grade1ChengjiDataSet.Grade = grade;
-                    Grade1ChengjiDataSet.NumberName = NumberName;
-                    Grade1ChengjiDataSet.SubNameList = GradeExam.Where(x => x.NumberName == NumberName && !string.IsNullOrEmpty(x.SubName))
+                    var GradeChengjiDataSet = new ChengjiDataSet();
+                    GradeChengjiDataSet.Grade = grade;
+                    GradeChengjiDataSet.Number = Number;
+                    GradeChengjiDataSet.NumberName = GradeExam.Where(x => x.Number == Number).First().NumberName;
+                    GradeChengjiDataSet.SubNameList = GradeExam.Where(x => x.Number == Number && !string.IsNullOrEmpty(x.SubName))
                                                       .Select(x => x.SubName).Distinct().ToList();
-                    if (Grade1ChengjiDataSet.SubNameList.Count > 0)
+                    if (GradeChengjiDataSet.SubNameList.Count > 0)
                     {
-                        GradeExamList.Add(Grade1ChengjiDataSet);
+                        GradeExamList.Add(GradeChengjiDataSet);
                     }
                 }
                 ExamNameList.Add(grade, GradeExamList);

@@ -23,8 +23,6 @@ public static class Dataset
 
     public static List<Chengji> ChengjiList = new List<Chengji>();
 
-    public static List<Chengji> TotalScoreList = new List<Chengji>();
-
     public static List<Consumption> ConsumptionList = new List<Consumption>();
 
     public static Dictionary<string, struKaoqin> KaoqinTypeDic = new Dictionary<string, struKaoqin>();
@@ -162,31 +160,6 @@ public static class Dataset
         }
         sr.Close();
 
-        //读取总分
-        fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "TotalScore.csv";
-        TotalScoreList.Clear();
-        sr = new StreamReader(fullfilepath);
-        sr.ReadLine();  //读取标题栏
-        while (!sr.EndOfStream)
-        {
-            var line = sr.ReadLine().Split(",");
-            ChengjiList.Add(new Chengji()
-            {
-                Number = line[0],
-                StudentID = line[1],
-                Score = float.Parse(line[2]),
-                GradeRank = int.Parse(line[3]),
-                StudentName = line[4],
-                ClassID = line[5],
-                ClassName = line[6],
-                SubId = "99",
-                SubName = "总分"
-            });
-        }
-        sr.Close();
-        Console.WriteLine(timer.Elapsed.ToString());
-
-
         Console.WriteLine("年级排行" + ExamRankList.Count);
         //使用Linq太慢，这里两个数组排序和直接赋值
         ChengjiList.Sort((x, y) => { return (x.Id + x.StudentID).CompareTo(y.Id + y.StudentID); });
@@ -203,7 +176,35 @@ public static class Dataset
         }
         //内存优化：2016-2017-1开始考试成绩保留，其他不要了
         ExamRankList.Clear();
-
+        //读取总分
+        fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "TotalScore.csv";
+        sr = new StreamReader(fullfilepath);
+        sr.ReadLine();  //读取标题栏
+        var NewExamId = 999000;
+        while (!sr.EndOfStream)
+        {
+            var line = sr.ReadLine().Split(",");
+            ChengjiList.Add(new Chengji()
+            {
+                Number = line[0],
+                StudentID = line[1],
+                Score = float.Parse(line[2]),
+                GradeRank = int.Parse(line[3]),
+                StudentName = line[4],
+                ClassID = line[5],
+                ClassName = line[6],
+                Grade = line[7],
+                Term = line[8],
+                NumberName = line[9],
+                SubId = "99",
+                SubName = "总分",
+                Id = NewExamId.ToString(),
+                Type = "99"
+            });
+            NewExamId++;
+        }
+        sr.Close();
+        Console.WriteLine(timer.Elapsed.ToString());
         Education.Controllers.CourseController.PrepareExamNameList();
         GC.Collect();
 
@@ -229,6 +230,7 @@ public static class Dataset
             var line = sr.ReadLine().Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray(); ;
             ExamTypeDic.Add(line[0], line[1]);
         }
+        ExamTypeDic.Add("99","总分");
         sr.Close();
         Console.WriteLine("读取考试类型信息件数：" + ExamTypeDic.Count);
         Console.WriteLine(timer.Elapsed.ToString());
@@ -287,16 +289,20 @@ public static class Dataset
             var StudentIds = ChengjiList.Where(x => x.Number == ExamNumber).Select(x => x.StudentID).Distinct();
             foreach (var StudentID in StudentIds)
             {
-                var Sum = ChengjiList.Where(x => x.Number == ExamNumber && x.StudentID == StudentID).Sum(x => x.Score > 0 ? x.Score : 0);
+                var Temp = ChengjiList.Where(x => x.Number == ExamNumber && x.StudentID == StudentID);
+                var Sum = Temp.Sum(x => x.Score > 0 ? x.Score : 0);
                 var student = Dataset.StudentList.Where(x => x.ID == StudentID).First();
                 TotalScoreList.Add(new Chengji()
                 {
                     Number = ExamNumber,
+                    NumberName = Temp.First().NumberName,
                     StudentID = StudentID,
                     Score = Sum,
                     StudentName = student.Name,
                     ClassID = student.ClassId,
-                    ClassName = student.ClassName
+                    ClassName = student.ClassName,
+                    Term = Temp.First().Term,
+                    Grade = Temp.First().Grade
                 });
             }
             CntComplete++;
@@ -306,7 +312,7 @@ public static class Dataset
         //总分表
         sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "TotalScore.csv");
         //获得考试数：Number做Distinct
-        sw.WriteLine("Number,StudentId,Score,GradeRank,StudentName,ClassID,ClassName,Grade");
+        sw.WriteLine("Number,StudentId,Score,GradeRank,StudentName,ClassID,ClassName,Grade,Term,NumberName");
         foreach (var ExamNumber in NumberUnion)
         {
             var temp = TotalScoreList.Where(x => x.Number == ExamNumber);
@@ -314,7 +320,8 @@ public static class Dataset
             {
                 chengji.GradeRank = temp.Count(x => x.Score > chengji.Score) + 1;
                 sw.WriteLine(chengji.Number + "," + chengji.StudentID + "," + chengji.Score + "," + chengji.GradeRank + "," +
-                             chengji.StudentName + "," + chengji.ClassID + "," + chengji.ClassName + "," + chengji.Grade);
+                             chengji.StudentName + "," + chengji.ClassID + "," + chengji.ClassName + "," +
+                             chengji.Grade + "," + chengji.Term + "," + chengji.NumberName);
 
             }
         }

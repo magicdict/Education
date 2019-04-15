@@ -118,6 +118,7 @@ public class Chengji : IEqualityComparer<Chengji>
     {
         get
         {
+            if (SubId == "99") return 100;  //总分的情况
             //规则1：平时分数应该是15分
             if (Type == "4")
             {
