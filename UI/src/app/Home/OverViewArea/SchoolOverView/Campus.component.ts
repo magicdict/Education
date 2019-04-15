@@ -49,6 +49,7 @@ export class CampusComponent implements OnInit {
         } else {
             this.campusfullname = "东部校区";
             this.campusInfo = this.service.SchoolOverview.east;
+            this.mSexRatePieOption.title.text = "";
             this.mSexRatePieOption.series[0].data[0].value = this.campusInfo.property.totalSexRate.maleCnt;
             this.mSexRatePieOption.series[0].data[1].value = this.campusInfo.property.totalSexRate.femaleCnt;
         }

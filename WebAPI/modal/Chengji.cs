@@ -415,3 +415,4 @@ public class AddtionalInfo
 
     public float ClassAvg { get; set; }
 }
+

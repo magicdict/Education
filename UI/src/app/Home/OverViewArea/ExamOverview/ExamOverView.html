@@ -18,11 +18,15 @@
                                                 <li *ngFor="let item of exam.subNameList"
                                                     style="width: 50px;float:left;">
                                                     <button type="button" class="btn btn-primary"
-                                                        (click)="JumpToExam(exam.numberName,item,grade.name)">{{item}}</button>
+                                                        (click)="JumpToExam(exam.number,item,grade.name)">{{item}}</button>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
+                                    <div class="card-footer">
+                                        <button type="button" class="btn btn-primary"
+                                        (click)="JumpToExam(exam.number,'总分',grade.name)">总分</button>
+                                    </div> 
                                 </div>
                             </td>
                         </tr>

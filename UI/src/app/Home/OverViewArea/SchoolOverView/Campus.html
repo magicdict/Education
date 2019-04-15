@@ -1,27 +1,27 @@
 <p-dialog [header]="this.campusfullname" [(visible)]="this.display" modal="modal" [responsive]="true">
-    <div style="height: 820px;width:900px">
+    <div style="height: 850px;width:900px">
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <div class="card card-stats" style="width: 300px">
-                        <div class="card-header card-header-warning card-header-icon">
-                            性别比例
+                    <div class="box box-primary box-solid" style="width: 100%;margin-top: 10px;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">性别比例</h3>
                         </div>
-                        <div class="card-body">
+                        <div class="box-body">
                             <div *ngIf="this.campusfullname === '东部校区'" echarts [options]="mSexRatePieOption"
-                                style="width:250px;height:250px"></div>
+                                style="width:300px;height:300px"></div>
                             <div *ngIf="this.campusfullname === '白杨校区'" echarts [options]="mSexRateSunburstOption"
-                                style="width:250px;height:250px"></div>
+                                style="width:300px;height:300px"></div>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card card-stats" style="width:450px;">
-                        <div class="card-header card-header-warning card-header-icon">
-                            教师
+                    <div class="box box-primary box-solid" style="width: 100%;margin-top: 10px;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">教师</h3>
                         </div>
-                        <div class="card-body">
-                            <div echarts [options]="mTeacherSub" style="width:400px;height:250px"></div>
+                        <div class="box-body">
+                            <div echarts [options]="mTeacherSub" style="width:400px;height:300px"></div>
                         </div>
                     </div>
                 </div>
@@ -36,21 +36,25 @@
                         <div class="card-body">
                             <div class="stats">
                                 <div style="margin: 5px 0px 5px 0px">
-                                    <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
+                                    <button type="button" class="btn btn-info"
+                                        style="cursor: default;margin-left: 10px">
                                         学生数 <span
                                             class="badge badge-light">{{this.campusInfo.property.studentCnt}}</span>
                                         <span class="sr-only">学生数</span>
                                     </button>
-                                    <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
+                                    <button type="button" class="btn btn-info"
+                                        style="cursor: default;margin-left: 10px">
                                         学生数(IB) <span
                                             class="badge badge-light">{{this.campusInfo.property.studentIBCnt}}</span>
                                         <span class="sr-only">学生数</span>
                                     </button>
-                                    <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
+                                    <button type="button" class="btn btn-info"
+                                        style="cursor: default;margin-left: 10px">
                                         教师数 <span class="badge badge-light">{{this.campusInfo.teacherCnt}}</span>
                                         <span class="sr-only">教师数</span>
                                     </button>
-                                    <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
+                                    <button type="button" class="btn btn-info"
+                                        style="cursor: default;margin-left: 10px">
                                         班级数 <span class="badge badge-light">{{this.campusInfo.classCnt}}</span>
                                         <span class="sr-only">班级数</span>
                                     </button>

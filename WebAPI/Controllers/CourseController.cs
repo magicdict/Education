@@ -77,15 +77,15 @@ namespace Education.Controllers
         /// <summary>
         /// 某个年级的某次考试的某个科目的班级单位的信息列表
         /// </summary>
-        /// <param name="NumberName"></param>
+        /// <param name="Number"></param>
         /// <param name="SubName"></param>
         /// <param name="Grade"></param>
         /// <returns></returns>
         [HttpGet("GetExamInfoByNumberAndSubName")]
-        public ActionResult<ExamInfoForNumberAndSubName> GetExamInfoByNumberAndSubName(string NumberName, string SubName, string Grade)
+        public ActionResult<ExamInfoForNumberAndSubName> GetExamInfoByNumberAndSubName(string Number, string SubName, string Grade)
         {
             var Result = new ExamInfoForNumberAndSubName();
-            var All = Dataset.ChengjiList.Where(x => x.SubName == SubName && x.NumberName == NumberName && x.Grade == Grade).ToList();
+            var All = Dataset.ChengjiList.Where(x => x.SubName == SubName && x.Number == Number && x.Grade == Grade).ToList();
             var dic = new Dictionary<string, List<Chengji>>();
             foreach (var item in All)
             {

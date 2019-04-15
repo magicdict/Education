@@ -65,6 +65,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
         this.StudentsInfo = data.classinfo.property;
 
         this.mSexRate.title.text = "";
+        this.mSexRate.legend.data = [];
         this.mSexRate.series[0].data[0].value = data.classinfo.property.totalSexRate.maleCnt;
         this.mSexRate.series[0].data[1].value = data.classinfo.property.totalSexRate.femaleCnt;
         if (this.SexRateEchartsInstance !== undefined) {

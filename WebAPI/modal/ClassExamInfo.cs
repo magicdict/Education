@@ -6,12 +6,13 @@ using System.Linq;
 public class ClassExamInfo
 {
     /// <summary>
-    /// 考试代码
+    /// 考试成绩
     /// </summary>
     /// <value></value>
     internal List<Chengji> ChengjiList { get; set; }
 
-    public ClassExamInfo(List<Chengji> chengjis){
+    public ClassExamInfo(List<Chengji> chengjis)
+    {
         chengjis.Sort((x, y) => { return x.Score.CompareTo(y.Score); });
         ChengjiList = chengjis;
     }

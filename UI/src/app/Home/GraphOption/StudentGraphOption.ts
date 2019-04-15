@@ -7,17 +7,6 @@ export const regionMapOptions = {
     trigger: 'item',
     formatter: '{b}：{c}'
   },
-  toolbox: {
-    show: true,
-    orient: 'vertical',
-    left: 'right',
-    top: 'center',
-    feature: {
-      dataView: { readOnly: false },
-      restore: {},
-      saveAsImage: {}
-    }
-  },
   visualMap: {
     min: 0,
     max: 50,

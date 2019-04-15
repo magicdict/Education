@@ -1,5 +1,5 @@
 <p-dialog header="班级查询器" [(visible)]="this.display" modal="modal" [responsive]="true">
-  <div style="height: 550px;width:320px">
+  <div style="height: 550px;width:640px">
     <div>
       &nbsp;&nbsp;
       <b>年级&nbsp;&nbsp;&nbsp;</b>
@@ -7,8 +7,9 @@
         placeholder="选择一个年级">
       </p-dropdown>
       <br /> <br />
+      <b>过滤条件&nbsp;&nbsp;&nbsp;</b>
       <p-selectButton [options]="Campus" [(ngModel)]="selectedCampus" (onChange)="RefreshList()"></p-selectButton>
-      <br /> <br />
+      &nbsp;&nbsp;
       <p-selectButton [options]="Addtional" [(ngModel)]="selectedAddtional" (onChange)="RefreshList()"></p-selectButton>
       <br /> <br />
       <p-table [value]="this.Classes" selectionMode="single" [(selection)]="this.selectClass" [scrollable]="true"
