@@ -34,7 +34,7 @@
             <p-tabView *ngIf="this.Exams.length !== 0">
                 <p-tabPanel [header]="'概要'">
                     <div class="card">
-                        <div class="card-header card-header-text card-header-primary">
+                        <div class="card-header card-header-text card-header-warning">
                             <h4 class="card-title">{{Title}}</h4>
                             <p class="category">{{subTitle}}</p>
                         </div>
@@ -47,7 +47,7 @@
                 <p-tabPanel [header]="'排行榜'">
 
                     <div class="card">
-                        <div class="card-header card-header-text card-header-primary">
+                        <div class="card-header card-header-text card-header-warning">
                             <h4 class="card-title">前10名</h4>
                             <p class="category">{{Title}} - {{subTitle}}</p>
                         </div>
@@ -57,7 +57,7 @@
                     </div>
                     <br /><br />
                     <div class="card">
-                        <div class="card-header card-header-text card-header-primary">
+                        <div class="card-header card-header-text card-header-warning">
                             <h4 class="card-title">倒数10名</h4>
                             <p class="category">{{Title}} - {{subTitle}}</p>
                         </div>

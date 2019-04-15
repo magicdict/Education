@@ -11,7 +11,7 @@
                         <tr *ngFor="let x of KaoqinDateList">
                             <td *ngIf="x.value !== 0"> {{x.catalog}} </td>
                             <td *ngIf="x.value !== 0"> {{x.value}} </td>
-                            <th *ngIf="x.value === 0" colspan=2> {{x.catalog}} </th>
+                            <th *ngIf="x.value === 0" colspan=2 style="font-size: 15px;"> {{x.catalog}} </th>
                         </tr>
                     </table>
                 </div>

@@ -70,6 +70,9 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.liveAtSchool = data.consumptionInfo.liveAtSchoolCnt;
         this.notLiveAtSchool = data.consumptionInfo.notLiveAtSchoolCnt;
 
+        this.MonthUpLimit = 1000;
+        this.QueryByMonthUpLimit();
+
       });
   }
 

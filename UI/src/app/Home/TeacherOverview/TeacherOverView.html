@@ -1,9 +1,10 @@
 <app-nav></app-nav>
 <br />
 <div class="card">
-    <div class="card-header card-header-text card-header-primary">
+    <div class="card-header card-header-text card-header-warning">
         <h4 class="card-title">{{this.CurrentTeachers[0].name}} - {{this.CurrentTeachers[0].subName}}</h4>
-        <p class="category">本学期班级数：{{CurrentClassCnt}}(包含本学期所有班级数：{{TotalClassCnt}})</p>
+        <p class="category">本学期班级数：{{CurrentClassCnt}}</p>
+        <p class="category">班级总数：{{TotalClassCnt}}</p>
     </div>
     <div class="card-body" style="padding:0.5em">
         <p-tabView>

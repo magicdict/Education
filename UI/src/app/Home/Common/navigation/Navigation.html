@@ -1,15 +1,10 @@
 <div style="background: white;margin: 5px 0px 5px 0px;height: 50px;">
-  &nbsp;&nbsp;&nbsp;
-  <button style="margin-top: 10px" class="btn btn-primary" (click)="ClassQuery()"><i
-      class="fa fa-search"></i>班级检索</button>
-  &nbsp;&nbsp;&nbsp;
-  <button style="margin-top: 10px" class="btn btn-primary" (click)="StudentQuery()"><i
-      class="fa fa-search"></i>学生检索</button>
-  &nbsp;&nbsp;&nbsp;
-  <button style="margin-top: 10px" class="btn btn-primary" (click)="TeacherQuery()"><i
-      class="fa fa-search"></i>教师检索器</button>
-
-  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="float:right">
+  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="margin-top: auto;margin-bottom: auto; float:right">
+    <div class="btn-group mr-2" role="group">
+      <button type="button" class="btn btn-primary" (click)="ClassQuery()"><i class="fa fa-search"></i>班级检索</button>
+      <button type="button" class="btn btn-primary" (click)="StudentQuery()"><i class="fa fa-search"></i>学生检索</button>
+      <button type="button" class="btn btn-primary" (click)="TeacherQuery()"><i class="fa fa-search"></i>教师检索器</button>
+    </div>
     <div class="btn-group mr-2" role="group">
       <button type="button" class="btn btn-info" (click)="JumpTo('home/course')">7选3</button>
       <button type="button" class="btn btn-info" (click)="JumpTo('home/exam')">考试</button>

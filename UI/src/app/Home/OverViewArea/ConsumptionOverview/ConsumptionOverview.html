@@ -44,12 +44,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-7">
-                    月消费上限： <p-dropdown [options]="MonthUpLimitList" [(ngModel)]="MonthUpLimit"
+                    <b>月消费上限：&nbsp;</b> <p-dropdown [options]="MonthUpLimitList" [(ngModel)]="MonthUpLimit"
                         [style]="{'width':'150px'}" placeholder="选择一个月消费金额：" (onChange)="QueryByMonthUpLimit()">
                     </p-dropdown>
-                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;
                     <button style="margin-top: 10px" class="btn btn-primary" (click)="StudentQuery()"><i
-                            class="fa fa-search"></i>学生检索</button>
+                            class="fa fa-search"></i>学生月度消费检索</button>
                     <br />
                     <br />
                     <p-table [value]="this.Students" selectionMode="single" [(selection)]="this.selectStudent"

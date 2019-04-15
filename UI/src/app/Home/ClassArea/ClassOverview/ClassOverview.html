@@ -43,40 +43,25 @@
       </div>
       <div class="row">
         <div class="col-8">
-          <div class="card card-stats" style="width: 640px;">
-            <div class="card-header card-header-warning card-header-icon">
-              生源地
-            </div>
-            <div class="card-body" style="height: 640px;">
-              <div class="stats">
-                <div echarts (chartInit)="onNativePlaceChartInit($event)" [options]="NativePlaceRegionOptions"
-                  style="width:600px;height: 600px;"></div>
-              </div>
+          <div class="card text-right" style="width: 100%;margin-top: 10px;">
+            <div class="card-body">
+              <div echarts (chartInit)="onNativePlaceChartInit($event)" [options]="NativePlaceRegionOptions"
+                style="width:600px;height: 600px;"></div>
             </div>
           </div>
         </div>
         <div class="col-4">
-          <div class="card card-stats" style="width:360px;height: 360px;">
-            <div class="card-header card-header-warning card-header-icon">
-              男女比例
-            </div>
-            <div class="card-body" style="height: 350px;">
-              <div class="stats">
-                <div echarts (chartInit)="onSexRateChartInit($event)" [options]="mSexRate"
-                  style="width:320px;height: 320px;"></div>
-              </div>
+          <div class="card text-right" style="width: 100%;margin-top: 10px;">
+            <div class="card-body">
+              <div echarts (chartInit)="onSexRateChartInit($event)" [options]="mSexRate"
+                style="width:300px;height: 320px;"></div>
             </div>
           </div>
           <br />
-          <div *ngIf="IsShowKaoqinGraph" class="card card-stats" style="width: 360px;">
-            <div class="card-header card-header-warning card-header-icon">
-              考勤
-            </div>
-            <div class="card-body" style="height: 350px;">
-              <div class="stats">
-                <div (chartInit)="onKaoqinChartInit($event)" echarts [options]="KaoqinOpt"
-                  style="width:320px;height:320px;"></div>
-              </div>
+          <div *ngIf="IsShowKaoqinGraph" class="card text-right" style="width: 100%;margin-top: 10px;">
+            <div class="card-body">
+              <div (chartInit)="onKaoqinChartInit($event)" echarts [options]="KaoqinOpt"
+              style="width:300px;height:320px;"></div>
             </div>
           </div>
         </div>

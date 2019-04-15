@@ -1,7 +1,7 @@
 <app-nav></app-nav>
 <div class="container" style="margin: 0px;">
   <div class="row" style="width:1140px">
-    <div class="col"  style="padding: 0px;">
+    <div class="col" style="padding: 0px;">
       <div class="card text-right">
         <div class="card-header card-header-image">
           <img src="Card" src="assets/image/BaiYangCampus.jpg" height="300px">
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="col">
-      <div class="card text-right"> 
+      <div class="card text-right">
         <div class="card-header card-header-image">
           <img src="Card" src="assets/image/EastCampus.jpg" height="300px">
         </div>
@@ -28,35 +28,41 @@
       </div>
     </div>
     <div class="col">
-      <div class="card card-stats">
-        <div class="card-header card-header-warning card-header-icon">
-          性别比例
+      <div class="box box-primary" style="width: 100%;margin-top: 10px;">
+        <div class="box-header with-border">
+          <h3 class="box-title">性别比例</h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
         </div>
-        <div class="card-body">
+        <div class="box-body">
           <div echarts [options]="SexRateSunburstOption" style="width:300px;height:310px"></div>
         </div>
       </div>
     </div>
   </div>
 
-
   <div class="row" style="width:1140px">
-
-    <div class="col-8"  style="padding: 0px;">
-      <div class="card card-stats">
-        <div class="card-header card-header-warning card-header-icon">
-          生源地图
+    <div class="col-8" style="padding: 0px;">
+      <div class="box box-primary " style="width: 100%;margin-top: 10px;">
+        <div class="box-header with-border">
+          <h3 class="box-title">生源地图</h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
         </div>
-        <div class="card-body">
+        <div class="box-body">
           <div *ngIf="IsMapReady" echarts [options]="this.NativePlaceRegionOpt" style="width:600px;height:600px">
           </div>
         </div>
       </div>
-
     </div>
 
     <div class="col-4">
-
       <div class="card card-stats">
         <div class="card-header card-header-warning card-header-icon">
           概要
@@ -64,22 +70,19 @@
         <div class="card-body">
           <div class="stats">
             <div style="margin: 5px 0px 5px 0px">
-              <button type="button" class="btn btn-info" style="cursor: default">
+              <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
                 学生数 <span class="badge badge-light">{{this.schoolinfo.total.property.studentCnt}}</span>
                 <span class="sr-only">学生数</span>
               </button>
-              &nbsp;
-              <button type="button" class="btn btn-info" style="cursor: default">
+              <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
                 学生数(IB) <span class="badge badge-light">{{this.schoolinfo.total.property.studentIBCnt}}</span>
                 <span class="sr-only">学生数</span>
               </button>
-              &nbsp;
-              <button type="button" class="btn btn-info" style="cursor: default">
+              <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
                 教师数 <span class="badge badge-light">{{this.schoolinfo.total.teacherCnt}}</span>
                 <span class="sr-only">教师数</span>
               </button>
-              &nbsp;
-              <button type="button" class="btn btn-info" style="cursor: default">
+              <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
                 班级数 <span class="badge badge-light">{{this.schoolinfo.total.classCnt}}</span>
                 <span class="sr-only">班级数</span>
               </button>
@@ -87,9 +90,7 @@
           </div>
         </div>
       </div>
-
       <br />
-
       <div class="card card-stats">
         <div class="card-header card-header-warning card-header-icon">
           少数名族
@@ -97,37 +98,10 @@
         <div class="card-body">
           <div class="stats">
             <div style="margin: 5px 0px 5px 0px">
-              <button type="button" class="btn btn-primary" style="cursor: default">
-                畲族 <span class="badge badge-light">1</span>
-                <span class="sr-only">畲族</span>
-              </button>
-              &nbsp;
-              <button type="button" class="btn btn-primary" style="cursor: default">
-                回族 <span class="badge badge-light">2</span>
-                <span class="sr-only">回族</span>
-              </button>
-              &nbsp;
-              <button type="button" class="btn btn-primary" style="cursor: default">
-                满族 <span class="badge badge-light">4</span>
-                <span class="sr-only">满族</span>
-              </button>
-              &nbsp;
-              <button type="button" class="btn btn-primary" style="cursor: default">
-                苗族 <span class="badge badge-light">3</span>
-                <span class="sr-only">苗族</span>
-              </button>
-              <button type="button" class="btn btn-primary" style="cursor: default">
-                朝鲜族 <span class="badge badge-light">2</span>
-                <span class="sr-only">朝鲜族</span>
-              </button>
-              &nbsp;
-              <button type="button" class="btn btn-primary" style="cursor: default">
-                土家族 <span class="badge badge-light">3</span>
-                <span class="sr-only">土家族</span>
-              </button>
-              <button type="button" class="btn btn-primary" style="cursor: default">
-                汉族 <span class="badge badge-light">1750</span>
-                <span class="sr-only">汉族</span>
+              <button *ngFor="let x of this.schoolinfo.total.property.nation" type="button" class="btn btn-primary"
+                style="cursor: default;margin-left: 10px">
+                {{x.name}}
+                <span class="badge badge-light">{{x.value}}</span>
               </button>
             </div>
           </div>
@@ -143,28 +117,10 @@
         <div class="card-body">
           <div class="stats">
             <div style="margin: 5px 0px 5px 0px">
-              <button type="button" class="btn btn-danger" style="cursor: default">
-                共青团员 <span class="badge badge-light">1662</span>
-                <span class="sr-only">共青团员</span>
-              </button>
-              &nbsp;
-              <button type="button" class="btn btn-danger" style="cursor: default">
-                少先队员 <span class="badge badge-light">23</span>
-                <span class="sr-only">少先队员</span>
-              </button>
-              &nbsp;
-              <button type="button" class="btn btn-danger" style="cursor: default">
-                一般 <span class="badge badge-light">78</span>
-                <span class="sr-only">一般</span>
-              </button>
-              <button type="button" class="btn btn-danger" style="cursor: default">
-                共产党党员 <span class="badge badge-light">1</span>
-                <span class="sr-only">共产党党员</span>
-              </button>
-              &nbsp;
-              <button type="button" class="btn btn-danger" style="cursor: default">
-                民主党派 <span class="badge badge-light">1</span>
-                <span class="sr-only">民主党派</span>
+              <button *ngFor="let x of this.schoolinfo.total.property.policy" type="button" class="btn btn-danger"
+                style="cursor: default;margin-left: 10px">
+                {{x.name}}
+                <span class="badge badge-light">{{x.value}}</span>
               </button>
             </div>
           </div>
