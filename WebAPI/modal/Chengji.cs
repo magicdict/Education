@@ -110,6 +110,7 @@ public class Chengji : IEqualityComparer<Chengji>
     /// <value></value>
     public float Score { get; set; }
 
+    private float _fullscore;
     /// <summary>
     /// 总分
     /// </summary>
@@ -118,7 +119,7 @@ public class Chengji : IEqualityComparer<Chengji>
     {
         get
         {
-            if (SubId == "99") return 100;  //总分的情况
+            if (SubId == "99") return _fullscore;  //总分的情况,直接从私有变量拿值
             //规则1：平时分数应该是15分
             if (Type == "4")
             {
@@ -144,6 +145,10 @@ public class Chengji : IEqualityComparer<Chengji>
             }
 
             return 100; //默认100;
+        }
+        set
+        {
+            _fullscore = value;
         }
     }
 
