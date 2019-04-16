@@ -29,78 +29,75 @@
 
             <div class="row">
                 <div class="col">
-                    <div class="card card-stats">
-                        <div class="card-header card-header-warning card-header-icon">
-                            概要
+
+
+                    <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">概要</h3>
                         </div>
-                        <div class="card-body">
-                            <div class="stats">
-                                <div style="margin: 5px 0px 5px 0px">
-                                    <button type="button" class="btn btn-info"
-                                        style="cursor: default;margin-left: 10px">
-                                        学生数 <span
-                                            class="badge badge-light">{{this.campusInfo.property.studentCnt}}</span>
-                                        <span class="sr-only">学生数</span>
-                                    </button>
-                                    <button type="button" class="btn btn-info"
-                                        style="cursor: default;margin-left: 10px">
-                                        学生数(IB) <span
-                                            class="badge badge-light">{{this.campusInfo.property.studentIBCnt}}</span>
-                                        <span class="sr-only">学生数</span>
-                                    </button>
-                                    <button type="button" class="btn btn-info"
-                                        style="cursor: default;margin-left: 10px">
-                                        教师数 <span class="badge badge-light">{{this.campusInfo.teacherCnt}}</span>
-                                        <span class="sr-only">教师数</span>
-                                    </button>
-                                    <button type="button" class="btn btn-info"
-                                        style="cursor: default;margin-left: 10px">
-                                        班级数 <span class="badge badge-light">{{this.campusInfo.classCnt}}</span>
-                                        <span class="sr-only">班级数</span>
-                                    </button>
-                                </div>
+                        <div class="box-body">
+                            <div style="margin: 5px 0px 5px 0px">
+                                <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
+                                    学生数 <span class="badge badge-light">{{this.campusInfo.property.studentCnt}}</span>
+                                    <span class="sr-only">学生数</span>
+                                </button>
+                                <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
+                                    学生数(IB) <span
+                                        class="badge badge-light">{{this.campusInfo.property.studentIBCnt}}</span>
+                                    <span class="sr-only">学生数</span>
+                                </button>
+                                <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
+                                    教师数 <span class="badge badge-light">{{this.campusInfo.teacherCnt}}</span>
+                                    <span class="sr-only">教师数</span>
+                                </button>
+                                <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
+                                    班级数 <span class="badge badge-light">{{this.campusInfo.classCnt}}</span>
+                                    <span class="sr-only">班级数</span>
+                                </button>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
 
             <div class="row">
                 <div class="col">
-                    <div class="card card-stats">
-                        <div class="card-header card-header-warning card-header-icon">
-                            民族
+
+                    <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">少数名族</h3>
                         </div>
-                        <div class="card-body">
-                            <div class="stats">
-                                <div style="margin: 5px 0px 5px 0px">
-                                    <button *ngFor="let x of this.campusInfo.property.nation" type="button"
-                                        class="btn btn-primary" style="cursor: default;margin-left: 10px">
-                                        {{x.name}}
-                                        <span class="badge badge-light">{{x.value}}</span>
-                                    </button>
-                                </div>
+                        <div class="box-body">
+                            <div style="margin: 5px 0px 5px 0px">
+                                <button *ngFor="let x of this.campusInfo.property.nation" type="button"
+                                    class="btn btn-primary" style="cursor: default;margin-left: 10px">
+                                    {{x.name}}
+                                    <span class="badge badge-light">{{x.value}}</span>
+                                </button>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
 
             <div class="row">
                 <div class="col">
-                    <div class="card card-stats">
-                        <div class="card-header card-header-warning card-header-icon">
-                            政治面貌
+
+                    <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">政治面貌</h3>
                         </div>
-                        <div class="card-body">
-                            <div class="stats">
-                                <div style="margin: 5px 0px 5px 0px">
-                                    <button *ngFor="let x of this.campusInfo.property.policy" type="button"
-                                        class="btn btn-danger" style="cursor: default;margin-left: 10px">
-                                        {{x.name}}
-                                        <span class="badge badge-light">{{x.value}}</span>
-                                    </button>
-                                </div>
+                        <div class="box-body">
+                            <div style="margin: 5px 0px 5px 0px">
+                                <button *ngFor="let x of this.campusInfo.property.policy" type="button"
+                                    class="btn btn-danger" style="cursor: default;margin-left: 10px">
+                                    {{x.name}}
+                                    <span class="badge badge-light">{{x.value}}</span>
+                                </button>
                             </div>
                         </div>
                     </div>

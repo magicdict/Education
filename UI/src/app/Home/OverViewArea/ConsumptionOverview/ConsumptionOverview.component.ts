@@ -98,7 +98,7 @@ export class ConsumptionOverviewComponent implements OnInit {
   private pickhandler: any;
 
   StudentQuery() {
-    if (this.pickhandler != null) {
+    if (this.pickhandler !== null && this.pickhandler !== undefined) {
       // 需要把上次的订阅取消掉，不然的话，多个订阅会同时发生效果！
       this.pickhandler.unsubscribe();
     }

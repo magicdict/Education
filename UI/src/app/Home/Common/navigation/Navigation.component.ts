@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { classopt, ITeacher, IStudent } from '../Education.model';
+import { ITeacher, IStudent } from '../Education.model';
 import { HomeService } from '../Home.service';
 import { TeacherPickerComponent } from '../teacherPicker/teacherPicker.component'
 import { ConfirmationService, SelectItem } from 'primeng/api';
@@ -65,7 +65,7 @@ export class NavigationComponent implements OnInit {
 
 
   StudentQuery() {
-    if (this.pickhandler != null) {
+    if (this.pickhandler !== null && this.pickhandler !== undefined) {
       // 需要把上次的订阅取消掉，不然的话，多个订阅会同时发生效果！
       this.pickhandler.unsubscribe();
     }
@@ -74,9 +74,9 @@ export class NavigationComponent implements OnInit {
     });
     this.studentpicker.show();
   }
-
+ 
   ClassQuery() {
-    if (this.pickhandler != null) {
+    if (this.pickhandler !== null && this.pickhandler !== undefined) {
       // 需要把上次的订阅取消掉，不然的话，多个订阅会同时发生效果！
       this.pickhandler.unsubscribe();
     }
@@ -94,7 +94,7 @@ export class NavigationComponent implements OnInit {
   }
 
   TeacherQuery() {
-    if (this.pickhandler != null) {
+    if (this.pickhandler !== null && this.pickhandler !== undefined) {
       // 需要把上次的订阅取消掉，不然的话，多个订阅会同时发生效果！
       this.pickhandler.unsubscribe();
     }
@@ -108,7 +108,7 @@ export class NavigationComponent implements OnInit {
     this._location.back();
   }
   Home() {
-    this.router.navigate(['']);
+    this.router.navigate(['home/school']);
   }
 
   JumpTo(url: string) {

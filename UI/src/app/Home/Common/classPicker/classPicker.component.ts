@@ -1,16 +1,13 @@
-import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
-import { ITeacher, classopt } from '../Education.model';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { classopt } from '../Education.model';
 import { CommonFunction } from '../common';
 import { SelectItem } from 'primeng/api';
-import { ErrorMessageDialogComponent } from '../error-message-dialog/error-message-dialog.component';
 
 @Component({
   selector: 'app-classPicker',
   templateUrl: './classPicker.component.html'
 })
 export class ClassPickerComponent {
-  @ViewChild(ErrorMessageDialogComponent)
-  private errMsgDialog: ErrorMessageDialogComponent;
 
   @Output() pick: EventEmitter<any> = new EventEmitter();
 
@@ -45,7 +42,6 @@ export class ClassPickerComponent {
   FullClass: SelectItem[] = [];
 
   constructor(
-    private commonfunction: CommonFunction
   ) {
 
   }

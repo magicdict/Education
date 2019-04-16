@@ -255,7 +255,7 @@ export interface ICampus {
   teacherSubCnt: { [key: string]: number }
   classCnt: number;
   classIBCnt: number;
-  property:IStudentGroupProperty;
+  property: IStudentGroupProperty;
 }
 
 export interface IStudentGroupProperty {
@@ -265,6 +265,7 @@ export interface IStudentGroupProperty {
   policy: { name: string, value: number }[];
   nation: { name: string, value: number }[];
   nativePlace: { name: string, value: number }[];
+  nativePlaceZheJiang: { name: string, value: number }[];
 }
 
 export interface ISchoolInfo {

@@ -54,7 +54,7 @@
         <p-sortIcon [field]="'dengdi'">
         </p-sortIcon>
       </th>
-      <th *ngIf="Mode === 'Same'" style="width: 50px" [pSortableColumn]="'classRank'">班级排名
+      <th style="width: 50px" [pSortableColumn]="'classRank'">班级排名
         <p-sortIcon [field]="'classRank'">
         </p-sortIcon>
       </th>
@@ -81,7 +81,7 @@
       <td style="width: 50px">{{roundvalue(itemData.tScore)}}</td>
       <td style="width: 50px">{{roundvalue(itemData.zScore)}}</td>
       <td style="width: 50px">{{roundvalue(itemData.dengdi)}}</td>
-      <td *ngIf="Mode === 'Same'" style="width: 50px">{{itemData.classRank}}</td>
+      <td style="width: 50px">{{itemData.classRank}}</td>
       <td style="width: 50px">{{itemData.gradeRank}}</td>
       <td style="width: 50px">{{itemData.gradeRankPercent}}</td>
     </tr>

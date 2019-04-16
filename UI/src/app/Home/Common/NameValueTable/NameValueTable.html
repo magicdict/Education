@@ -1,0 +1,26 @@
+<p-dialog [header]="Title" [(visible)]="this.display" modal="modal" [responsive]="true">
+    <div style="height: 550px;width:340px">
+        <p-table [value]="NameValueTable" [scrollable]="true" scrollHeight="500px">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 50px" [pSortableColumn]="'name'">
+                        名称
+                        <p-sortIcon [field]="'name'">
+                        </p-sortIcon>
+                    </th>
+                    <th style="width: 100px" [pSortableColumn]="'value'">
+                        值
+                        <p-sortIcon [field]="'value'">
+                        </p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-itemData>
+                <tr [pSelectableRow]="itemData">
+                    <td style="width: 50px">{{itemData.name}}</td>
+                    <td style="width: 100px">{{itemData.value}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</p-dialog>

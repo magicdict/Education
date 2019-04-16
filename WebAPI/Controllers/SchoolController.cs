@@ -79,7 +79,8 @@ namespace Education.Controllers
         {
             private List<Student> _studentlist;
 
-            public StudentGroupProperty(List<Student> students){
+            public StudentGroupProperty(List<Student> students)
+            {
                 _studentlist = students;
             }
 
@@ -180,10 +181,14 @@ namespace Education.Controllers
                         }
                         else
                         {
-                            //对于宁波的修正
-                            if (item.NativePlace.Contains("宁波"))
+                            //对于浙江省的修正
+                            foreach (var zhejiang in Utility.ZhejiangCity)
                             {
-                                geodic["浙江"]++;
+                                if (item.NativePlace.Contains(zhejiang))
+                                {
+                                    geodic["浙江"]++;
+                                    break;
+                                }
                             }
                         }
                     }
@@ -195,6 +200,58 @@ namespace Education.Controllers
                     return rtn;
                 }
             }
+
+            public List<NameValueSet> NativePlaceZheJiang
+            {
+                get
+                {
+                    //获得地理信息
+                    var geodic = new Dictionary<string, int>();
+                    foreach (var city in Utility.ZhejiangCity)
+                    {
+                        geodic.Add(city, 0);
+                    }
+                    foreach (var item in _studentlist)
+                    {
+                        var x = Utility.GetProvince(item.NativePlace);
+                        if (!string.IsNullOrEmpty(x))
+                        {
+                            if (x == "浙江")
+                            {
+                                //浙江省的细分
+                                foreach (var city in Utility.ZhejiangCity)
+                                {
+                                    if (item.NativePlace.Contains(city))
+                                    {
+                                        geodic[city]++;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //浙江省的细分
+                            foreach (var city in Utility.ZhejiangCity)
+                            {
+                                if (item.NativePlace.Contains(city))
+                                {
+                                    geodic[city]++;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    var rtn = new List<NameValueSet>();
+                    foreach (var k in geodic.Keys)
+                    {
+                        rtn.Add(new NameValueSet() { name = k, value = geodic[k] });
+                    }
+                    return rtn;
+                }
+
+            }
+
         }
 
         /// <summary>
