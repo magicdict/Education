@@ -85,7 +85,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
           mergeMap(x => x.pipe(toArray()))
         ).subscribe(
           r => {
-            this.Exams.push(r);
+            this.Exams.push(r.filter(x => x.record.subId !== "99"));
           }
         )
 

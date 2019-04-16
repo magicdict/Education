@@ -55,13 +55,16 @@ public class ClassExamInfo
             }
             else
             {
-                //获得最高分和最低分，看一下是否是5的倍数
-                var MaxLimit = MaxScore % 5 == 0 ? (int)MaxScore : (int)(MaxScore / 5) * 5 + 5;
-                var LowLimit = MinScore % 5 == 0 ? (int)MinScore - 5 : (int)(MinScore / 5) * 5;
+                int ScoreStep = 5;
+                if (MaxScore > 200) ScoreStep = 10;
+                if (MaxScore > 500) ScoreStep = 25;
+                //获得最高分和最低分，看一下是否是ScoreStep的倍数
+                var MaxLimit = MaxScore % ScoreStep == 0 ? (int)MaxScore : (int)(MaxScore / ScoreStep) * ScoreStep + ScoreStep;
+                var LowLimit = MinScore % ScoreStep == 0 ? (int)MinScore - ScoreStep : (int)(MinScore / ScoreStep) * ScoreStep;
                 if (LowLimit < 0) LowLimit = 0; //特殊情况的排除
-                for (int i = LowLimit; i < MaxLimit; i += 5)
+                for (int i = LowLimit; i < MaxLimit; i += ScoreStep)
                 {
-                    dict.Add(i + "-" + (i + 5) + "分", ChengjiList.Count(x => x.Score <= (i + 5) && x.Score > i));
+                    dict.Add(i + "-" + (i + ScoreStep) + "分", ChengjiList.Count(x => x.Score <= (i + ScoreStep) && x.Score > i));
                 }
             }
             return dict;

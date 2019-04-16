@@ -30,7 +30,7 @@ export class Grade3ScoreComponent implements OnInit {
         //成绩列表
         this.CurrentStudent = this.service.CurrentStudentInfo.baseInfo;
         this.Teachers = this.service.CurrentStudentInfo.teachers;
-        this.Scores = this.service.CurrentStudentInfo.chengjis;
+        this.Scores = this.service.CurrentStudentInfo.chengjis.filter(x => x.subId !== "99"); //99表示总分
 
         if (this.CurrentStudent.optionCourse.length == 3) {
             this.subNameList.push(this.CurrentStudent.optionCourse[0]);
@@ -51,17 +51,17 @@ export class Grade3ScoreComponent implements OnInit {
                     legend: {
                         right: 10,
                         data: ['年级百分比', '等第']
-                      },
+                    },
                     xAxis: { type: 'category', data: [] },
                     yAxis: { type: 'value' },
                     series: [
-                        { data: [], type: 'line',name: '年级百分比' },
-                        { data: [], type: 'line',name: '等第' }
+                        { data: [], type: 'line', name: '年级百分比' },
+                        { data: [], type: 'line', name: '等第' }
                     ]
                 };
                 let scoreAvalible = this.Scores.filter(
-                    x => x.subName == subname && x.score > 0 && 
-                    (x.type === "2" || x.type === "3" || x.type === "6" || x.type === "7"));
+                    x => x.subName == subname && x.score > 0 &&
+                        (x.type === "2" || x.type === "3" || x.type === "6" || x.type === "7"));
                 opt.xAxis.data = scoreAvalible.map(x => "");
                 opt.series[0].data = scoreAvalible.map(x => -x.gradeRankPercent);
                 opt.series[1].data = scoreAvalible.filter(x => x.dengdi.toString() !== "").map(x => -x.dengdi * 100);

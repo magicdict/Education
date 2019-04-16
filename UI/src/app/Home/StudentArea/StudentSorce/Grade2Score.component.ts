@@ -29,7 +29,7 @@ export class Grade2ScoreComponent implements OnInit {
         //成绩列表
         this.CurrentStudent = this.service.CurrentStudentInfo.baseInfo;
         this.Teachers = this.service.CurrentStudentInfo.teachers;
-        this.Scores = this.service.CurrentStudentInfo.chengjis;
+        this.Scores = this.service.CurrentStudentInfo.chengjis.filter(x => x.subId !== "99");   //99表示总分
         //按照考试科目进行分组
         //语数外
         //历史政治生物 

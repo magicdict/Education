@@ -144,7 +144,7 @@
   <p-tabPanel header="成绩" style="width:1140px;">
     <div class="container">
       <div class="row">
-        <div class="col-3">
+        <div class="col-2">
           <ul class="heroes linkheroes" style="margin-top: 120px;">
             <li *ngFor="let teacher of this.Teachers" (click)="JumpToTeacher(teacher.id)">
               <span class="badge" style="width: 100px;">{{teacher.subName}} </span>{{teacher.name}}
@@ -152,7 +152,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-9">
+        <div class="col-10">
           <p-tabView>
             <p-tabPanel *ngFor="let item of this.Exams" [header]="item[0].record.term">
               <class-exam-list [Exams]="item" [scrollHeight]="'600px'"></class-exam-list>
