@@ -37,6 +37,10 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         if (this.service.CurrentExam !== undefined) {
             //恢复上次浏览的考试
             this.CreateEntity(this.service.CurrentExam);
+        }else{
+            //默认
+            this.JumpToExam(this.GradeList[0].value[0].number,
+                            this.GradeList[0].value[0].subNameList[0],this.GradeList[0].name);
         }
     }
     constructor(

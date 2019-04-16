@@ -1,38 +1,45 @@
 <p-dialog header="学生查询器" [(visible)]="this.display" modal="modal" [responsive]="true">
-  <div style="height: 600px;width:600px">
+  <div style="height: 650px;width:600px">
     <div>
       <div class="container">
-        <div class="row">
-          <div class="col">
+        <div class="row" style="padding:0px">
+          <div class="col-2" style="padding:10px 0px 10px 0px">
             学号：
+          </div>
+          <div class="col-10" style="padding: auto 0px auto 0px">
             <input type="text" [(ngModel)]="this.StudentId" placeholder="输入一个学号" />&nbsp;
             <button class="btn btn-primary" (click)="QueryByStudentId()"><i class="fa fa-search"></i>检索</button>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div class="row" style="height: 32px;padding: 0px">
+          <div class="col-2" style="padding-left: 0px;padding-right: 0px;">
             民族：
+          </div>
+          <div class="col-10" style="padding: auto 0px auto 0px">
             <p-dropdown [options]="nationlist" [(ngModel)]="this.NationName" placeholder="选择一个民族"
               (onChange)="QueryByNation()"></p-dropdown>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div class="row" style="padding: 0px">
+          <div class="col-2" style="padding:10px 0px 10px 0px">
             宿舍：
+          </div>
+          <div class="col-10" style="padding: auto 0px auto 0px">
             <input type="text" [(ngModel)]="this.RoomNo" placeholder="输入一个宿舍号" />&nbsp;
             <p-selectButton [options]="Campus" [(ngModel)]="selectedCampus"></p-selectButton>&nbsp;
             <button class="btn btn-primary" (click)="QueryByLiveRoomNo()"><i class="fa fa-search"></i>检索</button>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div class="row" style="height:32px;padding: 0px">
+          <div class="col-2" style="padding-left: 0px;padding-right: 0px;">
             政治面貌：
+          </div>
+          <div class="col-10" style="padding: auto 0px auto 0px">
             <p-dropdown [options]="policylist" [(ngModel)]="this.PolicyName" placeholder="选择一个政治面貌"
               (onChange)="QueryByPolicy()"></p-dropdown>
           </div>
         </div>
       </div>
-      <br />
       <p-table [value]="this.Students" selectionMode="single" [(selection)]="this.selectStudent" [scrollable]="true"
         scrollHeight="400px" (onRowSelect)="onRowSelect()">
         <ng-template pTemplate="header">

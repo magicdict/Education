@@ -13,14 +13,9 @@
                                     </div>
                                     <div class="box-body">
                                         <div style="margin: 5px 0px 5px 0px">
-                                            <ul class="heroes linkheroes"
-                                                style="width: auto;height: auto;padding: 0px;margin: 0px;">
-                                                <li *ngFor="let item of exam.subNameList"
-                                                    style="width: 50px;float:left;">
-                                                    <button type="button" class="btn btn-info"
-                                                        (click)="JumpToExam(exam.number,item,grade.name)">{{item}}</button>
-                                                </li>
-                                            </ul>
+                                            <button *ngFor="let item of exam.subNameList" type="button"
+                                                class="btn btn-info" style="margin-left: 10px;"
+                                                (click)="JumpToExam(exam.number,item,grade.name)">{{item}}</button>
                                         </div>
                                     </div>
                                 </div>
