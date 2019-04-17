@@ -18,7 +18,7 @@
         <p-sortIcon [field]="'record.numberName'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px" [pSortableColumn]="'record.typeName'">考试类型
+      <th style="width: 80px" [pSortableColumn]="'record.typeName'">考试类型
         <p-sortIcon [field]="'record.typeName'">
         </p-sortIcon>
       </th>
@@ -57,7 +57,7 @@
     <tr [pSelectableRow]="itemData">
       <td style="width: 100px">{{itemData.record.className}}</td>
       <td *ngIf="IsShowExamName" style="width: 100px">{{itemData.record.numberName}}</td>
-      <td style="width: 50px">{{itemData.record.typeName}}</td>
+      <td style="width: 80px">{{itemData.record.typeName}}</td>
       <td style="width: 100px">{{itemData.record.term}}</td>
       <td style="width: 50px">{{itemData.record.subName}}</td>
       <td style="width: 60px">{{itemData.avilibleCnt}}/{{itemData.allCnt}}</td>
@@ -72,7 +72,7 @@
     <tr>
       <td style="width: 100px">{{Footer.record.className}}</td>
       <td *ngIf="IsShowExamName" style="width: 100px">{{Footer.record.numberName}}</td>
-      <td style="width: 50px">{{Footer.record.typeName}}</td>
+      <td style="width: 80px">{{Footer.record.typeName}}</td>
       <td style="width: 100px">{{Footer.record.term}}</td>
       <td style="width: 50px">{{Footer.record.subName}}</td>
       <td style="width: 60px">{{Footer.avilibleCnt}}/{{Footer.allCnt}}</td>

@@ -55,6 +55,7 @@ import { StudentItemComponent } from './Common/StudentItem/studentItem.component
 import { StudentKaoqinComponent } from './StudentArea/StudentKaoqin/StudentKaoqin.component';
 import { NameValueTableComponent } from './Common/NameValueTable/NameValueTable';
 import { ChinaMapComponent } from './Common/ChinaMap/ChinaMap';
+import { ExamOverView2Component } from './OverViewArea/ExamOverview/ExamOverview2.component';
 
 
 @NgModule({
@@ -92,6 +93,7 @@ import { ChinaMapComponent } from './Common/ChinaMap/ChinaMap';
     //考试相关
     SingleExamClassComponent,
     ExamOverViewComponent,
+    ExamOverView2Component
   ],
   imports: [
     CommonModule,
