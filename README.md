@@ -4,9 +4,9 @@
 
 运行环境
 
-- Linux 7
-- DotNet Core 3.0-Preview3
-- Angular 7.12
+- Linux CentOS 7
+- DotNet Core v3.0.0-preview3
+- Angular 7.2.13
 
 - UI ： Angular代码
 - WebAPI：WebAPI代码

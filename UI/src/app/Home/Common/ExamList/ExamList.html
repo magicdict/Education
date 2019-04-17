@@ -74,16 +74,16 @@
       <td *ngIf="Mode !== 'Same'" style="width: 50px">{{itemData.studentName}}</td>
       <td *ngIf="Mode === 'Same'" style="width: 200px">{{itemData.numberName}}</td>
       <td *ngIf="Mode === 'Same'" style="width: 50px">{{itemData.subName}}</td>
-      <td style="width: 40px">{{itemData.score}}</td>
-      <td style="width: 40px">{{itemData.scorePercent}}</td>
-      <td style="width: 40px">{{roundvalue(itemData.gradeAvgDiff)}}</td>
-      <td style="width: 40px">{{roundvalue(itemData.classAvgDiff)}}</td>
-      <td style="width: 50px">{{roundvalue(itemData.tScore)}}</td>
-      <td style="width: 50px">{{roundvalue(itemData.zScore)}}</td>
-      <td style="width: 50px">{{roundvalue(itemData.dengdi)}}</td>
-      <td style="width: 50px">{{itemData.classRank}}</td>
-      <td style="width: 50px">{{itemData.gradeRank}}</td>
-      <td style="width: 50px">{{itemData.gradeRankPercent}}</td>
+      <td style="width: 40px;text-align:right;">{{itemData.score}}</td>
+      <td style="width: 40px;text-align:right;">{{itemData.scorePercent}}</td>
+      <td style="width: 40px;text-align:right;">{{roundvalue(itemData.gradeAvgDiff)}}</td>
+      <td style="width: 40px;text-align:right;">{{roundvalue(itemData.classAvgDiff)}}</td>
+      <td style="width: 50px;text-align:right;">{{roundvalue(itemData.tScore)}}</td>
+      <td style="width: 50px;text-align:right;">{{roundvalue(itemData.zScore)}}</td>
+      <td style="width: 50px;text-align:right;">{{roundvalue(itemData.dengdi)}}</td>
+      <td style="width: 50px;text-align:right;">{{itemData.classRank}}</td>
+      <td style="width: 50px;text-align:right;">{{itemData.gradeRank}}</td>
+      <td style="width: 50px;text-align:right;">{{itemData.gradeRankPercent}}</td>
     </tr>
   </ng-template>
 </p-table>

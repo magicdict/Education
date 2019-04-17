@@ -60,6 +60,10 @@ canvas {
   background: white;
 }
 
+th {
+  text-align: center;
+}
+
 fieldset {
   padding: .35em .625em .75em;
   margin: 0 2px;

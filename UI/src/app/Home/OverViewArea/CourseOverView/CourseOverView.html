@@ -3,31 +3,47 @@
 <p-tabView>
     <p-tabPanel header="单门课程" style="width:1140px;">
         <div class="container" style="width:1140px;">
-            <div class="row" style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+            <div class="row" style="padding: 5px;margin: 5px;">
                 <div class="col">
-                    <div echarts [options]="mCourseSelectRadarGraphOption" style="width:500px;"></div>
-                </div>
-                <div class="col">
-                    <ul class="heroes">
-                        <li *ngFor="let item of SingleCoursePercent">
-                            <span class="badge">{{item.name}} </span>{{item.value}} %
-                        </li>
-                    </ul>
+                    <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">单课程百分比</h3>
+                        </div>
+                        <div class="box-body">
+                            <div style="margin: 5px 0px 5px 0px">
+                                <button *ngFor="let x of SingleCoursePercent" type="button"
+                                    class="btn btn-info" style="cursor: default;margin-left: 10px">
+                                    {{x.name}}&nbsp;
+                                    <span class="badge badge-light">{{x.value}}%</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-                <div echarts [options]="mCourseSelectCntOption" style="width:500px;"></div>
+
+            <div class="row" style="padding: 5px;margin: 5px;">
+                <div class="col">
+                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                        <div echarts [options]="mCourseSelectRadarGraphOption" style="width:450px;"></div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                        <div echarts [options]="mCourseSelectCntOption" style="width:450px;"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </p-tabPanel>
     <p-tabPanel header="两门课程" style="width:100%;">
         <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
             <div echarts [options]="mCourseSelectTwoCntOption"
-                style="width:800px;height: 400px;padding: 5px;margin: 5px;"></div>
+                style="width:800px;height: 400px;padding: 5px;margin: auto;"></div>
         </div>
         <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
             <div echarts [options]="mCourseSelectTwoPercentOption"
-                style="width:800px;height: 400px;padding: 5px;margin: 5px;"></div>
+                style="width:800px;height: 400px;padding: 5px;margin: auto;"></div>
         </div>
     </p-tabPanel>
     <p-tabPanel header="三门课程" style="width:1140x;">

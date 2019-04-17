@@ -10,44 +10,44 @@
   (onRowSelect)="onRowSelect($event)">
   <ng-template pTemplate="header">
     <tr>
-      <th style="width: 100px" [pSortableColumn]="'record.className'">班级名
+      <th style="width: 100px;" [pSortableColumn]="'record.className'">班级名
         <p-sortIcon [field]="'record.className'">
         </p-sortIcon>
       </th>
-      <th *ngIf="IsShowExamName" style="width: 100px" [pSortableColumn]="'record.numberName'">考试名称
+      <th *ngIf="IsShowExamName" style="width: 100px;" [pSortableColumn]="'record.numberName'">考试名称
         <p-sortIcon [field]="'record.numberName'">
         </p-sortIcon>
       </th>
-      <th style="width: 80px" [pSortableColumn]="'record.typeName'">考试类型
+      <th style="width: 80px;" [pSortableColumn]="'record.typeName'">考试类型
         <p-sortIcon [field]="'record.typeName'">
         </p-sortIcon>
       </th>
-      <th style="width: 100px" [pSortableColumn]="'record.term'">学期
+      <th style="width: 100px;" [pSortableColumn]="'record.term'">学期
         <p-sortIcon [field]="'record.term'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px" [pSortableColumn]="'record.subName'">学科
+      <th style="width: 50px;" [pSortableColumn]="'record.subName'">学科
         <p-sortIcon [field]="'record.subName'">
         </p-sortIcon>
       </th>
-      <th style="width: 60px">考试人数</th>
-      <th style="width: 50px" [pSortableColumn]="'maxScore'">最高分
+      <th style="width: 60px;">考试人数</th>
+      <th style="width: 50px;" [pSortableColumn]="'maxScore'">最高分
         <p-sortIcon [field]="'maxScore'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px" [pSortableColumn]="'minScore'">最低分
+      <th style="width: 50px;" [pSortableColumn]="'minScore'">最低分
         <p-sortIcon [field]="'minScore'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px" [pSortableColumn]="'avgScore'">平均分
+      <th style="width: 50px;" [pSortableColumn]="'avgScore'">平均分
         <p-sortIcon [field]="'avgScore'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px" [pSortableColumn]="'std'">标准差
+      <th style="width: 50px;" [pSortableColumn]="'std'">标准差
         <p-sortIcon [field]="'std'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px" [pSortableColumn]="'var'">方差
+      <th style="width: 50px;" [pSortableColumn]="'var'">方差
         <p-sortIcon [field]="'var'">
         </p-sortIcon>
       </th>
@@ -61,14 +61,14 @@
       <td style="width: 100px">{{itemData.record.term}}</td>
       <td style="width: 50px">{{itemData.record.subName}}</td>
       <td style="width: 60px">{{itemData.avilibleCnt}}/{{itemData.allCnt}}</td>
-      <td style="width: 50px">{{itemData.maxScore}}</td>
-      <td style="width: 50px">{{itemData.minScore}}</td>
-      <td style="width: 50px">{{itemData.avgScore}}</td>
-      <td style="width: 50px">{{itemData.std}}</td>
-      <td style="width: 50px">{{itemData.var}}</td>
+      <td style="width: 50px;text-align:right;">{{itemData.maxScore}}</td>
+      <td style="width: 50px;text-align:right;">{{itemData.minScore}}</td>
+      <td style="width: 50px;text-align:right;">{{itemData.avgScore}}</td>
+      <td style="width: 50px;text-align:right;">{{itemData.std}}</td>
+      <td style="width: 50px;text-align:right;">{{itemData.var}}</td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="footer" *ngIf="Footer !==null" > 
+  <ng-template pTemplate="footer" *ngIf="Footer !==null">
     <tr>
       <td style="width: 100px">{{Footer.record.className}}</td>
       <td *ngIf="IsShowExamName" style="width: 100px">{{Footer.record.numberName}}</td>
@@ -76,11 +76,11 @@
       <td style="width: 100px">{{Footer.record.term}}</td>
       <td style="width: 50px">{{Footer.record.subName}}</td>
       <td style="width: 60px">{{Footer.avilibleCnt}}/{{Footer.allCnt}}</td>
-      <td style="width: 50px">{{Footer.maxScore}}</td>
-      <td style="width: 50px">{{Footer.minScore}}</td>
-      <td style="width: 50px">{{Footer.avgScore}}</td>
-      <td style="width: 50px">{{Footer.std}}</td>
-      <td style="width: 50px">{{Footer.var}}</td>
+      <td style="width: 50px;text-align:right;">{{Footer.maxScore}}</td>
+      <td style="width: 50px;text-align:right;">{{Footer.minScore}}</td>
+      <td style="width: 50px;text-align:right;">{{Footer.avgScore}}</td>
+      <td style="width: 50px;text-align:right;">{{Footer.std}}</td>
+      <td style="width: 50px;text-align:right;">{{Footer.var}}</td>
     </tr>
-</ng-template>
+  </ng-template>
 </p-table>
