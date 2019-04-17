@@ -6,7 +6,7 @@ import { HomeService } from '../../Common/Home.service';
 import { ScoreFunnelOption } from '../../GraphOption/ScoreOption';
 @Component({
     templateUrl: 'ExamOverView.html',
-})
+}) 
 export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
     Exams: IClassExam[] = [];
@@ -17,7 +17,36 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
     Title: string;
     subTitle: string;
 
-    GradeList: {
+    Gradelist = [
+        { label: '高一', value: '高一' },
+        { label: '高二', value: '高二' },
+        { label: '高三', value: '高三' }
+    ]
+    SelectGrade = '';
+
+    Examlist = [];
+    SelectExamNumber = '';
+    SelectExamName = '';
+    GradeChange() {
+        let m = this.GradeExamList.find(x => x.name == this.SelectGrade).value;
+        this.Examlist = m.map(x => { return { 'label': x.numberName, 'value': x.number } });
+        this.SelectExamNumber = this.Examlist[0].value;
+        this.SelectExamName = this.Examlist[0].label;
+        this.ExamChange();
+    }
+
+    SubNameList: string[]
+
+    ExamChange() {
+        let m = this.GradeExamList.find(x => x.name == this.SelectGrade).value;
+        let n = m.find(x => x.number == this.SelectExamNumber);
+        this.SelectExamName = n.numberName;
+        this.SubNameList = n.subNameList;
+        this.JumpToExam(this.SelectExamNumber, this.SubNameList[0], this.SelectGrade);
+    }
+
+
+    GradeExamList: {
         name: string,
         value: {
             grade: string,
@@ -25,22 +54,31 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
             numberName: string,
             subNameList: string[]
         }[]
-    }[] = []; 
+    }[] = [];
     ngOnInit(): void {
         this.route.data
             .subscribe((data: { examgradelist: IExamList }) => {
-                this.GradeList = [];
-                this.GradeList.push({ name: "高一", value: data.examgradelist["高一"] });
-                this.GradeList.push({ name: "高二", value: data.examgradelist["高二"] });
-                this.GradeList.push({ name: "高三", value: data.examgradelist["高三"] });
+                this.GradeExamList = [];
+                this.GradeExamList.push({ name: "高一", value: data.examgradelist["高一"] });
+                this.GradeExamList.push({ name: "高二", value: data.examgradelist["高二"] });
+                this.GradeExamList.push({ name: "高三", value: data.examgradelist["高三"] });
             });
         if (this.service.CurrentExam !== undefined) {
             //恢复上次浏览的考试
             this.CreateEntity(this.service.CurrentExam);
-        }else{
+            this.SelectGrade = this.Exams[0].record.grade;
+            this.GradeChange();
+            this.SelectExamNumber = this.Exams[0].record.number;
+            this.SelectExamName = this.Exams[0].record.numberName;
+            this.ExamChange();
+        } else {
             //默认
-            this.JumpToExam(this.GradeList[0].value[0].number,
-                            this.GradeList[0].value[0].subNameList[0],this.GradeList[0].name);
+            this.SelectGrade = this.GradeExamList[0].name;
+            this.GradeChange();
+            this.SelectExamNumber = this.GradeExamList[0].value[0].number;
+            this.SubNameList = this.GradeExamList[0].value[0].subNameList;
+            this.JumpToExam(this.GradeExamList[0].value[0].number,
+                this.GradeExamList[0].value[0].subNameList[0], this.GradeExamList[0].name);
         }
     }
     constructor(
@@ -69,7 +107,6 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         this.Low10 = r.low10;
         this.Title = this.Exams[0].record.numberName;
         this.subTitle = this.Exams[0].record.grade + " - " + this.Exams[0].record.subName;
-
         this.mScoreFunnelOption.legend.data = [];
         this.mScoreFunnelOption.series[0].data = [];
         let maxcnt = 0;

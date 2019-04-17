@@ -75,3 +75,9 @@ legend {
   border: 0;
   width: auto
 }
+
+.ui-dropdown    {
+  height: 24px;
+  font-weight: 400;
+  font-size: 12px;
+}

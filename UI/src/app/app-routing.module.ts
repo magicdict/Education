@@ -8,8 +8,7 @@ import { SchoolOverViewComponent } from "./Home/OverViewArea/SchoolOverView/Scho
 import { CourseOverViewComponent } from './Home/OverViewArea/CourseOverView/CourseOverView.component';
 import { ConsumptionOverviewComponent } from './Home/OverViewArea/ConsumptionOverview/ConsumptionOverview.component';
 import { ClassOverviewComponent } from './Home/ClassArea/ClassOverview/ClassOverview.component';
-import { ExamOverViewComponent } from './Home/OverViewArea/ExamOverview/ExamOverview.component';  //原来的风格
-import { ExamOverView2Component } from './Home/OverViewArea/ExamOverview/ExamOverview2.component';  //新的风格
+import { ExamOverViewComponent } from './Home/OverViewArea/ExamOverview/ExamOverview.component';  
 import { KaoqinOverviewComponent } from './Home/OverViewArea/KaoqinOverview/KaoqinOverview.component';
 import { CampusComponent } from './Home/OverViewArea/SchoolOverView/Campus.component';
 const routes: Routes = [
@@ -26,11 +25,6 @@ const routes: Routes = [
   {
     path: 'home/exam',
     component: ExamOverViewComponent,
-    resolve: { examgradelist: IExamGradeListResolver }
-  },
-  {
-    path: 'home/exam2',
-    component: ExamOverView2Component,
     resolve: { examgradelist: IExamGradeListResolver }
   },
   {
