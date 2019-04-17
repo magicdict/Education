@@ -2,17 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ISchoolInfo } from '../../Common/Education.model';
 import { regionMapOptions, SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
-import { registerMap } from 'echarts';
-import { HttpClient } from '@angular/common/http';
 import { HomeService } from '../../Common/Home.service';
-import { CampusComponent } from './Campus.component';
+import { CommonFunction } from '../../Common/common';
 
 @Component({
   templateUrl: 'SchoolOverView.html',
 })
 export class SchoolOverViewComponent implements OnInit {
   constructor(
-    private http: HttpClient,
+    private router: Router,
     private route: ActivatedRoute,
     private service: HomeService
   ) {
@@ -24,18 +22,11 @@ export class SchoolOverViewComponent implements OnInit {
 
   IsMapReady = false;
   /**地图 */
-  NativePlaceRegionOpt = regionMapOptions;
+  NativePlaceRegionOpt = CommonFunction.clone(regionMapOptions);
   /**旭日图 性别比例 */
   SexRateSunburstOption = SexRateSunburstOption;
 
   ngOnInit(): void {
-
-    //最初的页面就执行地图注册的操作
-    this.http.get('assets/china.json')
-      .subscribe(geoJson => {
-        registerMap('China', geoJson);
-        this.IsMapReady = true;
-      });
 
     this.route.data
       .subscribe((data: { schoolInfo: ISchoolInfo }) => {
@@ -63,21 +54,7 @@ export class SchoolOverViewComponent implements OnInit {
       });
   }
 
-
-  @ViewChild('baiyang')
-  private baiyangcampus: CampusComponent;
-
-  @ViewChild('dongbu')
-  private dongbucampus: CampusComponent;
-
-  ShwoCampus(campusname: string) {
-    //获得校区信息
-    if (campusname === '白') {
-      this.baiyangcampus.campusname = campusname;
-      this.baiyangcampus.show();
-    } else {
-      this.dongbucampus.campusname = campusname;
-      this.dongbucampus.show();
-    }
+  ShowCampus(campusname: string) {
+    this.router.navigate(['home/campus', campusname]);
   }
 }

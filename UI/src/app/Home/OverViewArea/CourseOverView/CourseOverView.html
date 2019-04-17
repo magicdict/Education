@@ -21,13 +21,18 @@
         </div>
     </p-tabPanel>
     <p-tabPanel header="两门课程" style="width:100%;">
-        <div echarts [options]="mCourseSelectTwoCntOption"
-            style="width:800px;height: 400px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
-        <div echarts [options]="mCourseSelectTwoPercentOption"
-            style="width:800px;height: 400px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
+        <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+            <div echarts [options]="mCourseSelectTwoCntOption"
+                style="width:800px;height: 400px;padding: 5px;margin: 5px;"></div>
+        </div>
+        <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+            <div echarts [options]="mCourseSelectTwoPercentOption"
+                style="width:800px;height: 400px;padding: 5px;margin: 5px;"></div>
+        </div>
     </p-tabPanel>
     <p-tabPanel header="三门课程" style="width:1140x;">
-        <div echarts [options]="mCourseSelectThreeCntOption" style="width:1100px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
+        <div echarts [options]="mCourseSelectThreeCntOption"
+            style="width:1100px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
 
         <div class="container" style="width:1140px;">
             <div class="row">
@@ -63,6 +68,7 @@
         </div>
     </p-tabPanel>
     <p-tabPanel header="桑基图（Sankey）" style="width:100%;">
-        <div echarts [options]="mSelectCourseSankeyOption" style="width:1080px;height: 900px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
+        <div echarts [options]="mSelectCourseSankeyOption"
+            style="width:1080px;height: 900px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
     </p-tabPanel>
 </p-tabView>

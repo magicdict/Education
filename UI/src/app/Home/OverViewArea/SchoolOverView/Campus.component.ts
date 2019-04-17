@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HomeService } from '../../Common/Home.service';
 import { ICampus } from '../../Common/Education.model';
-import { SexRatePieOption, SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
+import { SexRatePieOption, SexRateSunburstOption, regionMapOptions } from '../../GraphOption/StudentGraphOption';
 import { CommonFunction } from '../../Common/common';
 import { ISimpleBar } from '../../GraphOption/KaoqinOption';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class CampusComponent implements OnInit {
 
     campusfullname: string;
 
-    @Input() campusname: string;
+    campusname: string;
 
     campusInfo: ICampus;
     /**性别饼图 */
@@ -24,10 +25,15 @@ export class CampusComponent implements OnInit {
     /**旭日图 性别比例 */
     mSexRateSunburstOption = CommonFunction.clone(SexRateSunburstOption);
 
+    /**地图 */
+    NativePlaceRegionOpt = CommonFunction.clone(regionMapOptions);
+
     mTeacherSub: ISimpleBar;
 
     ngOnInit(): void {
-
+        this.route.params.subscribe(
+            params => this.campusname = params['id']
+        );
         if (this.campusname === "白") {
             this.campusfullname = "白杨校区";
             this.campusInfo = this.service.SchoolOverview.baiYang;
@@ -53,11 +59,17 @@ export class CampusComponent implements OnInit {
             this.mSexRatePieOption.series[0].data[0].value = this.campusInfo.property.totalSexRate.maleCnt;
             this.mSexRatePieOption.series[0].data[1].value = this.campusInfo.property.totalSexRate.femaleCnt;
         }
+        this.NativePlaceRegionOpt.title.text = "";
+        this.NativePlaceRegionOpt.series[0].data = this.campusInfo.property.nativePlace;
 
         let subnamelist = [];
         let subcnt = [];
         for (const key in this.campusInfo.teacherSubCnt) {
-            subnamelist.push(key);
+            if (key == "通用技术") {
+                subnamelist.push('技术');   //单引号.. 保持图标X轴显示完整
+            } else {
+                subnamelist.push(key);
+            }
             subcnt.push(this.campusInfo.teacherSubCnt[key]);
         }
 
@@ -66,6 +78,7 @@ export class CampusComponent implements OnInit {
                 type: 'category',
                 data: subnamelist
             },
+            tooltip: {},
             yAxis: {
                 type: 'value'
             },
@@ -83,9 +96,10 @@ export class CampusComponent implements OnInit {
 
     }
     constructor(
-        private service: HomeService
+        private service: HomeService,
+        private route: ActivatedRoute,
     ) {
-
+        
     }
 
     show() {

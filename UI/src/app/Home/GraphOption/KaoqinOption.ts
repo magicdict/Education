@@ -66,12 +66,17 @@ export interface IStack {
 
 
 export interface ISimpleBar {
+    tooltip?: {},
+    title?: {
+        text: string,
+        left?: number
+    },
     xAxis: {
-        type: 'category',
+        type: string,
         data: string[]
     },
     yAxis: {
-        type: 'value'
+        type: string
     },
     series: [{
         label?: {

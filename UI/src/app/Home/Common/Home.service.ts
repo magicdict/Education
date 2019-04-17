@@ -48,6 +48,9 @@ export class HomeService {
         return this.commonFunction.httpRequest<any>('Student/GetStudentInfo?ID=' + StudentId);
     }
 
+    /**是否注册完毕地图 */
+    IsMapReady: boolean = false;
+
     /**考试一览缓存 */
     CurrentExam: IExamInfoForNumberAndSubName;
 

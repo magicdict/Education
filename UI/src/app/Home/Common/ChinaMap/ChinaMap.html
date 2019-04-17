@@ -1,0 +1,21 @@
+<div class="box box-primary  box-solid" style="width: 100%;">
+    <div class="box-header with-border">
+        <h3 class="box-title">生源地图</h3>
+        <div class="box-tools pull-right">
+            <button type="button" style="margin: 0px;" class="btn btn-info btn-box-tool" (click)="this.china.show()">
+                <i class="fas fa-info-circle"></i>&nbsp;全国
+            </button>
+            &nbsp;
+            <button type="button" style="margin: 0px;" class="btn btn-info btn-box-tool "
+                (click)="this.zhejiang.show()">
+                <i class="fas fa-info-circle"></i>&nbsp;浙江省
+            </button>
+        </div>
+    </div>
+    <div class="box-body">
+        <div *ngIf="this.service.IsMapReady" echarts [options]="MapOption" [style.width]="this.StyleWidth" [style.height]="this.StyleHeight"></div>
+    </div>
+</div>
+<app-namevalue #china [Title]="'全国生源'" [NameValueTable]="NativePlace"></app-namevalue>
+<app-namevalue #zhejiang [Title]="'浙江省生源'" [NameValueTable]="NativePlaceZheJiang">
+</app-namevalue>

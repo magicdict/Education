@@ -1,63 +1,58 @@
 <app-nav></app-nav>
+<div class="alert alert-info" style="font-size: 18px;font-weight: 500;">
+    {{this.ClassName}} 人数：{{this.StudentCnt}}
+</div>
 <p-tabView>
   <p-tabPanel header="概要" style="width:1140px;">
-    <div class="alert alert-info">{{this.ClassName}} 人数：{{this.StudentCnt}}</div>
     <div class="container" style="margin: 0px;">
       <div class="row">
         <div class="col">
-          <div class="card card-stats">
-            <div class="card-header card-header-warning card-header-icon">
-              民族
-            </div>
-            <div class="card-body">
-              <div class="stats">
-                <div style="margin: 5px 0px 5px 0px">
-                  <button *ngFor="let x of StudentsInfo.nation" type="button" class="btn btn-primary"
-                    style="cursor: default;margin-left: 10px">
-                    {{x.name}}
-                    <span class="badge badge-light">{{x.value}}</span>
-                  </button>
+
+            <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+                <div class="box-header with-border">
+                  <h3 class="box-title">民族</h3>
+                </div>
+                <div class="box-body">
+                  <div style="margin: 5px 0px 5px 0px">
+                    <button *ngFor="let x of StudentsInfo.nation" type="button" class="btn btn-primary"
+                      style="cursor: default;margin-left: 10px">
+                      {{x.name}}
+                      <span class="badge badge-light">{{x.value}}</span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
         </div>
         <div class="col">
-          <div class="card card-stats">
-            <div class="card-header card-header-warning card-header-icon">
-              政治面貌
-            </div>
-            <div class="card-body">
-              <div class="stats">
-                <div style="margin: 5px 0px 5px 0px">
-                  <button *ngFor="let x of StudentsInfo.policy" type="button" class="btn btn-danger"
-                    style="cursor: default;margin-left: 10px">
-                    {{x.name}}
-                    <span class="badge badge-light">{{x.value}}</span>
-                  </button>
+
+            <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+                <div class="box-header with-border">
+                  <h3 class="box-title">政治面貌</h3>
                 </div>
-              </div>
-            </div>
-          </div>
+                <div class="box-body">
+                  <div style="margin: 5px 0px 5px 0px">
+                    <button *ngFor="let x of StudentsInfo.policy" type="button" class="btn btn-danger"
+                      style="cursor: default;margin-left: 10px">
+                      {{x.name}}
+                      <span class="badge badge-light">{{x.value}}</span>
+                    </button>
+                  </div>
+                </div>
+              </div>          
         </div>
       </div>
       <div class="row">
         <div class="col-8">
 
-          <div class="box box-primary box-solid" style="width: 100%;margin-top: 10px;">
-            <div class="box-header with-border">
-              <h3 class="box-title">生源</h3>
-            </div>
-            <div class="box-body">
-              <div echarts (chartInit)="onNativePlaceChartInit($event)" [options]="NativePlaceRegionOptions"
-                style="width:680px;height: 600px;"></div>
-            </div>
-          </div>
+          <app-map [NativePlace]="this.StudentsInfo.nativePlace" [StyleHeight]="'600px'"
+            [StyleWidth]="'600px'" [NativePlaceZheJiang]="this.StudentsInfo.nativePlaceZheJiang"
+            [MapOption]="this.NativePlaceRegionOptions">
+          </app-map>
 
         </div>
         <div class="col-4">
 
-          <div class="box box-primary box-solid" style="width: 100%;margin-top: 10px;">
+          <div class="box box-primary box-solid" style="width: 100%;">
             <div class="box-header with-border">
               <h3 class="box-title">性别比例</h3>
             </div>

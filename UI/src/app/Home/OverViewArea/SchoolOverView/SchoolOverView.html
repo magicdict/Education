@@ -2,31 +2,32 @@
 <div class="container" style="margin: 0px;">
   <div class="row" style="width:1140px">
     <div class="col-4" style="padding: 0px;">
-      <div class="card text-right">
+      <div class="card text-right" style="margin-bottom: 0px;">
         <div class="card-header card-header-image">
           <img src="Card" src="assets/image/BaiYangCampus.jpg" height="300px">
         </div>
         <div class="card-body">
           <div class="stats">
             白杨校区 宁波市白杨街178号<br />
-            <button type="button" class="btn btn-info" (click)="ShwoCampus('白')">详细</button>
+            <button type="button" class="btn btn-info" (click)="ShowCampus('白')">详细</button>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-4">
-      <div class="card text-right">
+    <div class="col-4" style="padding-right:0px">
+      <div class="card text-right" style="margin-bottom: 0px;">
         <div class="card-header card-header-image">
           <img src="Card" src="assets/image/EastCampus.jpg" height="300px">
         </div>
         <div class="card-body">
           <div class="stats">
             东部校区 宁波市百丈东路1907号<br />
-            <button type="button" class="btn btn-info" (click)="ShwoCampus('东')">详细</button>
+            <button type="button" class="btn btn-info" (click)="ShowCampus('东')">详细</button>
           </div>
         </div>
       </div>
-    </div>
+    </div> 
+
     <div class="col-4">
       <div class="box box-primary box-solid" style="width: 100%;margin-top: 10px;">
         <div class="box-header with-border">
@@ -41,32 +42,14 @@
 
   <div class="row" style="width:1140px">
     <div class="col-8" style="padding: 0px;">
-
-      <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
-        <div class="box-header with-border">
-          <h3 class="box-title">生源地图</h3>
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" (click)="this.china.show()">
-              全国
-            </button>
-            <button type="button" class="btn btn-box-tool" (click)="this.zhejiang.show()">
-              浙江省
-            </button>
-          </div>
-        </div>
-        <div class="box-body">
-          <div *ngIf="IsMapReady" echarts [options]="this.NativePlaceRegionOpt" style="width:700px;height:600px">
-          </div>
-        </div>
-      </div>
-
+      <app-map [NativePlace]="this.schoolinfo.total.property.nativePlace" [StyleHeight]="'600px'" [StyleWidth]="'700px'"
+        [NativePlaceZheJiang]="this.schoolinfo.total.property.nativePlaceZheJiang" [MapOption]="this.NativePlaceRegionOpt">
+      </app-map>
     </div>
 
     <div class="col-4">
 
-
-
-      <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+      <div class="box box-primary  box-solid" style="width: 100%;">
         <div class="box-header with-border">
           <h3 class="box-title">概要</h3>
         </div>
@@ -94,15 +77,15 @@
 
       <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
         <div class="box-header with-border">
-          <h3 class="box-title">少数名族</h3>
+          <h3 class="box-title">民族</h3>
         </div>
         <div class="box-body">
           <div style="margin: 5px 0px 5px 0px">
             <button *ngFor="let x of this.schoolinfo.total.property.nation" type="button" class="btn btn-primary"
-            style="cursor: default;margin-left: 10px">
-            {{x.name}}
-            <span class="badge badge-light">{{x.value}}</span>
-          </button>
+              style="cursor: default;margin-left: 10px">
+              {{x.name}}
+              <span class="badge badge-light">{{x.value}}</span>
+            </button>
           </div>
         </div>
       </div>
@@ -114,10 +97,10 @@
         <div class="box-body">
           <div style="margin: 5px 0px 5px 0px">
             <button *ngFor="let x of this.schoolinfo.total.property.policy" type="button" class="btn btn-danger"
-            style="cursor: default;margin-left: 10px">
-            {{x.name}}
-            <span class="badge badge-light">{{x.value}}</span>
-          </button>
+              style="cursor: default;margin-left: 10px">
+              {{x.name}}
+              <span class="badge badge-light">{{x.value}}</span>
+            </button>
           </div>
         </div>
       </div>
@@ -125,9 +108,3 @@
     </div>
   </div>
 </div>
-
-<campus #baiyang [campusname]="'白'"></campus>
-<campus #dongbu [campusname]="'东'"></campus>
-<app-namevalue #china [Title]="'全国生源'" [NameValueTable]="this.schoolinfo.total.property.nativePlace"></app-namevalue>
-<app-namevalue #zhejiang [Title]="'浙江省生源'" [NameValueTable]="this.schoolinfo.total.property.nativePlaceZheJiang">
-</app-namevalue>

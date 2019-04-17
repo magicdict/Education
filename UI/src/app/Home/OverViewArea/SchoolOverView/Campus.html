@@ -1,109 +1,103 @@
-<p-dialog [header]="this.campusfullname" [(visible)]="this.display" modal="modal" [responsive]="true">
-    <div style="height: 850px;width:900px">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="box box-primary box-solid" style="width: 100%;margin-top: 10px;">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">性别比例</h3>
-                        </div>
-                        <div class="box-body">
-                            <div *ngIf="this.campusfullname === '东部校区'" echarts [options]="mSexRatePieOption"
-                                style="width:300px;height:300px"></div>
-                            <div *ngIf="this.campusfullname === '白杨校区'" echarts [options]="mSexRateSunburstOption"
-                                style="width:300px;height:300px"></div>
-                        </div>
-                    </div>
+<app-nav></app-nav>
+<div class="container" style="margin: 0px;">
+    <div class="row" style="width:1140px">
+        <div class="col-7" style="padding: 0px;">
+            <app-map [NativePlace]="this.campusInfo.property.nativePlace" [StyleHeight]="'450px'" [StyleWidth]="'650px'"
+                [NativePlaceZheJiang]="this.campusInfo.property.nativePlaceZheJiang"
+                [MapOption]="this.NativePlaceRegionOpt">
+            </app-map>
+        </div>
+        <div class="col-5" style="padding-left: 10px;padding-right: 0px;">
+            <div class="box box-primary box-solid" style="width: 100%;">
+                <div class="box-header with-border">
+                    <h3 class="box-title">性别比例</h3>
                 </div>
-                <div class="col">
-                    <div class="box box-primary box-solid" style="width: 100%;margin-top: 10px;">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">教师</h3>
-                        </div>
-                        <div class="box-body">
-                            <div echarts [options]="mTeacherSub" style="width:400px;height:300px"></div>
-                        </div>
-                    </div>
+                <div class="box-body">
+                    <div *ngIf="this.campusfullname === '东部校区'" echarts [options]="mSexRatePieOption"
+                        style="width:450px;height:450px"></div>
+                    <div *ngIf="this.campusfullname === '白杨校区'" echarts [options]="mSexRateSunburstOption"
+                        style="width:450px;height:450px"></div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col">
-
-
-                    <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">概要</h3>
-                        </div>
-                        <div class="box-body">
-                            <div style="margin: 5px 0px 5px 0px">
-                                <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
-                                    学生数 <span class="badge badge-light">{{this.campusInfo.property.studentCnt}}</span>
-                                    <span class="sr-only">学生数</span>
-                                </button>
-                                <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
-                                    学生数(IB) <span
-                                        class="badge badge-light">{{this.campusInfo.property.studentIBCnt}}</span>
-                                    <span class="sr-only">学生数</span>
-                                </button>
-                                <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
-                                    教师数 <span class="badge badge-light">{{this.campusInfo.teacherCnt}}</span>
-                                    <span class="sr-only">教师数</span>
-                                </button>
-                                <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
-                                    班级数 <span class="badge badge-light">{{this.campusInfo.classCnt}}</span>
-                                    <span class="sr-only">班级数</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-
-                    <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">少数名族</h3>
-                        </div>
-                        <div class="box-body">
-                            <div style="margin: 5px 0px 5px 0px">
-                                <button *ngFor="let x of this.campusInfo.property.nation" type="button"
-                                    class="btn btn-primary" style="cursor: default;margin-left: 10px">
-                                    {{x.name}}
-                                    <span class="badge badge-light">{{x.value}}</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-
-                    <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">政治面貌</h3>
-                        </div>
-                        <div class="box-body">
-                            <div style="margin: 5px 0px 5px 0px">
-                                <button *ngFor="let x of this.campusInfo.property.policy" type="button"
-                                    class="btn btn-danger" style="cursor: default;margin-left: 10px">
-                                    {{x.name}}
-                                    <span class="badge badge-light">{{x.value}}</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
-</p-dialog>
+    <div class="row">
+        <div class="col" style="padding: 0px;">
+            <div class="box box-primary box-solid" style="width: 100%;">
+                <div class="box-header with-border">
+                    <h3 class="box-title">教师</h3>
+                </div>
+                <div class="box-body">
+                    <div echarts [options]="mTeacherSub" style="width:1000px;height:300px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col" style="padding: 0px;">
+            <div class="box box-primary  box-solid" style="width: 100%;">
+                <div class="box-header with-border">
+                    <h3 class="box-title">概要</h3>
+                </div>
+                <div class="box-body">
+                    <div style="margin: 5px 0px 5px 0px">
+                        <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
+                            学生数 <span class="badge badge-light">{{this.campusInfo.property.studentCnt}}</span>
+                            <span class="sr-only">学生数</span>
+                        </button>
+                        <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
+                            学生数(IB) <span class="badge badge-light">{{this.campusInfo.property.studentIBCnt}}</span>
+                            <span class="sr-only">学生数</span>
+                        </button>
+                        <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
+                            教师数 <span class="badge badge-light">{{this.campusInfo.teacherCnt}}</span>
+                            <span class="sr-only">教师数</span>
+                        </button>
+                        <button type="button" class="btn btn-info" style="cursor: default;margin-left: 10px">
+                            班级数 <span class="badge badge-light">{{this.campusInfo.classCnt}}</span>
+                            <span class="sr-only">班级数</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="padding: 0px;">
+            <div class="box box-primary  box-solid" style="width: 100%;">
+                <div class="box-header with-border">
+                    <h3 class="box-title">少数名族</h3>
+                </div>
+                <div class="box-body">
+                    <div style="margin: 5px 0px 5px 0px">
+                        <button *ngFor="let x of this.campusInfo.property.nation" type="button" class="btn btn-primary"
+                            style="cursor: default;margin-left: 10px">
+                            {{x.name}}
+                            <span class="badge badge-light">{{x.value}}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="padding: 0px;">
+            <div class="box box-primary  box-solid" style="width: 100%;">
+                <div class="box-header with-border">
+                    <h3 class="box-title">政治面貌</h3>
+                </div>
+                <div class="box-body">
+                    <div style="margin: 5px 0px 5px 0px">
+                        <button *ngFor="let x of this.campusInfo.property.policy" type="button" class="btn btn-danger"
+                            style="cursor: default;margin-left: 10px">
+                            {{x.name}}
+                            <span class="badge badge-light">{{x.value}}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

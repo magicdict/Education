@@ -71,6 +71,8 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
         if (this.SexRateEchartsInstance !== undefined) {
           this.SexRateEchartsInstance.setOption(this.mSexRate);
         }
+
+        this.NativePlaceRegionOptions.title.text = "";
         this.NativePlaceRegionOptions.visualMap.max = 5;
         this.NativePlaceRegionOptions.series[0].data = data.classinfo.property.nativePlace;
         if (this.NativeEchartsInstance !== undefined) {
