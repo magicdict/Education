@@ -47,18 +47,20 @@
                     <div class="col-6" *ngIf="ScoreAvg.length !== 0">
                         <div class="card text-right" style="width: 100%;margin-top: 35px;margin-bottom: 5px;">
                             <div class="card-body">
-                                <div echarts (chartInit)="onScoreChartInit($event)" [options]="ScoreGraph" style="width:350px;height:350px;"></div>
-                                <button class="btn btn-primary" style="float:right" (click)="JumpTo('grade')"><i
-                                        class="fa fas fa-chart-bar"></i> 详细</button>
+                                <div echarts (chartInit)="onScoreChartInit($event)" [options]="ScoreGraph"
+                                    style="width:350px;height:350px;"></div>
+                                <button class="btn btn-info" style="float:right" (click)="JumpTo('grade')"><i
+                                        class="fa fas fa-chart-bar"></i>&nbsp; 详细</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-6" *ngIf="ConsumptionMonth.length !== 0">
                         <div class="card text-right" style="width: 100%;margin-top: 35px;margin-bottom: 5px;">
                             <div class="card-body">
-                                <div echarts (chartInit)="onCompumptionChartInit($event)" [options]="CompumptionGraph" style="width:350px;height:350px;"></div>
-                                <button class="btn btn-primary" style="float:right" (click)="JumpTo('compumption')"><i
-                                        class="fa fas fa-chart-bar"></i> 详细</button>
+                                <div echarts (chartInit)="onCompumptionChartInit($event)" [options]="CompumptionGraph"
+                                    style="width:350px;height:350px;"></div>
+                                <button class="btn btn-info" style="float:right" (click)="JumpTo('compumption')"><i
+                                        class="fa fas fa-chart-bar"></i>&nbsp; 详细</button>
                             </div>
                         </div>
                     </div>
@@ -67,9 +69,11 @@
                     <div class="col-6" style="padding-top:0px;" *ngIf="KaoqinMonthCnt.length !== 0">
                         <div class="card text-right" style="width: 100%;margin-top: 10px;">
                             <div class="card-body">
-                                <div echarts (chartInit)="onKaoqinChartInit($event)" [options]="KaoqinGraph" style="width:350px;height:350px;"></div>
-                                <button class="btn btn-primary" style="float:right" (click)="JumpTo('kaoqin')"><i class="fa fas fa-chart-bar"></i>
-                                    详细</button>
+                                <div echarts (chartInit)="onKaoqinChartInit($event)" [options]="KaoqinGraph"
+                                    style="width:350px;height:350px;"></div>
+                                <button class="btn btn-info" style="float:right" (click)="JumpTo('kaoqin')"><i
+                                        class="fa fas fa-chart-bar"></i>
+                                    &nbsp;详细</button>
                             </div>
                         </div>
                     </div>
