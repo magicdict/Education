@@ -1,13 +1,18 @@
-<br />
-<div *ngIf="subName.length > 2">
-  科目选择：
-  <p-dropdown #subnamelist [options]="subName" (onChange)="dt.filter($event.value, 'record.subName', 'equals')">
-  </p-dropdown>
-  <br />
-  <br />
+<div class="container">
+  <div class="row">
+    <div class="col" *ngIf="subName.length > 2">
+      <div style="margin-top: 10px;margin-bottom: 10px;">
+        科目选择：
+        <p-dropdown #subnamelist [options]="subName" (onChange)="dt.filter($event.value, 'subName', 'equals')">
+        </p-dropdown>
+      </div>
+    </div>
+    <table-function [Table]="dt" [FrameStyle]="{'float':'right'}"></table-function>
+  </div>
 </div>
+
 <p-table #dt [value]="this.Exams" selectionMode="single" [scrollable]="true" [scrollHeight]="scrollHeight"
-  (onRowSelect)="onRowSelect($event)">
+  (onRowSelect)="onRowSelect($event)" [columns]="cols">
   <ng-template pTemplate="header">
     <tr>
       <th style="width: 100px;" [pSortableColumn]="'record.className'">班级名
@@ -30,7 +35,14 @@
         <p-sortIcon [field]="'record.subName'">
         </p-sortIcon>
       </th>
-      <th style="width: 60px;">考试人数</th>
+      <th style="width: 60px;" [pSortableColumn]="'avilibleCnt'">有效人数
+        <p-sortIcon [field]="'avilibleCnt'">
+        </p-sortIcon>
+      </th>
+      <th style="width: 50px;" [pSortableColumn]="'allCnt'">总人数
+        <p-sortIcon [field]="'allCnt'">
+        </p-sortIcon>
+      </th>
       <th style="width: 50px;" [pSortableColumn]="'maxScore'">最高分
         <p-sortIcon [field]="'maxScore'">
         </p-sortIcon>
@@ -60,9 +72,18 @@
       <td style="width: 80px">{{itemData.record.typeName}}</td>
       <td style="width: 100px">{{itemData.record.term}}</td>
       <td style="width: 50px">{{itemData.record.subName}}</td>
-      <td style="width: 60px">{{itemData.avilibleCnt}}/{{itemData.allCnt}}</td>
-      <td style="width: 50px;text-align:right;">{{itemData.maxScore}}</td>
-      <td style="width: 50px;text-align:right;">{{itemData.minScore}}</td>
+      <td style="width: 60px;text-align:right;"
+        [ngStyle]="itemData.avilibleCnt !== itemData.allCnt?{'background':'lightyellow'}:{}">
+        {{itemData.avilibleCnt}}</td>
+      <td style="width: 50px;text-align:right;"
+        [ngStyle]="itemData.avilibleCnt !== itemData.allCnt?{'background':'lightyellow'}:{}">
+        {{itemData.allCnt}}</td>
+      <td style="width: 50px;text-align:right;"
+        [ngStyle]="Footer !== null && itemData.maxScore === Footer.maxScore?{'background':'lightgreen'}:{}">
+        {{itemData.maxScore}}</td>
+      <td style="width: 50px;text-align:right;"
+        [ngStyle]="Footer !== null && itemData.minScore === Footer.minScore?{'background':'pink'}:{}">
+        {{itemData.minScore}}</td>
       <td style="width: 50px;text-align:right;">{{itemData.avgScore}}</td>
       <td style="width: 50px;text-align:right;">{{itemData.std}}</td>
       <td style="width: 50px;text-align:right;">{{itemData.var}}</td>
@@ -75,7 +96,8 @@
       <td style="width: 80px">{{Footer.record.typeName}}</td>
       <td style="width: 100px">{{Footer.record.term}}</td>
       <td style="width: 50px">{{Footer.record.subName}}</td>
-      <td style="width: 60px">{{Footer.avilibleCnt}}/{{Footer.allCnt}}</td>
+      <td style="width: 60px;text-align:right;">{{Footer.avilibleCnt}}</td>
+      <td style="width: 50px;text-align:right;">{{Footer.allCnt}}</td>
       <td style="width: 50px;text-align:right;">{{Footer.maxScore}}</td>
       <td style="width: 50px;text-align:right;">{{Footer.minScore}}</td>
       <td style="width: 50px;text-align:right;">{{Footer.avgScore}}</td>

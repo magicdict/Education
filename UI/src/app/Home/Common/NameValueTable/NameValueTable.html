@@ -1,15 +1,17 @@
 <p-dialog [header]="Title" [(visible)]="this.display" modal="modal" [responsive]="true">
+    <table-function [Table]="dt" [FrameStyle]="{'margin':'10px auto 10px auto','width':'100%'}"></table-function>
     <div style="height: 550px;width:340px">
-        <p-table [value]="NameValueTable" [scrollable]="true" scrollHeight="500px">
+        <p-table #dt [columns]="cols" [value]="NameValueTable" [scrollable]="true" scrollHeight="500px"
+            selectionMode="multiple">
             <ng-template pTemplate="header">
                 <tr>
                     <th style="width: 50px" [pSortableColumn]="'name'">
-                        名称
+                        {{TitleName}}
                         <p-sortIcon [field]="'name'">
                         </p-sortIcon>
                     </th>
                     <th style="width: 100px" [pSortableColumn]="'value'">
-                        值
+                        {{TitleValue}}
                         <p-sortIcon [field]="'value'">
                         </p-sortIcon>
                     </th>

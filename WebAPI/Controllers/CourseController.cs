@@ -107,6 +107,10 @@ namespace Education.Controllers
                 //高三的ClassId混乱,所以按照ClassName再排序
                 r.Sort((x, y) => { return x.Record.ClassName.CompareTo(y.Record.ClassName); });
             }
+
+            //由于总人数的问题，这个必须先做，不然总人数会出现问题
+            Result.GradeInfo = new ClassExamInfo(All);
+
             //获得前10名和后10名
             All = All.Where(x => x.Score > 0).ToList();
             var topx = Math.Min(All.Count(), 10);
@@ -118,7 +122,6 @@ namespace Education.Controllers
             Result.ClassExamInfoList = r;
             Result.Top10 = Top10;
             Result.Low10 = Low10;
-            Result.GradeInfo = new ClassExamInfo(All);
 
             return Result;
         }

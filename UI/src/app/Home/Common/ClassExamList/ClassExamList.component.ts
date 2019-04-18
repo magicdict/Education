@@ -25,6 +25,22 @@ export class ClassExamListComponent implements OnChanges {
     /**统计条目 */
     @Input() Footer: IClassExam = null;
 
+    cols = [
+        { field: 'record.className', header: "班级名" },
+        { field: 'record.numberName', header: "考试名称" },
+        { field: 'record.typeName', header: "考试类型" },
+        { field: 'record.term', header: "学期" },
+        { field: 'record.subName', header: "学科" },
+        { field: 'avilibleCnt', header: "有效人数" },
+        { field: 'allCnt', header: "总人数" },
+        { field: 'maxScore', header: "最高分" },
+        { field: 'minScore', header: "最低分" },
+        { field: 'avgScore', header: "平均分" },
+        { field: 'std', header: "标准差" },
+        { field: 'var', header: "方差" }
+    ];
+
+
     ngOnChanges(): void {
         this.subName = [];
         this.subName.push({ label: "全部", value: null });

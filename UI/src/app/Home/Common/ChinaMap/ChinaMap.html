@@ -13,9 +13,12 @@
         </div>
     </div>
     <div class="box-body">
-        <div *ngIf="this.service.IsMapReady" echarts [options]="MapOption" [style.width]="this.StyleWidth" [style.height]="this.StyleHeight"></div>
+        <div *ngIf="this.service.IsMapReady" echarts [options]="MapOption" [style.width]="this.StyleWidth"
+            [style.height]="this.StyleHeight"></div>
     </div>
 </div>
-<app-namevalue #china [Title]="'全国生源'" [NameValueTable]="NativePlace"></app-namevalue>
-<app-namevalue #zhejiang [Title]="'浙江省生源'" [NameValueTable]="NativePlaceZheJiang">
+<app-namevalue #china [Title]="'全国生源'" [NameValueTable]="NativePlace" [TitleName]="'省份'" [TitleValue]="'人数'">
+</app-namevalue>
+<app-namevalue #zhejiang [Title]="'浙江省生源'" [NameValueTable]="NativePlaceZheJiang" [TitleName]="'城市'"
+    [TitleValue]="'人数'">
 </app-namevalue>
