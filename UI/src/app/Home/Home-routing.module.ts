@@ -7,7 +7,7 @@ import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.com
 import { Grade2ScoreComponent } from './StudentArea/StudentSorce/Grade2Score.component';
 import { Grade3ScoreComponent } from './StudentArea/StudentSorce/Grade3Score.component';
 import { TeacherOverviewComponent } from './TeacherOverview/TeacherOverview.component';
-import { SingleExamClassComponent } from './OverViewArea/ExamOverview/SingleExamClass.component';
+import { SingleExamClassComponent } from './Common/ClassExamList/SingleExamClass.component';
 import { StudentKaoqinComponent } from './StudentArea/StudentKaoqin/StudentKaoqin.component';
 
 const routes: Routes = [

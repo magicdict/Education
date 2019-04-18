@@ -12,8 +12,7 @@
 </div>
 
 <p-table #dt [value]="this.Scores" selectionMode="single" (onRowSelect)="onRowSelect($event)" [scrollable]="true"
-  scrollHeight="400px" [columns]="cols"
-  [exportFilename]="CSVFilename"> 
+  scrollHeight="400px" [columns]="cols" [exportFilename]="CSVFilename">
   <ng-template pTemplate="header">
     <tr>
       <th *ngIf="Mode !== 'Same'" style="width: 50px" [pSortableColumn]="'studentID'">学号
@@ -75,7 +74,8 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-itemData>
-    <tr [pSelectableRow]="itemData">
+    <tr [pSelectableRow]="itemData"
+      [ngStyle]="itemData.score <= 0?{'background':'gray'}:itemData.classRank <= 3 && itemData.type !=='4' && itemData.type !=='22' ?{'background':'lightgreen'}:{}">
       <td *ngIf="Mode !== 'Same'" style="width: 50px">{{itemData.studentID}}</td>
       <td *ngIf="Mode !== 'Same'" style="width: 50px">{{itemData.studentName}}</td>
       <td *ngIf="Mode === 'Same'" style="width: 200px">{{itemData.numberName}}</td>

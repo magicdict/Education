@@ -8,6 +8,29 @@ export class CommonFunction {
         private http: Http
     ) { }
 
+    public static GetWeatherImageByText(text: string): string {
+        if (CommonFunction.IsNullOrEmpty(text)) { return "assets/image/weathy/weathy_01.png" }
+        if (text === "阴"){
+            return "assets/image/weathy/weathy_02.png"
+        }
+        if (text === "多云"){
+            return "assets/image/weathy/weathy_03.png"
+        }
+        if (text === "阵雨"){
+            return "assets/image/weathy/weathy_08.png"
+        }
+        if (text === "雨"){
+            return "assets/image/weathy/weathy_08.png"
+        }
+        if (text === "小雨"){
+            return "assets/image/weathy/weathy_07.png"
+        }
+        if (text === "中雨"){
+            return "assets/image/weathy/weathy_08.png"
+        }
+        return "assets/image/weathy/weathy_01.png";
+    }
+
 
     /* 工具类 */
     public static checkNumbericRanger(text: string, max: number, min: number): number {

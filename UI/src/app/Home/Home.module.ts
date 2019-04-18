@@ -33,7 +33,7 @@ import { CampusComponent } from './OverViewArea/SchoolOverView/Campus.component'
 import { ExamOverViewComponent } from './OverViewArea/ExamOverview/ExamOverview.component';
 import { ConsumptionOverviewComponent } from './OverViewArea/ConsumptionOverview/ConsumptionOverview.component';
 import { ClassOverviewComponent } from './ClassArea/ClassOverview/ClassOverview.component';
-import { SingleExamClassComponent } from './OverViewArea/ExamOverview/SingleExamClass.component';
+import { SingleExamClassComponent } from './Common/ClassExamList/SingleExamClass.component';
 
 import { TeacherOverviewComponent } from './TeacherOverview/TeacherOverview.component';
 import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentOverview.component';

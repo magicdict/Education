@@ -16,6 +16,8 @@ export class StudentCompumptionComponent implements OnInit {
 
     }
 
+    GetWeatherImageByText = CommonFunction.GetWeatherImageByText;
+
     cols = [
         { field: 'dealTime', header: "时间" },
         { field: 'monDeal', header: "金额" },

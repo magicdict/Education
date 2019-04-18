@@ -10,7 +10,7 @@
             <p-tabPanel [header]="'成绩列表'">
                 <exam-list [Scores]="Scores" [Mode]="'DIFF'" [CSVFilename]="Title + subTitle"></exam-list>
             </p-tabPanel>
-            <p-tabPanel [header]="'分数段人数'">
+            <p-tabPanel [header]="'分数段人数'" *ngIf="IsFunnel">
                 <div echarts [options]="mScoreFunnelOption" style="width:650px;height:650px;"></div>
             </p-tabPanel>
         </p-tabView>

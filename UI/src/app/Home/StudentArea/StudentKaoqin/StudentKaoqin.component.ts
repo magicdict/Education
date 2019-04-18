@@ -15,6 +15,7 @@ export class StudentKaoqinComponent implements OnInit{
         { field: 'weather.type', header: "天气" },
     ];
     KaoqinList:IKaoqin[]
+    GetWeatherImageByText = CommonFunction.GetWeatherImageByText;
     ConvertNumberToWeekday = CommonFunction.ConvertNumberToWeekday;
     ngOnInit(): void {
         this.KaoqinList = this.service.CurrentStudentInfo.kaoqins; 

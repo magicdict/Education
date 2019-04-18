@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IScore, IClassExam } from 'src/app/Home/Common/Education.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HomeService } from '../../Common/Home.service';
+import { HomeService } from '../Home.service';
 import { ScoreFunnelOption } from '../../GraphOption/ScoreOption';
+import { CommonFunction } from '../common';
 
 @Component({
     templateUrl: 'SingleExamClass.html',
@@ -10,14 +11,20 @@ import { ScoreFunnelOption } from '../../GraphOption/ScoreOption';
 export class SingleExamClassComponent implements OnInit {
     Scores: IScore[];
     CurrentClassExam: IClassExam;
-    mScoreFunnelOption = ScoreFunnelOption;
+    mScoreFunnelOption = CommonFunction.clone(ScoreFunnelOption);
     Title: string;
     subTitle: string;
+    IsFunnel: boolean = false;
     ngOnInit(): void {
         this.route.data.subscribe((data: { singleExam: IScore[] }) => {
             this.Title = data.singleExam[0].numberName;
             this.subTitle = data.singleExam[0].className + " - " + data.singleExam[0].subName;
             this.Scores = data.singleExam;
+            if (this.service.CurrentClassExam === undefined) {
+                //在该页面刷新的话，会出现问题
+                this.IsFunnel = false;
+                return;
+            }
             this.CurrentClassExam = this.service.CurrentClassExam;
             this.mScoreFunnelOption.legend.data = [];
             this.mScoreFunnelOption.series[0].data = [];
@@ -30,6 +37,7 @@ export class SingleExamClassComponent implements OnInit {
                 }
             }
             this.mScoreFunnelOption.series[0].max = maxcnt;
+            this.IsFunnel = true;
         });
     }
     constructor(
