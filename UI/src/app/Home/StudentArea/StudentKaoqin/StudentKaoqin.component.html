@@ -37,14 +37,19 @@
                 <tr [pSelectableRow]="itemData">
                     <td style="width: 50px">{{itemData.recDateTime}}</td>
                     <td style="width: 50px">{{itemData.controllerName}}</td>
-                    <td style="width: 50px">{{ConvertNumberToWeekday(itemData.dayOfWeek)}}</td>
-                    <td style="width: 50px">{{itemData.weather.high}}</td>
-                    <td style="width: 50px">{{itemData.weather.low}}</td>
-                    <td style="width: 50px"> <img [src]="GetWeatherImageByText(itemData.weather.type)">
+                    <td [ngStyle]="itemData.dayOfWeek == 0 || itemData.dayOfWeek == 6 ?{'color':'red'}:{} "
+                        style="width: 50px;text-align: center;">
+                        {{ConvertNumberToWeekday(itemData.dayOfWeek)}}</td>
+                    <td [ngStyle]="itemData.weather.high > 32 ?{'color':'red'}:{} "
+                        style="width: 50px;text-align: right;">{{itemData.weather.high}}</td>
+                    <td [ngStyle]="itemData.weather.low <=0 ?{'color':'blue'}:{} "
+                        style="width: 50px;text-align: right;">{{itemData.weather.low}}</td>
+                    <td style="width: 50px;text-align: center;">
+                        <img [src]="GetWeatherImageByText(itemData.weather.type)">
                         {{itemData.weather.type}}
                     </td>
                 </tr>
             </ng-template>
-        </p-table> 
+        </p-table>
     </p-tabPanel>
 </p-tabView>

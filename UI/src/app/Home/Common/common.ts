@@ -22,11 +22,26 @@ export class CommonFunction {
         if (text === "雨"){
             return "assets/image/weathy/weathy_08.png"
         }
-        if (text === "小雨"){
+        if (text.endsWith("小雨")){
             return "assets/image/weathy/weathy_07.png"
         }
-        if (text === "中雨"){
+        if (text.endsWith("中雨")){
             return "assets/image/weathy/weathy_08.png"
+        }
+        if (text.endsWith("大雨")){
+            return "assets/image/weathy/weathy_09.png"
+        }
+        if (text === "雪"){
+            return "assets/image/weathy/weathy_12.png"
+        }
+        if (text.endsWith("小雪")){
+            return "assets/image/weathy/weathy_11.png"
+        }
+        if (text.endsWith("中雪")){
+            return "assets/image/weathy/weathy_12.png"
+        }
+        if (text.endsWith("大雪")){
+            return "assets/image/weathy/weathy_13.png"
         }
         return "assets/image/weathy/weathy_01.png";
     }

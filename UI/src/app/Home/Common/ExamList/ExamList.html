@@ -74,8 +74,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-itemData>
-    <tr [pSelectableRow]="itemData"
-      [ngStyle]="itemData.score <= 0?{'background':'gray'}:itemData.classRank <= 3 && itemData.type !=='4' && itemData.type !=='22' ?{'background':'lightgreen'}:{}">
+    <tr [pSelectableRow]="itemData" [ngStyle]="this.GetStyle(itemData)">
       <td *ngIf="Mode !== 'Same'" style="width: 50px">{{itemData.studentID}}</td>
       <td *ngIf="Mode !== 'Same'" style="width: 50px">{{itemData.studentName}}</td>
       <td *ngIf="Mode === 'Same'" style="width: 200px">{{itemData.numberName}}</td>
