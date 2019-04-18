@@ -44,16 +44,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-7">
-                    <b>月消费上限：&nbsp;</b> <p-dropdown [options]="MonthUpLimitList" [(ngModel)]="MonthUpLimit"
-                        [style]="{'width':'150px'}" placeholder="选择一个月消费金额：" (onChange)="QueryByMonthUpLimit()">
+                    <b>月消费上限：&nbsp;</b>
+                    <p-dropdown [options]="MonthUpLimitList" [(ngModel)]="MonthUpLimit" [style]="{'width':'150px'}"
+                        placeholder="选择一个月消费金额：" (onChange)="QueryByMonthUpLimit()">
                     </p-dropdown>
                     &nbsp;&nbsp;
                     <button style="margin-top: 10px" class="btn btn-primary" (click)="StudentQuery()"><i
                             class="fa fa-search"></i>学生月度消费检索</button>
                     <br />
-                    <br />
-                    <p-table [value]="this.Students" selectionMode="single" [(selection)]="this.selectStudent"
-                        [scrollable]="true" scrollHeight="720px" (onRowSelect)="onRowSelect($event)">
+                    <table-function [Table]="studentcomsumption"></table-function>
+                    <p-table #studentcomsumption [value]="this.Students" selectionMode="single"
+                        [(selection)]="this.selectStudent" [scrollable]="true" scrollHeight="720px"
+                        (onRowSelect)="onRowSelect($event)" [columns]="cols"
+                        [exportFilename]="'学生月度消费(' + MonthUpLimit + '元)'">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th style="width: 50px">学号</th>

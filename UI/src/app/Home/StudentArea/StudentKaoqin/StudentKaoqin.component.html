@@ -1,15 +1,18 @@
 <app-nav></app-nav>
 <p-tabView>
     <p-tabPanel header="考勤明细">
-        <p-table [value]="KaoqinList" selectionMode="single" [scrollable]="true" scrollHeight="570px">
+        <table-function [Table]="dt"></table-function>
+        <p-table #dt [columns]="cols"
+            [exportFilename]="this.service.CurrentStudentInfo.baseInfo.name + '('  + this.service.CurrentStudentInfo.baseInfo.id + ')考勤记录'"
+            [value]="KaoqinList" selectionMode="multiple" [scrollable]="true" scrollHeight="570px">
             <ng-template pTemplate="header">
                 <tr>
                     <th style="width: 50px" [pSortableColumn]="'recDateTime'">时间
-                        <p-sortIcon [field]="'dealTime'">
+                        <p-sortIcon [field]="'recDateTime'">
                         </p-sortIcon>
                     </th>
                     <th style="width: 50px" [pSortableColumn]="'controllerName'">类型
-                        <p-sortIcon [field]="'monDeal'">
+                        <p-sortIcon [field]="'controllerName'">
                         </p-sortIcon>
                     </th>
                     <th style="width: 50px" [pSortableColumn]="'dayOfWeek'">星期

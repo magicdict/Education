@@ -62,7 +62,10 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <p-table [value]="Compumptions" selectionMode="single" [scrollable]="true" scrollHeight="570px">
+                    <table-function [Table]="dt"></table-function>
+                    <p-table #dt [columns]="cols"
+                        [exportFilename]="this.service.CurrentStudentInfo.baseInfo.name + '('  + this.service.CurrentStudentInfo.baseInfo.id + ')消费记录'"
+                        [value]="Compumptions" selectionMode="multiple" [scrollable]="true" scrollHeight="570px">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th style="width: 50px" [pSortableColumn]="'dealTime'">时间

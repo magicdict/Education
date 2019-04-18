@@ -12,7 +12,8 @@
 </div>
 
 <p-table #dt [value]="this.Exams" selectionMode="single" [scrollable]="true" [scrollHeight]="scrollHeight"
-  (onRowSelect)="onRowSelect($event)" [columns]="cols">
+  (onRowSelect)="onRowSelect($event)" [columns]="cols"
+  [exportFilename]="CSVFilename"> 
   <ng-template pTemplate="header">
     <tr>
       <th style="width: 100px;" [pSortableColumn]="'record.className'">班级名

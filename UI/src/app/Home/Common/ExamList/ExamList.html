@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col" *ngIf="subName.length > 2">
-      <div  style="margin-top: 10px;margin-bottom: 10px;">
-          科目选择：
-          <p-dropdown #subnamelist [options]="subName" (onChange)="dt.filter($event.value, 'subName', 'equals')">
-          </p-dropdown>
+      <div style="margin-top: 10px;margin-bottom: 10px;">
+        科目选择：
+        <p-dropdown #subnamelist [options]="subName" (onChange)="dt.filter($event.value, 'subName', 'equals')">
+        </p-dropdown>
       </div>
     </div>
     <table-function [Table]="dt" [FrameStyle]="{'float':'right'}"></table-function>
@@ -12,7 +12,8 @@
 </div>
 
 <p-table #dt [value]="this.Scores" selectionMode="single" (onRowSelect)="onRowSelect($event)" [scrollable]="true"
-  scrollHeight="400px" [columns]="cols">
+  scrollHeight="400px" [columns]="cols"
+  [exportFilename]="CSVFilename"> 
   <ng-template pTemplate="header">
     <tr>
       <th *ngIf="Mode !== 'Same'" style="width: 50px" [pSortableColumn]="'studentID'">学号

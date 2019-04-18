@@ -12,7 +12,9 @@
     <div class="card-body" style="padding:0.5em">
         <p-tabView>
             <p-tabPanel [header]="'成绩列表'">
-                <class-exam-list [Exams]="this.Exams"></class-exam-list>
+                <class-exam-list [Exams]="this.Exams"
+                    [CSVFilename]="this.CurrentTeachers[0].name + '(' + this.CurrentTeachers[0].subName + ')任课班级成绩'">
+                </class-exam-list>
             </p-tabPanel>
             <p-tabPanel [header]="'本学期班级'">
                 <div class="card">

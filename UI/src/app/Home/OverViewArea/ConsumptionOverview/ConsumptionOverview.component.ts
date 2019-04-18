@@ -15,6 +15,17 @@ export class ConsumptionOverviewComponent implements OnInit {
     public service: HomeService
   ) { }
 
+  cols = [
+    { field: 'id', header: "学号" },
+    { field: 'name', header: "姓名" },
+    { field: 'className', header: "班级" },
+    { field: 'sex', header: "性别" },
+    { field: 'liveAtSchool', header: "是否住校" },
+    { field: 'month', header: "月度" },
+    { field: 'amount', header: "金额" },
+];
+
+
   monthlyOpt = CommonFunction.clone(MonthlyCompumptionBarOption);
   weekdayOpt = CommonFunction.clone(MonthlyCompumptionBarOption);
 

@@ -28,6 +28,8 @@ export class ExamListComponent implements OnChanges {
         { field: 'gradeRankPercent', header: "年级排名百分比" }
     ];
 
+    @Input() CSVFilename:string = "download";
+
     ngOnChanges(): void {
         this.subName = [];
         this.subName.push({ label: "全部", value: null });

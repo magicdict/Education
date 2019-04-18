@@ -41,7 +41,7 @@
                         </div>
                         <div class="card-body">
                             <class-exam-list [Exams]="this.Exams" [Footer]="FootExam" [scrollHeight]="'600px'"
-                                [IsShowExamName]="false">
+                                [IsShowExamName]="false" [CSVFilename]="Title + subTitle">
                             </class-exam-list>
                         </div>
                     </div>
@@ -54,17 +54,17 @@
                             <p class="category">{{Title}} - {{subTitle}}</p>
                         </div>
                         <div class="card-body">
-                            <exam-list [Scores]="Top10" [Mode]="'DIFF'"></exam-list>
+                            <exam-list [Scores]="Top10" [Mode]="'DIFF'" [CSVFilename]="'前10名 ' + Title + subTitle"  ></exam-list>
                         </div>
                     </div>
                     <br /><br />
                     <div class="card">
                         <div class="card-header card-header-text card-header-warning">
-                            <h4 class="card-title">倒数10名</h4>
+                            <h4 class="card-title">后10名</h4>
                             <p class="category">{{Title}} - {{subTitle}}</p>
                         </div>
                         <div class="card-body">
-                            <exam-list [Scores]="Low10" [Mode]="'DIFF'"></exam-list>
+                            <exam-list [Scores]="Low10" [Mode]="'DIFF'" [CSVFilename]="'后10名 ' + Title + subTitle"></exam-list>
                         </div>
                     </div>
                 </p-tabPanel>

@@ -15,6 +15,16 @@ export class StudentCompumptionComponent implements OnInit {
     ) {
 
     }
+
+    cols = [
+        { field: 'dealTime', header: "时间" },
+        { field: 'monDeal', header: "金额" },
+        { field: 'dayOfWeek', header: "星期" },
+        { field: 'weather.high', header: "最高温度" },
+        { field: 'weather.low', header: "最低温度" },
+        { field: 'weather.type', header: "天气" },
+    ];
+
     ngOnInit(): void {
         //1.按照时段进行统计，某个时段，每天平均消费数
         this.GetDiaryAvgByTimeRange();

@@ -25,6 +25,8 @@ export class ClassExamListComponent implements OnChanges {
     /**统计条目 */
     @Input() Footer: IClassExam = null;
 
+    @Input() CSVFilename:string = "download";
+
     cols = [
         { field: 'record.className', header: "班级名" },
         { field: 'record.numberName', header: "考试名称" },

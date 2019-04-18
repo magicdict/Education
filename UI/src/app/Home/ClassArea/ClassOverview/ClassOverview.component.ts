@@ -55,6 +55,18 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
 
   IsMapReady = false;
 
+  cols = [
+    { field: 'id', header: "学号" },
+    { field: 'name', header: "姓名" },
+    { field: 'sex', header: "性别" },
+    { field: 'bornDate', header: "出生年" },
+    { field: 'policy', header: "政治面貌" },
+    { field: 'nation', header: "民族" },
+    { field: 'nativePlace', header: "出生地" },
+    { field: 'optionCourse', header: "七选三" }
+];
+
+
   ngOnInit(): void {
     this.route.data
       .subscribe((data: { classinfo: IClassInfo }) => {

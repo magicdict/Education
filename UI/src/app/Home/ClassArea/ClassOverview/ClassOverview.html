@@ -1,6 +1,6 @@
 <app-nav></app-nav>
 <div class="alert alert-info" style="font-size: 18px;font-weight: 500;">
-    {{this.ClassName}} 人数：{{this.StudentCnt}}
+  {{this.ClassName}} 人数：{{this.StudentCnt}}
 </div>
 <p-tabView>
   <p-tabPanel header="概要" style="width:1140px;">
@@ -8,45 +8,44 @@
       <div class="row">
         <div class="col">
 
-            <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
-                <div class="box-header with-border">
-                  <h3 class="box-title">民族</h3>
-                </div>
-                <div class="box-body">
-                  <div style="margin: 5px 0px 5px 0px">
-                    <button *ngFor="let x of StudentsInfo.nation" type="button" class="btn btn-primary"
-                      style="cursor: default;margin-left: 10px">
-                      {{x.name}}
-                      <span class="badge badge-light">{{x.value}}</span>
-                    </button>
-                  </div>
-                </div>
+          <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+            <div class="box-header with-border">
+              <h3 class="box-title">民族</h3>
+            </div>
+            <div class="box-body">
+              <div style="margin: 5px 0px 5px 0px">
+                <button *ngFor="let x of StudentsInfo.nation" type="button" class="btn btn-primary"
+                  style="cursor: default;margin-left: 10px">
+                  {{x.name}}
+                  <span class="badge badge-light">{{x.value}}</span>
+                </button>
               </div>
+            </div>
+          </div>
         </div>
         <div class="col">
 
-            <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
-                <div class="box-header with-border">
-                  <h3 class="box-title">政治面貌</h3>
-                </div>
-                <div class="box-body">
-                  <div style="margin: 5px 0px 5px 0px">
-                    <button *ngFor="let x of StudentsInfo.policy" type="button" class="btn btn-danger"
-                      style="cursor: default;margin-left: 10px">
-                      {{x.name}}
-                      <span class="badge badge-light">{{x.value}}</span>
-                    </button>
-                  </div>
-                </div>
-              </div>          
+          <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+            <div class="box-header with-border">
+              <h3 class="box-title">政治面貌</h3>
+            </div>
+            <div class="box-body">
+              <div style="margin: 5px 0px 5px 0px">
+                <button *ngFor="let x of StudentsInfo.policy" type="button" class="btn btn-danger"
+                  style="cursor: default;margin-left: 10px">
+                  {{x.name}}
+                  <span class="badge badge-light">{{x.value}}</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col-8">
 
-          <app-map [NativePlace]="this.StudentsInfo.nativePlace" [StyleHeight]="'600px'"
-            [StyleWidth]="'600px'" [NativePlaceZheJiang]="this.StudentsInfo.nativePlaceZheJiang"
-            [MapOption]="this.NativePlaceRegionOptions">
+          <app-map [NativePlace]="this.StudentsInfo.nativePlace" [StyleHeight]="'600px'" [StyleWidth]="'600px'"
+            [NativePlaceZheJiang]="this.StudentsInfo.nativePlaceZheJiang" [MapOption]="this.NativePlaceRegionOptions">
           </app-map>
 
         </div>
@@ -76,12 +75,14 @@
     </div>
   </p-tabPanel>
   <p-tabPanel header="学生列表" style="width:1140px;">
-    <p-table [value]="QueryResult" [scrollable]="true" (onRowSelect)="onRowSelect($event)" selectionMode="single"
-      scrollHeight="620px" [style]="{'width':'100%','min-width':'600px'}">
+    <table-function [Table]="dt"></table-function>
+    <p-table #dt [columns]="cols" [value]="QueryResult" [scrollable]="true" (onRowSelect)="onRowSelect($event)"
+      selectionMode="single" scrollHeight="620px" [style]="{'width':'100%','min-width':'600px'}"
+      [exportFilename]="ClassName + '学生列表'">
       <ng-template pTemplate="header">
         <tr>
           <th [pSortableColumn]="'id'" style="width: 40px">
-            ID
+            学号
             <p-sortIcon [field]="'id'">
             </p-sortIcon>
           </th>
@@ -150,7 +151,7 @@
         <div class="col-10">
           <p-tabView>
             <p-tabPanel *ngFor="let item of this.Exams" [header]="item[0].record.term">
-              <class-exam-list [Exams]="item" [scrollHeight]="'600px'"></class-exam-list>
+              <class-exam-list [CSVFilename]="ClassName +  item[0].record.term + '学期考试一览'"   [Exams]="item" [scrollHeight]="'600px'"></class-exam-list>
             </p-tabPanel>
           </p-tabView>
         </div>

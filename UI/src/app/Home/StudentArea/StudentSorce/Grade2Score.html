@@ -16,43 +16,53 @@
             <!--右侧内容-->
             <p-tabView>
                 <p-tabPanel [header]="'成绩列表'">
-                    <exam-list [Scores]="Scores"></exam-list>
+                    <exam-list [Scores]="Scores"
+                        [CSVFilename]="CurrentStudent.name + '(' + CurrentStudent.id + ')成绩一览'"></exam-list>
                 </p-tabPanel>
                 <p-tabPanel [header]="'各科图表'">
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <div echarts [options]="this.LineGraphOption[0]" style="width:250px;height:250px;"></div>
+                                <div echarts [options]="this.LineGraphOption[0]" style="width:250px;height:250px;">
+                                </div>
                             </div>
                             <div class="col">
-                                <div echarts [options]="this.LineGraphOption[1]" style="width:250px;height:250px;"></div>
+                                <div echarts [options]="this.LineGraphOption[1]" style="width:250px;height:250px;">
+                                </div>
                             </div>
                             <div class="col">
-                                <div echarts [options]="this.LineGraphOption[2]" style="width:250px;height:250px;"></div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <div echarts [options]="this.LineGraphOption[3]" style="width:250px;height:250px;"></div>
-                            </div>
-                            <div class="col">
-                                <div echarts [options]="this.LineGraphOption[4]" style="width:250px;height:250px;"></div>
-                            </div>
-                            <div class="col">
-                                <div echarts [options]="this.LineGraphOption[5]" style="width:250px;height:250px;"></div>
+                                <div echarts [options]="this.LineGraphOption[2]" style="width:250px;height:250px;">
+                                </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
-                                <div echarts [options]="this.LineGraphOption[6]" style="width:250px;height:250px;"></div>
+                                <div echarts [options]="this.LineGraphOption[3]" style="width:250px;height:250px;">
+                                </div>
                             </div>
                             <div class="col">
-                                <div echarts [options]="this.LineGraphOption[7]" style="width:250px;height:250px;"></div>
+                                <div echarts [options]="this.LineGraphOption[4]" style="width:250px;height:250px;">
+                                </div>
                             </div>
                             <div class="col">
-                                <div echarts [options]="this.LineGraphOption[8]" style="width:250px;height:250px;"></div>
+                                <div echarts [options]="this.LineGraphOption[5]" style="width:250px;height:250px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div echarts [options]="this.LineGraphOption[6]" style="width:250px;height:250px;">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div echarts [options]="this.LineGraphOption[7]" style="width:250px;height:250px;">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div echarts [options]="this.LineGraphOption[8]" style="width:250px;height:250px;">
+                                </div>
                             </div>
                         </div>
                     </div>
