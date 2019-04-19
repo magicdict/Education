@@ -26,9 +26,9 @@ export class CourseOverViewComponent implements OnInit {
 
   //三门课程
   ThreeCoursePercent: { name: string, value: number }[];
-  mCourseSelectThreeCntOption = CourseSelectThreeCntOption;
+  mCourseSelectThreeCntOption =  CommonFunction.clone(CourseSelectThreeCntOption);
   //桑吉图
-  mSelectCourseSankeyOption = SelectCourseSankeyOption;
+  mSelectCourseSankeyOption = CommonFunction.clone(SelectCourseSankeyOption);
 
 
   ngOnInit(): void {

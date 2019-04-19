@@ -61,34 +61,34 @@
     <p-tabPanel header="消费明细">
         <div class="container">
             <div class="row">
-                <div class="col">
+                <div class="col-7">
                     <table-function [Table]="dt"></table-function>
                     <p-table #dt [columns]="cols"
                         [exportFilename]="this.service.CurrentStudentInfo.baseInfo.name + '('  + this.service.CurrentStudentInfo.baseInfo.id + ')消费记录'"
                         [value]="Compumptions" selectionMode="multiple" [scrollable]="true" scrollHeight="570px">
                         <ng-template pTemplate="header">
                             <tr>
-                                <th style="width: 50px" [pSortableColumn]="'dealTime'">时间
+                                <th style="width: 70px" [pSortableColumn]="'dealTime'">时间
                                     <p-sortIcon [field]="'dealTime'">
                                     </p-sortIcon>
                                 </th>
-                                <th style="width: 50px" [pSortableColumn]="'monDeal'">金额
+                                <th style="width: 30px" [pSortableColumn]="'monDeal'">金额
                                     <p-sortIcon [field]="'monDeal'">
                                     </p-sortIcon>
                                 </th>
-                                <th style="width: 50px" [pSortableColumn]="'dayOfWeek'">星期
+                                <th style="width: 30px" [pSortableColumn]="'dayOfWeek'">星期
                                     <p-sortIcon [field]="'dayOfWeek'">
                                     </p-sortIcon>
                                 </th>
-                                <th style="width: 50px" [pSortableColumn]="'weather.high'">最高温度
+                                <th style="width: 40px" [pSortableColumn]="'weather.high'">最高温度
                                     <p-sortIcon [field]="'weather.high'">
                                     </p-sortIcon>
                                 </th>
-                                <th style="width: 50px" [pSortableColumn]="'weather.low'">最低温度
+                                <th style="width: 40px" [pSortableColumn]="'weather.low'">最低温度
                                     <p-sortIcon [field]="'weather.low'">
                                     </p-sortIcon>
                                 </th>
-                                <th style="width: 50px" [pSortableColumn]="'weather.type'">天气
+                                <th style="width: 60px" [pSortableColumn]="'weather.type'">天气
                                     <p-sortIcon [field]="'weather.type'">
                                     </p-sortIcon>
                                 </th>
@@ -96,22 +96,29 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-itemData>
                             <tr [pSelectableRow]="itemData">
-                                <td style="width: 50px">{{itemData.dealTime}}</td>
-                                <td style="width: 50px;text-align: right;">{{-1 * itemData.monDeal}}</td>
+                                <td style="width: 70px">{{itemData.dealTime}}</td>
+                                <td style="width: 30px;text-align: right;">{{-1 * itemData.monDeal}}</td>
                                 <td [ngStyle]="itemData.dayOfWeek == 0 || itemData.dayOfWeek == 6 ?{'color':'red'}:{} "
-                                    style="width: 50px;text-align: center;">
+                                    style="width: 30px;text-align: center;">
                                     {{ConvertNumberToWeekday(itemData.dayOfWeek)}}</td>
                                 <td [ngStyle]="itemData.weather.high > 32 ?{'color':'red'}:{} "
-                                    style="width: 50px;text-align: right;">{{itemData.weather.high}}</td>
+                                    style="width: 40px;text-align: right;">{{itemData.weather.high}}</td>
                                 <td [ngStyle]="itemData.weather.low <=0 ?{'color':'blue'}:{} "
-                                    style="width: 50px;text-align: right;">{{itemData.weather.low}}</td>
-                                <td style="width: 50px;text-align: center">
+                                    style="width: 40px;text-align: right;">{{itemData.weather.low}}</td>
+                                <td style="width: 60px;text-align: center">
                                     <img [src]="GetWeatherImageByText(itemData.weather.type)">
                                     {{itemData.weather.type}}
                                 </td>
                             </tr>
                         </ng-template>
                     </p-table>
+                </div>
+                <div class="col-5">
+                    <div class="card text-left" style="width: 100%;margin-top: 45px;">
+                        <div class="card-body">
+                            <div echarts [options]="PerRangeCntOption" style="width: 400px;height: 400px;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

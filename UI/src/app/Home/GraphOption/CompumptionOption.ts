@@ -127,7 +127,11 @@ export const MonthlyCompumptionBarOptionTotal = {
     },
     xAxis: {
         type: 'category',
-        data: []
+        data: [],
+        axisLabel: {
+            interval: 0,
+            rotate: 40
+        }
     },
     yAxis: {
         type: 'value'
@@ -164,7 +168,11 @@ export const MonthlyCompumptionBarOption = {
     },
     xAxis: {
         type: 'category',
-        data: []
+        data: [],
+        axisLabel: {
+            interval: 0,
+            rotate: 40
+        }
     },
     yAxis: {
         type: 'value'

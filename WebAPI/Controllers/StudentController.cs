@@ -20,28 +20,28 @@ namespace Education.Controllers
 
 
         [HttpGet("QueryByStudentId")]
-        public ActionResult<Student> QueryByStudentId(string Id)
+        public ActionResult<List<Student>> QueryByStudentId(string Id)
         {
-            var baseInfo = Dataset.StudentList.Where(x => x.ID.Equals(Id)).ToList();
+            var baseInfo = Dataset.StudentList.Where(x => x.ID.Contains(Id)).ToList();
             if (baseInfo.Count() == 0) return null;
-            return baseInfo.First();
+            return baseInfo;
         }
 
         [HttpGet("QueryByLiveRoomNo")]
-        public ActionResult<List<Student>> QueryByLiveRoomNo(string Id, string Campus)
+        public ActionResult<List<Student>> QueryByLiveRoomNo(string Id, string Campus, string Sex)
         {
+
+            var baseInfo = Dataset.StudentList.Where(x => x.LiveRoomNo.Equals(Id));
             if (!String.IsNullOrEmpty(Campus))
             {
-                var baseInfo = Dataset.StudentList.Where(x => x.LiveRoomNo.Equals(Id) && x.Campus == Campus).ToList();
-                if (baseInfo.Count() == 0) return null;
-                return baseInfo;
+                baseInfo = baseInfo.Where(x => x.Campus == Campus);
             }
-            else
+            if (!String.IsNullOrEmpty(Sex))
             {
-                var baseInfo = Dataset.StudentList.Where(x => x.LiveRoomNo.Equals(Id)).ToList();
-                if (baseInfo.Count() == 0) return null;
-                return baseInfo;
+                baseInfo = baseInfo.Where(x => x.Sex == Sex);
             }
+            if (baseInfo.Count() == 0) return null;
+            return baseInfo.ToList();
         }
 
         [HttpGet("QueryByNation")]
@@ -106,12 +106,15 @@ namespace Education.Controllers
                 );
                 //消费件数
                 info.ConsumptionCnt = info.Consumptions.Count;
+
+                info.MonthlyConsumptions = Dataset.StudentConsumptionList.Where(x => x.ID == Id).ToList();
+
                 //室友
                 if (info.BaseInfo.LiveAtSchool)
                 {
                     info.Roommate = Dataset.StudentList.Where(
-                         x => x.Campus == info.BaseInfo.Campus && 
-                         x.Sex == info.BaseInfo.Sex && 
+                         x => x.Campus == info.BaseInfo.Campus &&
+                         x.Sex == info.BaseInfo.Sex &&
                          x.LiveRoomNo == info.BaseInfo.LiveRoomNo).ToList();
                 }
                 return info;

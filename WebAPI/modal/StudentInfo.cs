@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using static Utility;
 
 public class StudentInfo
 {
@@ -36,7 +37,11 @@ public class StudentInfo
     /// </summary>
     /// <value></value>
     public List<Consumption> Consumptions { get; set; }
-
+    /// <summary>
+    /// 学生每月消费
+    /// </summary>
+    /// <value></value>
+    public List<MonthConsumptionStudent> MonthlyConsumptions { get; set; }
     /// <summary>
     /// 消费信息件数
     /// </summary>

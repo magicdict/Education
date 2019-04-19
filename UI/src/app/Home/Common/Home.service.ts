@@ -14,11 +14,11 @@ export class HomeService {
         return this.commonFunction.httpRequest<any>('Teacher/QueryByTeacherId?ID=' + TeacherId);
     }
     /** 按学号检索 */
-    public QueryByStudentId(StudentId: string): Promise<IStudent> {
+    public QueryByStudentId(StudentId: string): Promise<Array<IStudent>> {
         return this.commonFunction.httpRequest<any>('Student/QueryByStudentId?ID=' + StudentId);
     }
-    public QueryByLiveRoomNo(RoomNo: string, Campus: string): Promise<Array<IStudent>> {
-        return this.commonFunction.httpRequest<any>('Student/QueryByLiveRoomNo?ID=' + RoomNo + "&Campus=" + Campus);
+    public QueryByLiveRoomNo(RoomNo: string, Campus: string, Sex: string): Promise<Array<IStudent>> {
+        return this.commonFunction.httpRequest<any>('Student/QueryByLiveRoomNo?ID=' + RoomNo + "&Campus=" + Campus + "&Sex=" + Sex);
     }
     public QueryByNation(Nation: string): Promise<Array<IStudent>> {
         return this.commonFunction.httpRequest<any>('Student/QueryByNation?Nation=' + Nation);

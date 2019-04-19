@@ -231,15 +231,24 @@ export const CompumptionBarGraph = {
   title: {
     text: "消费记录（月度）"
   },
-  tooltip: {},
+  tooltip: {
+
+  },
   grid: {
     left: 50
+  },
+  label: {
+    show:  true
   },
   legend: {
     data: ['消费额']
   },
   xAxis: {
-    data: []
+    data: [],
+    axisLabel: {
+      interval: 0,
+      rotate: 40
+    }
   },
   yAxis: {},
   series: [{
@@ -253,12 +262,19 @@ export const KaoqinBarGraph = {
   title: {
     text: '考勤（月度）'
   },
+  label: {
+    show:  true
+  },
   tooltip: {},
   legend: {
     data: ['次数']
   },
   xAxis: {
-    data: []
+    data: [],
+    axisLabel: {
+      interval: 0,
+      rotate: 40
+    }
   },
   yAxis: {},
   series: [{

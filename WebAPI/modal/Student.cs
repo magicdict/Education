@@ -32,11 +32,11 @@ public class Student
     /// </summary>
     /// <value></value>
     public string ClassName { get; set; }
+
     /// <summary>
-    /// /// 家庭住址（省市或省）
+    /// 校区
     /// </summary>
     /// <value></value>
-
     public string Campus
     {
         get
@@ -53,7 +53,10 @@ public class Student
             }
         }
     }
-
+    /// <summary>
+    /// /// 家庭住址（省市或省）
+    /// </summary>
+    /// <value></value>
     public string NativePlace { get; set; }
     /// <summary>
     /// 家庭类型

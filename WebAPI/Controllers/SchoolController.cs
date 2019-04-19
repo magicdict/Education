@@ -23,6 +23,8 @@ namespace Education.Controllers
 
             public Campus Total { get; set; }
 
+            public RoomCntInfo SchoolRooms { get; set; }
+
         }
 
         /// <summary>
@@ -269,7 +271,6 @@ namespace Education.Controllers
             BaiYang.Property = new StudentGroupProperty(Dataset.StudentList.Where(z => z.Campus == "白").ToList());
             East.Property = new StudentGroupProperty(Dataset.StudentList.Where(z => z.Campus == "东").ToList());
 
-
             //只选择2018-2019-1学年的教师，教师可能会教多个班级，所以需要Distinct一下
             SchoolOver.TeacherCnt = Dataset.TeacherList.Where(x => x.Term == "2018-2019-1").Select(x => x.Id).Distinct().Count();
             SchoolOver.TeacherSubCnt = new Dictionary<string, int>();
@@ -331,12 +332,74 @@ namespace Education.Controllers
             East.Grade1SexRate.maleCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.Sex == "男" && x.ClassName.Contains("高一"));
             East.Grade1SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.Sex == "女" && x.ClassName.Contains("高一"));
 
+            //宿舍分析
+            var RoomInfo = new RoomCntInfo();
+            foreach (var student in Dataset.StudentList)
+            {
+                RoomInfo.AddStudent(student);
+            }
+
             return new Overview
             {
                 Total = SchoolOver,
                 BaiYang = BaiYang,
-                East = East
+                East = East,
+                SchoolRooms = RoomInfo
             };
+        }
+
+
+        public class RoomCntInfo
+        {
+            public Dictionary<string, int> BaiYangMale { get; set; }
+
+            public Dictionary<string, int> BaiYangFemale { get; set; }
+
+            public Dictionary<string, int> EastMale { get; set; }
+
+            public Dictionary<string, int> EastFemale { get; set; }
+
+            public RoomCntInfo()
+            {
+                BaiYangMale = new Dictionary<string, int>();
+                BaiYangFemale = new Dictionary<string, int>();
+                EastMale = new Dictionary<string, int>();
+                EastFemale = new Dictionary<string, int>();
+            }
+            public void AddStudent(Student student)
+            {
+                if (!student.LiveRoomNo.Equals("-"))
+                {
+                    Dictionary<string, int> x;
+                    if (student.Campus == "东")
+                    {
+                        if (student.Sex == "男")
+                        {
+                            x = EastMale;
+                        }
+                        else
+                        {
+                            x = EastFemale;
+                        }
+                    }
+                    else
+                    {
+                        if (student.Sex == "男")
+                        {
+                            x = BaiYangMale;
+                        }
+                        else
+                        {
+                            x = BaiYangFemale;
+                        }
+                    }
+                    if (!x.ContainsKey(student.LiveRoomNo))
+                    {
+                        x.Add(student.LiveRoomNo, 0);
+                    }
+                    x[student.LiveRoomNo]++;
+                }
+            }
         }
     }
 }

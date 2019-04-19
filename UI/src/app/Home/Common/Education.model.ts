@@ -101,6 +101,7 @@ export interface IStudent {
 export interface IStudentInfo {
   baseInfo: IStudent;
   consumptions: IConsumption[];
+  monthlyConsumptions: IStudentMonthlyConsumption[];
   kaoqins: IKaoqin[];
   chengjis: IScore[];
   consumptionCnt: number;
@@ -272,6 +273,12 @@ export interface ISchoolInfo {
   baiYang: ICampus;
   east: ICampus;
   total: ICampus;
+  schoolRooms: {
+    baiYangMale: { [key: string]: number };
+    baiYangFemale: { [key: string]: number };
+    eastMale: { [key: string]: number };
+    eastFemale: { [key: string]: number };
+  }
 }
 
 export interface IClassInfo {

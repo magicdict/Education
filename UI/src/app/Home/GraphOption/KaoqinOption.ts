@@ -73,7 +73,8 @@ export interface ISimpleBar {
     },
     xAxis: {
         type: string,
-        data: string[]
+        data: string[],
+        axisLabel?:any
     },
     yAxis: {
         type: string

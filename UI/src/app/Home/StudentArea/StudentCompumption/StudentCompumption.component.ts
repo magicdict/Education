@@ -32,7 +32,8 @@ export class StudentCompumptionComponent implements OnInit {
         this.GetDiaryAvgByTimeRange();
         //2.按照星期统计
         this.GetDiaryAvgByWeekday();
-
+        //3.统计单笔消费的消费区间
+        this.GetPerRangeCnt();
     }
     ConvertNumberToWeekday = CommonFunction.ConvertNumberToWeekday;
     Compumptions = this.service.CurrentStudentInfo.consumptions;
@@ -180,4 +181,42 @@ export class StudentCompumptionComponent implements OnInit {
 
         console.log(WeekArray);
     }
+
+    /**星期统计 */
+    PerRangeCntOption: ISimpleBar;
+
+    GetPerRangeCnt() {
+        let Compumptions = this.service.CurrentStudentInfo.consumptions;
+        let RangeArray: number[] = [0, 0, 0, 0];
+        RangeArray[0] = Compumptions.filter(x => (-1 * x.monDeal) <= 10).length;
+        RangeArray[1] = Compumptions.filter(x => (-1 * x.monDeal) <= 20 &&  (-1 * x.monDeal) > 10).length;
+        RangeArray[2] = Compumptions.filter(x => (-1 * x.monDeal) <= 50 &&  (-1 * x.monDeal) > 20).length;
+        RangeArray[3] = Compumptions.filter(x => (-1 * x.monDeal) > 50).length;
+
+        for (let index = 0; index < 4; index++) {
+            RangeArray[index] = CommonFunction.roundvalue(RangeArray[index]);
+        }
+        this.PerRangeCntOption = {
+            title: {
+                text: '单笔消费金额'
+            },
+            xAxis: {
+                type: 'category',
+                data: ["10元以下", "10-20元", "20元-50元", "50元以上"]
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                label: {
+                    normal: {
+                        show: true
+                    }
+                },
+                data: RangeArray,
+                type: 'bar'
+            }]
+        };
+    }
+
 }

@@ -159,9 +159,16 @@ export const CourseSelectThreeCntOption = {
     },
     formatter: '{b}\n{c}'
   },
+  grid: {
+    bottom: 100
+  },
   xAxis: {
     type: 'category',
-    data: []
+    data: [],
+    axisLabel: {
+      interval: 0,
+      rotate: 90
+    }
   },
   yAxis: {
     type: 'value'

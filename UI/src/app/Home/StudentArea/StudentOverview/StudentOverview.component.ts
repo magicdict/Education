@@ -27,7 +27,7 @@ export class StudentOverviewComponent implements OnInit {
   onCompumptionChartInit(event: any) {
     this.CompumptionEchartsInstance = event;
   }
-  
+
   ScoreEchartsInstance: any;
   onScoreChartInit(event: any) {
     this.ScoreEchartsInstance = event;
@@ -91,8 +91,6 @@ export class StudentOverviewComponent implements OnInit {
         this.IsHeaderReady = true;
         this.CurrentStudent = data.studentinfo.baseInfo;
         this.Teachers = data.studentinfo.teachers;
-        this.ConsumptionMonth = [];
-        this.ConsumptionMonthMoney = [];
 
         this.ScoreName = [];
         this.ScoreAvg = [];
@@ -101,19 +99,13 @@ export class StudentOverviewComponent implements OnInit {
         this.KaoqinMonth = [];
         this.KaoqinMonthCnt = [];
 
-        from(data.studentinfo.consumptions).pipe(
-          groupBy(x => x.dealTimeYear + "/" + x.dealTimeMonth),
-          mergeMap(x => x.pipe(toArray()))
-        ).subscribe(
-          r => {
-            this.ConsumptionMonth.push(r[0].dealTimeYear + "/" + r[0].dealTimeMonth);
-            this.ConsumptionMonthMoney.push(Number(CommonFunction.roundvalue(r.map(x => -x.monDeal).reduce((sum, current) => sum + current))));
-          }
-        )
+        //消费
+        this.ConsumptionMonth = data.studentinfo.monthlyConsumptions.map(x => x.month.slice(0,4) + "/" + x.month.slice(4,6));
+        this.ConsumptionMonthMoney = data.studentinfo.monthlyConsumptions.map(x => x.amount);
         this.CompumptionGraph.xAxis.data = this.ConsumptionMonth;
-        this.CompumptionGraph.series[0].data = this.ConsumptionMonthMoney;
+        this.CompumptionGraph.series[0].data = this.ConsumptionMonthMoney; 
 
-
+        //考勤
         from(data.studentinfo.kaoqins).pipe(
           groupBy(x => x.recDateTimeYear + "/" + x.recDateTimeMonth),
           mergeMap(x => x.pipe(toArray()))
@@ -125,7 +117,8 @@ export class StudentOverviewComponent implements OnInit {
         )
         this.KaoqinGraph.xAxis.data = this.KaoqinMonth;
         this.KaoqinGraph.series[0].data = this.KaoqinMonthCnt;
-        
+
+        //课程
         data.studentinfo.chengjis.sort((x, y) => { return x.subId.localeCompare(y.subId) });
         from(data.studentinfo.chengjis).pipe(
           groupBy(x => x.subId),
@@ -171,7 +164,7 @@ export class StudentOverviewComponent implements OnInit {
             }
           }
         )
-        
+
         this.ScoreGraph = CommonFunction.clone(ScoreRadarGraphOption);
         this.ScoreGraph.title.text = '成绩';
         this.ScoreGraph.radar.indicator = this.ScoreName;

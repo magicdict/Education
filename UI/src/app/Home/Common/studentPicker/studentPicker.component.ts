@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild, OnInit } from '@angular/core';
 import { IStudent, nationopt, policyopt } from '../Education.model';
 import { ErrorMessageDialogComponent } from '../error-message-dialog/error-message-dialog.component';
 import { HomeService } from '../Home.service';
@@ -7,7 +7,8 @@ import { HomeService } from '../Home.service';
   selector: 'app-studentPicker',
   templateUrl: './studentPicker.component.html'
 })
-export class StudentPickerComponent {
+export class StudentPickerComponent implements OnInit {
+
   @ViewChild(ErrorMessageDialogComponent)
   private errMsgDialog: ErrorMessageDialogComponent;
 
@@ -24,7 +25,23 @@ export class StudentPickerComponent {
   ) {
 
   }
-
+  ngOnInit(): void {
+    this.roomlist = [];
+    for (const key in this.service.SchoolOverview.schoolRooms.baiYangFemale) {
+      if (this.roomlist.indexOf(key) === -1) this.roomlist.push(key);
+    }
+    for (const key in this.service.SchoolOverview.schoolRooms.baiYangMale) {
+      if (this.roomlist.indexOf(key) === -1) this.roomlist.push(key);
+    }
+    for (const key in this.service.SchoolOverview.schoolRooms.eastFemale) {
+      if (this.roomlist.indexOf(key) === -1) this.roomlist.push(key);
+    }
+    for (const key in this.service.SchoolOverview.schoolRooms.eastMale) {
+      if (this.roomlist.indexOf(key) === -1) this.roomlist.push(key);
+    }
+    this.roomlist.sort();
+    this.roomlist = this.roomlist.map(x => { return { 'label': x, 'value': x } });
+  }
   show() {
     this.display = true;
     this.selectStudent = null;
@@ -48,13 +65,54 @@ export class StudentPickerComponent {
   public nationlist = nationopt;
   public policylist = policyopt;
 
+  public roomlist = [];
+
   Campus = [
     { label: '全部', value: '' },
     { label: '白杨', value: '白' },
     { label: '东部', value: '东' }
   ];
-  selectedCampus: string = '';
 
+  Sexs = [
+    { label: '全部', value: '' },
+    { label: '男', value: '男' },
+    { label: '女', value: '女' }
+  ]
+
+  selectedCampus: string = '';
+  selectedSex: string = '';
+
+  RoomConditionChange() {
+    this.roomlist = [];
+    if (this.selectedCampus === '白' || this.selectedCampus === '') {
+      if (this.selectedSex === '女' || this.selectedSex === '') {
+        for (const key in this.service.SchoolOverview.schoolRooms.baiYangFemale) {
+          if (this.roomlist.indexOf(key) === -1) this.roomlist.push(key);
+        }
+      }
+      if (this.selectedSex === '男' || this.selectedSex === '') {
+        for (const key in this.service.SchoolOverview.schoolRooms.baiYangMale) {
+          if (this.roomlist.indexOf(key) === -1) this.roomlist.push(key);
+        }
+      }
+    }
+    if (this.selectedCampus === '东' || this.selectedCampus === '') {
+      if (this.selectedSex === '女' || this.selectedSex === '') {
+        for (const key in this.service.SchoolOverview.schoolRooms.eastFemale) {
+          if (this.roomlist.indexOf(key) === -1) this.roomlist.push(key);
+        }
+      }
+      if (this.selectedSex === '男' || this.selectedSex === '') {
+        for (const key in this.service.SchoolOverview.schoolRooms.eastMale) {
+          if (this.roomlist.indexOf(key) === -1) this.roomlist.push(key);
+        }
+      }
+    }
+    this.roomlist.sort();
+    this.roomlist = this.roomlist.map(x => { return { 'label': x, 'value': x } });
+    this.RoomNo = '';
+    this.Students = [];
+  }
   QueryByStudentId() {
     this.service.QueryByStudentId(this.StudentId).then(
       result => {
@@ -62,7 +120,12 @@ export class StudentPickerComponent {
           this.errMsgDialog.show("没有找到符合条件的学生！");
           this.Students = [];
         } else {
-          this.Students = [result];
+          this.Students = result;
+          if (this.Students.length == 1 && this.Students[0].id == this.StudentId) {
+            this.selectStudent = this.Students[0];
+            this.pick.emit(this.selectStudent);
+            this.display = false;
+          }
         }
       }
     );
@@ -93,9 +156,9 @@ export class StudentPickerComponent {
       }
     );
   }
-  
+
   QueryByLiveRoomNo() {
-    this.service.QueryByLiveRoomNo(this.RoomNo,this.selectedCampus).then(
+    this.service.QueryByLiveRoomNo(this.RoomNo, this.selectedCampus, this.selectedSex).then(
       result => {
         if (result === null) {
           this.errMsgDialog.show("没有找到符合条件的学生！");

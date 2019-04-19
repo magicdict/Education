@@ -11,8 +11,8 @@
                         </div>
                         <div class="box-body">
                             <div style="margin: 5px 0px 5px 0px">
-                                <button *ngFor="let x of SingleCoursePercent" type="button"
-                                    class="btn btn-info" style="cursor: default;margin-left: 10px">
+                                <button *ngFor="let x of SingleCoursePercent" type="button" class="btn btn-info"
+                                    style="cursor: default;margin-left: 10px">
                                     {{x.name}}&nbsp;
                                     <span class="badge badge-light">{{x.value}}%</span>
                                 </button>
@@ -47,10 +47,13 @@
         </div>
     </p-tabPanel>
     <p-tabPanel header="三门课程" style="width:1140x;">
-        <div echarts [options]="mCourseSelectThreeCntOption"
-            style="width:1100px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
-
         <div class="container" style="width:1140px;">
+            <div class="row">
+                <div class="col">
+                    <div echarts [options]="mCourseSelectThreeCntOption"
+                        style="width:1025px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col">
                     <ul class="heroes">
