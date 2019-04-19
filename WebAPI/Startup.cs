@@ -33,7 +33,8 @@ namespace Education
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddMvc(options => { options.EnableEndpointRouting = false; })  //Core3.0.0 - Preview4
+            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddMvc().AddNewtonsoftJson();
             services.Configure<KestrelServerOptions>(options =>
             {
