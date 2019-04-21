@@ -33,6 +33,17 @@ public class Student
     /// <value></value>
     public string ClassName { get; set; }
 
+    public string Grade
+    {
+        get
+        {
+            if (ClassName.Contains("高一")) return "高一";
+            if (ClassName.Contains("高二")) return "高二";
+            if (ClassName.Contains("高三")) return "高三";
+            return string.Empty;
+        }
+    }
+
     /// <summary>
     /// 校区
     /// </summary>

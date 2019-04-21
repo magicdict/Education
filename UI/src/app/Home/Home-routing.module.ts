@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StudentOverviewComponent } from './StudentArea/StudentOverview/StudentOverview.component';
 import { StudentCompumptionComponent } from './StudentArea/StudentCompumption/StudentCompumption.component';
-import { IStudentInfoResolver, ITeacherInfoResolver, ISingleExamInfoResolver } from './Common/Resolver.service';
+import { IStudentInfoResolver, ITeacherInfoResolver, ISingleExamInfoResolver, ICompareStudentResolver } from './Common/Resolver.service';
 import { Grade1ScoreComponent } from './StudentArea/StudentSorce/Grade1Score.component';
 import { Grade2ScoreComponent } from './StudentArea/StudentSorce/Grade2Score.component';
 import { Grade3ScoreComponent } from './StudentArea/StudentSorce/Grade3Score.component';
 import { TeacherOverviewComponent } from './TeacherOverview/TeacherOverview.component';
 import { SingleExamClassComponent } from './Common/ClassExamList/SingleExamClass.component';
 import { StudentKaoqinComponent } from './StudentArea/StudentKaoqin/StudentKaoqin.component';
+import { CompareStudentComponent } from './StudentArea/Compare/CompareStudent';
 
 const routes: Routes = [
   {
@@ -50,6 +51,13 @@ const routes: Routes = [
     component: SingleExamClassComponent,
     resolve: {
       singleExam: ISingleExamInfoResolver
+    }
+  },
+  {
+    path: 'student/compare',
+    component: CompareStudentComponent,
+    resolve: {
+      compareinfo: ICompareStudentResolver
     }
   }
 ];

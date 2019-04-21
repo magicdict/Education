@@ -51,6 +51,8 @@
                                     style="width:350px;height:350px;"></div>
                                 <button class="btn btn-info" style="float:right" (click)="JumpTo('grade')"><i
                                         class="fa fas fa-chart-bar"></i>&nbsp; 详细</button>
+                                <button class="btn btn-info" style="float:right" (click)="PickStudent()"><i
+                                        class="fa fas fa-chart-bar"></i>&nbsp; 比较</button>
                             </div>
                         </div>
                     </div>
@@ -95,3 +97,5 @@
         </div>
     </div>
 </div>
+<app-studentPicker></app-studentPicker>
+<app-error-message-dialog></app-error-message-dialog>

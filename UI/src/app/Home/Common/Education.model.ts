@@ -96,6 +96,13 @@ export interface IStudent {
   leaveSchool: boolean;
   liveRoomNo: string;
   optionCourse: string[];
+  grade: string;
+}
+
+export interface ICompareStudentInfo {
+  first: IStudent;
+  second: IStudent;
+  examResult: IChengjiSimple[];
 }
 
 export interface IStudentInfo {
@@ -179,6 +186,18 @@ export interface IStudentMonthlyConsumption {
   liveAtSchool: boolean;
   month: string;
   amount: number;
+}
+
+export interface IChengjiSimple {
+  idForGradeExam: string;
+  subId: string;
+  subName: string;
+  number: string;
+  numberName: string;
+  score: number;
+  compareToScore: number;
+  result: string;
+  resultText: string;
 }
 
 export interface IScore {

@@ -19,28 +19,18 @@
             <p-tabPanel [header]="'本学期班级'">
                 <div class="card">
                     <div class="card-body">
-                        <ul class="heroes linkheroes" style="width: auto;height: auto;padding: 0px;margin: 0px;">
-                            <li *ngFor="let teacher of this.CurrentTeachers" style="width: 300px;float:left;"
-                                (click)="JumpToClass(teacher.classId)">
-                                <span class="badge" style="width:100px">{{teacher.term}}
-                                </span>{{teacher.className}}
-                                <i class="fa fa-search"></i>
-                            </li>
-                        </ul>
+                        <button *ngFor="let teacher of this.CurrentTeachers" class="btn btn-info"
+                            style="margin-left: 10px" (click)="JumpToClass(teacher.classId)">
+                            <i class="fas fa-info-circle"></i>&nbsp;{{teacher.className}}</button>
                     </div>
                 </div>
             </p-tabPanel>
             <p-tabPanel [header]="Term.year + '学年班级'" *ngFor="let Term of this.TeacherHistory">
                 <div class="card">
                     <div class="card-body">
-                        <ul class="heroes" style="width: auto;height: auto;padding: 0px;margin: 0px;">
-                            <li *ngFor="let classname of Term.classname" style="width: 300px;float:left;"
-                                (click)="JumpToClass(teacher.classId)">
-                                <span class="badge" style="width:100px">{{Term.year}}
-                                </span>{{classname}}
-                                <i class="fa fa-search"></i>
-                            </li>
-                        </ul>
+                        <button *ngFor="let classname of Term.classname" class="btn btn-info"
+                        style="margin-left: 10px;cursor: default;">
+                        {{classname}}</button>
                     </div>
                 </div>
             </p-tabPanel>

@@ -1,9 +1,22 @@
 import { Injectable } from '@angular/core';
 import { CommonFunction } from './common';
-import { ISchoolInfo, ICourse, IClassInfo, IStudentInfo, ISchoolConsumptionInfo, ITeacherInfo, IExamList, IScore, IKaoqinOverview } from './Education.model';
+import { ISchoolInfo, ICourse, IClassInfo, IStudentInfo, ISchoolConsumptionInfo, ITeacherInfo, IExamList, IScore, IKaoqinOverview, ICompareStudentInfo } from './Education.model';
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HomeService } from './Home.service'
+
+@Injectable()
+export class ICompareStudentResolver implements Resolve<ICompareStudentInfo> {
+    constructor(public commonFunction: CommonFunction) {
+
+    }
+    resolve(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): ICompareStudentInfo | Observable<ICompareStudentInfo> | Promise<ICompareStudentInfo> {
+        let secondid = route.paramMap.get('secondid');
+        let firstid = route.paramMap.get('firstid');
+        return this.commonFunction.httpRequest<ICompareStudentInfo>("Student/CompareStudent?firstid=" + firstid + "&secondid=" + secondid);
+    }
+}
+
 
 @Injectable()
 export class IExamGradeListResolver implements Resolve<IExamList> {

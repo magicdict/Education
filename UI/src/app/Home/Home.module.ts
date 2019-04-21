@@ -23,7 +23,8 @@ import {
   ITeacherInfoResolver,
   IExamGradeListResolver,
   ISingleExamInfoResolver,
-  IKaoqinInfoResolver
+  IKaoqinInfoResolver,
+  ICompareStudentResolver
 } from "./Common/Resolver.service";
 import { HomeService } from './Common/Home.service';
 /**组件 */
@@ -57,6 +58,8 @@ import { NameValueTableComponent } from './Common/NameValueTable/NameValueTable'
 import { ChinaMapComponent } from './Common/ChinaMap/ChinaMap';
 import { TableFunctionComponent } from './Common/TableFunction/TableFunction';
 
+import { CompareStudentComponent } from './StudentArea/Compare/CompareStudent';
+
 
 @NgModule({
   declarations: [
@@ -79,6 +82,7 @@ import { TableFunctionComponent } from './Common/TableFunction/TableFunction';
     Grade1ScoreComponent,
     Grade2ScoreComponent,
     Grade3ScoreComponent,
+    CompareStudentComponent,
     //共通
     NavigationComponent,
     ErrorMessageDialogComponent,
@@ -120,6 +124,7 @@ import { TableFunctionComponent } from './Common/TableFunction/TableFunction';
     IExamGradeListResolver,
     ISingleExamInfoResolver,
     IKaoqinInfoResolver,
+    ICompareStudentResolver,
     HomeService,
     ConfirmationService,
     HttpClient

@@ -11,6 +11,89 @@ namespace Education.Controllers
     public class StudentController : ControllerBase
     {
 
+        public class CompareStudentInfo
+        {
+            public Student first { get; set; }
+            public Student second { get; set; }
+            public List<ChengjiSimple> ExamResult { get; set; }
+        }
+
+        [HttpGet("CompareStudent")]
+        public ActionResult<CompareStudentInfo> CompareStudent(string firstId, string secondId)
+        {
+            //学生基础信息的获取
+            var rtn = new CompareStudentInfo();
+
+            rtn.first = QueryByStudentId(firstId).Value[0];
+            rtn.second = QueryByStudentId(secondId).Value[0];
+            var FirstExamResult = new List<ChengjiSimple>();
+            var firstExams = Dataset.ChengjiList.Where(x => x.StudentID == firstId).ToList();
+            var secondExams = Dataset.ChengjiList.Where(x => x.StudentID == secondId).ToList();
+
+            foreach (var chengji in secondExams)
+            {
+                //First需要补充一些只有Second有的考试信息
+                if (firstExams.Count(x => x.IdForGradeExam == chengji.IdForGradeExam) == 0)
+                {
+                    FirstExamResult.Add(new ChengjiSimple(chengji)
+                    {
+                        Result = "-",
+                        Score = -4,
+                        CompareToScore = chengji.Score
+                    });
+                }
+            }
+
+            foreach (var chengji in firstExams)
+            {
+                if (secondExams.Count(x => x.IdForGradeExam == chengji.IdForGradeExam) == 0)
+                {
+                    //First特有的考试
+                    FirstExamResult.Add(new ChengjiSimple(chengji)
+                    {
+                        Result = "-8",
+                        Score = chengji.Score,
+                        CompareToScore = -4
+                    });
+                }
+                else
+                {
+                    var c = secondExams.Find(x => x.IdForGradeExam == chengji.IdForGradeExam);
+                    var result = "";
+                    if (chengji.Score <= 0 || c.Score <= 0)
+                    {
+                        result = "-9";
+                    }
+                    else
+                    {
+                        if (chengji.Score == c.Score) result = "0";
+                        if (chengji.Score > c.Score) result = "1";
+                        if (chengji.Score < c.Score) result = "-1";
+                    }
+                    //双方都有的考试信息
+                    FirstExamResult.Add(new ChengjiSimple(chengji)
+                    {
+                        CompareToScore = c.Score,
+                        Result = result
+                    });
+                }
+            }
+            FirstExamResult.Sort((x, y) =>
+            {
+                if (x.Number == y.Number)
+                {
+                    return (x.SubId.CompareTo(y.SubId));
+                }
+                else
+                {
+                    return (x.Number.CompareTo(y.Number));
+                }
+            });
+            rtn.ExamResult = FirstExamResult;
+            return rtn;
+        }
+
+
         [HttpGet("QueryByClassId")]
         public ActionResult<List<Student>> QueryByClassId(string Id)
         {

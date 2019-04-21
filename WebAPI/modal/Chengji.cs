@@ -400,6 +400,47 @@ public class Chengji : IEqualityComparer<Chengji>
 
 }
 
+/// <summary>
+/// 用于成绩比较的简化版的成绩
+/// </summary>
+public class ChengjiSimple
+{
+    public string IdForGradeExam { get; set; }
+    public string SubId { get; set; }
+    public string SubName { get; set; }
+
+    public string Number { get; set; }
+
+    public string NumberName { get; set; }
+
+    public float Score { get; set; }
+    public float CompareToScore{get;set;}
+    /// <summary>
+    ///  比较结果
+    /// </summary>
+    /// <value></value>
+    public string Result { get; set; }
+
+    public string ResultText{
+        get{
+            if (Result == "0") return "一致";
+            if (Result == "1") return "好于";
+            if (Result == "-1") return "差于";
+            return string.Empty;
+        }
+    }
+
+    public ChengjiSimple(Chengji c){
+        IdForGradeExam = c.IdForGradeExam;
+        SubId = c.SubId;
+        SubName = c.SubName;
+        Number = c.Number;
+        NumberName = c.NumberName;
+        Score = c.Score;
+    }
+
+}
+
 
 public class AddtionalInfo
 {

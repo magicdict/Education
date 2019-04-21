@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HomeService } from '../../Common/Home.service';
 import { IStudent, IStudentInfo, ITeacher } from '../../Common/Education.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,6 +7,8 @@ import { from } from 'rxjs';
 import { CommonFunction } from 'src/app/Home/Common/common';
 import { ScoreRadarGraphOption } from '../../GraphOption/ScoreOption'
 import { CompumptionBarGraph, KaoqinBarGraph } from '../../GraphOption/StudentGraphOption';
+import { StudentPickerComponent } from '../../Common/studentPicker/studentPicker.component';
+import { ErrorMessageDialogComponent } from '../../Common/error-message-dialog/error-message-dialog.component';
 
 @Component({
   templateUrl: 'StudentOverview.html'
@@ -82,6 +84,39 @@ export class StudentOverviewComponent implements OnInit {
     )
   }
 
+  @ViewChild(ErrorMessageDialogComponent)
+  private errMsgDialog: ErrorMessageDialogComponent;
+
+  @ViewChild(StudentPickerComponent)
+  private studentpicker: StudentPickerComponent;
+  pickhandler: any;
+
+  PickStudent() {
+    if (this.pickhandler !== null && this.pickhandler !== undefined) {
+      // 需要把上次的订阅取消掉，不然的话，多个订阅会同时发生效果！
+      this.pickhandler.unsubscribe();
+    }
+    this.pickhandler = this.studentpicker.pick.subscribe((student: IStudent) => {
+      if (student.id == this.CurrentStudent.id) {
+        this.errMsgDialog.show("不能自己和自己比较:相同的学号[" + student.id + "]");
+        return;
+      }
+      if (student.grade !== this.CurrentStudent.grade) {
+        //限制本年级和本年级比较
+        this.errMsgDialog.show("不能跨年级比较:" + student.grade + " - " + this.CurrentStudent.grade);
+        return;
+
+      }
+      if (student.className.endsWith("IB")) {
+        //IB班级成绩缺失，无法比较
+        this.errMsgDialog.show("IB班级学生无法比较成绩:" + student.className);
+        return;
+      }
+      this.router.navigate(['student/compare', { firstid: this.CurrentStudent.id, secondid: student.id }]);
+    });
+    this.studentpicker.show();
+  }
+
   ngOnInit(): void {
     this.route.data
       .subscribe((data: { studentinfo: IStudentInfo }) => {
@@ -100,10 +135,10 @@ export class StudentOverviewComponent implements OnInit {
         this.KaoqinMonthCnt = [];
 
         //消费
-        this.ConsumptionMonth = data.studentinfo.monthlyConsumptions.map(x => x.month.slice(0,4) + "/" + x.month.slice(4,6));
+        this.ConsumptionMonth = data.studentinfo.monthlyConsumptions.map(x => x.month.slice(0, 4) + "/" + x.month.slice(4, 6));
         this.ConsumptionMonthMoney = data.studentinfo.monthlyConsumptions.map(x => x.amount);
         this.CompumptionGraph.xAxis.data = this.ConsumptionMonth;
-        this.CompumptionGraph.series[0].data = this.ConsumptionMonthMoney; 
+        this.CompumptionGraph.series[0].data = this.ConsumptionMonthMoney;
 
         //考勤
         from(data.studentinfo.kaoqins).pipe(

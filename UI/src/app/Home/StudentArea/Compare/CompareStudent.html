@@ -1,0 +1,54 @@
+<app-nav></app-nav>
+<div class="container">
+    <div class="row" style="background: white">
+        <div class="col-6">
+            <student-item [Sex]="FirstStudent.sex" [StudentId]="FirstStudent.id" [Title]="FirstStudent.name"
+                [SubTitle]="FirstStudent.className"></student-item>
+        </div>
+        <div class="col-6">
+            <student-item [Sex]="SecondStudent.sex" [StudentId]="SecondStudent.id" [Title]="SecondStudent.name"
+                [SubTitle]="SecondStudent.className"></student-item>
+        </div>
+    </div>
+    <div class="row" style="background: white">
+        <div class="col">
+            <table-function [Table]="dt"></table-function>
+            <p-table #dt [columns]="cols" [exportFilename]="FirstStudent.id + ' 和 ' + SecondStudent.id + '的比较'" [value]="Scores" selectionMode="multiple"
+                [scrollable]="true" scrollHeight="570px">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 140px" [pSortableColumn]="'numberName'">考试
+                            <p-sortIcon [field]="'NumberName'">
+                            </p-sortIcon>
+                        </th>
+                        <th style="width: 70px" [pSortableColumn]="'subName'">科目
+                            <p-sortIcon [field]="'SubName'">
+                            </p-sortIcon>
+                        </th>
+                        <th style="width: 70px" [pSortableColumn]="'score'">分数
+                            <p-sortIcon [field]="'score'">
+                            </p-sortIcon>
+                        </th>
+                        <th style="width: 70px" [pSortableColumn]="'compareToScore'">分数
+                            <p-sortIcon [field]="'compareToScore'">
+                            </p-sortIcon>
+                        </th>
+                        <th style="width: 70px" [pSortableColumn]="'resultText'">结果
+                            <p-sortIcon [field]="'resultText'">
+                            </p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-itemData>
+                    <tr [pSelectableRow]="itemData">
+                        <td style="width: 140px">{{itemData.numberName}}</td>
+                        <td style="width: 70px">{{itemData.subName}}</td>
+                        <td style="width: 70px">{{itemData.score}}</td>
+                        <td style="width: 70px">{{itemData.compareToScore}}</td>
+                        <td style="width: 70px">{{itemData.resultText}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

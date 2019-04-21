@@ -67,8 +67,8 @@ export class TeacherPickerComponent {
 
   query() {
 
-    if(this.SelectSub===""){
-      this.errMsgDialog.show("请选择一种科目！");
+    if (this.SelectSub === "" && this.SelectGrade ==="") {
+      this.errMsgDialog.show("请选择一种科目或者一个年级！");
       return;
     }
 
