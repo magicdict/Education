@@ -1,12 +1,14 @@
-<div class="row">
+<div class="row" style="margin:2px;padding:2px;border: 1px solid rgb(128, 128, 128);border-radius: 5px">
     <div class="col-3" style="width:48px;">
         <img class="img" style="width:48px;"
             [src]="Sex == '男' ? '/assets/image/male.png' : '/assets/image/female.png'">
     </div>
     <div class="col-5">
-        <b>{{Title}}</b>
-        <br />
-        <b>{{SubTitle}}</b>
+        <div style="margin-top: auto;margin-bottom: auto;">
+            <b>{{Title}}</b>
+            <br />
+            <b>{{SubTitle}}</b>
+        </div>
     </div>
     <div class="col-4" style="width:72px;">
         <button type="button" class="btn btn-info" (click)="JumpTo(StudentId)"><i class="fa fas fa-user-tag"></i>&nbsp;个人信息</button>

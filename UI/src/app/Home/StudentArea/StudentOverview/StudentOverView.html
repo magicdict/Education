@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <h4 class="card-title">{{CurrentStudent.name}} &nbsp;&nbsp;&nbsp;
                         <button type="button" class="btn btn-info" (click)="JumpToClass()">
-                            {{CurrentStudent.className}}
+                            <i class="fas fa-chalkboard-teacher"></i>&nbsp;{{CurrentStudent.className}}
                         </button>
                     </h4>
                     <br />
@@ -52,7 +52,7 @@
                                 <button class="btn btn-info" style="float:right" (click)="JumpTo('grade')"><i
                                         class="fa fas fa-chart-bar"></i>&nbsp; 详细</button>
                                 <button class="btn btn-info" style="float:right" (click)="PickStudent()"><i
-                                        class="fa fas fa-chart-bar"></i>&nbsp; 比较</button>
+                                        class="fas fa-balance-scale"></i>&nbsp; 比较</button>
                             </div>
                         </div>
                     </div>
@@ -80,11 +80,11 @@
                         </div>
                     </div>
                     <div class="col-6" *ngIf="CurrentStudent.liveRoomNo !=='-'">
-                        <div class="card text-left" style="width: 100%;margin-top: 10px;height: 415px;">
+                        <div class="card text-left" style="width: 100%;margin-top: 10px;">
                             <div class="card-body">
                                 <h4><b>{{CurrentStudent.liveRoomNo}}{{CurrentStudent.sex}}生宿舍</b></h4>
-                                <div class="container">
-                                    <student-item [Title]="item.name" [Sex]="item.sex" [StudentId]="item.studentID"
+                                <div class="container" style="padding:0px">
+                                    <student-item [Title]="item.name" [Sex]="item.sex" [StudentId]="item.id"
                                         [SubTitle]="item.className"
                                         *ngFor="let item of this.service.CurrentStudentInfo.roommate">
                                     </student-item>

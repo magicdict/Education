@@ -31,4 +31,18 @@ export class CompareStudentComponent implements OnInit {
 
     }
 
+    getRowStyle(chengji: IChengjiSimple): any {
+        if (chengji.subId == "99") {
+            if (chengji.result === "1") {
+                return { 'background': 'lightgreen', 'font-weight': 'bolder' };
+            }
+            if (chengji.result === "-1") {
+                return { 'background': 'pink', 'font-weight': 'bolder' };
+            }
+            if (chengji.result === "-" || chengji.result === "-8" || chengji.result === "-9") {
+                return { 'background': 'lightgray', 'font-weight': 'bolder' };
+            }
+        }
+        return {};
+    }
 }

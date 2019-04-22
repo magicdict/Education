@@ -28,7 +28,7 @@ export class ExamListComponent implements OnChanges {
         { field: 'gradeRankPercent', header: "年级排名百分比" }
     ];
 
-    @Input() CSVFilename:string = "download";
+    @Input() CSVFilename: string = "download";
 
     ngOnChanges(): void {
         this.subName = [];
@@ -68,17 +68,17 @@ export class ExamListComponent implements OnChanges {
         this.router.navigate(['student/overview', event.data.studentID]);
     }
     /**根据年级排名设定行颜色 */
-    public GetStyle(itemData:IScore):any{
-        if (itemData.score <= 0){
-            return {'background':'gray'}
+    public GetStyle(itemData: IScore): any {
+        if (itemData.score <= 0) {
+            return { 'background': 'gray' }
         }
-        if (itemData.type !=='4' && itemData.type !=='22'){
-            if (itemData.gradeRankPercent <= 10){
-                return {'background':'lightgreen'}
+        if (itemData.type !== '4' && itemData.type !== '22') {
+            if (itemData.gradeRankPercent <= 10) {
+                return { 'background': 'lightgreen' }
             }
-            if (itemData.gradeRankPercent >= 90){
-                return {'background':'pink'}
-            }            
+            if (itemData.gradeRankPercent >= 90) {
+                return { 'background': 'pink' }
+            }
         }
         return {};
     }
