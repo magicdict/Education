@@ -173,14 +173,35 @@ namespace Education.Controllers
             public List<NameValueSet> SelectionThreeCourseCnt { get; set; }
         }
 
+        /// <summary>
+        /// 使用五校联考
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("GetOverview")]
-        public ActionResult<Overview> GetOverview()
+        public ActionResult<Overview> GetOverview(string ExamType)
         {
+            if (ExamType == "6")
+            {
+                foreach (var item in Dataset.StudentList)
+                {
+                    item.OptionCourse = item.OptionCourse_FiveSchool;
+                }
+            }
+            else
+            {
+                foreach (var item in Dataset.StudentList)
+                {
+                    item.OptionCourse = item.OptionCourse_TenSchool;
+                }
+            }
+
+
             var o = new Overview();
             o.selectionCourseCnt = new List<NameValueSet>();
             o.selectionTwoCourseCnt = new List<NameValueSet>();
             o.SelectionThreeCourseCnt = new List<NameValueSet>();
-            o.StudentCnt = Dataset.StudentList.Count(student => student.OptionCourse != null && student.OptionCourse.Count == 3);
+            o.StudentCnt = Dataset.StudentList.Count(student => student.OptionCourse != null &&
+                                                                student.OptionCourse.Count == 3);
             var dicSingle = new Dictionary<string, int>();
             var dicDouble = new Dictionary<string, int>();
             var dicCombine = new Dictionary<string, int>();

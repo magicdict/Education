@@ -106,7 +106,17 @@ public class Student
     public string LiveRoomNo { get; set; }
 
     /// <summary>
-    /// 高考选课情况
+    /// 高考选课情况(五校联考)
+    /// </summary>
+    /// <value></value>
+    public List<string> OptionCourse_FiveSchool { get; set; }
+    /// <summary>
+    /// 高考选课情况(五校联考)
+    /// </summary>
+    /// <value></value>
+    public List<string> OptionCourse_TenSchool { get; set; }
+    /// <summary>
+    /// 统计用
     /// </summary>
     /// <value></value>
     public List<string> OptionCourse { get; set; }

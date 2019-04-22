@@ -94,8 +94,9 @@ export class IClassInfoResolver implements Resolve<IClassInfo>{
 
 @Injectable()
 export class ICourseResolver implements Resolve<ICourse>{
-    resolve(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot): ICourse | Observable<ICourse> | Promise<ICourse> {
-        return this.commonFunction.httpRequest<ICourse>("course/GetOverview");
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): ICourse | Observable<ICourse> | Promise<ICourse> {
+        let type = route.paramMap.get("type");
+        return this.commonFunction.httpRequest<ICourse>("course/GetOverview?ExamType=" + type);
     }
     constructor(public commonFunction: CommonFunction) {
 

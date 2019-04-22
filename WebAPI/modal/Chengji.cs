@@ -388,15 +388,14 @@ public class Chengji : IEqualityComparer<Chengji>
     /// 通过学号获得选修课列表
     /// </summary>
     /// <param name="StudentId"></param>
-    /// /// <returns></returns>
-    public static List<string> GetOptionCourse(string StudentId)
+    /// <returns></returns>
+    public static List<string> GetOptionCourse(string StudentId,string StardardType)
     {
         //选择学生,选修课
-        return Dataset.ChengjiList.Where(x => x.StudentID == StudentId && x.SubType == enumSubType.OptionalSelect && x.Score > 0 && x.Type == "6")
-               .Select(x => x.SubName).Distinct().ToList();
-        //return Dataset.ChengjiList.Where(x => x.StudentID == StudentId && x.SubType == enumSubType.OptionalSelect && x.Score > 0 && x.Term=="2018-2019-1")
-        //       .Select(x => x.SubName).Distinct().ToList();
-
+        return Dataset.ChengjiList.Where(x => x.StudentID == StudentId && 
+                                         x.SubType == enumSubType.OptionalSelect && 
+                                         x.Score > 0 && x.Type == StardardType)
+                                    .Select(x => x.SubName).Distinct().ToList();
     }
 
 }

@@ -18,7 +18,7 @@ const routes: Routes = [
     resolve: { schoolInfo: ISchoolInfoResolver }
   },
   {
-    path: 'home/course',
+    path: 'home/course/:type',
     component: CourseOverViewComponent,
     resolve: { courseInfo: ICourseResolver }
   },

@@ -236,11 +236,15 @@ public static class Dataset
         {
             if (student.ClassName.Contains("高三"))
             {
-                student.OptionCourse = Chengji.GetOptionCourse(student.ID);
-                student.OptionCourse.Sort((x, y) => { return Chengji.OptionalSelectSort(x, y); });    //排序
+                student.OptionCourse_FiveSchool = Chengji.GetOptionCourse(student.ID, "6");
+                student.OptionCourse_FiveSchool.Sort((x, y) => { return Chengji.OptionalSelectSort(x, y); });    //排序
+
+                student.OptionCourse_TenSchool = Chengji.GetOptionCourse(student.ID, "7");
+                student.OptionCourse_TenSchool.Sort((x, y) => { return Chengji.OptionalSelectSort(x, y); });    //排序
+
             }
         }
-
+        CreateTotalScoreForGrade3(fullpath);
         Console.WriteLine(timer.Elapsed.ToString());
 
         //导入考试类型信息 6_exam_type.csv
@@ -294,6 +298,82 @@ public static class Dataset
         sr.Close();
         Console.WriteLine(timer.Elapsed.ToString());
         timer.Stop();
+    }
+
+    public static void CreateTotalScoreForGrade3(string fullpath)
+    {
+        var TotalScoreList_FiveSchool = new List<Chengji>();
+        //高三学生五校联考
+        foreach (var student in Dataset.StudentList)
+        {
+            if (student.OptionCourse_FiveSchool != null &&
+                student.OptionCourse_FiveSchool.Count == 3)
+            {
+                var Temp = ChengjiList.Where(x => x.Type == "6" &&
+                student.OptionCourse_FiveSchool.Contains(x.SubName) &&
+                x.StudentID == student.ID);
+                var Sum = Temp.Sum(x => x.Score > 0 ? x.Score : 0);
+                TotalScoreList_FiveSchool.Add(new Chengji()
+                {
+                    Number = "999999",
+                    StudentID = student.ID,
+                    Score = Sum,
+                    StudentName = student.Name,
+                    ClassID = student.ClassId,
+                    ClassName = student.ClassName,
+                    NumberName = "五校联考7选3",
+                    Term = "2018-2019-1",
+                    Grade = "高三",
+                    Type = "6",
+                    FullScore = 300
+                });
+            }
+        }
+
+        //高三学生十校联考
+        var TotalScoreList_TenSchool = new List<Chengji>();
+        foreach (var student in Dataset.StudentList)
+        {
+            if (student.OptionCourse_TenSchool != null &&
+                student.OptionCourse_TenSchool.Count == 3)
+            {
+                var Temp = ChengjiList.Where(x => x.Type == "7" &&
+                student.OptionCourse_TenSchool.Contains(x.SubName) &&
+                x.StudentID == student.ID);
+                var Sum = Temp.Sum(x => x.Score > 0 ? x.Score : 0);
+                TotalScoreList_TenSchool.Add(new Chengji()
+                {
+                    Number = "999998",
+                    StudentID = student.ID,
+                    Score = Sum,
+                    StudentName = student.Name,
+                    ClassID = student.ClassId,
+                    ClassName = student.ClassName,
+                    NumberName = "十校联考7选3",
+                    Term = "2018-2019-1",
+                    Grade = "高三",
+                    Type = "7",
+                    FullScore = 300
+                });
+            }
+        }
+
+        //总分表
+        var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "TotalScoreForGrade3.csv");
+        //获得考试数：Number做Distinct
+        sw.WriteLine("Number,StudentId,Score,GradeRank,StudentName,ClassID,ClassName,Grade,Term,NumberName,FullScore,Type");
+        float TenAvg = TotalScoreList_TenSchool.Average(x=>x.Score);
+        foreach (var chengji in TotalScoreList_TenSchool)
+        {
+            chengji.GradeRank = TotalScoreList_TenSchool.Count(x => x.Score > chengji.Score) + 1;   //下一个过程可以计算
+            chengji.SubId = "99";
+            chengji.GradeAvg = TenAvg;
+            sw.WriteLine(chengji.Number + "," + chengji.StudentID + "," + chengji.Score + "," + chengji.GradeRank + "," +
+                         chengji.StudentName + "," + chengji.ClassID + "," + chengji.ClassName + "," +
+                         chengji.Grade + "," + chengji.Term + "," + chengji.NumberName + "," + chengji.FullScore + "," + chengji.Type);
+
+        }
+        sw.Close();
     }
 
 

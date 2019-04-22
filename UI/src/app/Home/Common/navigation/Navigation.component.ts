@@ -74,7 +74,7 @@ export class NavigationComponent implements OnInit {
     });
     this.studentpicker.show();
   }
- 
+
   ClassQuery() {
     if (this.pickhandler !== null && this.pickhandler !== undefined) {
       // 需要把上次的订阅取消掉，不然的话，多个订阅会同时发生效果！
@@ -112,6 +112,24 @@ export class NavigationComponent implements OnInit {
   }
 
   JumpTo(url: string) {
-    this.router.navigate([url]);
+    if (url === 'home/course') {
+      this.confirmationService.confirm({
+        message: '您可以使用五校联考或者十校联考作为7选3的基准，请选择一个基准',
+        acceptLabel: '五校联考',
+        rejectLabel: '十校联考',
+        header: '确认信息',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.router.navigate([url,"6"]);
+          return;
+        },
+        reject: () => {
+          this.router.navigate([url,"7"]);
+          return;
+        }
+      });
+    } else {
+      this.router.navigate([url]);
+    }
   }
 }
