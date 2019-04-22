@@ -137,6 +137,24 @@ public static class Dataset
         Console.WriteLine("有效成绩数：" + ChengjiList.Count);
         ChengjiList = ChengjiList.Where(x => x.Grade.StartsWith("高")).ToList();                //初中成绩
         Console.WriteLine("有效成绩数（高中）：" + ChengjiList.Count);
+
+        //相同Number，相同课程，有多条记录的情况,一般是因为缺考的补考造成的，这里使用补考成绩作为统计数据
+        var CheckPoint = ChengjiList.GroupBy(x => x.Number + x.SubId + x.StudentID).Where(x => x.Count() > 1).Select(x => x.ToList());
+        foreach (var item in CheckPoint)
+        {
+            //去掉其中较小的一个成绩
+            if (item[0].Score > item[1].Score)
+            {
+                Console.WriteLine(item[1].Score);
+                ChengjiList.Remove(item[1]);
+            }
+            else
+            {
+                Console.WriteLine(item[0].Score);
+                ChengjiList.Remove(item[0]);
+            }
+        }
+        Console.WriteLine("有效成绩数（去重复数据）：" + ChengjiList.Count);
         //CreateTotalScore(fullpath);
         //读取总分
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "TotalScore.csv";

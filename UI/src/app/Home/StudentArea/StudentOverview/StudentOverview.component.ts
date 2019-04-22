@@ -56,6 +56,14 @@ export class StudentOverviewComponent implements OnInit {
   public KaoqinMonth: string[] = [];
   public KaoqinMonthCnt: number[] = [];
 
+  getRoomMateStyle(): any {
+    if (this.service.CurrentStudentInfo.roommate.length <= 6) {
+      return { 'width': '100%', 'margin-top': '10px', 'height': '410px' };
+    } else {
+      return { 'width': '100%', 'margin-top': '10px' };
+    }
+  }
+
   JumpTo(url: string) {
     if (url === "grade") {
       //这里应该是 !== -1,但是高一都有校区前缀，所以这个判断也不会出现问题
