@@ -53,7 +53,7 @@ export class ExamListComponent implements OnChanges {
 
     @Input() scrollHeight: string = "400px";
 
-    @Input() Mode: string = "Same";
+    @Input() Mode: string = "SAME";
 
     subName: { label: string, value: string }[] = [];
 
@@ -65,6 +65,7 @@ export class ExamListComponent implements OnChanges {
 
     onRowSelect(event: { data: IScore; }) {
         //默认方法
+        if (this.Mode == "SAME") return;
         this.router.navigate(['student/overview', event.data.studentID]);
     }
     /**根据年级排名设定行颜色 */

@@ -139,7 +139,7 @@ public class Chengji : IEqualityComparer<Chengji>
             }
 
             //规则3:2018-1学期期中考试 语文150分
-            if (Number == "304")
+            if (Number == "000304")
             {
                 if (SubName == "语文") return 150;
             }
@@ -363,7 +363,8 @@ public class Chengji : IEqualityComparer<Chengji>
         {
             Score = (float)Math.Round(Score, 2);
         }
-        IdForGradeExam = SubId + ":" + Term + ":" + Type + ":" + Grade;
+        //Term + Type 不是Key，必须用Number
+        IdForGradeExam = SubId + ":" + Number + ":" + Grade;
         ZScore = Items[10];
         TScore = Items[11];
         Dengdi = Items[12];

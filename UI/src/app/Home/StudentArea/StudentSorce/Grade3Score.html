@@ -16,7 +16,7 @@
             <!--右侧内容-->
             <p-tabView>
                 <p-tabPanel [header]="'成绩列表'">
-                    <exam-list [Scores]="Scores"
+                    <exam-list [Scores]="Scores" [Mode]="'SAME'"
                         [CSVFilename]="CurrentStudent.name + '(' + CurrentStudent.id + ')成绩一览'"></exam-list>
                 </p-tabPanel>
                 <p-tabPanel [header]="'各科图表'">

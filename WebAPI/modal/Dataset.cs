@@ -163,7 +163,7 @@ public static class Dataset
                 SubId = "99",
                 SubName = "总分",
                 Id = NewExamId.ToString(),
-                IdForGradeExam = "99" + ":" + line[8] + ":" + line[11] + ":" + line[7]
+                IdForGradeExam = "99" + ":" + line[0] + ":" + line[7]
             });
             NewExamId++;
         }

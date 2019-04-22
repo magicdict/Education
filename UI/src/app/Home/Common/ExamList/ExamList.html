@@ -15,19 +15,19 @@
   scrollHeight="400px" [columns]="cols" [exportFilename]="CSVFilename">
   <ng-template pTemplate="header">
     <tr>
-      <th *ngIf="Mode !== 'Same'" style="width: 50px" [pSortableColumn]="'studentID'">学号
+      <th *ngIf="Mode !== 'SAME'" style="width: 50px" [pSortableColumn]="'studentID'">学号
         <p-sortIcon [field]="'studentID'">
         </p-sortIcon>
       </th>
-      <th *ngIf="Mode !== 'Same'" style="width: 50px" [pSortableColumn]="'studentName'">姓名
+      <th *ngIf="Mode !== 'SAME'" style="width: 50px" [pSortableColumn]="'studentName'">姓名
         <p-sortIcon [field]="'studentName'">
         </p-sortIcon>
       </th>
-      <th *ngIf="Mode === 'Same'" style="width: 200px" [pSortableColumn]="'numberName'">考试名称
+      <th *ngIf="Mode === 'SAME'" style="width: 200px" [pSortableColumn]="'numberName'">考试名称
         <p-sortIcon [field]="'numberName'">
         </p-sortIcon>
       </th>
-      <th *ngIf="Mode === 'Same'" style="width: 50px" [pSortableColumn]="'subName'">科目
+      <th *ngIf="Mode === 'SAME'" style="width: 50px" [pSortableColumn]="'subName'">科目
         <p-sortIcon [field]="'subName'">
         </p-sortIcon>
       </th>
@@ -75,10 +75,10 @@
   </ng-template>
   <ng-template pTemplate="body" let-itemData>
     <tr [pSelectableRow]="itemData" [ngStyle]="this.GetStyle(itemData)">
-      <td *ngIf="Mode !== 'Same'" style="width: 50px">{{itemData.studentID}}</td>
-      <td *ngIf="Mode !== 'Same'" style="width: 50px">{{itemData.studentName}}</td>
-      <td *ngIf="Mode === 'Same'" style="width: 200px">{{itemData.numberName}}</td>
-      <td *ngIf="Mode === 'Same'" style="width: 50px">{{itemData.subName}}</td>
+      <td *ngIf="Mode !== 'SAME'" style="width: 50px">{{itemData.studentID}}</td>
+      <td *ngIf="Mode !== 'SAME'" style="width: 50px">{{itemData.studentName}}</td>
+      <td *ngIf="Mode === 'SAME'" style="width: 200px">{{itemData.numberName}}</td>
+      <td *ngIf="Mode === 'SAME'" style="width: 50px">{{itemData.subName}}</td>
       <td style="width: 40px;text-align:right;">{{itemData.score}}</td>
       <td style="width: 40px;text-align:right;">{{itemData.scorePercent}}</td>
       <td style="width: 40px;text-align:right;">{{roundvalue(itemData.gradeAvgDiff)}}</td>
