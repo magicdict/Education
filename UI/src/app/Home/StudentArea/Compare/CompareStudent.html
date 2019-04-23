@@ -1,17 +1,28 @@
 <app-nav></app-nav>
 <div class="container">
     <div class="row" style="background: white">
-        <div class="col-6" style="margin: 10px 0px">
+        <div class="col-4" style="margin: 10px 0px">
             <student-item [Sex]="FirstStudent.sex" [StudentId]="FirstStudent.id" [Title]="FirstStudent.name"
                 [SubTitle]="FirstStudent.className"></student-item>
         </div>
-        <div class="col-6" style="margin: 10px 0px">
+        <div class="col-4" style="margin: 10px 0px">
             <student-item [Sex]="SecondStudent.sex" [StudentId]="SecondStudent.id" [Title]="SecondStudent.name"
                 [SubTitle]="SecondStudent.className"></student-item>
         </div>
+        <div class="col" *ngIf="subName.length > 2">
+            <div style="margin-top: 10px;margin-bottom: 10px;">
+                科目选择：
+                <p-dropdown #subnamelist [style]="{'width':'100px','min-width':'100px'}" [options]="subName" (onChange)="dt.filter($event.value, 'subName', 'equals')">
+                </p-dropdown>
+                &nbsp;&nbsp;&nbsp;
+                结果选择：
+                <p-dropdown #subnamelist [style]="{'width':'100px','min-width':'100px'}" [options]="resultopt" (onChange)="dt.filter($event.value, 'resultText', 'equals')">
+                </p-dropdown>
+            </div>
+        </div> 
     </div>
     <div class="row" style="background: white">
-        <div class="col">
+        <div class="col" style="padding-bottom: 5px;">
             <table-function [Table]="dt"></table-function>
             <p-table #dt [columns]="cols" [exportFilename]="FirstStudent.id + ' 和 ' + SecondStudent.id + '的比较'"
                 [value]="Scores" selectionMode="multiple" [scrollable]="true" scrollHeight="570px">
@@ -38,7 +49,7 @@
                             </p-sortIcon>
                         </th>
                     </tr>
-                </ng-template> 
+                </ng-template>
                 <ng-template pTemplate="body" let-itemData>
                     <tr [pSelectableRow]="itemData" [ngStyle]="getRowStyle(itemData)">
                         <td style="width: 140px">{{itemData.numberName}}</td>
