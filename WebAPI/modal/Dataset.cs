@@ -145,12 +145,12 @@ public static class Dataset
             //去掉其中较小的一个成绩
             if (item[0].Score > item[1].Score)
             {
-                Console.WriteLine(item[1].Score);
+                //Console.WriteLine(item[1].Score);
                 ChengjiList.Remove(item[1]);
             }
             else
             {
-                Console.WriteLine(item[0].Score);
+                //Console.WriteLine(item[0].Score);
                 ChengjiList.Remove(item[0]);
             }
         }
@@ -228,8 +228,6 @@ public static class Dataset
         //内存优化：2016-2017-1开始考试成绩保留，其他不要了
         ExamRankList.Clear();
         Console.WriteLine(timer.Elapsed.ToString());
-        Education.Controllers.CourseController.PrepareExamNameList();
-        GC.Collect();
 
         //7选3
         foreach (var student in StudentList)
@@ -244,8 +242,12 @@ public static class Dataset
 
             }
         }
-        CreateTotalScoreForGrade3(fullpath);
         Console.WriteLine(timer.Elapsed.ToString());
+        CreateTotalScoreForGrade3(fullpath);
+        Console.WriteLine("有效成绩数（含7选3）：" + ChengjiList.Count);
+        Console.WriteLine(timer.Elapsed.ToString());
+        Education.Controllers.CourseController.PrepareExamNameList();
+        GC.Collect();
 
         //导入考试类型信息 6_exam_type.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "6_exam_type.csv";
@@ -303,6 +305,8 @@ public static class Dataset
     public static void CreateTotalScoreForGrade3(string fullpath)
     {
         var TotalScoreList_FiveSchool = new List<Chengji>();
+        var ClassDict = new Dictionary<String, int>();
+
         //高三学生五校联考
         foreach (var student in Dataset.StudentList)
         {
@@ -313,18 +317,33 @@ public static class Dataset
                 student.OptionCourse_FiveSchool.Contains(x.SubName) &&
                 x.StudentID == student.ID);
                 var Sum = Temp.Sum(x => x.Score > 0 ? x.Score : 0);
+                var Number = Temp.First().Number;
+                var NumberName = Temp.First().NumberName;
+                var ClassKey = String.Join("/", student.OptionCourse_FiveSchool);
+                var ClassValue = 0;
+                if (ClassDict.ContainsKey(ClassKey))
+                {
+                    ClassValue = ClassDict[ClassKey];
+                }
+                else
+                {
+                    ClassValue = ClassDict.Count + 1;
+                    ClassDict.Add(ClassKey, ClassValue);
+                }
                 TotalScoreList_FiveSchool.Add(new Chengji()
                 {
-                    Number = "999999",
+                    //Rank将999999采番用掉了，这里从000001开始采番
+                    Id = "000001",
+                    Number = Number,
                     StudentID = student.ID,
                     Score = Sum,
                     StudentName = student.Name,
-                    ClassID = student.ClassId,
-                    ClassName = student.ClassName,
-                    NumberName = "五校联考7选3",
+                    ClassID = ClassValue.ToString("D3"),
+                    ClassName = ClassKey,
+                    NumberName = NumberName,
                     Term = "2018-2019-1",
                     Grade = "高三",
-                    Type = "6",
+                    Type = "99",
                     FullScore = 300
                 });
             }
@@ -341,18 +360,33 @@ public static class Dataset
                 student.OptionCourse_TenSchool.Contains(x.SubName) &&
                 x.StudentID == student.ID);
                 var Sum = Temp.Sum(x => x.Score > 0 ? x.Score : 0);
+                var Number = Temp.First().Number;
+                var NumberName = Temp.First().NumberName;
+                var ClassKey = String.Join("/", student.OptionCourse_FiveSchool);
+                var ClassValue = 0;
+                if (ClassDict.ContainsKey(ClassKey))
+                {
+                    ClassValue = ClassDict[ClassKey];
+                }
+                else
+                {
+                    ClassValue = ClassDict.Count + 1;
+                    ClassDict.Add(ClassKey, ClassValue);
+                }
                 TotalScoreList_TenSchool.Add(new Chengji()
                 {
-                    Number = "999998",
+                    //Rank将999999采番用掉了，这里从000001开始采番
+                    Id = "000002",
+                    Number = Number,
                     StudentID = student.ID,
                     Score = Sum,
                     StudentName = student.Name,
-                    ClassID = student.ClassId,
-                    ClassName = student.ClassName,
-                    NumberName = "十校联考7选3",
+                    ClassID = ClassValue.ToString("D3"),
+                    ClassName = ClassKey,
+                    NumberName = NumberName,
                     Term = "2018-2019-1",
                     Grade = "高三",
-                    Type = "7",
+                    Type = "99",
                     FullScore = 300
                 });
             }
@@ -362,17 +396,48 @@ public static class Dataset
         var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "TotalScoreForGrade3.csv");
         //获得考试数：Number做Distinct
         sw.WriteLine("Number,StudentId,Score,GradeRank,StudentName,ClassID,ClassName,Grade,Term,NumberName,FullScore,Type");
-        float TenAvg = TotalScoreList_TenSchool.Average(x=>x.Score);
+        float TenAvg = TotalScoreList_TenSchool.Average(x => x.Score);
         foreach (var chengji in TotalScoreList_TenSchool)
         {
-            chengji.GradeRank = TotalScoreList_TenSchool.Count(x => x.Score > chengji.Score) + 1;   //下一个过程可以计算
-            chengji.SubId = "99";
+            chengji.SubId = "98";
+            chengji.SubName = "选修课总分";
+            chengji.GradeRank = TotalScoreList_TenSchool.Count(x => x.Score > chengji.Score) + 1;
             chengji.GradeAvg = TenAvg;
+            chengji.GradeAvalibleCnt = TotalScoreList_TenSchool.Count;
+
+            chengji.ClassRank = TotalScoreList_TenSchool.Count(x => x.Score > chengji.Score && x.ClassID == chengji.ClassID) + 1;
+            chengji.ClassAvg = TotalScoreList_TenSchool.Where(x => x.ClassID == chengji.ClassID).Average(x => x.Score);
+            chengji.ClassAvalibleCnt = TotalScoreList_TenSchool.Count(x => x.ClassID == chengji.ClassID);
+
+            Dataset.ChengjiList.Add(chengji);
+
             sw.WriteLine(chengji.Number + "," + chengji.StudentID + "," + chengji.Score + "," + chengji.GradeRank + "," +
                          chengji.StudentName + "," + chengji.ClassID + "," + chengji.ClassName + "," +
                          chengji.Grade + "," + chengji.Term + "," + chengji.NumberName + "," + chengji.FullScore + "," + chengji.Type);
 
         }
+
+        float FiveAvg = TotalScoreList_FiveSchool.Average(x => x.Score);
+        foreach (var chengji in TotalScoreList_FiveSchool)
+        {
+            chengji.SubId = "98";
+            chengji.SubName = "选修课总分";
+            chengji.GradeRank = TotalScoreList_FiveSchool.Count(x => x.Score > chengji.Score) + 1;
+            chengji.GradeAvg = FiveAvg;
+            chengji.GradeAvalibleCnt = TotalScoreList_FiveSchool.Count;
+
+            chengji.ClassRank = TotalScoreList_FiveSchool.Count(x => x.Score > chengji.Score && x.ClassID == chengji.ClassID) + 1;
+            chengji.ClassAvg = TotalScoreList_FiveSchool.Where(x => x.ClassID == chengji.ClassID).Average(x => x.Score);
+            chengji.ClassAvalibleCnt = TotalScoreList_FiveSchool.Count(x => x.ClassID == chengji.ClassID);
+
+            Dataset.ChengjiList.Add(chengji);
+
+            sw.WriteLine(chengji.Number + "," + chengji.StudentID + "," + chengji.Score + "," + chengji.GradeRank + "," +
+                         chengji.StudentName + "," + chengji.ClassID + "," + chengji.ClassName + "," +
+                         chengji.Grade + "," + chengji.Term + "," + chengji.NumberName + "," + chengji.FullScore + "," + chengji.Type);
+
+        }
+
         sw.Close();
     }
 
@@ -426,8 +491,8 @@ public static class Dataset
                 var temp = TotalScoreList.Where(x => x.Number == ExamNumber && x.Grade == Grade);
                 foreach (var chengji in temp)
                 {
-                    chengji.GradeRank = temp.Count(x => x.Score > chengji.Score) + 1;   //下一个过程可以计算
-                    chengji.SubId = "99";   //FullScore使用私有值即可
+                    chengji.GradeRank = temp.Count(x => x.Score > chengji.Score) + 1;
+                    chengji.SubId = "99";
                     sw.WriteLine(chengji.Number + "," + chengji.StudentID + "," + chengji.Score + "," + chengji.GradeRank + "," +
                                  chengji.StudentName + "," + chengji.ClassID + "," + chengji.ClassName + "," +
                                  chengji.Grade + "," + chengji.Term + "," + chengji.NumberName + "," + chengji.FullScore + "," + chengji.Type);
@@ -438,25 +503,7 @@ public static class Dataset
         sw.Close();
     }
 
-    public static void CreateMonthlyCom(string fullpath)
-    {
-        StreamWriter sw;
-        var CntComplete = 0;
-        //月度消费
-        sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "StudentConsumptionMonthList.csv");
-        sw.WriteLine("Id,Name,Sex,ClassName,Month,Amount,LiveAtSchool");
-        var MonthTitle = new string[] { "201807", "201808", "201809", "201810", "201811", "201812", "201901" };
-        foreach (var student in Dataset.StudentList)
-        {
-            foreach (var mon in MonthTitle)
-            {
-                var sum = Dataset.ConsumptionList.Where(x => x.DealYearMonth == mon && x.StudentID == student.ID).Sum(x => x.MonDeal);
-                sw.WriteLine(student.ID + "," + student.Name + "," + student.Sex + "," + student.ClassName + "," + mon + "," + sum + "," + student.LiveAtSchool);
-                CntComplete++;
-            }
-        }
-        sw.Close();
-    }
+
 
     public static void CreateRank(string fullpath)
     {
@@ -514,5 +561,25 @@ public static class Dataset
         sw.Close();
         Console.WriteLine(timer.Elapsed.ToString());
         timer.Stop();
+    }
+
+    public static void CreateMonthlyCom(string fullpath)
+    {
+        StreamWriter sw;
+        var CntComplete = 0;
+        //月度消费
+        sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "StudentConsumptionMonthList.csv");
+        sw.WriteLine("Id,Name,Sex,ClassName,Month,Amount,LiveAtSchool");
+        var MonthTitle = new string[] { "201807", "201808", "201809", "201810", "201811", "201812", "201901" };
+        foreach (var student in Dataset.StudentList)
+        {
+            foreach (var mon in MonthTitle)
+            {
+                var sum = Dataset.ConsumptionList.Where(x => x.DealYearMonth == mon && x.StudentID == student.ID).Sum(x => x.MonDeal);
+                sw.WriteLine(student.ID + "," + student.Name + "," + student.Sex + "," + student.ClassName + "," + mon + "," + sum + "," + student.LiveAtSchool);
+                CntComplete++;
+            }
+        }
+        sw.Close();
     }
 }
