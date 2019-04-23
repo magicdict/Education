@@ -20,9 +20,7 @@ export class SchoolOverViewComponent implements OnInit {
 
   schoolinfo: ISchoolInfo;
 
-  IsMapReady = false;
-  /**地图 */
-  NativePlaceRegionOpt = CommonFunction.clone(regionMapOptions);
+
   /**旭日图 性别比例 */
   SexRateSunburstOption = SexRateSunburstOption;
 
@@ -32,8 +30,6 @@ export class SchoolOverViewComponent implements OnInit {
       .subscribe((data: { schoolInfo: ISchoolInfo }) => {
         this.schoolinfo = data.schoolInfo;
         this.service.SchoolOverview = this.schoolinfo;
-        this.NativePlaceRegionOpt.title.text = "";
-        this.NativePlaceRegionOpt.series[0].data = data.schoolInfo.total.property.nativePlace;
 
         //旭日图
         this.SexRateSunburstOption.title.text = "";

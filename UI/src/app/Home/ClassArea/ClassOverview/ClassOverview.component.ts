@@ -25,7 +25,6 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
   public Teachers: ITeacher[] = [];
   public Exams: IClassExam[][] = [];
   mSexRate = SexRatePieOption;
-  NativePlaceRegionOptions = CommonFunction.clone(regionMapOptions);
   KaoqinOpt: ISimpleBar;
   IsShowKaoqinGraph: boolean;
 
@@ -82,14 +81,6 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
         this.mSexRate.series[0].data[1].value = data.classinfo.property.totalSexRate.femaleCnt;
         if (this.SexRateEchartsInstance !== undefined) {
           this.SexRateEchartsInstance.setOption(this.mSexRate);
-        }
-
-        this.NativePlaceRegionOptions.title.text = "";
-        this.NativePlaceRegionOptions.visualMap.max = 5;
-        this.NativePlaceRegionOptions.series[0].data = data.classinfo.property.nativePlace;
-        if (this.NativeEchartsInstance !== undefined) {
-          console.log("地图重新绘制了");
-          this.NativeEchartsInstance.setOption(this.NativePlaceRegionOptions);
         }
 
         this.Teachers = data.classinfo.teachers;

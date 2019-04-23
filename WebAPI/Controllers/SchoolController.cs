@@ -184,9 +184,9 @@ namespace Education.Controllers
                         else
                         {
                             //对于浙江省的修正
-                            foreach (var zhejiang in Utility.ZhejiangCity)
+                            foreach (var city in Utility.ZhejiangCity)
                             {
-                                if (item.NativePlace.Contains(zhejiang))
+                                if (item.NativePlace.Contains(city.Substring(0, 2)))
                                 {
                                     geodic["浙江"]++;
                                     break;
@@ -220,10 +220,10 @@ namespace Education.Controllers
                         {
                             if (x == "浙江")
                             {
-                                //浙江省的细分
+                                //明确是浙江的部分
                                 foreach (var city in Utility.ZhejiangCity)
                                 {
-                                    if (item.NativePlace.Contains(city))
+                                    if (item.NativePlace.Contains(city.Substring(0, 2)))
                                     {
                                         geodic[city]++;
                                         break;
@@ -233,10 +233,10 @@ namespace Education.Controllers
                         }
                         else
                         {
-                            //浙江省的细分
+                            //未知的省份
                             foreach (var city in Utility.ZhejiangCity)
                             {
-                                if (item.NativePlace.Contains(city))
+                                if (item.NativePlace.Contains(city.Substring(0, 2)))
                                 {
                                     geodic[city]++;
                                     break;
@@ -245,10 +245,23 @@ namespace Education.Controllers
                         }
                     }
                     var rtn = new List<NameValueSet>();
+                    //Detail
                     foreach (var k in geodic.Keys)
                     {
-                        rtn.Add(new NameValueSet() { name = k + "市", value = geodic[k] });
+                        rtn.Add(new NameValueSet() { name = k, value = geodic[k] });
                     }
+                    //地图用
+                    rtn.Add(new NameValueSet() { name = "-杭州市", value = geodic["杭州市"] + geodic["建德市"]});
+                    rtn.Add(new NameValueSet() { name = "-宁波市", value = geodic["宁波市"] + geodic["余姚市"]+ geodic["慈溪市"]});
+                    rtn.Add(new NameValueSet() { name = "-温州市", value = geodic["温州市"] + geodic["瑞安市"]+ geodic["乐清市"]});
+                    rtn.Add(new NameValueSet() { name = "-嘉兴市", value = geodic["嘉兴市"] + geodic["海宁市"]+ geodic["桐乡市"]+ geodic["平湖市"]});
+                    rtn.Add(new NameValueSet() { name = "-湖州市", value = geodic["湖州市"] });
+                    rtn.Add(new NameValueSet() { name = "-绍兴市", value = geodic["绍兴市"] + geodic["嵊州市"] + geodic["诸暨市"]});
+                    rtn.Add(new NameValueSet() { name = "-金华市", value = geodic["金华市"] + geodic["义乌市"] + geodic["永康市"]+ geodic["兰溪市"]+ geodic["东阳市"]});
+                    rtn.Add(new NameValueSet() { name = "-衢州市", value = geodic["衢州市"] + geodic["江山市"]});
+                    rtn.Add(new NameValueSet() { name = "-舟山市", value = geodic["舟山市"] });
+                    rtn.Add(new NameValueSet() { name = "-台州市", value = geodic["台州市"] + geodic["温岭市"] + geodic["临海市"] + geodic["玉环市"]});
+                    rtn.Add(new NameValueSet() { name = "-丽水市", value = geodic["丽水市"] + geodic["龙泉市"]});
                     return rtn;
                 }
 

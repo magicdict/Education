@@ -1,16 +1,16 @@
 <p-dialog [header]="Title" [(visible)]="this.display" modal="modal" [responsive]="true">
     <table-function [Table]="dt" [FrameStyle]="{'margin':'10px auto 10px auto','width':'100%'}"></table-function>
-    <div style="height: 550px;width:340px">
+    <div style="height: 550px;width:350px">
         <p-table #dt [columns]="cols" [value]="NameValueTable" [scrollable]="true" scrollHeight="500px"
             selectionMode="multiple">
             <ng-template pTemplate="header">
                 <tr>
-                    <th style="width: 50px" [pSortableColumn]="'name'">
+                    <th style="width: 200px" [pSortableColumn]="'name'">
                         {{TitleName}}
                         <p-sortIcon [field]="'name'">
                         </p-sortIcon>
                     </th>
-                    <th style="width: 100px" [pSortableColumn]="'value'">
+                    <th style="width: 150px" [pSortableColumn]="'value'">
                         {{TitleValue}}
                         <p-sortIcon [field]="'value'">
                         </p-sortIcon>
@@ -19,8 +19,8 @@
             </ng-template>
             <ng-template pTemplate="body" let-itemData>
                 <tr [pSelectableRow]="itemData">
-                    <td style="width: 50px">{{itemData.name}}</td>
-                    <td style="width: 100px">{{itemData.value}}</td>
+                    <td style="width: 200px">{{itemData.name}}</td>
+                    <td style="width: 150px">{{itemData.value}}</td>
                 </tr>
             </ng-template>
         </p-table>

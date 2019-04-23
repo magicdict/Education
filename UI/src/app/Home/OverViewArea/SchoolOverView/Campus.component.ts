@@ -25,8 +25,6 @@ export class CampusComponent implements OnInit {
     /**旭日图 性别比例 */
     mSexRateSunburstOption = CommonFunction.clone(SexRateSunburstOption);
 
-    /**地图 */
-    NativePlaceRegionOpt = CommonFunction.clone(regionMapOptions);
 
     mTeacherSub: ISimpleBar;
 
@@ -59,9 +57,6 @@ export class CampusComponent implements OnInit {
             this.mSexRatePieOption.series[0].data[0].value = this.campusInfo.property.totalSexRate.maleCnt;
             this.mSexRatePieOption.series[0].data[1].value = this.campusInfo.property.totalSexRate.femaleCnt;
         }
-        this.NativePlaceRegionOpt.title.text = "";
-        this.NativePlaceRegionOpt.series[0].data = this.campusInfo.property.nativePlace;
-
         let subnamelist = [];
         let subcnt = [];
         for (const key in this.campusInfo.teacherSubCnt) {

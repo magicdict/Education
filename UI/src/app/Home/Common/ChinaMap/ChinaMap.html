@@ -13,12 +13,20 @@
         </div>
     </div>
     <div class="box-body">
-        <div *ngIf="this.service.IsMapReady" echarts [options]="MapOption" [style.width]="this.StyleWidth"
-            [style.height]="this.StyleHeight"></div>
+        <p-tabView>
+            <p-tabPanel [header]="'全国'">
+                <div *ngIf="this.service.IsMapReady" echarts [options]="ChinaMapOption" [style.width]="this.StyleWidth"
+                  (chartInit)="ChinaMapInit($event)"  [style.height]="this.StyleHeight"></div>
+            </p-tabPanel>
+            <p-tabPanel  [header]="'浙江'">
+                <div *ngIf="this.service.IsMapReady" echarts [options]="ZheJiangMapOption" [style.width]="this.StyleWidth"
+                (chartInit)="ZhejiangMapInit($event)" [style.height]="this.StyleHeight"></div>
+            </p-tabPanel>
+        </p-tabView>
     </div>
 </div>
 <app-namevalue #china [Title]="'全国生源'" [NameValueTable]="NativePlace" [TitleName]="'省份'" [TitleValue]="'人数'">
 </app-namevalue>
-<app-namevalue #zhejiang [Title]="'浙江省生源'" [NameValueTable]="NativePlaceZheJiang" [TitleName]="'城市'"
+<app-namevalue #zhejiang [Title]="'浙江省生源'" [NameValueTable]="NativePlaceZheJiangDetailOnly" [TitleName]="'城市'"
     [TitleValue]="'人数'">
 </app-namevalue>
