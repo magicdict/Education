@@ -25,12 +25,14 @@
             <div class="row" style="padding: 5px;margin: 5px;">
                 <div class="col">
                     <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-                        <div echarts [options]="mCourseSelectRadarGraphOption" style="width:450px;"></div>
+                        <div echarts [options]="mCourseSelectRadarGraphOption"  (chartInit)="onCourseSelectRadarGraphChartInit($event)"
+                         style="width:450px;"></div>
                     </div>
                 </div>
                 <div class="col">
                     <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-                        <div echarts [options]="mCourseSelectCntOption" style="width:450px;"></div>
+                        <div echarts [options]="mCourseSelectCntOption"  (chartInit)="onCourseSelectCntChartInit($event)"
+                        style="width:450px;"></div>
                     </div>
                 </div>
             </div>
@@ -38,11 +40,11 @@
     </p-tabPanel>
     <p-tabPanel header="两门课程" style="width:100%;">
         <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-            <div echarts [options]="mCourseSelectTwoCntOption"
+            <div echarts [options]="mCourseSelectTwoCntOption"  (chartInit)="onCourseSelectTwoCntChartInit($event)"
                 style="width:800px;height: 400px;padding: 5px;margin: auto;"></div>
         </div>
         <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-            <div echarts [options]="mCourseSelectTwoPercentOption"
+            <div echarts [options]="mCourseSelectTwoPercentOption"  (chartInit)="onCourseSelectTwoPercentChartInit($event)"
                 style="width:800px;height: 400px;padding: 5px;margin: auto;"></div>
         </div>
     </p-tabPanel>
@@ -50,7 +52,7 @@
         <div class="container" style="width:1140px;">
             <div class="row">
                 <div class="col">
-                    <div echarts [options]="mCourseSelectThreeCntOption"
+                    <div echarts [options]="mCourseSelectThreeCntOption"  (chartInit)="onCourseSelectThreeCntChartInit($event)"
                         style="width:1025px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
                 </div>
             </div>
@@ -87,7 +89,7 @@
         </div>
     </p-tabPanel>
     <p-tabPanel header="桑基图（Sankey）" style="width:100%;">
-        <div echarts [options]="mSelectCourseSankeyOption"
+        <div echarts [options]="mSelectCourseSankeyOption" (chartInit)="onSelectCourseSankeyChartInit($event)"
             style="width:1080px;height: 900px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
     </p-tabPanel>
 </p-tabView>

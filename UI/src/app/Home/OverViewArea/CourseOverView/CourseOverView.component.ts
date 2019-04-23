@@ -30,6 +30,36 @@ export class CourseOverViewComponent implements OnInit {
   //桑吉图
   mSelectCourseSankeyOption = CommonFunction.clone(SelectCourseSankeyOption);
 
+  CourseSelectRadarGraphChart: any;
+  onCourseSelectRadarGraphChartInit(event: any) {
+    this.CourseSelectRadarGraphChart = event;
+  }
+
+  CourseSelectCntChart: any;
+  onCourseSelectCntChartInit(event: any) {
+    this.CourseSelectCntChart = event;
+  }
+
+  CourseSelectTwoCntChart: any;
+  onCourseSelectTwoCntChartInit(event: any) {
+    this.CourseSelectTwoCntChart = event;
+  }
+
+  CourseSelectTwoPercentChart: any;
+  onCourseSelectTwoPercentChartInit(event: any) {
+    this.CourseSelectTwoPercentChart = event;
+  }
+
+  CourseSelectThreeCntChart: any;
+  onCourseSelectThreeCntChartInit(event: any) {
+    this.CourseSelectThreeCntChart = event;
+  }
+
+  SelectCourseSankeyChart: any;
+  onSelectCourseSankeyChartInit(event: any) {
+    this.SelectCourseSankeyChart = event;
+  }
+
 
   ngOnInit(): void {
     this.route.data
@@ -124,9 +154,24 @@ export class CourseOverViewComponent implements OnInit {
           }
         )
 
-
-
-        console.log(this.mSelectCourseSankeyOption.series.links);
+        if (this.CourseSelectRadarGraphChart !== undefined) {
+          this.CourseSelectRadarGraphChart.setOption(this.mCourseSelectRadarGraphOption);
+        }
+        if (this.CourseSelectCntChart !== undefined) {
+          this.CourseSelectCntChart.setOption(this.mCourseSelectCntOption);
+        }
+        if (this.CourseSelectTwoCntChart !== undefined) {
+          this.CourseSelectTwoCntChart.setOption(this.mCourseSelectTwoCntOption);
+        }
+        if (this.CourseSelectTwoPercentChart !== undefined) {
+          this.CourseSelectTwoPercentChart.setOption(this.mCourseSelectTwoPercentOption);
+        }
+        if (this.CourseSelectThreeCntChart !== undefined) {
+          this.CourseSelectThreeCntChart.setOption(this.mCourseSelectThreeCntOption);
+        }
+        if (this.SelectCourseSankeyChart !== undefined) {
+          this.SelectCourseSankeyChart.setOption(this.mSelectCourseSankeyOption);
+        }
 
 
       });

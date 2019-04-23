@@ -302,6 +302,10 @@ public static class Dataset
         timer.Stop();
     }
 
+    /// <summary>
+    /// 高三选修课
+    /// </summary>
+    /// <param name="fullpath"></param>
     public static void CreateTotalScoreForGrade3(string fullpath)
     {
         var TotalScoreList_FiveSchool = new List<Chengji>();
@@ -393,9 +397,9 @@ public static class Dataset
         }
 
         //总分表
-        var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "TotalScoreForGrade3.csv");
+        //var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "TotalScoreForGrade3.csv");
         //获得考试数：Number做Distinct
-        sw.WriteLine("Number,StudentId,Score,GradeRank,StudentName,ClassID,ClassName,Grade,Term,NumberName,FullScore,Type");
+        //sw.WriteLine("Number,StudentId,Score,GradeRank,StudentName,ClassID,ClassName,Grade,Term,NumberName,FullScore,Type");
         float TenAvg = TotalScoreList_TenSchool.Average(x => x.Score);
         foreach (var chengji in TotalScoreList_TenSchool)
         {
@@ -411,9 +415,9 @@ public static class Dataset
 
             Dataset.ChengjiList.Add(chengji);
 
-            sw.WriteLine(chengji.Number + "," + chengji.StudentID + "," + chengji.Score + "," + chengji.GradeRank + "," +
-                         chengji.StudentName + "," + chengji.ClassID + "," + chengji.ClassName + "," +
-                         chengji.Grade + "," + chengji.Term + "," + chengji.NumberName + "," + chengji.FullScore + "," + chengji.Type);
+            //sw.WriteLine(chengji.Number + "," + chengji.StudentID + "," + chengji.Score + "," + chengji.GradeRank + "," +
+            //           chengji.StudentName + "," + chengji.ClassID + "," + chengji.ClassName + "," +
+            //           chengji.Grade + "," + chengji.Term + "," + chengji.NumberName + "," + chengji.FullScore + "," + chengji.Type);
 
         }
 
@@ -432,13 +436,13 @@ public static class Dataset
 
             Dataset.ChengjiList.Add(chengji);
 
-            sw.WriteLine(chengji.Number + "," + chengji.StudentID + "," + chengji.Score + "," + chengji.GradeRank + "," +
-                         chengji.StudentName + "," + chengji.ClassID + "," + chengji.ClassName + "," +
-                         chengji.Grade + "," + chengji.Term + "," + chengji.NumberName + "," + chengji.FullScore + "," + chengji.Type);
+            //sw.WriteLine(chengji.Number + "," + chengji.StudentID + "," + chengji.Score + "," + chengji.GradeRank + "," +
+            //           chengji.StudentName + "," + chengji.ClassID + "," + chengji.ClassName + "," +
+            //           chengji.Grade + "," + chengji.Term + "," + chengji.NumberName + "," + chengji.FullScore + "," + chengji.Type);
 
         }
 
-        sw.Close();
+        //sw.Close();
     }
 
 
