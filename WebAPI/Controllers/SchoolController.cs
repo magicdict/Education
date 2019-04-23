@@ -247,7 +247,7 @@ namespace Education.Controllers
                     var rtn = new List<NameValueSet>();
                     foreach (var k in geodic.Keys)
                     {
-                        rtn.Add(new NameValueSet() { name = k, value = geodic[k] });
+                        rtn.Add(new NameValueSet() { name = k + "市", value = geodic[k] });
                     }
                     return rtn;
                 }

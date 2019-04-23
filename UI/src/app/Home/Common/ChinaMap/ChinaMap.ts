@@ -23,9 +23,14 @@ export class ChinaMapComponent implements OnInit {
 
     ngOnInit(): void {
         if (!this.service.IsMapReady){
-            this.http.get('assets/china.json')
+            this.http.get('assets/map/data-china.json')
             .subscribe(geoJson => {
                 registerMap('China', geoJson);
+                this.service.IsMapReady = true;
+            });
+            this.http.get('assets/map/zhejiang.json')
+            .subscribe(geoJson => {
+                registerMap('zhejiang', geoJson);
                 this.service.IsMapReady = true;
             });
         }
