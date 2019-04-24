@@ -88,6 +88,16 @@ export class CampusComponent implements OnInit {
             }]
         }
 
+        this.mTeacherSub['toolbox'] = {
+            'show': true,
+            'feature': {
+              'saveAsImage': {},
+              'magicType': {
+                'type': ['line', 'bar', 'stack', 'tiled']
+              }
+            }
+          };
+
 
     }
     constructor(

@@ -122,6 +122,19 @@ export class CommonFunction {
         }
     }
 
+    public static base64ToBlob(code: string): Blob {
+        const parts = code.split(';base64,');
+        const contentType = parts[0].split(':')[1];
+        const raw = window.atob(parts[1]);
+        const rawLength = raw.length;
+        const uInt8Array = new Uint8Array(rawLength);
+        for (let i = 0; i < rawLength; ++i) {
+            uInt8Array[i] = raw.charCodeAt(i);
+        }
+        return new Blob([uInt8Array], { type: contentType });
+    }
+
+
     public httpRequest<T>(serviceUrl: string): Promise<T> {
         let webapiurl = "http://39.105.206.6:8080/api/"
         //let webapiurl = "http://localhost:5000/api/"

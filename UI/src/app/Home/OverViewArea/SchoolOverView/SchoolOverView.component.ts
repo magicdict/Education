@@ -4,6 +4,7 @@ import { ISchoolInfo } from '../../Common/Education.model';
 import { SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
 import { HomeService } from '../../Common/Home.service';
 import { echartsInstance } from 'echarts'
+import { CommonFunction } from '../../Common/common';
 
 @Component({
   templateUrl: 'SchoolOverView.html',
@@ -22,7 +23,7 @@ export class SchoolOverViewComponent implements OnInit {
 
 
   /**旭日图 性别比例 */
-  SexRateSunburstOption = SexRateSunburstOption;
+  SexRateSunburstOption = CommonFunction.clone(SexRateSunburstOption);
 
   SexRateChart: echartsInstance;
   SexRateChartInit(chart: echartsInstance) {
@@ -35,6 +36,12 @@ export class SchoolOverViewComponent implements OnInit {
       pixelRatio: 2,
       backgroundColor: '#fff'
     });
+    // IE 11
+    if (window.navigator.msSaveBlob !== undefined) {
+      var blob = CommonFunction.base64ToBlob(img.src);
+      window.navigator.msSaveBlob(blob, '全校性别比例.png');
+      return;
+    }
     var a = document.createElement('a');
     a.download = '全校性别比例';
     a.href = img.src;
