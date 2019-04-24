@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Table } from 'primeng/table';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-namevalue',

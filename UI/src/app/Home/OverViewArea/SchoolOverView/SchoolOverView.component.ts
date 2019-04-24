@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ISchoolInfo } from '../../Common/Education.model';
-import { regionMapOptions, SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
+import { SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
 import { HomeService } from '../../Common/Home.service';
-import { CommonFunction } from '../../Common/common';
+import { echartsInstance } from 'echarts'
 
 @Component({
   templateUrl: 'SchoolOverView.html',
@@ -23,6 +23,24 @@ export class SchoolOverViewComponent implements OnInit {
 
   /**旭日图 性别比例 */
   SexRateSunburstOption = SexRateSunburstOption;
+
+  SexRateChart: echartsInstance;
+  SexRateChartInit(chart: echartsInstance) {
+    this.SexRateChart = chart;
+  }
+
+  SaveSexRateImage() {
+    var img = new Image();
+    img.src = this.SexRateChart.getDataURL({
+      pixelRatio: 2,
+      backgroundColor: '#fff'
+    });
+    var a = document.createElement('a');
+    var event = new MouseEvent('click');
+    a.download = '全校性别比例';
+    a.href = img.src;
+    a.dispatchEvent(event);
+  }
 
   ngOnInit(): void {
 

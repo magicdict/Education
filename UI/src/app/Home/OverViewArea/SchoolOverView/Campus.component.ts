@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../Common/Home.service';
 import { ICampus } from '../../Common/Education.model';
-import { SexRatePieOption, SexRateSunburstOption, regionMapOptions } from '../../GraphOption/StudentGraphOption';
+import { SexRatePieOption, SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
 import { CommonFunction } from '../../Common/common';
 import { ISimpleBar } from '../../GraphOption/KaoqinOption';
 import { ActivatedRoute } from '@angular/router';

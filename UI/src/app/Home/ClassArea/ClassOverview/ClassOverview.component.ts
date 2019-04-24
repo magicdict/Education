@@ -2,11 +2,10 @@ import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/co
 import { Router, ActivatedRoute } from '@angular/router';
 import { IStudent, IClassInfo, ITeacher, IClassExam, IStudentGroupProperty } from 'src/app/Home/Common/Education.model';
 import { HomeService } from '../../Common/Home.service';
-import { SexRatePieOption, regionMapOptions } from '../../GraphOption/StudentGraphOption'
+import { SexRatePieOption } from '../../GraphOption/StudentGraphOption'
 import { ISimpleBar } from '../../GraphOption/KaoqinOption';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
-import { CommonFunction } from '../../Common/common';
 
 @Component({
   templateUrl: 'ClassOverview.html',

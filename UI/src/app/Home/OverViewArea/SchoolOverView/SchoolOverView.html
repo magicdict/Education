@@ -34,12 +34,17 @@
       <div class="box box-primary box-solid" style="width: 100%;margin-top: 10px;">
         <div class="box-header with-border">
           <h3 class="box-title">性别比例</h3>
+          <div class="box-tools pull-right">
+              <button type="button" style="margin: 0px;" class="btn btn-info btn-box-tool" (click)="SaveSexRateImage()">
+                  <i class="fas fa-info-circle"></i>&nbsp;保存为图片
+              </button> 
+          </div>
         </div>
         <div class="box-body">
-          <div echarts [options]="SexRateSunburstOption" style="width:300px;height:310px"></div>
+          <div echarts (chartInit)="SexRateChartInit($event)" [options]="SexRateSunburstOption" style="width:300px;height:310px"></div>
         </div>
       </div>
-    </div>
+    </div> 
   </div>
 
   <div class="row" style="width:1140px">

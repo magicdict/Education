@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild } from '@angular/core';
 import { IClassExam } from 'src/app/Home/Common/Education.model';
 import { Router } from '@angular/router';
 import { HomeService } from '../Home.service';

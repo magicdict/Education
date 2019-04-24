@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { IStudent } from '../Education.model';
 import { Router } from '@angular/router';
 
 @Component({
