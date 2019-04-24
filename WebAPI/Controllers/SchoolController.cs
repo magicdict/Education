@@ -251,17 +251,74 @@ namespace Education.Controllers
                         rtn.Add(new NameValueSet() { name = k, value = geodic[k] });
                     }
                     //地图用
-                    rtn.Add(new NameValueSet() { name = "-杭州市", value = geodic["杭州市"] + geodic["建德市"]});
-                    rtn.Add(new NameValueSet() { name = "-宁波市", value = geodic["宁波市"] + geodic["余姚市"]+ geodic["慈溪市"]});
-                    rtn.Add(new NameValueSet() { name = "-温州市", value = geodic["温州市"] + geodic["瑞安市"]+ geodic["乐清市"]});
-                    rtn.Add(new NameValueSet() { name = "-嘉兴市", value = geodic["嘉兴市"] + geodic["海宁市"]+ geodic["桐乡市"]+ geodic["平湖市"]});
-                    rtn.Add(new NameValueSet() { name = "-湖州市", value = geodic["湖州市"] });
-                    rtn.Add(new NameValueSet() { name = "-绍兴市", value = geodic["绍兴市"] + geodic["嵊州市"] + geodic["诸暨市"]});
-                    rtn.Add(new NameValueSet() { name = "-金华市", value = geodic["金华市"] + geodic["义乌市"] + geodic["永康市"]+ geodic["兰溪市"]+ geodic["东阳市"]});
-                    rtn.Add(new NameValueSet() { name = "-衢州市", value = geodic["衢州市"] + geodic["江山市"]});
-                    rtn.Add(new NameValueSet() { name = "-舟山市", value = geodic["舟山市"] });
-                    rtn.Add(new NameValueSet() { name = "-台州市", value = geodic["台州市"] + geodic["温岭市"] + geodic["临海市"] + geodic["玉环市"]});
-                    rtn.Add(new NameValueSet() { name = "-丽水市", value = geodic["丽水市"] + geodic["龙泉市"]});
+                    rtn.Add(new NameValueSet()
+                    {
+                        name = "-杭州市",
+                        value = geodic["杭州市"] + geodic["建德市"] +
+                                geodic["桐庐县"] + geodic["淳安县"]
+                    });
+                    rtn.Add(new NameValueSet()
+                    {
+                        name = "-宁波市",
+                        value = geodic["宁波市"] + geodic["余姚市"] + geodic["慈溪市"] +
+                                geodic["象山县"] + geodic["宁海县"]
+                    });
+                    rtn.Add(new NameValueSet()
+                    {
+                        name = "-温州市",
+                        value = geodic["温州市"] + geodic["瑞安市"] + geodic["乐清市"] +
+                                geodic["永嘉县"] + geodic["平阳县"] + geodic["苍南县"] +
+                                geodic["文成县"] + geodic["泰顺县"]
+                    });
+                    rtn.Add(new NameValueSet()
+                    {
+                        name = "-嘉兴市",
+                        value = geodic["嘉兴市"] + geodic["海宁市"] + geodic["桐乡市"] + geodic["平湖市"] +
+                                geodic["嘉善县"] + geodic["海盐县"]
+                    });
+                    rtn.Add(new NameValueSet()
+                    {
+                        name = "-湖州市",
+                        value = geodic["湖州市"] +
+                                geodic["德清县"] + geodic["长兴县"] + geodic["安吉县"]
+                    });
+                    rtn.Add(new NameValueSet()
+                    {
+                        name = "-绍兴市",
+                        value = geodic["绍兴市"] + geodic["嵊州市"] + geodic["诸暨市"] +
+                                geodic["新昌县"]
+                    });
+                    rtn.Add(new NameValueSet()
+                    {
+                        name = "-金华市",
+                        value = geodic["金华市"] + geodic["义乌市"] + geodic["永康市"] + geodic["兰溪市"] + geodic["东阳市"] +
+                                geodic["武义县"] + geodic["浦江县"] + geodic["磐安县"]
+                    });
+                    rtn.Add(new NameValueSet()
+                    {
+                        name = "-衢州市",
+                        value = geodic["衢州市"] + geodic["江山市"] +
+                                geodic["常山县"] + geodic["开化县"] + geodic["龙游县"]
+                    });
+                    rtn.Add(new NameValueSet()
+                    {
+                        name = "-舟山市",
+                        value = geodic["舟山市"] +
+                                geodic["岱山县"] + geodic["嵊泗县"]
+                    });
+                    rtn.Add(new NameValueSet()
+                    {
+                        name = "-台州市",
+                        value = geodic["台州市"] + geodic["温岭市"] + geodic["临海市"] + geodic["玉环市"] +
+                                geodic["三门县"] + geodic["天台县"] + geodic["仙居县"]
+                    });
+                    rtn.Add(new NameValueSet()
+                    {
+                        name = "-丽水市",
+                        value = geodic["丽水市"] + geodic["龙泉市"] +
+                                geodic["青田县"] + geodic["缙云县"] + geodic["遂昌县"] +
+                                geodic["松阳县"] + geodic["云和县"] + geodic["庆元县"] + geodic["景宁畲族自治县"]
+                    });
                     return rtn;
                 }
 
