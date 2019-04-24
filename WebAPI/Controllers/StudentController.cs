@@ -113,7 +113,8 @@ namespace Education.Controllers
         [HttpGet("QueryByLiveRoomNo")]
         public ActionResult<List<Student>> QueryByLiveRoomNo(string Id, string Campus, string Sex)
         {
-
+            Campus = System.Web.HttpUtility.UrlDecode(Campus);
+            Sex = System.Web.HttpUtility.UrlDecode(Sex);
             var baseInfo = Dataset.StudentList.Where(x => x.LiveRoomNo.Equals(Id));
             if (!String.IsNullOrEmpty(Campus))
             {
@@ -130,6 +131,7 @@ namespace Education.Controllers
         [HttpGet("QueryByNation")]
         public ActionResult<List<Student>> QueryByNation(string Nation)
         {
+            Nation = System.Web.HttpUtility.UrlDecode(Nation);
             var baseInfo = Dataset.StudentList.Where(x => x.Nation.Equals(Nation)).ToList();
             if (baseInfo.Count() == 0) return null;
             return baseInfo;
@@ -138,6 +140,7 @@ namespace Education.Controllers
         [HttpGet("QueryByPolicy")]
         public ActionResult<List<Student>> QueryByPolicy(string Policy)
         {
+            Policy = System.Web.HttpUtility.UrlDecode(Policy);
             var baseInfo = Dataset.StudentList.Where(x => x.Policy.Equals(Policy)).ToList();
             if (baseInfo.Count() == 0) return null;
             return baseInfo;

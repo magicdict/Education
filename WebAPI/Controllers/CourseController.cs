@@ -86,6 +86,8 @@ namespace Education.Controllers
         [HttpGet("GetExamInfoByNumberAndSubName")]
         public ActionResult<ExamInfoForNumberAndSubName> GetExamInfoByNumberAndSubName(string Number, string SubName, string Grade)
         {
+            SubName = System.Web.HttpUtility.UrlDecode(SubName);
+            Grade = System.Web.HttpUtility.UrlDecode(Grade);
             var Result = new ExamInfoForNumberAndSubName();
             var All = Dataset.ChengjiList.Where(x => x.SubName == SubName && x.Number == Number && x.Grade == Grade).ToList();
             var dic = new Dictionary<string, List<Chengji>>();

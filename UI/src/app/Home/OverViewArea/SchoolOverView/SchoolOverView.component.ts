@@ -36,9 +36,9 @@ export class SchoolOverViewComponent implements OnInit {
       backgroundColor: '#fff'
     });
     var a = document.createElement('a');
-    var event = new MouseEvent('click');
     a.download = '全校性别比例';
     a.href = img.src;
+    var event = new MouseEvent('click');
     a.dispatchEvent(event);
   }
 

@@ -62,7 +62,7 @@ namespace Education.Controllers
         [HttpGet("QueryTeacher")]
         public ActionResult<List<Teacher>> QueryTeacher(string GraName, string SubId)
         {
-
+            GraName = System.Web.HttpUtility.UrlDecode(GraName);
             if (string.IsNullOrEmpty(GraName) && !string.IsNullOrEmpty(SubId))
             {
                 return Dataset.TeacherList.Where(x => x.SubId == SubId && x.Term == "2018-2019-1").Distinct(new Teacher()).ToList();

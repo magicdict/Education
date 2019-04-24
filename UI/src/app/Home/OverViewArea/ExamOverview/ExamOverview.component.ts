@@ -124,7 +124,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
     }
 
     JumpToExam(number: string, subName: string, Grade: string) {
-        var request = "course/GetExamInfoByNumberAndSubName?number=" + number + "&subName=" + subName + "&Grade=" + Grade;
+        var request = "course/GetExamInfoByNumberAndSubName?number=" + number + "&subName=" + escape(subName) + "&Grade=" + escape(Grade);
         this.commonFunction.httpRequest<IExamInfoForNumberAndSubName>(request).then(
             r => {
                 this.service.CurrentExam = r;

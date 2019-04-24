@@ -18,13 +18,13 @@ export class HomeService {
         return this.commonFunction.httpRequest<any>('Student/QueryByStudentId?ID=' + StudentId);
     }
     public QueryByLiveRoomNo(RoomNo: string, Campus: string, Sex: string): Promise<Array<IStudent>> {
-        return this.commonFunction.httpRequest<any>('Student/QueryByLiveRoomNo?ID=' + RoomNo + "&Campus=" + Campus + "&Sex=" + Sex);
+        return this.commonFunction.httpRequest<any>('Student/QueryByLiveRoomNo?ID=' + RoomNo + "&Campus=" + escape(Campus) + "&Sex=" + escape(Sex));
     }
     public QueryByNation(Nation: string): Promise<Array<IStudent>> {
-        return this.commonFunction.httpRequest<any>('Student/QueryByNation?Nation=' + Nation);
+        return this.commonFunction.httpRequest<any>('Student/QueryByNation?Nation=' + escape(Nation));
     }
     public QueryByPolicy(Policy: string): Promise<Array<IStudent>> {
-        return this.commonFunction.httpRequest<any>('Student/QueryByPolicy?Policy=' + Policy);
+        return this.commonFunction.httpRequest<any>('Student/QueryByPolicy?Policy=' + escape(Policy));
     }
     /** 月度消费 */
     public GetStudentWithMonthLimit(limit: number): Promise<IStudentMonthlyConsumption[]> {

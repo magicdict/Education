@@ -54,6 +54,8 @@ export class NavigationComponent implements OnInit {
         }
       });
     }
+    var ua = window.navigator.userAgent;
+    console.log(ua);
   }
 
   @ViewChild(TeacherPickerComponent)
