@@ -15,12 +15,19 @@
     <div class="box-body">
         <p-tabView>
             <p-tabPanel [header]="'全国'">
+                <div class="alert alert-warning" role="alert">
+                    南海诸岛省略表示
+                </div>
                 <div *ngIf="this.service.IsMapReady" echarts [options]="ChinaMapOption" [style.width]="this.StyleWidth"
-                  (chartInit)="ChinaMapInit($event)"  [style.height]="this.StyleHeight"></div>
+                    (chartInit)="ChinaMapInit($event)" [style.height]="this.StyleHeight"></div>
             </p-tabPanel>
-            <p-tabPanel  [header]="'浙江'">
-                <div *ngIf="this.service.IsMapReady" echarts [options]="ZheJiangMapOption" [style.width]="this.StyleWidth"
-                (chartInit)="ZhejiangMapInit($event)" [style.height]="this.StyleHeight"></div>
+            <p-tabPanel [header]="'浙江'">
+                <div class="alert alert-warning" role="alert">
+                    统计口径为浙江省的所有市级行政区
+                </div>
+                <div *ngIf="this.service.IsMapReady" echarts [options]="ZheJiangMapOption"
+                    [style.width]="this.StyleWidth" (chartInit)="ZhejiangMapInit($event)"
+                    [style.height]="this.StyleHeight"></div>
             </p-tabPanel>
         </p-tabView>
     </div>

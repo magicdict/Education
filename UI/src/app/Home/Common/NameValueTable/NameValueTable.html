@@ -5,7 +5,7 @@
             selectionMode="multiple">
             <ng-template pTemplate="header">
                 <tr>
-                    <th style="width: 200px" [pSortableColumn]="'name'">
+                    <th style="width: 150px" [pSortableColumn]="'name'">
                         {{TitleName}}
                         <p-sortIcon [field]="'name'">
                         </p-sortIcon>
@@ -19,7 +19,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-itemData>
                 <tr [pSelectableRow]="itemData">
-                    <td style="width: 200px">{{itemData.name}}</td>
+                    <td style="width: 150px">{{itemData.name}}</td>
                     <td style="width: 150px">{{itemData.value}}</td>
                 </tr>
             </ng-template>
