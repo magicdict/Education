@@ -4,7 +4,7 @@ import { ICampus } from '../../Common/Education.model';
 import { SexRatePieOption, SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
 import { CommonFunction } from '../../Common/common';
 import { ISimpleBar } from '../../GraphOption/KaoqinOption';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -25,10 +25,15 @@ export class CampusComponent implements OnInit {
     /**旭日图 性别比例 */
     mSexRateSunburstOption = CommonFunction.clone(SexRateSunburstOption);
 
-
     mTeacherSub: ISimpleBar;
 
     ngOnInit(): void {
+        if (this.service.SchoolOverview === undefined) {
+            //页面被强制刷新的时候，回到Home页面
+            //该页面没有网络取数据操作，所以，会和Nav一起加载，无法保证Nav和它的时序关系
+            this.router.navigate(['home/school']);
+            return;
+        }
         this.route.params.subscribe(
             params => this.campusname = params['id']
         );
@@ -91,32 +96,21 @@ export class CampusComponent implements OnInit {
         this.mTeacherSub['toolbox'] = {
             'show': true,
             'feature': {
-              'saveAsImage': {},
-              'magicType': {
-                'type': ['line', 'bar', 'stack', 'tiled']
-              }
+                'saveAsImage': {},
+                'magicType': {
+                    'type': ['line', 'bar', 'stack', 'tiled']
+                }
             }
-          };
+        };
 
 
     }
     constructor(
+        private router: Router,
         private service: HomeService,
         private route: ActivatedRoute,
     ) {
-        
-    }
 
-    show() {
-        this.display = true;
-    }
-
-    submit() {
-        this.display = false;
-    }
-
-    close() {
-        this.display = false;
     }
 
 }

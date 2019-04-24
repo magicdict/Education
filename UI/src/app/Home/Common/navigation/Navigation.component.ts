@@ -33,9 +33,15 @@ export class NavigationComponent implements OnInit {
   }
 
   // 订阅句柄
-  private pickhandler: any;
+  private pickhandler: any;  
 
   ngOnInit(): void {
+    if (this.service.SchoolOverview === undefined){
+      //页面被强制刷新的时候，回到Home页面
+      //第一次HOME页面进入的时候应该有数据，所以不会命中
+      this.Home();
+      return;
+    }
     if (this.service.IsFirstRun === false) {
       this.service.IsFirstRun = true;
       this.confirmationService.confirm({
@@ -122,11 +128,11 @@ export class NavigationComponent implements OnInit {
         header: '确认信息',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-          this.router.navigate([url,"6"]);
+          this.router.navigate([url, "6"]);
           return;
         },
         reject: () => {
-          this.router.navigate([url,"7"]);
+          this.router.navigate([url, "7"]);
           return;
         }
       });

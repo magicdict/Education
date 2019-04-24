@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ViewChild, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
 import { IStudent, nationopt, policyopt } from '../Education.model';
 import { ErrorMessageDialogComponent } from '../error-message-dialog/error-message-dialog.component';
 import { HomeService } from '../Home.service';
@@ -7,7 +7,7 @@ import { HomeService } from '../Home.service';
   selector: 'app-studentPicker',
   templateUrl: './studentPicker.component.html'
 })
-export class StudentPickerComponent implements OnInit {
+export class StudentPickerComponent {
 
   @ViewChild(ErrorMessageDialogComponent)
   private errMsgDialog: ErrorMessageDialogComponent;
@@ -25,7 +25,9 @@ export class StudentPickerComponent implements OnInit {
   ) {
 
   }
-  ngOnInit(): void {
+
+  show() {
+    //将原本OnInit的代码放到这里来，OnInit的时候，数据可能没有准备好！这里无法保证时序问题
     this.roomlist = [];
     for (const key in this.service.SchoolOverview.schoolRooms.baiYangFemale) {
       if (this.roomlist.indexOf(key) === -1) this.roomlist.push(key);
@@ -41,8 +43,6 @@ export class StudentPickerComponent implements OnInit {
     }
     this.roomlist.sort();
     this.roomlist = this.roomlist.map(x => { return { 'label': x, 'value': x } });
-  }
-  show() {
     this.display = true;
     this.selectStudent = null;
     this.Students = [];

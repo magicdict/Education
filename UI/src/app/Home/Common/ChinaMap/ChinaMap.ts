@@ -59,6 +59,9 @@ export class ChinaMapComponent implements OnInit, OnChanges {
         if (this.ViusalMax !== undefined) {
             this.ChinaMapOption.visualMap.max = this.ViusalMax;
             this.ZheJiangMapOption.visualMap.max = this.ViusalMax;
+        } else {
+            this.ChinaMapOption.visualMap.max = 100;
+            this.ZheJiangMapOption.visualMap.max = 100;
         }
         this.ChinaMapOption.series[0].mapType = "China";
         this.ChinaMapOption.series[0].data = this.NativePlace;
