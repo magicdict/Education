@@ -56,6 +56,63 @@ export class ConsumptionOverviewComponent implements OnInit {
     return val[1] / 2500;
   }
 
+  WeekTimeOption = {
+    tooltip: {
+      position: 'top',
+      formatter: (val: any) => { return val.data[1]; }
+    },
+    title: [],
+    singleAxis: [],
+    series: []
+  };
+
+  SetWeekTimeOption(dataItems: number[][]) {
+    var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
+      '7a', '8a', '9a', '10a', '11a',
+      '12p', '1p', '2p', '3p', '4p', '5p',
+      '6p', '7p', '8p', '9p', '10p', '11p'];
+    var days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
+
+    this.WeekTimeOption.title = [];
+    this.WeekTimeOption.singleAxis = [];
+    this.WeekTimeOption.series = [];
+
+    for (let idx = 0; idx < 7; idx++) {
+      let day = days[idx];
+      this.WeekTimeOption.title.push({
+        textBaseline: 'middle',
+        top: (idx + 0.5) * 100 / 7 + '%',
+        text: day
+      });
+      this.WeekTimeOption.singleAxis.push({
+        left: 150,
+        type: 'category',
+        boundaryGap: false,
+        data: hours,
+        top: (idx * 100 / 7 + 5) + '%',
+        height: (100 / 7 - 10) + '%',
+        axisLabel: {
+          interval: 2
+        }
+      });
+      this.WeekTimeOption.series.push({
+        singleAxisIndex: idx,
+        coordinateSystem: 'singleAxis',
+        type: 'scatter',
+        data: [],
+        symbolSize: (dataItem: number[]) => {
+          return dataItem[1] / 4000;
+        }
+      });
+    }
+    dataItems.forEach(dataItem => {
+      this.WeekTimeOption.series[dataItem[0]].data.push([dataItem[1], dataItem[2]]);
+    });
+
+    //console.log(this.WeekTimeOption);
+  }
+
+
   ngOnInit(): void {
     this.route.data
       .subscribe((data: { consumptionInfo: ISchoolConsumptionInfo }) => {
@@ -92,6 +149,8 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.MonthUpLimit = 1000;
         this.QueryByMonthUpLimit();
 
+        this.SetWeekTimeOption(data.consumptionInfo.weekTimeConsumption
+          .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
       });
   }
 

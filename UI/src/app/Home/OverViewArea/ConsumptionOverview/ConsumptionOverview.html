@@ -39,8 +39,12 @@
             </div>
         </div>
     </p-tabPanel>
-    <p-tabPanel header="消费统计" style="width:1140px;">
+    <p-tabPanel header="消费统计（每天）" style="width:1140px;">
         <div echarts [options]="dailyOpt" style="width:1000px;height:640px;">
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header="消费统计(时段周次)" style="width:1140px;">
+        <div echarts [options]="WeekTimeOption" style="width:1000px;height:640px;">
         </div>
     </p-tabPanel>
     <p-tabPanel header="消费预警" style="width:1140px;">

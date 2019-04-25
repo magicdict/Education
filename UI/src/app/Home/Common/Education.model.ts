@@ -327,6 +327,7 @@ export interface ISchoolConsumptionInfo {
   highestRecNotLiveAtSchool: IConsumption[];
   liveAtSchoolCnt: number;
   notLiveAtSchoolCnt: number;
+  weekTimeConsumption: { name: string, value: number }[];
 }
 
 /**天气 */

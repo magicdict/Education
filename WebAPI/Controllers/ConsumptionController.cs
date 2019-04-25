@@ -72,6 +72,8 @@ namespace Education.Controllers
             /// <returns></returns>
             public List<NameValueSet> DailyConsumption = new List<NameValueSet>();
 
+            public List<NameValueSet> WeekTimeConsumption = new List<NameValueSet>();
+
         }
 
 
@@ -118,30 +120,39 @@ namespace Education.Controllers
             }
 
             //全体
-            info.WeekDayConsumption.Add(new NameValueSet() { name = "周一", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Monday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumption.Add(new NameValueSet() { name = "周二", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Tuesday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumption.Add(new NameValueSet() { name = "周三", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Wednesday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumption.Add(new NameValueSet() { name = "周四", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Thursday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumption.Add(new NameValueSet() { name = "周五", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Friday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumption.Add(new NameValueSet() { name = "周六", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Saturday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumption.Add(new NameValueSet() { name = "周日", value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == DayOfWeek.Sunday).Sum(x => x.MonDeal) });
 
+            var WeekDays = new DayOfWeek[] { DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday };
+            var WeekDayNames = new String[] { "周一", "周二", "周三", "周四", "周五", "周六", "周日" };
 
-            info.WeekDayConsumptionLiveAtSchool.Add(new NameValueSet() { name = "周一", value = -(Int32)LiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Monday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumptionLiveAtSchool.Add(new NameValueSet() { name = "周二", value = -(Int32)LiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Tuesday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumptionLiveAtSchool.Add(new NameValueSet() { name = "周三", value = -(Int32)LiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Wednesday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumptionLiveAtSchool.Add(new NameValueSet() { name = "周四", value = -(Int32)LiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Thursday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumptionLiveAtSchool.Add(new NameValueSet() { name = "周五", value = -(Int32)LiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Friday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumptionLiveAtSchool.Add(new NameValueSet() { name = "周六", value = -(Int32)LiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Saturday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumptionLiveAtSchool.Add(new NameValueSet() { name = "周日", value = -(Int32)LiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Sunday).Sum(x => x.MonDeal) });
+            for (int WeekIndex = 0; WeekIndex < 7; WeekIndex++)
+            {
+                info.WeekDayConsumption.Add(new NameValueSet()
+                {
+                    name = WeekDayNames[WeekIndex],
+                    value = -(Int32)Dataset.ConsumptionList.Where(x => x.DayOfWeek == WeekDays[WeekIndex]).Sum(x => x.MonDeal)
+                });
+                //按照时间划分
+                for (int hourIndex = 0; hourIndex < 24; hourIndex++)
+                {
+                    info.WeekTimeConsumption.Add(new NameValueSet()
+                    {
+                        name = WeekIndex + "-" + hourIndex,
+                        value = -(Int32)Dataset.ConsumptionList.
+                        Where(x => x.DayOfWeek == WeekDays[WeekIndex] && x.DealTimeHour == hourIndex.ToString("D2")).Sum(x => x.MonDeal)
+                    });
+                }
 
-            info.WeekDayConsumptionNotLiveAtSchool.Add(new NameValueSet() { name = "周一", value = -(Int32)NotLiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Monday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumptionNotLiveAtSchool.Add(new NameValueSet() { name = "周二", value = -(Int32)NotLiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Tuesday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumptionNotLiveAtSchool.Add(new NameValueSet() { name = "周三", value = -(Int32)NotLiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Wednesday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumptionNotLiveAtSchool.Add(new NameValueSet() { name = "周四", value = -(Int32)NotLiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Thursday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumptionNotLiveAtSchool.Add(new NameValueSet() { name = "周五", value = -(Int32)NotLiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Friday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumptionNotLiveAtSchool.Add(new NameValueSet() { name = "周六", value = -(Int32)NotLiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Saturday).Sum(x => x.MonDeal) });
-            info.WeekDayConsumptionNotLiveAtSchool.Add(new NameValueSet() { name = "周日", value = -(Int32)NotLiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Sunday).Sum(x => x.MonDeal) });
+                info.WeekDayConsumptionLiveAtSchool.Add(new NameValueSet()
+                {
+                    name = WeekDayNames[WeekIndex],
+                    value = -(Int32)LiveAtSchool.Where(x => x.DayOfWeek == WeekDays[WeekIndex]).Sum(x => x.MonDeal)
+                });
+                info.WeekDayConsumptionNotLiveAtSchool.Add(new NameValueSet()
+                {
+                    name = WeekDayNames[WeekIndex],
+                    value = -(Int32)NotLiveAtSchool.Where(x => x.DayOfWeek == WeekDays[WeekIndex]).Sum(x => x.MonDeal)
+                });
+            }
 
             Console.WriteLine("消费月统计，周别统计：" + timer.Elapsed.ToString());
 
