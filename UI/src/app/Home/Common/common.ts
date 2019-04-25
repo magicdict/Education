@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { echartsInstance } from 'echarts'
 
 @Injectable()
 export class CommonFunction {
@@ -122,7 +123,27 @@ export class CommonFunction {
         }
     }
 
-    public static base64ToBlob(code: string): Blob {
+    public static SaveChartImage(chartInstannce:echartsInstance,filename:string) {
+        var img = new Image();
+        img.src = chartInstannce.getDataURL({
+            pixelRatio: 2,
+            backgroundColor: '#fff'
+        });
+        // IE 11
+        if (window.navigator.msSaveBlob !== undefined) {
+            var blob = CommonFunction.base64ToBlob(img.src);
+            window.navigator.msSaveBlob(blob, filename + '.png');
+            return;
+        }
+        var a = document.createElement('a');
+        a.download = filename;
+        a.href = img.src;
+        var event = new MouseEvent('click');
+        a.dispatchEvent(event);
+    }
+
+
+    private static base64ToBlob(code: string): Blob {
         const parts = code.split(';base64,');
         const contentType = parts[0].split(':')[1];
         const raw = window.atob(parts[1]);

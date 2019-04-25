@@ -6,6 +6,7 @@ import { SexRatePieOption } from '../../GraphOption/StudentGraphOption'
 import { ISimpleBar } from '../../GraphOption/KaoqinOption';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
+import { CommonFunction } from '../../Common/common';
 
 @Component({
   templateUrl: 'ClassOverview.html',
@@ -23,7 +24,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
   public ClassId: string;
   public Teachers: ITeacher[] = [];
   public Exams: IClassExam[][] = [];
-  mSexRate = SexRatePieOption;
+  mSexRate = CommonFunction.clone(SexRatePieOption);
   KaoqinOpt: ISimpleBar;
   IsShowKaoqinGraph: boolean;
 
@@ -51,7 +52,13 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
     this.KaoqinEchartsInstance = event;
   }
 
-  IsMapReady = false;
+  SaveSexRateImage() {
+    CommonFunction.SaveChartImage(this.SexRateEchartsInstance, this.ClassName + "性别比例");
+  }
+
+  SaveKaoqinImage() {
+    CommonFunction.SaveChartImage(this.KaoqinEchartsInstance, this.ClassName + "考勤统计");
+  }
 
   cols = [
     { field: 'id', header: "学号" },
@@ -78,13 +85,15 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
         this.StudentsInfo = data.classinfo.property;
 
         this.mSexRate.title.text = "";
-        this.mSexRate.legend.data = [];
+        this.mSexRate.title['show'] = false;
+        this.mSexRate.legend['show'] = false;
+        this.mSexRate.series[0]['radius'] = '75%';
         this.mSexRate.series[0].data[0].value = data.classinfo.property.totalSexRate.maleCnt;
         this.mSexRate.series[0].data[1].value = data.classinfo.property.totalSexRate.femaleCnt;
         if (this.SexRateEchartsInstance !== undefined) {
           this.SexRateEchartsInstance.setOption(this.mSexRate);
         }
-
+        //console.log(this.mSexRate);
         this.Teachers = data.classinfo.teachers;
         //classTerm划分
         from(data.classinfo.exams).pipe(

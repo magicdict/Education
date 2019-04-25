@@ -8,34 +8,6 @@
             </app-map>
         </div>
         <div class="col-5" style="padding-left: 10px;padding-right: 0px;">
-            <div class="box box-primary box-solid" style="width: 100%;">
-                <div class="box-header with-border">
-                    <h3 class="box-title">性别比例</h3>
-                </div>
-                <div class="box-body">
-                    <div *ngIf="this.campusfullname === '东部校区'" echarts [options]="mSexRatePieOption"
-                        style="width:450px;height:450px"></div>
-                    <div *ngIf="this.campusfullname === '白杨校区'" echarts [options]="mSexRateSunburstOption"
-                        style="width:450px;height:450px"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col" style="padding: 0px;">
-            <div class="box box-primary box-solid" style="width: 100%;">
-                <div class="box-header with-border">
-                    <h3 class="box-title">教师</h3>
-                </div>
-                <div class="box-body">
-                    <div echarts [options]="mTeacherSub" style="width:1000px;height:300px"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col" style="padding: 0px;">
             <div class="box box-primary  box-solid" style="width: 100%;">
                 <div class="box-header with-border">
                     <h3 class="box-title">概要</h3>
@@ -59,6 +31,29 @@
                             <span class="sr-only">班级数</span>
                         </button>
                     </div>
+                </div>
+            </div>
+            <div class="box box-primary box-solid" style="width: 100%;">
+                <div class="box-header with-border">
+                    <h3 class="box-title">性别比例</h3>
+                </div>
+                <div class="box-body">
+                    <div *ngIf="this.campusfullname === '东部校区'" echarts [options]="mSexRatePieOption"
+                        style="width:450px;height:435px"></div>
+                    <div *ngIf="this.campusfullname === '白杨校区'" echarts [options]="mSexRateSunburstOption"
+                        style="width:450px;height:435px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="padding: 0px;">
+            <div class="box box-primary box-solid" style="width: 100%;">
+                <div class="box-header with-border">
+                    <h3 class="box-title">教师</h3>
+                </div>
+                <div class="box-body">
+                    <div echarts [options]="mTeacherSub" style="width:1000px;height:300px"></div>
                 </div>
             </div>
         </div>

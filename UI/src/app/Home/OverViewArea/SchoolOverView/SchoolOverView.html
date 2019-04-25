@@ -10,7 +10,8 @@
           <div class="stats">
             <b>白杨校区 宁波市白杨街178号</b>
             <br />
-            <button type="button" class="btn btn-info" (click)="ShowCampus('白')"><i class="fa fas fa-chart-bar"></i>&nbsp;详细</button>
+            <button type="button" class="btn btn-info" (click)="ShowCampus('白')"><i
+                class="fa fas fa-chart-bar"></i>&nbsp;详细</button>
           </div>
         </div>
       </div>
@@ -24,27 +25,29 @@
           <div class="stats">
             <b>东部校区 宁波市百丈东路1907号</b>
             <br />
-            <button type="button" class="btn btn-info" (click)="ShowCampus('东')"><i class="fa fas fa-chart-bar"></i>&nbsp;详细</button>
+            <button type="button" class="btn btn-info" (click)="ShowCampus('东')"><i
+                class="fa fas fa-chart-bar"></i>&nbsp;详细</button>
           </div>
         </div>
       </div>
-    </div> 
+    </div>
 
     <div class="col-4">
-      <div class="box box-primary box-solid" style="width: 100%;margin-top: 10px;">
+      <div class="box box-primary box-solid" style="width: 100%;margin-top: 0px;">
         <div class="box-header with-border">
           <h3 class="box-title">性别比例</h3>
           <div class="box-tools pull-right">
-              <button type="button" style="margin: 0px;" class="btn btn-info btn-box-tool" (click)="SaveSexRateImage()">
-                  <i class="fas fa-info-circle"></i>&nbsp;保存为图片
-              </button> 
+            <button type="button" style="margin: 0px;" class="btn btn-info btn-box-tool" (click)="SaveSexRateImage()">
+              <i class="fas fa-file-download"></i>&nbsp;保存为图片
+            </button>
           </div>
         </div>
         <div class="box-body">
-          <div echarts (chartInit)="SexRateChartInit($event)" [options]="SexRateSunburstOption" style="width:300px;height:310px"></div>
+          <div echarts (chartInit)="SexRateChartInit($event)" [options]="SexRateSunburstOption"
+            style="width:300px;height:315px"></div>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
 
   <div class="row" style="width:1140px">
@@ -107,6 +110,36 @@
               style="cursor: default;margin-left: 10px">
               {{x.name}}
               <span class="badge badge-light">{{x.value}}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+        <div class="box-header with-border">
+          <h3 class="box-title">系统使用数据</h3>
+        </div>
+        <div class="box-body">
+          <div style="margin: 5px 0px 5px 0px">
+            <button type="button" class="btn btn-warning" style="cursor: default;margin-left: 10px">
+              学生数据
+              <span class="badge badge-light">1765</span>
+            </button>
+            <button type="button" class="btn btn-warning" style="cursor: default;margin-left: 10px">
+              考勤数据
+              <span class="badge badge-light">23630</span>
+            </button>
+            <button type="button" class="btn btn-warning" style="cursor: default;margin-left: 10px">
+              消费数据
+              <span class="badge badge-light">463904</span>
+            </button>
+            <button type="button" class="btn btn-warning" style="cursor: default;margin-left: 10px">
+              考试数据
+              <span class="badge badge-light">471686</span>
+            </button>
+            <button type="button" class="btn btn-warning" style="cursor: default;margin-left: 10px">
+              教师数据
+              <span class="badge badge-light">3088</span>
             </button>
           </div>
         </div>

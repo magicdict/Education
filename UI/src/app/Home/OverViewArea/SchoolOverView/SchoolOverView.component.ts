@@ -31,22 +31,7 @@ export class SchoolOverViewComponent implements OnInit {
   }
 
   SaveSexRateImage() {
-    var img = new Image();
-    img.src = this.SexRateChart.getDataURL({
-      pixelRatio: 2,
-      backgroundColor: '#fff'
-    });
-    // IE 11
-    if (window.navigator.msSaveBlob !== undefined) {
-      var blob = CommonFunction.base64ToBlob(img.src);
-      window.navigator.msSaveBlob(blob, '全校性别比例.png');
-      return;
-    }
-    var a = document.createElement('a');
-    a.download = '全校性别比例';
-    a.href = img.src;
-    var event = new MouseEvent('click');
-    a.dispatchEvent(event);
+    CommonFunction.SaveChartImage(this.SexRateChart, "全校性别比例");
   }
 
   ngOnInit(): void {

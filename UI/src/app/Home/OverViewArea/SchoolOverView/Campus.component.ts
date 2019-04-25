@@ -89,18 +89,15 @@ export class CampusComponent implements OnInit {
                 type: 'bar'
             }]
         }
-
         this.mTeacherSub['toolbox'] = {
             'show': true,
             'feature': {
                 'saveAsImage': {},
                 'magicType': {
-                    'type': ['line', 'bar', 'stack', 'tiled']
+                    'type': ['line', 'bar']
                 }
             }
         };
-
-
     }
     constructor(
         private router: Router,

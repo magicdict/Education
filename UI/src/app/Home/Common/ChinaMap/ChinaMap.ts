@@ -28,6 +28,14 @@ export class ChinaMapComponent implements OnInit, OnChanges {
         this.zhejiangChart = chart;
     }
 
+    SaveChinaMap() {
+        CommonFunction.SaveChartImage(this.chinaChart, "全国生源地图")
+    }
+    SaveZhejiangMap() {
+        CommonFunction.SaveChartImage(this.zhejiangChart, "浙江省生源地图")
+    }
+
+
 
     @Input() NativePlace: { name: string, value: number }[];
     @Input() NativePlaceZheJiang: { name: string, value: number }[];
@@ -54,7 +62,7 @@ export class ChinaMapComponent implements OnInit, OnChanges {
         }
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(_changes: SimpleChanges): void {
         //重新设置一下VisualMax的值    
         if (this.ViusalMax !== undefined) {
             this.ChinaMapOption.visualMap.max = this.ViusalMax;
