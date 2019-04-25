@@ -29,9 +29,6 @@ export class CampusComponent implements OnInit {
 
     ngOnInit(): void {
         if (this.service.SchoolOverview === undefined) {
-            //页面被强制刷新的时候，回到Home页面
-            //该页面没有网络取数据操作，所以，会和Nav一起加载，无法保证Nav和它的时序关系
-            this.router.navigate(['home/school']);
             return;
         }
         this.route.params.subscribe(

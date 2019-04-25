@@ -1,5 +1,5 @@
 <app-nav></app-nav>
-<div class="container" style="margin: 0px;">
+<div class="container" style="margin: 0px;" *ngIf="this.campusInfo !==undefined">
     <div class="row" style="width:1140px">
         <div class="col-7" style="padding: 0px;">
             <app-map [NativePlace]="this.campusInfo.property.nativePlace" [StyleHeight]="'450px'" [StyleWidth]="'600px'"

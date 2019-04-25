@@ -42,7 +42,7 @@ export class HomeService {
     public GetStudentInfoByID(StudentId: string): Promise<IStudentInfo> | IStudentInfo {
         if (this.CurrentStudentInfo !== undefined &&
             this.CurrentStudentInfo.baseInfo.id === StudentId) {
-            console.log("使用缓存数据：" + StudentId);
+            //console.log("使用缓存数据：" + StudentId);
             return this.CurrentStudentInfo;
         }
         return this.commonFunction.httpRequest<any>('Student/GetStudentInfo?ID=' + StudentId);

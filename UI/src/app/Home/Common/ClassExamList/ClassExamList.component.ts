@@ -59,7 +59,7 @@ export class ClassExamListComponent implements OnChanges {
         if (this.subnamelist !== undefined) {
             this.subnamelist.value = null;
         }
-        console.log("成绩列表变更");
+        //console.log("成绩列表变更");
     }
 
 

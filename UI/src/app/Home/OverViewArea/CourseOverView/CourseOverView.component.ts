@@ -70,7 +70,7 @@ export class CourseOverViewComponent implements OnInit {
         this.SingleCoursePercent = data.courseInfo.selectionCourseCnt.map(x => {
           return { 'name': x.name, 'value': CommonFunction.roundvalue(x.value * 100 / data.courseInfo.studentCnt) }
         });
-        console.log(this.SingleCoursePercent);
+        //console.log(this.SingleCoursePercent);
         this.mCourseSelectRadarGraphOption.radar.indicator =
           data.courseInfo.selectionCourseCnt.map(x => { return { 'name': x.name, 'max': data.courseInfo.studentCnt } });
         this.mCourseSelectRadarGraphOption.series[0].data[0].value = data.courseInfo.selectionCourseCnt.map(x => x.value);
@@ -125,7 +125,7 @@ export class CourseOverViewComponent implements OnInit {
         data.courseInfo.selectionThreeCourseCnt.map(x => { return { 'name': x.name } }).forEach(element => {
           this.mSelectCourseSankeyOption.series.data.push(element);
         });
-        console.log(this.mSelectCourseSankeyOption.series.data);
+        //console.log(this.mSelectCourseSankeyOption.series.data);
         //第一层Link
         data.courseInfo.selectionCourseCnt.map(x => x.name).forEach(
           one => {

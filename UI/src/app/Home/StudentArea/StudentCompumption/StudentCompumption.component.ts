@@ -179,7 +179,7 @@ export class StudentCompumptionComponent implements OnInit {
             }]
         };
 
-        console.log(WeekArray);
+        //console.log(WeekArray);
     }
 
     /**星期统计 */

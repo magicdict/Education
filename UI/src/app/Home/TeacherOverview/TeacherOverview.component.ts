@@ -38,7 +38,7 @@ export class TeacherOverviewComponent implements OnInit {
         )
         this.TeacherHistory = [];
         for (let k in data.teacherinfo.groupByTerm) {
-          console.log(Number(k.substring(0, 4)));
+          //console.log(Number(k.substring(0, 4)));
           if (k.substring(0, 4)=="2018") continue;  //本学年的不放入
           this.TeacherHistory.push({ year: k.substring(0, 4), classname: data.teacherinfo.groupByTerm[k] });
           this.TotalClassCnt += data.teacherinfo.groupByTerm[k].length;

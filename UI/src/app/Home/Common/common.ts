@@ -150,7 +150,7 @@ export class CommonFunction {
     }
 
     handleError(error: any): Promise<any> {
-        console.log('服务器访问失败');
+        //console.log('服务器访问失败');
         console.error('服务器访问失败', error);
         return Promise.reject(error.message || error);
     }

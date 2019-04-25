@@ -37,7 +37,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
 
   NativeEchartsInstance: any;
   onNativePlaceChartInit(event: any) {
-    console.log("地图初始化了");
+    //console.log("地图初始化了");
     this.NativeEchartsInstance = event;
   }
 
@@ -62,10 +62,13 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
     { field: 'nation', header: "民族" },
     { field: 'nativePlace', header: "出生地" },
     { field: 'optionCourse', header: "七选三" }
-];
+  ];
 
 
   ngOnInit(): void {
+    if (this.service.CurrentClassInfo === undefined) {
+      return;
+    }
     this.route.data
       .subscribe((data: { classinfo: IClassInfo }) => {
         this.QueryResult = this.service.CurrentClassInfo;
