@@ -235,11 +235,13 @@ public static class Dataset
             if (student.ClassName.Contains("高三"))
             {
                 student.OptionCourse_FiveSchool = Chengji.GetOptionCourse(student.ID, "6");
-                student.OptionCourse_FiveSchool.Sort((x, y) => { return Chengji.OptionalSelectSort(x, y); });    //排序
+                student.OptionCourse_FiveSchool.Sort((x, y) => { return Chengji.OptionalSelectSort(x, y); });
 
                 student.OptionCourse_TenSchool = Chengji.GetOptionCourse(student.ID, "7");
-                student.OptionCourse_TenSchool.Sort((x, y) => { return Chengji.OptionalSelectSort(x, y); });    //排序
-
+                student.OptionCourse_TenSchool.Sort((x, y) => { return Chengji.OptionalSelectSort(x, y); });
+                //默认值
+                student.OptionCourse = Chengji.GetOptionCourse(student.ID, "6");
+                student.OptionCourse.Sort((x, y) => { return Chengji.OptionalSelectSort(x, y); });
             }
         }
         Console.WriteLine(timer.Elapsed.ToString());

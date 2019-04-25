@@ -123,7 +123,7 @@ export class CommonFunction {
         }
     }
 
-    public static SaveChartImage(chartInstannce:echartsInstance,filename:string) {
+    public static SaveChartImage(chartInstannce: echartsInstance, filename: string) {
         var img = new Image();
         img.src = chartInstannce.getDataURL({
             pixelRatio: 2,

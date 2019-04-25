@@ -202,3 +202,69 @@ export const MonthlyCompumptionBarOption = {
         }
     ]
 };
+
+
+export const DairyCanlendarOption = {
+    tooltip: {
+        position: 'top',
+        formatter: "{c}"
+    },
+    visualMap: [{
+        min: 0,
+        max: 60000,
+        calculable: true,
+        seriesIndex: [0, 1],
+        orient: 'horizontal',
+        right: 20,
+        bottom: 20
+    }],
+    calendar: [
+        {
+            orient: 'vertical',
+            yearLabel: {
+                margin: 40
+            },
+            dayLabel: {
+                firstDay: 1,
+                nameMap: ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+            },
+            monthLabel: {
+                nameMap: 'cn',
+                margin: 20
+            },
+            cellSize: 40,
+            range: ['2018-08', '2018-11']
+        },
+        {
+            orient: 'vertical',
+            yearLabel: {
+                margin: 40
+            },
+            dayLabel: {
+                firstDay: 1,
+                nameMap: ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+            },
+            monthLabel: {
+                nameMap: 'cn',
+                margin: 20
+            },
+            left: 460,
+            cellSize: 40,
+            range: ['2018-11', '2019-02']
+        }
+    ],
+    series: [{
+        type: 'effectScatter',
+        symbolSize: null,
+        coordinateSystem: 'calendar',
+        calendarIndex: 0,
+        data: []
+    },
+    {
+        type: 'effectScatter',
+        symbolSize: null,
+        coordinateSystem: 'calendar',
+        calendarIndex: 1,
+        data: []
+    }]
+};

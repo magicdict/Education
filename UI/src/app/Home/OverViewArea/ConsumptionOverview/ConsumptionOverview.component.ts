@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ISchoolConsumptionInfo, IConsumption, IStudent, IStudentMonthlyConsumption } from 'src/app/Home/Common/Education.model';
-import { MonthlyCompumptionBarOption, MonthlyCompumptionBarOptionTotal } from '../../GraphOption/CompumptionOption'
+import { MonthlyCompumptionBarOption, MonthlyCompumptionBarOptionTotal, DairyCanlendarOption } from '../../GraphOption/CompumptionOption'
 import { HomeService } from '../../Common/Home.service';
 import { CommonFunction } from '../../Common/common';
 import { StudentPickerComponent } from '../../Common/studentPicker/studentPicker.component';
@@ -23,9 +23,9 @@ export class ConsumptionOverviewComponent implements OnInit {
     { field: 'liveAtSchool', header: "是否住校" },
     { field: 'month', header: "月度" },
     { field: 'amount', header: "金额" },
-];
+  ];
 
-
+  dailyOpt = CommonFunction.clone(DairyCanlendarOption);
   monthlyOpt = CommonFunction.clone(MonthlyCompumptionBarOption);
   weekdayOpt = CommonFunction.clone(MonthlyCompumptionBarOption);
 
@@ -52,9 +52,17 @@ export class ConsumptionOverviewComponent implements OnInit {
   public Students: IStudentMonthlyConsumption[] = [];
   public selectStudent: IStudentMonthlyConsumption;
 
+  symbolSize(val: any[]) {
+    return val[1] / 2500;
+  }
+
   ngOnInit(): void {
     this.route.data
       .subscribe((data: { consumptionInfo: ISchoolConsumptionInfo }) => {
+        this.dailyOpt.series[0].symbolSize = this.symbolSize;
+        this.dailyOpt.series[1].symbolSize = this.symbolSize;
+        this.dailyOpt.series[0].data = data.consumptionInfo.dailyConsumption.map(x => { return [x.name, x.value * -1]; });
+        this.dailyOpt.series[1].data = data.consumptionInfo.dailyConsumption.map(x => { return [x.name, x.value * -1]; });
 
         this.monthlyTotalOpt.title.text = "整体月消费金额";
         this.monthlyTotalOpt.xAxis.data = data.consumptionInfo.monthlyConsumption.map(x => x.name);

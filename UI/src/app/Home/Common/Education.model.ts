@@ -321,6 +321,7 @@ export interface ISchoolConsumptionInfo {
   weekDayConsumption: { name: string, value: number }[];
   weekDayConsumptionLiveAtSchool: { name: string, value: number }[];
   weekDayConsumptionNotLiveAtSchool: { name: string, value: number }[];
+  dailyConsumption: { name: string, value: number }[];
   highestRec: IConsumption[];
   highestRecLiveAtSchool: IConsumption[];
   highestRecNotLiveAtSchool: IConsumption[];

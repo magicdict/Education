@@ -65,6 +65,12 @@ namespace Education.Controllers
             public int LiveAtSchoolCnt { set; get; }
 
             public int NotLiveAtSchoolCnt { set; get; }
+            /// <summary>
+            /// 每日消费
+            /// </summary>
+            /// <typeparam name="NameValueSet"></typeparam>
+            /// <returns></returns>
+            public List<NameValueSet> DailyConsumption = new List<NameValueSet>();
 
         }
 
@@ -137,15 +143,22 @@ namespace Education.Controllers
             info.WeekDayConsumptionNotLiveAtSchool.Add(new NameValueSet() { name = "周六", value = -(Int32)NotLiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Saturday).Sum(x => x.MonDeal) });
             info.WeekDayConsumptionNotLiveAtSchool.Add(new NameValueSet() { name = "周日", value = -(Int32)NotLiveAtSchool.Where(x => x.DayOfWeek == DayOfWeek.Sunday).Sum(x => x.MonDeal) });
 
+            Console.WriteLine("消费月统计，周别统计：" + timer.Elapsed.ToString());
 
+            info.DailyConsumption = Dataset.ConsumptionList.GroupBy(x => x.DealTimeYear + "-" + x.DealTimeMonth + "-" + x.DealTimeDay)
+                    .Select(x => new NameValueSet()
+                    {
+                        name = x.Key,
+                        value = (int)x.Sum(y => y.MonDeal)
+                    }).ToList();
 
-            Console.WriteLine(timer.Elapsed.ToString());
+            Console.WriteLine("消费日统计：" + timer.Elapsed.ToString());
             //最高消费记录
             Dataset.ConsumptionList.Sort((x, y) => { return x.MonDeal.CompareTo(y.MonDeal); });
             info.HighestRec = Dataset.ConsumptionList.Take(3).ToList();
             info.HighestRecLiveAtSchool = Dataset.ConsumptionList.Where(x => x.ConsumpStudent.LiveAtSchool).Take(3).ToList();
             info.HighestRecNotLiveAtSchool = Dataset.ConsumptionList.Where(x => !x.ConsumpStudent.LiveAtSchool).Take(3).ToList();
-            Console.WriteLine(timer.Elapsed.ToString());
+            Console.WriteLine("消费统计结束" + timer.Elapsed.ToString());
             timer.Stop();
         }
     }

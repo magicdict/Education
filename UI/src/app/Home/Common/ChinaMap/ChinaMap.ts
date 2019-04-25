@@ -48,16 +48,18 @@ export class ChinaMapComponent implements OnInit, OnChanges {
     NativePlaceZheJiangDetailOnly: { name: string, value: number }[];
 
     ngOnInit(): void {
-        if (!this.service.IsMapReady) {
+        if (!this.service.IsChinaMapReady) {
             this.http.get('assets/map/data-china.json')
                 .subscribe(geoJson => {
                     registerMap('China', geoJson);
-                    this.service.IsMapReady = true;
+                    this.service.IsChinaMapReady = true;
                 });
+        }
+        if (!this.service.IsZheJiangMapReady) {
             this.http.get('assets/map/data-zhejiang.json')
                 .subscribe(geoJson => {
                     registerMap('zhejiang', geoJson);
-                    this.service.IsMapReady = true;
+                    this.service.IsZheJiangMapReady = true;
                 });
         }
     }

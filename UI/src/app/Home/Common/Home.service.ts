@@ -49,7 +49,8 @@ export class HomeService {
     }
 
     /**是否注册完毕地图 */
-    IsMapReady: boolean = false;
+    IsChinaMapReady: boolean = false;
+    IsZheJiangMapReady: boolean = false;
 
     /**考试一览缓存 */
     CurrentExam: IExamInfoForNumberAndSubName;

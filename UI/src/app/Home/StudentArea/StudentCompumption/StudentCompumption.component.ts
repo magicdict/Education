@@ -3,7 +3,7 @@ import { HomeService } from '../../Common/Home.service';
 import { CommonFunction } from 'src/app/Home/Common/common';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
-import { DiaryAvgByTimeRangeOption, TotalByTimeRangeOption, DiaryCompumptionOption } from '../../GraphOption/CompumptionOption';
+import { DiaryAvgByTimeRangeOption, TotalByTimeRangeOption, DiaryCompumptionOption, DairyCanlendarOption } from '../../GraphOption/CompumptionOption';
 import { ISimpleBar } from '../../GraphOption/KaoqinOption';
 @Component({
     templateUrl: 'StudentCompumption.html',
@@ -41,6 +41,7 @@ export class StudentCompumptionComponent implements OnInit {
     mDiaryAvgByTimeRangeOpt = CommonFunction.clone(DiaryAvgByTimeRangeOption);
     mTotalByTimeRangeOpt = CommonFunction.clone(TotalByTimeRangeOption);
     mDiaryCompumptionOpt = CommonFunction.clone(DiaryCompumptionOption);
+    mDirayCanlendarOpt = CommonFunction.clone(DairyCanlendarOption);
 
     DiaryAvgByTimeRangeInfo1: string;
     DiaryAvgByTimeRangeInfo2: string;
@@ -141,6 +142,18 @@ export class StudentCompumptionComponent implements OnInit {
         )
         this.mDiaryCompumptionOpt.xAxis.data = diaryDateArray;
         this.mDiaryCompumptionOpt.series[0].data = diaryMoneyArray;
+
+        let DiaryDate = [];
+        for (let index = 0; index < diaryDateArray.length; index++) {
+            DiaryDate.push([diaryDateArray[index], diaryMoneyArray[index]])
+        }
+        this.mDirayCanlendarOpt.visualMap[0].max = 100;
+        this.mDirayCanlendarOpt.series[0].data = DiaryDate;
+        this.mDirayCanlendarOpt.series[0].symbolSize = (val: any[]) => { return val[1]/5; };
+
+        this.mDirayCanlendarOpt.series[1].data = DiaryDate;
+        this.mDirayCanlendarOpt.series[1].symbolSize = (val: any[]) => { return val[1]/5; };
+
     }
 
     /**星期统计 */
@@ -189,8 +202,8 @@ export class StudentCompumptionComponent implements OnInit {
         let Compumptions = this.service.CurrentStudentInfo.consumptions;
         let RangeArray: number[] = [0, 0, 0, 0];
         RangeArray[0] = Compumptions.filter(x => (-1 * x.monDeal) <= 10).length;
-        RangeArray[1] = Compumptions.filter(x => (-1 * x.monDeal) <= 20 &&  (-1 * x.monDeal) > 10).length;
-        RangeArray[2] = Compumptions.filter(x => (-1 * x.monDeal) <= 50 &&  (-1 * x.monDeal) > 20).length;
+        RangeArray[1] = Compumptions.filter(x => (-1 * x.monDeal) <= 20 && (-1 * x.monDeal) > 10).length;
+        RangeArray[2] = Compumptions.filter(x => (-1 * x.monDeal) <= 50 && (-1 * x.monDeal) > 20).length;
         RangeArray[3] = Compumptions.filter(x => (-1 * x.monDeal) > 50).length;
 
         for (let index = 0; index < 4; index++) {
