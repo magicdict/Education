@@ -22,6 +22,8 @@ export class ClassExamListComponent implements OnChanges {
 
     @Input() IsShowExamName: boolean = true;
 
+    @Input() IsShowClassName :boolean = true;
+
     /**统计条目 */
     @Input() Footer: IClassExam = null;
 
@@ -31,6 +33,7 @@ export class ClassExamListComponent implements OnChanges {
         { field: 'record.className', header: "班级名" },
         { field: 'record.numberName', header: "考试名称" },
         { field: 'record.teacherName', header: "教师" },
+        { field: 'record.teacherID', header: "教师ID" },
         { field: 'record.typeName', header: "考试类型" },
         { field: 'record.term', header: "学期" },
         { field: 'record.subName', header: "学科" },
@@ -77,6 +80,7 @@ export class ClassExamListComponent implements OnChanges {
             this.FunRowSelect(event);
         } else {
             //默认方法
+            if (!this.IsShowClassName) return;
             if (event.data.record.className === "年级组") return;
             this.service.CurrentClassExam = event.data;
             this.router.navigate(["exam/detail", event.data.record.idForClass]);

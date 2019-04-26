@@ -75,6 +75,7 @@ namespace Education.Controllers
             public List<Chengji> Top10 { set; get; }
             public List<Chengji> Low10 { set; get; }
             public ClassExamInfo GradeInfo { set; get; }
+            public List<ClassExamInfo> TeacherExamInfoList { set; get; }
         }
         /// <summary>
         /// 某个年级的某次考试的某个科目的班级单位的信息列表
@@ -112,9 +113,8 @@ namespace Education.Controllers
 
             //由于总人数的问题，这个必须先做，不然总人数会出现问题
             Result.GradeInfo = new ClassExamInfo(All);
-
-            //获得前10名和后10名
             All = All.Where(x => x.Score > 0).ToList();
+            //获得前10名和后10名
             var topx = Math.Min(All.Count(), 10);
             All.Sort((x, y) => { return y.Score.CompareTo(x.Score); });  //降序
             var Top10 = All.Take(topx).ToList();
@@ -125,6 +125,15 @@ namespace Education.Controllers
             Result.Top10 = Top10;
             Result.Low10 = Low10;
 
+            //教师的选择
+            Result.TeacherExamInfoList = new List<ClassExamInfo>();
+            var TeacherIds = All.Select(x => x.TeacherID).Distinct();
+            foreach (var teacherId in TeacherIds)
+            {
+                Result.TeacherExamInfoList.Add(
+                    new ClassExamInfo(All.Where(x => x.TeacherID == teacherId).ToList())
+                );
+            }
             return Result;
         }
 

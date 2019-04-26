@@ -10,6 +10,7 @@ import { ScoreFunnelOption } from '../../GraphOption/ScoreOption';
 export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
     Exams: IClassExam[] = [];
+    TeacherExams:IClassExam[] = [];
     Top10: IScore[] = [];
     Low10: IScore[] = [];
     FootExam: IClassExam;
@@ -68,11 +69,11 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
             //恢复上次浏览的考试
             this.CreateEntity(this.service.CurrentExam);
             this.SelectGrade = this.Exams[0].record.grade;
+            let m = this.GradeExamList.find(x => x.name == this.SelectGrade).value;
             this.SelectExamNumber = this.Exams[0].record.number;
+            let n = m.find(x => x.number == this.SelectExamNumber);
             this.SelectExamName = this.Exams[0].record.numberName;
             this.SelectSubName = this.Exams[0].record.subName;
-            let m = this.GradeExamList.find(x => x.name == this.SelectGrade).value;
-            let n = m.find(x => x.number == this.SelectExamNumber);
             this.Examlist = m.map(x => { return { 'label': x.numberName, 'value': x.number } });
             this.SubNameList = n.subNameList;
         } else {
@@ -109,6 +110,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         this.FootExam = r.gradeInfo;
         this.Top10 = r.top10;
         this.Low10 = r.low10;
+        this.TeacherExams = r.teacherExamInfoList;
         this.Title = this.Exams[0].record.numberName;
         this.subTitle = this.Exams[0].record.grade + " - " + this.Exams[0].record.subName;
         this.mScoreFunnelOption.legend.data = [];

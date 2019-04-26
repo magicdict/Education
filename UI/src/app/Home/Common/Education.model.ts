@@ -162,6 +162,7 @@ export interface IExamInfoForNumberAndSubName {
   top10: IScore[];
   low10: IScore[];
   gradeInfo: IClassExam;
+  teacherExamInfoList: IClassExam[];
 }
 
 export interface IConsumption {

@@ -46,6 +46,19 @@
                         </div>
                     </div>
                 </p-tabPanel>
+                <p-tabPanel [header]="'教师'" *ngIf="TeacherExams.length > 0">
+                    <div class="card">
+                        <div class="card-header card-header-text card-header-warning">
+                            <h4 class="card-title">{{Title}}</h4>
+                            <p class="category">{{subTitle}}</p>
+                        </div>
+                        <div class="card-body">
+                            <class-exam-list [Exams]="this.TeacherExams" [scrollHeight]="'600px'"
+                                [IsShowClassName]="false" [IsShowExamName]="false" [CSVFilename]="Title + subTitle">
+                            </class-exam-list>
+                        </div>
+                    </div>
+                </p-tabPanel>
                 <p-tabPanel [header]="'排行榜'">
 
                     <div class="card">

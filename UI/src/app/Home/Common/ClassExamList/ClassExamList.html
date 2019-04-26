@@ -12,11 +12,10 @@
 </div>
 
 <p-table #dt [value]="this.Exams" selectionMode="single" [scrollable]="true" [scrollHeight]="scrollHeight"
-  (onRowSelect)="onRowSelect($event)" [columns]="cols"
-  [exportFilename]="CSVFilename"> 
+  (onRowSelect)="onRowSelect($event)" [columns]="cols" [exportFilename]="CSVFilename">
   <ng-template pTemplate="header">
     <tr>
-      <th style="width: 100px;" [pSortableColumn]="'record.className'">班级名
+      <th *ngIf="IsShowClassName" style="width: 100px;" [pSortableColumn]="'record.className'">班级名
         <p-sortIcon [field]="'record.className'">
         </p-sortIcon>
       </th>
@@ -26,6 +25,10 @@
       </th>
       <th style="width: 50px;" [pSortableColumn]="'record.teacherName'">教师
         <p-sortIcon [field]="'record.teacherName'">
+        </p-sortIcon>
+      </th>
+      <th style="width: 50px;" [pSortableColumn]="'record.teacherID'">教师ID
+        <p-sortIcon [field]="'record.teacherID'">
         </p-sortIcon>
       </th>
       <th style="width: 80px;" [pSortableColumn]="'record.typeName'">考试类型
@@ -76,9 +79,10 @@
   </ng-template>
   <ng-template pTemplate="body" let-itemData>
     <tr [pSelectableRow]="itemData">
-      <td style="width: 100px">{{itemData.record.className}}</td>
+      <td *ngIf="IsShowClassName" style="width: 100px">{{itemData.record.className}}</td>
       <td *ngIf="IsShowExamName" style="width: 100px">{{itemData.record.numberName}}</td>
       <td style="width: 50px">{{itemData.record.teacherName}}</td>
+      <td style="width: 50px">{{itemData.record.teacherID}}</td>
       <td style="width: 80px;text-align:center;">{{itemData.record.typeName}}</td>
       <td style="width: 100px;text-align:center;">{{itemData.record.term}}</td>
       <td style="width: 50px;text-align:center;">{{itemData.record.subName}}</td>
@@ -102,8 +106,9 @@
   </ng-template>
   <ng-template pTemplate="footer" *ngIf="Footer !==null">
     <tr>
-      <td style="width: 100px">{{Footer.record.className}}</td>
+      <td *ngIf="IsShowClassName" style="width: 100px">{{Footer.record.className}}</td>
       <td *ngIf="IsShowExamName" style="width: 100px">{{Footer.record.numberName}}</td>
+      <td style="width: 50px">-</td>
       <td style="width: 50px">-</td>
       <td style="width: 80px;text-align:center;">{{Footer.record.typeName}}</td>
       <td style="width: 100px;text-align:center;">{{Footer.record.term}}</td>
