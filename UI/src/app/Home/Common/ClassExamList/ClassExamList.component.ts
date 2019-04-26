@@ -30,6 +30,7 @@ export class ClassExamListComponent implements OnChanges {
     cols = [
         { field: 'record.className', header: "班级名" },
         { field: 'record.numberName', header: "考试名称" },
+        { field: 'record.teacherName', header: "教师" },
         { field: 'record.typeName', header: "考试类型" },
         { field: 'record.term', header: "学期" },
         { field: 'record.subName', header: "学科" },
@@ -39,7 +40,8 @@ export class ClassExamListComponent implements OnChanges {
         { field: 'minScore', header: "最低分" },
         { field: 'avgScore', header: "平均分" },
         { field: 'std', header: "标准差" },
-        { field: 'var', header: "方差" }
+        { field: 'var', header: "方差" },
+        { field: 'mid', header: "中位数" }
     ];
 
 

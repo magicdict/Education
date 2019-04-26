@@ -100,7 +100,10 @@ public class ClassExamInfo
             return System.Math.Round(r.Average(x => x.Score), 2);
         }
     }
-
+    /// <summary>
+    /// 保准差
+    /// </summary>
+    /// <value></value>
     public double Std
     {
         get
@@ -110,7 +113,10 @@ public class ClassExamInfo
             return System.Math.Round((r.Select(x => (double)x.Score).ToList().StandardDeviation()), 2);
         }
     }
-
+    /// <summary>
+    /// 方差
+    /// </summary>
+    /// <value></value>
     public double Var
     {
         get
@@ -121,5 +127,27 @@ public class ClassExamInfo
 
         }
     }
+
+    /// <summary>
+    /// 中位数
+    /// </summary>
+    /// <value></value>
+    public double Mid
+    {
+        get
+        {
+            var r = ChengjiList.Where(x => x.Score > 0);
+            if (r.Count() == 0) return -1;
+            int cnt = r.Count();
+            if (cnt % 2 != 0)
+            {
+                //奇数 3 => 3/2 = 1 Index From 0
+                return r.ToArray()[cnt / 2].Score;
+            }
+            //偶数 4 => 4/2 = 2 = (1 + 2)/2 Index From 0
+            return (r.ToArray()[cnt / 2 - 1].Score + r.ToArray()[cnt / 2].Score) / 2;
+        }
+    }
+
 }
 

@@ -6,7 +6,7 @@ import { HomeService } from '../../Common/Home.service';
 import { ScoreFunnelOption } from '../../GraphOption/ScoreOption';
 @Component({
     templateUrl: 'ExamOverView.html',
-}) 
+})
 export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
     Exams: IClassExam[] = [];
@@ -35,7 +35,8 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         this.ExamChange();
     }
 
-    SubNameList: string[]
+    SubNameList: string[];
+    SelectSubName = '';
 
     ExamChange() {
         let m = this.GradeExamList.find(x => x.name == this.SelectGrade).value;
@@ -67,10 +68,13 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
             //恢复上次浏览的考试
             this.CreateEntity(this.service.CurrentExam);
             this.SelectGrade = this.Exams[0].record.grade;
-            this.GradeChange();
             this.SelectExamNumber = this.Exams[0].record.number;
             this.SelectExamName = this.Exams[0].record.numberName;
-            this.ExamChange();
+            this.SelectSubName = this.Exams[0].record.subName;
+            let m = this.GradeExamList.find(x => x.name == this.SelectGrade).value;
+            let n = m.find(x => x.number == this.SelectExamNumber);
+            this.Examlist = m.map(x => { return { 'label': x.numberName, 'value': x.number } });
+            this.SubNameList = n.subNameList;
         } else {
             //默认
             this.SelectGrade = this.GradeExamList[0].name;
@@ -125,6 +129,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
     JumpToExam(number: string, subName: string, Grade: string) {
         var request = "course/GetExamInfoByNumberAndSubName?number=" + number + "&subName=" + escape(subName) + "&Grade=" + escape(Grade);
+        this.SelectSubName = subName;
         this.commonFunction.httpRequest<IExamInfoForNumberAndSubName>(request).then(
             r => {
                 this.service.CurrentExam = r;

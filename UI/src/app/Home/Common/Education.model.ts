@@ -144,6 +144,7 @@ export interface IClassExam {
   avgScore: number
   std: number;
   var: number;
+  mid: number;
 }
 
 export interface IExamList {
