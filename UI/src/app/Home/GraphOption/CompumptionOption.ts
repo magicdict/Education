@@ -1,3 +1,5 @@
+import { ToolboxForBar } from './KaoqinOption';
+
 export const DiaryAvgByTimeRangeOption = {
     title: {
         text: '按照时段统计每日平均消费',
@@ -7,6 +9,12 @@ export const DiaryAvgByTimeRangeOption = {
     tooltip: {
         trigger: 'item',
         formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    toolbox: {
+        'show': true,
+        'feature': {
+            'saveAsImage': {},
+        }
     },
     legend: {
         orient: 'vertical',
@@ -40,6 +48,12 @@ export const TotalByTimeRangeOption = {
         text: '按照时段统计总消费',
         subtext: '10点之前，16点之前，24点之前',
         x: 'center'
+    },
+    toolbox: {
+        'show': true,
+        'feature': {
+            'saveAsImage': {},
+        }
     },
     tooltip: {
         trigger: 'item',
@@ -76,6 +90,7 @@ export const DiaryCompumptionOption = {
     title: {
         text: '每日消费',
     },
+    toolbox: ToolboxForBar,
     tooltip: {
         trigger: 'axis',
         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -115,6 +130,7 @@ export const MonthlyCompumptionBarOptionTotal = {
     title: {
         text: '每日消费',
     },
+    toolbox: ToolboxForBar,
     grid: {
         left: 100
     },
@@ -153,6 +169,7 @@ export const MonthlyCompumptionBarOption = {
     title: {
         text: '每日消费',
     },
+    toolbox: ToolboxForBar,
     legend: {
         data: ['住校', '非住校']
     },
@@ -205,9 +222,19 @@ export const MonthlyCompumptionBarOption = {
 
 
 export const DairyCanlendarOption = {
+    title: {
+        text: '每日消费额',
+        show: false
+    },
     tooltip: {
         position: 'top',
         formatter: "{c}"
+    },
+    toolbox: {
+        'show': true,
+        'feature': {
+            'saveAsImage': {},
+        }
     },
     visualMap: [{
         min: 0,
@@ -215,7 +242,7 @@ export const DairyCanlendarOption = {
         calculable: true,
         seriesIndex: [0, 1],
         orient: 'horizontal',
-        right: 20,
+        left: 300,
         bottom: 20
     }],
     calendar: [

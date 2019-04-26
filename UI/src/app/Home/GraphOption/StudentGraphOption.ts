@@ -1,3 +1,5 @@
+import { ToolboxForBar } from './KaoqinOption';
+
 export const regionMapOptions = {
   title: {
     text: '生源地图',
@@ -229,16 +231,17 @@ export const SexRateSunburstOption = {
 
 export const CompumptionBarGraph = {
   title: {
-    text: "消费记录（月度）"
+    text: "月度消费记录"
   },
   tooltip: {
 
   },
+  toolbox: ToolboxForBar,
   grid: {
     left: 50
   },
   label: {
-    show:  true
+    show: true
   },
   legend: {
     data: ['消费额']
@@ -260,11 +263,12 @@ export const CompumptionBarGraph = {
 
 export const KaoqinBarGraph = {
   title: {
-    text: '考勤（月度）'
+    text: '月度考勤记录'
   },
   label: {
-    show:  true
+    show: true
   },
+  toolbox: ToolboxForBar,
   tooltip: {},
   legend: {
     data: ['次数']

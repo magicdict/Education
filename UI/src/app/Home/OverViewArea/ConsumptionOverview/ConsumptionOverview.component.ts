@@ -5,7 +5,7 @@ import { MonthlyCompumptionBarOption, MonthlyCompumptionBarOptionTotal, DairyCan
 import { HomeService } from '../../Common/Home.service';
 import { CommonFunction } from '../../Common/common';
 import { StudentPickerComponent } from '../../Common/studentPicker/studentPicker.component';
-import { ISimpleBar } from '../../GraphOption/KaoqinOption';
+import { ISimpleBar, ToolboxForBar } from '../../GraphOption/KaoqinOption';
 @Component({
   templateUrl: 'ConsumptionOverview.html',
 })
@@ -61,6 +61,12 @@ export class ConsumptionOverviewComponent implements OnInit {
     tooltip: {
       position: 'top',
       formatter: (val: any) => { return val.data[1]; }
+    },
+    toolbox: {
+      'show': true,
+      'feature': {
+        'saveAsImage': {},
+      }
     },
     title: [],
     singleAxis: [],
@@ -185,15 +191,12 @@ export class ConsumptionOverviewComponent implements OnInit {
           }]
         };
         this.PerRangeCntOption['grid'] = { left: 100 };
+        this.PerRangeCntOption.toolbox = ToolboxForBar;
       });
   }
 
   /**单笔消费金额统计 */
   PerRangeCntOption: ISimpleBar;
-
-
-
-
 
   QueryByMonthUpLimit() {
     this.service.GetStudentWithMonthLimit(this.MonthUpLimit).then(

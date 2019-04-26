@@ -80,7 +80,6 @@ export class ClassExamListComponent implements OnChanges {
             this.FunRowSelect(event);
         } else {
             //默认方法
-            if (!this.IsShowClassName) return;
             if (event.data.record.className === "年级组") return;
             this.service.CurrentClassExam = event.data;
             this.router.navigate(["exam/detail", event.data.record.idForClass]);

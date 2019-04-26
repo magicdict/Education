@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../Common/Home.service';
-import { ISunburstOption, ILeaf, IStackBarOption, IStack } from '../../GraphOption/KaoqinOption';
+import { ISunburstOption, ILeaf, IStackBarOption, IStack, ToolboxSaveImageOnly, ToolboxForBar } from '../../GraphOption/KaoqinOption';
 import { ActivatedRoute } from '@angular/router';
 import { IKaoqinOverview } from '../../Common/Education.model';
 
@@ -137,11 +137,12 @@ export class KaoqinOverviewComponent implements OnInit {
                 leaf.children.push(leaf_9);
 
                 this.KaoqinOption = {
+                    toolbox: ToolboxSaveImageOnly,
                     title: { text: "考勤次数", left: 10 },
                     label: { formatter: "{b}\n{c}" },
                     series: { data: [leaf], type: "sunburst", center: ["40%", "50%"] },
                 }
-
+                this.KaoqinOption.toolbox['left'] = 600;    
                 var NameArray: string[] = ["默认信息", "早上迟到", "晚到学校"];
                 var CodeArray: string[] = ["100000", "100100", "100200"];
                 var StackName: string = "迟到_晚到";
@@ -202,7 +203,9 @@ export class KaoqinOverviewComponent implements OnInit {
             });
     }
 
-    CreateOption(NameArray: string[], CodeArray: string[], StackName: string, data: { [key: string]: { name: string, value: number }[] }, Monthlist?: string[]): IStackBarOption {
+    CreateOption(NameArray: string[], CodeArray: string[],
+        StackName: string, data: { [key: string]: { name: string, value: number }[] },
+        Monthlist?: string[]): IStackBarOption {
         var StackArray: IStack[] = [];
         for (let index = 0; index < NameArray.length; index++) {
             let stack: IStack = {
@@ -220,19 +223,19 @@ export class KaoqinOverviewComponent implements OnInit {
         }
 
         let KaoqinMonthOption = {
+            toolbox: ToolboxForBar,
             title: {
                 text: StackName,
             },
             legend: {
                 data: NameArray
             },
-            tooltip : {
+            tooltip: {
                 //默认的就往往就是是最好的！
             },
             label: {
-                formatter: function(a)
-                {
-                    if (a.value > 0){
+                formatter: function (a) {
+                    if (a.value > 0) {
                         return (a.value)
                     }
                     return '';

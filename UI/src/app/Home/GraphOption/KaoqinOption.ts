@@ -1,5 +1,6 @@
 /**旭日图 */
 export interface ISunburstOption {
+    toolbox?: any,
     title: {
         text: string,
         left: number
@@ -64,8 +65,25 @@ export interface IStack {
     type: string
 }
 
+export const ToolboxForBar = {
+    'show': true,
+    'feature': {
+        'saveAsImage': {},
+        'magicType': {
+            'type': ['line', 'bar']
+        }
+    }
+}
+
+export const ToolboxSaveImageOnly = {
+    'show': true,
+    'feature': {
+        'saveAsImage': {}
+    }
+}
 
 export interface ISimpleBar {
+    toolbox?: any,
     tooltip?: {},
     title?: {
         text: string,
@@ -74,7 +92,7 @@ export interface ISimpleBar {
     xAxis: {
         type: string,
         data: string[],
-        axisLabel?:any
+        axisLabel?: any
     },
     yAxis: {
         type: string

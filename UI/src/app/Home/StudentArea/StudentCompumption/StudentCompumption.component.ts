@@ -4,7 +4,7 @@ import { CommonFunction } from 'src/app/Home/Common/common';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { DiaryAvgByTimeRangeOption, TotalByTimeRangeOption, DiaryCompumptionOption, DairyCanlendarOption } from '../../GraphOption/CompumptionOption';
-import { ISimpleBar } from '../../GraphOption/KaoqinOption';
+import { ISimpleBar, ToolboxForBar } from '../../GraphOption/KaoqinOption';
 @Component({
     templateUrl: 'StudentCompumption.html',
 })
@@ -174,6 +174,7 @@ export class StudentCompumptionComponent implements OnInit {
             title: {
                 text: '星期别消费总金额'
             },
+            toolbox:ToolboxForBar,
             xAxis: {
                 type: 'category',
                 data: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"]
@@ -213,6 +214,7 @@ export class StudentCompumptionComponent implements OnInit {
             title: {
                 text: '单笔消费金额'
             },
+            toolbox:ToolboxForBar,
             xAxis: {
                 type: 'category',
                 data: ["10元以下", "10-20元", "20元-50元", "50元以上"]

@@ -21,9 +21,9 @@ export class StudentOverviewComponent implements OnInit {
     private route: ActivatedRoute) {
   }
 
-  CompumptionGraph = CompumptionBarGraph;
-  KaoqinGraph = KaoqinBarGraph;
-  ScoreGraph = ScoreRadarGraphOption;
+  CompumptionGraph = CommonFunction.clone(CompumptionBarGraph);
+  KaoqinGraph = CommonFunction.clone(KaoqinBarGraph);
+  ScoreGraph = CommonFunction.clone(ScoreRadarGraphOption);
 
   CompumptionEchartsInstance: any;
   onCompumptionChartInit(event: any) {

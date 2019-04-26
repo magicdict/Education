@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../Common/Home.service';
 import { IKaoqin } from '../../Common/Education.model';
 import { CommonFunction } from '../../Common/common';
-import { ISimpleBar } from '../../GraphOption/KaoqinOption';
+import { ISimpleBar, ToolboxForBar } from '../../GraphOption/KaoqinOption';
 @Component({
     templateUrl: 'StudentKaoqin.component.html',
 })
@@ -43,6 +43,7 @@ export class StudentKaoqinComponent implements OnInit {
             title: {
                 text: '考勤统计'
             },
+            toolbox: ToolboxForBar,
             xAxis: {
                 type: 'category',
                 data: NameArray,

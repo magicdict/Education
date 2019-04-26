@@ -1,3 +1,5 @@
+import { ToolboxSaveImageOnly, ToolboxForBar } from './KaoqinOption';
+
 /**
  *  个人成绩雷达图
  */
@@ -6,6 +8,13 @@ export const ScoreRadarGraphOption = {
     text: '成绩'
   },
   tooltip: {},
+  toolbox: {
+    'show': true,
+    'feature': {
+      'saveAsImage': {}
+    },
+    left: 100
+  },
   legend: {
     right: 10,
     data: ['等第', 'TScore']
@@ -42,9 +51,10 @@ export const CourseSelectRadarGraphOption = {
   title: {
     text: '高考七选三(单科)'
   },
+  toolbox: ToolboxSaveImageOnly,
   tooltip: {},
   legend: {
-    right: 10,
+    right: 40,
     data: ['人数']
   },
   radar: {
@@ -74,6 +84,7 @@ export const CourseSelectCntOption = {
   title: {
     text: '高考七选三(单科)',
   },
+  toolbox: ToolboxForBar,
   xAxis: {
     type: 'category',
     data: []
@@ -99,6 +110,7 @@ export const CourseSelectTwoCntOption = {
   title: {
     text: '高考七选三(两门)',
   },
+  toolbox: ToolboxSaveImageOnly,
   tooltip: {
     position: 'top',
   },
@@ -152,6 +164,7 @@ export const CourseSelectThreeCntOption = {
   title: {
     text: '高考七选三（组合）',
   },
+  toolbox: ToolboxForBar,
   tooltip: {
     trigger: 'axis',
     axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -187,6 +200,10 @@ export const CourseSelectThreeCntOption = {
 };
 
 export const SelectCourseSankeyOption = {
+  toolbox: ToolboxSaveImageOnly,
+  title: {
+    text: '桑基图'
+  },
   series: {
     type: 'sankey',
     layout: 'none',
@@ -200,9 +217,10 @@ export const SelectCourseSankeyOption = {
 export const ScoreFunnelOption =
 {
   title: {
-    text: '',
-    //subtext: ''
+    text: '分数段人数',
+    show: false
   },
+  toolbox: ToolboxSaveImageOnly,
   tooltip: {
     trigger: 'item',
     formatter: "{b} : {c}"

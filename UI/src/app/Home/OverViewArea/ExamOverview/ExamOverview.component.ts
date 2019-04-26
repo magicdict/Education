@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IExamList, IClassExam, IExamInfoForNumberAndSubName, IScore } from 'src/app/Home/Common/Education.model';
 import { CommonFunction } from 'src/app/Home/Common/common';
 import { HomeService } from '../../Common/Home.service';
@@ -10,7 +10,7 @@ import { ScoreFunnelOption } from '../../GraphOption/ScoreOption';
 export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
     Exams: IClassExam[] = [];
-    TeacherExams:IClassExam[] = [];
+    TeacherExams: IClassExam[] = [];
     Top10: IScore[] = [];
     Low10: IScore[] = [];
     FootExam: IClassExam;
@@ -87,6 +87,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         }
     }
     constructor(
+        private router: Router,
         private route: ActivatedRoute,
         private commonFunction: CommonFunction,
         public service: HomeService,
@@ -139,4 +140,9 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
             }
         );
     }
+
+    JumpToTeacher(event: { data: IClassExam }) {
+        this.router.navigate(['teacher/overview', event.data.record.teacherID]);
+    }
+
 } 
