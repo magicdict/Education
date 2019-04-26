@@ -71,8 +71,19 @@ namespace Education.Controllers
             /// <typeparam name="NameValueSet"></typeparam>
             /// <returns></returns>
             public List<NameValueSet> DailyConsumption = new List<NameValueSet>();
-
+            /// <summary>
+            /// 周次时间统计
+            /// </summary>
+            /// <typeparam name="NameValueSet"></typeparam>
+            /// <returns></returns>
             public List<NameValueSet> WeekTimeConsumption = new List<NameValueSet>();
+
+            public List<NameValueSet> WeekTimeConsumptionLiveAtSchool = new List<NameValueSet>();
+
+            public List<NameValueSet> WeekTimeConsumptionNotLiveAtSchool = new List<NameValueSet>();
+
+
+            public List<NameValueSet> PerPriceRange = new List<NameValueSet>();
 
         }
 
@@ -91,6 +102,7 @@ namespace Education.Controllers
         {
             return info;
         }
+
         /// <summary>
         /// 全体消费信息预先统计
         /// </summary>
@@ -147,12 +159,57 @@ namespace Education.Controllers
                     name = WeekDayNames[WeekIndex],
                     value = -(Int32)LiveAtSchool.Where(x => x.DayOfWeek == WeekDays[WeekIndex]).Sum(x => x.MonDeal)
                 });
+
+                for (int hourIndex = 0; hourIndex < 24; hourIndex++)
+                {
+                    info.WeekTimeConsumptionLiveAtSchool.Add(new NameValueSet()
+                    {
+                        name = WeekIndex + "-" + hourIndex,
+                        value = -(Int32)LiveAtSchool.
+                        Where(x => x.DayOfWeek == WeekDays[WeekIndex] && x.DealTimeHour == hourIndex.ToString("D2")).Sum(x => x.MonDeal)
+                    });
+                }
+
+
                 info.WeekDayConsumptionNotLiveAtSchool.Add(new NameValueSet()
                 {
                     name = WeekDayNames[WeekIndex],
                     value = -(Int32)NotLiveAtSchool.Where(x => x.DayOfWeek == WeekDays[WeekIndex]).Sum(x => x.MonDeal)
                 });
+
+                for (int hourIndex = 0; hourIndex < 24; hourIndex++)
+                {
+                    info.WeekTimeConsumptionNotLiveAtSchool.Add(new NameValueSet()
+                    {
+                        name = WeekIndex + "-" + hourIndex,
+                        value = -(Int32)NotLiveAtSchool.
+                        Where(x => x.DayOfWeek == WeekDays[WeekIndex] && x.DealTimeHour == hourIndex.ToString("D2")).Sum(x => x.MonDeal)
+                    });
+                }
             }
+
+
+            info.PerPriceRange.Add(new NameValueSet()
+            {
+                name ="10元以下",
+                value = Dataset.ConsumptionList.Count(x => (-1 * x.MonDeal) <= 10)
+            });
+            info.PerPriceRange.Add(new NameValueSet()
+            {
+                name =  "10-20元",
+                value = Dataset.ConsumptionList.Count(x => (-1 * x.MonDeal) <= 20 && (-1 * x.MonDeal) > 10)
+            });
+            info.PerPriceRange.Add(new NameValueSet()
+            {
+                name = "20元-50元",
+                value = Dataset.ConsumptionList.Count(x => (-1 * x.MonDeal) <= 50 && (-1 * x.MonDeal) > 20)
+            });
+            info.PerPriceRange.Add(new NameValueSet()
+            {
+                name =  "50元以上",
+                value = Dataset.ConsumptionList.Count(x => (-1 * x.MonDeal) > 50)
+            });
+
 
             Console.WriteLine("消费月统计，周别统计：" + timer.Elapsed.ToString());
 

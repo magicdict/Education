@@ -149,10 +149,10 @@ export class StudentCompumptionComponent implements OnInit {
         }
         this.mDirayCanlendarOpt.visualMap[0].max = 100;
         this.mDirayCanlendarOpt.series[0].data = DiaryDate;
-        this.mDirayCanlendarOpt.series[0].symbolSize = (val: any[]) => { return val[1]/5; };
+        this.mDirayCanlendarOpt.series[0].symbolSize = (val: any[]) => { return val[1] / 5; };
 
         this.mDirayCanlendarOpt.series[1].data = DiaryDate;
-        this.mDirayCanlendarOpt.series[1].symbolSize = (val: any[]) => { return val[1]/5; };
+        this.mDirayCanlendarOpt.series[1].symbolSize = (val: any[]) => { return val[1] / 5; };
 
     }
 
@@ -195,7 +195,7 @@ export class StudentCompumptionComponent implements OnInit {
         //console.log(WeekArray);
     }
 
-    /**星期统计 */
+    /**单笔消费金额统计 */
     PerRangeCntOption: ISimpleBar;
 
     GetPerRangeCnt() {

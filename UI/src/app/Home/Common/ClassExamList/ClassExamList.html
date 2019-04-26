@@ -24,6 +24,10 @@
         <p-sortIcon [field]="'record.numberName'">
         </p-sortIcon>
       </th>
+      <th style="width: 50px;" [pSortableColumn]="'record.teacherName'">教师
+        <p-sortIcon [field]="'record.teacherName'">
+        </p-sortIcon>
+      </th>
       <th style="width: 80px;" [pSortableColumn]="'record.typeName'">考试类型
         <p-sortIcon [field]="'record.typeName'">
         </p-sortIcon>
@@ -70,9 +74,10 @@
     <tr [pSelectableRow]="itemData">
       <td style="width: 100px">{{itemData.record.className}}</td>
       <td *ngIf="IsShowExamName" style="width: 100px">{{itemData.record.numberName}}</td>
-      <td style="width: 80px">{{itemData.record.typeName}}</td>
-      <td style="width: 100px">{{itemData.record.term}}</td>
-      <td style="width: 50px">{{itemData.record.subName}}</td>
+      <td style="width: 50px">{{itemData.record.teacherName}}</td>
+      <td style="width: 80px;text-align:center;">{{itemData.record.typeName}}</td>
+      <td style="width: 100px;text-align:center;">{{itemData.record.term}}</td>
+      <td style="width: 50px;text-align:center;">{{itemData.record.subName}}</td>
       <td style="width: 60px;text-align:right;"
         [ngStyle]="itemData.avilibleCnt !== itemData.allCnt?{'background':'lightyellow'}:{}">
         {{itemData.avilibleCnt}}</td>
@@ -94,9 +99,10 @@
     <tr>
       <td style="width: 100px">{{Footer.record.className}}</td>
       <td *ngIf="IsShowExamName" style="width: 100px">{{Footer.record.numberName}}</td>
-      <td style="width: 80px">{{Footer.record.typeName}}</td>
-      <td style="width: 100px">{{Footer.record.term}}</td>
-      <td style="width: 50px">{{Footer.record.subName}}</td>
+      <td style="width: 50px">-</td>
+      <td style="width: 80px;text-align:center;">{{Footer.record.typeName}}</td>
+      <td style="width: 100px;text-align:center;">{{Footer.record.term}}</td>
+      <td style="width: 50px;text-align:center;">{{Footer.record.subName}}</td>
       <td style="width: 60px;text-align:right;">{{Footer.avilibleCnt}}</td>
       <td style="width: 50px;text-align:right;">{{Footer.allCnt}}</td>
       <td style="width: 50px;text-align:right;">{{Footer.maxScore}}</td>

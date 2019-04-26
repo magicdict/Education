@@ -5,6 +5,7 @@ import { MonthlyCompumptionBarOption, MonthlyCompumptionBarOptionTotal, DairyCan
 import { HomeService } from '../../Common/Home.service';
 import { CommonFunction } from '../../Common/common';
 import { StudentPickerComponent } from '../../Common/studentPicker/studentPicker.component';
+import { ISimpleBar } from '../../GraphOption/KaoqinOption';
 @Component({
   templateUrl: 'ConsumptionOverview.html',
 })
@@ -56,7 +57,7 @@ export class ConsumptionOverviewComponent implements OnInit {
     return val[1] / 2500;
   }
 
-  WeekTimeOption = {
+  WeekTimeOptionSample = {
     tooltip: {
       position: 'top',
       formatter: (val: any) => { return val.data[1]; }
@@ -66,25 +67,29 @@ export class ConsumptionOverviewComponent implements OnInit {
     series: []
   };
 
-  SetWeekTimeOption(dataItems: number[][]) {
+  WeekTimeOption = CommonFunction.clone(this.WeekTimeOptionSample);
+  WeekTimeLiveAtSchoolOption = CommonFunction.clone(this.WeekTimeOptionSample);
+  WeekTimeNotLiveAtSchoolOption = CommonFunction.clone(this.WeekTimeOptionSample);
+
+  SetWeekTimeOption(WeekTimeOptionInstance: any, dataItems: number[][]) {
     var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
       '7a', '8a', '9a', '10a', '11a',
       '12p', '1p', '2p', '3p', '4p', '5p',
       '6p', '7p', '8p', '9p', '10p', '11p'];
     var days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
 
-    this.WeekTimeOption.title = [];
-    this.WeekTimeOption.singleAxis = [];
-    this.WeekTimeOption.series = [];
+    WeekTimeOptionInstance.title = [];
+    WeekTimeOptionInstance.singleAxis = [];
+    WeekTimeOptionInstance.series = [];
 
     for (let idx = 0; idx < 7; idx++) {
       let day = days[idx];
-      this.WeekTimeOption.title.push({
+      WeekTimeOptionInstance.title.push({
         textBaseline: 'middle',
         top: (idx + 0.5) * 100 / 7 + '%',
         text: day
       });
-      this.WeekTimeOption.singleAxis.push({
+      WeekTimeOptionInstance.singleAxis.push({
         left: 150,
         type: 'category',
         boundaryGap: false,
@@ -95,7 +100,7 @@ export class ConsumptionOverviewComponent implements OnInit {
           interval: 2
         }
       });
-      this.WeekTimeOption.series.push({
+      WeekTimeOptionInstance.series.push({
         singleAxisIndex: idx,
         coordinateSystem: 'singleAxis',
         type: 'scatter',
@@ -106,7 +111,7 @@ export class ConsumptionOverviewComponent implements OnInit {
       });
     }
     dataItems.forEach(dataItem => {
-      this.WeekTimeOption.series[dataItem[0]].data.push([dataItem[1], dataItem[2]]);
+      WeekTimeOptionInstance.series[dataItem[0]].data.push([dataItem[1], dataItem[2]]);
     });
 
     //console.log(this.WeekTimeOption);
@@ -149,10 +154,46 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.MonthUpLimit = 1000;
         this.QueryByMonthUpLimit();
 
-        this.SetWeekTimeOption(data.consumptionInfo.weekTimeConsumption
+        this.SetWeekTimeOption(this.WeekTimeOption, data.consumptionInfo.weekTimeConsumption
           .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
+
+        this.SetWeekTimeOption(this.WeekTimeLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionLiveAtSchool
+          .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
+
+        this.SetWeekTimeOption(this.WeekTimeNotLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionNotLiveAtSchool
+          .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
+
+        this.PerRangeCntOption = {
+          title: {
+            text: '单笔消费金额'
+          },
+          xAxis: {
+            type: 'category',
+            data: ["10元以下", "10-20元", "20元-50元", "50元以上"]
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [{
+            label: {
+              normal: {
+                show: true
+              }
+            },
+            data: data.consumptionInfo.perPriceRange.map(x => x.value),
+            type: 'bar'
+          }]
+        };
+        this.PerRangeCntOption['grid'] = { left: 100 };
       });
   }
+
+  /**单笔消费金额统计 */
+  PerRangeCntOption: ISimpleBar;
+
+
+
+
 
   QueryByMonthUpLimit() {
     this.service.GetStudentWithMonthLimit(this.MonthUpLimit).then(

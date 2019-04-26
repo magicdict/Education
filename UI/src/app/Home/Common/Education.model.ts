@@ -234,6 +234,8 @@ export interface IScore {
   classAvg: number;
   gradeAvgDiff: number;
   classAvgDiff: number;
+  teacherID: string;
+  teacherName: string;
 }
 
 export interface IKaoqin {
@@ -328,6 +330,9 @@ export interface ISchoolConsumptionInfo {
   liveAtSchoolCnt: number;
   notLiveAtSchoolCnt: number;
   weekTimeConsumption: { name: string, value: number }[];
+  weekTimeConsumptionLiveAtSchool: { name: string, value: number }[];
+  weekTimeConsumptionNotLiveAtSchool: { name: string, value: number }[];
+  perPriceRange: { name: string, value: number }[];
 }
 
 /**天气 */

@@ -104,6 +104,8 @@ public class Chengji : IEqualityComparer<Chengji>
     /// <value></value>
     public string TeacherID { get; set; }
 
+    public string TeacherName { get; set; }
+
     /// <summary>
     /// 考试成绩(-1为作弊，-2为缺考，-3为免考)
     /// </summary>
@@ -356,6 +358,7 @@ public class Chengji : IEqualityComparer<Chengji>
             if (t.Count() == 1)
             {
                 TeacherID = t.First().Id;
+                TeacherName = t.First().Name;
             }
         }
         Score = float.Parse(Items[9]);
@@ -389,11 +392,11 @@ public class Chengji : IEqualityComparer<Chengji>
     /// </summary>
     /// <param name="StudentId"></param>
     /// <returns></returns>
-    public static List<string> GetOptionCourse(string StudentId,string StardardType)
+    public static List<string> GetOptionCourse(string StudentId, string StardardType)
     {
         //选择学生,选修课
-        return Dataset.ChengjiList.Where(x => x.StudentID == StudentId && 
-                                         x.SubType == enumSubType.OptionalSelect && 
+        return Dataset.ChengjiList.Where(x => x.StudentID == StudentId &&
+                                         x.SubType == enumSubType.OptionalSelect &&
                                          x.Score > 0 && x.Type == StardardType)
                                     .Select(x => x.SubName).Distinct().ToList();
     }
@@ -414,15 +417,17 @@ public class ChengjiSimple
     public string NumberName { get; set; }
 
     public float Score { get; set; }
-    public float CompareToScore{get;set;}
+    public float CompareToScore { get; set; }
     /// <summary>
     ///  比较结果
     /// </summary>
     /// <value></value>
     public string Result { get; set; }
 
-    public string ResultText{
-        get{
+    public string ResultText
+    {
+        get
+        {
             if (Result == "0") return "一致";
             if (Result == "1") return "好于";
             if (Result == "-1") return "差于";
@@ -430,7 +435,8 @@ public class ChengjiSimple
         }
     }
 
-    public ChengjiSimple(Chengji c){
+    public ChengjiSimple(Chengji c)
+    {
         IdForGradeExam = c.IdForGradeExam;
         SubId = c.SubId;
         SubName = c.SubName;
