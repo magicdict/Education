@@ -30,11 +30,11 @@
         <p-sortIcon [field]="'record.numberName'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px;" [pSortableColumn]="'record.teacherName'">教师
+      <th *ngIf="IsShowTeacher" style="width: 50px;" [pSortableColumn]="'record.teacherName'">教师
         <p-sortIcon [field]="'record.teacherName'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px;" [pSortableColumn]="'record.teacherID'">教师ID
+      <th *ngIf="IsShowTeacher" style="width: 50px;" [pSortableColumn]="'record.teacherID'">教师ID
         <p-sortIcon [field]="'record.teacherID'">
         </p-sortIcon>
       </th>
@@ -88,8 +88,8 @@
     <tr [pSelectableRow]="itemData">
       <td *ngIf="IsShowClassName" style="width: 100px">{{itemData.record.className}}</td>
       <td *ngIf="IsShowExamName" style="width: 100px">{{itemData.record.numberName}}</td>
-      <td style="width: 50px">{{itemData.record.teacherName}}</td>
-      <td style="width: 50px">{{itemData.record.teacherID}}</td>
+      <td *ngIf="IsShowTeacher" style="width: 50px">{{itemData.record.teacherName}}</td>
+      <td *ngIf="IsShowTeacher" style="width: 50px">{{itemData.record.teacherID}}</td>
       <td style="width: 80px;text-align:center;">{{itemData.record.typeName}}</td>
       <td style="width: 70px;text-align:center;">{{itemData.record.term}}</td>
       <td style="width: 50px;text-align:center;">{{itemData.record.subName}}</td>
@@ -115,8 +115,8 @@
     <tr>
       <td *ngIf="IsShowClassName" style="width: 100px">{{Footer.record.className}}</td>
       <td *ngIf="IsShowExamName" style="width: 100px">{{Footer.record.numberName}}</td>
-      <td style="width: 50px">-</td>
-      <td style="width: 50px">-</td>
+      <td *ngIf="IsShowTeacher" style="width: 50px">-</td>
+      <td *ngIf="IsShowTeacher" style="width: 50px">-</td>
       <td style="width: 80px;text-align:center;">{{Footer.record.typeName}}</td>
       <td style="width: 70px;text-align:center;">{{Footer.record.term}}</td>
       <td style="width: 50px;text-align:center;">{{Footer.record.subName}}</td>

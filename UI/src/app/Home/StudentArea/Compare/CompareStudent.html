@@ -6,6 +6,11 @@
                 [SubTitle]="FirstStudent.className"></student-item>
         </div>
         <div class="col-4" style="margin: 10px 0px">
+            <button *ngFor="let x of this.subResult" [ngStyle]="GetResultStyle(x)">
+                {{x.name}}
+            </button>
+        </div>
+        <div class="col-4" style="margin: 10px 0px">
             <student-item [Sex]="SecondStudent.sex" [StudentId]="SecondStudent.id" [Title]="SecondStudent.name"
                 [SubTitle]="SecondStudent.className"></student-item>
         </div>

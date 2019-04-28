@@ -103,6 +103,7 @@ export interface ICompareStudentInfo {
   first: IStudent;
   second: IStudent;
   examResult: IChengjiSimple[];
+  subResult: { name: string, value: number }[];
 }
 
 export interface IStudentInfo {

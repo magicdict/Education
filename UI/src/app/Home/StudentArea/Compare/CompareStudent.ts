@@ -25,6 +25,8 @@ export class CompareStudentComponent implements OnInit {
     FirstStudent: IStudent;
     SecondStudent: IStudent;
     Scores: IChengjiSimple[];
+    subResult: { name: string, value: number }[] = [];
+
     subName: { label: string, value: string }[] = [];
     @ViewChild("dt") dt: Table;
 
@@ -34,6 +36,7 @@ export class CompareStudentComponent implements OnInit {
                 this.FirstStudent = data.compareinfo.first;
                 this.SecondStudent = data.compareinfo.second;
                 this.Scores = data.compareinfo.examResult;
+                this.subResult = data.compareinfo.subResult;
                 //过滤器的准备    
                 this.subName = [];
                 this.subName.push({ label: "全部", value: null });
@@ -57,8 +60,21 @@ export class CompareStudentComponent implements OnInit {
 
     }
 
+    GetResultStyle(result: { name: string, value: number }) {
+        if (result.value == 0) {
+            return { 'margin': '10px 5px', 'cursor': 'default', 'color': 'black' };
+        } else {
+            if (result.value > 0) {
+                return { 'margin': '10px 5px', 'cursor': 'default', 'color': 'black', 'background-color': 'lightgreen' };
+
+            } else {
+                return { 'margin': '10px 5px', 'cursor': 'default', 'color': 'black', 'background-color': 'pink' };
+            }
+        }
+    }
+
     getRowStyle(chengji: IChengjiSimple): any {
-        if (chengji.subId == "99") {
+        if (chengji.subId === "99" || chengji.subId === "98") {
             if (chengji.result === "1") {
                 return { 'background': 'lightgreen', 'font-weight': 'bolder' };
             }

@@ -24,6 +24,8 @@ export class ClassExamListComponent implements OnChanges {
 
     @Input() IsShowClassName: boolean = true;
 
+    @Input() IsShowTeacher : boolean  = true;
+
     /**统计条目 */
     @Input() Footer: IClassExam = null;
 
@@ -55,6 +57,12 @@ export class ClassExamListComponent implements OnChanges {
         { field: 'mid', header: "中位数" }
     ];
 
+    subName: { label: string, value: string }[] = [];
+
+    constructor(
+        private router: Router,
+        private service: HomeService
+    ) { }
 
     ngOnChanges(): void {
         this.subName = [];
@@ -72,16 +80,16 @@ export class ClassExamListComponent implements OnChanges {
         if (this.subnamelist !== undefined) {
             this.subnamelist.value = null;
         }
+        if (this.Exams[0].record.subId === '98' || this.Exams[0].record.subId ==='99'){
+            this.IsShowTeacher = false;
+        }else{
+            this.IsShowTeacher = true;
+        }
         //console.log("成绩列表变更");
     }
 
 
-    subName: { label: string, value: string }[] = [];
 
-    constructor(
-        private router: Router,
-        private service: HomeService
-    ) { }
 
     onRowSelect(event: { data: IClassExam; }) {
         if (this.FunRowSelect !== undefined) {

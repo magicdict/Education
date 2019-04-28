@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using static Utility;
 
 namespace Education.Controllers
 {
@@ -16,6 +17,8 @@ namespace Education.Controllers
             public Student first { get; set; }
             public Student second { get; set; }
             public List<ChengjiSimple> ExamResult { get; set; }
+
+            public List<NameValueSet> SubResult { get; set; }
         }
 
         [HttpGet("CompareStudent")]
@@ -90,6 +93,23 @@ namespace Education.Controllers
                 }
             });
             rtn.ExamResult = FirstExamResult;
+
+            //对于各科进行比较
+            var SubNameList = FirstExamResult.Select(x => x.SubName).Distinct();
+            rtn.SubResult = new List<NameValueSet>();
+            foreach (var subname in SubNameList)
+            {
+                if (subname.Contains("总分")) continue;
+                rtn.SubResult.Add(new NameValueSet()
+                {
+                    name = subname,
+                    value = FirstExamResult
+                            .Where(x => x.SubName == subname)
+                            .Where(x => x.Result.Equals("1") || x.Result.Equals("-1"))
+                            .Select(x => int.Parse(x.Result)).Sum()
+                });
+            }
+
             return rtn;
         }
 
