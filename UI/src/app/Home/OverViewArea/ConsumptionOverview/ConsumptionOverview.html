@@ -13,34 +13,34 @@
         <br />
         <div class="container" style="width:1140px;">
             <div class="row">
-                <div class="col">
-                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-                        <div echarts [options]="monthlyTotalOpt" style="width:480px;height:400px;"></div>
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div style="border: 2px solid lightgray;padding: 0px;margin: 0px;width: 540px;">
+                        <div echarts [options]="monthlyTotalOpt" style="width:520px;height:400px;"></div>
                     </div>
                 </div>
-                <div class="col">
-                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-                        <div echarts [options]="weekdayTotalOpt" style="width:480px;height:400px;"></div>
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div style="border: 2px solid lightgray;padding: 0px;margin: 0px;width: 540px;">
+                        <div echarts [options]="weekdayTotalOpt" style="width:520px;height:400px;"></div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-                        <div echarts [options]="monthlyOpt" style="width:480px;height:400px;">
+            <div class="row" style="margin-top:10px;">
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div style="border: 2px solid lightgray;padding: 0px;margin: 0px;width: 540px;">
+                        <div echarts [options]="monthlyOpt" style="width:520px;height:400px;">
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-                        <div echarts [options]="weekdayOpt" style="width:480px;height:400px;"> </div>
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div style="border: 2px solid lightgray;padding: 0px;margin: 0px;width: 540px;">
+                        <div echarts [options]="weekdayOpt" style="width:520px;height:400px;"> </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-                        <div echarts [options]="PerRangeCntOption" style="width:480px;height:400px;">
+            <div class="row" style="margin-top:10px;">
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div style="border: 2px solid lightgray;padding: 0px;margin: 0px;width: 540px;">
+                        <div echarts [options]="PerRangeCntOption" style="width:520px;height:400px;">
                         </div>
                     </div>
                 </div>
@@ -49,19 +49,23 @@
         </div>
     </p-tabPanel>
     <p-tabPanel header="消费统计（每天）" style="width:1140px;">
-        <div echarts [options]="dailyOpt" style="width:1080px;height:740px;border: 2px solid lightgray;padding: 5px;margin: 5px">
+        <div echarts [options]="dailyOpt"
+            style="width:1100px;height:740px;border: 2px solid lightgray;padding: 5px;margin: 5px">
         </div>
     </p-tabPanel>
     <p-tabPanel header="时段周次统计(全体)" style="width:1140px;">
-        <div echarts [options]="WeekTimeOption" style="width:1080px;height:640px;border: 2px solid lightgray;padding: 5px;margin: 5px">
+        <div echarts [options]="WeekTimeOption"
+            style="width:1100px;height:640px;border: 2px solid lightgray;padding: 5px;margin: 5px">
         </div>
     </p-tabPanel>
     <p-tabPanel header="时段周次统计(住校)" style="width:1140px;">
-        <div echarts [options]="WeekTimeLiveAtSchoolOption" style="width:1080px;height:640px;border: 2px solid lightgray;padding: 5px;margin: 5px">
+        <div echarts [options]="WeekTimeLiveAtSchoolOption"
+            style="width:1100px;height:640px;border: 2px solid lightgray;padding: 5px;margin: 5px">
         </div>
     </p-tabPanel>
     <p-tabPanel header="时段周次统计(非住校)" style="width:1140px;">
-        <div echarts [options]="WeekTimeNotLiveAtSchoolOption" style="width:1080px;height:640px;border: 2px solid lightgray;padding: 5px;margin: 5px">
+        <div echarts [options]="WeekTimeNotLiveAtSchoolOption"
+            style="width:1100px;height:640px;border: 2px solid lightgray;padding: 5px;margin: 5px">
         </div>
     </p-tabPanel>
     <p-tabPanel header="消费预警" style="width:1140px;">

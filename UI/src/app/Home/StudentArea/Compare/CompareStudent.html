@@ -9,21 +9,32 @@
             <student-item [Sex]="SecondStudent.sex" [StudentId]="SecondStudent.id" [Title]="SecondStudent.name"
                 [SubTitle]="SecondStudent.className"></student-item>
         </div>
-        <div class="col" *ngIf="subName.length > 2">
+    </div>
+    <div class="row" style="background: white">
+        <div class="col-7" *ngIf="subName.length > 2">
             <div style="margin-top: 10px;margin-bottom: 10px;">
                 科目选择：
-                <p-dropdown #subnamelist [style]="{'width':'100px','min-width':'100px'}" [options]="subName" (onChange)="dt.filter($event.value, 'subName', 'equals')">
+                <p-dropdown #subnamelist [style]="{'width':'100px','min-width':'100px'}" [options]="subName"
+                    (onChange)="dt.filter($event.value, 'subName', 'equals')">
                 </p-dropdown>
                 &nbsp;&nbsp;&nbsp;
                 结果选择：
-                <p-dropdown #subnamelist [style]="{'width':'100px','min-width':'100px'}" [options]="resultopt" (onChange)="dt.filter($event.value, 'resultText', 'equals')">
+                <p-dropdown #subnamelist [style]="{'width':'100px','min-width':'100px'}" [options]="resultopt"
+                    (onChange)="dt.filter($event.value, 'resultText', 'equals')">
                 </p-dropdown>
+
+                <button type="button" class="btn"
+                    style="margin: 10px 5px;background-color: lightgreen;cursor:default;color: black;">总分好于</button>
+                <button type="button" class="btn"
+                    style="margin: 10px 5px;background-color: pink;cursor:default;color: black;">总分差于</button>
             </div>
-        </div> 
+        </div>
+        <div class="col-5">
+            <table-function [Table]="dt" [FrameStyle]="{'float':'right'}"></table-function>
+        </div>
     </div>
     <div class="row" style="background: white">
         <div class="col" style="padding-bottom: 5px;">
-            <table-function [Table]="dt"></table-function>
             <p-table #dt [columns]="cols" [exportFilename]="FirstStudent.id + ' 和 ' + SecondStudent.id + '的比较'"
                 [value]="Scores" selectionMode="multiple" [scrollable]="true" scrollHeight="570px">
                 <ng-template pTemplate="header">
@@ -36,11 +47,11 @@
                             <p-sortIcon [field]="'SubName'">
                             </p-sortIcon>
                         </th>
-                        <th style="width: 70px" [pSortableColumn]="'score'">分数
+                        <th style="width: 70px" [pSortableColumn]="'score'">{{FirstStudent.name}}分数
                             <p-sortIcon [field]="'score'">
                             </p-sortIcon>
                         </th>
-                        <th style="width: 70px" [pSortableColumn]="'compareToScore'">分数
+                        <th style="width: 70px" [pSortableColumn]="'compareToScore'">{{SecondStudent.name}}分数
                             <p-sortIcon [field]="'compareToScore'">
                             </p-sortIcon>
                         </th>
