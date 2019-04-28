@@ -72,7 +72,13 @@
     </div>
   </p-tabPanel>
   <p-tabPanel header="学生列表" style="width:1140px;">
-    <table-function [Table]="dt"></table-function>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+            <table-function [Table]="dt" [FrameStyle]="{'float':'right'}"></table-function>
+        </div>
+      </div>
+    </div>
     <p-table #dt [columns]="cols" [value]="QueryResult" [scrollable]="true" (onRowSelect)="onRowSelect($event)"
       selectionMode="single" scrollHeight="620px" [style]="{'width':'100%','min-width':'600px'}"
       [exportFilename]="ClassName + '学生列表'">

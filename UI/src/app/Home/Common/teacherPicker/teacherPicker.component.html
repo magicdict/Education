@@ -3,10 +3,10 @@
     <div>
       &nbsp;&nbsp;
       <b>年级&nbsp;&nbsp;&nbsp;</b>
-      <p-dropdown [options]="Gradelist" [(ngModel)]="SelectGrade" [style]="{'width':'150px'}" placeholder="选择一个年级">
+      <p-dropdown [options]="Gradelist"  (onChange)="query()" [(ngModel)]="SelectGrade" [style]="{'width':'150px'}" placeholder="选择一个年级">
       </p-dropdown>&nbsp; &nbsp;&nbsp;
       <b>课程&nbsp;&nbsp;&nbsp;</b>
-      <p-dropdown [options]="Sublist" [(ngModel)]="SelectSub" [style]="{'width':'150px'}" placeholder="选择一门课程">
+      <p-dropdown [options]="Sublist"  (onChange)="query()" [(ngModel)]="SelectSub" [style]="{'width':'150px'}" placeholder="选择一门课程">
       </p-dropdown>
       &nbsp; &nbsp;
       <button class="btn btn-primary" (click)="query()"><i class="fa fa-search"></i>&nbsp;检索</button>

@@ -8,6 +8,12 @@
       </div>
     </div>
     <div [ngClass]="subName.length > 2?'col-8':'col'">
+      <button type="button" class="btn"
+        style="margin: 10px 5px;background-color: lightgreen;cursor:default;color: black;">年级前10%</button>
+      <button type="button" class="btn"
+        style="margin: 10px 5px;background-color: pink;cursor:default;color: black;">年级后10%</button>
+      <button type="button" class="btn"
+        style="margin: 10px 5px;background-color: lightgray;cursor:default;color: black;">无效分数</button>
       <table-function [Table]="dt" [FrameStyle]="{'float':'right'}"></table-function>
     </div>
   </div>

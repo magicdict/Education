@@ -74,7 +74,7 @@ export class ExamListComponent implements OnChanges {
     public GetStyle(itemData: IScore): any {
         if (!this.IsColorful) return {};
         if (itemData.score <= 0) {
-            return { 'background': 'gray' }
+            return { 'background': 'lightgray' }
         }
         if (itemData.type !== '4' && itemData.type !== '22') {
             if (itemData.gradeRankPercent <= 10) {

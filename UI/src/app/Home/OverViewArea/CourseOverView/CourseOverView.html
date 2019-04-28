@@ -25,62 +25,72 @@
             <div class="row" style="padding: 5px;margin: 5px;">
                 <div class="col">
                     <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-                        <div echarts [options]="mCourseSelectRadarGraphOption"  (chartInit)="onCourseSelectRadarGraphChartInit($event)"
-                         style="width:450px;"></div>
+                        <div echarts [options]="mCourseSelectRadarGraphOption"
+                            (chartInit)="onCourseSelectRadarGraphChartInit($event)" style="width:450px;"></div>
                     </div>
                 </div>
                 <div class="col">
                     <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-                        <div echarts [options]="mCourseSelectCntOption"  (chartInit)="onCourseSelectCntChartInit($event)"
-                        style="width:450px;"></div>
+                        <div echarts [options]="mCourseSelectCntOption" (chartInit)="onCourseSelectCntChartInit($event)"
+                            style="width:450px;"></div>
                     </div>
                 </div>
             </div>
         </div>
     </p-tabPanel>
     <p-tabPanel header="两门课程" style="width:100%;">
-        <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-            <div echarts [options]="mCourseSelectTwoCntOption"  (chartInit)="onCourseSelectTwoCntChartInit($event)"
-                style="width:800px;height: 400px;padding: 5px;margin: auto;"></div>
-        </div>
-        <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-            <div echarts [options]="mCourseSelectTwoPercentOption"  (chartInit)="onCourseSelectTwoPercentChartInit($event)"
-                style="width:800px;height: 400px;padding: 5px;margin: auto;"></div>
+        <div class="container" style="width:1140px;">
+            <div class="row">
+                <div class="col">
+                    <div echarts [options]="mCourseSelectTwoCntOption"
+                        (chartInit)="onCourseSelectTwoCntChartInit($event)"
+                        style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div echarts [options]="mCourseSelectTwoPercentOption"
+                        (chartInit)="onCourseSelectTwoPercentChartInit($event)"
+                        style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
+                </div>
+            </div>
         </div>
     </p-tabPanel>
     <p-tabPanel header="三门课程" style="width:1140x;">
         <div class="container" style="width:1140px;">
             <div class="row">
                 <div class="col">
-                    <div echarts [options]="mCourseSelectThreeCntOption"  (chartInit)="onCourseSelectThreeCntChartInit($event)"
-                        style="width:1025px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
+                    <div echarts [options]="mCourseSelectThreeCntOption"
+                        (chartInit)="onCourseSelectThreeCntChartInit($event)"
+                        style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <ul class="heroes">
-                        <li *ngFor="let item of ThreeCoursePercent.slice(0,8)">
+                    <ul class="heroes" style="width:17em">
+                        <li *ngFor="let item of ThreeCoursePercent.slice(0,8)" style="width:17em">
                             <span class="badge" style="width: 120px;">{{item.name}} </span>{{item.value}} %
                         </li>
                     </ul>
                 </div>
                 <div class="col">
-                    <ul class="heroes">
-                        <li *ngFor="let item of ThreeCoursePercent.slice(8,16)">
+                    <ul class="heroes" style="width:17em">
+                        <li *ngFor="let item of ThreeCoursePercent.slice(8,16)" style="width:17em">
                             <span class="badge" style="width: 120px;">{{item.name}} </span>{{item.value}} %
                         </li>
                     </ul>
                 </div>
                 <div class="col">
-                    <ul class="heroes">
-                        <li *ngFor="let item of ThreeCoursePercent.slice(16,24)">
+                    <ul class="heroes" style="width:17em">
+                        <li *ngFor="let item of ThreeCoursePercent.slice(16,24)" style="width:17em">
                             <span class="badge" style="width: 120px;">{{item.name}} </span>{{item.value}} %
                         </li>
                     </ul>
                 </div>
                 <div class="col">
-                    <ul class="heroes">
-                        <li *ngFor="let item of ThreeCoursePercent.slice(24)">
+                    <ul class="heroes" style="width:17em">
+                        <li *ngFor="let item of ThreeCoursePercent.slice(24)" style="width:17em">
                             <span class="badge" style="width: 120px;">{{item.name}} </span>{{item.value}} %
                         </li>
                     </ul>

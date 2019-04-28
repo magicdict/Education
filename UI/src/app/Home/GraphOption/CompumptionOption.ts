@@ -242,7 +242,7 @@ export const DairyCanlendarOption = {
         calculable: true,
         seriesIndex: [0, 1],
         orient: 'horizontal',
-        left: 300,
+        left: 450,
         bottom: 20
     }],
     calendar: [
@@ -259,8 +259,10 @@ export const DairyCanlendarOption = {
                 nameMap: 'cn',
                 margin: 20
             },
+            top: 100,
+            left: 160,
             cellSize: 40,
-            range: ['2018-08', '2018-11']
+            range: ['2018-08-01', '2018-10-31']
         },
         {
             orient: 'vertical',
@@ -275,9 +277,10 @@ export const DairyCanlendarOption = {
                 nameMap: 'cn',
                 margin: 20
             },
-            left: 460,
+            top: 100,
+            left: 660,
             cellSize: 40,
-            range: ['2018-11', '2019-02']
+            range: ['2018-11-01', '2019-01-31']
         }
     ],
     series: [{

@@ -11,7 +11,7 @@
                 <exam-list [Scores]="Scores" [Mode]="'DIFF'" [CSVFilename]="Title + subTitle"></exam-list>
             </p-tabPanel>
             <p-tabPanel [header]="'分数段人数'" *ngIf="IsFunnel">
-                <div echarts [options]="mScoreFunnelOption" style="width:650px;height:650px;"></div>
+                <div echarts [options]="mScoreFunnelOption" style="width:1080px;height: 650px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
             </p-tabPanel>
         </p-tabView>
     </div>
