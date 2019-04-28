@@ -7,7 +7,9 @@
         </p-dropdown>
       </div>
     </div>
-    <table-function [Table]="dt"></table-function>
+    <div [ngClass]="subName.length > 2?'col-8':'col'">
+      <table-function [Table]="dt" [FrameStyle]="{'float':'right'}"></table-function>
+    </div>
   </div>
 </div>
 

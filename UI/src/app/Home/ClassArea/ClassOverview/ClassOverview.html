@@ -3,7 +3,7 @@
   {{this.ClassName}} 人数：{{this.StudentCnt}}
 </div>
 <p-tabView *ngIf="this.StudentsInfo !==undefined" (onChange)="handleChange($event)">
-  <p-tabPanel header="概要" style="width:1140px;"> 
+  <p-tabPanel header="概要" style="width:1140px;">
     <div class="row">
       <div class="col-8">
         <app-map [NativePlace]="this.StudentsInfo.nativePlace" [StyleHeight]="'600px'" [StyleWidth]="'600px'"
@@ -151,15 +151,15 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
-            <p-tabView>
-              <p-tabPanel *ngFor="let item of this.Exams" [header]="item[0].record.term">
-                <class-exam-list #classExamList [CSVFilename]="ClassName +  item[0].record.term + '学期考试一览'" [Exams]="item"
-                  [scrollHeight]="'600px'" [IsShowClassName]="false" style="padding:5px 0px;"></class-exam-list>
-              </p-tabPanel>
-            </p-tabView>
-          </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p-tabView>
+            <p-tabPanel *ngFor="let item of this.Exams" [header]="item[0].record.term">
+              <class-exam-list #classExamList [CSVFilename]="ClassName +  item[0].record.term + '学期考试一览'" [Exams]="item"
+                [scrollHeight]="'600px'" [IsShowClassName]="false" style="padding:5px 0px;"></class-exam-list>
+            </p-tabPanel>
+          </p-tabView>
         </div>
       </div>
     </div>
