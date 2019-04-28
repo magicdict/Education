@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild, OnInit, Output } from '@angular/core';
 import { IClassExam } from 'src/app/Home/Common/Education.model';
 import { Router } from '@angular/router';
 import { HomeService } from '../Home.service';
@@ -22,12 +22,20 @@ export class ClassExamListComponent implements OnChanges {
 
     @Input() IsShowExamName: boolean = true;
 
-    @Input() IsShowClassName :boolean = true;
+    @Input() IsShowClassName: boolean = true;
 
     /**统计条目 */
     @Input() Footer: IClassExam = null;
 
-    @Input() CSVFilename:string = "download";
+    @Input() CSVFilename: string = "download";
+
+    @Output() ResetScroll() {
+        //必须等到画面渲染完毕再进行格式处理！
+        setTimeout(() => {
+            this.dt.selection = [];
+            this.dt.selection = [];
+        }, 500);
+    }
 
     cols = [
         { field: 'record.className', header: "班级名" },

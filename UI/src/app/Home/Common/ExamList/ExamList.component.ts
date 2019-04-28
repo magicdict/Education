@@ -49,6 +49,8 @@ export class ExamListComponent implements OnChanges {
         //console.log("成绩列表变更");
     }
 
+    @Input() IsColorful = true;
+
     @Input() Scores: IScore[];
 
     @Input() scrollHeight: string = "400px";
@@ -70,6 +72,7 @@ export class ExamListComponent implements OnChanges {
     }
     /**根据年级排名设定行颜色 */
     public GetStyle(itemData: IScore): any {
+        if (!this.IsColorful) return {};
         if (itemData.score <= 0) {
             return { 'background': 'gray' }
         }

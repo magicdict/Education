@@ -145,7 +145,7 @@ public class ClassExamInfo
                 return r.ToArray()[cnt / 2].Score;
             }
             //偶数 4 => 4/2 = 2 = (1 + 2)/2 Index From 0
-            return (r.ToArray()[cnt / 2 - 1].Score + r.ToArray()[cnt / 2].Score) / 2;
+            return System.Math.Round((r.ToArray()[cnt / 2 - 1].Score + r.ToArray()[cnt / 2].Score) / 2, 2);
         }
     }
 

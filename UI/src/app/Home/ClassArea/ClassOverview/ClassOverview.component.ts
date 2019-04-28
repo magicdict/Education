@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IStudent, IClassInfo, ITeacher, IClassExam, IStudentGroupProperty } from 'src/app/Home/Common/Education.model';
 import { HomeService } from '../../Common/Home.service';
@@ -7,6 +7,8 @@ import { ISimpleBar } from '../../GraphOption/KaoqinOption';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { CommonFunction } from '../../Common/common';
+import { TabPanel } from 'primeng/tabview';
+import { ClassExamListComponent } from '../../Common/ClassExamList/ClassExamList.component';
 
 @Component({
   templateUrl: 'ClassOverview.html',
@@ -134,5 +136,18 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
   }
   JumpToTeacher(teacherid: string) {
     this.router.navigate(['teacher/overview', teacherid]);
+  }
+
+  @ViewChild("classExamList")
+  classExamList:ClassExamListComponent;
+
+  IsFirst = true;
+  handleChange(e){
+    var index = e.index;
+    if (index !== 2) return;
+    if (this.IsFirst){
+      this.IsFirst = false;
+      this.classExamList.ResetScroll();
+    }
   }
 }

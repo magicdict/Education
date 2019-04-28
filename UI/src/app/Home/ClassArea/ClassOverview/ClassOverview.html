@@ -2,8 +2,8 @@
 <div class="alert alert-info" style="font-size: 18px;font-weight: 500;">
   {{this.ClassName}} 人数：{{this.StudentCnt}}
 </div>
-<p-tabView *ngIf="this.StudentsInfo !==undefined">
-  <p-tabPanel header="概要" style="width:1140px;">
+<p-tabView *ngIf="this.StudentsInfo !==undefined" (onChange)="handleChange($event)">
+  <p-tabPanel header="概要" style="width:1140px;"> 
     <div class="row">
       <div class="col-8">
         <app-map [NativePlace]="this.StudentsInfo.nativePlace" [StyleHeight]="'600px'" [StyleWidth]="'600px'"
@@ -135,23 +135,31 @@
     </p-table>
   </p-tabPanel>
   <p-tabPanel header="成绩" style="width:1140px;">
-    <div class="container">
+    <div class="container" style="padding: 0px ">
       <div class="row">
-        <div class="col-2">
-          <ul class="heroes linkheroes" style="margin-top: 120px;">
-            <li *ngFor="let teacher of this.Teachers" (click)="JumpToTeacher(teacher.id)">
-              <span class="badge" style="width: 100px;">{{teacher.subName}} </span>{{teacher.name}}
-              <i class="fa fa-search"></i>
-            </li>
-          </ul>
+        <div class="col">
+          <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;margin-bottom: 5px;">
+            <div class="box-header with-border">
+              <h3 class="box-title">任课教师</h3>
+            </div>
+            <div class="box-body">
+              <div style="margin: 5px 0px 5px 0px">
+                <button *ngFor="let teacher of this.Teachers" type="button" class="btn btn-info"
+                  style="margin-left: 10px;"
+                  (click)="JumpToTeacher(teacher.id)">{{teacher.subName}}：{{teacher.name}}</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-10">
-          <p-tabView>
-            <p-tabPanel *ngFor="let item of this.Exams" [header]="item[0].record.term">
-              <class-exam-list [CSVFilename]="ClassName +  item[0].record.term + '学期考试一览'" [Exams]="item"
-                [scrollHeight]="'600px'"></class-exam-list>
-            </p-tabPanel>
-          </p-tabView>
+        <div class="row">
+          <div class="col">
+            <p-tabView>
+              <p-tabPanel *ngFor="let item of this.Exams" [header]="item[0].record.term">
+                <class-exam-list #classExamList [CSVFilename]="ClassName +  item[0].record.term + '学期考试一览'" [Exams]="item"
+                  [scrollHeight]="'600px'" [IsShowClassName]="false" style="padding:5px 0px;"></class-exam-list>
+              </p-tabPanel>
+            </p-tabView>
+          </div>
         </div>
       </div>
     </div>

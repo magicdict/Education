@@ -1,10 +1,12 @@
 <app-nav></app-nav>
+<div class="alert alert-info" style="font-size: 18px;font-weight: 500;">
+    {{this.campusfullname}}
+</div>
 <div class="container" style="margin: 0px;" *ngIf="this.campusInfo !==undefined">
     <div class="row" style="width:1140px">
         <div class="col-7" style="padding: 0px;">
             <app-map [NativePlace]="this.campusInfo.property.nativePlace" [StyleHeight]="'450px'" [StyleWidth]="'600px'"
-                [NativePlaceZheJiang]="this.campusInfo.property.nativePlaceZheJiang"
-                >
+                [NativePlaceZheJiang]="this.campusInfo.property.nativePlaceZheJiang">
             </app-map>
         </div>
         <div class="col-5" style="padding-left: 10px;padding-right: 0px;">

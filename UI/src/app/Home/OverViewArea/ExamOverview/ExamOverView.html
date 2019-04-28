@@ -53,8 +53,9 @@
                             <p class="category">{{subTitle}}</p>
                         </div>
                         <div class="card-body">
-                            <class-exam-list [Exams]="this.TeacherExams" [scrollHeight]="'600px'" [FunRowSelect]="JumpToTeacher"
-                                [IsShowClassName]="false" [IsShowExamName]="false" [CSVFilename]="Title + subTitle">
+                            <class-exam-list [Exams]="this.TeacherExams" [scrollHeight]="'600px'"
+                                [FunRowSelect]="JumpToTeacher" [IsShowClassName]="false" [IsShowExamName]="false"
+                                [CSVFilename]="Title + subTitle">
                             </class-exam-list>
                         </div>
                     </div>
@@ -67,7 +68,8 @@
                             <p class="category">{{Title}} - {{subTitle}}</p>
                         </div>
                         <div class="card-body">
-                            <exam-list [Scores]="Top10" [Mode]="'DIFF'" [CSVFilename]="'前10名 ' + Title + subTitle"  ></exam-list>
+                            <exam-list [Scores]="Top10" [Mode]="'DIFF'" [CSVFilename]="'前10名 ' + Title + subTitle"
+                                [IsColorful]="false"></exam-list>
                         </div>
                     </div>
                     <br /><br />
@@ -77,7 +79,8 @@
                             <p class="category">{{Title}} - {{subTitle}}</p>
                         </div>
                         <div class="card-body">
-                            <exam-list [Scores]="Low10" [Mode]="'DIFF'" [CSVFilename]="'后10名 ' + Title + subTitle"></exam-list>
+                            <exam-list [Scores]="Low10" [Mode]="'DIFF'" [CSVFilename]="'后10名 ' + Title + subTitle"
+                                [IsColorful]="false"></exam-list>
                         </div>
                     </div>
                 </p-tabPanel>
