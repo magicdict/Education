@@ -13,10 +13,8 @@ export const ScoreRadarGraphOption = {
     'feature': {
       'saveAsImage': {}
     },
-    left: 100
   },
   legend: {
-    right: 10,
     data: ['等第', 'TScore']
   },
   radar: {
@@ -28,6 +26,7 @@ export const ScoreRadarGraphOption = {
         padding: [3, 5]
       }
     },
+    radius: "65%",
     indicator: []
   },
   series: [{

@@ -3,7 +3,7 @@
     <div class="col-4" *ngIf="subName.length > 2">
       <div style="margin-top: 10px;margin-bottom: 10px;">
         科目选择：
-        <p-dropdown #subnamelist [options]="subName" (onChange)="dt.filter($event.value, 'subName', 'equals')">
+        <p-dropdown #subnamelist [options]="subName" (onChange)="dt.filter($event.value, 'record.subName', 'equals')">
         </p-dropdown>
       </div>
     </div>

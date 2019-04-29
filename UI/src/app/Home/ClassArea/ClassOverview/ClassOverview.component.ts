@@ -97,16 +97,19 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
         }
         //console.log(this.mSexRate);
         this.Teachers = data.classinfo.teachers;
+        this.Exams = [];
         //classTerm划分
         from(data.classinfo.exams).pipe(
           groupBy(x => x.record.term),
           mergeMap(x => x.pipe(toArray()))
         ).subscribe(
           r => {
-            this.Exams.push(r.filter(x => x.record.subId !== "99"));
+            this.Exams.push(r.filter(x => x.record.subId !== "99" && x.record.subId !== "98"));
           }
         )
-
+        this.Exams.sort((x,y)=>{
+          return x[0].record.term.localeCompare(y[0].record.term);  
+        });  
 
         if (data.classinfo.kaoqing.length === 0) {
           this.IsShowKaoqinGraph = false;
