@@ -35,14 +35,20 @@
                     </div>
                 </div>
             </div>
-            <div class="box box-primary box-solid" style="width: 100%;">
+            <div class="box box-primary box-solid" style="width: 100%;"> 
                 <div class="box-header with-border">
                     <h3 class="box-title">性别比例</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" style="margin: 0px;" class="btn btn-info btn-box-tool"
+                            (click)="SaveSexRateImage()">
+                            <i class="fas fa-file-download"></i>&nbsp;保存为图片
+                        </button>
+                    </div>
                 </div>
                 <div class="box-body">
-                    <div *ngIf="this.campusfullname === '东部校区'" echarts [options]="mSexRatePieOption"
+                    <div *ngIf="this.campusfullname === '东部校区'" echarts [options]="mSexRatePieOption"  (chartInit)="SexRateChartInit($event)"
                         style="width:450px;height:435px"></div>
-                    <div *ngIf="this.campusfullname === '白杨校区'" echarts [options]="mSexRateSunburstOption"
+                    <div *ngIf="this.campusfullname === '白杨校区'" echarts [options]="mSexRateSunburstOption"  (chartInit)="SexRateChartInit($event)"
                         style="width:450px;height:435px"></div>
                 </div>
             </div>

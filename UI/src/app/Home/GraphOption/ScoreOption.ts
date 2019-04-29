@@ -219,7 +219,13 @@ export const ScoreFunnelOption =
     text: '分数段人数',
     show: false
   },
-  toolbox: ToolboxSaveImageOnly,
+  toolbox: {
+    'show': true,
+    'feature': {
+      'saveAsImage': {}
+    },
+    top: 40
+  },
   tooltip: {
     trigger: 'item',
     formatter: "{b} : {c}"

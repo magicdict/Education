@@ -5,7 +5,7 @@ import { SexRatePieOption, SexRateSunburstOption } from '../../GraphOption/Stude
 import { CommonFunction } from '../../Common/common';
 import { ISimpleBar } from '../../GraphOption/KaoqinOption';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { echartsInstance } from 'echarts'
 
 @Component({
     selector: "campus",
@@ -24,6 +24,16 @@ export class CampusComponent implements OnInit {
     mSexRatePieOption = CommonFunction.clone(SexRatePieOption);
     /**旭日图 性别比例 */
     mSexRateSunburstOption = CommonFunction.clone(SexRateSunburstOption);
+
+    SexRateChart: echartsInstance;
+    SexRateChartInit(chart: echartsInstance) {
+        this.SexRateChart = chart;
+    }
+
+    SaveSexRateImage() {
+        CommonFunction.SaveChartImage(this.SexRateChart, this.campusfullname + "性别比例");
+    }
+
 
     mTeacherSub: ISimpleBar;
 

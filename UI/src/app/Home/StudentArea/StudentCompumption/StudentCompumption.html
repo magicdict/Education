@@ -140,7 +140,7 @@
             </div>
         </div>
     </p-tabPanel>
-    <p-tabPanel header="消费明细（图表）">
+    <p-tabPanel header="消费明细（柱状图）">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -148,6 +148,10 @@
                         style="width: 1080px;height: 600px;border: 2px solid lightgray;padding: 5px;margin: 5px"></div>
                 </div>
             </div>
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header="消费明细（日历图）">
+        <div class="container">
             <div class="row">
                 <div class="col">
                     <div echarts [options]="mDirayCanlendarOpt"

@@ -1,30 +1,32 @@
 <app-nav></app-nav>
 <div class="container">
-    <div class="row" style="width:1140px;">
-        <div class="col-2" style="padding: 0px;">
-            <!--左侧内容-->
-            <div style="background: white">
-                <ul class="heroes linkheroes" style="padding: 10px;">
-                    <li *ngFor="let teacher of Teachers" (click)="JumpToTeacher(teacher.id)" style="width: 150px;">
-                        <span class="badge">{{teacher.subName}} </span>{{teacher.name}}
-                        <i class="fa fa-search"></i>
-                    </li>
-                </ul>
+    <div class="row" style="padding: 0px;">
+        <div class="col"  style="padding: 0px;">
+            <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;margin-bottom: 5px;">
+                <div class="box-header with-border">
+                    <h3 class="box-title">任课教师</h3>
+                </div>
+                <div class="box-body">
+                    <div style="margin: 5px 0px 5px 0px">
+                        <button *ngFor="let teacher of this.Teachers" type="button" class="btn btn-info"
+                            style="margin-left: 10px;"
+                            (click)="JumpToTeacher(teacher.id)">{{teacher.subName}}：{{teacher.name}}</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-10">
-            <!--右侧内容-->
+    </div>
+
+    <div class="row" style="padding: 0px;">
+        <div class="col"  style="padding: 0px;">
             <p-tabView>
                 <p-tabPanel [header]="'成绩列表'">
                     <exam-list [Scores]="Scores" [Mode]="'SAME'"
                         [CSVFilename]="CurrentStudent.name + '(' + CurrentStudent.id + ')成绩一览'"></exam-list>
                 </p-tabPanel>
-                <p-tabPanel [header]="'各科图表'">
+                <p-tabPanel [header]="'期中考试雷达图'">
                     <div class="container">
                         <div class="row">
-                            <div class="col" *ngIf="IsShowType19">
-                                <div echarts [options]="ScoreGraphFor19Option" style="width:400px;height:450px;"></div>
-                            </div>
                             <div class="col" *ngIf="IsShowType2">
                                 <div echarts [options]="ScoreGraphFor2Option" style="width:400px;height:450px;"></div>
                             </div>
