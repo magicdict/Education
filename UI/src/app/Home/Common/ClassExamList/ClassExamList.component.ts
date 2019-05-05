@@ -80,11 +80,6 @@ export class ClassExamListComponent implements OnChanges {
         if (this.subnamelist !== undefined) {
             this.subnamelist.value = null;
         }
-        if (this.Exams[0].record.subId === '98' || this.Exams[0].record.subId ==='99'){
-            this.IsShowTeacher = false;
-        }else{
-            this.IsShowTeacher = true;
-        }
         //console.log("成绩列表变更");
     }
 

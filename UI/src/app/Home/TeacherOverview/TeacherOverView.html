@@ -12,7 +12,7 @@
     <div class="card-body" style="padding:0.5em">
         <p-tabView>
             <p-tabPanel [header]="'成绩列表'">
-                <class-exam-list [Exams]="this.Exams"
+                <class-exam-list [Exams]="this.Exams" [IsShowTeacher]="false"
                     [CSVFilename]="this.CurrentTeachers[0].name + '(' + this.CurrentTeachers[0].subName + ')任课班级成绩'">
                 </class-exam-list>
             </p-tabPanel>
@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <button *ngFor="let classname of Term.classname" class="btn btn-info"
                         style="margin-left: 10px;cursor: default;">
-                        {{classname}}</button>
+                        <i class="fas fa-chalkboard-teacher"></i>&nbsp;{{classname}}</button>
                     </div>
                 </div>
             </p-tabPanel>
