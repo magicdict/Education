@@ -303,7 +303,8 @@ export interface ISchoolInfo {
     eastMale: { [key: string]: number };
     eastFemale: { [key: string]: number };
   }
-  gradeClassInfoList: { label: string, items: { label: string, value: string, count: number }[] }[]
+  gradeClassInfoList: { label: string, items: { label: string, value: string, count: number }[] }[];
+  totalWorkdaycnt: number;
 }
 
 export interface IClassInfo {

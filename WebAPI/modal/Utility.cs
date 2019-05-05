@@ -1,7 +1,48 @@
 using System.Collections.Generic;
+using System;
+using Education.Controllers;
+using System.Linq;
 
 public static class Utility
 {
+    public static List<string> WorkDays = new List<string>();
+
+    public static int GetTotalDaysCnt()
+    {
+        if (WorkDays.Count != 0) return WorkDays.Count;
+        var StartDate = new DateTime(2018, 9, 1);
+        while (StartDate.CompareTo(new DateTime(2019, 1, 27)) != 0)
+        {
+            if (IsWorkDay(StartDate))
+            {
+                WorkDays.Add(StartDate.ToString("yyyyMMdd"));
+            }
+            StartDate = StartDate.AddDays(1);
+        }
+        Console.WriteLine("理论出勤天数：" + WorkDays.Count);
+        return WorkDays.Count;
+    }
+
+    public static bool IsWorkDay(DateTime day)
+    {
+        if (day.DayOfWeek == DayOfWeek.Saturday || day.DayOfWeek == DayOfWeek.Sunday) return false;
+        //中秋节
+        if (day.Year == 2018 && day.Month == 9 && day.Day == 24) return false;
+        //国庆节
+        if (day.Year == 2018 && day.Month == 10 && (day.Day >= 1 && day.Day <= 7)) return false;
+        //元旦
+        if (day.Year == 2018 && day.Month == 12 && day.Day == 30) return false;
+        if (day.Year == 2018 && day.Month == 12 && day.Day == 31) return false;
+        if (day.Year == 2019 && day.Month == 1 && day.Day == 1) return false;
+        //当日消费金额低于15000的
+        var t = ConsumptionController.info.DailyConsumption.Where(x => x.name == day.ToString("yyyy-MM-dd")).First();
+        if (t != null)
+        {
+            return (-1 * t.value) >= 15000;
+        }
+        return true;
+    }
+
     public static string FormatTime(string DealTime)
     {
         var DealTimeYear = DealTime.Split(" ")[0].Split("/")[0];

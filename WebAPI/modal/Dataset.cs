@@ -98,10 +98,11 @@ public static class Dataset
         }
         foreach (var key in ClassCntDict.Keys)
         {
-            classBaseInfoList.Add(new ClassBaseInfo(){
-               label = key.Substring(3),
-               value = key.Substring(0,3), 
-               count = ClassCntDict[key] 
+            classBaseInfoList.Add(new ClassBaseInfo()
+            {
+                label = key.Substring(3),
+                value = key.Substring(0, 3),
+                count = ClassCntDict[key]
             });
         }
 
@@ -283,6 +284,7 @@ public static class Dataset
         sr.Close();
         Console.WriteLine("读取考试类型信息件数：" + ExamTypeDic.Count);
         Console.WriteLine(timer.Elapsed.ToString());
+
         //导入学生消费信息 7_consumption
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "7_consumption.csv";
         sr = new StreamReader(fullfilepath);
@@ -319,7 +321,34 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine(timer.Elapsed.ToString());
+        var t = Utility.GetTotalDaysCnt();
+        CreatePresentStudentList(fullpath);
+        Console.WriteLine(timer.Elapsed.ToString());
         timer.Stop();
+    }
+
+    public static void CreatePresentStudentList(string fullpath)
+    {
+        //假设如果该天出勤，就应该有至少一条消费记录
+        var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "PresentStudentList.csv");
+        sw.WriteLine("studentId,date");
+
+        foreach (var student in Dataset.StudentList)
+        {
+            //如果该学生没有任何一条消费记录，则跳过
+            if (ConsumptionList.Count(x => x.StudentID == student.ID) == 0) continue;
+
+            foreach (var workday in Utility.WorkDays)
+            {
+                if (ConsumptionList.Count(x => x.StudentID == student.ID &&
+                   (x.DealTimeYear + x.DealTimeMonth + x.DealTimeDay).Equals(workday)) == 0)
+                {
+                    sw.WriteLine(student.ID + "," + workday);
+                }
+
+            }
+        }
+        sw.Close();
     }
 
     /// <summary>

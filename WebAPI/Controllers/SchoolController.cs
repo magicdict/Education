@@ -28,6 +28,8 @@ namespace Education.Controllers
 
             public List<GradeClassInfo> gradeClassInfoList { get; set; }
 
+            public int totalWorkdaycnt { get; set; }
+
         }
 
         /// <summary>
@@ -458,7 +460,8 @@ namespace Education.Controllers
                 SchoolRooms = RoomInfo,
                 gradeClassInfoList = new List<GradeClassInfo>(){
                     gradeOneClassInfo,gradeTwoClassInfo,gradeThreeClassInfo
-                }
+                },
+                totalWorkdaycnt = Utility.GetTotalDaysCnt()
             };
         }
 

@@ -91,7 +91,7 @@ namespace Education.Controllers
         /// <summary>
         /// 全体消费信息
         /// </summary>
-        static SchoolConsumptionInfo info;
+        public static SchoolConsumptionInfo info;
 
         /// <summary>
         /// 获得整个学校消费的统计信息

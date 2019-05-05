@@ -147,7 +147,7 @@ export class StudentOverviewComponent implements OnInit {
         this.ConsumptionMonthMoney = data.studentinfo.monthlyConsumptions.map(x => x.amount);
         this.CompumptionGraph.xAxis.data = this.ConsumptionMonth;
         this.CompumptionGraph.series[0].data = this.ConsumptionMonthMoney;
-        
+
 
         //考勤
         from(data.studentinfo.kaoqins).pipe(
@@ -217,7 +217,10 @@ export class StudentOverviewComponent implements OnInit {
 
 
         if (this.ScoreEchartsInstance !== undefined) {
-          this.ScoreEchartsInstance.setOption(this.ScoreGraph);
+          if (this.ScoreAvg.length !== 0) {
+            //切换的时候，从有到无的情况，这里会报错
+            this.ScoreEchartsInstance.setOption(this.ScoreGraph);
+          }
         }
         if (this.KaoqinEchartsInstance !== undefined) {
           this.KaoqinEchartsInstance.setOption(this.KaoqinGraph);
