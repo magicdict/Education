@@ -40,7 +40,8 @@
                             <p class="category">{{subTitle}}</p>
                         </div>
                         <div class="card-body">
-                            <class-exam-list [Exams]="this.Exams" [Footer]="FootExam" [scrollHeight]="'600px'" [IsShowTeacher]="this.Exams[0].record.type !=='99'"
+                            <class-exam-list [Exams]="this.Exams" [Footer]="FootExam" [scrollHeight]="'600px'" 
+                                [IsShowTeacher]="this.Exams[0].record.subId !=='99' && this.Exams[0].record.subId !=='98'"
                                 [IsShowExamName]="false" [CSVFilename]="Title + subTitle">
                             </class-exam-list>
                         </div>
@@ -53,7 +54,8 @@
                             <p class="category">{{subTitle}}</p>
                         </div>
                         <div class="card-body">
-                            <class-exam-list [Exams]="this.TeacherExams" [scrollHeight]="'600px'" [IsShowTeacher]="this.TeacherExams[0].record.type !=='99'"
+                            <class-exam-list [Exams]="this.TeacherExams" [scrollHeight]="'600px'" 
+                                [IsShowTeacher]="this.Exams[0].record.subId !=='99' && this.Exams[0].record.subId !=='98'"
                                 [FunRowSelect]="JumpToTeacher" [IsShowClassName]="false" [IsShowExamName]="false"
                                 [CSVFilename]="Title + subTitle">
                             </class-exam-list>

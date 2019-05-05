@@ -261,7 +261,7 @@ public static class Dataset
             var line = sr.ReadLine().Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray(); ;
             ExamTypeDic.Add(line[0], line[1]);
         }
-        ExamTypeDic.Add("99", "总分");
+        //ExamTypeDic.Add("99", "总分");
         sr.Close();
         Console.WriteLine("读取考试类型信息件数：" + ExamTypeDic.Count);
         Console.WriteLine(timer.Elapsed.ToString());
@@ -349,7 +349,7 @@ public static class Dataset
                     NumberName = NumberName,
                     Term = "2018-2019-1",
                     Grade = "高三",
-                    Type = "99",
+                    Type = "6",
                     FullScore = 300
                 });
             }
@@ -392,7 +392,7 @@ public static class Dataset
                     NumberName = NumberName,
                     Term = "2018-2019-1",
                     Grade = "高三",
-                    Type = "99",
+                    Type = "7",
                     FullScore = 300
                 });
             }
@@ -406,7 +406,7 @@ public static class Dataset
         foreach (var chengji in TotalScoreList_TenSchool)
         {
             chengji.SubId = "98";
-            chengji.SubName = "选修课总分";
+            chengji.SubName = "7选3";
             chengji.GradeRank = TotalScoreList_TenSchool.Count(x => x.Score > chengji.Score) + 1;
             chengji.GradeAvg = TenAvg;
             chengji.GradeAvalibleCnt = TotalScoreList_TenSchool.Count;
@@ -427,7 +427,7 @@ public static class Dataset
         foreach (var chengji in TotalScoreList_FiveSchool)
         {
             chengji.SubId = "98";
-            chengji.SubName = "选修课总分";
+            chengji.SubName = "7选3";
             chengji.GradeRank = TotalScoreList_FiveSchool.Count(x => x.Score > chengji.Score) + 1;
             chengji.GradeAvg = FiveAvg;
             chengji.GradeAvalibleCnt = TotalScoreList_FiveSchool.Count;

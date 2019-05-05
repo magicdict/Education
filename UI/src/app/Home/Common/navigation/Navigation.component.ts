@@ -7,6 +7,7 @@ import { ConfirmationService, SelectItem } from 'primeng/api';
 import { StudentPickerComponent } from '../studentPicker/studentPicker.component';
 import { Location } from '@angular/common';
 import { ClassPickerComponent } from '../classPicker/classPicker.component';
+import { ConfirmDialog } from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-nav',
@@ -21,6 +22,8 @@ export class NavigationComponent implements OnInit {
   ) {
 
   }
+
+  @ViewChild("confirm") confirm : ConfirmDialog;
 
   /**全屏模式 */
   fullScreen() {
@@ -121,6 +124,9 @@ export class NavigationComponent implements OnInit {
 
   JumpTo(url: string) {
     if (url === 'home/course') {
+      //全屏化之后不会再出现，这里可以放心修改掉图标
+      this.confirm.acceptIcon = 'fa fas fa-diagnoses';
+      this.confirm.rejectIcon = 'fa fas fa-diagnoses';
       this.confirmationService.confirm({
         message: '您可以使用五校联考或者十校联考作为7选3的基准，请选择一个基准',
         acceptLabel: '五校联考',
