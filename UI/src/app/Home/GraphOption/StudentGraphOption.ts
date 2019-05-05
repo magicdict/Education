@@ -1,10 +1,11 @@
-import { ToolboxForBar } from './KaoqinOption';
+import { ToolboxForBar, ToolboxSaveImageOnly } from './KaoqinOption';
 
 export const regionMapOptions = {
   title: {
     text: '生源地图',
     left: 10
   },
+  toolbox: ToolboxSaveImageOnly,
   tooltip: {
     trigger: 'item',
     formatter: '{b}：{c}'
@@ -102,6 +103,7 @@ export const SexRatePieOption = {
     text: '性别比例',
     x: 'center'
   },
+  toolbox: ToolboxSaveImageOnly,
   tooltip: {
     trigger: 'item',
     formatter: "{b} : {c} ({d}%)"
@@ -144,6 +146,7 @@ export const SexRateSunburstOption = {
     text: '性别比例',
     left: 10
   },
+  toolbox: ToolboxSaveImageOnly,
   label: {
     formatter: "{b}\n{c}"
   },

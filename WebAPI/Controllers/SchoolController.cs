@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using static Education.Controllers.ClassController;
 using static Utility;
 
 namespace Education.Controllers
@@ -24,6 +25,8 @@ namespace Education.Controllers
             public Campus Total { get; set; }
 
             public RoomCntInfo SchoolRooms { get; set; }
+
+            public List<GradeClassInfo> gradeClassInfoList { get; set; }
 
         }
 
@@ -409,12 +412,53 @@ namespace Education.Controllers
                 RoomInfo.AddStudent(student);
             }
 
+            var gradeOneClassInfo = new GradeClassInfo();
+            gradeOneClassInfo.label = "高一";
+            gradeOneClassInfo.items = new List<ClassBaseInfo>();
+            foreach (var item in Dataset.classBaseInfoList)
+            {
+                if (item.label.Contains("高一"))
+                {
+                    gradeOneClassInfo.items.Add(item);
+                }
+            }
+            gradeOneClassInfo.items.Sort((x, y) => { return x.value.CompareTo(y.value); });
+
+
+            var gradeTwoClassInfo = new GradeClassInfo();
+            gradeTwoClassInfo.label = "高二";
+            gradeTwoClassInfo.items = new List<ClassBaseInfo>();
+            foreach (var item in Dataset.classBaseInfoList)
+            {
+                if (item.label.Contains("高二"))
+                {
+                    gradeTwoClassInfo.items.Add(item);
+                }
+            }
+            gradeTwoClassInfo.items.Sort((x, y) => { return x.value.CompareTo(y.value); });
+
+
+            var gradeThreeClassInfo = new GradeClassInfo();
+            gradeThreeClassInfo.label = "高三";
+            gradeThreeClassInfo.items = new List<ClassBaseInfo>();
+            foreach (var item in Dataset.classBaseInfoList)
+            {
+                if (item.label.Contains("高三"))
+                {
+                    gradeThreeClassInfo.items.Add(item);
+                }
+            }
+            gradeThreeClassInfo.items.Sort((x, y) => { return x.label.CompareTo(y.label); });
+
             return new Overview
             {
                 Total = SchoolOver,
                 BaiYang = BaiYang,
                 East = East,
-                SchoolRooms = RoomInfo
+                SchoolRooms = RoomInfo,
+                gradeClassInfoList = new List<GradeClassInfo>(){
+                    gradeOneClassInfo,gradeTwoClassInfo,gradeThreeClassInfo
+                }
             };
         }
 

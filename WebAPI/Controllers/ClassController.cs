@@ -13,12 +13,27 @@ namespace Education.Controllers
     public class ClassController : ControllerBase
     {
 
+        public class GradeClassInfo
+        {
+            public string label { get; set; }
+            public List<ClassBaseInfo> items { get; set; }
+        }
+
+        public class ClassBaseInfo
+        {
+            public string label { get; set; }
+
+            public string value { get; set; }
+
+            public int count { get; set; }
+        }
+
         /// <summary>
         /// 班级概要
         /// </summary>
         public class ClassOverview
         {
-            public StudentGroupProperty Property { get; set; } 
+            public StudentGroupProperty Property { get; set; }
 
             /// <summary>
             /// 任课教师
@@ -46,7 +61,7 @@ namespace Education.Controllers
         public ActionResult<ClassOverview> GetClassOverview(string ClassId)
         {
             var overview = new ClassOverview();
-            overview.Property = new StudentGroupProperty(Dataset.StudentList.Where(x => x.ClassId == ClassId).ToList()); 
+            overview.Property = new StudentGroupProperty(Dataset.StudentList.Where(x => x.ClassId == ClassId).ToList());
             //教师记录
             overview.Teachers = Dataset.TeacherList.Where(x => x.ClassId == ClassId).ToList();
             var All = Dataset.ChengjiList.Where(x => x.ClassID == ClassId).ToList();

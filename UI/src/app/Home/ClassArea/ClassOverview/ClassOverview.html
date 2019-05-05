@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-8">
         <app-map [NativePlace]="this.StudentsInfo.nativePlace" [StyleHeight]="'600px'" [StyleWidth]="'600px'"
-          [NativePlaceZheJiang]="this.StudentsInfo.nativePlaceZheJiang" [ViusalMax]="5">
+          [NativePlaceZheJiang]="this.StudentsInfo.nativePlaceZheJiang" [ViusalMax]="5" [Title]="this.ClassName">
         </app-map>
       </div>
       <div class="col-4">
@@ -42,11 +42,6 @@
         <div class="box box-primary box-solid" style="width: 100%;">
           <div class="box-header with-border">
             <h3 class="box-title">性别比例</h3>
-            <div class="box-tools pull-right">
-              <button type="button" style="margin: 0px;" class="btn btn-info btn-box-tool" (click)="SaveSexRateImage()">
-                <i class="fas fa-file-download"></i>&nbsp;保存为图片
-              </button>
-            </div>
           </div>
           <div class="box-body">
             <div echarts (chartInit)="onSexRateChartInit($event)" [options]="mSexRate"
@@ -57,11 +52,6 @@
         <div *ngIf="IsShowKaoqinGraph" class="box box-primary box-solid" style="width: 100%;margin-top: 10px;">
           <div class="box-header with-border">
             <h3 class="box-title">考勤</h3>
-            <div class="box-tools pull-right">
-              <button type="button" style="margin: 0px;" class="btn btn-info btn-box-tool" (click)="SaveKaoqinImage()">
-                <i class="fas fa-file-download"></i>&nbsp;保存为图片
-              </button>
-            </div>
           </div>
           <div class="box-body">
             <div (chartInit)="onKaoqinChartInit($event)" echarts [options]="KaoqinOpt"

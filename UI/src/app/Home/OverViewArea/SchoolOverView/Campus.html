@@ -6,7 +6,7 @@
     <div class="row" style="width:1140px">
         <div class="col-7" style="padding: 0px;">
             <app-map [NativePlace]="this.campusInfo.property.nativePlace" [StyleHeight]="'450px'" [StyleWidth]="'600px'"
-                [NativePlaceZheJiang]="this.campusInfo.property.nativePlaceZheJiang">
+                [NativePlaceZheJiang]="this.campusInfo.property.nativePlaceZheJiang" [Title]="this.campusfullname">
             </app-map>
         </div>
         <div class="col-5" style="padding-left: 10px;padding-right: 0px;">
@@ -38,12 +38,6 @@
             <div class="box box-primary box-solid" style="width: 100%;"> 
                 <div class="box-header with-border">
                     <h3 class="box-title">性别比例</h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" style="margin: 0px;" class="btn btn-info btn-box-tool"
-                            (click)="SaveSexRateImage()">
-                            <i class="fas fa-file-download"></i>&nbsp;保存为图片
-                        </button>
-                    </div>
                 </div>
                 <div class="box-body">
                     <div *ngIf="this.campusfullname === '东部校区'" echarts [options]="mSexRatePieOption"  (chartInit)="SexRateChartInit($event)"

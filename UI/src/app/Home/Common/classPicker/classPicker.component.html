@@ -16,14 +16,16 @@
         scrollHeight="360px" (onRowSelect)="onRowSelect()">
         <ng-template pTemplate="header">
           <tr>
-            <th style="width: 50px">班级</th>
-            <th style="width: 100px">编号</th>
+            <th style="width: 100px">班级</th>
+            <th style="width: 50px">编号</th>
+            <th style="width: 50px">人数</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-itemData>
           <tr [pSelectableRow]="itemData">
-            <td style="width: 50px">{{itemData.label}}</td>
-            <td style="width: 100px">{{itemData.value}}</td>
+            <td style="width: 100px">{{itemData.label}}</td>
+            <td style="width: 50px">{{itemData.value}}</td>
+            <td style="width: 50px">{{itemData.count}}</td>
           </tr>
         </ng-template>
       </p-table>

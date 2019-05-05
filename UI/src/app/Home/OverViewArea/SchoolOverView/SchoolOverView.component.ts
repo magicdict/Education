@@ -42,7 +42,8 @@ export class SchoolOverViewComponent implements OnInit {
         this.service.SchoolOverview = this.schoolinfo;
 
         //旭日图
-        this.SexRateSunburstOption.title.text = "";
+        this.SexRateSunburstOption.title.text = "全校男女性别比例";
+        this.SexRateSunburstOption.title['show'] = false;
         this.SexRateSunburstOption.series.data[0].value = data.schoolInfo.total.property.totalSexRate.maleCnt + data.schoolInfo.total.property.totalSexRate.femaleCnt;
 
         this.SexRateSunburstOption.series.data[0].children[0].value = data.schoolInfo.total.grade1SexRate.maleCnt + data.schoolInfo.total.grade1SexRate.femaleCnt;

@@ -147,6 +147,7 @@ export class StudentOverviewComponent implements OnInit {
         this.ConsumptionMonthMoney = data.studentinfo.monthlyConsumptions.map(x => x.amount);
         this.CompumptionGraph.xAxis.data = this.ConsumptionMonth;
         this.CompumptionGraph.series[0].data = this.ConsumptionMonthMoney;
+        
 
         //考勤
         from(data.studentinfo.kaoqins).pipe(
@@ -209,7 +210,7 @@ export class StudentOverviewComponent implements OnInit {
         )
 
         this.ScoreGraph = CommonFunction.clone(ScoreRadarGraphOption);
-        this.ScoreGraph.title.text = '成绩';
+        this.ScoreGraph.title.text = '各科成绩';
         this.ScoreGraph.radar.indicator = this.ScoreName;
         this.ScoreGraph.series[0].data[0].value = this.ScoreAvg;
         this.ScoreGraph.series[0].data[1].value = this.TScoreAvg;

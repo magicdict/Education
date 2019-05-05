@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { classopt } from '../Education.model';
 import { CommonFunction } from '../common';
 import { SelectItem } from 'primeng/api';
+import { HomeService } from '../Home.service';
 
 @Component({
   selector: 'app-classPicker',
@@ -42,6 +42,8 @@ export class ClassPickerComponent {
   FullClass: SelectItem[] = [];
 
   constructor(
+    private service: HomeService
+
   ) {
 
   }
@@ -65,7 +67,7 @@ export class ClassPickerComponent {
   }
 
   show() {
-    CommonFunction.clone(classopt).forEach(grade => {
+    CommonFunction.clone(this.service.SchoolOverview.gradeClassInfoList).forEach(grade => {
       grade.items.forEach(classname => {
         this.FullClass.push(classname);
       });

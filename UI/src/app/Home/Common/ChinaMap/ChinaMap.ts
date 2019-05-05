@@ -36,7 +36,7 @@ export class ChinaMapComponent implements OnInit, OnChanges {
     }
 
 
-
+    @Input() Title = "";
     @Input() NativePlace: { name: string, value: number }[];
     @Input() NativePlaceZheJiang: { name: string, value: number }[];
     ChinaMapOption = CommonFunction.clone(regionMapOptions);
@@ -75,12 +75,15 @@ export class ChinaMapComponent implements OnInit, OnChanges {
         }
         this.ChinaMapOption.series[0].mapType = "China";
         this.ChinaMapOption.series[0].data = this.NativePlace;
-        this.ChinaMapOption.title.text = "";
+        this.ChinaMapOption.title.text = this.Title + "全国生源地图";
+        this.ChinaMapOption.title['show'] = false;
+
         this.ZheJiangMapOption.series[0].mapType = "zhejiang";
         this.ZheJiangMapOption.series[0].data =
             this.NativePlaceZheJiang.filter(x => x.name.startsWith("-")).
                 map(x => { return { name: x.name.slice(1, 4), value: x.value } });
-        this.ZheJiangMapOption.title.text = "";
+        this.ZheJiangMapOption.title.text = this.Title + "浙江省生源地图";
+        this.ZheJiangMapOption.title['show'] = false;
         this.NativePlaceZheJiangDetailOnly = this.NativePlaceZheJiang.filter(x => !x.name.startsWith("-"));
         if (this.chinaChart !== undefined) {
             this.chinaChart.setOption(this.ChinaMapOption);

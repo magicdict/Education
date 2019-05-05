@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using Education.Controllers;
+using static Education.Controllers.ClassController;
 
 public static class Dataset
 {
@@ -34,7 +35,7 @@ public static class Dataset
 
     public static List<MonthConsumptionStudent> StudentConsumptionList = new List<MonthConsumptionStudent>();
 
-
+    public static List<ClassBaseInfo> classBaseInfoList = new List<ClassBaseInfo>();
 
     //数据库的导入
     public static void Load(IWebHostEnvironment hostingEnvironment)
@@ -86,6 +87,23 @@ public static class Dataset
         StudentList.Sort((x, y) => x.ID.CompareTo(y.ID));
         Console.WriteLine("读取学生基本信息件数：" + StudentList.Count);
         Console.WriteLine(timer.Elapsed.ToString());
+        var ClassCntDict = new Dictionary<String, int>();
+        foreach (var stud in StudentList)
+        {
+            if (!ClassCntDict.ContainsKey(stud.ClassId + stud.ClassName))
+            {
+                ClassCntDict.Add(stud.ClassId + stud.ClassName, 0);
+            }
+            ClassCntDict[stud.ClassId + stud.ClassName]++;
+        }
+        foreach (var key in ClassCntDict.Keys)
+        {
+            classBaseInfoList.Add(new ClassBaseInfo(){
+               label = key.Substring(3),
+               value = key.Substring(0,3), 
+               count = ClassCntDict[key] 
+            });
+        }
 
         //导入考勤类型信息 4_kaoqintype.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "4_kaoqintype.csv";

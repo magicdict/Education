@@ -48,7 +48,8 @@ export class CampusComponent implements OnInit {
             this.campusfullname = "白杨校区";
             this.campusInfo = this.service.SchoolOverview.baiYang;
             //旭日图
-            this.mSexRateSunburstOption.title.text = "";
+            this.mSexRateSunburstOption.title.text = "白杨校区性别比例";
+            this.mSexRateSunburstOption.title['show'] = false;
             this.mSexRateSunburstOption.series.data[0].value = this.campusInfo.property.totalSexRate.maleCnt + this.campusInfo.property.totalSexRate.femaleCnt;
 
             this.mSexRateSunburstOption.series.data[0].children[0].value = this.campusInfo.grade1SexRate.maleCnt + this.campusInfo.grade1SexRate.femaleCnt;
@@ -65,7 +66,8 @@ export class CampusComponent implements OnInit {
         } else {
             this.campusfullname = "东部校区";
             this.campusInfo = this.service.SchoolOverview.east;
-            this.mSexRatePieOption.title.text = "";
+            this.mSexRatePieOption.title.text = "东部校区性别比例";
+            this.mSexRatePieOption.title['show'] = false;
             this.mSexRatePieOption.series[0].data[0].value = this.campusInfo.property.totalSexRate.maleCnt;
             this.mSexRatePieOption.series[0].data[1].value = this.campusInfo.property.totalSexRate.femaleCnt;
         }
@@ -85,6 +87,9 @@ export class CampusComponent implements OnInit {
                 type: 'category',
                 data: subnamelist
             },
+            title: {
+                text: this.campusfullname + '教师人数'
+            },
             tooltip: {},
             yAxis: {
                 type: 'value'
@@ -99,6 +104,7 @@ export class CampusComponent implements OnInit {
                 type: 'bar'
             }]
         }
+        this.mTeacherSub.title['show'] = false;
         this.mTeacherSub['toolbox'] = {
             'show': true,
             'feature': {

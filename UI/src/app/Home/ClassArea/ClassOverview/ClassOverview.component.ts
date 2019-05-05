@@ -3,11 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { IStudent, IClassInfo, ITeacher, IClassExam, IStudentGroupProperty } from 'src/app/Home/Common/Education.model';
 import { HomeService } from '../../Common/Home.service';
 import { SexRatePieOption } from '../../GraphOption/StudentGraphOption'
-import { ISimpleBar } from '../../GraphOption/KaoqinOption';
+import { ISimpleBar, ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { CommonFunction } from '../../Common/common';
-import { TabPanel } from 'primeng/tabview';
 import { ClassExamListComponent } from '../../Common/ClassExamList/ClassExamList.component';
 
 @Component({
@@ -86,7 +85,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
         this.ClassId = this.QueryResult[0].classId;
         this.StudentsInfo = data.classinfo.property;
 
-        this.mSexRate.title.text = "";
+        this.mSexRate.title.text = this.ClassName + "性别比例";
         this.mSexRate.title['show'] = false;
         this.mSexRate.legend['show'] = false;
         this.mSexRate.series[0]['radius'] = '75%';
@@ -107,9 +106,9 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
             this.Exams.push(r.filter(x => x.record.subId !== "99" && x.record.subId !== "98"));
           }
         )
-        this.Exams.sort((x,y)=>{
-          return x[0].record.term.localeCompare(y[0].record.term);  
-        });  
+        this.Exams.sort((x, y) => {
+          return x[0].record.term.localeCompare(y[0].record.term);
+        });
 
         if (data.classinfo.kaoqing.length === 0) {
           this.IsShowKaoqinGraph = false;
@@ -120,6 +119,10 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
               type: 'category',
               data: data.classinfo.kaoqing.map(x => x.name)
             },
+            title: {
+              text: this.ClassName + "考勤统计"
+            },
+            toolbox: ToolboxSaveImageOnly,
             yAxis: {
               type: 'value'
             },
@@ -128,6 +131,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
               type: 'bar'
             }]
           };
+          this.KaoqinOpt.title['show'] = false;
           if (this.KaoqinEchartsInstance !== undefined) {
             this.KaoqinEchartsInstance.setOption(this.KaoqinOpt);
           }
@@ -142,13 +146,13 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
   }
 
   @ViewChild("classExamList")
-  classExamList:ClassExamListComponent;
+  classExamList: ClassExamListComponent;
 
   IsFirst = true;
-  handleChange(e){
+  handleChange(e) {
     var index = e.index;
     if (index !== 2) return;
-    if (this.IsFirst){
+    if (this.IsFirst) {
       this.IsFirst = false;
       this.classExamList.ResetScroll();
     }

@@ -116,6 +116,8 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         this.subTitle = this.Exams[0].record.grade + " - " + this.Exams[0].record.subName;
         this.mScoreFunnelOption.legend.data = [];
         this.mScoreFunnelOption.series[0].data = [];
+        this.mScoreFunnelOption.title.text = this.Title + this.subTitle + "分数段人数";
+        this.mScoreFunnelOption.title.show = false;
         let maxcnt = 0;
         for (let k in r.gradeInfo.funnelDic) {
             this.mScoreFunnelOption.legend.data.push(k);

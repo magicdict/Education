@@ -36,6 +36,8 @@ export class SingleExamClassComponent implements OnInit {
                     maxcnt = this.CurrentClassExam.funnelDic[k];
                 }
             }
+            this.mScoreFunnelOption.title.text = this.Title + this.subTitle + "分数段人数";
+            this.mScoreFunnelOption.title.show = false;
             this.mScoreFunnelOption.series[0].max = maxcnt;
             this.IsFunnel = true;
         });
