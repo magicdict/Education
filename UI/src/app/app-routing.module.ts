@@ -7,7 +7,7 @@ import {
 import { SchoolOverViewComponent } from "./Home/OverViewArea/SchoolOverView/SchoolOverView.component"
 import { CourseOverViewComponent } from './Home/OverViewArea/CourseOverView/CourseOverView.component';
 import { ConsumptionOverviewComponent } from './Home/OverViewArea/ConsumptionOverview/ConsumptionOverview.component';
-import { ClassOverviewComponent } from './Home/ClassArea/ClassOverview/ClassOverview.component';
+import { ClassOverviewComponent } from './Home/ClassOverview/ClassOverview.component';
 import { ExamOverViewComponent } from './Home/OverViewArea/ExamOverview/ExamOverview.component';  
 import { KaoqinOverviewComponent } from './Home/OverViewArea/KaoqinOverview/KaoqinOverview.component';
 import { CampusComponent } from './Home/OverViewArea/SchoolOverView/Campus.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
     component: SchoolOverViewComponent,
     resolve: { schoolInfo: ISchoolInfoResolver }
   },
-  {
+  { 
     path: 'home/course/:type',
     component: CourseOverViewComponent,
     resolve: { courseInfo: ICourseResolver }

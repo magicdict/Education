@@ -67,6 +67,7 @@ export class ClassPickerComponent {
   }
 
   show() {
+    this.FullClass = [];
     CommonFunction.clone(this.service.SchoolOverview.gradeClassInfoList).forEach(grade => {
       grade.items.forEach(classname => {
         this.FullClass.push(classname);

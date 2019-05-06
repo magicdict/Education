@@ -65,7 +65,7 @@
     <div class="container">
       <div class="row">
         <div class="col">
-            <table-function [Table]="dt" [FrameStyle]="{'float':'right'}"></table-function>
+          <table-function [Table]="dt" [FrameStyle]="{'float':'right'}"></table-function>
         </div>
       </div>
     </div>
@@ -154,6 +154,36 @@
             <p-tabPanel *ngFor="let item of this.Exams" [header]="item[0].record.term">
               <class-exam-list #classExamList [CSVFilename]="ClassName +  item[0].record.term + '学期考试一览'" [Exams]="item"
                 [scrollHeight]="'600px'" [IsShowClassName]="false" style="padding:5px 0px;"></class-exam-list>
+            </p-tabPanel>
+            <p-tabPanel [header]="'期中考试趋势'">
+              <div class="container">
+                <div class="row" *ngFor="let opt of this.subNameOptionsMid">
+                  <div class="col">
+                    <div echarts [options]="opt" style="width:1000px;height:350px;">
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </p-tabPanel>
+            <p-tabPanel [header]="'期末考试趋势'">
+              <div class="container">
+                <div class="row" *ngFor="let opt of this.subNameOptionsFinal">
+                  <div class="col">
+                    <div echarts [options]="opt" style="width:1000px;height:350px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </p-tabPanel>
+            <p-tabPanel [header]="'期中期末趋势'">
+              <div class="container">
+                <div class="row" *ngFor="let opt of this.subNameOptionsMidFinal">
+                  <div class="col">
+                    <div echarts [options]="opt" style="width:1000px;height:350px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </p-tabPanel>
           </p-tabView>
         </div>

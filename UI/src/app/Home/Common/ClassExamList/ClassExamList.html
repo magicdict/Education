@@ -108,7 +108,7 @@
       <td style="width: 50px;text-align:right;">{{itemData.avgScore}}</td>
       <td style="width: 50px;text-align:right;">{{itemData.std}}</td>
       <td style="width: 45px;text-align:right;">{{itemData.var}}</td>
-      <td style="width: 50px;text-align:right;">{{itemData.mid}}</td>
+      <td style="width: 50px;text-align:right;">{{roundvalue(itemData.mid)}}</td>
     </tr>
   </ng-template>
   <ng-template pTemplate="footer" *ngIf="Footer !==null">
@@ -127,7 +127,7 @@
       <td style="width: 50px;text-align:right;">{{Footer.avgScore}}</td>
       <td style="width: 50px;text-align:right;">{{Footer.std}}</td>
       <td style="width: 45px;text-align:right;">{{Footer.var}}</td>
-      <td style="width: 50px;text-align:right;">{{Footer.mid}}</td>
+      <td style="width: 50px;text-align:right;">{{roundvalue(Footer.mid)}}</td>
     </tr>
   </ng-template>
 </p-table>

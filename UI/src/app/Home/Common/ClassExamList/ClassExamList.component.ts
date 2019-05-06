@@ -1,9 +1,10 @@
 import { Component, Input, OnChanges, ViewChild, OnInit, Output } from '@angular/core';
-import { IClassExam } from 'src/app/Home/Common/Education.model';
+import { IClassExam } from '../Education.model';
 import { Router } from '@angular/router';
 import { HomeService } from '../Home.service';
 import { Table } from 'primeng/table';
 import { Dropdown } from 'primeng/dropdown';
+import { CommonFunction } from '../common';
 @Component({
     selector: 'class-exam-list',
     templateUrl: 'ClassExamList.html',
@@ -56,6 +57,9 @@ export class ClassExamListComponent implements OnChanges {
         { field: 'var', header: "方差" },
         { field: 'mid', header: "中位数" }
     ];
+
+
+    roundvalue = CommonFunction.roundvalue;
 
     subName: { label: string, value: string }[] = [];
 

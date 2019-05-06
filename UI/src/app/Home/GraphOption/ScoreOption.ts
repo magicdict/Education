@@ -1,5 +1,54 @@
 import { ToolboxSaveImageOnly, ToolboxForBar } from './KaoqinOption';
 
+
+export const ExamSubNameOption = {
+  title: {
+    text: '语文期中考试'
+  },
+  tooltip: {
+    trigger: 'axis'
+  },
+  legend: {
+    data: ['最高分', '最低分', '平均分']
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  toolbox: {
+    feature: {
+      saveAsImage: {}
+    }
+  },
+  xAxis: {
+    type: 'category',
+    boundaryGap: false,
+    data: []
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      name: '最高分',
+      type: 'line',
+      data: []
+    },
+    {
+      name: '最低分',
+      type: 'line',
+      data: []
+    },
+    {
+      name: '平均分',
+      type: 'line',
+      data: []
+    }
+  ]
+};
+
 /**
  *  个人成绩雷达图
  */

@@ -1,13 +1,14 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IStudent, IClassInfo, ITeacher, IClassExam, IStudentGroupProperty } from 'src/app/Home/Common/Education.model';
-import { HomeService } from '../../Common/Home.service';
-import { SexRatePieOption } from '../../GraphOption/StudentGraphOption'
-import { ISimpleBar, ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
+import { IStudent, IClassInfo, ITeacher, IClassExam, IStudentGroupProperty } from '../Common/Education.model';
+import { HomeService } from '../Common/Home.service';
+import { SexRatePieOption } from '../GraphOption/StudentGraphOption'
+import { ISimpleBar, ToolboxSaveImageOnly } from '../GraphOption/KaoqinOption';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
-import { CommonFunction } from '../../Common/common';
-import { ClassExamListComponent } from '../../Common/ClassExamList/ClassExamList.component';
+import { CommonFunction } from '../Common/common';
+import { ClassExamListComponent } from '../Common/ClassExamList/ClassExamList.component';
+import { ExamSubNameOption } from '../GraphOption/ScoreOption';
 
 @Component({
   templateUrl: 'ClassOverview.html',
@@ -110,6 +111,14 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
           return x[0].record.term.localeCompare(y[0].record.term);
         });
 
+        this.subNameOptionsMid = [];
+        this.subNameOptionsFinal = [];
+        this.subNameOptionsMidFinal = [];
+
+        this.CreateOptionForGrade("期中", this.subNameOptionsMid);
+        this.CreateOptionForGrade("期末", this.subNameOptionsFinal);
+        this.CreateOptionForGrade("", this.subNameOptionsMidFinal);
+
         if (data.classinfo.kaoqing.length === 0) {
           this.IsShowKaoqinGraph = false;
         } else {
@@ -133,11 +142,67 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
           };
           this.KaoqinOpt.title['show'] = false;
           if (this.KaoqinEchartsInstance !== undefined) {
-            this.KaoqinEchartsInstance.setOption(this.KaoqinOpt);
+            try {
+              this.KaoqinEchartsInstance.setOption(this.KaoqinOpt);
+            } catch (error) {
+              //从不显示到显示这里会报错
+            }
           }
         }
       });
   }
+
+  subNameList = ['语文', '数学', '英语', '历史', '政治', '生物', '物理', '化学', '地理'];
+  subNameOptionsMid: any[] = [];
+  subNameOptionsFinal: any[] = [];
+  subNameOptionsMidFinal: any[] = [];
+
+  CreateOptionForGrade(typeName: string, optarray: any[]) {
+    //期中考试的获取
+    this.subNameList.forEach(
+      subname => {
+        let opt = CommonFunction.clone(ExamSubNameOption);
+        opt.title.text = subname + typeName + "考试趋势"
+        let High = [];
+        let Low = [];
+        let Avg = [];
+        let xAxis = [];
+        this.Exams.forEach(examlist => {
+
+          if (typeName === "") {
+            let x = examlist.find(x => x.record.subName === subname && x.record.typeName === "期中");
+            if (x !== undefined) {
+              High.push(x.maxScore);
+              Low.push(x.minScore);
+              Avg.push(x.avgScore);
+              xAxis.push(x.record.term + "期中")
+            }
+            let y = examlist.find(x => x.record.subName === subname && x.record.typeName === "期末");
+            if (y !== undefined) {
+              High.push(y.maxScore);
+              Low.push(y.minScore);
+              Avg.push(y.avgScore);
+              xAxis.push(y.record.term + "期末")
+            }
+          } else {
+            let x = examlist.find(x => x.record.subName === subname && x.record.typeName === typeName);
+            if (x !== undefined) {
+              High.push(x.maxScore);
+              Low.push(x.minScore);
+              Avg.push(x.avgScore);
+              xAxis.push(x.record.term)
+            }
+          }
+        });
+        opt.series[0].data = High;
+        opt.series[1].data = Low;
+        opt.series[2].data = Avg;
+        opt.xAxis.data = xAxis;
+        optarray.push(opt);
+      }
+    )
+  }
+
   onRowSelect(event: { data: IStudent; }) {
     this.router.navigate(['student/overview', event.data.id]);
   }
@@ -148,6 +213,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
   @ViewChild("classExamList")
   classExamList: ClassExamListComponent;
 
+  //Panel里面带滚动条表格的修复
   IsFirst = true;
   handleChange(e) {
     var index = e.index;
