@@ -3,6 +3,7 @@ import { HomeService } from '../../Common/Home.service';
 import { IKaoqin } from '../../Common/Education.model';
 import { CommonFunction } from '../../Common/common';
 import { ISimpleBar, ToolboxForBar } from '../../GraphOption/KaoqinOption';
+import { Router } from '@angular/router';
 @Component({
     templateUrl: 'StudentKaoqin.component.html',
 })
@@ -21,6 +22,9 @@ export class StudentKaoqinComponent implements OnInit {
     KaoqinOption: ISimpleBar;
 
     ngOnInit(): void {
+        if (this.service.CurrentStudentInfo === undefined) {
+            this.router.navigate(['home/school']);
+        }
         this.KaoqinList = this.service.CurrentStudentInfo.kaoqins;
         let CntArray: number[] = [];
         let NameArray: string[] = [];
@@ -68,6 +72,7 @@ export class StudentKaoqinComponent implements OnInit {
 
     }
     constructor(
+        private router: Router,
         public service: HomeService
     ) {
 

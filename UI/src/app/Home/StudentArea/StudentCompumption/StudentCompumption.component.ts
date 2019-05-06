@@ -5,12 +5,15 @@ import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { DiaryAvgByTimeRangeOption, TotalByTimeRangeOption, DiaryCompumptionOption, DairyCanlendarOption } from '../../GraphOption/CompumptionOption';
 import { ISimpleBar, ToolboxForBar } from '../../GraphOption/KaoqinOption';
+import { Router } from '@angular/router';
+import { IConsumption } from '../../Common/Education.model';
 @Component({
     templateUrl: 'StudentCompumption.html',
 })
 export class StudentCompumptionComponent implements OnInit {
 
     constructor(
+        private router: Router,
         public service: HomeService
     ) {
 
@@ -28,6 +31,10 @@ export class StudentCompumptionComponent implements OnInit {
     ];
 
     ngOnInit(): void {
+        if (this.service.CurrentStudentInfo === undefined) {
+            this.router.navigate(['home/school']);
+        }
+        this.Compumptions = this.service.CurrentStudentInfo.consumptions;
         //1.按照时段进行统计，某个时段，每天平均消费数
         this.GetDiaryAvgByTimeRange();
         //2.按照星期统计
@@ -36,7 +43,7 @@ export class StudentCompumptionComponent implements OnInit {
         this.GetPerRangeCnt();
     }
     ConvertNumberToWeekday = CommonFunction.ConvertNumberToWeekday;
-    Compumptions = this.service.CurrentStudentInfo.consumptions;
+    Compumptions:IConsumption[] = [];
 
     mDiaryAvgByTimeRangeOpt = CommonFunction.clone(DiaryAvgByTimeRangeOption);
     mTotalByTimeRangeOpt = CommonFunction.clone(TotalByTimeRangeOption);

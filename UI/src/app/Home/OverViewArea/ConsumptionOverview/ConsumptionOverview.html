@@ -94,15 +94,15 @@
                                     <p-sortIcon [field]="'sex'">
                                     </p-sortIcon>
                                 </th>
-                                <th style="width: 50px" [pSortableColumn]="'liveAtSchool'">是否住校
+                                <th style="width: 60px" [pSortableColumn]="'liveAtSchool'">是否住校
                                     <p-sortIcon [field]="'liveAtSchool'">
                                     </p-sortIcon>
                                 </th>
-                                <th style="width: 100px" [pSortableColumn]="'month'">月度
+                                <th style="width: 80px" [pSortableColumn]="'month'">月度
                                     <p-sortIcon [field]="'month'">
                                     </p-sortIcon>
                                 </th>
-                                <th style="width: 100px" [pSortableColumn]="'amount'">金额
+                                <th style="width: 80px" [pSortableColumn]="'amount'">金额
                                     <p-sortIcon [field]="'amount'">
                                     </p-sortIcon>
                                 </th>
@@ -114,9 +114,9 @@
                                 <td style="width: 100px">{{itemData.name}}</td>
                                 <td style="width: 100px">{{itemData.className}}</td>
                                 <td style="width: 50px;text-align: center">{{itemData.sex}}</td>
-                                <td style="width: 50px;text-align: center">{{itemData.liveAtSchool?"是":"否"}}</td>
-                                <td style="width: 100px;text-align: center">{{itemData.month}}</td>
-                                <td style="width: 100px;text-align: right;">{{itemData.amount}}</td>
+                                <td style="width: 60px;text-align: center">{{itemData.liveAtSchool?"是":"否"}}</td>
+                                <td style="width: 80px;text-align: center">{{itemData.month}}</td>
+                                <td style="width: 80px;text-align: right;">{{itemData.amount}}</td>
                             </tr>
                         </ng-template>
                     </p-table>

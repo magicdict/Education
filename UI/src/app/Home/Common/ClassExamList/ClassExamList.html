@@ -22,7 +22,7 @@
   (onRowSelect)="onRowSelect($event)" [columns]="cols" [exportFilename]="CSVFilename">
   <ng-template pTemplate="header">
     <tr>
-      <th *ngIf="IsShowClassName" style="width: 100px;" [pSortableColumn]="'record.className'">班级名
+      <th *ngIf="IsShowClassName" style="width: 75px;" [pSortableColumn]="'record.className'">班级名
         <p-sortIcon [field]="'record.className'">
         </p-sortIcon>
       </th>
@@ -86,7 +86,7 @@
   </ng-template>
   <ng-template pTemplate="body" let-itemData>
     <tr [pSelectableRow]="itemData">
-      <td *ngIf="IsShowClassName" style="width: 100px">{{itemData.record.className}}</td>
+      <td *ngIf="IsShowClassName" style="width: 75px">{{itemData.record.className}}</td>
       <td *ngIf="IsShowExamName" style="width: 100px">{{itemData.record.numberName}}</td>
       <td *ngIf="IsShowTeacher" style="width: 50px">{{itemData.record.teacherName}}</td>
       <td *ngIf="IsShowTeacher" style="width: 50px">{{itemData.record.teacherID}}</td>
@@ -113,7 +113,7 @@
   </ng-template>
   <ng-template pTemplate="footer" *ngIf="Footer !==null">
     <tr>
-      <td *ngIf="IsShowClassName" style="width: 100px">{{Footer.record.className}}</td>
+      <td *ngIf="IsShowClassName" style="width: 75px">{{Footer.record.className}}</td>
       <td *ngIf="IsShowExamName" style="width: 100px">{{Footer.record.numberName}}</td>
       <td *ngIf="IsShowTeacher" style="width: 50px">-</td>
       <td *ngIf="IsShowTeacher" style="width: 50px">-</td>

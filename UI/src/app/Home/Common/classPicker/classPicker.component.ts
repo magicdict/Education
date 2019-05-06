@@ -75,6 +75,9 @@ export class ClassPickerComponent {
     });
     this.display = true;
     this.selectClass = null;
+    this.selectedAddtional = '';
+    this.selectedCampus= '';
+    this.SelectGrade = '';
     this.Classes = this.FullClass;
   }
 
@@ -87,9 +90,6 @@ export class ClassPickerComponent {
     this.display = false;
   }
 
-  query() {
-
-  }
   onRowSelect() {
     this.display = false;
     this.pick.emit(this.selectClass);

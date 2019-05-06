@@ -52,6 +52,8 @@ export class TeacherPickerComponent {
 
   show() {
     this.display = true;
+    this.SelectGrade = '';
+    this.SelectSub = '';
     this.selectTeacher = null;
     this.Teachers = [];
   }

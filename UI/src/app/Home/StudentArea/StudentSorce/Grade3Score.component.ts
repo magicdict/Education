@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../Common/Home.service';
 import { IStudent, ITeacher, IScore } from 'src/app/Home/Common/Education.model';
 import { Router } from '@angular/router';
+import { ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
 
 @Component({
     templateUrl: 'Grade3Score.html',
@@ -27,6 +28,9 @@ export class Grade3ScoreComponent implements OnInit {
 
 
     ngOnInit(): void {
+        if (this.service.CurrentStudentInfo === undefined) {
+            this.router.navigate(['home/school']);
+        }
         //成绩列表
         this.CurrentStudent = this.service.CurrentStudentInfo.baseInfo;
         this.Teachers = this.service.CurrentStudentInfo.teachers;
@@ -48,8 +52,9 @@ export class Grade3ScoreComponent implements OnInit {
             subname => {
                 let opt = {
                     title: { text: subname },
+                    toolbox: ToolboxSaveImageOnly,
                     legend: {
-                        right: 10,
+                        right: 50,
                         data: ['年级百分比', '等第']
                     },
                     xAxis: { type: 'category', data: [] },

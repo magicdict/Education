@@ -46,6 +46,12 @@ export class StudentPickerComponent {
     this.display = true;
     this.selectStudent = null;
     this.Students = [];
+    this.RoomNo = '';
+    this.NationName = '';
+    this.PolicyName = '';
+    this.StudentId = '';
+    this.selectedCampus = '';
+    this.selectedSex = '';
   }
 
   submit() {

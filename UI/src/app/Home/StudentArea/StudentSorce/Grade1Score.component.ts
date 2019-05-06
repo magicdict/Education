@@ -23,6 +23,9 @@ export class Grade1ScoreComponent implements OnInit {
 
     ngOnInit(): void {
         //成绩列表
+        if (this.service.CurrentStudentInfo === undefined) {
+            this.router.navigate(['home/school']);
+        }
         this.CurrentStudent = this.service.CurrentStudentInfo.baseInfo;
         this.Teachers = this.service.CurrentStudentInfo.teachers;
         this.Scores = this.service.CurrentStudentInfo.chengjis.filter(x => x.subId !== "99"); //99表示总分
