@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using Education.Controllers;
 using static Education.Controllers.ClassController;
+using static Utility;
 
 public static class Dataset
 {
@@ -36,6 +37,8 @@ public static class Dataset
     public static List<MonthConsumptionStudent> StudentConsumptionList = new List<MonthConsumptionStudent>();
 
     public static List<ClassBaseInfo> classBaseInfoList = new List<ClassBaseInfo>();
+
+    public static List<NameValueSet> NoConsumptionList = new List<NameValueSet>();
 
     //数据库的导入
     public static void Load(IWebHostEnvironment hostingEnvironment)
@@ -321,8 +324,21 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine(timer.Elapsed.ToString());
-        var t = Utility.GetTotalDaysCnt();
-        CreatePresentStudentList(fullpath);
+        //var t = Utility.GetTotalDaysCnt();
+        //CreatePresentStudentList(fullpath);
+        fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "PresentStudentList.csv";
+        sr = new StreamReader(fullfilepath);
+        sr.ReadLine();  //读取标题栏
+        while (!sr.EndOfStream)
+        {
+            var line = sr.ReadLine().Split(",");
+            NoConsumptionList.Add(new NameValueSet()
+            {
+                name = line[0],
+                value = int.Parse(line[1])
+            });
+        }
+        sr.Close();
         Console.WriteLine(timer.Elapsed.ToString());
         timer.Stop();
     }
@@ -616,7 +632,7 @@ public static class Dataset
         timer.Stop();
     }
 
-    public static void CreateMonthlyCom(string fullpath)
+    public static void CreateMonthlyConsumption(string fullpath)
     {
         StreamWriter sw;
         var CntComplete = 0;

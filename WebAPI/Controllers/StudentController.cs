@@ -185,6 +185,32 @@ namespace Education.Controllers
                 info.Teachers = Dataset.TeacherList.Where(x => x.ClassId == info.BaseInfo.ClassId).ToList();
                 //考勤记录
                 info.Kaoqins = Dataset.KaoqinList.Where(x => x.StudentID == info.BaseInfo.ID).ToList();
+                //增加没有消费记录的日期
+                foreach (var rec in Dataset.NoConsumptionList.Where(x => x.name == Id))
+                {
+                    var year = rec.value.ToString().Substring(0, 4);
+                    var month = rec.value.ToString().Substring(4, 2);
+                    var day = rec.value.ToString().Substring(6, 2);
+                    info.Kaoqins.Add(new Kaoqin()
+                    {
+                        Id = "0",
+                        Term = "2018-2019-1",
+                        RecDateTime = year + "/" + month + "/" + day + " 09:00:00",
+                        RecDateTimeYear = year,
+                        RecDateTimeMonth = month,
+                        RecDateTimeDay = day,
+                        RecDateTimeHour = "09",
+                        ControllerID = "99999",
+                        ControllerName = "缺勤[无消费记录]",
+                        DetailId = "9999999",
+                        StudentID =Id,
+                        StudentName =info.BaseInfo.Name,
+                        ClassName = info.BaseInfo.ClassName,
+                        ClassId = info.BaseInfo.ClassId,
+                        DayOfWeek = new System.DateTime(int.Parse(year), int.Parse(month), int.Parse(day)).DayOfWeek
+                    });
+                }
+
                 info.Kaoqins.Sort(
                     (x, y) =>
                     {
@@ -212,9 +238,7 @@ namespace Education.Controllers
                 );
                 //消费件数
                 info.ConsumptionCnt = info.Consumptions.Count;
-
                 info.MonthlyConsumptions = Dataset.StudentConsumptionList.Where(x => x.ID == Id).ToList();
-
                 //室友
                 if (info.BaseInfo.LiveAtSchool)
                 {

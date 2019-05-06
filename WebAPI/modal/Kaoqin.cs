@@ -77,6 +77,10 @@ public class Kaoqin
 
     public DayOfWeek DayOfWeek { get; set; }
 
+    public Kaoqin(){
+        
+    }
+
     public Kaoqin(string RawData)
     {
         var Items = RawData.Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray();
