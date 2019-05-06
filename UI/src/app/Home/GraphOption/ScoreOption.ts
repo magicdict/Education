@@ -19,7 +19,8 @@ export const ExamSubNameOption = {
   },
   toolbox: {
     feature: {
-      saveAsImage: {}
+      saveAsImage: {},
+      magicType: { type: ['line', 'bar'] }
     }
   },
   xAxis: {
@@ -34,16 +35,49 @@ export const ExamSubNameOption = {
     {
       name: '最高分',
       type: 'line',
+      markPoint: {
+        data: [
+          { type: 'max', name: '最大值' },
+          { type: 'min', name: '最小值' }
+        ]
+      },
+      markLine: {
+        data: [
+          { type: 'average', name: '平均值' }
+        ]
+      },
       data: []
     },
     {
       name: '最低分',
       type: 'line',
+      markPoint: {
+        data: [
+          { type: 'max', name: '最大值' },
+          { type: 'min', name: '最小值' }
+        ]
+      },
+      markLine: {
+        data: [
+          { type: 'average', name: '平均值' }
+        ]
+      },
       data: []
     },
     {
       name: '平均分',
       type: 'line',
+      markPoint: {
+        data: [
+          { type: 'max', name: '最大值' },
+          { type: 'min', name: '最小值' }
+        ]
+      },
+      markLine: {
+        data: [
+          { type: 'average', name: '平均值' }
+        ]
+      },
       data: []
     }
   ]
@@ -106,7 +140,7 @@ export const ScoreRadarGraphForClassOption = {
     },
   },
   legend: {
-    data: ['最高分', '最低分','平均分']
+    data: ['最高分', '最低分', '平均分']
   },
   radar: {
     name: {
