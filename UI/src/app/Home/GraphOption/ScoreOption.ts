@@ -94,6 +94,51 @@ export const ScoreRadarGraphOption = {
   }]
 };
 
+export const ScoreRadarGraphForClassOption = {
+  title: {
+    text: '成绩'
+  },
+  tooltip: {},
+  toolbox: {
+    'show': true,
+    'feature': {
+      'saveAsImage': {}
+    },
+  },
+  legend: {
+    data: ['最高分', '最低分','平均分']
+  },
+  radar: {
+    name: {
+      textStyle: {
+        color: '#fff',
+        backgroundColor: '#999',
+        borderRadius: 3,
+        padding: [3, 5]
+      }
+    },
+    radius: "65%",
+    indicator: []
+  },
+  series: [{
+    name: '各科平均分',
+    type: 'radar',
+    data: [
+      {
+        value: [],
+        name: '最高分'
+      },
+      {
+        value: [],
+        name: '最低分'
+      },
+      {
+        value: [],
+        name: '平均分'
+      }
+    ]
+  }]
+};
 
 export const CourseSelectRadarGraphOption = {
   title: {

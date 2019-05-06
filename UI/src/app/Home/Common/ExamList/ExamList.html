@@ -31,6 +31,10 @@
         <p-sortIcon [field]="'studentName'">
         </p-sortIcon>
       </th>
+      <th *ngIf="Mode !== 'SAME'" style="width: 50px" [pSortableColumn]="'className'">班级
+        <p-sortIcon [field]="'className'">
+        </p-sortIcon>
+      </th>
       <th *ngIf="Mode === 'SAME'" style="width: 200px" [pSortableColumn]="'numberName'">考试名称
         <p-sortIcon [field]="'numberName'">
         </p-sortIcon>
@@ -39,7 +43,7 @@
         <p-sortIcon [field]="'subName'">
         </p-sortIcon>
       </th>
-      <th style="width: 40px" [pSortableColumn]="'score'">分数
+      <th style="width: 30px" [pSortableColumn]="'score'">分数
         <p-sortIcon [field]="'score'">
         </p-sortIcon>
       </th>
@@ -63,15 +67,15 @@
         <p-sortIcon [field]="'zScore'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px" [pSortableColumn]="'dengdi'">等第
+      <th style="width: 30px" [pSortableColumn]="'dengdi'">等第
         <p-sortIcon [field]="'dengdi'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px" [pSortableColumn]="'classRank'">班级排名
+      <th style="width: 40px" [pSortableColumn]="'classRank'">班级排名
         <p-sortIcon [field]="'classRank'">
         </p-sortIcon>
       </th>
-      <th style="width: 50px" [pSortableColumn]="'gradeRank'">年级排名
+      <th style="width: 40px" [pSortableColumn]="'gradeRank'">年级排名
         <p-sortIcon [field]="'gradeRank'">
         </p-sortIcon>
       </th>
@@ -85,17 +89,18 @@
     <tr [pSelectableRow]="itemData" [ngStyle]="this.GetStyle(itemData)">
       <td *ngIf="Mode !== 'SAME'" style="width: 50px">{{itemData.studentID}}</td>
       <td *ngIf="Mode !== 'SAME'" style="width: 50px">{{itemData.studentName}}</td>
+      <td *ngIf="Mode !== 'SAME'" style="width: 50px">{{itemData.className}}</td>
       <td *ngIf="Mode === 'SAME'" style="width: 200px">{{itemData.numberName}}</td>
       <td *ngIf="Mode === 'SAME'" style="width: 50px">{{itemData.subName}}</td>
-      <td style="width: 40px;text-align:right;">{{itemData.score}}</td>
+      <td style="width: 30px;text-align:right;">{{itemData.score}}</td>
       <td style="width: 40px;text-align:right;">{{itemData.scorePercent}}</td>
       <td style="width: 40px;text-align:right;">{{roundvalue(itemData.gradeAvgDiff)}}</td>
       <td style="width: 40px;text-align:right;">{{roundvalue(itemData.classAvgDiff)}}</td>
       <td style="width: 50px;text-align:right;">{{roundvalue(itemData.tScore)}}</td>
       <td style="width: 50px;text-align:right;">{{roundvalue(itemData.zScore)}}</td>
-      <td style="width: 50px;text-align:right;">{{roundvalue(itemData.dengdi)}}</td>
-      <td style="width: 50px;text-align:right;">{{itemData.classRank}}</td>
-      <td style="width: 50px;text-align:right;">{{itemData.gradeRank}}</td>
+      <td style="width: 30px;text-align:right;">{{roundvalue(itemData.dengdi)}}</td>
+      <td style="width: 40px;text-align:right;">{{itemData.classRank}}</td>
+      <td style="width: 40px;text-align:right;">{{itemData.gradeRank}}</td>
       <td style="width: 50px;text-align:right;">{{itemData.gradeRankPercent}}</td>
     </tr>
   </ng-template>

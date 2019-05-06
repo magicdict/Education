@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, ViewChild, OnInit, Output } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild, Output } from '@angular/core';
 import { IClassExam } from '../Education.model';
 import { Router } from '@angular/router';
 import { HomeService } from '../Home.service';
@@ -86,9 +86,6 @@ export class ClassExamListComponent implements OnChanges {
         }
         //console.log("成绩列表变更");
     }
-
-
-
 
     onRowSelect(event: { data: IClassExam; }) {
         if (this.FunRowSelect !== undefined) {

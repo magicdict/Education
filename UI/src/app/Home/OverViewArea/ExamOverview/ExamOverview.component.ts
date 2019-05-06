@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IExamList, IClassExam, IExamInfoForNumberAndSubName, IScore } from 'src/app/Home/Common/Education.model';
 import { CommonFunction } from 'src/app/Home/Common/common';
 import { HomeService } from '../../Common/Home.service';
-import { ScoreFunnelOption } from '../../GraphOption/ScoreOption';
+import { ScoreFunnelOption, ScoreRadarGraphForClassOption } from '../../GraphOption/ScoreOption';
 @Component({
     templateUrl: 'ExamOverView.html',
 })
@@ -14,7 +14,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
     Top10: IScore[] = [];
     Low10: IScore[] = [];
     FootExam: IClassExam;
-    mScoreFunnelOption = ScoreFunnelOption;
+
     Title: string;
     subTitle: string;
 
@@ -100,10 +100,17 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         this.cd.detectChanges();
     }
     //ngx-echarts初始化，获得图表实例
-    echartsInstance: any;
-    onChartInit(event: any) {
-        this.echartsInstance = event;
+    FunnelechartsInstance: any;
+    onFunnelChartInit(event: any) {
+        this.FunnelechartsInstance = event;
     }
+    mScoreFunnelOption = CommonFunction.clone(ScoreFunnelOption);
+
+    RadarechartsInstance: any;
+    onRadarChartInit(event: any) {
+        this.RadarechartsInstance = event;
+    }
+    mScoreRadarOption = CommonFunction.clone(ScoreRadarGraphForClassOption);
 
     CreateEntity(r: IExamInfoForNumberAndSubName) {
         r.gradeInfo.record.className = "年级组";
@@ -127,8 +134,38 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
             }
         }
         this.mScoreFunnelOption.series[0].max = maxcnt;
-        if (this.echartsInstance !== undefined) {
-            this.echartsInstance.setOption(this.mScoreFunnelOption);
+        if (this.FunnelechartsInstance !== undefined) {
+            this.FunnelechartsInstance.setOption(this.mScoreFunnelOption);
+        }
+
+        this.mScoreRadarOption.legend.data = ["最高分", "最低分", "平均分"]
+        let High = [];
+        let Low = [];
+        let Avg = [];
+        let ClassName = [];
+        let MaxIndicator = 0;
+        this.Exams.forEach(
+            exam => {
+                if (exam.maxScore > MaxIndicator) MaxIndicator = exam.maxScore;
+            }
+        );
+        this.Exams.forEach(
+            exam => {
+                if (exam.record.className.indexOf("IB") === -1 && exam.record.className.indexOf("未分班") === -1) {
+                    High.push(exam.maxScore);
+                    Low.push(exam.minScore);
+                    Avg.push(exam.avgScore);
+                    ClassName.push({ name: exam.record.className, max: MaxIndicator })
+                }
+            }
+        );
+        this.mScoreRadarOption.series[0].data[0].value = High;
+        this.mScoreRadarOption.series[0].data[1].value = Low;
+        this.mScoreRadarOption.series[0].data[2].value = Avg;
+        this.mScoreRadarOption.radar.indicator = ClassName;
+
+        if (this.RadarechartsInstance !== undefined) {
+            this.RadarechartsInstance.setOption(this.mScoreRadarOption);
         }
     }
 

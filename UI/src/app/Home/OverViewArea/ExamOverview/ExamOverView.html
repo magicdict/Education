@@ -40,7 +40,7 @@
                             <p class="category">{{subTitle}}</p>
                         </div>
                         <div class="card-body">
-                            <class-exam-list [Exams]="this.Exams" [Footer]="FootExam" [scrollHeight]="'600px'" 
+                            <class-exam-list [Exams]="this.Exams" [Footer]="FootExam" [scrollHeight]="'600px'"
                                 [IsShowTeacher]="this.Exams[0].record.subId !=='99' && this.Exams[0].record.subId !=='98'"
                                 [IsShowExamName]="false" [CSVFilename]="Title + subTitle">
                             </class-exam-list>
@@ -54,7 +54,7 @@
                             <p class="category">{{subTitle}}</p>
                         </div>
                         <div class="card-body">
-                            <class-exam-list [Exams]="this.TeacherExams" [scrollHeight]="'600px'" 
+                            <class-exam-list [Exams]="this.TeacherExams" [scrollHeight]="'600px'"
                                 [IsShowTeacher]="this.Exams[0].record.subId !=='99' && this.Exams[0].record.subId !=='98'"
                                 [FunRowSelect]="JumpToTeacher" [IsShowClassName]="false" [IsShowExamName]="false"
                                 [CSVFilename]="Title + subTitle">
@@ -86,9 +86,15 @@
                         </div>
                     </div>
                 </p-tabPanel>
+                <p-tabPanel [header]="'班级比较'">
+                    <div echarts [options]="mScoreRadarOption"
+                        style="width:1100px;height: 650px;border: 2px solid lightgray;padding: 5px;margin: 5px;"
+                        (chartInit)="onRadarChartInit($event)"></div>
+                </p-tabPanel>
                 <p-tabPanel [header]="'分数段人数'">
-                    <div echarts [options]="mScoreFunnelOption" style="width:1100px;height: 650px;border: 2px solid lightgray;padding: 5px;margin: 5px;"
-                        (chartInit)="onChartInit($event)"></div>
+                    <div echarts [options]="mScoreFunnelOption"
+                        style="width:1100px;height: 650px;border: 2px solid lightgray;padding: 5px;margin: 5px;"
+                        (chartInit)="onFunnelChartInit($event)"></div>
                 </p-tabPanel>
             </p-tabView>
         </div>
