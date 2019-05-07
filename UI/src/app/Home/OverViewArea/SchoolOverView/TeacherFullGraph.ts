@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HomeService } from '../../Common/Home.service';
+import { ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
 
 
 @Component({
@@ -19,10 +20,14 @@ export class FullTeacherComponent implements OnInit {
             trigger: 'item',
             triggerOn: 'mousemove'
         },
+        toolbox: ToolboxSaveImageOnly,
+        title: {
+            text: '教师全体树形图',
+            show: false
+        },
         series: [
             {
                 type: 'tree',
-
                 data: [],
 
                 left: '2%',

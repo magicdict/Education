@@ -14,6 +14,14 @@ export class StudentPickerComponent {
 
   @Output() pick: EventEmitter<any> = new EventEmitter();
 
+
+  cols = [
+    { field: 'id', header: '学号' },
+    { field: 'name', header: '姓名' },
+    { field: 'className', header: '班级' },
+    { field: 'sex', header: '性别' },
+  ]
+
   public display = false;
 
   public Students: IStudent[] = [];

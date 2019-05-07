@@ -11,9 +11,9 @@
       <p-selectButton [options]="Campus" [(ngModel)]="selectedCampus" (onChange)="RefreshList()"></p-selectButton>
       &nbsp;&nbsp;
       <p-selectButton [options]="Addtional" [(ngModel)]="selectedAddtional" (onChange)="RefreshList()"></p-selectButton>
-      <br /> <br />
-      <p-table [value]="this.Classes" selectionMode="single" [(selection)]="this.selectClass" [scrollable]="true"
-        scrollHeight="360px" (onRowSelect)="onRowSelect()">
+      <table-function [Table]="dt" [FrameStyle]="{'margin':'0px auto 0px auto','width':'100%'}" ></table-function>
+      <p-table #dt [value]="this.Classes" selectionMode="single" [(selection)]="this.selectClass" [scrollable]="true"
+        scrollHeight="360px" (onRowSelect)="onRowSelect()" [columns]="cols" [exportFilename]="'班级检索器'"> 
         <ng-template pTemplate="header">
           <tr>
             <th style="width: 100px">班级</th>

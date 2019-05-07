@@ -17,6 +17,12 @@ export class ClassPickerComponent {
 
   public selectClass: SelectItem;
 
+  cols = [
+    { field: 'label', header: '班级' },
+    { field: 'value', header: '编号' },
+    { field: 'count', header: '人数' },
+  ]
+
   Gradelist = [
     { label: '全部', value: '' },
     { label: '高一', value: '高一' },
@@ -76,7 +82,7 @@ export class ClassPickerComponent {
     this.display = true;
     this.selectClass = null;
     this.selectedAddtional = '';
-    this.selectedCampus= '';
+    this.selectedCampus = '';
     this.SelectGrade = '';
     this.Classes = this.FullClass;
   }

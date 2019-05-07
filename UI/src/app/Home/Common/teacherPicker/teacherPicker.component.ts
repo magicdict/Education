@@ -19,6 +19,13 @@ export class TeacherPickerComponent {
 
   public selectTeacher: ITeacher;
 
+  cols = [
+    { field: 'id', header: '员工ID' },
+    { field: 'name', header: '姓名' },
+    { field: 'graName', header: '年级' },
+    { field: 'subName', header: '学科' },
+  ]
+
   Gradelist = [
     { label: '全部', value: '' },
     { label: '高一', value: '高一' },
