@@ -6,15 +6,19 @@
             "children": [
                 {
                     "name": "高一东部",
+                    "collapsed":false,
                     "children": [
                         {
                             "name": "语文",
+                            "collapsed":false,
                             "children": [
                                 {
                                     "name": "朱老师",
+                                    "collapsed":false,
                                     "children": [
                                         {
-                                            "name": "东-高一(01)"
+                                            "name": "东-高一(01)",
+                                            "collapsed":false
                                         },
                                         {
                                             "name": "东-高一(02)"

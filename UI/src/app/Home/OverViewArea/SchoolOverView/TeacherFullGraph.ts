@@ -29,22 +29,18 @@ export class FullTeacherComponent implements OnInit {
             {
                 type: 'tree',
                 data: [],
-
-                left: '2%',
-                right: '2%',
-                top: '8%',
-                bottom: '20%',
-
+                initialTreeDepth:2,
+                top: '1%',
+                left: '7%',
+                bottom: '1%',
+                right: '20%',
                 symbol: 'emptyCircle',
-
-                orient: 'vertical',
 
                 expandAndCollapse: true,
 
                 label: {
                     normal: {
-                        position: 'top',
-                        rotate: -90,
+                        position: 'left',
                         verticalAlign: 'middle',
                         align: 'right',
                         fontSize: 12
@@ -54,10 +50,10 @@ export class FullTeacherComponent implements OnInit {
                 leaves: {
                     label: {
                         normal: {
-                            position: 'bottom',
-                            rotate: -90,
+                            position: 'left',
                             verticalAlign: 'middle',
-                            align: 'left'
+                            align: 'right',
+                            fontSize: 12
                         }
                     }
                 },
