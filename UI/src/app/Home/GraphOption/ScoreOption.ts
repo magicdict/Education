@@ -243,7 +243,7 @@ export const CourseSelectTwoCntOption = {
   },
   animation: false,
   grid: {
-    height: '50%',
+    height: '70%',
     y: '10%'
   },
   xAxis: {
@@ -266,7 +266,7 @@ export const CourseSelectTwoCntOption = {
     calculable: true,
     orient: 'horizontal',
     left: 'center',
-    bottom: '15%'
+    bottom: '5%'
   },
   series: [{
     name: '两门课程组合',
