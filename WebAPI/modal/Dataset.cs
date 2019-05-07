@@ -8,6 +8,7 @@ using System.Collections.Concurrent;
 using Education.Controllers;
 using static Education.Controllers.ClassController;
 using static Utility;
+using Newtonsoft.Json;
 
 public static class Dataset
 {
@@ -366,6 +367,47 @@ public static class Dataset
         }
         sw.Close();
     }
+
+    public static void CreateTeacherRelationShipJsonFile(string fullpath)
+    {
+        var Grade3 = new { name = "高三", children = GetTeacherNode("高三") };
+        var Grade2 = new { name = "高二", children = GetTeacherNode("高二") };
+        var Grade1BaiYang = new { name = "高一白杨", children = GetTeacherNode("白-高一") };
+        var Grade1East = new { name = "高一东部", children = GetTeacherNode("东-高一") };
+        var Grade1 = new { name = "高一", children = new List<dynamic> { Grade1East, Grade1BaiYang } };
+        var School = new { name = "实效中学", children = new List<dynamic> { Grade1, Grade2, Grade3 } };
+        var json = JsonConvert.SerializeObject(School);
+        var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "Teacher.json");
+        sw.WriteLine(json);
+        sw.Close();
+    }
+
+    private static dynamic GetTeacherNode(string grade)
+    {
+        var LastTermTeacher = Dataset.TeacherList.Where(x => x.Term == "2018-2019-1").ToList();
+        //高三教师的提取
+        var TeacherGrade3 = LastTermTeacher.Where(x => x.ClassName.Contains(grade));
+        var SubNameGrade3 = TeacherGrade3.Select(x => x.SubName).Distinct().ToList();
+        //课程子节点的做成
+        var SubNodeGrade3List = new List<dynamic>();
+        foreach (var subname in SubNameGrade3)
+        {
+            var teachers = TeacherGrade3.Where(x => x.SubName == subname).Distinct(new Teacher()).ToList();
+            var TeacherClassList = new List<dynamic>();
+            foreach (var teacher in teachers)
+            {
+                TeacherClassList.Add(new
+                {
+                    name = teacher.Name,
+                    children = TeacherGrade3.Where(x => x.Id == teacher.Id).Select(x => { return new { name = x.ClassName }; }).ToList()
+                });
+            }
+            //获得所有教师和班级联系
+            SubNodeGrade3List.Add(new { name = subname, children = TeacherClassList });
+        }
+        return SubNodeGrade3List;
+    }
+
 
     /// <summary>
     /// 高三选修课

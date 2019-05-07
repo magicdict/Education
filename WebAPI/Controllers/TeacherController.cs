@@ -10,6 +10,13 @@ namespace Education.Controllers
     [ApiController]
     public class TeacherController : ControllerBase
     {
+        public class TeacherInfo
+        {
+            public Dictionary<string, List<string>> GroupByTerm = new Dictionary<string, List<string>>();
+            public List<Teacher> Records { set; get; }
+            public List<ClassExamInfo> ClassExams { set; get; }
+        }
+
         [HttpGet("QueryByTeacherId")]
         public ActionResult<TeacherInfo> QueryByTeacherId(string Id)
         {

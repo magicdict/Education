@@ -44,7 +44,23 @@
       </div>
     </div>
   </div>
-
+  <div class="row">
+    <div class="col" style="padding: 0px;">
+      <div class="box box-primary box-solid" style="width: 100%;">
+        <div class="box-header with-border">
+          <h3 class="box-title">教师</h3>
+          <div class="box-tools pull-right">
+            <button type="button" style="margin: 0px;" class="btn btn-info btn-box-tool" (click)="fullteacher()"> 
+                <i class="fas fa-info-circle"></i>&nbsp;教师全体树状图
+            </button>
+        </div>
+        </div>
+        <div class="box-body">
+          <div echarts [options]="mTeacherSub" style="width:1000px;height:300px"></div>
+        </div>
+      </div>
+    </div>
+  </div> 
   <div class="row" style="width:1140px">
     <div class="col-8" style="padding: 0px;">
       <app-map [NativePlace]="this.schoolinfo.total.property.nativePlace" [StyleHeight]="'600px'" [StyleWidth]="'700px'"

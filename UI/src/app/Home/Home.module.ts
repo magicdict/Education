@@ -59,6 +59,7 @@ import { ChinaMapComponent } from './Common/ChinaMap/ChinaMap';
 import { TableFunctionComponent } from './Common/TableFunction/TableFunction';
 
 import { CompareStudentComponent } from './StudentArea/Compare/CompareStudent';
+import { FullTeacherComponent } from './OverViewArea/SchoolOverView/TeacherFullGraph';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { CompareStudentComponent } from './StudentArea/Compare/CompareStudent';
     ClassOverviewComponent,
     //教师相关
     TeacherOverviewComponent,
+    FullTeacherComponent,
     //学生相关
     StudentOverviewComponent,
     StudentCompumptionComponent,

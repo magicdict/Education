@@ -10,6 +10,7 @@ import { TeacherOverviewComponent } from './TeacherOverview/TeacherOverview.comp
 import { SingleExamClassComponent } from './Common/ClassExamList/SingleExamClass.component';
 import { StudentKaoqinComponent } from './StudentArea/StudentKaoqin/StudentKaoqin.component';
 import { CompareStudentComponent } from './StudentArea/Compare/CompareStudent';
+import { FullTeacherComponent } from './OverViewArea/SchoolOverView/TeacherFullGraph';
 
 const routes: Routes = [
   {
@@ -59,6 +60,10 @@ const routes: Routes = [
     resolve: {
       compareinfo: ICompareStudentResolver
     }
+  },
+  {
+    path: 'home/teacherfull',
+    component: FullTeacherComponent,
   }
 ];
 
