@@ -176,8 +176,18 @@
               </div>
             </p-tabPanel>
             <p-tabPanel [header]="'期中期末趋势'" *ngIf="ClassName.indexOf('高一') ===-1">
-              <div class="container">
+              <div class="container"> 
                 <div class="row" *ngFor="let opt of this.subNameOptionsMidFinal">
+                  <div class="col">
+                    <div echarts [options]="opt" style="width:1000px;height:350px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </p-tabPanel>
+            <p-tabPanel [header]="'期中期末得分率趋势'" *ngIf="ClassName.indexOf('高一') ===-1">
+              <div class="container">
+                <div class="row" *ngFor="let opt of this.subNameOptionsMidFinalRate">
                   <div class="col">
                     <div echarts [options]="opt" style="width:1000px;height:350px;">
                     </div>

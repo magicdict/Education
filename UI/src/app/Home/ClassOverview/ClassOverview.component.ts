@@ -114,10 +114,11 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
         this.subNameOptionsMid = [];
         this.subNameOptionsFinal = [];
         this.subNameOptionsMidFinal = [];
-
+        this.subNameOptionsMidFinalRate = [];
         this.CreateOptionForGrade("期中", this.subNameOptionsMid);
         this.CreateOptionForGrade("期末", this.subNameOptionsFinal);
         this.CreateOptionForGrade("", this.subNameOptionsMidFinal);
+        this.CreateRateOptionForGrade(this.subNameOptionsMidFinalRate);
 
         if (data.classinfo.kaoqing.length === 0) {
           this.IsShowKaoqinGraph = false;
@@ -156,9 +157,81 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
   subNameOptionsMid: any[] = [];
   subNameOptionsFinal: any[] = [];
   subNameOptionsMidFinal: any[] = [];
+  subNameOptionsMidFinalRate: any[] = [];
+  CreateRateOptionForGrade(optarray: any[]) {
+    this.subNameList.forEach(
+      subname => {
+        let opt = CommonFunction.clone(ExamSubNameOption);
+        opt.title.text = subname + "考试趋势"
+        opt.legend.data = ['最高得分率', '最低得分率', '平均得分率']
+        opt.series[0].name = '最高得分率';
+        opt.series[1].name = '最低得分率';
+        opt.series[2].name = '平均得分率';
+        let High = [];
+        let Low = [];
+        let Avg = [];
+        let xAxis = [];
+        this.Exams.forEach(examlist => {
+          if (this.ClassName.indexOf("高二") !== -1) {
+            //对于高二的修正
 
+            let rate = 100;
+            let x = examlist.find(x => x.record.subName === subname && x.record.typeName === "期中");
+            if (x !== undefined) {
+              High.push(CommonFunction.roundvalue(x.maxScore / rate));
+              Low.push(CommonFunction.roundvalue(x.minScore / rate));
+              Avg.push(CommonFunction.roundvalue(x.avgScore / rate));
+              xAxis.push(x.record.term + "期中")
+            }
+
+            if (subname === "语文" || subname === "数学" || subname == "英语") {
+              rate = 150;
+            }
+            let y = examlist.find(x => x.record.subName === subname && x.record.typeName === "期末");
+            if (y !== undefined) {
+              High.push(CommonFunction.roundvalue(y.maxScore / rate));
+              Low.push(CommonFunction.roundvalue(y.minScore / rate));
+              Avg.push(CommonFunction.roundvalue(y.avgScore / rate));
+              xAxis.push(y.record.term + "期末")
+            }
+          }
+          if (this.ClassName.indexOf("高三") !== -1) {
+            //对于高三的修正
+            let rate = 100;
+            let x = examlist.find(x => x.record.subName === subname && x.record.typeName === "期中");
+            if (x !== undefined) {
+              if (subname === "语文") {
+                if (x.record.term == "2018-2019-1") rate = 150;
+              }
+              High.push(CommonFunction.roundvalue(x.maxScore / rate));
+              Low.push(CommonFunction.roundvalue(x.minScore / rate));
+              Avg.push(CommonFunction.roundvalue(x.avgScore / rate));
+              xAxis.push(x.record.term + "期中")
+            }
+
+            let y = examlist.find(x => x.record.subName === subname && x.record.typeName === "期末");
+            if (y !== undefined) {
+              if (subname === "语文" || subname === "数学" || subname == "英语") {
+                if (y.record.term == "2016-2017-1") rate = 150;
+                if (y.record.term == "2017-2018-1") rate = 150;
+                if (y.record.term == "2017-2018-2") rate = 150;
+              }
+              High.push(CommonFunction.roundvalue(y.maxScore / rate));
+              Low.push(CommonFunction.roundvalue(y.minScore / rate));
+              Avg.push(CommonFunction.roundvalue(y.avgScore / rate));
+              xAxis.push(y.record.term + "期末")
+            }
+          }
+        });
+        opt.series[0].data = High;
+        opt.series[1].data = Low;
+        opt.series[2].data = Avg;
+        opt.xAxis.data = xAxis;
+        optarray.push(opt);
+      }
+    )
+  }
   CreateOptionForGrade(typeName: string, optarray: any[]) {
-    //期中考试的获取
     this.subNameList.forEach(
       subname => {
         let opt = CommonFunction.clone(ExamSubNameOption);
