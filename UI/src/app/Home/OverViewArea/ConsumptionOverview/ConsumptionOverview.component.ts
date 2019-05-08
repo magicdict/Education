@@ -57,6 +57,12 @@ export class ConsumptionOverviewComponent implements OnInit {
     return val[1] / 2500;
   }
 
+  hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
+    '7a', '8a', '9a', '10a', '11a',
+    '12p', '1p', '2p', '3p', '4p', '5p',
+    '6p', '7p', '8p', '9p', '10p', '11p'];
+  days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
+
   WeekTimeOptionSample = {
     tooltip: {
       position: 'top',
@@ -73,14 +79,14 @@ export class ConsumptionOverviewComponent implements OnInit {
     series: []
   };
 
-  WeekTimeLineOptions = {
+  WeekTimeLineOptionSample = {
     baseOption: {
       timeline: {
         axisType: 'category',
         show: true,
         autoPlay: true,
         playInterval: 1000,
-        data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+        data: this.days
       },
       toolbox: {
         'show': true,
@@ -94,10 +100,7 @@ export class ConsumptionOverviewComponent implements OnInit {
           left: 150,
           type: 'category',
           boundaryGap: false,
-          data: ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
-            '7a', '8a', '9a', '10a', '11a',
-            '12p', '1p', '2p', '3p', '4p', '5p',
-            '6p', '7p', '8p', '9p', '10p', '11p'],
+          data: this.hours,
           top: 10,
           height: 200,
           axisLabel: {
@@ -176,29 +179,74 @@ export class ConsumptionOverviewComponent implements OnInit {
     ]
   }
 
+
+  WeekTimeOptionSample3D = {
+    tooltip: {},
+    visualMap: {
+      max: 50000,
+      show:false,
+      inRange: {
+        color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+      }
+    },
+    xAxis3D: {
+      type: 'category',
+      data: this.hours
+    },
+    yAxis3D: {
+      type: 'category',
+      data: this.days
+    },
+    zAxis3D: {
+      type: 'value'
+    },
+    grid3D: {
+      boxWidth: 200,
+      boxDepth: 80,
+      viewControl: {
+        projection: 'orthographic'
+      },
+      light: {
+        main: {
+          intensity: 1.2
+        },
+        ambient: {
+          intensity: 0.3
+        }
+      }
+    },
+    series: [{
+      type: 'bar3D',
+      data: [],
+      shading: 'color',
+
+      label: {
+        formatter: '{c}'
+      },
+
+      itemStyle: {
+        opacity: 0.4
+      },
+    }]
+  }
+
   WeekTimeOption = CommonFunction.clone(this.WeekTimeOptionSample);
   WeekTimeLiveAtSchoolOption = CommonFunction.clone(this.WeekTimeOptionSample);
   WeekTimeNotLiveAtSchoolOption = CommonFunction.clone(this.WeekTimeOptionSample);
 
-  WeekTimeLineOption = CommonFunction.clone(this.WeekTimeLineOptions);
-  WeekTimeLineLiveAtSchoolOption = CommonFunction.clone(this.WeekTimeLineOptions);
-  WeekTimeLineNotLiveAtSchoolOption = CommonFunction.clone(this.WeekTimeLineOptions);
+  WeekTimeLineOption = CommonFunction.clone(this.WeekTimeLineOptionSample);
+  WeekTimeLineLiveAtSchoolOption = CommonFunction.clone(this.WeekTimeLineOptionSample);
+  WeekTimeLineNotLiveAtSchoolOption = CommonFunction.clone(this.WeekTimeLineOptionSample);
 
-
+  WeekTimeOption3D = CommonFunction.clone(this.WeekTimeOptionSample3D)
 
   SetWeekTimeOption(WeekTimeOptionInstance: any, dataItems: number[][]) {
-    var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
-      '7a', '8a', '9a', '10a', '11a',
-      '12p', '1p', '2p', '3p', '4p', '5p',
-      '6p', '7p', '8p', '9p', '10p', '11p'];
-    var days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
-
     WeekTimeOptionInstance.title = [];
     WeekTimeOptionInstance.singleAxis = [];
     WeekTimeOptionInstance.series = [];
 
     for (let idx = 0; idx < 7; idx++) {
-      let day = days[idx];
+      let day = this.days[idx];
       WeekTimeOptionInstance.title.push({
         textBaseline: 'middle',
         top: (idx + 0.5) * 100 / 7 + '%',
@@ -208,7 +256,7 @@ export class ConsumptionOverviewComponent implements OnInit {
         left: 150,
         type: 'category',
         boundaryGap: false,
-        data: hours,
+        data: this.hours,
         top: (idx * 100 / 7 + 5) + '%',
         height: (100 / 7 - 10) + '%',
         axisLabel: {
@@ -292,6 +340,7 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.SetWeekTimeOption(this.WeekTimeNotLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionNotLiveAtSchool
           .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
 
+        //时间线  
         this.SetWeekTimeLineOption(this.WeekTimeLineOption, data.consumptionInfo.weekTimeConsumption
           .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
 
@@ -301,6 +350,9 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.SetWeekTimeLineOption(this.WeekTimeLineNotLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionNotLiveAtSchool
           .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
 
+        //三维图形
+        this.WeekTimeOption3D.series[0].data = data.consumptionInfo.weekTimeConsumption
+          .map(x => { return [Number.parseInt(x.name.split('-')[1]), Number.parseInt(x.name.split('-')[0]), x.value]; })
 
         this.PerRangeCntOption = {
           title: {
