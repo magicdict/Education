@@ -25,7 +25,10 @@ export const ExamSubNameOption = {
   },
   xAxis: {
     type: 'category',
-    boundaryGap: false,
+    boundaryGap: true,
+    axisLabel:{
+      interval: 0
+    },  
     data: []
   },
   yAxis: {

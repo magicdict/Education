@@ -82,7 +82,7 @@
                     <div class="col-6" *ngIf="CurrentStudent.liveRoomNo !=='-'">
                         <div class="card text-left" [ngStyle]="getRoomMateStyle()">
                             <div class="card-body">
-                                <h4><b>{{CurrentStudent.liveRoomNo}}{{CurrentStudent.sex}}生宿舍</b></h4>
+                                <b style="font-size:15px;">{{RoomTitle}}</b>
                                 <div class="container" style="padding:0px">
                                     <student-item [Title]="item.name" [Sex]="item.sex" [StudentId]="item.id"
                                         [SubTitle]="item.className"

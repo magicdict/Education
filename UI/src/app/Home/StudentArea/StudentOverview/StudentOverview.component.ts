@@ -24,6 +24,7 @@ export class StudentOverviewComponent implements OnInit {
   CompumptionGraph = CommonFunction.clone(CompumptionBarGraph);
   KaoqinGraph = CommonFunction.clone(KaoqinBarGraph);
   ScoreGraph = CommonFunction.clone(ScoreRadarGraphOption);
+  RoomTitle = "";
 
   CompumptionEchartsInstance: any;
   onCompumptionChartInit(event: any) {
@@ -228,6 +229,9 @@ export class StudentOverviewComponent implements OnInit {
         if (this.CompumptionEchartsInstance !== undefined) {
           this.CompumptionEchartsInstance.setOption(this.CompumptionGraph);
         }
+
+        this.RoomTitle = (this.CurrentStudent.className.indexOf("东") === -1 ? "白杨校区" : "东部校区") +
+          this.CurrentStudent.sex + '生宿舍' + this.CurrentStudent.liveRoomNo + '室';
 
       });
   }

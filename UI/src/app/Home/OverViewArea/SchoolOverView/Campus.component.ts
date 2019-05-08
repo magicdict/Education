@@ -4,7 +4,7 @@ import { ICampus } from '../../Common/Education.model';
 import { SexRatePieOption, SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
 import { CommonFunction } from '../../Common/common';
 import { ISimpleBar } from '../../GraphOption/KaoqinOption';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { echartsInstance } from 'echarts'
 
 @Component({
@@ -116,7 +116,6 @@ export class CampusComponent implements OnInit {
         };
     }
     constructor(
-        private router: Router,
         private service: HomeService,
         private route: ActivatedRoute,
     ) {
