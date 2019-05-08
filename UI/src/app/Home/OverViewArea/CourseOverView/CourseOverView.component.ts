@@ -6,6 +6,7 @@ import {
   CourseSelectCntOption, CourseSelectTwoCntOption, CourseSelectThreeCntOption,
   CourseSelectRadarGraphOption, SelectCourseSankeyOption
 } from '../../GraphOption/ScoreOption'
+import { ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
 
 @Component({
   templateUrl: 'CourseOverView.html',
@@ -17,7 +18,6 @@ export class CourseOverViewComponent implements OnInit {
 
   //三维散点图
   ThreeCourseOption3D = {
-
     // 需要注意的是我们不能跟 grid 一样省略 grid3D
     grid3D: {
       viewControl: {
@@ -32,7 +32,6 @@ export class CourseOverViewComponent implements OnInit {
     series: [{
       type: 'scatter3D',
       symbolSize: (dataItem: number) => {
-        console.log(dataItem);
         return dataItem[3];
       },
       label: {
@@ -45,6 +44,51 @@ export class CourseOverViewComponent implements OnInit {
   };
 
 
+  //三维柱状图
+  TwoCourseOption3D = {
+    tooltip: {},
+    xAxis3D: {
+      type: 'category',
+      name: "课程1",
+      data: []
+    },
+    yAxis3D: {
+      type: 'category',
+      name: "课程2",
+      data: []
+    },
+    zAxis3D: {
+      type: 'value',
+      name: "人数"
+    },
+    grid3D: {
+      boxWidth: 200,
+      boxDepth: 80,
+      light: {
+        main: {
+          intensity: 1.2
+        },
+        ambient: {
+          intensity: 0.3
+        }
+      }
+    },
+    series: [{
+      type: 'bar3D',
+      data: [],
+      shading: 'color',
+
+      label: {
+        formatter: '{c}'
+      },
+
+      itemStyle: {
+        opacity: 0.4
+      },
+    }]
+  }
+
+
   //单科图
   mCourseSelectRadarGraphOption = CourseSelectRadarGraphOption;
   mCourseSelectCntOption = CourseSelectCntOption;
@@ -53,6 +97,7 @@ export class CourseOverViewComponent implements OnInit {
   //两门课程
   mCourseSelectTwoCntOption = CommonFunction.clone(CourseSelectTwoCntOption);
   mCourseSelectTwoPercentOption = CommonFunction.clone(CourseSelectTwoCntOption);
+  mTwoCourseOption3D = this.TwoCourseOption3D;
 
   //三门课程
   ThreeCoursePercent: { name: string, value: number }[];
@@ -98,6 +143,10 @@ export class CourseOverViewComponent implements OnInit {
     this.SelectCourseSankeyChart = event;
   }
 
+  CourseSelectTwoCnt3DChar: any;
+  onCourseSelectTwoCnt3DChartInit(event: any) {
+    this.CourseSelectTwoCnt3DChar = event;
+  }
 
   ngOnInit(): void {
     this.route.data
@@ -122,6 +171,7 @@ export class CourseOverViewComponent implements OnInit {
 
         let CombineData = [];
         let CombineDataPercent = [];
+        let Combine3D = [];
 
         for (let index = 0; index < 6; index++) {
           for (let index2 = 0; index2 < 6; index2++) {
@@ -132,9 +182,12 @@ export class CourseOverViewComponent implements OnInit {
             if (combine === undefined) {
               CombineData.push([index, index2, "-"]);
               CombineDataPercent.push([index, index2, "-"]);
+              Combine3D.push([Course1[index], Course2[index2], 0]);
             } else {
               CombineData.push([index, index2, combine.value]);
               CombineDataPercent.push([index, index2, CommonFunction.roundvalue(combine.value * 100 / data.courseInfo.studentCnt)]);
+              Combine3D.push([Course1[index], Course2[index2], combine.value]);
+
             }
           }
         }
@@ -142,6 +195,10 @@ export class CourseOverViewComponent implements OnInit {
         this.mCourseSelectTwoPercentOption.title.text = "高考七选三（两门百分比）"
         this.mCourseSelectTwoPercentOption.visualMap.max = 50;
         this.mCourseSelectTwoPercentOption.series[0].data = CombineDataPercent;
+
+        this.mTwoCourseOption3D.xAxis3D.data = Course1;
+        this.mTwoCourseOption3D.yAxis3D.data = Course2;
+        this.mTwoCourseOption3D.series[0].data = Combine3D;
 
         //三门课程
         data.courseInfo.selectionThreeCourseCnt.sort((x, y) => { return y.value - x.value; });
@@ -205,6 +262,9 @@ export class CourseOverViewComponent implements OnInit {
         }
         if (this.CourseSelectTwoCntChart !== undefined) {
           this.CourseSelectTwoCntChart.setOption(this.mCourseSelectTwoCntOption);
+        }
+        if (this.CourseSelectTwoCnt3DChar !== undefined) {
+          this.CourseSelectTwoCnt3DChar.setOption(this.mTwoCourseOption3D);
         }
         if (this.CourseSelectTwoPercentChart !== undefined) {
           this.CourseSelectTwoPercentChart.setOption(this.mCourseSelectTwoPercentOption);

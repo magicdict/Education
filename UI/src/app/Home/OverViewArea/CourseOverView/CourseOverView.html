@@ -46,8 +46,13 @@
                         (chartInit)="onCourseSelectTwoCntChartInit($event)"
                         style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
                 </div>
+            </div> 
+            <div class="row">
+                <div class="col">
+                    <div echarts [options]="mTwoCourseOption3D" (chartInit)="onCourseSelectTwoCnt3DChartInit($event)"
+                        style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
+                </div>
             </div>
-
             <div class="row">
                 <div class="col">
                     <div echarts [options]="mCourseSelectTwoPercentOption"
