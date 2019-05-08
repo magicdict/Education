@@ -15,6 +15,36 @@ export class CourseOverViewComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
+  //三维散点图
+  ThreeCourseOption3D = {
+
+    // 需要注意的是我们不能跟 grid 一样省略 grid3D
+    grid3D: {
+      viewControl: {
+        // 使用正交投影。
+        projection: 'orthographic'
+      }
+    },
+    // 默认情况下, x, y, z 分别是从 0 到 1 的数值轴
+    xAxis3D: { type: 'category', name: "课程1", data: ['物理', '化学', '生物', '地理', '政治', '技术', '历史'] },
+    yAxis3D: { type: 'category', name: "课程2", data: ['物理', '化学', '生物', '地理', '政治', '技术', '历史'] },
+    zAxis3D: { type: 'category', name: "课程3", data: ['物理', '化学', '生物', '地理', '政治', '技术', '历史'] },
+    series: [{
+      type: 'scatter3D',
+      symbolSize: (dataItem: number) => {
+        console.log(dataItem);
+        return dataItem[3];
+      },
+      label: {
+        formatter: '{c}'
+      },
+      data: [
+
+      ]
+    }]
+  };
+
+
   //单科图
   mCourseSelectRadarGraphOption = CourseSelectRadarGraphOption;
   mCourseSelectCntOption = CourseSelectCntOption;
@@ -26,7 +56,9 @@ export class CourseOverViewComponent implements OnInit {
 
   //三门课程
   ThreeCoursePercent: { name: string, value: number }[];
-  mCourseSelectThreeCntOption =  CommonFunction.clone(CourseSelectThreeCntOption);
+  mCourseSelectThreeCntOption = CommonFunction.clone(CourseSelectThreeCntOption);
+  mThreeCourseOption3D = this.ThreeCourseOption3D;
+
   //桑吉图
   mSelectCourseSankeyOption = CommonFunction.clone(SelectCourseSankeyOption);
 
@@ -53,6 +85,12 @@ export class CourseOverViewComponent implements OnInit {
   CourseSelectThreeCntChart: any;
   onCourseSelectThreeCntChartInit(event: any) {
     this.CourseSelectThreeCntChart = event;
+  }
+
+
+  CourseSelectThree3DChart: any;
+  onCourseSelectThree3DChartInit(event: any) {
+    this.CourseSelectThree3DChart = event;
   }
 
   SelectCourseSankeyChart: any;
@@ -112,6 +150,11 @@ export class CourseOverViewComponent implements OnInit {
         this.ThreeCoursePercent = data.courseInfo.selectionThreeCourseCnt.map(x => {
           return { 'name': x.name, 'value': CommonFunction.roundvalue(x.value * 100 / data.courseInfo.studentCnt) }
         });
+
+        this.mThreeCourseOption3D.series[0].data = data.courseInfo.selectionThreeCourseCnt.map(
+          x => [x.name.split("/")[0], x.name.split("/")[1], x.name.split("/")[2], x.value]
+        );
+
         //桑基图
         //注意：重复数据会导致桑基图出现错误
         this.mSelectCourseSankeyOption.series.data = [];
@@ -168,6 +211,9 @@ export class CourseOverViewComponent implements OnInit {
         }
         if (this.CourseSelectThreeCntChart !== undefined) {
           this.CourseSelectThreeCntChart.setOption(this.mCourseSelectThreeCntOption);
+        }
+        if (this.CourseSelectThree3DChart !== undefined) {
+          this.CourseSelectThree3DChart.setOption(this.mThreeCourseOption3D);
         }
         if (this.SelectCourseSankeyChart !== undefined) {
           this.SelectCourseSankeyChart.setOption(this.mSelectCourseSankeyOption);

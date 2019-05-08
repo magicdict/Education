@@ -68,6 +68,13 @@
             </div>
             <div class="row">
                 <div class="col">
+                    <div echarts [options]="mThreeCourseOption3D"
+                        (chartInit)="onCourseSelectThree3DChartInit($event)" 
+                        style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
                     <ul class="heroes" style="width:17em">
                         <li *ngFor="let item of ThreeCoursePercent.slice(0,8)" style="width:17em">
                             <span class="badge" style="width: 120px;">{{item.name}} </span>{{item.value}} %
