@@ -191,14 +191,17 @@ export class ConsumptionOverviewComponent implements OnInit {
     },
     xAxis3D: {
       type: 'category',
-      data: this.hours
+      data: this.hours,
+      name:'时间'
     },
     yAxis3D: {
       type: 'category',
-      data: this.days
+      data: this.days,
+      name:'周次'
     },
     zAxis3D: {
-      type: 'value'
+      type: 'value',
+      name:'金额'
     },
     grid3D: {
       boxWidth: 200,
@@ -219,11 +222,9 @@ export class ConsumptionOverviewComponent implements OnInit {
       type: 'bar3D',
       data: [],
       shading: 'color',
-
       label: {
         formatter: '{c}'
       },
-
       itemStyle: {
         opacity: 0.4
       },
