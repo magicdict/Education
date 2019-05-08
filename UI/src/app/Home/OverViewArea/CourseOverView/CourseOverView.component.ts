@@ -25,6 +25,13 @@ export class CourseOverViewComponent implements OnInit {
         projection: 'orthographic'
       }
     },
+    visualMap: {
+      max: 60,
+      inRange: {
+        color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+      }, 
+      show: false
+    },
     // 默认情况下, x, y, z 分别是从 0 到 1 的数值轴
     xAxis3D: { type: 'category', name: "课程1", data: ['物理', '化学', '生物', '地理', '政治', '技术', '历史'] },
     yAxis3D: { type: 'category', name: "课程2", data: ['物理', '化学', '生物', '地理', '政治', '技术', '历史'] },
@@ -62,6 +69,10 @@ export class CourseOverViewComponent implements OnInit {
       name: "人数"
     },
     grid3D: {
+      viewControl: {
+        // 使用正交投影。
+        projection: 'orthographic'
+      },
       boxWidth: 200,
       boxDepth: 80,
       light: {
@@ -72,6 +83,13 @@ export class CourseOverViewComponent implements OnInit {
           intensity: 0.3
         }
       }
+    },
+    visualMap: {
+      max: 100,
+      inRange: {
+        color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+      }, 
+      show: false
     },
     series: [{
       type: 'bar3D',
