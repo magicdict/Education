@@ -57,15 +57,24 @@
         <div echarts [options]="WeekTimeOption"
             style="width:1100px;height:640px;border: 2px solid lightgray;padding: 5px;margin: 5px">
         </div>
+        <div echarts [options]="WeekTimeLineOption"
+            style="width:1100px;height:200px;border: 2px solid lightgray;padding: 5px;margin: 5px">
+        </div>
     </p-tabPanel>
     <p-tabPanel header="时段周次统计(住校)" style="width:1140px;">
         <div echarts [options]="WeekTimeLiveAtSchoolOption"
             style="width:1100px;height:640px;border: 2px solid lightgray;padding: 5px;margin: 5px">
         </div>
+        <div echarts [options]="WeekTimeLineLiveAtSchoolOption"
+            style="width:1100px;height:200px;border: 2px solid lightgray;padding: 5px;margin: 5px">
+        </div>
     </p-tabPanel>
     <p-tabPanel header="时段周次统计(非住校)" style="width:1140px;">
         <div echarts [options]="WeekTimeNotLiveAtSchoolOption"
             style="width:1100px;height:640px;border: 2px solid lightgray;padding: 5px;margin: 5px">
+        </div>
+        <div echarts [options]="WeekTimeLineNotLiveAtSchoolOption"
+            style="width:1100px;height:200px;border: 2px solid lightgray;padding: 5px;margin: 5px">
         </div>
     </p-tabPanel>
     <p-tabPanel header="消费预警" style="width:1140px;">

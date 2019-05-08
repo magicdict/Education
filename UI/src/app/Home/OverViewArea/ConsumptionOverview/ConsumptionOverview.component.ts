@@ -73,9 +73,118 @@ export class ConsumptionOverviewComponent implements OnInit {
     series: []
   };
 
+  WeekTimeLineOptions = {
+    baseOption: {
+      timeline: {
+        axisType: 'category',
+        show: true,
+        autoPlay: true,
+        playInterval: 1000,
+        data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+      },
+      toolbox: {
+        'show': true,
+        'feature': {
+          'saveAsImage': {},
+        }
+      },
+      title: [],
+      singleAxis: [
+        {
+          left: 150,
+          type: 'category',
+          boundaryGap: false,
+          data: ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
+            '7a', '8a', '9a', '10a', '11a',
+            '12p', '1p', '2p', '3p', '4p', '5p',
+            '6p', '7p', '8p', '9p', '10p', '11p'],
+          top: 10,
+          height: 200,
+          axisLabel: {
+            interval: 2
+          }
+        }
+      ],
+      series: [
+        {
+          singleAxisIndex: 0,
+          coordinateSystem: 'singleAxis',
+          type: 'scatter',
+          symbolSize: (dataItem: number[]) => {
+            return dataItem[1] / 4000;
+          }
+        }
+      ]
+    },
+    options: [
+      {
+        title: {
+          text: '周一'
+        },
+        series: [{
+          data: []
+        }]
+      },
+      {
+        title: {
+          text: '周二'
+        },
+        series: [{
+          data: []
+        }]
+      },
+      {
+        title: {
+          text: '周三'
+        },
+        series: [{
+          data: []
+        }]
+      },
+      {
+        title: {
+          text: '周四'
+        },
+        series: [{
+          data: []
+        }]
+      },
+      {
+        title: {
+          text: '周五'
+        },
+        series: [{
+          data: []
+        }]
+      },
+      {
+        title: {
+          text: '周六'
+        },
+        series: [{
+          data: []
+        }]
+      },
+      {
+        title: {
+          text: '周日'
+        },
+        series: [{
+          data: []
+        }]
+      },
+    ]
+  }
+
   WeekTimeOption = CommonFunction.clone(this.WeekTimeOptionSample);
   WeekTimeLiveAtSchoolOption = CommonFunction.clone(this.WeekTimeOptionSample);
   WeekTimeNotLiveAtSchoolOption = CommonFunction.clone(this.WeekTimeOptionSample);
+
+  WeekTimeLineOption = CommonFunction.clone(this.WeekTimeLineOptions);
+  WeekTimeLineLiveAtSchoolOption = CommonFunction.clone(this.WeekTimeLineOptions);
+  WeekTimeLineNotLiveAtSchoolOption = CommonFunction.clone(this.WeekTimeLineOptions);
+
+
 
   SetWeekTimeOption(WeekTimeOptionInstance: any, dataItems: number[][]) {
     var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
@@ -119,8 +228,22 @@ export class ConsumptionOverviewComponent implements OnInit {
     dataItems.forEach(dataItem => {
       WeekTimeOptionInstance.series[dataItem[0]].data.push([dataItem[1], dataItem[2]]);
     });
+  }
 
-    //console.log(this.WeekTimeOption);
+  SetWeekTimeLineOption(WeekTimeLineOptionInstance: any, dataItems: number[][]) {
+
+    WeekTimeLineOptionInstance.baseOption.series[0].symbolSize = (dataItem: number[]) => {
+      return dataItem[1] / 4000;
+    };
+    //dataItem[0] 周次下标
+    //dataItem[1] 时间下标
+    //dataItem[2] 金额
+    for (let idx = 0; idx < 7; idx++) {
+      WeekTimeLineOptionInstance.options[idx].series[0].data = [];
+    }
+    dataItems.forEach(dataItem => {
+      WeekTimeLineOptionInstance.options[dataItem[0]].series[0].data.push([dataItem[1], dataItem[2]]);
+    });
   }
 
 
@@ -168,6 +291,16 @@ export class ConsumptionOverviewComponent implements OnInit {
 
         this.SetWeekTimeOption(this.WeekTimeNotLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionNotLiveAtSchool
           .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
+
+        this.SetWeekTimeLineOption(this.WeekTimeLineOption, data.consumptionInfo.weekTimeConsumption
+          .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
+
+        this.SetWeekTimeLineOption(this.WeekTimeLineLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionLiveAtSchool
+          .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
+
+        this.SetWeekTimeLineOption(this.WeekTimeLineNotLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionNotLiveAtSchool
+          .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
+
 
         this.PerRangeCntOption = {
           title: {
