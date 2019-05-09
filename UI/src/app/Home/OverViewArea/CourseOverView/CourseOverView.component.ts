@@ -52,7 +52,6 @@ export class CourseOverViewComponent implements OnInit {
 
   //三维柱状图
   TwoCourseOption3D = {
-    tooltip: {},
     xAxis3D: {
       type: 'category',
       name: "课程1",
