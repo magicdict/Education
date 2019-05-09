@@ -3,6 +3,7 @@ import { HomeService } from '../../Common/Home.service';
 import { ISunburstOption, ILeaf, IStackBarOption, IStack, ToolboxSaveImageOnly, ToolboxForBar } from '../../GraphOption/KaoqinOption';
 import { ActivatedRoute } from '@angular/router';
 import { IKaoqinOverview } from '../../Common/Education.model';
+import { CommonFunction } from '../../Common/common';
 
 @Component({
     templateUrl: 'KaoqinOverview.html',
@@ -137,12 +138,12 @@ export class KaoqinOverviewComponent implements OnInit {
                 leaf.children.push(leaf_9);
 
                 this.KaoqinOption = {
-                    toolbox: ToolboxSaveImageOnly,
+                    toolbox: CommonFunction.clone(ToolboxSaveImageOnly),
                     title: { text: "考勤次数", left: 10 },
                     label: { formatter: "{b}\n{c}" },
                     series: { data: [leaf], type: "sunburst", center: ["40%", "50%"] },
                 }
-                this.KaoqinOption.toolbox['left'] = 600;    
+                this.KaoqinOption.toolbox['left'] = 600;    //这里会修改toolbox，必须Clone一个！
                 var NameArray: string[] = ["默认信息", "早上迟到", "晚到学校"];
                 var CodeArray: string[] = ["100000", "100100", "100200"];
                 var StackName: string = "迟到_晚到";
