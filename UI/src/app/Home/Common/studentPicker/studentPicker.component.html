@@ -34,12 +34,16 @@
           </div>
         </div>
       </div>
-      <table-function [Table]="dt" [FrameStyle]="{'margin':'0px auto 0px auto','width':'100%'}"></table-function>
+      <div class="row">
+        <div class="col">
+          <table-function [Table]="dt" [FrameStyle]="{'float':'right'}" [OutputOnly]="true"></table-function>
+        </div>
+      </div>
       <p-table #dt [value]="this.Students" selectionMode="single" [(selection)]="this.selectStudent" [scrollable]="true"
         scrollHeight="400px" (onRowSelect)="onRowSelect()" [columns]="cols" [exportFilename]="'学生检索器'">
         <ng-template pTemplate="header">
           <tr>
-            <th style="width: 50px">学号</th>
+            <th style="width: 100px">学号</th>
             <th style="width: 100px">姓名</th>
             <th style="width: 100px">班级</th>
             <th style="width: 100px">性别</th>
@@ -47,7 +51,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-itemData>
           <tr [pSelectableRow]="itemData">
-            <td style="width: 50px">{{itemData.id}}</td>
+            <td style="width: 100px">{{itemData.id}}</td>
             <td style="width: 100px">{{itemData.name}}</td>
             <td style="width: 100px">{{itemData.className}}</td>
             <td style="width: 100px">{{itemData.sex}}</td>

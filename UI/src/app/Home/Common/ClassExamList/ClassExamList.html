@@ -8,7 +8,7 @@
       </div>
     </div>
     <div [ngClass]="subName.length > 2?'col-8':'col'">
-      <table-function [Table]="dt" [FrameStyle]="{'float':'right'}"></table-function>
+      <table-function [Table]="dt" [FrameStyle]="{'float':'right'}" [OutputOnly]="true"></table-function>
       <button type="button" class="btn"
         style="margin: 10px 5px;background-color: lightgreen;cursor:default;color: black;">最高分</button>
       <button type="button" class="btn"

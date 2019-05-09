@@ -79,15 +79,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-7">
-                    <b>月消费上限：&nbsp;</b>
-                    <p-dropdown [options]="MonthUpLimitList" [(ngModel)]="MonthUpLimit" [style]="{'width':'150px'}"
-                        placeholder="选择一个月消费金额：" (onChange)="QueryByMonthUpLimit()">
-                    </p-dropdown>
-                    &nbsp;&nbsp;
-                    <button style="margin-top: 10px" class="btn btn-primary" (click)="StudentQuery()"><i
-                            class="fa fa-search"></i>学生月度消费检索</button>
-                    <br />
-                    <table-function [Table]="studentcomsumption"></table-function>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <b>月消费上限：&nbsp;</b>
+                                <p-dropdown [options]="MonthUpLimitList" [(ngModel)]="MonthUpLimit"
+                                    [style]="{'width':'150px'}" placeholder="选择一个月消费金额："
+                                    (onChange)="QueryByMonthUpLimit()">
+                                </p-dropdown>
+                                &nbsp;&nbsp;
+                                <button style="margin-top: 10px" class="btn btn-primary" (click)="StudentQuery()">
+                                    <i class="fa fa-search"></i>学生月度消费检索</button>
+                                    <table-function [Table]="studentcomsumption" [OutputOnly]="true"
+                                    [FrameStyle]="{'float':'right'}">
+                                </table-function>
+                                </div>
+                        </div>
+                    </div>
                     <p-table #studentcomsumption [value]="this.Students" selectionMode="single"
                         [(selection)]="this.selectStudent" [scrollable]="true" scrollHeight="720px"
                         (onRowSelect)="onRowSelect($event)" [columns]="cols"

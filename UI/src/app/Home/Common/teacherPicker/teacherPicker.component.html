@@ -1,5 +1,5 @@
 <p-dialog header="教师查询器" [(visible)]="this.display" modal="modal" [responsive]="true">
-  <div style="height: 520px;width:640px">
+  <div style="height: 520px;width:480px">
     <div>
       &nbsp;&nbsp;
       <b>年级&nbsp;&nbsp;&nbsp;</b>
@@ -12,12 +12,18 @@
       </p-dropdown>
       &nbsp; &nbsp;
       <button class="btn btn-primary" (click)="query()"><i class="fa fa-search"></i>&nbsp;检索</button>
-      <table-function [Table]="dt" [FrameStyle]="{'margin':'0px auto 0px auto','width':'100%'}"></table-function>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <table-function [Table]="dt" [FrameStyle]="{'float':'right'}" [OutputOnly]="true"></table-function>
+          </div>
+        </div>
+      </div>
       <p-table #dt [value]="this.Teachers" selectionMode="single" [(selection)]="this.selectTeacher" [scrollable]="true"
         scrollHeight="400px" (onRowSelect)="onRowSelect()" [columns]="cols" [exportFilename]="'教师检索器'">
         <ng-template pTemplate="header">
           <tr>
-            <th style="width: 50px">员工ID</th>
+            <th style="width: 100px">员工ID</th>
             <th style="width: 100px">姓名</th>
             <th style="width: 100px">年级</th>
             <th style="width: 150px">学科</th>
@@ -25,7 +31,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-itemData>
           <tr [pSelectableRow]="itemData">
-            <td style="width: 50px">{{itemData.id}}</td>
+            <td style="width: 100px">{{itemData.id}}</td>
             <td style="width: 100px">{{itemData.name}}</td>
             <td style="width: 100px">{{itemData.graName}}</td>
             <td style="width: 150px">{{itemData.subName}}</td>

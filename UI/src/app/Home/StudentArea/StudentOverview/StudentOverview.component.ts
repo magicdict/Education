@@ -220,14 +220,26 @@ export class StudentOverviewComponent implements OnInit {
         if (this.ScoreEchartsInstance !== undefined) {
           if (this.ScoreAvg.length !== 0) {
             //切换的时候，从有到无的情况，这里会报错
-            this.ScoreEchartsInstance.setOption(this.ScoreGraph);
+            try {
+              this.ScoreEchartsInstance.setOption(this.ScoreGraph);
+            } catch (error) {
+
+            }
           }
         }
         if (this.KaoqinEchartsInstance !== undefined) {
-          this.KaoqinEchartsInstance.setOption(this.KaoqinGraph);
+          try {
+            this.KaoqinEchartsInstance.setOption(this.KaoqinGraph);
+          } catch (error) {
+
+          }
         }
         if (this.CompumptionEchartsInstance !== undefined) {
-          this.CompumptionEchartsInstance.setOption(this.CompumptionGraph);
+          try {
+            this.CompumptionEchartsInstance.setOption(this.CompumptionGraph);
+          } catch (error) {
+
+          }
         }
 
         this.RoomTitle = (this.CurrentStudent.className.indexOf("东") === -1 ? "白杨校区" : "东部校区") +
