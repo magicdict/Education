@@ -124,7 +124,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         this.mScoreFunnelOption.legend.data = [];
         this.mScoreFunnelOption.series[0].data = [];
         this.mScoreFunnelOption.title.text = this.Title + this.subTitle + "分数段人数";
-        this.mScoreFunnelOption.title.show = false;
+        this.mScoreFunnelOption.title.show = true;
         let maxcnt = 0;
         for (let k in r.gradeInfo.funnelDic) {
             this.mScoreFunnelOption.legend.data.push(k);
@@ -134,6 +134,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
             }
         }
         this.mScoreFunnelOption.series[0].max = maxcnt;
+        this.mScoreFunnelOption.title.text = this.subTitle;
         if (this.FunnelechartsInstance !== undefined) {
             this.FunnelechartsInstance.setOption(this.mScoreFunnelOption);
         }
@@ -159,6 +160,8 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
                 }
             }
         );
+
+        this.mScoreRadarOption.title.text = this.subTitle + "各班成绩"
         this.mScoreRadarOption.series[0].data[0].value = High;
         this.mScoreRadarOption.series[0].data[1].value = Low;
         this.mScoreRadarOption.series[0].data[2].value = Avg;

@@ -58,10 +58,6 @@
             </div>
         </div>
     </p-tabPanel>
-
-
-
-
     <p-tabPanel header="消费明细">
         <div class="container">
             <div class="row">
@@ -140,22 +136,20 @@
             </div>
         </div>
     </p-tabPanel>
-    <p-tabPanel header="消费明细（柱状图）">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div echarts [options]="mDiaryCompumptionOpt"
-                        style="width: 1080px;height: 600px;border: 2px solid lightgray;padding: 5px;margin: 5px"></div>
-                </div>
-            </div>
-        </div>
-    </p-tabPanel>
-    <p-tabPanel header="消费明细（日历图）">
+    <p-tabPanel header="消费日历">
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div echarts [options]="mDirayCanlendarOpt"
-                        style="width: 1080px;height: 800px;border: 2px solid lightgray;padding: 5px;margin: 5px"></div>
+                        style="width: 1080px;height: 800px;border: 2px solid lightgray;padding: 5px;margin: 5px">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div echarts [options]="mDiaryCompumptionOpt"
+                        style="width: 1080px;height: 600px;border: 2px solid lightgray;padding: 5px;margin: 5px">
+                    </div>
                 </div>
             </div>
         </div>

@@ -348,14 +348,15 @@ export const ScoreFunnelOption =
 {
   title: {
     text: '分数段人数',
-    show: false
+    show: true,
+    top: 70
   },
   toolbox: {
     'show': true,
     'feature': {
       'saveAsImage': {}
     },
-    top: 40
+    top: 70
   },
   tooltip: {
     trigger: 'item',

@@ -155,6 +155,8 @@ export class StudentCompumptionComponent implements OnInit {
             DiaryDate.push([diaryDateArray[index], diaryMoneyArray[index]])
         }
         this.mDirayCanlendarOpt.visualMap[0].max = 100;
+        this.mDirayCanlendarOpt.title.text = "消费日历";
+        this.mDirayCanlendarOpt.title.show = true;
         this.mDirayCanlendarOpt.series[0].data = DiaryDate;
         this.mDirayCanlendarOpt.series[0].symbolSize = (val: any[]) => { return val[1] / 5; };
 
@@ -179,7 +181,7 @@ export class StudentCompumptionComponent implements OnInit {
         }
         this.WeekDayOption = {
             title: {
-                text: '星期别消费总金额'
+                text: '周别消费总金额'
             },
             toolbox:ToolboxForBar,
             xAxis: {
