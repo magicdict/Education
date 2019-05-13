@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { echartsInstance } from 'echarts'
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class CommonFunction {
 
     constructor(
-        private http: Http
+        private http: HttpClient
     ) { }
 
     public static GetWeatherImageByText(text: string): string {
@@ -165,7 +165,7 @@ export class CommonFunction {
         )
             .toPromise()
             .then(response => {
-                return response.json() as T;
+                return response as T;
             })
             .catch(this.handleError);
     }
