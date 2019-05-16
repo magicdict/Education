@@ -5,8 +5,8 @@
 运行环境
 
 - Linux CentOS 7.4
-- DotNet Core v3.0.0-preview4
-- Angular 7.2.14
+- DotNet Core v3.0.0-preview5
+- Angular 7.2.15
 
 - UI ： Angular代码
 - WebAPI：WebAPI代码
@@ -44,10 +44,8 @@ TODO:
 0.总分的页面去掉教师和ID的表示
 0.dialog-自响应必须改掉
 1.页面间隔的问题，主要部分和次要部分
-2.东部校区和白羊校区，加一个标题        FIXED
 3.增加对比时候的人名
 4.点中的记录如果有跳转，不变蓝色
-5.前10名，后10名颜色去掉               FIXED
 6.增加跳转按钮
 7.文档修改
 
