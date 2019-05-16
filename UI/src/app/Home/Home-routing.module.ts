@@ -11,6 +11,8 @@ import { SingleExamClassComponent } from './Common/ClassExamList/SingleExamClass
 import { StudentKaoqinComponent } from './StudentArea/StudentKaoqin/StudentKaoqin.component';
 import { CompareStudentComponent } from './StudentArea/Compare/CompareStudent';
 import { FullTeacherComponent } from './OverViewArea/SchoolOverView/TeacherFullGraph';
+import { ReportCenterComponent } from './ReportCenter/ReportCenter';
+import { DataFilterComponent } from './ReportCenter/DataFilter';
 
 const routes: Routes = [
   {
@@ -64,6 +66,16 @@ const routes: Routes = [
   {
     path: 'home/teacherfull',
     component: FullTeacherComponent,
+  },
+  {
+    path: 'home/ReportCenter',
+    component: ReportCenterComponent,
+    children: [{
+      path: 'DataFilter',
+      component: DataFilterComponent,
+    },
+    { path: '', redirectTo: 'DataFilter', pathMatch: 'full' }
+    ]
   }
 ];
 

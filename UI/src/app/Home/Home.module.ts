@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /**第三方UI */
 import { TableModule } from 'primeng/table';
+import { ListboxModule } from 'primeng/listbox';
+import { StepsModule } from 'primeng/steps';
 import { TabViewModule } from 'primeng/tabview';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
@@ -60,6 +62,8 @@ import { TableFunctionComponent } from './Common/TableFunction/TableFunction';
 
 import { CompareStudentComponent } from './StudentArea/Compare/CompareStudent';
 import { FullTeacherComponent } from './OverViewArea/SchoolOverView/TeacherFullGraph';
+import { ReportCenterComponent } from './ReportCenter/ReportCenter';
+import { DataFilterComponent } from './ReportCenter/DataFilter';
 
 
 @NgModule({
@@ -85,6 +89,9 @@ import { FullTeacherComponent } from './OverViewArea/SchoolOverView/TeacherFullG
     Grade2ScoreComponent,
     Grade3ScoreComponent,
     CompareStudentComponent,
+    //报表
+    ReportCenterComponent,
+    DataFilterComponent,
     //共通
     NavigationComponent,
     ErrorMessageDialogComponent,
@@ -105,7 +112,9 @@ import { FullTeacherComponent } from './OverViewArea/SchoolOverView/TeacherFullG
     CommonModule,
     FormsModule,
     TableModule,
+    StepsModule,
     TabViewModule,
+    ListboxModule,
     DialogModule,
     CardModule,
     ButtonModule,

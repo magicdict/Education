@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using static Utility;
 
 namespace Education.Controllers
@@ -114,6 +115,25 @@ namespace Education.Controllers
         }
 
 
+        [HttpPost("QueryByFilter")]
+        public ActionResult<List<Student>> QueryByFilter(dynamic data)
+        {
+            var baseInfo = Dataset.StudentList;
+            string Sex = data["Sex"].ToString();
+            if (Sex != "")
+            {
+                baseInfo = baseInfo.Where(x => Sex == x.Sex).ToList();
+            }
+            List<String> ClassId = (data["ClassIds"] as JArray).ToObject<List<string>>();
+            if (ClassId.Count != 0)
+            {
+                baseInfo = baseInfo.Where(x => ClassId.Contains(x.ClassId)).ToList();
+            }
+            return baseInfo;
+        }
+
+
+
         [HttpGet("QueryByClassId")]
         public ActionResult<List<Student>> QueryByClassId(string Id)
         {
@@ -203,8 +223,8 @@ namespace Education.Controllers
                         ControllerID = "99999",
                         ControllerName = "缺勤[无消费记录]",
                         DetailId = "9999999",
-                        StudentID =Id,
-                        StudentName =info.BaseInfo.Name,
+                        StudentID = Id,
+                        StudentName = info.BaseInfo.Name,
                         ClassName = info.BaseInfo.ClassName,
                         ClassId = info.BaseInfo.ClassId,
                         DayOfWeek = new System.DateTime(int.Parse(year), int.Parse(month), int.Parse(day)).DayOfWeek

@@ -24,6 +24,9 @@
                                 消费</button>
                         <button type="button" class="btn btn-info" style="height: 30px;"
                                 (click)="JumpTo('home/kaoqin')"><i class="fa far fa-clock"></i>&nbsp;考勤</button>
+                        <button type="button" class="btn btn-info" style="height: 30px;"
+                                (click)="JumpTo('home/ReportCenter')"><i class="fa fas fa-chart-bar"></i>&nbsp;报表</button>
+
                 </div>
                 <div class="btn-group mr-2" role="group" style="margin-top: auto;margin-bottom: auto;">
                         <button type="button" class="btn btn-warning" style="height: 30px;" (click)="Home()"><i
@@ -38,4 +41,3 @@
 <app-teacherPicker></app-teacherPicker>
 <app-studentPicker></app-studentPicker>
 <p-confirmDialog #confirm [style]="{width: '425px'}"></p-confirmDialog>
-<router-outlet></router-outlet>

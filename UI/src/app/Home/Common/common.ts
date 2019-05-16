@@ -156,12 +156,24 @@ export class CommonFunction {
     }
 
 
-    public httpRequest<T>(serviceUrl: string): Promise<T> {
-        let webapiurl = "http://39.105.206.6:8080/api/"
-        //let webapiurl = "http://localhost:5000/api/"
+    //private webapiurl = "http://39.105.206.6:8080/api/";
+    private webapiurl = "http://localhost:5000/api/";
 
+    public httpRequest<T>(serviceUrl: string): Promise<T> {
         return this.http.get(
-            webapiurl + serviceUrl
+            this.webapiurl + serviceUrl
+        )
+            .toPromise()
+            .then(response => {
+                return response as T;
+            })
+            .catch(this.handleError);
+    }
+
+    public httpRequestPost<T>(serviceUrl: string, params: any = {}): Promise<T> {
+        return this.http.post(
+            this.webapiurl + serviceUrl,
+            params
         )
             .toPromise()
             .then(response => {

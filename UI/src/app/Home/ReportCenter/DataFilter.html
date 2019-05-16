@@ -1,0 +1,29 @@
+<div class="container" style="padding: 10px 10px">
+    <div class="row">
+        <div class="col">
+            班级选择:<br />
+            <p-listbox [options]="FullClassOne" [(ngModel)]="SelectClassGradeOne" multiple="multiple" checkbox="checkbox"
+                optionLabel="label" [listStyle]="{'max-height':'460px'}" [style]="{'height':'500px','width':'150px'}">
+            </p-listbox>
+        </div>
+        <div class="col">
+            班级选择:<br />
+            <p-listbox [options]="FullClassTwo" [(ngModel)]="SelectClassGradeTwo" multiple="multiple" checkbox="checkbox"
+                optionLabel="label" [listStyle]="{'max-height':'460px'}" [style]="{'height':'500px','width':'150px'}">
+            </p-listbox>
+        </div>
+        <div class="col">
+            班级选择:<br />
+            <p-listbox [options]="FullClassThree" [(ngModel)]="SelectClassGradeThree" multiple="multiple" checkbox="checkbox"
+                optionLabel="label" [listStyle]="{'max-height':'460px'}" [style]="{'height':'500px','width':'150px'}">
+            </p-listbox>
+        </div>
+        <div class="col">
+            性别选择:<br />
+            <p-selectButton [options]="Sexs" [(ngModel)]="selectedSex">
+            </p-selectButton>
+            <button class="btn btn-lg btn-info" (click)="RunSearch()" style="float: right"><i
+                class="fas fa-arrow-left"></i>&nbsp;上一步</button>
+        </div>
+    </div>
+</div>
