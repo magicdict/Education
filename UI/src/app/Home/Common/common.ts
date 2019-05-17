@@ -102,6 +102,19 @@ export class CommonFunction {
         return (JSON.parse(JSON.stringify(source)));
     }
 
+
+    public static NumberSortMethod = (n1: number, n2: number) => {
+        if (n1 > n2) {
+            return 1;
+        }
+
+        if (n1 < n2) {
+            return -1;
+        }
+
+        return 0;
+    };
+
     public static ConvertNumberToWeekday(week: number): string {
         switch (week) {
             case 0:

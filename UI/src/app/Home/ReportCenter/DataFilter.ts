@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/cor
 import { CommonFunction } from '../Common/common';
 import { HomeService } from '../Common/Home.service';
 import { SelectItem } from 'primeng/api';
-import { IStudent } from '../Common/Education.model';
+import { IStudent, IStudentGroupProperty } from '../Common/Education.model';
 import { ErrorMessageDialogComponent } from '../Common/error-message-dialog/error-message-dialog.component';
 @Component({
     selector: "data-filter",
@@ -71,8 +71,6 @@ export class DataFilterComponent implements OnInit {
                 if (r.length == 0) {
                     this.errMsgDialog.show("查询结果为空");
                 } else {
-                    this.service.DataFilterParms = parm;
-                    this.service.FilterData = r;
                     this.FilterResult = r;
                     this.DataPicked.emit();
                 }
@@ -80,10 +78,18 @@ export class DataFilterComponent implements OnInit {
         );
     }
     GoToVisualFactory() {
-        if (this.FilterResult.length == 0){
+        if (this.FilterResult.length == 0) {
             this.errMsgDialog.show("请先选择可视化用学生数据");
             return;
+        } else {
+            let ClassIds = this.SelectClassGradeOne.concat(this.SelectClassGradeTwo).concat(this.SelectClassGradeThree);
+            let parm = { 'Sex': this.selectedSex, 'ClassIds': ClassIds.map(x => x.value), 'IsLiveAtSchool': this.IsLiveAtSchool };
+            this.common.httpRequestPost<IStudentGroupProperty>("Student/VisualDateForFilter", parm).then(
+                r => {
+                    this.service.FilterDataGroupProperty = r;
+                    this.GotoNextPage.emit();
+                }
+            )
         }
-        this.GotoNextPage.emit();
     }
 }

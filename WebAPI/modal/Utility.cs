@@ -92,27 +92,27 @@ public static class Utility
 
     }
 
-    public class SexRate
+    public class PNRateItem
     {
-        public int maleCnt;
+        public int PosCnt;
 
-        public int femaleCnt;
+        public int NegCnt;
 
-        public int malePercent
+        public int PosPercent
         {
             get
             {
-                if (maleCnt + femaleCnt == 0) return 0;
-                return maleCnt * 100 / (maleCnt + femaleCnt);
+                if (PosCnt + NegCnt == 0) return 0;
+                return PosCnt * 100 / (PosCnt + NegCnt);
             }
         }
 
-        public int femaleCntPercent
+        public int NegPercent
         {
             get
             {
-                if (maleCnt + femaleCnt == 0) return 0;
-                return 100 - malePercent;
+                if (PosCnt + NegCnt == 0) return 0;
+                return 100 - PosPercent;
             }
         }
     }

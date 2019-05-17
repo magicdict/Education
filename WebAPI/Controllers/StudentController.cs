@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using static Education.Controllers.SchoolController;
 using static Utility;
 
 namespace Education.Controllers
@@ -148,6 +149,11 @@ namespace Education.Controllers
             return baseInfo;
         }
 
+        [HttpPost("VisualDateForFilter")]
+        public ActionResult<StudentGroupProperty> VisualDateForFilter(dynamic data){
+            ActionResult<List<Student>> StudentList = QueryByFilter(data);
+            return new StudentGroupProperty(StudentList.Value);
+        }
 
 
         [HttpGet("QueryByClassId")]

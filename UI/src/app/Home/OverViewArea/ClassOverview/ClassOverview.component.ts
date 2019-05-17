@@ -1,14 +1,14 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IStudent, IClassInfo, ITeacher, IClassExam, IStudentGroupProperty } from '../Common/Education.model';
-import { HomeService } from '../Common/Home.service';
-import { SexRatePieOption } from '../GraphOption/StudentGraphOption'
-import { ISimpleBar, ToolboxSaveImageOnly } from '../GraphOption/KaoqinOption';
+import { IStudent, IClassInfo, ITeacher, IClassExam, IStudentGroupProperty } from '../../Common/Education.model';
+import { HomeService } from '../../Common/Home.service';
+import { SexRatePieOption } from '../../GraphOption/StudentGraphOption'
+import { ISimpleBar, ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
-import { CommonFunction } from '../Common/common';
-import { ClassExamListComponent } from '../Common/ClassExamList/ClassExamList.component';
-import { ExamSubNameOption } from '../GraphOption/ScoreOption';
+import { CommonFunction } from '../../Common/common';
+import { ClassExamListComponent } from '../../Common/ClassExamList/ClassExamList.component';
+import { ExamSubNameOption } from '../../GraphOption/ScoreOption';
 
 @Component({
   templateUrl: 'ClassOverview.html',
@@ -90,8 +90,8 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
         this.mSexRate.title['show'] = false;
         this.mSexRate.legend['show'] = false;
         this.mSexRate.series[0]['radius'] = '75%';
-        this.mSexRate.series[0].data[0].value = data.classinfo.property.totalSexRate.maleCnt;
-        this.mSexRate.series[0].data[1].value = data.classinfo.property.totalSexRate.femaleCnt;
+        this.mSexRate.series[0].data[0].value = data.classinfo.property.sexRate.posCnt;
+        this.mSexRate.series[0].data[1].value = data.classinfo.property.sexRate.negCnt;
         if (this.SexRateEchartsInstance !== undefined) {
           this.SexRateEchartsInstance.setOption(this.mSexRate);
         }

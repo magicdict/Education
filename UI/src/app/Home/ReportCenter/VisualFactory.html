@@ -1,8 +1,32 @@
 <div style="width: 100%;height: 600px;background: white;">
-
-</div>
-<div style="width: 100%;height: 80px;background: white;">
-    <button class="btn btn-lg btn-info" (click)="this.GotoPreviousPage.emit()"
-        style="float: right;margin-top: 20px;margin-right: 20px;">
-        <i class="fas fa-arrow-right"></i>&nbsp;重置数据过滤器</button>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6" style="padding-top:10px">
+                <app-map [NativePlaceZheJiang]="groupInfo.nativePlaceZheJiang" [NativePlace]="groupInfo.nativePlace"
+                    [StyleHeight]="'400px'" [StyleWidth]="'400px'" [ViusalZheJiangMax]="ZheJiangMax"
+                    [ViusalChinaMax]="ChinaMax">
+                </app-map>
+            </div>
+            <div class="col-6" style="padding-top:10px">
+                <b>图表类型：</b>
+                <p-dropdown (onChange)="GraphTypeChanged()" [options]="GraphTypeList" [(ngModel)]="SelectGraphType"
+                    [style]="{'width':'150px'}"></p-dropdown>
+                <br /><br />
+                <div class="box box-primary  box-solid" style="width: 100%;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{GraphName}}</h3>
+                    </div>
+                    <div class="box-body">
+                        <div echarts (chartInit)="onChartInit($event)" [options]="Graphoption"
+                            style="width:100%;height:350px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%;height: 80px;background: white;">
+        <button class="btn btn-lg btn-info" (click)="this.GotoPreviousPage.emit()"
+            style="float: right;margin-top: 20px;margin-right: 20px;">
+            <i class="fas fa-arrow-left"></i>&nbsp;重置数据过滤器</button>
+    </div>

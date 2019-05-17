@@ -44,17 +44,17 @@ namespace Education.Controllers
             /// 性别比例
             /// </summary>
             /// <value></value>
-            public SexRate Grade1SexRate { get; set; }
+            public PNRateItem Grade1SexRate { get; set; }
             /// <summary>
             /// 性别比例
             /// </summary>
             /// <value></value>
-            public SexRate Grade2SexRate { get; set; }
+            public PNRateItem Grade2SexRate { get; set; }
             /// <summary>
             /// 性别比例
             /// </summary>
             /// <value></value>
-            public SexRate Grade3SexRate { get; set; }
+            public PNRateItem Grade3SexRate { get; set; }
 
             /// <summary>
             /// 教师数
@@ -106,14 +106,26 @@ namespace Education.Controllers
             /// 整体性别比例
             /// </summary>
             /// <value></value>
-            public SexRate TotalSexRate
+            public PNRateItem SexRate
             {
                 get
                 {
-                    return new SexRate
+                    return new PNRateItem
                     {
-                        maleCnt = _studentlist.Count(x => x.Sex == "男"),
-                        femaleCnt = _studentlist.Count(x => x.Sex == "女"),
+                        PosCnt = _studentlist.Count(x => x.Sex == "男"),
+                        NegCnt = _studentlist.Count(x => x.Sex == "女"),
+                    };
+                }
+            }
+
+            public PNRateItem LiveAtSchoolRate
+            {
+                get
+                {
+                    return new PNRateItem
+                    {
+                        PosCnt = _studentlist.Count(x => x.LiveAtSchool),
+                        NegCnt = _studentlist.Count(x => !x.LiveAtSchool),
                     };
                 }
             }
@@ -381,31 +393,31 @@ namespace Education.Controllers
             East.ClassCnt = Dataset.StudentList.Where(z => z.Campus == "东").Select(x => x.ClassName).Distinct().Count(y => { return !y.Contains("未分班"); });
             East.ClassIBCnt = Dataset.StudentList.Where(z => z.Campus == "东").Select(x => x.ClassName).Distinct().Count(y => { return y.Contains("IB"); });
 
-            SchoolOver.Grade1SexRate = new SexRate();
-            SchoolOver.Grade2SexRate = new SexRate();
-            SchoolOver.Grade3SexRate = new SexRate();
-            SchoolOver.Grade1SexRate.maleCnt = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassName.Contains("高一"));
-            SchoolOver.Grade1SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Sex == "女" && x.ClassName.Contains("高一"));
-            SchoolOver.Grade2SexRate.maleCnt = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassName.Contains("高二"));
-            SchoolOver.Grade2SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Sex == "女" && x.ClassName.Contains("高二"));
-            SchoolOver.Grade3SexRate.maleCnt = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassName.Contains("高三"));
-            SchoolOver.Grade3SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Sex == "女" && x.ClassName.Contains("高三"));
+            SchoolOver.Grade1SexRate = new PNRateItem();
+            SchoolOver.Grade2SexRate = new PNRateItem();
+            SchoolOver.Grade3SexRate = new PNRateItem();
+            SchoolOver.Grade1SexRate.PosCnt = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassName.Contains("高一"));
+            SchoolOver.Grade1SexRate.NegCnt = Dataset.StudentList.Count(x => x.Sex == "女" && x.ClassName.Contains("高一"));
+            SchoolOver.Grade2SexRate.PosCnt = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassName.Contains("高二"));
+            SchoolOver.Grade2SexRate.NegCnt = Dataset.StudentList.Count(x => x.Sex == "女" && x.ClassName.Contains("高二"));
+            SchoolOver.Grade3SexRate.PosCnt = Dataset.StudentList.Count(x => x.Sex == "男" && x.ClassName.Contains("高三"));
+            SchoolOver.Grade3SexRate.NegCnt = Dataset.StudentList.Count(x => x.Sex == "女" && x.ClassName.Contains("高三"));
 
 
-            BaiYang.Grade1SexRate = new SexRate();
-            BaiYang.Grade2SexRate = new SexRate();
-            BaiYang.Grade3SexRate = new SexRate();
-            BaiYang.Grade1SexRate.maleCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "男" && x.ClassName.Contains("高一"));
-            BaiYang.Grade1SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "女" && x.ClassName.Contains("高一"));
-            BaiYang.Grade2SexRate.maleCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "男" && x.ClassName.Contains("高二"));
-            BaiYang.Grade2SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "女" && x.ClassName.Contains("高二"));
-            BaiYang.Grade3SexRate.maleCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "男" && x.ClassName.Contains("高三"));
-            BaiYang.Grade3SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "女" && x.ClassName.Contains("高三"));
+            BaiYang.Grade1SexRate = new PNRateItem();
+            BaiYang.Grade2SexRate = new PNRateItem();
+            BaiYang.Grade3SexRate = new PNRateItem();
+            BaiYang.Grade1SexRate.PosCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "男" && x.ClassName.Contains("高一"));
+            BaiYang.Grade1SexRate.NegCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "女" && x.ClassName.Contains("高一"));
+            BaiYang.Grade2SexRate.PosCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "男" && x.ClassName.Contains("高二"));
+            BaiYang.Grade2SexRate.NegCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "女" && x.ClassName.Contains("高二"));
+            BaiYang.Grade3SexRate.PosCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "男" && x.ClassName.Contains("高三"));
+            BaiYang.Grade3SexRate.NegCnt = Dataset.StudentList.Count(x => x.Campus == "白" && x.Sex == "女" && x.ClassName.Contains("高三"));
 
             //东部校区只有高一，这里简化了
-            East.Grade1SexRate = new SexRate();
-            East.Grade1SexRate.maleCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.Sex == "男" && x.ClassName.Contains("高一"));
-            East.Grade1SexRate.femaleCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.Sex == "女" && x.ClassName.Contains("高一"));
+            East.Grade1SexRate = new PNRateItem();
+            East.Grade1SexRate.PosCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.Sex == "男" && x.ClassName.Contains("高一"));
+            East.Grade1SexRate.NegCnt = Dataset.StudentList.Count(x => x.Campus == "东" && x.Sex == "女" && x.ClassName.Contains("高一"));
 
             //宿舍分析
             var RoomInfo = new RoomCntInfo();

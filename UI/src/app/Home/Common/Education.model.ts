@@ -201,17 +201,17 @@ export interface IKaoqinOverview {
   overviewDict: { [key: string]: { name: string, value: number } };
 }
 
-export interface ISexRate {
-  maleCnt: number;
-  femaleCnt: number;
-  malePercent: number;
-  femaleCntPercent: number;
+export interface IPNRateItem {
+  posCnt: number;
+  negCnt: number;
+  posPercent: number;
+  negPercent: number;
 }
 
 export interface ICampus {
-  grade1SexRate: ISexRate;
-  grade2SexRate: ISexRate;
-  grade3SexRate: ISexRate;
+  grade1SexRate: IPNRateItem;
+  grade2SexRate: IPNRateItem;
+  grade3SexRate: IPNRateItem;
   teacherCnt: number;
   teacherSubCnt: { [key: string]: number }
   classCnt: number;
@@ -222,7 +222,8 @@ export interface ICampus {
 export interface IStudentGroupProperty {
   studentCnt: number;
   studentIBCnt: number;
-  totalSexRate: ISexRate;
+  sexRate: IPNRateItem;
+  liveAtSchoolRate:IPNRateItem;
   policy: { name: string, value: number }[];
   nation: { name: string, value: number }[];
   nativePlace: { name: string, value: number }[];

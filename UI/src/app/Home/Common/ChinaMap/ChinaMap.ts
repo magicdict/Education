@@ -43,7 +43,8 @@ export class ChinaMapComponent implements OnInit, OnChanges {
     ZheJiangMapOption = CommonFunction.clone(regionMapOptions);
     @Input() StyleHeight: string;
     @Input() StyleWidth: string;
-    @Input() ViusalMax: number;
+    @Input() ViusalChinaMax: number;
+    @Input() ViusalZheJiangMax: number;
 
     NativePlaceZheJiangDetailOnly: { name: string, value: number }[];
 
@@ -66,12 +67,13 @@ export class ChinaMapComponent implements OnInit, OnChanges {
 
     ngOnChanges(_changes: SimpleChanges): void {
         //重新设置一下VisualMax的值    
-        if (this.ViusalMax !== undefined) {
-            this.ChinaMapOption.visualMap.max = this.ViusalMax;
-            this.ZheJiangMapOption.visualMap.max = this.ViusalMax;
-        } else {
-            this.ChinaMapOption.visualMap.max = 100;
-            this.ZheJiangMapOption.visualMap.max = 100;
+        this.ChinaMapOption.visualMap.max = 100;
+        this.ZheJiangMapOption.visualMap.max = 100;
+        if (this.ViusalChinaMax !== undefined) {
+            this.ChinaMapOption.visualMap.max = this.ViusalChinaMax;
+        }
+        if (this.ViusalZheJiangMax !== undefined) {
+            this.ZheJiangMapOption.visualMap.max = this.ViusalZheJiangMax;
         }
         this.ChinaMapOption.series[0].mapType = "China";
         this.ChinaMapOption.series[0].data = this.NativePlace;
