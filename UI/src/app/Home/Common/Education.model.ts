@@ -23,6 +23,7 @@ export interface IStudent {
   bornDate: string;
   className: string;
   nativePlace: string;
+  isNativePlaceZheJiang:boolean;
   residenceType: string;
   policy: string;
   classId: string;
@@ -223,7 +224,8 @@ export interface IStudentGroupProperty {
   studentCnt: number;
   studentIBCnt: number;
   sexRate: IPNRateItem;
-  liveAtSchoolRate:IPNRateItem;
+  liveAtSchoolRate: IPNRateItem;
+  zheJiangRate: IPNRateItem;
   policy: { name: string, value: number }[];
   nation: { name: string, value: number }[];
   nativePlace: { name: string, value: number }[];

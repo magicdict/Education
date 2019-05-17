@@ -8,36 +8,33 @@
                         <div class="col">
                             <b>高一班级选择:</b><br />
                             <p-listbox [options]="FullClassOne" [(ngModel)]="SelectClassGradeOne" multiple="multiple"
-                                checkbox="checkbox" optionLabel="label" [listStyle]="{'max-height':'460px'}"
-                                [style]="{'height':'500px','width':'130px'}">
+                                checkbox="checkbox" optionLabel="label" [listStyle]="{'max-height':'360px'}"
+                                [style]="{'height':'400px','width':'130px'}">
                             </p-listbox>
                         </div>
                         <div class="col">
                             <b> 高二班级选择:</b><br />
                             <p-listbox [options]="FullClassTwo" [(ngModel)]="SelectClassGradeTwo" multiple="multiple"
-                                checkbox="checkbox" optionLabel="label" [listStyle]="{'max-height':'460px'}"
-                                [style]="{'height':'500px','width':'110px'}">
+                                checkbox="checkbox" optionLabel="label" [listStyle]="{'max-height':'360px'}"
+                                [style]="{'height':'400px','width':'110px'}">
                             </p-listbox>
                         </div>
                         <div class="col">
                             <b>高三班级选择:</b><br />
                             <p-listbox [options]="FullClassThree" [(ngModel)]="SelectClassGradeThree"
                                 multiple="multiple" checkbox="checkbox" optionLabel="label"
-                                [listStyle]="{'max-height':'460px'}" [style]="{'height':'500px','width':'110px'}">
+                                [listStyle]="{'max-height':'360px'}" [style]="{'height':'400px','width':'110px'}">
                             </p-listbox>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-7">
-                <div class="container">
-                    <div class="row">
+                    <div class="row" style="margin-top:10px">
                         <div class="col">
                             <b>性别选择:&nbsp;&nbsp;</b>
                             <p-selectButton [options]="Sexs" [(ngModel)]="selectedSex">
                             </p-selectButton>
                         </div>
+                    </div>
+                    <div class="row" style="margin-top:10px">
                         <div class="col">
                             <b>住校: &nbsp;&nbsp;</b>
                             <p-selectButton [options]="LiveAtSchool" [(ngModel)]="IsLiveAtSchool">
@@ -45,6 +42,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="col-7">
                 <div style="width: 100%;height: 300px;background: white;">
                     <div class="container">
                         <div class="row">
@@ -116,7 +116,7 @@
     <button class="btn btn-lg btn-info" (click)="GoToVisualFactory()"
         style="float: right;margin-top: 20px;margin-right: 20px;">
         <i class="fas fa-arrow-right"></i>&nbsp;可视化</button>
-    <button class="btn btn-lg btn-info" (click)="RunSearch()" style="float: right;margin-top: 20px;margin-right: 20px;">
+    <button class="btn btn-lg btn-info" (click)="RunSearch()" style="float: left;margin-top: 20px;margin-left: 20px;">
         <i class="fa fa-search"></i>&nbsp;检索</button>
 </div>
 <app-error-message-dialog></app-error-message-dialog>

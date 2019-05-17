@@ -130,6 +130,19 @@ namespace Education.Controllers
                 }
             }
 
+            public PNRateItem ZheJiangRate
+            {
+                get
+                {
+                    return new PNRateItem
+                    {
+                        PosCnt = _studentlist.Count(x => x.IsNativePlaceZheJiang),
+                        NegCnt = _studentlist.Count(x => !x.IsNativePlaceZheJiang),
+                    };
+                }
+            }
+
+
             /// <summary>
             /// 国际部
             /// </summary>

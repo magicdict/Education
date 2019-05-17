@@ -10,7 +10,7 @@ import { SexRatePieOption } from '../GraphOption/StudentGraphOption';
 export class VisualFactoryComponent implements OnInit {
 
     constructor(
-        private service: HomeService    ) {
+        private service: HomeService) {
 
     }
     groupInfo: IStudentGroupProperty;
@@ -33,6 +33,7 @@ export class VisualFactoryComponent implements OnInit {
     GraphTypeList = [
         { label: '性别比例（饼图）', value: 'SexRate' },
         { label: '住宿比例（饼图）', value: 'LiveAtSchoolRate' },
+        { label: '浙江省比例（饼图）', value: 'IsZheJiangRate' },
     ]
     SelectGraphType = "SexRate";
     GraphTypeChanged() {
@@ -42,6 +43,9 @@ export class VisualFactoryComponent implements OnInit {
                 break;
             case "LiveAtSchoolRate":
                 this.CreateGraphLiveAtSchoolRate();
+                break;
+            case "IsZheJiangRate":
+                this.CreateGraphZheJiangRate();
                 break;
             default:
                 break;
@@ -79,6 +83,23 @@ export class VisualFactoryComponent implements OnInit {
         x.series[0].data[0].name = "住校";
         x.series[0].data[1].value = this.groupInfo.liveAtSchoolRate.negCnt;
         x.series[0].data[1].name = "不住校";
+
+        this.Graphoption = x;
+        if (this.EchartsInstance !== undefined) {
+            this.EchartsInstance.setOption(this.Graphoption);
+        }
+    }
+
+    CreateGraphZheJiangRate() {
+        let x = CommonFunction.clone(SexRatePieOption);
+        this.GraphName = "浙江省比例";
+        x.title.text = this.GraphName;
+        x.title['show'] = false;
+        x.legend.data = ["浙江省", "浙江省以外"];
+        x.series[0].data[0].value = this.groupInfo.zheJiangRate.posCnt;
+        x.series[0].data[0].name = "浙江省";
+        x.series[0].data[1].value = this.groupInfo.zheJiangRate.negCnt;
+        x.series[0].data[1].name = "浙江省以外";
 
         this.Graphoption = x;
         if (this.EchartsInstance !== undefined) {

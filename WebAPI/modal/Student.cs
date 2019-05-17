@@ -69,6 +69,36 @@ public class Student
     /// </summary>
     /// <value></value>
     public string NativePlace { get; set; }
+
+    public bool IsNativePlaceZheJiang
+    {
+        get
+        {
+            var x = Utility.GetProvince(NativePlace);
+            if (!string.IsNullOrEmpty(x))
+            {
+                if (x == "浙江")
+                {
+                    //明确是浙江
+                    return true;
+                }
+            }
+            else
+            {
+                //未知的省份
+                foreach (var city in Utility.ZhejiangCity)
+                {
+                    if (NativePlace.Contains(city.Substring(0, 2)))
+                    {
+                        //浙江的城市
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+    }
+
     /// <summary>
     /// 家庭类型
     /// </summary>
