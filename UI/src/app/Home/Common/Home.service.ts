@@ -66,4 +66,9 @@ export class HomeService {
 
     /** 班级考试状态到单门开始列表的缓存 */
     CurrentClassExam: IClassExam;
+
+    /** 报表中心用过滤器 */
+    DataFilterParms: any;
+
+    FilterData: IStudent[];
 }

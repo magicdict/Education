@@ -1,10 +1,5 @@
 <app-nav></app-nav>
 <p-steps [model]="items" [(activeIndex)]="activeIndex">
 </p-steps>
-<div style="width: 100%;height: 600px;background: white;">
-    <router-outlet></router-outlet>
-</div>
-<button *ngIf="activeIndex !== 3" class="btn btn-lg btn-info" (click)="NextStep()" style="float: right"><i
-    class="fas fa-arrow-right"></i>&nbsp;下一步</button>
-<button *ngIf="activeIndex !== 0" class="btn btn-lg btn-info" (click)="PreStep()" style="float: right"><i
-        class="fas fa-arrow-left"></i>&nbsp;上一步</button>
+<data-filter *ngIf="activeIndex == 0 || activeIndex == 1" (GotoNextPage)="activeIndex = 2" (DataPicked)="activeIndex = 1"></data-filter>
+<visual-factory *ngIf="activeIndex == 2" (GotoNextPage)="activeIndex = 3" (GotoPreviousPage)="activeIndex = 0"></visual-factory>

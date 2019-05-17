@@ -12,7 +12,6 @@ import { StudentKaoqinComponent } from './StudentArea/StudentKaoqin/StudentKaoqi
 import { CompareStudentComponent } from './StudentArea/Compare/CompareStudent';
 import { FullTeacherComponent } from './OverViewArea/SchoolOverView/TeacherFullGraph';
 import { ReportCenterComponent } from './ReportCenter/ReportCenter';
-import { DataFilterComponent } from './ReportCenter/DataFilter';
 
 const routes: Routes = [
   {
@@ -69,13 +68,7 @@ const routes: Routes = [
   },
   {
     path: 'home/ReportCenter',
-    component: ReportCenterComponent,
-    children: [{
-      path: 'DataFilter',
-      component: DataFilterComponent,
-    },
-    { path: '', redirectTo: 'DataFilter', pathMatch: 'full' }
-    ]
+    component: ReportCenterComponent
   }
 ];
 

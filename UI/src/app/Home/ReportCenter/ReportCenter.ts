@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { Router } from '@angular/router';
+
 
 @Component({
     templateUrl: 'ReportCenter.html',
@@ -40,34 +40,20 @@ export class ReportCenterComponent implements OnInit {
 
     activeIndex: number = 0;
 
-    constructor(
-        private router: Router,
-    ) {
-
-    }
-
     ngOnInit(): void {
-        this.items = [{
-            label: '过滤条件',
-        },
-        {
-            label: '数据展示',
-        },
-        {
-            label: '可视化',
-        },
-        {
-            label: '预测',
-        }
+        this.items = [
+            {
+                label: '过滤条件',
+            },
+            {
+                label: '数据展示',
+            },
+            {
+                label: '可视化',
+            },
+            {
+                label: '预测',
+            }
         ];
     }
-
-    PreStep() {
-        this.activeIndex -= 1;
-        //this.router.navigate([url], { relativeTo: this.route });
-    }
-    NextStep() {
-        this.activeIndex += 1;
-    }
-
 } 

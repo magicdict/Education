@@ -119,15 +119,31 @@ namespace Education.Controllers
         public ActionResult<List<Student>> QueryByFilter(dynamic data)
         {
             var baseInfo = Dataset.StudentList;
+            List<String> ClassId = (data["ClassIds"] as JArray).ToObject<List<string>>();
+            if (ClassId.Count != 0)
+            {
+                baseInfo = baseInfo.Where(x => ClassId.Contains(x.ClassId)).ToList();
+            }
+            else
+            {
+                return new List<Student>();
+            }
             string Sex = data["Sex"].ToString();
             if (Sex != "")
             {
                 baseInfo = baseInfo.Where(x => Sex == x.Sex).ToList();
             }
-            List<String> ClassId = (data["ClassIds"] as JArray).ToObject<List<string>>();
-            if (ClassId.Count != 0)
+            string IsLiveAtSchool = data["IsLiveAtSchool"];
+            if (IsLiveAtSchool != "")
             {
-                baseInfo = baseInfo.Where(x => ClassId.Contains(x.ClassId)).ToList();
+                if (IsLiveAtSchool == "是")
+                {
+                    baseInfo = baseInfo.Where(x => x.LiveAtSchool).ToList();
+                }
+                else
+                {
+                    baseInfo = baseInfo.Where(x => !x.LiveAtSchool).ToList();
+                }
             }
             return baseInfo;
         }

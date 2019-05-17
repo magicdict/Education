@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CommonFunction } from '../Common/common';
 import { HomeService } from '../Common/Home.service';
 import { SelectItem } from 'primeng/api';
 import { IStudent } from '../Common/Education.model';
+import { ErrorMessageDialogComponent } from '../Common/error-message-dialog/error-message-dialog.component';
 @Component({
+    selector: "data-filter",
     templateUrl: 'DataFilter.html',
 })
 export class DataFilterComponent implements OnInit {
@@ -13,19 +15,40 @@ export class DataFilterComponent implements OnInit {
     ) {
 
     }
+    @ViewChild(ErrorMessageDialogComponent)
+    private errMsgDialog: ErrorMessageDialogComponent;
+    @Output() DataPicked = new EventEmitter();
+    @Output() GotoNextPage = new EventEmitter();
     FullClassOne: SelectItem[] = [];
     FullClassTwo: SelectItem[] = [];
     FullClassThree: SelectItem[] = [];
     SelectClassGradeOne: SelectItem[] = [];
     SelectClassGradeTwo: SelectItem[] = [];
     SelectClassGradeThree: SelectItem[] = [];
-
     Sexs = [
-        { label: '全部', value: '' },
+        { label: '不限', value: '' },
         { label: '男', value: '男' },
         { label: '女', value: '女' }
     ]
     selectedSex: string = '';
+    LiveAtSchool = [
+        { label: '不限', value: '' },
+        { label: '住校生', value: '是' },
+        { label: '非住校生', value: '否' }
+    ]
+    IsLiveAtSchool: string = '';
+
+    cols = [
+        { field: 'id', header: "学号" },
+        { field: 'name', header: "姓名" },
+        { field: 'sex', header: "性别" },
+        { field: 'bornDate', header: "出生年" },
+        { field: 'policy', header: "政治面貌" },
+        { field: 'nation', header: "民族" },
+        { field: 'nativePlace', header: "出生地" },
+    ];
+    FilterResult: IStudent[] = [];
+
     ngOnInit(): void {
         //班级数据的获得
         CommonFunction.clone(this.service.SchoolOverview.gradeClassInfoList).forEach(grade => {
@@ -36,13 +59,31 @@ export class DataFilterComponent implements OnInit {
             });
         });
     }
-
     RunSearch() {
-        let parm = { 'Sex': this.selectedSex, 'ClassIds': this.SelectClassGradeOne.map(x => x.value) };
+        let ClassIds = this.SelectClassGradeOne.concat(this.SelectClassGradeTwo).concat(this.SelectClassGradeThree);
+        if (ClassIds.length == 0) {
+            this.errMsgDialog.show("请至少选择一个班级");
+            return;
+        }
+        let parm = { 'Sex': this.selectedSex, 'ClassIds': ClassIds.map(x => x.value), 'IsLiveAtSchool': this.IsLiveAtSchool };
         this.common.httpRequestPost<IStudent[]>("Student/QueryByFilter", parm).then(
             r => {
-                console.log("获得学生：" + r.length)
+                if (r.length == 0) {
+                    this.errMsgDialog.show("查询结果为空");
+                } else {
+                    this.service.DataFilterParms = parm;
+                    this.service.FilterData = r;
+                    this.FilterResult = r;
+                    this.DataPicked.emit();
+                }
             }
         );
+    }
+    GoToVisualFactory() {
+        if (this.FilterResult.length == 0){
+            this.errMsgDialog.show("请先选择可视化用学生数据");
+            return;
+        }
+        this.GotoNextPage.emit();
     }
 }

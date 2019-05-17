@@ -14,6 +14,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { CardModule } from 'primeng/card';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
+import { CheckboxModule } from 'primeng/checkbox';
 import { NgxEchartsModule } from 'ngx-echarts';
 /**路由 */
 import { HomeRoutingModule } from './Home-routing.module';
@@ -64,6 +65,7 @@ import { CompareStudentComponent } from './StudentArea/Compare/CompareStudent';
 import { FullTeacherComponent } from './OverViewArea/SchoolOverView/TeacherFullGraph';
 import { ReportCenterComponent } from './ReportCenter/ReportCenter';
 import { DataFilterComponent } from './ReportCenter/DataFilter';
+import { VisualFactoryComponent } from './ReportCenter/VisualFactory';
 
 
 @NgModule({
@@ -92,6 +94,7 @@ import { DataFilterComponent } from './ReportCenter/DataFilter';
     //报表
     ReportCenterComponent,
     DataFilterComponent,
+    VisualFactoryComponent,
     //共通
     NavigationComponent,
     ErrorMessageDialogComponent,
@@ -117,6 +120,7 @@ import { DataFilterComponent } from './ReportCenter/DataFilter';
     ListboxModule,
     DialogModule,
     CardModule,
+    CheckboxModule,
     ButtonModule,
     SelectButtonModule,
     BrowserAnimationsModule,
