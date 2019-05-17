@@ -38,7 +38,7 @@ let webapiurl = "http://39.105.206.6:8080/api/"
   - Education\WebAPI\bin\Debug\netcoreapp3.0\publish -> Education\publish
 
 - 4.systemctl restart education.service (远程执行)
-
+- ssh root@39.105.206.6 (Mac Login via SSH)
 TODO:
 
 0.总分的页面去掉教师和ID的表示

@@ -158,9 +158,14 @@ namespace Education.Controllers
             var rtn = new ClassOverview();
             rtn.Property = new StudentGroupProperty(StudentList.Value);
             rtn.Kaoqing = new List<NameValueSet>();
-            foreach (var key in Dataset.KaoqinTypeDic.Keys)
+            //只使用2018年的数据
+            foreach (var key in Dataset.KaoqinTypeDic2018.Keys)
             {
-                var cnt = Dataset.KaoqinList.Count(x => StudentIds.Contains(x.StudentID) && x.DetailId == key);
+                var cnt = 0;
+                foreach (var sId in StudentIds)
+                {
+                    cnt += Dataset.KaoqinStudentIdDetail[sId + key];
+                }
                 if (cnt > 0)
                 {
                     rtn.Kaoqing.Add(new NameValueSet()

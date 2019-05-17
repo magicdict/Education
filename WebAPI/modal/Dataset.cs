@@ -33,6 +33,9 @@ public static class Dataset
 
     public static Dictionary<string, struKaoqin> KaoqinTypeDic = new Dictionary<string, struKaoqin>();
 
+    public static Dictionary<string, struKaoqin> KaoqinTypeDic2018 = new Dictionary<string, struKaoqin>();
+
+
     public static Dictionary<string, string> ExamTypeDic = new Dictionary<string, string>();
 
     public static List<MonthConsumptionStudent> StudentConsumptionList = new List<MonthConsumptionStudent>();
@@ -40,6 +43,8 @@ public static class Dataset
     public static List<ClassBaseInfo> classBaseInfoList = new List<ClassBaseInfo>();
 
     public static List<NameValueSet> NoConsumptionList = new List<NameValueSet>();
+
+    public static Dictionary<string, int> KaoqinStudentIdDetail = new Dictionary<string, int>();
 
     //数据库的导入
     public static void Load(IWebHostEnvironment hostingEnvironment)
@@ -120,9 +125,14 @@ public static class Dataset
             var line = sr.ReadLine();
             var x = new struKaoqin(line);
             KaoqinTypeDic.Add(x.control_task_order_id, x);
+            if (x.controler_id.StartsWith("009"))
+            {
+                KaoqinTypeDic2018.Add(x.control_task_order_id, x);
+            }
         }
         sr.Close();
         Console.WriteLine("读取考勤类型信息件数：" + KaoqinTypeDic.Count);
+        Console.WriteLine("2018学期读取考勤类型信息件数：" + KaoqinTypeDic2018.Count);
         Console.WriteLine(timer.Elapsed.ToString());
 
         //导入考勤信息 3_kaoqin.csv
@@ -139,6 +149,16 @@ public static class Dataset
         Console.WriteLine("读取考勤信息件数：" + KaoqinList.Count);
         Education.Controllers.KaoqinController.PrepareKaoqinOverview();
         Console.WriteLine(timer.Elapsed.ToString());
+
+        foreach (var student in StudentList)
+        {
+            foreach (var key in KaoqinTypeDic2018.Keys)
+            {
+                var cnt = Dataset.KaoqinList.Count(x => x.StudentID == student.ID && x.DetailId == key);
+                KaoqinStudentIdDetail.Add(student.ID + key, cnt);
+            }
+        }
+
 
         //导入学生成绩信息 5_chengji.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "5_chengji.csv";
