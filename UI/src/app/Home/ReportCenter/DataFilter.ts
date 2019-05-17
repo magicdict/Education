@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/cor
 import { CommonFunction } from '../Common/common';
 import { HomeService } from '../Common/Home.service';
 import { SelectItem } from 'primeng/api';
-import { IStudent, IStudentGroupProperty } from '../Common/Education.model';
+import { IStudent, IStudentGroupProperty, IClassInfo } from '../Common/Education.model';
 import { ErrorMessageDialogComponent } from '../Common/error-message-dialog/error-message-dialog.component';
 @Component({
     selector: "data-filter",
@@ -84,12 +84,12 @@ export class DataFilterComponent implements OnInit {
         } else {
             let ClassIds = this.SelectClassGradeOne.concat(this.SelectClassGradeTwo).concat(this.SelectClassGradeThree);
             let parm = { 'Sex': this.selectedSex, 'ClassIds': ClassIds.map(x => x.value), 'IsLiveAtSchool': this.IsLiveAtSchool };
-            this.common.httpRequestPost<IStudentGroupProperty>("Student/VisualDateForFilter", parm).then(
+            this.common.httpRequestPost<IClassInfo>("Student/VisualDateForFilter", parm).then(
                 r => {
-                    this.service.FilterDataGroupProperty = r;
+                    this.service.FilterDataClassInfo = r;
                     this.GotoNextPage.emit();
                 }
-            )
+            ) 
         }
     }
 }

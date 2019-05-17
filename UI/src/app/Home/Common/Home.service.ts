@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CommonFunction } from './common';
-import { IStudent, IStudentInfo, ITeacherInfo, IClassExam, IStudentMonthlyConsumption, ISchoolInfo, IExamInfoForNumberAndSubName, IStudentGroupProperty } from './Education.model';
+import {
+    IStudent, IStudentInfo, ITeacherInfo, IClassExam, IStudentMonthlyConsumption,
+    ISchoolInfo, IExamInfoForNumberAndSubName, IClassInfo
+} from './Education.model';
 
 @Injectable()
 export class HomeService {
@@ -68,5 +71,5 @@ export class HomeService {
     CurrentClassExam: IClassExam;
 
     /** 报表中心用过滤器 */
-    FilterDataGroupProperty: IStudentGroupProperty;
+    FilterDataClassInfo: IClassInfo;
 }

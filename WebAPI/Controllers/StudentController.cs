@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using static Education.Controllers.ClassController;
 using static Education.Controllers.SchoolController;
 using static Utility;
 
@@ -150,9 +151,26 @@ namespace Education.Controllers
         }
 
         [HttpPost("VisualDateForFilter")]
-        public ActionResult<StudentGroupProperty> VisualDateForFilter(dynamic data){
+        public ActionResult<ClassOverview> VisualDateForFilter(dynamic data)
+        {
             ActionResult<List<Student>> StudentList = QueryByFilter(data);
-            return new StudentGroupProperty(StudentList.Value);
+            var StudentIds = StudentList.Value.Select(x => x.ID);
+            var rtn = new ClassOverview();
+            rtn.Property = new StudentGroupProperty(StudentList.Value);
+            rtn.Kaoqing = new List<NameValueSet>();
+            foreach (var key in Dataset.KaoqinTypeDic.Keys)
+            {
+                var cnt = Dataset.KaoqinList.Count(x => StudentIds.Contains(x.StudentID) && x.DetailId == key);
+                if (cnt > 0)
+                {
+                    rtn.Kaoqing.Add(new NameValueSet()
+                    {
+                        name = Dataset.KaoqinTypeDic[key].control_task_name,
+                        value = cnt
+                    });
+                }
+            }
+            return rtn;
         }
 
 
