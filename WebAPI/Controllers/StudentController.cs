@@ -187,9 +187,28 @@ namespace Education.Controllers
                     });
                 }
             }
+            
+            var MonthlyConsumption = new List<NameValueSet>();
+            var MonthTitle = new string[] { "201807", "201808", "201809", "201810", "201811", "201812", "201901" };
+            var SelectedStudentConsumptionList = Dataset.StudentConsumptionList.Where(x=>StudentIds.Contains(x.ID));
+            foreach (var mon in MonthTitle)
+            {
+                var sum = SelectedStudentConsumptionList.Where(x => x.Month == mon).Sum(x => x.Amount);
+                MonthlyConsumption.Add(new NameValueSet() { name = mon, value = (Int32)sum });
+            }
+            rtn.MonthlyConsumption = MonthlyConsumption;
+
+            var WeeklyConsumption = new List<NameValueSet>();
+            var WeekDayNames = new String[] { "周一", "周二", "周三", "周四", "周五", "周六", "周日" };
+            var SelectedStudentWeeklyConsumptionList = Dataset.StudentWeeklyConsumptionList.Where(x=>StudentIds.Contains(x.ID));
+            foreach (var mon in WeekDayNames)
+            {
+                var sum = SelectedStudentWeeklyConsumptionList.Where(x => x.Month == mon).Sum(x => x.Amount);
+                WeeklyConsumption.Add(new NameValueSet() { name = mon, value = (Int32)sum });
+            }
+            rtn.WeeklyConsumption = WeeklyConsumption;
             return rtn;
         }
-
 
         [HttpGet("QueryByClassId")]
         public ActionResult<List<Student>> QueryByClassId(string Id)

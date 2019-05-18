@@ -23,7 +23,7 @@ export interface IStudent {
   bornDate: string;
   className: string;
   nativePlace: string;
-  isNativePlaceZheJiang:boolean;
+  isNativePlaceZheJiang: boolean;
   residenceType: string;
   policy: string;
   classId: string;
@@ -251,6 +251,8 @@ export interface IClassInfo {
   teachers: ITeacher[];
   exams: IClassExam[];
   kaoqing: { name: string, value: number }[];
+  monthlyConsumption: { name: string, value: number }[];
+  weeklyConsumption: { name: string, value: number }[];
 }
 
 export interface ICourse {

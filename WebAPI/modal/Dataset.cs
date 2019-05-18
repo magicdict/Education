@@ -40,6 +40,9 @@ public static class Dataset
 
     public static List<MonthConsumptionStudent> StudentConsumptionList = new List<MonthConsumptionStudent>();
 
+    public static List<MonthConsumptionStudent> StudentWeeklyConsumptionList = new List<MonthConsumptionStudent>();
+
+
     public static List<ClassBaseInfo> classBaseInfoList = new List<ClassBaseInfo>();
 
     public static List<NameValueSet> NoConsumptionList = new List<NameValueSet>();
@@ -321,11 +324,14 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine("读取学生消费件数：" + ConsumptionList.Count);
+
+        //CreateWeeklyConsumption(fullpath);
         //Dump(fullpath);
         //全体消费信息预先统计
         Education.Controllers.ConsumptionController.PrepareSchoolConsumptionInfo();
         Console.WriteLine("全体消费信息预先统计");
         Console.WriteLine(timer.Elapsed.ToString());
+
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "StudentConsumptionMonthList.csv";
         sr = new StreamReader(fullfilepath);
         sr.ReadLine();  //读取标题栏
@@ -344,6 +350,26 @@ public static class Dataset
             });
         }
         sr.Close();
+
+        fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "StudentConsumptionWeekList.csv";
+        sr = new StreamReader(fullfilepath);
+        sr.ReadLine();  //读取标题栏
+        while (!sr.EndOfStream)
+        {
+            var line = sr.ReadLine().Split(",");
+            StudentWeeklyConsumptionList.Add(new MonthConsumptionStudent()
+            {
+                ID = line[0],
+                Name = line[1],
+                Sex = line[2],
+                ClassName = line[3],
+                Month = line[4],
+                Amount = -1 * float.Parse(line[5]),
+                LiveAtSchool = line[6] == "True"
+            });
+        }
+        sr.Close();
+
         Console.WriteLine(timer.Elapsed.ToString());
         //var t = Utility.GetTotalDaysCnt();
         //CreatePresentStudentList(fullpath);
@@ -713,4 +739,27 @@ public static class Dataset
         }
         sw.Close();
     }
+
+    public static void CreateWeeklyConsumption(string fullpath)
+    {
+        StreamWriter sw;
+        var CntComplete = 0;
+        //月度消费
+        sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "StudentConsumptionWeekList.csv");
+        sw.WriteLine("Id,Name,Sex,ClassName,WeekDayNames,Amount,LiveAtSchool");
+        var WeekDays = new DayOfWeek[] { DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday };
+        var WeekDayNames = new String[] { "周一", "周二", "周三", "周四", "周五", "周六", "周日" };
+        foreach (var student in Dataset.StudentList)
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                var weekday = WeekDays[i];
+                var sum = Dataset.ConsumptionList.Where(x => x.DayOfWeek == weekday && x.StudentID == student.ID).Sum(x => x.MonDeal);
+                sw.WriteLine(student.ID + "," + student.Name + "," + student.Sex + "," + student.ClassName + "," + WeekDayNames[i] + "," + sum + "," + student.LiveAtSchool);
+                CntComplete++;
+            }
+        }
+        sw.Close();
+    }
+
 }

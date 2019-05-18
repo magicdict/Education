@@ -51,6 +51,11 @@ namespace Education.Controllers
             /// </summary>
             /// <value></value>
             public List<NameValueSet> Kaoqing { get; set; }
+
+            public List<NameValueSet> MonthlyConsumption { get; set; }
+
+            public List<NameValueSet> WeeklyConsumption { get; set; }
+
         }
 
         /// <summary>

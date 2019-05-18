@@ -4,6 +4,7 @@ import { IClassInfo } from '../Common/Education.model';
 import { CommonFunction } from '../Common/common';
 import { SexRatePieOption } from '../GraphOption/StudentGraphOption';
 import { ToolboxSaveImageOnly } from '../GraphOption/KaoqinOption';
+import { MonthlyCompumptionBarOptionTotal } from '../GraphOption/CompumptionOption';
 @Component({
     selector: "visual-factory",
     templateUrl: 'VisualFactory.html',
@@ -35,7 +36,9 @@ export class VisualFactoryComponent implements OnInit {
         { label: '性别比例（饼图）', value: 'SexRate' },
         { label: '住宿比例（饼图）', value: 'LiveAtSchoolRate' },
         { label: '浙江省比例（饼图）', value: 'IsZheJiangRate' },
-        { label: '考勤（柱状图）', value: 'Kaoqin' },
+        { label: '考勤（柱状图）', value: 'kaoqin' },
+        { label: '月度消费（柱状图）', value: 'monthlyConsumption' },
+        { label: '周次消费（柱状图）', value: 'weeklyConsumption' },
     ]
     SelectGraphType = "SexRate";
     GraphTypeChanged() {
@@ -49,9 +52,16 @@ export class VisualFactoryComponent implements OnInit {
             case "IsZheJiangRate":
                 this.CreateGraphZheJiangRate();
                 break;
-            case "Kaoqin":
-                this.CreateGraphKaoqinRate();
+            case "kaoqin":
+                this.CreateGraphKaoqin();
                 break;
+            case "monthlyConsumption":
+                this.CreateGraphMonthlyConsumption();
+                break;
+            case "weeklyConsumption":
+                this.CreateGraphWeeklyConsumption();
+                break;
+
             default:
                 break;
         }
@@ -112,7 +122,7 @@ export class VisualFactoryComponent implements OnInit {
         }
     }
 
-    CreateGraphKaoqinRate() {
+    CreateGraphKaoqin() {
         this.GraphName = "考勤统计";
         let x = {
             xAxis: {
@@ -136,6 +146,33 @@ export class VisualFactoryComponent implements OnInit {
         if (this.EchartsInstance !== undefined) {
             this.EchartsInstance.setOption(this.Graphoption);
         }
+    }
+
+    CreateGraphMonthlyConsumption() {
+        this.GraphName = "整体月消费金额";
+        let x = CommonFunction.clone(MonthlyCompumptionBarOptionTotal);
+        x.title.text = "整体月消费金额";
+        x.xAxis.data = this.groupInfo.monthlyConsumption.map(x => x.name);
+        x.series[0].data = this.groupInfo.monthlyConsumption;
+        x.title['show'] = false;
+        this.Graphoption = x;
+        if (this.EchartsInstance !== undefined) {
+            this.EchartsInstance.setOption(this.Graphoption);
+        }
+    }
+
+    CreateGraphWeeklyConsumption() {
+        this.GraphName = "周别消费";
+        let x = CommonFunction.clone(MonthlyCompumptionBarOptionTotal);
+        x.title.text = "周别消费";
+        x.xAxis.data = this.groupInfo.weeklyConsumption.map(x => x.name);
+        x.series[0].data = this.groupInfo.weeklyConsumption;
+        x.title['show'] = false;
+        this.Graphoption = x;
+        if (this.EchartsInstance !== undefined) {
+            this.EchartsInstance.setOption(this.Graphoption);
+        }
+
     }
 
     @Output() GotoNextPage = new EventEmitter();
