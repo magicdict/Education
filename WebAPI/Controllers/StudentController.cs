@@ -120,22 +120,19 @@ namespace Education.Controllers
         [HttpPost("QueryByFilter")]
         public ActionResult<List<Student>> QueryByFilter(dynamic data)
         {
+            var timer = new System.Diagnostics.Stopwatch();
+            timer.Start();
             var baseInfo = Dataset.StudentList;
             List<String> ClassId = (data["ClassIds"] as JArray).ToObject<List<string>>();
-            if (ClassId.Count != 0)
-            {
-                baseInfo = baseInfo.Where(x => ClassId.Contains(x.ClassId)).ToList();
-            }
-            else
-            {
-                return new List<Student>();
-            }
             string Sex = data["Sex"].ToString();
+            string IsLiveAtSchool = data["IsLiveAtSchool"];
+            string IsNativeZhejiang = data["IsNativeZhejiang"];
+            if (ClassId.Count == 0) return new List<Student>();
+            baseInfo = baseInfo.Where(x => ClassId.Contains(x.ClassId)).ToList();
             if (Sex != "")
             {
                 baseInfo = baseInfo.Where(x => Sex == x.Sex).ToList();
             }
-            string IsLiveAtSchool = data["IsLiveAtSchool"];
             if (IsLiveAtSchool != "")
             {
                 if (IsLiveAtSchool == "是")
@@ -147,7 +144,6 @@ namespace Education.Controllers
                     baseInfo = baseInfo.Where(x => !x.LiveAtSchool).ToList();
                 }
             }
-            string IsNativeZhejiang = data["IsNativeZhejiang"];
             if (IsNativeZhejiang != "")
             {
                 if (IsNativeZhejiang == "是")
@@ -159,6 +155,9 @@ namespace Education.Controllers
                     baseInfo = baseInfo.Where(x => !x.IsNativePlaceZheJiang).ToList();
                 }
             }
+            Console.WriteLine(timer.Elapsed.ToString());
+            Console.WriteLine("人数：" + baseInfo.Count);
+            timer.Stop();
             return baseInfo;
         }
 
@@ -187,26 +186,37 @@ namespace Education.Controllers
                     });
                 }
             }
-            
+
+
+            var timer = new System.Diagnostics.Stopwatch();
+            timer.Start();
             var MonthlyConsumption = new List<NameValueSet>();
             var MonthTitle = new string[] { "201807", "201808", "201809", "201810", "201811", "201812", "201901" };
-            var SelectedStudentConsumptionList = Dataset.StudentConsumptionList.Where(x=>StudentIds.Contains(x.ID));
-            foreach (var mon in MonthTitle)
-            {
-                var sum = SelectedStudentConsumptionList.Where(x => x.Month == mon).Sum(x => x.Amount);
-                MonthlyConsumption.Add(new NameValueSet() { name = mon, value = (Int32)sum });
-            }
-            rtn.MonthlyConsumption = MonthlyConsumption;
-
             var WeeklyConsumption = new List<NameValueSet>();
             var WeekDayNames = new String[] { "周一", "周二", "周三", "周四", "周五", "周六", "周日" };
-            var SelectedStudentWeeklyConsumptionList = Dataset.StudentWeeklyConsumptionList.Where(x=>StudentIds.Contains(x.ID));
-            foreach (var mon in WeekDayNames)
+
+            foreach (var mon in MonthTitle)
             {
-                var sum = SelectedStudentWeeklyConsumptionList.Where(x => x.Month == mon).Sum(x => x.Amount);
-                WeeklyConsumption.Add(new NameValueSet() { name = mon, value = (Int32)sum });
+                float sum = 0;
+                foreach (var ids in StudentIds)
+                {
+                    sum += Dataset.ConsumptionDict[ids + mon].Amount;
+                }
+                MonthlyConsumption.Add(new NameValueSet() { name = mon, value = (Int32)sum });
             }
+            foreach (var weekname in WeekDayNames)
+            {
+                float sum = 0;
+                foreach (var ids in StudentIds)
+                {
+                    sum += Dataset.ConsumptionDict[ids + weekname].Amount;
+                }
+                WeeklyConsumption.Add(new NameValueSet() { name = weekname, value = (Int32)sum });
+            }
+            rtn.MonthlyConsumption = MonthlyConsumption;
             rtn.WeeklyConsumption = WeeklyConsumption;
+            Console.WriteLine(timer.Elapsed.ToString());
+            timer.Stop();
             return rtn;
         }
 
@@ -334,7 +344,7 @@ namespace Education.Controllers
                 );
                 //消费件数
                 info.ConsumptionCnt = info.Consumptions.Count;
-                info.MonthlyConsumptions = Dataset.StudentConsumptionList.Where(x => x.ID == Id).ToList();
+                info.MonthlyConsumptions = Dataset.StudentMonthlyConsumptionList.Where(x => x.ID == Id).ToList();
                 //室友
                 if (info.BaseInfo.LiveAtSchool)
                 {

@@ -20,7 +20,7 @@ namespace Education.Controllers
         [HttpGet("GetStudentWithMonthLimit")]
         public ActionResult<List<MonthConsumptionStudent>> GetStudentWithMonthLimit(int limit)
         {
-            return Dataset.StudentConsumptionList.Where(x => x.Amount >= limit).ToList();
+            return Dataset.StudentMonthlyConsumptionList.Where(x => x.Amount >= limit).ToList();
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Education.Controllers
         [HttpGet("GetStudentMonthlyConsumption")]
         public ActionResult<List<MonthConsumptionStudent>> GetStudentMonthlyConsumption(string studentId)
         {
-            return Dataset.StudentConsumptionList.Where(x => x.ID == studentId).ToList();
+            return Dataset.StudentMonthlyConsumptionList.Where(x => x.ID == studentId).ToList();
         }
 
         /// <summary>

@@ -38,10 +38,11 @@ public static class Dataset
 
     public static Dictionary<string, string> ExamTypeDic = new Dictionary<string, string>();
 
-    public static List<MonthConsumptionStudent> StudentConsumptionList = new List<MonthConsumptionStudent>();
+    public static List<MonthConsumptionStudent> StudentMonthlyConsumptionList = new List<MonthConsumptionStudent>();
 
     public static List<MonthConsumptionStudent> StudentWeeklyConsumptionList = new List<MonthConsumptionStudent>();
 
+    public static Dictionary<string,MonthConsumptionStudent> ConsumptionDict = new Dictionary<string, MonthConsumptionStudent>();
 
     public static List<ClassBaseInfo> classBaseInfoList = new List<ClassBaseInfo>();
 
@@ -56,6 +57,7 @@ public static class Dataset
         Console.WriteLine("数据库路径:" + fullpath);
         var timer = new System.Diagnostics.Stopwatch();
         timer.Start();
+        Console.WriteLine("内存变化:" + GC.GetTotalMemory(true));
 
         //导入教师信息 5_chengji.csv
         var fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "1_teacher.csv";
@@ -117,6 +119,7 @@ public static class Dataset
                 count = ClassCntDict[key]
             });
         }
+        Console.WriteLine("内存变化:" + GC.GetTotalMemory(true));
 
         //导入考勤类型信息 4_kaoqintype.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "4_kaoqintype.csv";
@@ -296,6 +299,7 @@ public static class Dataset
         Console.WriteLine(timer.Elapsed.ToString());
         Education.Controllers.CourseController.PrepareExamNameList();
         GC.Collect();
+        Console.WriteLine("内存变化:" + GC.GetTotalMemory(true));
 
         //导入考试类型信息 6_exam_type.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "6_exam_type.csv";
@@ -338,7 +342,7 @@ public static class Dataset
         while (!sr.EndOfStream)
         {
             var line = sr.ReadLine().Split(",");
-            StudentConsumptionList.Add(new MonthConsumptionStudent()
+            StudentMonthlyConsumptionList.Add(new MonthConsumptionStudent()
             {
                 ID = line[0],
                 Name = line[1],
@@ -369,6 +373,19 @@ public static class Dataset
             });
         }
         sr.Close();
+
+        Console.WriteLine("内存变化:" + GC.GetTotalMemory(true));
+
+        foreach (var item in StudentMonthlyConsumptionList)
+        {
+            ConsumptionDict.Add(item.ID + item.Month,item);
+        }
+        foreach (var item in StudentWeeklyConsumptionList)
+        {
+            ConsumptionDict.Add(item.ID + item.Month,item);
+        }
+        long n2 = GC.GetTotalMemory(true);
+        Console.WriteLine("内存变化:" + GC.GetTotalMemory(true));
 
         Console.WriteLine(timer.Elapsed.ToString());
         //var t = Utility.GetTotalDaysCnt();
