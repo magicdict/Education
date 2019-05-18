@@ -147,6 +147,18 @@ namespace Education.Controllers
                     baseInfo = baseInfo.Where(x => !x.LiveAtSchool).ToList();
                 }
             }
+            string IsNativeZhejiang = data["IsNativeZhejiang"];
+            if (IsNativeZhejiang != "")
+            {
+                if (IsNativeZhejiang == "是")
+                {
+                    baseInfo = baseInfo.Where(x => x.IsNativePlaceZheJiang).ToList();
+                }
+                else
+                {
+                    baseInfo = baseInfo.Where(x => !x.IsNativePlaceZheJiang).ToList();
+                }
+            }
             return baseInfo;
         }
 

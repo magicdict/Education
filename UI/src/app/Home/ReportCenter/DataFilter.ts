@@ -1,16 +1,18 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CommonFunction } from '../Common/common';
 import { HomeService } from '../Common/Home.service';
-import { SelectItem } from 'primeng/api';
-import { IStudent, IStudentGroupProperty, IClassInfo } from '../Common/Education.model';
+import { SelectItem, MessageService } from 'primeng/api';
+import { IStudent, IClassInfo } from '../Common/Education.model';
 import { ErrorMessageDialogComponent } from '../Common/error-message-dialog/error-message-dialog.component';
 @Component({
     selector: "data-filter",
     templateUrl: 'DataFilter.html',
+    providers: [MessageService],
 })
 export class DataFilterComponent implements OnInit {
     constructor(
         private service: HomeService,
+        private messageService: MessageService,
         private common: CommonFunction
     ) {
 
@@ -37,6 +39,15 @@ export class DataFilterComponent implements OnInit {
         { label: '非住校生', value: '否' }
     ]
     IsLiveAtSchool: string = '';
+
+    NativeZhejiang = [
+        { label: '不限', value: '' },
+        { label: '浙江省', value: '是' },
+        { label: '浙江省之外', value: '否' }
+    ]
+    IsNativeZhejiang: string = '';
+
+    parm :any = {};
 
     cols = [
         { field: 'id', header: "学号" },
@@ -65,14 +76,19 @@ export class DataFilterComponent implements OnInit {
             this.errMsgDialog.show("请至少选择一个班级");
             return;
         }
-        let parm = { 'Sex': this.selectedSex, 'ClassIds': ClassIds.map(x => x.value), 'IsLiveAtSchool': this.IsLiveAtSchool };
-        this.common.httpRequestPost<IStudent[]>("Student/QueryByFilter", parm).then(
+        this.parm = { 'Sex': this.selectedSex, 
+                     'IsNativeZhejiang':this.IsNativeZhejiang,
+                     'ClassIds': ClassIds.map(x => x.value), 
+                     'IsLiveAtSchool': this.IsLiveAtSchool };
+
+        this.common.httpRequestPost<IStudent[]>("Student/QueryByFilter", this.parm).then(
             r => {
                 if (r.length == 0) {
                     this.errMsgDialog.show("查询结果为空");
                 } else {
                     this.FilterResult = r;
                     this.DataPicked.emit();
+                    this.messageService.add({severity:'success', summary: '查询完毕', detail:'符合条件人数：' + r.length});
                 }
             }
         );
@@ -82,9 +98,7 @@ export class DataFilterComponent implements OnInit {
             this.errMsgDialog.show("请先选择可视化用学生数据");
             return;
         } else {
-            let ClassIds = this.SelectClassGradeOne.concat(this.SelectClassGradeTwo).concat(this.SelectClassGradeThree);
-            let parm = { 'Sex': this.selectedSex, 'ClassIds': ClassIds.map(x => x.value), 'IsLiveAtSchool': this.IsLiveAtSchool };
-            this.common.httpRequestPost<IClassInfo>("Student/VisualDateForFilter", parm).then(
+            this.common.httpRequestPost<IClassInfo>("Student/VisualDateForFilter", this.parm).then(
                 r => {
                     this.service.FilterDataClassInfo = r;
                     this.GotoNextPage.emit();

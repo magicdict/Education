@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /**第三方UI */
+import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
 import { ListboxModule } from 'primeng/listbox';
 import { StepsModule } from 'primeng/steps';
@@ -114,6 +115,7 @@ import { VisualFactoryComponent } from './ReportCenter/VisualFactory';
   imports: [
     CommonModule,
     FormsModule,
+    ToastModule,
     TableModule,
     StepsModule,
     TabViewModule,

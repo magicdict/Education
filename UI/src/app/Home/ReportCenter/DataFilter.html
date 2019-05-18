@@ -40,6 +40,13 @@
                             </p-selectButton>
                         </div>
                     </div>
+                    <div class="row" style="margin-top:10px">
+                        <div class="col">
+                            <b>出生地: &nbsp;&nbsp;</b>
+                            <p-selectButton [options]="NativeZhejiang" [(ngModel)]="IsNativeZhejiang">
+                            </p-selectButton>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-7">
@@ -124,3 +131,4 @@
         <i class="fa fa-search"></i>&nbsp;检索</button>
 </div>
 <app-error-message-dialog></app-error-message-dialog>
+<p-toast position="bottom-center"></p-toast>
