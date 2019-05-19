@@ -73,9 +73,15 @@ namespace Education.Controllers
         {
             public List<ClassExamInfo> ClassExamInfoList { set; get; }
             public List<Chengji> Top10 { set; get; }
+            public List<Chengji> Top50 { set; get; }
             public List<Chengji> Low10 { set; get; }
             public ClassExamInfo GradeInfo { set; get; }
             public List<ClassExamInfo> TeacherExamInfoList { set; get; }
+            /// <summary>
+            /// TOP50班级分布
+            /// </summary>
+            /// <value></value>
+            public List<NameValueSet> Top50ForClassName { set; get; }
         }
         /// <summary>
         /// 某个年级的某次考试的某个科目的班级单位的信息列表
@@ -118,11 +124,15 @@ namespace Education.Controllers
             var topx = Math.Min(All.Count(), 10);
             All.Sort((x, y) => { return y.Score.CompareTo(x.Score); });  //降序
             var Top10 = All.Take(topx).ToList();
+            topx = Math.Min(All.Count(), 50);
+            var Top50 = All.Take(topx).ToList();
+
             All.Sort((x, y) => { return x.Score.CompareTo(y.Score); });  //升序
             var Low10 = All.Take(topx).ToList();
 
             Result.ClassExamInfoList = r;
             Result.Top10 = Top10;
+            Result.Top50 = Top50;
             Result.Low10 = Low10;
 
             //教师的选择
@@ -134,6 +144,10 @@ namespace Education.Controllers
                     new ClassExamInfo(All.Where(x => x.TeacherID == teacherId).ToList())
                 );
             }
+            //TOP50
+            Result.Top50ForClassName = Top50.GroupBy(x => x.ClassName)
+                                            .Select(x => new NameValueSet() { name = x.Key, value = x.Count() }).ToList();
+            Result.Top50ForClassName.Sort((x, y) => { return x.name.CompareTo(y.name); });
             return Result;
         }
 

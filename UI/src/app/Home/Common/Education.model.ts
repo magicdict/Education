@@ -98,6 +98,8 @@ export interface IExamList {
 export interface IExamInfoForNumberAndSubName {
   classExamInfoList: IClassExam[];
   top10: IScore[];
+  top50: IScore[];
+  top50ForClassName: { name: string, value: number }[];
   low10: IScore[];
   gradeInfo: IClassExam;
   teacherExamInfoList: IClassExam[];

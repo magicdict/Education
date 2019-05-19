@@ -4,6 +4,7 @@ import { IExamList, IClassExam, IExamInfoForNumberAndSubName, IScore } from 'src
 import { CommonFunction } from 'src/app/Home/Common/common';
 import { HomeService } from '../../Common/Home.service';
 import { ScoreFunnelOption, ScoreRadarGraphForClassOption } from '../../GraphOption/ScoreOption';
+import { ISimpleBar, ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
 @Component({
     templateUrl: 'ExamOverView.html',
 })
@@ -17,6 +18,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
     Title: string;
     subTitle: string;
+    SubName :string;
 
     Gradelist = [
         { label: '高一', value: '高一' },
@@ -112,6 +114,61 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
     }
     mScoreRadarOption = CommonFunction.clone(ScoreRadarGraphForClassOption);
 
+    Top50ClassChartInstance: any;
+    onTop50ClassChartInit(event: any) {
+        this.Top50ClassChartInstance = event;
+    }
+    mTop50ClassOption: ISimpleBar = {
+        toolbox: ToolboxSaveImageOnly,
+        tooltip: {},
+        title: {
+            text: 'TOP50各班级人数',
+        },
+        xAxis: {
+            type: 'category',
+            data: [],
+            axisLabel: {
+                interval: 0,
+            }
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            label: {
+                normal: {
+                    show: true
+                }
+            },
+            data: [],
+            type: 'bar'
+        }]
+    };
+
+
+    Top50ScatterChartInstance: any;
+    onTop50ScatterChartInit(event: any) {
+        this.Top50ScatterChartInstance = event;
+    }
+    mTop50ScatterOption = {
+        title: {
+            text: 'TOP50各班级排名分布情况',
+        },
+        xAxis: {
+            data: []
+        },
+        yAxis: {
+
+        },
+        series: [{
+            symbolSize: 20,
+            data: [],
+            type: 'scatter'
+        }]
+    };
+
+    
+
     CreateEntity(r: IExamInfoForNumberAndSubName) {
         r.gradeInfo.record.className = "年级组";
         this.Exams = r.classExamInfoList;
@@ -120,6 +177,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         this.Low10 = r.low10;
         this.TeacherExams = r.teacherExamInfoList;
         this.Title = this.Exams[0].record.numberName;
+        this.SubName = this.Exams[0].record.subName;
         this.subTitle = this.Exams[0].record.grade + " - " + this.Exams[0].record.subName;
         this.mScoreFunnelOption.legend.data = [];
         this.mScoreFunnelOption.series[0].data = [];
@@ -169,6 +227,37 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
         if (this.RadarechartsInstance !== undefined) {
             this.RadarechartsInstance.setOption(this.mScoreRadarOption);
+        }
+
+        this.mTop50ClassOption.xAxis.data = r.top50ForClassName.map(x => x.name);
+        this.mTop50ClassOption.series[0].data = r.top50ForClassName.map(x => x.value);
+        if (this.Top50ClassChartInstance !== undefined) {
+            try {
+                this.Top50ClassChartInstance.setOption(this.mTop50ClassOption);
+            } catch (error) {
+                
+            }
+
+        }
+
+        let classnamelist = [];
+        r.top50.forEach(
+            r => {
+                if (classnamelist.indexOf(r.className) === -1) {
+                    classnamelist.push(r.className);
+                }
+            }
+        )
+        classnamelist.sort();
+        this.mTop50ScatterOption.series[0].data = r.top50.map(x => [x.className, x.gradeRank]);
+        this.mTop50ScatterOption.xAxis.data = classnamelist;
+        
+        if (this.Top50ScatterChartInstance !== undefined) {
+            try {
+                this.Top50ScatterChartInstance.setOption(this.mTop50ScatterOption);
+            } catch (error) {
+                
+            }
         }
     }
 
