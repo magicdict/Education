@@ -18,7 +18,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
     Title: string;
     subTitle: string;
-    SubName :string;
+    SubName: string;
 
     Gradelist = [
         { label: '高一', value: '高一' },
@@ -161,13 +161,15 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
         },
         series: [{
-            symbolSize: 20,
+            symbolSize: (dataItem: number[]) => {
+                return dataItem[2] * 20;
+            },
             data: [],
             type: 'scatter'
         }]
     };
 
-    
+
 
     CreateEntity(r: IExamInfoForNumberAndSubName) {
         r.gradeInfo.record.className = "年级组";
@@ -235,7 +237,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
             try {
                 this.Top50ClassChartInstance.setOption(this.mTop50ClassOption);
             } catch (error) {
-                
+
             }
 
         }
@@ -249,14 +251,27 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
             }
         )
         classnamelist.sort();
-        this.mTop50ScatterOption.series[0].data = r.top50.map(x => [x.className, x.gradeRank]);
+        let SeriesData = r.top50.map(x => [x.className, x.gradeRank, 1]);
+        SeriesData.forEach(
+            e => {
+                let x = 0;
+                SeriesData.forEach(
+                    e2 => {
+                        if (e2[0] === e[0] && e2[1] === e[1]) x++;
+                    }
+                )
+                e[2] = x;
+            }
+        )
+
+        this.mTop50ScatterOption.series[0].data = SeriesData;
         this.mTop50ScatterOption.xAxis.data = classnamelist;
-        
+
         if (this.Top50ScatterChartInstance !== undefined) {
             try {
                 this.Top50ScatterChartInstance.setOption(this.mTop50ScatterOption);
             } catch (error) {
-                
+
             }
         }
     }
