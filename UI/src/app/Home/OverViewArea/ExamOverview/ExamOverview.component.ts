@@ -4,7 +4,7 @@ import { IExamList, IClassExam, IExamInfoForNumberAndSubName, IScore } from 'src
 import { CommonFunction } from 'src/app/Home/Common/common';
 import { HomeService } from '../../Common/Home.service';
 import { ScoreFunnelOption, ScoreRadarGraphForClassOption } from '../../GraphOption/ScoreOption';
-import { ISimpleBar, ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
+import { ISimpleBar, ToolboxForBar } from '../../GraphOption/KaoqinOption';
 @Component({
     templateUrl: 'ExamOverView.html',
 })
@@ -119,7 +119,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         this.Top50ClassChartInstance = event;
     }
     mTop50ClassOption: ISimpleBar = {
-        toolbox: ToolboxSaveImageOnly,
+        toolbox: ToolboxForBar,
         tooltip: {},
         title: {
             text: 'TOP50各班级人数',

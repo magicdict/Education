@@ -1,13 +1,13 @@
 <div style="width: 100%;height: 600px;background: white;">
     <div class="container">
         <div class="row">
-            <div class="col-6" style="padding-top:10px">
-                <app-map [NativePlaceZheJiang]="groupInfo.property.nativePlaceZheJiang" [NativePlace]="groupInfo.property.nativePlace"
-                    [StyleHeight]="'400px'" [StyleWidth]="'400px'" [ViusalZheJiangMax]="ZheJiangMax"
-                    [ViusalChinaMax]="ChinaMax">
+            <div class="col-5" style="padding-top:10px">
+                <app-map [NativePlaceZheJiang]="groupInfo.property.nativePlaceZheJiang"
+                    [NativePlace]="groupInfo.property.nativePlace" [StyleHeight]="'380px'" [StyleWidth]="'400px'"
+                    [ViusalZheJiangMax]="ZheJiangMax" [ViusalChinaMax]="ChinaMax">
                 </app-map>
             </div>
-            <div class="col-6" style="padding-top:10px">
+            <div class="col-7" style="padding-top:10px">
                 <b>图表类型：</b>
                 <p-dropdown (onChange)="GraphTypeChanged()" [options]="GraphTypeList" [(ngModel)]="SelectGraphType"
                     [style]="{'width':'150px'}"></p-dropdown>
@@ -18,15 +18,16 @@
                     </div>
                     <div class="box-body">
                         <div echarts (chartInit)="onChartInit($event)" [options]="Graphoption"
-                            style="width:100%;height:350px;">
+                            style="width:100%;height:450px;">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div style="width: 100%;height: 80px;background: white;">
-        <button class="btn btn-lg btn-info" (click)="this.GotoPreviousPage.emit()"
-            style="float: right;margin-top: 20px;margin-right: 20px;">
-            <i class="fas fa-arrow-left"></i>&nbsp;重置数据过滤器</button>
-    </div>
+</div>
+<div style="width: 100%;height: 80px;background: white;">
+    <button class="btn btn-lg btn-info" (click)="this.GotoPreviousPage.emit()"
+        style="float: right;margin-top: 20px;margin-right: 20px;">
+        <i class="fas fa-arrow-left"></i>&nbsp;重置数据过滤器</button>
+</div>
