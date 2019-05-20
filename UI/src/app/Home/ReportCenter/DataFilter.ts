@@ -47,7 +47,17 @@ export class DataFilterComponent implements OnInit {
     ]
     IsNativeZhejiang: string = '';
 
-    parm :any = {};
+    BornDateYears = [
+        { label: '不限', value: '' },
+        { label: '2000年', value: '2000' },
+        { label: '2001年', value: '2001' },
+        { label: '2002年', value: '2002' },
+        { label: '2003年', value: '2003' },
+    ];
+
+    BornDate: string = '';
+
+    parm: any = {};
 
     cols = [
         { field: 'id', header: "学号" },
@@ -76,10 +86,13 @@ export class DataFilterComponent implements OnInit {
             this.errMsgDialog.show("请至少选择一个班级");
             return;
         }
-        this.parm = { 'Sex': this.selectedSex, 
-                     'IsNativeZhejiang':this.IsNativeZhejiang,
-                     'ClassIds': ClassIds.map(x => x.value), 
-                     'IsLiveAtSchool': this.IsLiveAtSchool };
+        this.parm = {
+            'Sex': this.selectedSex,
+            'IsNativeZhejiang': this.IsNativeZhejiang,
+            'ClassIds': ClassIds.map(x => x.value),
+            'IsLiveAtSchool': this.IsLiveAtSchool,
+            'BornDate': this.BornDate
+        };
 
         this.common.httpRequestPost<IStudent[]>("Student/QueryByFilter", this.parm).then(
             r => {
@@ -88,7 +101,7 @@ export class DataFilterComponent implements OnInit {
                 } else {
                     this.FilterResult = r;
                     this.DataPicked.emit();
-                    this.messageService.add({severity:'success', summary: '查询完毕', detail:'符合条件人数：' + r.length});
+                    this.messageService.add({ severity: 'success', summary: '查询完毕', detail: '符合条件人数：' + r.length });
                 }
             }
         );
@@ -103,7 +116,7 @@ export class DataFilterComponent implements OnInit {
                     this.service.FilterDataClassInfo = r;
                     this.GotoNextPage.emit();
                 }
-            ) 
+            )
         }
     }
 }

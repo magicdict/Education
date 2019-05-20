@@ -155,10 +155,14 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
             text: 'TOP50各班级排名分布情况',
         },
         xAxis: {
-            data: []
+            type: 'category',
+            data: [],
+            axisLabel: {
+                interval: 0,
+            }
         },
         yAxis: {
-
+            type: 'value'
         },
         series: [{
             symbolSize: (dataItem: number[]) => {
@@ -242,15 +246,6 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
         }
 
-        let classnamelist = [];
-        r.top50.forEach(
-            r => {
-                if (classnamelist.indexOf(r.className) === -1) {
-                    classnamelist.push(r.className);
-                }
-            }
-        )
-        classnamelist.sort();
         let SeriesData = r.top50.map(x => [x.className, x.gradeRank, 1]);
         SeriesData.forEach(
             e => {
@@ -264,8 +259,8 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
             }
         )
 
+        this.mTop50ScatterOption.xAxis.data = this.mTop50ClassOption.xAxis.data;
         this.mTop50ScatterOption.series[0].data = SeriesData;
-        this.mTop50ScatterOption.xAxis.data = classnamelist;
 
         if (this.Top50ScatterChartInstance !== undefined) {
             try {

@@ -127,6 +127,7 @@ namespace Education.Controllers
             string Sex = data["Sex"].ToString();
             string IsLiveAtSchool = data["IsLiveAtSchool"];
             string IsNativeZhejiang = data["IsNativeZhejiang"];
+            string BornDate = data["BornDate"];
             if (ClassId.Count == 0) return new List<Student>();
             baseInfo = baseInfo.Where(x => ClassId.Contains(x.ClassId)).ToList();
             if (Sex != "")
@@ -154,6 +155,10 @@ namespace Education.Controllers
                 {
                     baseInfo = baseInfo.Where(x => !x.IsNativePlaceZheJiang).ToList();
                 }
+            }
+            if (BornDate != "")
+            {
+                baseInfo = baseInfo.Where(x => x.BornDate == BornDate).ToList();
             }
             Console.WriteLine(timer.Elapsed.ToString());
             Console.WriteLine("人数：" + baseInfo.Count);
