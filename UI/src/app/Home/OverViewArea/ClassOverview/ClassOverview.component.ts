@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { IStudent, IClassInfo, ITeacher, IClassExam, IStudentGroupProperty } from '../../Common/Education.model';
 import { HomeService } from '../../Common/Home.service';
 import { SexRatePieOption } from '../../GraphOption/StudentGraphOption'
-import { ISimpleBar, ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
+import { ISimpleBar, ToolboxForBar } from '../../GraphOption/KaoqinOption';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { CommonFunction } from '../../Common/common';
@@ -132,11 +132,16 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
             title: {
               text: this.ClassName + "考勤统计"
             },
-            toolbox: ToolboxSaveImageOnly,
+            toolbox: ToolboxForBar,
             yAxis: {
               type: 'value'
             },
             series: [{
+              label: {
+                normal: {
+                  show: true
+                }
+              },
               data: data.classinfo.kaoqing.map(x => x.value),
               type: 'bar'
             }]

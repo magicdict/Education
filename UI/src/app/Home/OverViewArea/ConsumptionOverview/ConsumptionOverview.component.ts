@@ -6,13 +6,16 @@ import { HomeService } from '../../Common/Home.service';
 import { CommonFunction } from '../../Common/common';
 import { StudentPickerComponent } from '../../Common/studentPicker/studentPicker.component';
 import { ISimpleBar, ToolboxForBar } from '../../GraphOption/KaoqinOption';
+import { MessageService } from 'primeng/api';
 @Component({
   templateUrl: 'ConsumptionOverview.html',
+  providers: [MessageService],
 })
 export class ConsumptionOverviewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private messageService: MessageService,
     public service: HomeService
   ) { }
 
@@ -48,6 +51,7 @@ export class ConsumptionOverviewComponent implements OnInit {
     { label: '1300元', value: 1300 },
     { label: '1400元', value: 1400 },
   ]
+  IsShowToast = false;
   MonthUpLimit = 0;
 
   public Students: IStudentMonthlyConsumption[] = [];
@@ -183,7 +187,7 @@ export class ConsumptionOverviewComponent implements OnInit {
   WeekTimeOptionSample3D = {
     visualMap: {
       max: 300000,
-      show:false,
+      show: false,
       inRange: {
         color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
       }
@@ -191,16 +195,16 @@ export class ConsumptionOverviewComponent implements OnInit {
     xAxis3D: {
       type: 'category',
       data: this.hours,
-      name:'时间'
+      name: '时间'
     },
     yAxis3D: {
       type: 'category',
       data: this.days,
-      name:'周次'
+      name: '周次'
     },
     zAxis3D: {
       type: 'value',
-      name:'金额'
+      name: '金额'
     },
     grid3D: {
       boxWidth: 200,
@@ -387,6 +391,8 @@ export class ConsumptionOverviewComponent implements OnInit {
     this.service.GetStudentWithMonthLimit(this.MonthUpLimit).then(
       r => {
         this.Students = r;
+        if (this.IsShowToast) this.messageService.add({ severity: 'success', summary: '查询完毕', detail: '符合条件人数：' + r.length });
+        this.IsShowToast = true;  //控制OnInit的时候不出现Toast
       }
     );
   }

@@ -3,7 +3,7 @@ import { HomeService } from '../Common/Home.service';
 import { IClassInfo } from '../Common/Education.model';
 import { CommonFunction } from '../Common/common';
 import { SexRatePieOption } from '../GraphOption/StudentGraphOption';
-import { ToolboxSaveImageOnly } from '../GraphOption/KaoqinOption';
+import { ToolboxSaveImageOnly, ToolboxForBar } from '../GraphOption/KaoqinOption';
 import { MonthlyCompumptionBarOptionTotal } from '../GraphOption/CompumptionOption';
 @Component({
     selector: "visual-factory",
@@ -132,11 +132,16 @@ export class VisualFactoryComponent implements OnInit {
             title: {
                 text: "考勤统计"
             },
-            toolbox: ToolboxSaveImageOnly,
+            toolbox: ToolboxForBar,
             yAxis: {
                 type: 'value'
             },
             series: [{
+                label: {
+                    normal: {
+                        show: true
+                    }
+                },
                 data: this.groupInfo.kaoqing.map(x => x.value),
                 type: 'bar'
             }]
