@@ -40,7 +40,7 @@
                     <h3 class="box-title">性别比例</h3>
                 </div>
                 <div class="box-body">
-                    <div *ngIf="this.campusfullname === '东部校区'" echarts [options]="mSexRatePieOption"  (chartInit)="SexRateChartInit($event)"
+                    <div *ngIf="this.campusfullname === '东部校区'" echarts [options]="mSexRateOption"  (chartInit)="SexRateChartInit($event)"
                         style="width:450px;height:435px"></div>
                     <div *ngIf="this.campusfullname === '白杨校区'" echarts [options]="mSexRateSunburstOption"  (chartInit)="SexRateChartInit($event)"
                         style="width:450px;height:435px"></div>

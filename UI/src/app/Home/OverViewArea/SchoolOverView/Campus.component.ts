@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../Common/Home.service';
 import { ICampus } from '../../Common/Education.model';
-import { SexRatePieOption, SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
+import { SexRateSunburstOption } from '../../GraphOption/StudentGraphOption';
 import { CommonFunction } from '../../Common/common';
 import { ISimpleBar } from '../../GraphOption/KaoqinOption';
 import { ActivatedRoute } from '@angular/router';
 import { echartsInstance } from 'echarts'
+import { SexRateChartOption } from '../../GraphOption/SexRateChart';
 
 @Component({
     selector: "campus",
@@ -21,7 +22,7 @@ export class CampusComponent implements OnInit {
 
     campusInfo: ICampus;
     /**性别饼图 */
-    mSexRatePieOption = CommonFunction.clone(SexRatePieOption);
+    mSexRateOption = CommonFunction.clone(SexRateChartOption);
     /**旭日图 性别比例 */
     mSexRateSunburstOption = CommonFunction.clone(SexRateSunburstOption);
 
@@ -66,10 +67,13 @@ export class CampusComponent implements OnInit {
         } else {
             this.campusfullname = "东部校区";
             this.campusInfo = this.service.SchoolOverview.east;
-            this.mSexRatePieOption.title.text = "东部校区性别比例";
-            this.mSexRatePieOption.title['show'] = false;
-            this.mSexRatePieOption.series[0].data[0].value = this.campusInfo.property.sexRate.posCnt;
-            this.mSexRatePieOption.series[0].data[1].value = this.campusInfo.property.sexRate.negCnt;
+            this.mSexRateOption.title.text = "东部校区性别比例";
+            this.mSexRateOption.title['show'] = false;
+            this.mSexRateOption.grid.bottom = '20%';
+            this.mSexRateOption.grid.top = '20%';
+            this.mSexRateOption.series[0].data[0].value = (this.campusInfo.property.sexRate.posCnt * 100 / this.campusInfo.property.studentCnt);
+            this.mSexRateOption.series[0].data[1].value = (this.campusInfo.property.sexRate.negCnt * 100 / this.campusInfo.property.studentCnt);
+            this.mSexRateOption.series[0].label.normal['formatter'] = param => (param.value).toFixed(2) + '%';
         }
         let subnamelist = [];
         let subcnt = [];

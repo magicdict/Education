@@ -9,6 +9,7 @@ import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { CommonFunction } from '../../Common/common';
 import { ClassExamListComponent } from '../../Common/ClassExamList/ClassExamList.component';
 import { ExamSubNameOption } from '../../GraphOption/ScoreOption';
+import { SexRateChartOption } from '../../GraphOption/SexRateChart';
 
 @Component({
   templateUrl: 'ClassOverview.html',
@@ -26,7 +27,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
   public ClassId: string;
   public Teachers: ITeacher[] = [];
   public Exams: IClassExam[][] = [];
-  mSexRate = CommonFunction.clone(SexRatePieOption);
+  mSexRate = CommonFunction.clone(SexRateChartOption);
   KaoqinOpt: ISimpleBar;
   IsShowKaoqinGraph: boolean;
 
@@ -86,14 +87,16 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
         this.ClassId = this.QueryResult[0].classId;
         this.StudentsInfo = data.classinfo.property;
 
+        this.mSexRate = null;
+        this.mSexRate = CommonFunction.clone(SexRateChartOption);
         this.mSexRate.title.text = this.ClassName + "性别比例";
         this.mSexRate.title['show'] = false;
-        this.mSexRate.legend['show'] = false;
-        this.mSexRate.series[0]['radius'] = '75%';
-        this.mSexRate.series[0].data[0].value = data.classinfo.property.sexRate.posCnt;
-        this.mSexRate.series[0].data[1].value = data.classinfo.property.sexRate.negCnt;
+        this.mSexRate.series[0].data[0].value = data.classinfo.property.sexRate.posCnt * 100 / data.classinfo.property.studentCnt;
+        this.mSexRate.series[0].data[1].value = data.classinfo.property.sexRate.negCnt * 100 / data.classinfo.property.studentCnt;
+        this.mSexRate.series[0].label.normal['formatter'] = param => (param.value).toFixed(2) + '%';
         if (this.SexRateEchartsInstance !== undefined) {
-          this.SexRateEchartsInstance.setOption(this.mSexRate);
+          this.SexRateEchartsInstance.clear();  //不写的话label居然不更新
+          this.SexRateEchartsInstance.setOption(this.mSexRate,true);
         }
         //console.log(this.mSexRate);
         this.Teachers = data.classinfo.teachers;
