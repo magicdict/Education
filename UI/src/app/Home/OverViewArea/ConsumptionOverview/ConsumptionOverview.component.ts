@@ -381,11 +381,38 @@ export class ConsumptionOverviewComponent implements OnInit {
         };
         this.PerRangeCntOption['grid'] = { left: 100 };
         this.PerRangeCntOption.toolbox = ToolboxForBar;
+
+        this.PerDayByGradeOption = {
+          title: {
+            text: '年级别日均消费'
+          },
+          xAxis: {
+            type: 'category',
+            data: ["高一", "高二", "高三"]
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [{
+            label: {
+              normal: {
+                show: true
+              }
+            },
+            data: data.consumptionInfo.perDayByGrade.map(x => -1 * x.value),
+            type: 'bar'
+          }]
+        };
+        this.PerDayByGradeOption['grid'] = { left: 100 };
+        this.PerDayByGradeOption.toolbox = ToolboxForBar;
       });
+      
   }
 
   /**单笔消费金额统计 */
   PerRangeCntOption: ISimpleBar;
+  /**年级别日均消费统计 */
+  PerDayByGradeOption:ISimpleBar;
 
   QueryByMonthUpLimit() {
     this.service.GetStudentWithMonthLimit(this.MonthUpLimit).then(

@@ -21,7 +21,11 @@
                     </div>
                 </div>
             </div>
-
+            <div class="row" style="padding: 5px;margin: 5px;">
+                <div class="alert alert-warning">
+                    选课人数最多和最少的课程，相差了3倍，课程有明显的热门和冷门。男生和女生的选课倾向也是不同的。
+                </div>
+            </div>
             <div class="row" style="padding: 5px;margin: 5px;">
                 <div class="col">
                     <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
@@ -38,24 +42,48 @@
             </div>
 
             <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="alert alert-warning">
-                    选课人数最多和最少的课程，相差了3倍，课程有明显的热门和冷门
+                <div class="col">
+                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                        <div echarts [options]="mMaleCourseSelectRadarGraphOption"
+                            (chartInit)="onMaleCourseSelectRadarGraphChartInit($event)" style="width:450px;"></div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                        <div echarts [options]="mMaleCourseSelectCntOption" (chartInit)="onMaleCourseSelectCntChartInit($event)"
+                            style="width:450px;"></div>
+                    </div>
                 </div>
             </div>
+
+            <div class="row" style="padding: 5px;margin: 5px;">
+                <div class="col">
+                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                        <div echarts [options]="mFeMaleCourseSelectRadarGraphOption"
+                            (chartInit)="onFeMaleCourseSelectRadarGraphChartInit($event)" style="width:450px;"></div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                        <div echarts [options]="mFeMaleCourseSelectCntOption" (chartInit)="onFeMaleCourseSelectCntChartInit($event)"
+                            style="width:450px;"></div>
+                    </div>
+                </div>
+            </div>            
         </div>
     </p-tabPanel>
     <p-tabPanel header="两门课程" style="width:100%;">
         <div class="container" style="width:1140px;">
+            <div class="row" style="padding: 5px;margin: 5px;">
+                <div class="alert alert-warning">
+                    由于单科有冷门和热门课程，两门课程的最多组合和最少组合，相差了15倍
+                </div>
+            </div>
             <div class="row">
                 <div class="col">
                     <div echarts [options]="mCourseSelectTwoCntOption"
                         (chartInit)="onCourseSelectTwoCntChartInit($event)"
                         style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
-                </div>
-            </div>
-            <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="alert alert-warning">
-                    由于单科有冷门和热门课程，两门课程的最多组合和最少组合，相差了15倍
                 </div>
             </div>
             <div class="row">
@@ -75,16 +103,16 @@
     </p-tabPanel>
     <p-tabPanel header="三门课程" style="width:1140x;">
         <div class="container" style="width:1140px;">
+            <div class="row" style="padding: 5px;margin: 5px;">
+                <div class="alert alert-warning">
+                    3门课程的组合有更加明显的聚集效应，前2种组合占了25%
+                </div>
+            </div>
             <div class="row">
                 <div class="col">
                     <div echarts [options]="mCourseSelectThreeCntOption"
                         (chartInit)="onCourseSelectThreeCntChartInit($event)"
                         style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
-                </div>
-            </div>
-            <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="alert alert-warning">
-                    3门课程的组合有更加明显的聚集效应，前2种组合占了25%
                 </div>
             </div>
             <div class="row">

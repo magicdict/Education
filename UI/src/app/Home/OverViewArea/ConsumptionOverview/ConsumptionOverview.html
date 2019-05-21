@@ -55,11 +55,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col"></div>
+                <div class="col">
+                    <div style="border: 2px solid lightgray;padding: 0px;margin: 0px;width: 540px;">
+                        <div echarts [options]="PerDayByGradeOption" style="width:520px;height:400px;">
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row" style="padding: 5px;margin: 5px;">
                 <div class="alert alert-warning">
-                    绝大部分的消费的单笔金额都小于20元。
+                    绝大部分的消费的单笔金额都小于20元。各个年级个人每日平均消费额差不多，没有显著区别。
                 </div>
             </div>
         </div>
@@ -107,10 +112,10 @@
                                 &nbsp;&nbsp;
                                 <button style="margin-top: 10px" class="btn btn-primary" (click)="StudentQuery()">
                                     <i class="fa fa-search"></i>学生月度消费检索</button>
-                                    <table-function [Table]="studentcomsumption" [OutputOnly]="true"
+                                <table-function [Table]="studentcomsumption" [OutputOnly]="true"
                                     [FrameStyle]="{'float':'right'}">
                                 </table-function>
-                                </div>
+                            </div>
                         </div>
                     </div>
                     <p-table #studentcomsumption [value]="this.Students" selectionMode="single"

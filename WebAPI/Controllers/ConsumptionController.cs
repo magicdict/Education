@@ -81,10 +81,13 @@ namespace Education.Controllers
             public List<NameValueSet> WeekTimeConsumptionLiveAtSchool = new List<NameValueSet>();
 
             public List<NameValueSet> WeekTimeConsumptionNotLiveAtSchool = new List<NameValueSet>();
-
-
             public List<NameValueSet> PerPriceRange = new List<NameValueSet>();
-
+            /// <summary>
+            /// 每个年级每日平均消费
+            /// </summary>
+            /// <typeparam name="NameValueSet"></typeparam>
+            /// <returns></returns>
+            public List<NameValueSet> PerDayByGrade = new List<NameValueSet>();
         }
 
 
@@ -191,12 +194,12 @@ namespace Education.Controllers
 
             info.PerPriceRange.Add(new NameValueSet()
             {
-                name ="10元以下",
+                name = "10元以下",
                 value = Dataset.ConsumptionList.Count(x => (-1 * x.MonDeal) <= 10)
             });
             info.PerPriceRange.Add(new NameValueSet()
             {
-                name =  "10-20元",
+                name = "10-20元",
                 value = Dataset.ConsumptionList.Count(x => (-1 * x.MonDeal) <= 20 && (-1 * x.MonDeal) > 10)
             });
             info.PerPriceRange.Add(new NameValueSet()
@@ -206,7 +209,7 @@ namespace Education.Controllers
             });
             info.PerPriceRange.Add(new NameValueSet()
             {
-                name =  "50元以上",
+                name = "50元以上",
                 value = Dataset.ConsumptionList.Count(x => (-1 * x.MonDeal) > 50)
             });
 
@@ -226,6 +229,23 @@ namespace Education.Controllers
             info.HighestRec = Dataset.ConsumptionList.Take(3).ToList();
             info.HighestRecLiveAtSchool = Dataset.ConsumptionList.Where(x => x.ConsumpStudent.LiveAtSchool).Take(3).ToList();
             info.HighestRecNotLiveAtSchool = Dataset.ConsumptionList.Where(x => !x.ConsumpStudent.LiveAtSchool).Take(3).ToList();
+
+            Console.WriteLine("PerDayByGrade Start:" + timer.Elapsed.ToString());
+            //PerDayByGrade
+            var Grade1ConsumptionList = Dataset.ConsumptionList.Where(x => x.Student.Grade == "高一");
+            var Grade2ConsumptionList = Dataset.ConsumptionList.Where(x => x.Student.Grade == "高二");
+            var Grade3ConsumptionList = Dataset.ConsumptionList.Where(x => x.Student.Grade == "高三");
+            var Grade1Sum = Grade1ConsumptionList.Sum(x => x.MonDeal);
+            var Grade2Sum = Grade2ConsumptionList.Sum(x => x.MonDeal);
+            var Grade3Sum = Grade3ConsumptionList.Sum(x => x.MonDeal);
+            var DayStudentCntGrade1 = Grade1ConsumptionList.GroupBy(x => x.StudentID + x.DealYearMonthDay).Count();
+            var DayStudentCntGrade2 = Grade2ConsumptionList.GroupBy(x => x.StudentID + x.DealYearMonthDay).Count();
+            var DayStudentCntGrade3 = Grade3ConsumptionList.GroupBy(x => x.StudentID + x.DealYearMonthDay).Count();
+
+            info.PerDayByGrade.Add(new NameValueSet { name = "高一", value = (int)(Grade1Sum / DayStudentCntGrade1) });
+            info.PerDayByGrade.Add(new NameValueSet { name = "高二", value = (int)(Grade2Sum / DayStudentCntGrade2) });
+            info.PerDayByGrade.Add(new NameValueSet { name = "高三", value = (int)(Grade3Sum / DayStudentCntGrade3) });
+
             Console.WriteLine("消费统计结束" + timer.Elapsed.ToString());
             timer.Stop();
         }

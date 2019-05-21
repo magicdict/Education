@@ -27,13 +27,24 @@ public class Consumption
     /// </summary>
     /// <value></value>
     public string DealTime { get; set; }
-
     public string DealTimeYear { get; set; }
     public string DealTimeMonth { get; set; }
     public string DealTimeDay { get; set; }
     public string DealTimeHour { get; set; }
-
-    public string DealYearMonth { get; set; }
+    public string DealYearMonth
+    {
+        get
+        {
+            return DealTimeYear + DealTimeMonth;
+        }
+    }
+    public string DealYearMonthDay
+    {
+        get
+        {
+            return DealTimeYear + DealTimeMonth + DealTimeDay;
+        }
+    }
 
     /// <summary>
     /// 消费金额
@@ -45,6 +56,15 @@ public class Consumption
     /// </summary>
     /// <value></value>
     public string StudentID { get; set; }
+
+    public Student Student
+    {
+        get
+        {
+            return Dataset.StudentList.Where(x => x.ID == StudentID).First();
+        }
+    }
+
     /// <summary>
     /// 姓名
     /// </summary>
@@ -58,7 +78,7 @@ public class Consumption
 
     public DayOfWeek DayOfWeek { get; set; }
 
-    public Weather Weather{get;set;}
+    public Weather Weather { get; set; }
 
     public Student ConsumpStudent { get; set; }
 
@@ -70,13 +90,12 @@ public class Consumption
         DealTimeMonth = DealTime.Split(" ")[0].Split("/")[1];
         DealTimeDay = DealTime.Split(" ")[0].Split("/")[2];
         DealTimeHour = DealTime.Split(" ")[1].Split(":")[0];
-        DealYearMonth = DealTimeYear + DealTimeMonth;
         MonDeal = Single.Parse(Items[1]);
         StudentID = Items[2];
         AccName = Items[3];
         PerSex = Items[4];
         DayOfWeek = new System.DateTime(int.Parse(DealTimeYear), int.Parse(DealTimeMonth), int.Parse(DealTimeDay)).DayOfWeek;
-        Weather = Weather.GetWeatherByDate(DealTimeYear,DealTimeMonth,DealTimeDay);
+        Weather = Weather.GetWeatherByDate(DealTimeYear, DealTimeMonth, DealTimeDay);
         ConsumpStudent = Dataset.StudentList.Where(x => x.ID == StudentID).First();
     }
 

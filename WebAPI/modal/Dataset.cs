@@ -42,7 +42,7 @@ public static class Dataset
 
     public static List<MonthConsumptionStudent> StudentWeeklyConsumptionList = new List<MonthConsumptionStudent>();
 
-    public static Dictionary<string,MonthConsumptionStudent> ConsumptionDict = new Dictionary<string, MonthConsumptionStudent>();
+    public static Dictionary<string, MonthConsumptionStudent> ConsumptionDict = new Dictionary<string, MonthConsumptionStudent>();
 
     public static List<ClassBaseInfo> classBaseInfoList = new List<ClassBaseInfo>();
 
@@ -378,11 +378,11 @@ public static class Dataset
 
         foreach (var item in StudentMonthlyConsumptionList)
         {
-            ConsumptionDict.Add(item.ID + item.Month,item);
+            ConsumptionDict.Add(item.ID + item.Month, item);
         }
         foreach (var item in StudentWeeklyConsumptionList)
         {
-            ConsumptionDict.Add(item.ID + item.Month,item);
+            ConsumptionDict.Add(item.ID + item.Month, item);
         }
         long n2 = GC.GetTotalMemory(true);
         Console.WriteLine("内存变化:" + GC.GetTotalMemory(true));
@@ -578,6 +578,7 @@ public static class Dataset
             chengji.GradeRank = TotalScoreList_TenSchool.Count(x => x.Score > chengji.Score) + 1;
             chengji.GradeAvg = TenAvg;
             chengji.GradeAvalibleCnt = TotalScoreList_TenSchool.Count;
+            chengji.FullScore = 300;
 
             chengji.ClassRank = TotalScoreList_TenSchool.Count(x => x.Score > chengji.Score && x.ClassID == chengji.ClassID) + 1;
             chengji.ClassAvg = TotalScoreList_TenSchool.Where(x => x.ClassID == chengji.ClassID).Average(x => x.Score);
@@ -599,6 +600,7 @@ public static class Dataset
             chengji.GradeRank = TotalScoreList_FiveSchool.Count(x => x.Score > chengji.Score) + 1;
             chengji.GradeAvg = FiveAvg;
             chengji.GradeAvalibleCnt = TotalScoreList_FiveSchool.Count;
+            chengji.FullScore = 300;
 
             chengji.ClassRank = TotalScoreList_FiveSchool.Count(x => x.Score > chengji.Score && x.ClassID == chengji.ClassID) + 1;
             chengji.ClassAvg = TotalScoreList_FiveSchool.Where(x => x.ClassID == chengji.ClassID).Average(x => x.Score);

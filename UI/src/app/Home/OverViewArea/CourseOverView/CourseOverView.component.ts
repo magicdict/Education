@@ -28,7 +28,7 @@ export class CourseOverViewComponent implements OnInit {
       max: 60,
       inRange: {
         color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-      }, 
+      },
       show: false
     },
     // 默认情况下, x, y, z 分别是从 0 到 1 的数值轴
@@ -86,7 +86,7 @@ export class CourseOverViewComponent implements OnInit {
       max: 100,
       inRange: {
         color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-      }, 
+      },
       show: false
     },
     series: [{
@@ -106,9 +106,46 @@ export class CourseOverViewComponent implements OnInit {
 
 
   //单科图
-  mCourseSelectRadarGraphOption = CourseSelectRadarGraphOption;
-  mCourseSelectCntOption = CourseSelectCntOption;
+  mCourseSelectRadarGraphOption = CommonFunction.clone(CourseSelectRadarGraphOption);
+  mMaleCourseSelectRadarGraphOption = CommonFunction.clone(CourseSelectRadarGraphOption);
+  mFeMaleCourseSelectRadarGraphOption = CommonFunction.clone(CourseSelectRadarGraphOption);
+
+  mCourseSelectCntOption = CommonFunction.clone(CourseSelectCntOption);
+  mMaleCourseSelectCntOption = CommonFunction.clone(CourseSelectCntOption);
+  mFeMaleCourseSelectCntOption = CommonFunction.clone(CourseSelectCntOption);
+  
   SingleCoursePercent: { name: string, value: number }[];
+
+  CourseSelectCntChart: any;
+  onCourseSelectCntChartInit(event: any) {
+    this.CourseSelectCntChart = event;
+  }
+
+  MaleCourseSelectCntChart: any;
+  onMaleCourseSelectCntChartInit(event: any) {
+    this.MaleCourseSelectCntChart = event;
+  }
+
+  FeMaleCourseSelectCntChart: any;
+  onFeMaleCourseSelectCntChartInit(event: any) {
+    this.FeMaleCourseSelectCntChart = event;
+  }
+
+  CourseSelectRadarGraphChart: any;
+  onCourseSelectRadarGraphChartInit(event: any) {
+    this.CourseSelectRadarGraphChart = event;
+  }
+
+  MaleCourseSelectRadarGraphChart: any;
+  onMaleCourseSelectRadarGraphChartInit(event: any) {
+    this.MaleCourseSelectRadarGraphChart = event;
+  }
+
+  FeMaleCourseSelectRadarGraphChart: any;
+  onFeMaleCourseSelectRadarGraphChartInit(event: any) {
+    this.FeMaleCourseSelectRadarGraphChart = event;
+  }
+
 
   //两门课程
   mCourseSelectTwoCntOption = CommonFunction.clone(CourseSelectTwoCntOption);
@@ -123,15 +160,8 @@ export class CourseOverViewComponent implements OnInit {
   //桑吉图
   mSelectCourseSankeyOption = CommonFunction.clone(SelectCourseSankeyOption);
 
-  CourseSelectRadarGraphChart: any;
-  onCourseSelectRadarGraphChartInit(event: any) {
-    this.CourseSelectRadarGraphChart = event;
-  }
 
-  CourseSelectCntChart: any;
-  onCourseSelectCntChartInit(event: any) {
-    this.CourseSelectCntChart = event;
-  }
+
 
   CourseSelectTwoCntChart: any;
   onCourseSelectTwoCntChartInit(event: any) {
@@ -166,17 +196,45 @@ export class CourseOverViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data
-      .subscribe((data: { courseInfo: ICourse }) => {
-        data.courseInfo.selectionCourseCnt.sort((x, y) => { return y.value - x.value; });
-        this.mCourseSelectCntOption.xAxis.data = data.courseInfo.selectionCourseCnt.map(x => x.name);
-        this.mCourseSelectCntOption.series[0].data = data.courseInfo.selectionCourseCnt.map(x => x.value);
-        this.SingleCoursePercent = data.courseInfo.selectionCourseCnt.map(x => {
-          return { 'name': x.name, 'value': CommonFunction.roundvalue(x.value * 100 / data.courseInfo.studentCnt) }
+      .subscribe((data: { courseInfo: ICourse[] }) => {
+        data.courseInfo[0].selectionCourseCnt.sort((x, y) => { return y.value - x.value; });
+        data.courseInfo[1].selectionCourseCnt.sort((x, y) => { return y.value - x.value; });
+        data.courseInfo[2].selectionCourseCnt.sort((x, y) => { return y.value - x.value; });
+
+        this.SingleCoursePercent = data.courseInfo[0].selectionCourseCnt.map(x => {
+          return { 'name': x.name, 'value': CommonFunction.roundvalue(x.value * 100 / data.courseInfo[0].studentCnt) }
         });
-        //console.log(this.SingleCoursePercent);
+
+
+        this.mCourseSelectRadarGraphOption.title.text = "全体雷达图";
+        this.mMaleCourseSelectRadarGraphOption.title.text = "男生雷达图";
+        this.mFeMaleCourseSelectRadarGraphOption.title.text = "女生雷达图";
+
+        this.mCourseSelectCntOption.title.text = "全体柱状图";
+        this.mMaleCourseSelectCntOption.title.text = "男生柱状图";
+        this.mFeMaleCourseSelectCntOption.title.text = "女生柱状图";
+
+
+        this.mCourseSelectCntOption.xAxis.data = data.courseInfo[0].selectionCourseCnt.map(x => x.name);
+        this.mCourseSelectCntOption.series[0].data = data.courseInfo[0].selectionCourseCnt.map(x => x.value);
         this.mCourseSelectRadarGraphOption.radar.indicator =
-          data.courseInfo.selectionCourseCnt.map(x => { return { 'name': x.name, 'max': data.courseInfo.studentCnt } });
-        this.mCourseSelectRadarGraphOption.series[0].data[0].value = data.courseInfo.selectionCourseCnt.map(x => x.value);
+          data.courseInfo[0].selectionCourseCnt.map(x => { return { 'name': x.name, 'max': data.courseInfo[0].studentCnt } });
+        this.mCourseSelectRadarGraphOption.series[0].data[0].value = data.courseInfo[0].selectionCourseCnt.map(x => x.value);
+
+
+        this.mMaleCourseSelectCntOption.xAxis.data = data.courseInfo[1].selectionCourseCnt.map(x => x.name);
+        this.mMaleCourseSelectCntOption.series[0].data = data.courseInfo[1].selectionCourseCnt.map(x => x.value);
+        this.mMaleCourseSelectRadarGraphOption.radar.indicator =
+          data.courseInfo[1].selectionCourseCnt.map(x => { return { 'name': x.name, 'max': data.courseInfo[1].studentCnt } });
+        this.mMaleCourseSelectRadarGraphOption.series[0].data[0].value = data.courseInfo[1].selectionCourseCnt.map(x => x.value);
+
+
+        this.mFeMaleCourseSelectCntOption.xAxis.data = data.courseInfo[2].selectionCourseCnt.map(x => x.name);
+        this.mFeMaleCourseSelectCntOption.series[0].data = data.courseInfo[2].selectionCourseCnt.map(x => x.value);
+        this.mFeMaleCourseSelectRadarGraphOption.radar.indicator =
+          data.courseInfo[2].selectionCourseCnt.map(x => { return { 'name': x.name, 'max': data.courseInfo[2].studentCnt } });
+        this.mFeMaleCourseSelectRadarGraphOption.series[0].data[0].value = data.courseInfo[2].selectionCourseCnt.map(x => x.value);
+
         //两门课程
         var Course1 = ['地理', '化学', '技术', '历史', '生物', '物理'];
         var Course2 = ['化学', '技术', '历史', '生物', '物理', '政治'];
@@ -194,14 +252,14 @@ export class CourseOverViewComponent implements OnInit {
             let c1 = Course1[index];
             let c2 = Course2[index2];
             let key = c1 + '/' + c2;
-            let combine = data.courseInfo.selectionTwoCourseCnt.find(x => x.name == key)
+            let combine = data.courseInfo[0].selectionTwoCourseCnt.find(x => x.name == key)
             if (combine === undefined) {
               CombineData.push([index, index2, "-"]);
               CombineDataPercent.push([index, index2, "-"]);
               Combine3D.push([Course1[index], Course2[index2], 0]);
             } else {
               CombineData.push([index, index2, combine.value]);
-              CombineDataPercent.push([index, index2, CommonFunction.roundvalue(combine.value * 100 / data.courseInfo.studentCnt)]);
+              CombineDataPercent.push([index, index2, CommonFunction.roundvalue(combine.value * 100 / data.courseInfo[0].studentCnt)]);
               Combine3D.push([Course1[index], Course2[index2], combine.value]);
 
             }
@@ -217,14 +275,14 @@ export class CourseOverViewComponent implements OnInit {
         this.mTwoCourseOption3D.series[0].data = Combine3D;
 
         //三门课程
-        data.courseInfo.selectionThreeCourseCnt.sort((x, y) => { return y.value - x.value; });
-        this.mCourseSelectThreeCntOption.xAxis.data = data.courseInfo.selectionThreeCourseCnt.map(x => x.name);
-        this.mCourseSelectThreeCntOption.series[0].data = data.courseInfo.selectionThreeCourseCnt.map(x => x.value);
-        this.ThreeCoursePercent = data.courseInfo.selectionThreeCourseCnt.map(x => {
-          return { 'name': x.name, 'value': CommonFunction.roundvalue(x.value * 100 / data.courseInfo.studentCnt) }
+        data.courseInfo[0].selectionThreeCourseCnt.sort((x, y) => { return y.value - x.value; });
+        this.mCourseSelectThreeCntOption.xAxis.data = data.courseInfo[0].selectionThreeCourseCnt.map(x => x.name);
+        this.mCourseSelectThreeCntOption.series[0].data = data.courseInfo[0].selectionThreeCourseCnt.map(x => x.value);
+        this.ThreeCoursePercent = data.courseInfo[0].selectionThreeCourseCnt.map(x => {
+          return { 'name': x.name, 'value': CommonFunction.roundvalue(x.value * 100 / data.courseInfo[0].studentCnt) }
         });
 
-        this.mThreeCourseOption3D.series[0].data = data.courseInfo.selectionThreeCourseCnt.map(
+        this.mThreeCourseOption3D.series[0].data = data.courseInfo[0].selectionThreeCourseCnt.map(
           x => [x.name.split("/")[0], x.name.split("/")[1], x.name.split("/")[2], x.value]
         );
 
@@ -232,20 +290,20 @@ export class CourseOverViewComponent implements OnInit {
         //注意：重复数据会导致桑基图出现错误
         this.mSelectCourseSankeyOption.series.data = [];
         this.mSelectCourseSankeyOption.series.links = [];
-        data.courseInfo.selectionCourseCnt.map(x => { return { 'name': x.name } }).forEach(element => {
+        data.courseInfo[0].selectionCourseCnt.map(x => { return { 'name': x.name } }).forEach(element => {
           this.mSelectCourseSankeyOption.series.data.push(element);
         });
-        data.courseInfo.selectionTwoCourseCnt.map(x => { return { 'name': x.name } }).forEach(element => {
+        data.courseInfo[0].selectionTwoCourseCnt.map(x => { return { 'name': x.name } }).forEach(element => {
           this.mSelectCourseSankeyOption.series.data.push(element);
         });
-        data.courseInfo.selectionThreeCourseCnt.map(x => { return { 'name': x.name } }).forEach(element => {
+        data.courseInfo[0].selectionThreeCourseCnt.map(x => { return { 'name': x.name } }).forEach(element => {
           this.mSelectCourseSankeyOption.series.data.push(element);
         });
         //console.log(this.mSelectCourseSankeyOption.series.data);
         //第一层Link
-        data.courseInfo.selectionCourseCnt.map(x => x.name).forEach(
+        data.courseInfo[0].selectionCourseCnt.map(x => x.name).forEach(
           one => {
-            data.courseInfo.selectionTwoCourseCnt.forEach(
+            data.courseInfo[0].selectionTwoCourseCnt.forEach(
               two => {
                 if (two.name.indexOf(one) !== -1) {
                   this.mSelectCourseSankeyOption.series.links.push({ 'source': one, 'target': two.name, 'value': two.value });
@@ -256,9 +314,9 @@ export class CourseOverViewComponent implements OnInit {
         )
 
         //第二层Link
-        data.courseInfo.selectionTwoCourseCnt.map(x => x.name).forEach(
+        data.courseInfo[0].selectionTwoCourseCnt.map(x => x.name).forEach(
           two => {
-            data.courseInfo.selectionThreeCourseCnt.forEach(
+            data.courseInfo[0].selectionThreeCourseCnt.forEach(
               three => {
                 let first = two.split("/")[0];
                 let second = two.split("/")[1];
@@ -276,6 +334,23 @@ export class CourseOverViewComponent implements OnInit {
         if (this.CourseSelectCntChart !== undefined) {
           this.CourseSelectCntChart.setOption(this.mCourseSelectCntOption);
         }
+
+        if (this.MaleCourseSelectRadarGraphChart !== undefined) {
+          this.MaleCourseSelectRadarGraphChart.setOption(this.mMaleCourseSelectRadarGraphOption);
+        }
+        if (this.MaleCourseSelectCntChart !== undefined) {
+          this.MaleCourseSelectCntChart.setOption(this.mMaleCourseSelectCntOption);
+        }
+
+        if (this.FeMaleCourseSelectRadarGraphChart !== undefined) {
+          this.FeMaleCourseSelectRadarGraphChart.setOption(this.mFeMaleCourseSelectRadarGraphOption);
+        }
+        if (this.FeMaleCourseSelectCntChart !== undefined) {
+          this.FeMaleCourseSelectCntChart.setOption(this.mFeMaleCourseSelectCntOption);
+        }
+
+
+
         if (this.CourseSelectTwoCntChart !== undefined) {
           this.CourseSelectTwoCntChart.setOption(this.mCourseSelectTwoCntOption);
         }

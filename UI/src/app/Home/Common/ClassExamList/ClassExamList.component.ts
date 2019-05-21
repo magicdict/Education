@@ -55,7 +55,8 @@ export class ClassExamListComponent implements OnChanges {
         { field: 'avgScore', header: "平均分" },
         { field: 'std', header: "标准差" },
         { field: 'var', header: "方差" },
-        { field: 'mid', header: "中位数" }
+        { field: 'mid', header: "中位数" },
+        { field: 'goodRate', header: "优良率" },
     ];
 
 

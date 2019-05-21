@@ -186,7 +186,7 @@ namespace Education.Controllers
         /// <summary>
         /// 七选三信息
         /// </summary>
-        public class Overview
+        public class PickCourseOverview
         {
             /// <summary>
             /// 符合标准人数
@@ -198,34 +198,40 @@ namespace Education.Controllers
             public List<NameValueSet> SelectionThreeCourseCnt { get; set; }
         }
 
-        /// <summary>
-        /// 使用五校联考
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("GetOverview")]
-        public ActionResult<Overview> GetOverview(string ExamType)
+        public ActionResult<List<PickCourseOverview>> GetOverview(string ExamType)
+        {
+            var rtn = new List<PickCourseOverview>();
+            rtn.Add(GetPickCourseOverview(Dataset.StudentList, ExamType));
+            rtn.Add(GetPickCourseOverview(Dataset.StudentList.Where(x => x.Sex == "男").ToList(), ExamType));
+            rtn.Add(GetPickCourseOverview(Dataset.StudentList.Where(x => x.Sex == "女").ToList(), ExamType));
+            return rtn;
+        }
+
+        public PickCourseOverview GetPickCourseOverview(List<Student> PickStudentList, string ExamType)
         {
             if (ExamType == "6")
             {
-                foreach (var item in Dataset.StudentList)
+                foreach (var item in PickStudentList)
                 {
                     item.OptionCourse = item.OptionCourse_FiveSchool;
                 }
             }
             else
             {
-                foreach (var item in Dataset.StudentList)
+                foreach (var item in PickStudentList)
                 {
                     item.OptionCourse = item.OptionCourse_TenSchool;
                 }
             }
 
 
-            var o = new Overview();
+            var o = new PickCourseOverview();
             o.selectionCourseCnt = new List<NameValueSet>();
             o.selectionTwoCourseCnt = new List<NameValueSet>();
             o.SelectionThreeCourseCnt = new List<NameValueSet>();
-            o.StudentCnt = Dataset.StudentList.Count(student => student.OptionCourse != null &&
+            o.StudentCnt = PickStudentList.Count(student => student.OptionCourse != null &&
                                                                 student.OptionCourse.Count == 3);
             var dicSingle = new Dictionary<string, int>();
             var dicDouble = new Dictionary<string, int>();
@@ -234,7 +240,9 @@ namespace Education.Controllers
             {
                 dicSingle.Add(item, 0);
             }
-            foreach (var student in Dataset.StudentList)
+
+
+            foreach (var student in PickStudentList)
             {
                 if (student.OptionCourse != null && student.OptionCourse.Count == 3)
                 {

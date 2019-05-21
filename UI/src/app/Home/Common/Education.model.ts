@@ -83,6 +83,7 @@ export interface IClassExam {
   std: number;
   var: number;
   mid: number;
+  goodRate: number;
 }
 
 export interface IExamList {
@@ -281,6 +282,7 @@ export interface ISchoolConsumptionInfo {
   weekTimeConsumptionLiveAtSchool: { name: string, value: number }[];
   weekTimeConsumptionNotLiveAtSchool: { name: string, value: number }[];
   perPriceRange: { name: string, value: number }[];
+  perDayByGrade: { name: string, value: number }[];
 }
 
 /**天气 */

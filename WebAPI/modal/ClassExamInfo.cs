@@ -149,5 +149,22 @@ public class ClassExamInfo
         }
     }
 
+    /// <summary>
+    /// 优秀率
+    /// </summary>
+    /// <value></value>
+    public double GoodRate
+    {
+        get
+        {
+            if (ChengjiList.Count == 0) return 0;
+            var Totalcnt = ChengjiList.Count(x => x.Score > 0);
+            if (Totalcnt == 0) return 0;
+            var GoodScore = ChengjiList.Where(x => x.Score > 0).First().FullScore * 0.8;
+            var GoodCnt = ChengjiList.Count(x => x.Score >= GoodScore);
+            return System.Math.Round((double)(GoodCnt * 100) / Totalcnt, 2);
+        }
+    }
+
 }
 
