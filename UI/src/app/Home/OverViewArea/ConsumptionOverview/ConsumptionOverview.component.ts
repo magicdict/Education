@@ -355,7 +355,7 @@ export class ConsumptionOverviewComponent implements OnInit {
           .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
 
         //三维图形
-        this.WeekTimeOption3D.series[0].data = data.consumptionInfo.weekTimeConsumption
+        this.WeekTimeOption3D.series[0].data = data.consumptionInfo.weekTimeConsumption.filter(x => x.value !== 0)
           .map(x => { return [Number.parseInt(x.name.split('-')[1]), Number.parseInt(x.name.split('-')[0]), x.value]; })
 
         this.PerRangeCntOption = {
@@ -398,7 +398,7 @@ export class ConsumptionOverviewComponent implements OnInit {
             },
             data: data.consumptionInfo.perPriceRange,
             type: 'pie',
-            radius: ['50%', '70%'],
+            radius: ['40%', '70%'],
           }]
         };
         this.PerRangeCntOption['grid'] = { left: 100 };
@@ -444,6 +444,16 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.IsShowToast = true;  //控制OnInit的时候不出现Toast
       }
     );
+  }
+
+
+  WeekTimeOption3DChartInstance:any;
+  onWeekTimeOption3DChartInit(event: any){
+    this.WeekTimeOption3DChartInstance = event;
+  }
+
+  SaveWeekTimeOption3DChartImage(){
+    CommonFunction.SaveChartImage(this.WeekTimeOption3DChartInstance,"时段周别统计（3D）")
   }
 
   onRowSelect(event: { data: IStudent; }) {

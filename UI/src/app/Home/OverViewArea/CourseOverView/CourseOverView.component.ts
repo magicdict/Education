@@ -6,6 +6,7 @@ import {
   CourseSelectCntOption, CourseSelectTwoCntOption, CourseSelectThreeCntOption,
   CourseSelectRadarGraphOption, SelectCourseSankeyOption
 } from '../../GraphOption/ScoreOption'
+import { ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
 
 @Component({
   templateUrl: 'CourseOverView.html',
@@ -83,25 +84,38 @@ export class CourseOverViewComponent implements OnInit {
       }
     },
     visualMap: {
-      max: 100,
+      max: 80,
       inRange: {
         color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
       },
       show: false
     },
-    series: [{
-      type: 'bar3D',
-      data: [],
-      shading: 'color',
-
-      label: {
-        formatter: '{c}'
+    series: [
+      {
+        type: 'bar3D',
+        data: [],
+        shading: 'color',
+        stack: "stack",
+        label: {
+          formatter: '{c}'
+        },
+        itemStyle: {
+          opacity: 0.8
+        }
       },
-
-      itemStyle: {
-        opacity: 0.4
-      },
-    }]
+      {
+        type: 'bar3D',
+        data: [],
+        shading: 'color',
+        stack: "stack",
+        label: {
+          formatter: '{c}'
+        },
+        itemStyle: {
+          opacity: 0.8
+        }
+      }
+    ]
   }
 
 
@@ -196,6 +210,15 @@ export class CourseOverViewComponent implements OnInit {
     this.CourseSelectTwoCnt3DChar = event;
   }
 
+
+  SaveTwoCourseOption3DImage(){
+    CommonFunction.SaveChartImage(this.CourseSelectTwoCnt3DChar,"两门课程选课人数（性别堆叠图）");
+  }
+
+  SaveThreeCourseOption3DImage(){
+    CommonFunction.SaveChartImage(this.CourseSelectThree3DChart,"三门课程选课人数");
+  }
+
   ngOnInit(): void {
     this.route.data
       .subscribe((data: { courseInfo: ICourse[] }) => {
@@ -232,7 +255,7 @@ export class CourseOverViewComponent implements OnInit {
             }
           },
           stack: '选课人数',
-          name:"男生",
+          name: "男生",
           data: data.courseInfo[1].selectionCourseCnt.map(x => x.value),
           type: 'bar'
         };
@@ -245,11 +268,11 @@ export class CourseOverViewComponent implements OnInit {
             }
           },
           stack: '选课人数',
-          name:"女生",
+          name: "女生",
           data: data.courseInfo[2].selectionCourseCnt.map(x => x.value),
           type: 'bar'
         }
-        this.mCourseSelectCntOption["legend"] = { show:true,data: ["男生", "女生"] };
+        this.mCourseSelectCntOption["legend"] = { show: true, data: ["男生", "女生"] };
 
         this.mCourseSelectRadarGraphOption.radar.indicator =
           data.courseInfo[0].selectionCourseCnt.map(x => { return { 'name': x.name, 'max': data.courseInfo[0].studentCnt } });
@@ -279,7 +302,8 @@ export class CourseOverViewComponent implements OnInit {
 
         let CombineData = [];
         let CombineDataPercent = [];
-        let Combine3D = [];
+        let Combine3DMale = [];
+        let Combine3DFeMale = [];
 
         for (let index = 0; index < 6; index++) {
           for (let index2 = 0; index2 < 6; index2++) {
@@ -290,13 +314,24 @@ export class CourseOverViewComponent implements OnInit {
             if (combine === undefined) {
               CombineData.push([index, index2, "-"]);
               CombineDataPercent.push([index, index2, "-"]);
-              Combine3D.push([Course1[index], Course2[index2], 0]);
             } else {
               CombineData.push([index, index2, combine.value]);
               CombineDataPercent.push([index, index2, CommonFunction.roundvalue(combine.value * 100 / data.courseInfo[0].studentCnt)]);
-              Combine3D.push([Course1[index], Course2[index2], combine.value]);
-
             }
+
+            let combinemale = data.courseInfo[1].selectionTwoCourseCnt.find(x => x.name == key)
+            let combinefemale = data.courseInfo[2].selectionTwoCourseCnt.find(x => x.name == key)
+            if (combinemale === undefined) {
+              //Combine3DMale.push([Course1[index], Course2[index2], 0]);
+            } else {
+              Combine3DMale.push([Course1[index], Course2[index2], combinemale.value]);
+            }
+            if (combinefemale === undefined) {
+              //Combine3DFeMale.push([Course1[index], Course2[index2], 0]);
+            } else {
+              Combine3DFeMale.push([Course1[index], Course2[index2], combinefemale.value]);
+            }
+
           }
         }
         this.mCourseSelectTwoCntOption.series[0].data = CombineData;
@@ -306,7 +341,8 @@ export class CourseOverViewComponent implements OnInit {
 
         this.mTwoCourseOption3D.xAxis3D.data = Course1;
         this.mTwoCourseOption3D.yAxis3D.data = Course2;
-        this.mTwoCourseOption3D.series[0].data = Combine3D;
+        this.mTwoCourseOption3D.series[0].data = Combine3DMale;
+        this.mTwoCourseOption3D.series[1].data = Combine3DFeMale;
 
         //三门课程
         data.courseInfo[0].selectionThreeCourseCnt.sort((x, y) => { return y.value - x.value; });

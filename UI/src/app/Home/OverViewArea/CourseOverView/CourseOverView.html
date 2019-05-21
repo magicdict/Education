@@ -57,7 +57,7 @@
                                     style="cursor: default;margin-left: 10px">
                                     {{x.name}}&nbsp;
                                     <span class="badge badge-light">{{x.value}}</span>
-                                </button>                           
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -72,8 +72,8 @@
                 </div>
                 <div class="col">
                     <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-                        <div echarts [options]="mMaleCourseSelectCntOption" (chartInit)="onMaleCourseSelectCntChartInit($event)"
-                            style="width:450px;"></div>
+                        <div echarts [options]="mMaleCourseSelectCntOption"
+                            (chartInit)="onMaleCourseSelectCntChartInit($event)" style="width:450px;"></div>
                     </div>
                 </div>
             </div>
@@ -110,11 +110,11 @@
                 </div>
                 <div class="col">
                     <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
-                        <div echarts [options]="mFeMaleCourseSelectCntOption" (chartInit)="onFeMaleCourseSelectCntChartInit($event)"
-                            style="width:450px;"></div>
+                        <div echarts [options]="mFeMaleCourseSelectCntOption"
+                            (chartInit)="onFeMaleCourseSelectCntChartInit($event)" style="width:450px;"></div>
                     </div>
                 </div>
-            </div>            
+            </div>
         </div>
     </p-tabPanel>
     <p-tabPanel header="两门课程" style="width:100%;">
@@ -138,10 +138,29 @@
                         style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
                 </div>
             </div>
+            <div class="row" style="padding: 5px;margin: 5px;">
+                <div class="alert alert-warning">
+                    通过堆叠可以看到不同组合对于男女生来说倾向性明显，历史/生物 组合女生高于男生，技术/物理组合男生高于女生
+                </div>
+            </div>
             <div class="row">
                 <div class="col">
-                    <div echarts [options]="mTwoCourseOption3D" (chartInit)="onCourseSelectTwoCnt3DChartInit($event)"
-                        style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
+                    <div class="box box-primary box-solid" style="width: 100%;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">两门课程选课人数（性别堆叠图）</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" (click)="SaveTwoCourseOption3DImage()">
+                                    <i class="fas fa-file-download"></i>保存为图片
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div echarts [options]="mTwoCourseOption3D"
+                                (chartInit)="onCourseSelectTwoCnt3DChartInit($event)"
+                                style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -162,8 +181,22 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <div echarts [options]="mThreeCourseOption3D" (chartInit)="onCourseSelectThree3DChartInit($event)"
-                        style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
+                    <div class="box box-primary box-solid" style="width: 100%;">
+                        <div class="box-header with-border"> 
+                            <h3 class="box-title">三门课程选课人数</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" (click)="SaveThreeCourseOption3DImage()">
+                                    <i class="fas fa-file-download"></i>保存为图片
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div echarts [options]="mThreeCourseOption3D"
+                                (chartInit)="onCourseSelectThree3DChartInit($event)"
+                                style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
