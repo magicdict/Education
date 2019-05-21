@@ -144,7 +144,7 @@ public class Chengji : IEqualityComparer<Chengji>
             //规则3:2018-1学期期中考试 语文150分
             if (Number == "000304")
             {
-                if (SubName == "语文") return 150;
+                if (SubName == "语文" && Grade == "高三") return 150;
             }
 
             return 100; //默认100;

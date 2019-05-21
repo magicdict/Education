@@ -113,8 +113,10 @@ export class CourseOverViewComponent implements OnInit {
   mCourseSelectCntOption = CommonFunction.clone(CourseSelectCntOption);
   mMaleCourseSelectCntOption = CommonFunction.clone(CourseSelectCntOption);
   mFeMaleCourseSelectCntOption = CommonFunction.clone(CourseSelectCntOption);
-  
-  SingleCoursePercent: { name: string, value: number }[];
+
+  SingleCoursePercent: { name: string, value: string }[];
+  MaleSingleCoursePercent: { name: string, value: string }[];
+  FeMaleSingleCoursePercent: { name: string, value: string }[];
 
   CourseSelectCntChart: any;
   onCourseSelectCntChartInit(event: any) {
@@ -202,7 +204,13 @@ export class CourseOverViewComponent implements OnInit {
         data.courseInfo[2].selectionCourseCnt.sort((x, y) => { return y.value - x.value; });
 
         this.SingleCoursePercent = data.courseInfo[0].selectionCourseCnt.map(x => {
-          return { 'name': x.name, 'value': CommonFunction.roundvalue(x.value * 100 / data.courseInfo[0].studentCnt) }
+          return { 'name': x.name, 'value': (x.value * 100 / data.courseInfo[0].studentCnt).toFixed(2) + "%" }
+        });
+        this.MaleSingleCoursePercent = data.courseInfo[1].selectionCourseCnt.map(x => {
+          return { 'name': x.name, 'value': (x.value * 100 / data.courseInfo[1].studentCnt).toFixed(2) + "%" }
+        });
+        this.FeMaleSingleCoursePercent = data.courseInfo[2].selectionCourseCnt.map(x => {
+          return { 'name': x.name, 'value': (x.value * 100 / data.courseInfo[2].studentCnt).toFixed(2) + "%" }
         });
 
 
@@ -216,7 +224,33 @@ export class CourseOverViewComponent implements OnInit {
 
 
         this.mCourseSelectCntOption.xAxis.data = data.courseInfo[0].selectionCourseCnt.map(x => x.name);
-        this.mCourseSelectCntOption.series[0].data = data.courseInfo[0].selectionCourseCnt.map(x => x.value);
+        this.mCourseSelectCntOption.series[0] = {
+          label: {
+            normal: {
+              show: true,
+              formatter: '{b}\n{c}'
+            }
+          },
+          stack: '选课人数',
+          name:"男生",
+          data: data.courseInfo[1].selectionCourseCnt.map(x => x.value),
+          type: 'bar'
+        };
+
+        this.mCourseSelectCntOption.series[1] = {
+          label: {
+            normal: {
+              show: true,
+              formatter: '{b}\n{c}'
+            }
+          },
+          stack: '选课人数',
+          name:"女生",
+          data: data.courseInfo[2].selectionCourseCnt.map(x => x.value),
+          type: 'bar'
+        }
+        this.mCourseSelectCntOption["legend"] = { show:true,data: ["男生", "女生"] };
+
         this.mCourseSelectRadarGraphOption.radar.indicator =
           data.courseInfo[0].selectionCourseCnt.map(x => { return { 'name': x.name, 'max': data.courseInfo[0].studentCnt } });
         this.mCourseSelectRadarGraphOption.series[0].data[0].value = data.courseInfo[0].selectionCourseCnt.map(x => x.value);

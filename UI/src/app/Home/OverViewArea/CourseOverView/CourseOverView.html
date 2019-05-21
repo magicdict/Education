@@ -4,26 +4,26 @@
     <p-tabPanel header="单门课程" style="width:1140px;">
         <div class="container" style="width:1140px;">
             <div class="row" style="padding: 5px;margin: 5px;">
+                <div class="alert alert-warning">
+                    选课人数最多和最少的课程，相差了3倍，课程有明显的热门和冷门。男生和女生的选课倾向也是不同的。
+                </div>
+            </div>
+            <div class="row" style="padding: 5px;margin: 5px;">
                 <div class="col">
                     <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
                         <div class="box-header with-border">
-                            <h3 class="box-title">单课程百分比</h3>
+                            <h3 class="box-title">单课程百分比(全体)</h3>
                         </div>
                         <div class="box-body">
                             <div style="margin: 5px 0px 5px 0px">
                                 <button *ngFor="let x of SingleCoursePercent" type="button" class="btn btn-info"
                                     style="cursor: default;margin-left: 10px">
                                     {{x.name}}&nbsp;
-                                    <span class="badge badge-light">{{x.value}}%</span>
+                                    <span class="badge badge-light">{{x.value}}</span>
                                 </button>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="alert alert-warning">
-                    选课人数最多和最少的课程，相差了3倍，课程有明显的热门和冷门。男生和女生的选课倾向也是不同的。
                 </div>
             </div>
             <div class="row" style="padding: 5px;margin: 5px;">
@@ -40,7 +40,29 @@
                     </div>
                 </div>
             </div>
-
+            <div class="row" style="padding: 5px;margin: 5px;">
+                <div class="alert alert-warning">
+                    选课人数最多和最少的课程，相差了8倍，物理基本上是男生最爱的课程。
+                </div>
+            </div>
+            <div class="row" style="padding: 5px;margin: 5px;">
+                <div class="col">
+                    <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">单课程百分比(男生)</h3>
+                        </div>
+                        <div class="box-body">
+                            <div style="margin: 5px 0px 5px 0px">
+                                <button *ngFor="let x of MaleSingleCoursePercent" type="button" class="btn btn-info"
+                                    style="cursor: default;margin-left: 10px">
+                                    {{x.name}}&nbsp;
+                                    <span class="badge badge-light">{{x.value}}</span>
+                                </button>                           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row" style="padding: 5px;margin: 5px;">
                 <div class="col">
                     <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
@@ -55,7 +77,30 @@
                     </div>
                 </div>
             </div>
+            <div class="row" style="padding: 5px;margin: 5px;">
+                <div class="alert alert-warning">
+                    选课人数最多和最少的课程，相差了3倍，相对男生来说比较平均。
+                </div>
+            </div>
+            <div class="row" style="padding: 5px;margin: 5px;">
+                <div class="col">
+                    <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">单课程百分比(女生)</h3>
+                        </div>
+                        <div class="box-body">
+                            <div style="margin: 5px 0px 5px 0px">
+                                <button *ngFor="let x of FeMaleSingleCoursePercent" type="button" class="btn btn-info"
+                                    style="cursor: default;margin-left: 10px">
+                                    {{x.name}}&nbsp;
+                                    <span class="badge badge-light">{{x.value}}</span>
+                                </button>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row" style="padding: 5px;margin: 5px;">
                 <div class="col">
                     <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">

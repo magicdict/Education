@@ -224,6 +224,8 @@ export const CourseSelectCntOption = {
   },
   series: [
     {
+      stack:'',
+      name:'',
       label: {
         normal: {
           show: true,

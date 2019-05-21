@@ -5,7 +5,7 @@ import { MonthlyCompumptionBarOption, MonthlyCompumptionBarOptionTotal, DairyCan
 import { HomeService } from '../../Common/Home.service';
 import { CommonFunction } from '../../Common/common';
 import { StudentPickerComponent } from '../../Common/studentPicker/studentPicker.component';
-import { ISimpleBar, ToolboxForBar } from '../../GraphOption/KaoqinOption';
+import { ISimpleBar, ToolboxForBar, ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
 import { MessageService } from 'primeng/api';
 @Component({
   templateUrl: 'ConsumptionOverview.html',
@@ -362,25 +362,47 @@ export class ConsumptionOverviewComponent implements OnInit {
           title: {
             text: '单笔消费金额'
           },
-          xAxis: {
-            type: 'category',
-            data: ["10元以下", "10-20元", "20元-50元", "50元以上"]
-          },
-          yAxis: {
-            type: 'value'
+          tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
           },
           series: [{
+            name: '单笔消费金额',
             label: {
               normal: {
-                show: true
+                formatter: '{b|{b}}{abg|}\n{hr|}\n {c}  {per|{d}%}  ',
+                backgroundColor: '#eee',
+                borderColor: '#aaa',
+                borderWidth: 1,
+                borderRadius: 4,
+                rich: {
+                  b: {
+                    color: '#999',
+                    lineHeight: 22,
+                    align: 'center'
+                  },
+                  hr: {
+                    borderColor: '#aaa',
+                    width: '100%',
+                    borderWidth: 0.5,
+                    height: 0
+                  },
+                  per: {
+                    color: '#eee',
+                    backgroundColor: '#334455',
+                    padding: [2, 4],
+                    borderRadius: 2
+                  }
+                }
               }
             },
-            data: data.consumptionInfo.perPriceRange.map(x => x.value),
-            type: 'bar'
+            data: data.consumptionInfo.perPriceRange,
+            type: 'pie',
+            radius: ['50%', '70%'],
           }]
         };
         this.PerRangeCntOption['grid'] = { left: 100 };
-        this.PerRangeCntOption.toolbox = ToolboxForBar;
+        this.PerRangeCntOption.toolbox = ToolboxSaveImageOnly;
 
         this.PerDayByGradeOption = {
           title: {
@@ -406,13 +428,13 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.PerDayByGradeOption['grid'] = { left: 100 };
         this.PerDayByGradeOption.toolbox = ToolboxForBar;
       });
-      
+
   }
 
   /**单笔消费金额统计 */
-  PerRangeCntOption: ISimpleBar;
+  PerRangeCntOption: any;
   /**年级别日均消费统计 */
-  PerDayByGradeOption:ISimpleBar;
+  PerDayByGradeOption: ISimpleBar;
 
   QueryByMonthUpLimit() {
     this.service.GetStudentWithMonthLimit(this.MonthUpLimit).then(

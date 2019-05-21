@@ -160,7 +160,19 @@ export const MonthlyCompumptionBarOptionTotal = {
                 }
             },
             data: [],
-            type: 'bar'
+            type: 'bar',
+            markPoint: {
+                data: [
+                  { type: 'max', name: '最大值' },
+                  { type: 'min', name: '最小值' }
+                ]
+              },
+              markLine: {
+                data: [
+                  { type: 'average', name: '平均值' }
+                ]
+              },
+        
         }
     ]
 };
