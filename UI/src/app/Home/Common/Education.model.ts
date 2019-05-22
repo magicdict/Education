@@ -203,6 +203,11 @@ export interface IKaoqin {
 export interface IKaoqinOverview {
   monthDict: { [key: string]: { name: string, value: number }[] };
   overviewDict: { [key: string]: { name: string, value: number } };
+  kaoqingTotal: { name: string, value: number }[];
+  kaoqingMale: { name: string, value: number }[];
+  kaoqingFeMale: { name: string, value: number }[];
+  kaoqingLiveAtSchool: { name: string, value: number }[];
+  kaoqingNotLiveAtSchool: { name: string, value: number }[];
 }
 
 export interface IPNRateItem {

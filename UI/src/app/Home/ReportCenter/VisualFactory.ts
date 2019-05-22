@@ -16,6 +16,10 @@ export class VisualFactoryComponent implements OnInit {
     }
     @Output() GotoNextPage = new EventEmitter();
     @Output() GotoPreviousPage = new EventEmitter();
+
+    Description1: string = "";
+    Description2: string = "";
+
     groupInfo1: IClassInfo;
     groupInfo2: IClassInfo;
     ChinaMax1 = 100;
@@ -44,17 +48,17 @@ export class VisualFactoryComponent implements OnInit {
         this.Graphoption1.legend.data = ["男", "女"];
         this.Graphoption1.series[0].data[0].value = this.groupInfo1.property.sexRate.posCnt;
         this.Graphoption1.series[0].data[1].value = this.groupInfo1.property.sexRate.negCnt;
-        
-        if (this.groupInfo2 !== null){
- 
+        this.Description1 = this.GetDescription(this.service.parmFirst, this.groupInfo1.property.studentCnt);
+        if (this.groupInfo2 !== null) {
+            this.Description2 = this.GetDescription(this.service.parmSecond, this.groupInfo2.property.studentCnt);
             m = this.groupInfo2.property.nativePlace.map(x => x.value);
             m = m.sort(CommonFunction.NumberSortMethod);
             this.ChinaMax2 = m[m.length - 1];
-    
+
             m = this.groupInfo2.property.nativePlaceZheJiang.map(x => x.value);
             m = m.sort(CommonFunction.NumberSortMethod);
             this.ZheJiangMax2 = m[m.length - 1];
-    
+
             this.Graphoption2 = CommonFunction.clone(SexRatePieOption);
             this.Graphoption2.title.text = this.GraphName;
             this.Graphoption2.title['show'] = false;
@@ -63,6 +67,37 @@ export class VisualFactoryComponent implements OnInit {
             this.Graphoption2.series[0].data[1].value = this.groupInfo2.property.sexRate.negCnt;
         }
 
+    }
+
+    GetDescription(parm: any, cnt: number): string {
+        let description = "";
+        if (parm.Sex !== "") {
+            description += "性别：" + parm.Sex + " ";
+        } else {
+            description += "性别：不限 ";
+        }
+        if (parm.IsNativeZhejiang !== "") {
+            if (parm.IsNativeZhejiang === "是") {
+                description += "出生地：浙江省 ";
+            } else {
+                description += "出生地：非浙江省 ";
+            }
+        } else {
+            description += "出生地：不限 ";
+        }
+        if (parm.IsLiveAtSchool !== "") {
+            description += "住校：" + parm.IsLiveAtSchool + " ";
+        } else {
+            description += "住校：不限 ";
+        }
+        if (parm.BornDate !== "") {
+            description += "出生年：" + parm.BornDate + " ";
+        } else {
+            description += "出生年：不限 ";
+        }
+        description += "班级数：" + parm.ClassIds.length;
+        description += " 人数：" + cnt;
+        return description;
     }
 
     GraphName = "";

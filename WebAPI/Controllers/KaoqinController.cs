@@ -12,6 +12,11 @@ namespace Education.Controllers
     {
         public Dictionary<string, NameValueSet> OverviewDict { get; set; }
         public Dictionary<string, List<NameValueSet>> MonthDict { get; set; }
+        public List<NameValueSet> KaoqingTotal { get; set; }
+        public List<NameValueSet> KaoqingMale { get; set; }
+        public List<NameValueSet> KaoqingFeMale { get; set; }
+        public List<NameValueSet> KaoqingLiveAtSchool { get; set; }
+        public List<NameValueSet> KaoqingNotLiveAtSchool { get; set; }
     }
 
     [Route("api/[controller]")]
@@ -86,6 +91,47 @@ namespace Education.Controllers
             }
             overviewInfo.OverviewDict = OverviewDict;
             overviewInfo.MonthDict = MonthDict;
+            overviewInfo.KaoqingTotal = new List<NameValueSet>();
+            overviewInfo.KaoqingMale = new List<NameValueSet>();
+            overviewInfo.KaoqingFeMale = new List<NameValueSet>();
+            overviewInfo.KaoqingLiveAtSchool = new List<NameValueSet>();
+            overviewInfo.KaoqingNotLiveAtSchool = new List<NameValueSet>();
+
+
+            var CurrentStudent = Dataset.KaoqinList.Where(x => x.Student != null);
+            foreach (var key in Dataset.KaoqinTypeDic2018.Keys)
+            {
+                overviewInfo.KaoqingTotal.Add(new NameValueSet()
+                {
+                    name = Dataset.KaoqinTypeDic[key].control_task_name,
+                    value = CurrentStudent.Count(x => x.DetailId == key)
+                });
+
+                overviewInfo.KaoqingMale.Add(new NameValueSet()
+                {
+                    name = Dataset.KaoqinTypeDic[key].control_task_name,
+                    value = CurrentStudent.Count(x => x.DetailId == key && x.Student.Sex == "男")
+                });
+
+                overviewInfo.KaoqingFeMale.Add(new NameValueSet()
+                {
+                    name = Dataset.KaoqinTypeDic[key].control_task_name,
+                    value = CurrentStudent.Count(x => x.DetailId == key && x.Student.Sex == "女")
+                });
+
+                overviewInfo.KaoqingLiveAtSchool.Add(new NameValueSet()
+                {
+                    name = Dataset.KaoqinTypeDic[key].control_task_name,
+                    value = CurrentStudent.Count(x => x.DetailId == key && x.Student.LiveAtSchool)
+                });
+
+                overviewInfo.KaoqingNotLiveAtSchool.Add(new NameValueSet()
+                {
+                    name = Dataset.KaoqinTypeDic[key].control_task_name,
+                    value = CurrentStudent.Count(x => x.DetailId == key && !x.Student.LiveAtSchool)
+                });
+            }
+
             KaoqinOverviewInfo = overviewInfo;
         }
 

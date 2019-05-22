@@ -21,6 +21,25 @@
             </div>
         </div>
     </p-tabPanel>
+    <p-tabPanel header="本学期学生" style="width:1140px;">
+        <div class="alert alert-warning" role="alert">
+            男生和女生在考勤上没有很大区别，住校生基本上不会发生迟到早退和校服问题。
+        </div>
+        <div class="row" style="margin-top:10px;">
+            <div class="col" style="padding: 0px;margin: 0px;">
+                <div style="border: 2px solid lightgray;padding: 0px;margin: 0px;width: 540px;">
+                    <div echarts [options]="SexCntOption" style="width:520px;height:400px;">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div style="border: 2px solid lightgray;padding: 0px;margin: 0px;width: 540px;">
+                    <div echarts [options]="LiveAtSchoolCntOption" style="width:520px;height:400px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p-tabPanel>
     <p-tabPanel header="迟到_晚到" style="width:1140px;">
         <div class="alert alert-warning" role="alert">
             迟到_晚到的数据到2016年4月为止

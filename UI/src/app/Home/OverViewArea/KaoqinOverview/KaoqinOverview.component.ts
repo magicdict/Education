@@ -4,6 +4,7 @@ import { ISunburstOption, ILeaf, IStackBarOption, IStack, ToolboxSaveImageOnly, 
 import { ActivatedRoute } from '@angular/router';
 import { IKaoqinOverview } from '../../Common/Education.model';
 import { CommonFunction } from '../../Common/common';
+import { MonthlyCompumptionBarOption } from '../../GraphOption/CompumptionOption';
 
 @Component({
     templateUrl: 'KaoqinOverview.html',
@@ -17,6 +18,8 @@ export class KaoqinOverviewComponent implements OnInit {
     Kaoqin99MonthOption: IStackBarOption;
     KaoqinAbnormalMonthOption: IStackBarOption;
     KaoqinDateList: { key: string, catalog: string, value: number }[] = [];
+    SexCntOption = CommonFunction.clone(MonthlyCompumptionBarOption);
+    LiveAtSchoolCntOption = CommonFunction.clone(MonthlyCompumptionBarOption);
 
     ngOnInit(): void {
         this.route.data
@@ -201,6 +204,21 @@ export class KaoqinOverviewComponent implements OnInit {
                     dataSet[code] = monthcnt;
                 });
                 this.KaoqinAbnormalMonthOption = this.CreateOption(NameArray, CodeArray, StackName, dataSet, Monthlist);
+
+                this.SexCntOption.title.text = "考勤性别比";
+                this.SexCntOption.legend.data = ["男","女"];
+                this.SexCntOption.xAxis.data = data.kaoqinInfo.kaoqingMale.map(x => x.name);
+                this.SexCntOption.series[0].data = data.kaoqinInfo.kaoqingMale;
+                this.SexCntOption.series[0].name = "男";
+                this.SexCntOption.series[1].data = data.kaoqinInfo.kaoqingFeMale;
+                this.SexCntOption.series[1].name = "女";
+
+                this.LiveAtSchoolCntOption.title.text = "考勤住校比";
+                this.LiveAtSchoolCntOption.legend.data = ["住校","非住校"];
+                this.LiveAtSchoolCntOption.xAxis.data = data.kaoqinInfo.kaoqingMale.map(x => x.name);
+                this.LiveAtSchoolCntOption.series[0].data = data.kaoqinInfo.kaoqingLiveAtSchool;
+                this.LiveAtSchoolCntOption.series[1].data = data.kaoqinInfo.kaoqingNotLiveAtSchool;
+
             });
     }
 

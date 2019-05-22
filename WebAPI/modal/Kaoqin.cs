@@ -75,10 +75,20 @@ public class Kaoqin
     }
 
 
+    public Student Student
+    {
+        get
+        {
+            if (Dataset.StudentList.Count(x => x.ID == StudentID) == 0) return null;
+            return Dataset.StudentList.Where(x => x.ID == StudentID).First();
+        }
+    }
+
     public DayOfWeek DayOfWeek { get; set; }
 
-    public Kaoqin(){
-        
+    public Kaoqin()
+    {
+
     }
 
     public Kaoqin(string RawData)

@@ -447,13 +447,13 @@ export class ConsumptionOverviewComponent implements OnInit {
   }
 
 
-  WeekTimeOption3DChartInstance:any;
-  onWeekTimeOption3DChartInit(event: any){
+  WeekTimeOption3DChartInstance: any;
+  onWeekTimeOption3DChartInit(event: any) {
     this.WeekTimeOption3DChartInstance = event;
   }
 
-  SaveWeekTimeOption3DChartImage(){
-    CommonFunction.SaveChartImage(this.WeekTimeOption3DChartInstance,"时段周别统计（3D）")
+  SaveWeekTimeOption3DChartImage() {
+    CommonFunction.SaveChartImage(this.WeekTimeOption3DChartInstance, "时段周别统计（3D）")
   }
 
   onRowSelect(event: { data: IStudent; }) {
