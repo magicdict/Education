@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IKaoqinOverview } from '../../Common/Education.model';
 import { CommonFunction } from '../../Common/common';
 import { MonthlyCompumptionBarOption } from '../../GraphOption/CompumptionOption';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
     templateUrl: 'KaoqinOverview.html',
@@ -206,7 +207,7 @@ export class KaoqinOverviewComponent implements OnInit {
                 this.KaoqinAbnormalMonthOption = this.CreateOption(NameArray, CodeArray, StackName, dataSet, Monthlist);
 
                 this.SexCntOption.title.text = "考勤性别比";
-                this.SexCntOption.legend.data = ["男","女"];
+                this.SexCntOption.legend.data = ["男", "女"];
                 this.SexCntOption.xAxis.data = data.kaoqinInfo.kaoqingMale.map(x => x.name);
                 this.SexCntOption.series[0].data = data.kaoqinInfo.kaoqingMale;
                 this.SexCntOption.series[0].name = "男";
@@ -214,11 +215,65 @@ export class KaoqinOverviewComponent implements OnInit {
                 this.SexCntOption.series[1].name = "女";
 
                 this.LiveAtSchoolCntOption.title.text = "考勤住校比";
-                this.LiveAtSchoolCntOption.legend.data = ["住校","非住校"];
+                this.LiveAtSchoolCntOption.legend.data = ["住校", "非住校"];
                 this.LiveAtSchoolCntOption.xAxis.data = data.kaoqinInfo.kaoqingMale.map(x => x.name);
                 this.LiveAtSchoolCntOption.series[0].data = data.kaoqinInfo.kaoqingLiveAtSchool;
                 this.LiveAtSchoolCntOption.series[1].data = data.kaoqinInfo.kaoqingNotLiveAtSchool;
 
+
+                //TimeLine设定 201401 - 201901
+                var TimeLineMonthArray = [];
+                for (const key in data.kaoqinInfo.monthDict) {
+                    if (data.kaoqinInfo.monthDict.hasOwnProperty(key)) {
+                        const element = data.kaoqinInfo.monthDict[key];
+                        element.forEach(
+                            r => {
+                                if (TimeLineMonthArray.indexOf(r.name) === -1) {
+                                    TimeLineMonthArray.push(r.name);
+                                }
+                            }
+                        )
+                    }
+                }
+                this.TimeLineOption.baseOption.timeline.data = TimeLineMonthArray;
+
+                //数据准备
+                TimeLineMonthArray.forEach(
+                    Month => {
+                        let xAxis = [];
+                        let series = [];
+
+                        for (const key in data.kaoqinInfo.monthDict) {
+                            if (data.kaoqinInfo.monthDict.hasOwnProperty(key)) {
+                                const element = data.kaoqinInfo.monthDict[key];
+                                element.forEach(
+                                    r => {
+                                        if (r.value !== 0 && r.name == Month) {
+                                            xAxis.push(data.kaoqinInfo.overviewDict[key].name);
+                                            series.push(r.value);
+                                        }
+                                    }
+                                )
+                            }
+                        }
+
+
+                        let opt = {
+                            title: {
+                                text: '考勤历史数据 ' + Month,
+                                show: true
+                            },
+                            xAxis: {
+                                data: xAxis
+                            },
+                            series: {
+                                type: 'bar',
+                                data: series,
+                            }
+                        }
+                        this.TimeLineOption.options.push(opt);
+                    }
+                );
             });
     }
 
@@ -287,4 +342,95 @@ export class KaoqinOverviewComponent implements OnInit {
         private route: ActivatedRoute,
         public service: HomeService
     ) { }
+
+
+    TimeLineOption = {
+        baseOption: {
+            timeline: {
+                axisType: 'category',
+                orient: 'vertical',
+                autoPlay: true,
+                inverse: true,
+                playInterval: 2000,
+                left: null,
+                right: 0,
+                top: 20,
+                bottom: 20,
+                width: 55,
+                height: null,
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: '#999'
+                        }
+                    },
+                    emphasis: {
+                        textStyle: {
+                            color: '#fff'
+                        }
+                    }
+                },
+                symbol: 'none',
+                lineStyle: {
+                    color: '#555'
+                },
+                checkpointStyle: {
+                    color: '#bbb',
+                    borderColor: '#777',
+                    borderWidth: 2
+                },
+                controlStyle: {
+                    showNextBtn: false,
+                    showPrevBtn: false,
+                    normal: {
+                        color: '#666',
+                        borderColor: '#666'
+                    },
+                    emphasis: {
+                        color: '#aaa',
+                        borderColor: '#aaa'
+                    }
+                },
+                data: []
+            },
+
+            title:
+            {
+                text: '考勤历史数据',
+                left: 'center',
+                top: 10,
+                textStyle: {
+                    color: '#aaa',
+                    fontWeight: 'normal',
+                    fontSize: 20
+                }
+            },
+            grid: {
+                top: 100,
+                containLabel: true,
+                left: 30,
+                right: '110'
+            },
+            xAxis: {
+                type: 'category',
+                name: '类型',
+            },
+            yAxis: {
+                type: 'value',
+                name: '次数',
+            },
+            series: [
+                {
+                    type: 'bar',
+                    data: [],
+                }
+            ],
+            animationDurationUpdate: 1000,
+            animationEasingUpdate: 'quinticInOut'
+        },
+        options: [
+        ]
+    };
+
+
 } 

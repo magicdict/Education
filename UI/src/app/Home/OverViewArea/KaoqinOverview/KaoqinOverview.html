@@ -40,6 +40,13 @@
             </div>
         </div>
     </p-tabPanel>
+    <p-tabPanel header="考勤历史时间轴" style="width:1140px;">
+        <div class="alert alert-warning" role="alert">
+            每个月考勤数据变化
+        </div>
+        <div echarts [options]="TimeLineOption" style="width:1080px;height:800px;"></div>
+    </p-tabPanel>
+
     <p-tabPanel header="迟到_晚到" style="width:1140px;">
         <div class="alert alert-warning" role="alert">
             迟到_晚到的数据到2016年4月为止
