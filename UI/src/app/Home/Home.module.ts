@@ -67,6 +67,7 @@ import { FullTeacherComponent } from './OverViewArea/SchoolOverView/TeacherFullG
 import { ReportCenterComponent } from './ReportCenter/ReportCenter';
 import { DataFilterComponent } from './ReportCenter/DataFilter';
 import { VisualFactoryComponent } from './ReportCenter/VisualFactory';
+import { DataViewComponent } from './ReportCenter/DataView';
 
 
 @NgModule({
@@ -96,6 +97,7 @@ import { VisualFactoryComponent } from './ReportCenter/VisualFactory';
     ReportCenterComponent,
     DataFilterComponent,
     VisualFactoryComponent,
+    DataViewComponent,
     //共通
     NavigationComponent,
     ErrorMessageDialogComponent,

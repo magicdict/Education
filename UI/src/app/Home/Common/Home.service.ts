@@ -71,5 +71,8 @@ export class HomeService {
     CurrentClassExam: IClassExam;
 
     /** 报表中心用过滤器 */
+    parmFirst: any = {};
+    parmSecond: any = {};
     FilterDataClassInfo: IClassInfo;
+    FilterDataClassInfo_2: IClassInfo;
 }

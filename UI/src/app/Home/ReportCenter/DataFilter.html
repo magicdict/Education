@@ -1,8 +1,11 @@
 <div style="width: 100%;height: 600px;background: white;">
     <div class="container" style="padding: 10px 10px">
         <div class="row">
-            <div class="col-5">
+            <div class="col-6">
                 <div class="container">
+                    <div class="row">
+                        <h4>比较对象1</h4>
+                    </div>
                     <div class="row">
                         <div class="col">
                             <b>高一班级选择:</b><br />
@@ -15,14 +18,14 @@
                             <b> 高二班级选择:</b><br />
                             <p-listbox [options]="FullClassTwo" [(ngModel)]="SelectClassGradeTwo" multiple="multiple"
                                 checkbox="checkbox" optionLabel="label" [listStyle]="{'max-height':'360px'}"
-                                [style]="{'height':'400px','width':'110px'}">
+                                [style]="{'height':'400px','width':'130px'}">
                             </p-listbox>
                         </div>
                         <div class="col">
                             <b>高三班级选择:</b><br />
                             <p-listbox [options]="FullClassThree" [(ngModel)]="SelectClassGradeThree"
                                 multiple="multiple" checkbox="checkbox" optionLabel="label"
-                                [listStyle]="{'max-height':'360px'}" [style]="{'height':'400px','width':'110px'}">
+                                [listStyle]="{'max-height':'360px'}" [style]="{'height':'400px','width':'130px'}">
                             </p-listbox>
                         </div>
                     </div>
@@ -56,80 +59,69 @@
                     </div>
                 </div>
             </div>
-            <div class="col-7">
-                <div style="width: 100%;height: 300px;background: white;">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <table-function [Table]="dt" [FrameStyle]="{'float':'right'}"></table-function>
-                            </div>
+            <div class="col-6">
+                <div class="container">
+                    <div class="row">
+                        <h4>比较对象2</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <b>高一班级选择:</b><br />
+                            <p-listbox [options]="FullClassOne" [(ngModel)]="SelectClassGradeOne_2" multiple="multiple"
+                                checkbox="checkbox" optionLabel="label" [listStyle]="{'max-height':'360px'}"
+                                [style]="{'height':'400px','width':'130px'}">
+                            </p-listbox>
+                        </div>
+                        <div class="col">
+                            <b> 高二班级选择:</b><br />
+                            <p-listbox [options]="FullClassTwo" [(ngModel)]="SelectClassGradeTwo_2" multiple="multiple"
+                                checkbox="checkbox" optionLabel="label" [listStyle]="{'max-height':'360px'}"
+                                [style]="{'height':'400px','width':'130px'}">
+                            </p-listbox>
+                        </div>
+                        <div class="col">
+                            <b>高三班级选择:</b><br />
+                            <p-listbox [options]="FullClassThree" [(ngModel)]="SelectClassGradeThree_2"
+                                multiple="multiple" checkbox="checkbox" optionLabel="label"
+                                [listStyle]="{'max-height':'360px'}" [style]="{'height':'400px','width':'130px'}">
+                            </p-listbox>
                         </div>
                     </div>
-                    <b>符合条件学生人数:{{FilterResult.length}}</b>
-                    <p-table #dt [columns]="cols" [value]="FilterResult" [paginator]="true" [rows]="15"
-                        selectionMode="multiple" [style]="{'width':'100%'}" [exportFilename]="'学生列表'">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th [pSortableColumn]="'id'" style="width: 40px">
-                                    学号
-                                    <p-sortIcon [field]="'id'">
-                                    </p-sortIcon>
-                                </th>
-                                <th [pSortableColumn]="'name'" style="width: 60px">
-                                    姓名
-                                    <p-sortIcon [field]="'name'">
-                                    </p-sortIcon>
-                                </th>
-                                <th [pSortableColumn]="'sex'" style="width: 40px">
-                                    性别
-                                    <p-sortIcon [field]="'sex'">
-                                    </p-sortIcon>
-                                </th>
-                                <th [pSortableColumn]="'bornDate'" style="width: 60px">
-                                    出生年
-                                    <p-sortIcon [field]="'bornDate'">
-                                    </p-sortIcon>
-                                </th>
-                                <th [pSortableColumn]="'policy'" style="width: 80px">
-                                    政治面貌
-                                    <p-sortIcon [field]="'policy'">
-                                    </p-sortIcon>
-                                </th>
-                                <th [pSortableColumn]="'nation'" style="width: 50px">
-                                    民族
-                                    <p-sortIcon [field]="'nation'">
-                                    </p-sortIcon>
-                                </th>
-                                <th [pSortableColumn]="'nativePlace'" style="width: 100px">
-                                    出生地
-                                    <p-sortIcon [field]="'nativePlace'">
-                                    </p-sortIcon>
-                                </th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-itemData>
-                            <tr [pSelectableRow]="itemData">
-                                <td style="width: 40px">{{itemData.id}}</td>
-                                <td style="width: 60px">{{itemData.name}}</td>
-                                <td style="width: 40px">{{itemData.sex}}</td>
-                                <td style="width: 60px">{{itemData.bornDate}}</td>
-                                <td style="width: 80px">{{itemData.policy}}</td>
-                                <td style="width: 50px">{{itemData.nation}}</td>
-                                <td style="width: 100px">{{itemData.nativePlace}}</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
+                    <div class="row" style="margin-top:10px">
+                        <div class="col">
+                            <b>性别选择:&nbsp;&nbsp;</b>
+                            <p-selectButton [options]="Sexs" [(ngModel)]="selectedSex_2">
+                            </p-selectButton>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:10px">
+                        <div class="col">
+                            <b>住校: &nbsp;&nbsp;</b>
+                            <p-selectButton [options]="LiveAtSchool" [(ngModel)]="IsLiveAtSchool_2">
+                            </p-selectButton>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:10px">
+                        <div class="col">
+                            <b>出生地: &nbsp;&nbsp;</b>
+                            <p-selectButton [options]="NativeZhejiang" [(ngModel)]="IsNativeZhejiang_2">
+                            </p-selectButton>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:10px">
+                        <div class="col">
+                            <b>出生年: &nbsp;&nbsp;</b>
+                            <p-selectButton [options]="BornDateYears" [(ngModel)]="BornDate_2">
+                            </p-selectButton>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div style="width: 100%;height: 80px;background: white;">
-    <button class="btn btn-lg btn-info" (click)="GoToVisualFactory()"
-        style="float: right;margin-top: 20px;margin-right: 20px;">
-        <i class="fas fa-arrow-right"></i>&nbsp;可视化</button>
-    <button class="btn btn-lg btn-info" (click)="RunSearch()" style="float: left;margin-top: 20px;margin-left: 20px;">
+    <button class="btn btn-lg btn-info" (click)="RunSearch()" style="float: right;margin-top: 20px;margin-left: 20px;">
         <i class="fa fa-search"></i>&nbsp;检索</button>
 </div>
 <app-error-message-dialog></app-error-message-dialog>
-<p-toast position="bottom-center"></p-toast>

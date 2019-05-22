@@ -1,23 +1,38 @@
 <div style="width: 100%;height: 600px;background: white;">
     <div class="container">
+        <div class="row" style="padding: 10px;">
+            <b>图表类型：</b>
+            <p-dropdown (onChange)="GraphTypeChanged()" [options]="GraphTypeList" [(ngModel)]="SelectGraphType"
+                [style]="{'width':'150px'}"></p-dropdown>
+        </div>
         <div class="row">
-            <div class="col-5" style="padding-top:10px">
-                <app-map [NativePlaceZheJiang]="groupInfo.property.nativePlaceZheJiang"
-                    [NativePlace]="groupInfo.property.nativePlace" [StyleHeight]="'380px'" [StyleWidth]="'400px'"
-                    [ViusalZheJiangMax]="ZheJiangMax" [ViusalChinaMax]="ChinaMax">
+            <div class="col-6" style="padding-top:10px">
+                <app-map *ngIf="IsShowMap" [NativePlaceZheJiang]="groupInfo1.property.nativePlaceZheJiang"
+                    [NativePlace]="groupInfo1.property.nativePlace" [StyleHeight]="'335px'" [StyleWidth]="'400px'"
+                    [ViusalZheJiangMax]="ZheJiangMax1" [ViusalChinaMax]="ChinaMax1">
                 </app-map>
-            </div>
-            <div class="col-7" style="padding-top:10px">
-                <b>图表类型：</b>
-                <p-dropdown (onChange)="GraphTypeChanged()" [options]="GraphTypeList" [(ngModel)]="SelectGraphType"
-                    [style]="{'width':'150px'}"></p-dropdown>
-                <br /><br />
-                <div class="box box-primary  box-solid" style="width: 100%;">
+                <div *ngIf="!IsShowMap" class="box box-primary  box-solid" style="width: 100%;">
                     <div class="box-header with-border">
                         <h3 class="box-title">{{GraphName}}</h3>
                     </div>
                     <div class="box-body">
-                        <div echarts (chartInit)="onChartInit($event)" [options]="Graphoption"
+                        <div echarts (chartInit)="onChartInit($event)" [options]="Graphoption1"
+                            style="width:100%;height:450px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6" style="padding-top:10px" *ngIf="groupInfo2 !== null">
+                <app-map *ngIf="IsShowMap" [NativePlaceZheJiang]="groupInfo2.property.nativePlaceZheJiang"
+                    [NativePlace]="groupInfo2.property.nativePlace" [StyleHeight]="'335px'" [StyleWidth]="'400px'"
+                    [ViusalZheJiangMax]="ZheJiangMax2" [ViusalChinaMax]="ChinaMax2">
+                </app-map>
+                <div *ngIf="!IsShowMap" class="box box-primary  box-solid" style="width: 100%;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{GraphName}}</h3>
+                    </div>
+                    <div class="box-body">
+                        <div echarts (chartInit)="onChart2Init($event)" [options]="Graphoption2"
                             style="width:100%;height:450px;">
                         </div>
                     </div>
