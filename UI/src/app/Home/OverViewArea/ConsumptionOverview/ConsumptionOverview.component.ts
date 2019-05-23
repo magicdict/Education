@@ -408,6 +408,7 @@ export class ConsumptionOverviewComponent implements OnInit {
           title: {
             text: '年级别日均消费'
           },
+          tooltip:{},
           xAxis: {
             type: 'category',
             data: ["高一", "高二", "高三"]

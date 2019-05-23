@@ -96,7 +96,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
         this.mSexRate.series[0].label.normal['formatter'] = param => (param.value).toFixed(2) + '%';
         if (this.SexRateEchartsInstance !== undefined) {
           this.SexRateEchartsInstance.clear();  //不写的话label居然不更新
-          this.SexRateEchartsInstance.setOption(this.mSexRate,true);
+          this.SexRateEchartsInstance.setOption(this.mSexRate, true);
         }
         //console.log(this.mSexRate);
         this.Teachers = data.classinfo.teachers;
@@ -132,6 +132,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
               type: 'category',
               data: data.classinfo.kaoqing.map(x => x.name)
             },
+            tooltip: {},
             title: {
               text: this.ClassName + "考勤统计"
             },

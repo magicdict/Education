@@ -214,6 +214,7 @@ export const CourseSelectCntOption = {
   title: {
     text: '高考七选三(单科)',
   },
+  tooltip:{},
   toolbox: ToolboxForBar,
   xAxis: {
     type: 'category',

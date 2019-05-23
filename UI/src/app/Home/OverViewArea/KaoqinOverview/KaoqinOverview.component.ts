@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { IKaoqinOverview } from '../../Common/Education.model';
 import { CommonFunction } from '../../Common/common';
 import { MonthlyCompumptionBarOption } from '../../GraphOption/CompumptionOption';
-import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
     templateUrl: 'KaoqinOverview.html',
@@ -142,6 +141,7 @@ export class KaoqinOverviewComponent implements OnInit {
                 leaf.children.push(leaf_9);
 
                 this.KaoqinOption = {
+                    tooltip:{},
                     toolbox: CommonFunction.clone(ToolboxSaveImageOnly),
                     title: { text: "考勤次数", left: 10 },
                     label: { formatter: "{b}\n{c}" },

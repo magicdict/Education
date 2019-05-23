@@ -154,6 +154,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         title: {
             text: 'TOP50各班级排名分布情况',
         },
+        tooltip:{},
         xAxis: {
             type: 'category',
             data: [],

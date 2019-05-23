@@ -64,12 +64,22 @@ export class SchoolOverViewComponent implements OnInit {
         let subnamelist = [];
         let subcnt = [];
         for (const key in this.schoolinfo.total.teacherSubCnt) {
-          if (key == "通用技术") {
-            subnamelist.push('技术');   //单引号.. 保持图标X轴显示完整
-          } else {
-            subnamelist.push(key);
+          switch (key) {
+            case "通用技术":
+              subnamelist.push('技术'); //替换
+              break;
+            case "英语2":
+              break;                    //不计算
+            default:
+              subnamelist.push(key);
+              break;
           }
-          subcnt.push(this.schoolinfo.total.teacherSubCnt[key]);
+          if (key === "英语") {
+            //英语和英语2一起计算
+            subcnt.push(this.schoolinfo.total.teacherSubCnt['英语'] + this.schoolinfo.total.teacherSubCnt['英语2']);
+          } else {
+            if (key !== "英语2") subcnt.push(this.schoolinfo.total.teacherSubCnt[key]);
+          }
         }
 
         this.mTeacherSub = {

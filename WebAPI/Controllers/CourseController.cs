@@ -121,13 +121,14 @@ namespace Education.Controllers
             Result.GradeInfo = new ClassExamInfo(All);
             All = All.Where(x => x.Score > 0).ToList();
             //获得前10名和后10名
-            var topx = Math.Min(All.Count(), 10);
             All.Sort((x, y) => { return y.Score.CompareTo(x.Score); });  //降序
+            var topx = Math.Min(All.Count(), 10);
             var Top10 = All.Take(topx).ToList();
             topx = Math.Min(All.Count(), 50);
             var Top50 = All.Take(topx).ToList();
 
             All.Sort((x, y) => { return x.Score.CompareTo(y.Score); });  //升序
+            topx = Math.Min(All.Count(), 10);
             var Low10 = All.Take(topx).ToList();
 
             Result.ClassExamInfoList = r;

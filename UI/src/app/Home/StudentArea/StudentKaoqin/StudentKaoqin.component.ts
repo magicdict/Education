@@ -47,6 +47,7 @@ export class StudentKaoqinComponent implements OnInit {
             title: {
                 text: '考勤统计'
             },
+            tooltip: {},
             toolbox: ToolboxForBar,
             xAxis: {
                 type: 'category',

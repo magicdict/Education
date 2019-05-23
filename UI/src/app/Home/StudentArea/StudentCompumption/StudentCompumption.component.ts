@@ -43,7 +43,7 @@ export class StudentCompumptionComponent implements OnInit {
         this.GetPerRangeCnt();
     }
     ConvertNumberToWeekday = CommonFunction.ConvertNumberToWeekday;
-    Compumptions:IConsumption[] = [];
+    Compumptions: IConsumption[] = [];
 
     mDiaryAvgByTimeRangeOpt = CommonFunction.clone(DiaryAvgByTimeRangeOption);
     mTotalByTimeRangeOpt = CommonFunction.clone(TotalByTimeRangeOption);
@@ -183,7 +183,8 @@ export class StudentCompumptionComponent implements OnInit {
             title: {
                 text: '周别消费总金额'
             },
-            toolbox:ToolboxForBar,
+            tooltip: {},
+            toolbox: ToolboxForBar,
             xAxis: {
                 type: 'category',
                 data: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"]
@@ -223,7 +224,8 @@ export class StudentCompumptionComponent implements OnInit {
             title: {
                 text: '单笔消费金额'
             },
-            toolbox:ToolboxForBar,
+            tooltip: {},
+            toolbox: ToolboxForBar,
             xAxis: {
                 type: 'category',
                 data: ["10元以下", "10-20元", "20元-50元", "50元以上"]

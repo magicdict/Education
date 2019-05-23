@@ -124,7 +124,7 @@ public class Chengji : IEqualityComparer<Chengji>
             if (SubId == "99") return _fullscore;  //总分的情况,直接从私有变量拿值
             if (SubId == "98") return _fullscore;  //7选3的情况,直接从私有变量拿值
             //规则1：平时分数应该是15分
-            if (Type == "4")
+            if (Type == "4" || Type == "22")
             {
                 //特殊情况
                 if (Id == "137971" || Id == "137972") return 20;
