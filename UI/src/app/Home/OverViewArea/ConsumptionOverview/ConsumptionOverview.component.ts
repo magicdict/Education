@@ -30,6 +30,7 @@ export class ConsumptionOverviewComponent implements OnInit {
   ];
 
   dailyOpt = CommonFunction.clone(DairyCanlendarOption);
+  dailycntOpt = CommonFunction.clone(DairyCanlendarOption);
   monthlyOpt = CommonFunction.clone(MonthlyCompumptionBarOption);
   weekdayOpt = CommonFunction.clone(MonthlyCompumptionBarOption);
 
@@ -57,9 +58,7 @@ export class ConsumptionOverviewComponent implements OnInit {
   public Students: IStudentMonthlyConsumption[] = [];
   public selectStudent: IStudentMonthlyConsumption;
 
-  symbolSize(val: any[]) {
-    return val[1] / 2500;
-  }
+
 
   hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
     '7a', '8a', '9a', '10a', '11a',
@@ -299,13 +298,28 @@ export class ConsumptionOverviewComponent implements OnInit {
   }
 
 
+  symbolSize(val: any[]) {
+    return val[1] / 2500;
+  }
+
+  symbolSizeCnt(val: any[]) {
+    return val[1] / 100;
+  }
+
   ngOnInit(): void {
     this.route.data
       .subscribe((data: { consumptionInfo: ISchoolConsumptionInfo }) => {
+        this.dailyOpt.visualMap[0].max = 50000;
         this.dailyOpt.series[0].symbolSize = this.symbolSize;
         this.dailyOpt.series[1].symbolSize = this.symbolSize;
         this.dailyOpt.series[0].data = data.consumptionInfo.dailyConsumption.map(x => { return [x.name, x.value * -1]; });
         this.dailyOpt.series[1].data = data.consumptionInfo.dailyConsumption.map(x => { return [x.name, x.value * -1]; });
+
+        this.dailycntOpt.visualMap[0].max = 1700;
+        this.dailycntOpt.series[0].symbolSize = this.symbolSizeCnt;
+        this.dailycntOpt.series[1].symbolSize = this.symbolSizeCnt;
+        this.dailycntOpt.series[0].data = data.consumptionInfo.dailyConsumptionStudentCnt.map(x => { return [x.name, x.value ]; });
+        this.dailycntOpt.series[1].data = data.consumptionInfo.dailyConsumptionStudentCnt.map(x => { return [x.name, x.value ]; });        
 
         this.monthlyTotalOpt.title.text = "整体月消费金额";
         this.monthlyTotalOpt.xAxis.data = data.consumptionInfo.monthlyConsumption.map(x => x.name);

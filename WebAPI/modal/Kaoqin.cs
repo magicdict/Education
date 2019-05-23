@@ -29,6 +29,7 @@ public class Kaoqin
 
     public string RecDateTimeHour { get; set; }
 
+    public string RecDateTimeMinute { get; set; }
 
     /// <summary>
     /// 对应考勤类型表里的ControllerID
@@ -101,6 +102,8 @@ public class Kaoqin
         RecDateTimeMonth = RecDateTime.Split(" ")[0].Split("/")[1];
         RecDateTimeDay = RecDateTime.Split(" ")[0].Split("/")[2];
         RecDateTimeHour = RecDateTime.Split(" ")[1].Split(":")[0];
+        RecDateTimeMinute = RecDateTime.Split(" ")[1].Split(":")[1];
+
         ControllerID = Items[3];
         ControllerName = Items[4];
         DetailId = Items[5];

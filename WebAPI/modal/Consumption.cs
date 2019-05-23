@@ -31,6 +31,8 @@ public class Consumption
     public string DealTimeMonth { get; set; }
     public string DealTimeDay { get; set; }
     public string DealTimeHour { get; set; }
+    public string DealTimeMinute { get; set; }
+
     public string DealYearMonth
     {
         get
@@ -90,6 +92,7 @@ public class Consumption
         DealTimeMonth = DealTime.Split(" ")[0].Split("/")[1];
         DealTimeDay = DealTime.Split(" ")[0].Split("/")[2];
         DealTimeHour = DealTime.Split(" ")[1].Split(":")[0];
+        DealTimeMinute = DealTime.Split(" ")[1].Split(":")[1];
         MonDeal = Single.Parse(Items[1]);
         StudentID = Items[2];
         AccName = Items[3];

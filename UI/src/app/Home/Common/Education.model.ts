@@ -208,6 +208,8 @@ export interface IKaoqinOverview {
   kaoqingFeMale: { name: string, value: number }[];
   kaoqingLiveAtSchool: { name: string, value: number }[];
   kaoqingNotLiveAtSchool: { name: string, value: number }[];
+  timePolar0099001: { name: string, value: number }[];
+  minuteList:string[];
 }
 
 export interface IPNRateItem {
@@ -278,6 +280,7 @@ export interface ISchoolConsumptionInfo {
   weekDayConsumptionLiveAtSchool: { name: string, value: number }[];
   weekDayConsumptionNotLiveAtSchool: { name: string, value: number }[];
   dailyConsumption: { name: string, value: number }[];
+  dailyConsumptionStudentCnt: { name: string, value: number }[];
   highestRec: IConsumption[];
   highestRecLiveAtSchool: IConsumption[];
   highestRecNotLiveAtSchool: IConsumption[];

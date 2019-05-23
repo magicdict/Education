@@ -17,6 +17,16 @@ namespace Education.Controllers
         public List<NameValueSet> KaoqingFeMale { get; set; }
         public List<NameValueSet> KaoqingLiveAtSchool { get; set; }
         public List<NameValueSet> KaoqingNotLiveAtSchool { get; set; }
+
+        //按照时间进行堆叠
+        public List<NameValueSet> TimePolar0099001 { get; set; }
+        public List<NameValueSet> TimePolar0099002 { get; set; }
+        public List<NameValueSet> TimePolar0099003 { get; set; }
+        public List<NameValueSet> TimePolar0099004 { get; set; }
+        public List<NameValueSet> TimePolar0099005 { get; set; }
+
+        public List<string> MinuteList = new List<string>();
+
     }
 
     [Route("api/[controller]")]
@@ -131,7 +141,16 @@ namespace Education.Controllers
                     value = CurrentStudent.Count(x => x.DetailId == key && !x.Student.LiveAtSchool)
                 });
             }
-
+            overviewInfo.MinuteList = new List<string>();
+            for (int hour = 0; hour < 24; hour++)
+            {
+                for (int minute = 0; minute < 60; minute++)
+                {
+                    var hh = hour.ToString("D2");
+                    var mm = minute.ToString("D2");
+                    overviewInfo.MinuteList.Add(hh + ":" + mm);
+                }
+            }
             KaoqinOverviewInfo = overviewInfo;
         }
 

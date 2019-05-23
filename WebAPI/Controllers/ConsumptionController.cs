@@ -66,11 +66,20 @@ namespace Education.Controllers
 
             public int NotLiveAtSchoolCnt { set; get; }
             /// <summary>
-            /// 每日消费
+            /// 每日消费金额
             /// </summary>
             /// <typeparam name="NameValueSet"></typeparam>
             /// <returns></returns>
             public List<NameValueSet> DailyConsumption = new List<NameValueSet>();
+
+            /// <summary>
+            /// 每日消费人数
+            /// </summary>
+            /// <typeparam name="NameValueSet"></typeparam>
+            /// <returns></returns>
+            public List<NameValueSet> DailyConsumptionStudentCnt = new List<NameValueSet>();
+
+
             /// <summary>
             /// 周次时间统计
             /// </summary>
@@ -221,6 +230,13 @@ namespace Education.Controllers
                     {
                         name = x.Key,
                         value = (int)x.Sum(y => y.MonDeal)
+                    }).ToList();
+
+            info.DailyConsumptionStudentCnt = Dataset.ConsumptionList.GroupBy(x => x.DealTimeYear + "-" + x.DealTimeMonth + "-" + x.DealTimeDay)
+                    .Select(x => new NameValueSet()
+                    {
+                        name = x.Key,
+                        value = x.Select(y=>y.StudentID).Distinct().Count()
                     }).ToList();
 
             Console.WriteLine("消费日统计：" + timer.Elapsed.ToString());

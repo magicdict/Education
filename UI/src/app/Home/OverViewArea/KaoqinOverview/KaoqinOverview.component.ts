@@ -141,7 +141,7 @@ export class KaoqinOverviewComponent implements OnInit {
                 leaf.children.push(leaf_9);
 
                 this.KaoqinOption = {
-                    tooltip:{},
+                    tooltip: {},
                     toolbox: CommonFunction.clone(ToolboxSaveImageOnly),
                     title: { text: "考勤次数", left: 10 },
                     label: { formatter: "{b}\n{c}" },
@@ -393,7 +393,7 @@ export class KaoqinOverviewComponent implements OnInit {
                 },
                 data: []
             },
-
+            tooltip: {},
             title:
             {
                 text: '考勤历史数据',
@@ -432,5 +432,39 @@ export class KaoqinOverviewComponent implements OnInit {
         ]
     };
 
+    HourMinuteOption = {
+        angleAxis: {
+            type: 'category',
+            data: [],
+            z: 10
+        },
+        radiusAxis: {
+        },
+        polar: {
+        },
+        series: [{
+            type: 'bar',
+            data: [],
+            coordinateSystem: 'polar',
+            name: '迟到',
+            stack: 'kaoqin'
+        }, {
+            type: 'bar',
+            data: [],
+            coordinateSystem: 'polar',
+            name: 'B',
+            stack: 'kaoqin'
+        }, {
+            type: 'bar',
+            data: [],
+            coordinateSystem: 'polar',
+            name: 'C',
+            stack: 'kaoqin'
+        }],
+        legend: {
+            show: true,
+            data: ['A', 'B', 'C']
+        }
+    };
 
 } 

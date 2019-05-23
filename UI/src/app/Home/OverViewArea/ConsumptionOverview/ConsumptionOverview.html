@@ -69,8 +69,13 @@
             </div>
         </div>
     </p-tabPanel>
-    <p-tabPanel header="消费日历" style="width:1140px;">
+    <p-tabPanel header="消费日历(金额)" style="width:1140px;">
         <div echarts [options]="dailyOpt"
+            style="width:1100px;height:740px;border: 2px solid lightgray;padding: 5px;margin: 5px">
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header="消费日历(人数)" style="width:1140px;">
+        <div echarts [options]="dailycntOpt" 
             style="width:1100px;height:740px;border: 2px solid lightgray;padding: 5px;margin: 5px">
         </div>
     </p-tabPanel>
@@ -78,8 +83,6 @@
         <div echarts [options]="WeekTimeOption"
             style="width:1100px;height:640px;border: 2px solid lightgray;padding: 5px;margin: 5px">
         </div>
-
-
         <div class="box box-primary box-solid" style="width: 100%;">
             <div class="box-header with-border">
                 <h3 class="box-title">时段周别统计（3D）</h3>
@@ -90,7 +93,7 @@
                 </div>
             </div>
             <div class="box-body">
-                <div echarts [options]="WeekTimeOption3D"  (chartInit)="onWeekTimeOption3DChartInit($event)"
+                <div echarts [options]="WeekTimeOption3D" (chartInit)="onWeekTimeOption3DChartInit($event)"
                     style="width:1080px;height:640px;border: 2px solid lightgray;padding: 5px;margin: 5px">
                 </div>
             </div>
