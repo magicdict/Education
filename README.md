@@ -39,7 +39,9 @@ let webapiurl = "http://39.105.206.6:8080/api/"
 
 - 4.systemctl restart education.service (远程执行)
 - ssh root@39.105.206.6 (Mac Login via SSH)
+
 TODO:
+-1:班级成绩里面增加年级排名的走势图。
 
 0.总分的页面去掉教师和ID的表示
 0.dialog-自响应必须改掉

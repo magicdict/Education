@@ -50,6 +50,13 @@ public static class Dataset
 
     public static Dictionary<string, int> KaoqinStudentIdDetail = new Dictionary<string, int>();
 
+    public static List<NameValueSet> Minute_00000 = new List<NameValueSet>();
+    public static List<NameValueSet> Minute_99001 = new List<NameValueSet>();
+    public static List<NameValueSet> Minute_99002 = new List<NameValueSet>();
+    public static List<NameValueSet> Minute_99003 = new List<NameValueSet>();
+    public static List<NameValueSet> Minute_99004 = new List<NameValueSet>();
+    public static List<NameValueSet> Minute_99005 = new List<NameValueSet>();
+
     //数据库的导入
     public static void Load(IWebHostEnvironment hostingEnvironment)
     {
@@ -153,7 +160,6 @@ public static class Dataset
         }
         sr.Close();
         Console.WriteLine("读取考勤信息件数：" + KaoqinList.Count);
-        Education.Controllers.KaoqinController.PrepareKaoqinOverview();
         Console.WriteLine(timer.Elapsed.ToString());
 
         foreach (var student in StudentList)
@@ -403,8 +409,41 @@ public static class Dataset
         sr.Close();
         Console.WriteLine(timer.Elapsed.ToString());
         //读取分钟文件
-
-
+        fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "HourMinuteRec.csv";
+        sr = new StreamReader(fullfilepath);
+        sr.ReadLine();  //读取标题栏
+        while (!sr.EndOfStream)
+        {
+            var line = sr.ReadLine().Split(",");
+            var key = line[1];
+            var minute = line[0];
+            var count = int.Parse(line[2]);
+            switch (key)
+            {
+                case "99001":
+                    Minute_99001.Add(new NameValueSet() { name = minute, value = count });
+                    break;
+                case "99002":
+                    Minute_99002.Add(new NameValueSet() { name = minute, value = count });
+                    break;
+                case "99003":
+                    Minute_99003.Add(new NameValueSet() { name = minute, value = count });
+                    break;
+                case "99004":
+                    Minute_99004.Add(new NameValueSet() { name = minute, value = count });
+                    break;
+                case "99005":
+                    Minute_99005.Add(new NameValueSet() { name = minute, value = count });
+                    break;
+                case "00000":
+                    Minute_00000.Add(new NameValueSet() { name = minute, value = count });
+                    break;
+                default:
+                    break;
+            }
+        }
+        sr.Close();
+        Education.Controllers.KaoqinController.PrepareKaoqinOverview();
         timer.Stop();
     }
 }

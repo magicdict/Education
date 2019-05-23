@@ -50,7 +50,9 @@
         <div class="alert alert-warning" role="alert">
             这里只统计了本学期学生的移动考勤时间
         </div>
-        <div echarts [options]="HourMinuteOption" style="width:1080px;height:800px;"></div>
+        <div echarts [options]="MinuteFrom6" style="width:1080px;height:800px;"></div>
+        <div echarts [options]="MinuteFrom11" style="width:1080px;height:800px;"></div>
+        <div echarts [options]="MinuteFrom16" style="width:1080px;height:800px;"></div>
     </p-tabPanel>
     <p-tabPanel header="迟到_晚到" style="width:1140px;">
         <div class="alert alert-warning" role="alert">

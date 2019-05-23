@@ -209,6 +209,10 @@ export interface IKaoqinOverview {
   kaoqingLiveAtSchool: { name: string, value: number }[];
   kaoqingNotLiveAtSchool: { name: string, value: number }[];
   timePolar0099001: { name: string, value: number }[];
+  timePolar0099002: { name: string, value: number }[];
+  timePolar0099003: { name: string, value: number }[];
+  timePolar0099004: { name: string, value: number }[];
+  timePolar0099005: { name: string, value: number }[];
   minuteList:string[];
 }
 

@@ -141,6 +141,13 @@ namespace Education.Controllers
                     value = CurrentStudent.Count(x => x.DetailId == key && !x.Student.LiveAtSchool)
                 });
             }
+
+            overviewInfo.TimePolar0099001 = new List<NameValueSet>();
+            overviewInfo.TimePolar0099002 = new List<NameValueSet>();
+            overviewInfo.TimePolar0099003 = new List<NameValueSet>();
+            overviewInfo.TimePolar0099004 = new List<NameValueSet>();
+            overviewInfo.TimePolar0099005 = new List<NameValueSet>();
+
             overviewInfo.MinuteList = new List<string>();
             for (int hour = 0; hour < 24; hour++)
             {
@@ -149,6 +156,56 @@ namespace Education.Controllers
                     var hh = hour.ToString("D2");
                     var mm = minute.ToString("D2");
                     overviewInfo.MinuteList.Add(hh + ":" + mm);
+                    var r = Dataset.Minute_99001.Find(x => x.name == hh + ":" + mm);
+                    if (r == null)
+                    {
+                        overviewInfo.TimePolar0099001.Add(new NameValueSet() { name = hh + ":" + mm });
+                    }
+                    else
+                    {
+                        overviewInfo.TimePolar0099001.Add(r);
+                    }
+
+                    r = Dataset.Minute_99002.Find(x => x.name == hh + ":" + mm);
+                    if (r == null)
+                    {
+                        overviewInfo.TimePolar0099002.Add(new NameValueSet() { name = hh + ":" + mm });
+                    }
+                    else
+                    {
+                        overviewInfo.TimePolar0099002.Add(r);
+                    }
+
+                    r = Dataset.Minute_99003.Find(x => x.name == hh + ":" + mm);
+                    if (r == null)
+                    {
+                        overviewInfo.TimePolar0099003.Add(new NameValueSet() { name = hh + ":" + mm });
+                    }
+                    else
+                    {
+                        overviewInfo.TimePolar0099003.Add(r);
+                    }
+
+                    r = Dataset.Minute_99004.Find(x => x.name == hh + ":" + mm);
+                    if (r == null)
+                    {
+                        overviewInfo.TimePolar0099004.Add(new NameValueSet() { name = hh + ":" + mm });
+                    }
+                    else
+                    {
+                        overviewInfo.TimePolar0099004.Add(r);
+                    }
+
+                    r = Dataset.Minute_99005.Find(x => x.name == hh + ":" + mm);
+                    if (r == null)
+                    {
+                        overviewInfo.TimePolar0099005.Add(new NameValueSet() { name = hh + ":" + mm });
+                    }
+                    else
+                    {
+                        overviewInfo.TimePolar0099005.Add(r);
+                    }
+
                 }
             }
             KaoqinOverviewInfo = overviewInfo;
