@@ -108,7 +108,7 @@ namespace Education.Controllers
             overviewInfo.KaoqingNotLiveAtSchool = new List<NameValueSet>();
 
 
-            var CurrentStudent = Dataset.KaoqinList.Where(x => x.Student != null);
+            var CurrentStudent = Dataset.KaoqinList.Where(x => x.IsAvalible);
             foreach (var key in Dataset.KaoqinTypeDic2018.Keys)
             {
                 overviewInfo.KaoqingTotal.Add(new NameValueSet()
@@ -120,25 +120,25 @@ namespace Education.Controllers
                 overviewInfo.KaoqingMale.Add(new NameValueSet()
                 {
                     name = Dataset.KaoqinTypeDic[key].control_task_name,
-                    value = CurrentStudent.Count(x => x.DetailId == key && x.Student.Sex == "男")
+                    value = CurrentStudent.Count(x => x.DetailId == key && x.Sex == "男")
                 });
 
                 overviewInfo.KaoqingFeMale.Add(new NameValueSet()
                 {
                     name = Dataset.KaoqinTypeDic[key].control_task_name,
-                    value = CurrentStudent.Count(x => x.DetailId == key && x.Student.Sex == "女")
+                    value = CurrentStudent.Count(x => x.DetailId == key && x.Sex == "女")
                 });
 
                 overviewInfo.KaoqingLiveAtSchool.Add(new NameValueSet()
                 {
                     name = Dataset.KaoqinTypeDic[key].control_task_name,
-                    value = CurrentStudent.Count(x => x.DetailId == key && x.Student.LiveAtSchool)
+                    value = CurrentStudent.Count(x => x.DetailId == key && x.LiveAtSchool)
                 });
 
                 overviewInfo.KaoqingNotLiveAtSchool.Add(new NameValueSet()
                 {
                     name = Dataset.KaoqinTypeDic[key].control_task_name,
-                    value = CurrentStudent.Count(x => x.DetailId == key && !x.Student.LiveAtSchool)
+                    value = CurrentStudent.Count(x => x.DetailId == key && !x.LiveAtSchool)
                 });
             }
 
@@ -153,53 +153,52 @@ namespace Education.Controllers
             {
                 for (int minute = 0; minute < 60; minute++)
                 {
-                    var hh = hour.ToString("D2");
-                    var mm = minute.ToString("D2");
-                    overviewInfo.MinuteList.Add(hh + ":" + mm);
-                    var r = Dataset.Minute_99001.Find(x => x.name == hh + ":" + mm);
+                    var Key = hour.ToString("D2") + ":" + minute.ToString("D2");
+                    overviewInfo.MinuteList.Add(Key);
+                    var r = Dataset.Minute_99001.Find(x => x.name == Key);
                     if (r == null)
                     {
-                        overviewInfo.TimePolar0099001.Add(new NameValueSet() { name = hh + ":" + mm });
+                        overviewInfo.TimePolar0099001.Add(new NameValueSet() { name = Key });
                     }
                     else
                     {
                         overviewInfo.TimePolar0099001.Add(r);
                     }
 
-                    r = Dataset.Minute_99002.Find(x => x.name == hh + ":" + mm);
+                    r = Dataset.Minute_99002.Find(x => x.name == Key);
                     if (r == null)
                     {
-                        overviewInfo.TimePolar0099002.Add(new NameValueSet() { name = hh + ":" + mm });
+                        overviewInfo.TimePolar0099002.Add(new NameValueSet() { name = Key });
                     }
                     else
                     {
                         overviewInfo.TimePolar0099002.Add(r);
                     }
 
-                    r = Dataset.Minute_99003.Find(x => x.name == hh + ":" + mm);
+                    r = Dataset.Minute_99003.Find(x => x.name == Key);
                     if (r == null)
                     {
-                        overviewInfo.TimePolar0099003.Add(new NameValueSet() { name = hh + ":" + mm });
+                        overviewInfo.TimePolar0099003.Add(new NameValueSet() { name = Key });
                     }
                     else
                     {
                         overviewInfo.TimePolar0099003.Add(r);
                     }
 
-                    r = Dataset.Minute_99004.Find(x => x.name == hh + ":" + mm);
+                    r = Dataset.Minute_99004.Find(x => x.name == Key);
                     if (r == null)
                     {
-                        overviewInfo.TimePolar0099004.Add(new NameValueSet() { name = hh + ":" + mm });
+                        overviewInfo.TimePolar0099004.Add(new NameValueSet() { name = Key });
                     }
                     else
                     {
                         overviewInfo.TimePolar0099004.Add(r);
                     }
 
-                    r = Dataset.Minute_99005.Find(x => x.name == hh + ":" + mm);
+                    r = Dataset.Minute_99005.Find(x => x.name == Key);
                     if (r == null)
                     {
-                        overviewInfo.TimePolar0099005.Add(new NameValueSet() { name = hh + ":" + mm });
+                        overviewInfo.TimePolar0099005.Add(new NameValueSet() { name = Key });
                     }
                     else
                     {

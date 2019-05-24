@@ -74,19 +74,10 @@ public class Kaoqin
             return Weather.GetWeatherByDate(RecDateTimeYear, RecDateTimeMonth, RecDateTimeDay);
         }
     }
-
-
-    public Student Student
-    {
-        get
-        {
-            if (Dataset.StudentList.Count(x => x.ID == StudentID) == 0) return null;
-            return Dataset.StudentList.Where(x => x.ID == StudentID).First();
-        }
-    }
-
+    public bool IsAvalible { get; set; }
+    public string Sex { get; set; }
+    public bool LiveAtSchool { get; set; }
     public DayOfWeek DayOfWeek { get; set; }
-
     public Kaoqin()
     {
 
@@ -112,6 +103,16 @@ public class Kaoqin
         ClassName = Items[8];
         ClassId = Items[9];
         DayOfWeek = new System.DateTime(int.Parse(RecDateTimeYear), int.Parse(RecDateTimeMonth), int.Parse(RecDateTimeDay)).DayOfWeek;
+
+        if (Dataset.StudentList.Count(x => x.ID == StudentID) == 0)
+        {
+            IsAvalible = false;
+            return;
+        }
+        var student = Dataset.StudentList.Where(x => x.ID == StudentID).First();
+        IsAvalible = true;
+        LiveAtSchool = student.LiveAtSchool;
+        Sex = student.Sex;
     }
 
 }

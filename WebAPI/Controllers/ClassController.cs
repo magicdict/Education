@@ -56,7 +56,20 @@ namespace Education.Controllers
 
             public List<NameValueSet> WeeklyConsumption { get; set; }
 
+            public List<statistics> ConsumptionStatisticsList { get; set; }
         }
+
+        public class statistics
+        {
+            public string name { get; set; }
+            public float max { get; set; }
+            public float min { get; set; }
+            public float avg { get; set; }
+            public float sum { get; set; }
+            public float cnt { get; set; }
+
+        }
+
 
         /// <summary>
         /// 获得班级概要
@@ -99,6 +112,19 @@ namespace Education.Controllers
                     });
                 }
             }
+            var ClassConsumption = Dataset.ConsumptionList.Where(x => x.ClassId == ClassId);
+            overview.ConsumptionStatisticsList = ClassConsumption.GroupBy(x => x.DealYearMonthDay).Select(x =>
+               new statistics()
+               {
+                   name = x.Key,
+                   max = x.Max(y => -y.MonDeal),
+                   min = x.Min(y => -y.MonDeal),
+                   avg = x.Average(y => -y.MonDeal),
+                   sum = x.Sum(y => -y.MonDeal),
+                   cnt = x.Select(y => y.StudentID).Distinct().Count()
+               }
+            ).ToList();
+            overview.ConsumptionStatisticsList.Sort((x, y) => { return x.name.CompareTo(y.name); });
             return overview;
         }
     }

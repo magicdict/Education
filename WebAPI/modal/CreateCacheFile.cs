@@ -16,7 +16,7 @@ public static class CreateCahceFile
     public static void CreateHourMinute(string fullpath)
     {
         var sw = new StreamWriter(fullpath + System.IO.Path.DirectorySeparatorChar + "HourMinuteRec.csv");
-        var CurrentStudent = Dataset.KaoqinList.Where(x => x.Student != null);
+        var CurrentStudent = Dataset.KaoqinList.Where(x => x.IsAvalible);
         sw.WriteLine("TimeStamp,ControlId,Cnt");
         foreach (var controlid in new string[] { "99001", "99002", "99003", "99004", "99005" })
         {

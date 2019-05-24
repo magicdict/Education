@@ -213,7 +213,7 @@ export interface IKaoqinOverview {
   timePolar0099003: { name: string, value: number }[];
   timePolar0099004: { name: string, value: number }[];
   timePolar0099005: { name: string, value: number }[];
-  minuteList:string[];
+  minuteList: string[];
 }
 
 export interface IPNRateItem {
@@ -267,6 +267,16 @@ export interface IClassInfo {
   kaoqing: { name: string, value: number }[];
   monthlyConsumption: { name: string, value: number }[];
   weeklyConsumption: { name: string, value: number }[];
+  consumptionStatisticsList : IStatistics[];
+}
+
+export interface IStatistics {
+  name: string;
+  max: number;
+  min: number;
+  avg: number;
+  sum: number;
+  cnt: number;
 }
 
 export interface ICourse {
@@ -296,7 +306,7 @@ export interface ISchoolConsumptionInfo {
   perPriceRange: { name: string, value: number }[];
   perDayByGrade: { name: string, value: number }[];
   timePolar00000: { name: string, value: number }[];
-  minuteList:string[];
+  minuteList: string[];
 }
 
 /**天气 */

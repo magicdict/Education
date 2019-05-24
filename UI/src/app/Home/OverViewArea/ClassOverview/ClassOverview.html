@@ -7,7 +7,8 @@
     <div class="row">
       <div class="col-8">
         <app-map [NativePlace]="this.StudentsInfo.nativePlace" [StyleHeight]="'600px'" [StyleWidth]="'600px'"
-          [NativePlaceZheJiang]="this.StudentsInfo.nativePlaceZheJiang" [ViusalZheJiangMax]="5" [ViusalChinaMax]="5" [Title]="this.ClassName">
+          [NativePlaceZheJiang]="this.StudentsInfo.nativePlaceZheJiang" [ViusalZheJiangMax]="5" [ViusalChinaMax]="5"
+          [Title]="this.ClassName">
         </app-map>
       </div>
       <div class="col-4">
@@ -48,15 +49,17 @@
             </div>
           </div>
         </div>
-        <div *ngIf="IsShowKaoqinGraph" class="box box-primary box-solid" style="width: 100%;margin-top: 10px;">
-          <div class="box-header with-border">
-            <h3 class="box-title">考勤</h3>
-          </div>
-          <div class="box-body">
-            <div (chartInit)="onKaoqinChartInit($event)" echarts [options]="KaoqinOpt"
-              style="width:300px;height:260px;"></div>
-          </div>
-        </div>
+      </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="考勤和消费" style="width:1140px;">
+    <div *ngIf="IsShowKaoqinGraph" class="box box-primary box-solid" style="width: 100%;margin-top: 10px;">
+      <div class="box-header with-border">
+        <h3 class="box-title">考勤</h3>
+      </div>
+      <div class="box-body">
+        <div (chartInit)="onKaoqinChartInit($event)" echarts [options]="KaoqinOpt"
+          style="width:300px;height:260px;"></div>
       </div>
     </div>
   </p-tabPanel>

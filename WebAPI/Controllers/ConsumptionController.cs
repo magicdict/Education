@@ -128,8 +128,8 @@ namespace Education.Controllers
             var timer = new System.Diagnostics.Stopwatch();
             timer.Start();
             info = new SchoolConsumptionInfo();
-            var LiveAtSchool = Dataset.ConsumptionList.Where(x => x.ConsumpStudent.LiveAtSchool);
-            var NotLiveAtSchool = Dataset.ConsumptionList.Where(x => !x.ConsumpStudent.LiveAtSchool);
+            var LiveAtSchool = Dataset.ConsumptionList.Where(x => x.LiveAtSchool);
+            var NotLiveAtSchool = Dataset.ConsumptionList.Where(x => !x.LiveAtSchool);
             //月度整体消费统计
             //2018/07 -> 2019/01 
             info.LiveAtSchoolCnt = Dataset.StudentList.Count(x => x.LiveAtSchool);
@@ -248,14 +248,14 @@ namespace Education.Controllers
             //最高消费记录
             Dataset.ConsumptionList.Sort((x, y) => { return x.MonDeal.CompareTo(y.MonDeal); });
             info.HighestRec = Dataset.ConsumptionList.Take(3).ToList();
-            info.HighestRecLiveAtSchool = Dataset.ConsumptionList.Where(x => x.ConsumpStudent.LiveAtSchool).Take(3).ToList();
-            info.HighestRecNotLiveAtSchool = Dataset.ConsumptionList.Where(x => !x.ConsumpStudent.LiveAtSchool).Take(3).ToList();
+            info.HighestRecLiveAtSchool = Dataset.ConsumptionList.Where(x => x.LiveAtSchool).Take(3).ToList();
+            info.HighestRecNotLiveAtSchool = Dataset.ConsumptionList.Where(x => !x.LiveAtSchool).Take(3).ToList();
 
             Console.WriteLine("PerDayByGrade Start:" + timer.Elapsed.ToString());
             //PerDayByGrade
-            var Grade1ConsumptionList = Dataset.ConsumptionList.Where(x => x.Student.Grade == "高一");
-            var Grade2ConsumptionList = Dataset.ConsumptionList.Where(x => x.Student.Grade == "高二");
-            var Grade3ConsumptionList = Dataset.ConsumptionList.Where(x => x.Student.Grade == "高三");
+            var Grade1ConsumptionList = Dataset.ConsumptionList.Where(x => x.Grade == "高一");
+            var Grade2ConsumptionList = Dataset.ConsumptionList.Where(x => x.Grade == "高二");
+            var Grade3ConsumptionList = Dataset.ConsumptionList.Where(x => x.Grade == "高三");
             var Grade1Sum = Grade1ConsumptionList.Sum(x => x.MonDeal);
             var Grade2Sum = Grade2ConsumptionList.Sum(x => x.MonDeal);
             var Grade3Sum = Grade3ConsumptionList.Sum(x => x.MonDeal);

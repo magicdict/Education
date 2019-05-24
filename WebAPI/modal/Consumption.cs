@@ -59,14 +59,10 @@ public class Consumption
     /// <value></value>
     public string StudentID { get; set; }
 
-    public Student Student
-    {
-        get
-        {
-            return Dataset.StudentList.Where(x => x.ID == StudentID).First();
-        }
-    }
+    public string ClassId { get; set; }
+    public string Grade { get; set; }
 
+    public bool LiveAtSchool { get; set; }
     /// <summary>
     /// 姓名
     /// </summary>
@@ -81,8 +77,6 @@ public class Consumption
     public DayOfWeek DayOfWeek { get; set; }
 
     public Weather Weather { get; set; }
-
-    public Student ConsumpStudent { get; set; }
 
     public Consumption(string RawData)
     {
@@ -99,7 +93,10 @@ public class Consumption
         PerSex = Items[4];
         DayOfWeek = new System.DateTime(int.Parse(DealTimeYear), int.Parse(DealTimeMonth), int.Parse(DealTimeDay)).DayOfWeek;
         Weather = Weather.GetWeatherByDate(DealTimeYear, DealTimeMonth, DealTimeDay);
-        ConsumpStudent = Dataset.StudentList.Where(x => x.ID == StudentID).First();
+        var Student = Dataset.StudentList.Where(x => x.ID == StudentID).First();
+        ClassId = Student.ClassId;
+        LiveAtSchool = Student.LiveAtSchool;
+        Grade = Student.Grade;
     }
 
 }

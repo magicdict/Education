@@ -170,6 +170,9 @@ export class CommonFunction {
 
 
     public static pred(arr: number[]): number {
+
+        if (arr.length == 0) return 0;
+        if (arr.length == 1) return arr[0];
         let sum = 0;
         for (var i = 0; i < arr.length; i++) {
             sum += arr[i];
@@ -183,8 +186,8 @@ export class CommonFunction {
     }
 
 
-    private webapiurl = "http://39.105.206.6:8080/api/";
-    //private webapiurl = "http://localhost:5000/api/";
+    //private webapiurl = "http://39.105.206.6:8080/api/";
+    private webapiurl = "http://localhost:5000/api/";
 
     public httpRequest<T>(serviceUrl: string): Promise<T> {
         return this.http.get(
