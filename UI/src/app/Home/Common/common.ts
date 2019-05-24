@@ -169,6 +169,20 @@ export class CommonFunction {
     }
 
 
+    public static pred(arr: number[]): number {
+        let sum = 0;
+        for (var i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        };
+        var avg_num = Math.ceil(sum / arr.length);
+        var last_num = arr[arr.length - 1];
+        var last_2_num = arr[arr.length - 2];
+        var diff = last_2_num - last_num
+        var diff_pred = last_num - diff
+        return this.roundvalue(avg_num * 0.2 + last_num * 0.2 + diff_pred * 0.6);
+    }
+
+
     private webapiurl = "http://39.105.206.6:8080/api/";
     //private webapiurl = "http://localhost:5000/api/";
 

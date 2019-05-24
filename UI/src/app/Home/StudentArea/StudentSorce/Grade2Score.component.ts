@@ -3,6 +3,7 @@ import { HomeService } from '../../Common/Home.service';
 import { IStudent, ITeacher, IScore } from 'src/app/Home/Common/Education.model';
 import { Router } from '@angular/router';
 import { ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
+import { CommonFunction } from '../../Common/common';
 
 @Component({
     templateUrl: 'Grade2Score.html',
@@ -47,7 +48,7 @@ export class Grade2ScoreComponent implements OnInit {
                         right: 50,
                         data: ['年级百分比', '等第']
                     },
-                    xAxis: { type: 'category', data: [] },
+                    xAxis: { type: 'category', data: [], axisLabel: { interval: 0 } },
                     yAxis: { type: 'value' },
                     series: [
                         { data: [], type: 'line', name: '年级百分比' },
@@ -57,9 +58,12 @@ export class Grade2ScoreComponent implements OnInit {
                 let scoreAvalible = this.Scores.filter(
                     x => x.subName == subname && x.score > 0 &&
                         (x.type === "2" || x.type === "3" || x.type === "6" || x.type === "7"));
-                opt.xAxis.data = scoreAvalible.map(x => "");
-                opt.series[0].data = scoreAvalible.map(x => -x.gradeRankPercent);
-                opt.series[1].data = scoreAvalible.filter(x => x.dengdi.toString() !== "").map(x => -x.dengdi * 100);
+                opt.xAxis.data = scoreAvalible.map(_ => "");
+                opt.xAxis.data.push("预测")
+                opt.series[0].data = scoreAvalible.map(x => CommonFunction.roundvalue(-x.gradeRankPercent));
+                opt.series[0].data.push(CommonFunction.pred(opt.series[0].data));
+                opt.series[1].data = scoreAvalible.filter(x => x.dengdi.toString() !== "").map(x => CommonFunction.roundvalue(-x.dengdi * 100));
+                opt.series[1].data.push(CommonFunction.pred(opt.series[1].data));
                 //等第可能是空
                 this.LineGraphOption.push(opt);
             }

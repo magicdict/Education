@@ -6,7 +6,7 @@ import { MenuItem } from 'primeng/api';
     templateUrl: 'ReportCenter.html',
     styles: [`
         .ui-steps .ui-steps-item {
-            width: 25%;
+            width: 33%;
         }
 
         .ui-steps.steps-custom {
@@ -49,10 +49,7 @@ export class ReportCenterComponent implements OnInit {
                 label: '数据展示',
             },
             {
-                label: '可视化',
-            },
-            {
-                label: '预测',
+                label: '可视化对比',
             }
         ];
     }
