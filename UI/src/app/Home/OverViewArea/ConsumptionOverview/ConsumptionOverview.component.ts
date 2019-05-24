@@ -318,8 +318,8 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.dailycntOpt.visualMap[0].max = 1700;
         this.dailycntOpt.series[0].symbolSize = this.symbolSizeCnt;
         this.dailycntOpt.series[1].symbolSize = this.symbolSizeCnt;
-        this.dailycntOpt.series[0].data = data.consumptionInfo.dailyConsumptionStudentCnt.map(x => { return [x.name, x.value ]; });
-        this.dailycntOpt.series[1].data = data.consumptionInfo.dailyConsumptionStudentCnt.map(x => { return [x.name, x.value ]; });        
+        this.dailycntOpt.series[0].data = data.consumptionInfo.dailyConsumptionStudentCnt.map(x => { return [x.name, x.value]; });
+        this.dailycntOpt.series[1].data = data.consumptionInfo.dailyConsumptionStudentCnt.map(x => { return [x.name, x.value]; });
 
         this.monthlyTotalOpt.title.text = "整体月消费金额";
         this.monthlyTotalOpt.xAxis.data = data.consumptionInfo.monthlyConsumption.map(x => x.name);
@@ -422,7 +422,7 @@ export class ConsumptionOverviewComponent implements OnInit {
           title: {
             text: '年级别日均消费'
           },
-          tooltip:{},
+          tooltip: {},
           xAxis: {
             type: 'category',
             data: ["高一", "高二", "高三"]
@@ -442,6 +442,20 @@ export class ConsumptionOverviewComponent implements OnInit {
         };
         this.PerDayByGradeOption['grid'] = { left: 100 };
         this.PerDayByGradeOption.toolbox = ToolboxForBar;
+
+
+        //Polar:
+        //Minute
+        this.MinuteFrom6.angleAxis.data = data.consumptionInfo.minuteList.slice(360, 480);
+        this.MinuteFrom6.series[0].data = data.consumptionInfo.timePolar00000.map(x => x.value).slice(360, 480);
+
+
+        this.MinuteFrom11.angleAxis.data = data.consumptionInfo.minuteList.slice(660, 780);
+        this.MinuteFrom11.series[0].data = data.consumptionInfo.timePolar00000.map(x => x.value).slice(660, 780);
+
+        this.MinuteFrom16.angleAxis.data = data.consumptionInfo.minuteList.slice(1020, 1140);
+        this.MinuteFrom16.series[0].data = data.consumptionInfo.timePolar00000.map(x => x.value).slice(1020, 1140);
+
       });
 
   }
@@ -460,6 +474,32 @@ export class ConsumptionOverviewComponent implements OnInit {
       }
     );
   }
+
+
+  HourMinuteOption = {
+    angleAxis: {
+      type: 'category',
+      data: [],
+      z: 10,
+      interval: 50
+    },
+    tooltip: {},
+    radiusAxis: {
+    },
+    polar: {
+    },
+    series: [{
+      type: 'bar',
+      data: [],
+      coordinateSystem: 'polar',
+    }],
+  };
+
+  MinuteFrom6 = CommonFunction.clone(this.HourMinuteOption);
+  MinuteFrom11 = CommonFunction.clone(this.HourMinuteOption);
+  MinuteFrom16 = CommonFunction.clone(this.HourMinuteOption);
+
+
 
 
   WeekTimeOption3DChartInstance: any;

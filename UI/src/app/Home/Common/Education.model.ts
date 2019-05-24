@@ -295,6 +295,8 @@ export interface ISchoolConsumptionInfo {
   weekTimeConsumptionNotLiveAtSchool: { name: string, value: number }[];
   perPriceRange: { name: string, value: number }[];
   perDayByGrade: { name: string, value: number }[];
+  timePolar00000: { name: string, value: number }[];
+  minuteList:string[];
 }
 
 /**天气 */

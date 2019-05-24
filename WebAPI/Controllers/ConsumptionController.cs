@@ -97,6 +97,11 @@ namespace Education.Controllers
             /// <typeparam name="NameValueSet"></typeparam>
             /// <returns></returns>
             public List<NameValueSet> PerDayByGrade = new List<NameValueSet>();
+
+
+            public List<NameValueSet> TimePolar00000 { get; set; }
+
+            public List<string> MinuteList = new List<string>();
         }
 
 
@@ -236,7 +241,7 @@ namespace Education.Controllers
                     .Select(x => new NameValueSet()
                     {
                         name = x.Key,
-                        value = x.Select(y=>y.StudentID).Distinct().Count()
+                        value = x.Select(y => y.StudentID).Distinct().Count()
                     }).ToList();
 
             Console.WriteLine("消费日统计：" + timer.Elapsed.ToString());
@@ -262,6 +267,27 @@ namespace Education.Controllers
             info.PerDayByGrade.Add(new NameValueSet { name = "高二", value = (int)(Grade2Sum / DayStudentCntGrade2) });
             info.PerDayByGrade.Add(new NameValueSet { name = "高三", value = (int)(Grade3Sum / DayStudentCntGrade3) });
 
+
+            info.MinuteList = new List<string>();
+            info.TimePolar00000 = new List<NameValueSet>();
+            for (int hour = 0; hour < 24; hour++)
+            {
+                for (int minute = 0; minute < 60; minute++)
+                {
+                    var hh = hour.ToString("D2");
+                    var mm = minute.ToString("D2");
+                    info.MinuteList.Add(hh + ":" + mm);
+                    var r = Dataset.Minute_00000.Find(x => x.name == hh + ":" + mm);
+                    if (r == null)
+                    {
+                        info.TimePolar00000.Add(new NameValueSet() { name = hh + ":" + mm });
+                    }
+                    else
+                    {
+                        info.TimePolar00000.Add(r);
+                    }
+                }
+            }
             Console.WriteLine("消费统计结束" + timer.Elapsed.ToString());
             timer.Stop();
         }

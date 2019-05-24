@@ -75,7 +75,7 @@
         </div>
     </p-tabPanel>
     <p-tabPanel header="消费日历(人数)" style="width:1140px;">
-        <div echarts [options]="dailycntOpt" 
+        <div echarts [options]="dailycntOpt"
             style="width:1100px;height:740px;border: 2px solid lightgray;padding: 5px;margin: 5px">
         </div>
     </p-tabPanel>
@@ -101,7 +101,7 @@
 
 
     </p-tabPanel>
-    <p-tabPanel header="时段周别时间线" style="width:1140px;">
+    <p-tabPanel header="时间线和时刻" style="width:1140px;">
         <div class="alert alert-warning" role="alert">
             至上而下分别是全体学生，住校学生，非住校学生，周次分时段消费变化的动态时间图
         </div>
@@ -113,6 +113,25 @@
         </div>
         <div echarts [options]="WeekTimeLineNotLiveAtSchoolOption"
             style="width:1100px;height:200px;border: 2px solid lightgray;padding: 5px;margin: 5px">
+        </div>
+        <div class="container">
+            <div class="row" style="margin-top:10px;">
+                <div style="border: 2px solid lightgray;padding: 0px;margin: 0px;width: 370px;">
+                    <div class="col" style="padding: 0px;margin: 0px;">
+                        <div echarts [options]="MinuteFrom6" style="width:365px;height:400px;"></div>
+                    </div>
+                </div>
+                <div style="border: 2px solid lightgray;padding: 0px;margin: 0px;width: 370px;">
+                    <div class="col" style="padding: 0px;margin: 0px;">
+                        <div echarts [options]="MinuteFrom11" style="width:365px;height:400px;"></div>
+                    </div>
+                </div>
+                <div style="border: 2px solid lightgray;padding: 0px;margin: 0px;width: 370px;">
+                    <div class="col" style="padding: 0px;margin: 0px;">
+                        <div echarts [options]="MinuteFrom16" style="width:365px;height:400px;"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </p-tabPanel>
     <p-tabPanel header="消费预警" style="width:1140px;">

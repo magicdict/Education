@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from '../Home.service';
 import { ScoreFunnelOption } from '../../GraphOption/ScoreOption';
 import { CommonFunction } from '../common';
+import { ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
 
 @Component({
     templateUrl: 'SingleExamClass.html',
@@ -12,6 +13,27 @@ export class SingleExamClassComponent implements OnInit {
     Scores: IScore[];
     CurrentClassExam: IClassExam;
     mScoreFunnelOption = CommonFunction.clone(ScoreFunnelOption);
+    mRankOption = {
+        xAxis: {
+            data: [],
+            axisLabel: {
+                interval: 0
+            }
+        },
+        yAxis: {
+            type: 'value'
+        },
+        toolbox: ToolboxSaveImageOnly,
+        series:
+
+            [{
+                type: 'line',
+                label: {
+                    show: true
+                },
+                data: []
+            }]
+    };
     Title: string;
     subTitle: string;
     IsFunnel: boolean = false;
@@ -40,6 +62,18 @@ export class SingleExamClassComponent implements OnInit {
             this.mScoreFunnelOption.title.show = false;
             this.mScoreFunnelOption.series[0].max = maxcnt;
             this.IsFunnel = true;
+            let IScoreSortMethod = (n1: IScore, n2: IScore) => {
+                if (n1.classRank > n2.classRank) {
+                    return 1;
+                }
+                if (n1.classRank < n2.classRank) {
+                    return -1;
+                }
+                return 0;
+            };
+            data.singleExam.sort(IScoreSortMethod);
+            this.mRankOption.xAxis.data = data.singleExam.map(x => x.classRank);
+            this.mRankOption.series[0].data = data.singleExam.map(x => x.gradeRank);
         });
     }
     constructor(

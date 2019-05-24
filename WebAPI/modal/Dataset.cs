@@ -335,8 +335,6 @@ public static class Dataset
 
         //CreateWeeklyConsumption(fullpath);
         //Dump(fullpath);
-        //全体消费信息预先统计
-        Education.Controllers.ConsumptionController.PrepareSchoolConsumptionInfo();
         Console.WriteLine("全体消费信息预先统计");
         Console.WriteLine(timer.Elapsed.ToString());
 
@@ -443,7 +441,10 @@ public static class Dataset
             }
         }
         sr.Close();
+        //全体消费信息预先统计
+        Education.Controllers.ConsumptionController.PrepareSchoolConsumptionInfo();
         Education.Controllers.KaoqinController.PrepareKaoqinOverview();
+        Console.WriteLine(timer.Elapsed.ToString());
         timer.Stop();
     }
 }
