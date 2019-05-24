@@ -116,9 +116,11 @@ export interface IConsumption {
   studentID: string;
   accName: string;
   perSex: string;
-  consumpStudent: IStudent;
   weather: IWeather;
   dayOfWeek: number;
+  classId:string;
+  grade:string;
+  liveAtSchool:boolean;
 }
 
 export interface IStudentMonthlyConsumption {

@@ -205,7 +205,7 @@
                             <div class="stats">
                                 <div class="container">
                                     <student-item [Title]="item.accName + ' ' + item.monDeal * -1 + '元'"
-                                        [Sex]="item.consumpStudent.sex" [StudentId]="item.studentID"
+                                        [Sex]="item.perSex" [StudentId]="item.studentID"
                                         [SubTitle]="item.dealTime" *ngFor="let item of this.highestRec"> </student-item>
                                 </div>
                             </div>
@@ -222,7 +222,7 @@
                             <div class="stats">
                                 <div class="container">
                                     <student-item [Title]="item.accName + ' ' + item.monDeal * -1 + '元'"
-                                        [Sex]="item.consumpStudent.sex" [StudentId]="item.studentID"
+                                        [Sex]="item.perSex" [StudentId]="item.studentID"
                                         [SubTitle]="item.dealTime" *ngFor="let item of this.highestRecLiveAtSchool">
                                     </student-item>
                                 </div>
@@ -240,7 +240,7 @@
                             <div class="stats">
                                 <div class="container">
                                     <student-item [Title]="item.accName + ' ' + item.monDeal * -1 + '元'"
-                                        [Sex]="item.consumpStudent.sex" [StudentId]="item.studentID"
+                                        [Sex]="item.perSex" [StudentId]="item.studentID"
                                         [SubTitle]="item.dealTime" *ngFor="let item of this.highestRecNotLiveAtSchool">
                                     </student-item>
                                 </div>

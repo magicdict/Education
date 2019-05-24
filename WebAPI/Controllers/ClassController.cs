@@ -114,14 +114,18 @@ namespace Education.Controllers
             }
             var ClassConsumption = Dataset.ConsumptionList.Where(x => x.ClassId == ClassId);
             overview.ConsumptionStatisticsList = ClassConsumption.GroupBy(x => x.DealYearMonthDay).Select(x =>
-               new statistics()
                {
-                   name = x.Key,
-                   max = x.Max(y => -y.MonDeal),
-                   min = x.Min(y => -y.MonDeal),
-                   avg = x.Average(y => -y.MonDeal),
-                   sum = x.Sum(y => -y.MonDeal),
-                   cnt = x.Select(y => y.StudentID).Distinct().Count()
+                   //按照学生GroupBy，获得每个学生的当日总消费数组
+                   var StudentGroup = x.GroupBy(z => z.StudentID).Select(m => m.Sum(n => -n.MonDeal));
+                   return new statistics()
+                   {
+                       name = x.Key,
+                       max = StudentGroup.Max(),
+                       min = StudentGroup.Min(),
+                       avg = StudentGroup.Average(),
+                       sum = StudentGroup.Sum(),
+                       cnt = StudentGroup.Count()
+                   };
                }
             ).ToList();
             overview.ConsumptionStatisticsList.Sort((x, y) => { return x.name.CompareTo(y.name); });

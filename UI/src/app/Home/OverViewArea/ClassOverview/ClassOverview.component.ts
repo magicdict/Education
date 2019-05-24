@@ -29,6 +29,8 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
   public Exams: IClassExam[][] = [];
   mSexRate = CommonFunction.clone(SexRateChartOption);
   KaoqinOpt: ISimpleBar;
+  ConsumptionOption: any;
+  ConsumptionTotalOption: any;
   IsShowKaoqinGraph: boolean;
 
   StudentsInfo: IStudentGroupProperty;
@@ -53,6 +55,15 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
   KaoqinEchartsInstance: any;
   onKaoqinChartInit(event: any) {
     this.KaoqinEchartsInstance = event;
+  }
+
+  ConsumptionEchartsInstance: any;
+  onConsumptionChartInit(event: any) {
+    this.ConsumptionEchartsInstance = event;
+  }
+  ConsumptionTotalEchartsInstance: any;
+  onConsumptionTotalChartInit(event: any) {
+    this.ConsumptionTotalEchartsInstance = event;
   }
 
   SaveSexRateImage() {
@@ -159,6 +170,168 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
             }
           }
         }
+
+
+        this.ConsumptionOption = {
+          xAxis: {
+            type: 'category',
+            data: data.classinfo.consumptionStatisticsList.map(x => x.name)
+          },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+              type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            },
+            formatter: (items) => {
+              let rtn = items[0].name + "<br />"
+              rtn += "最小值：" + items[0].value + "<br />"
+              rtn += "最大值：" + CommonFunction.roundvalue((items[0].value + items[1].value)) + "<br />"
+              rtn += "平均值：" + (items[2].value)
+              return rtn;
+            }
+          },
+          title: {
+            text: this.ClassName + "每日个人消费统计"
+          },
+          toolbox: ToolboxForBar,
+          yAxis: [{
+            type: 'value'
+          }, {
+            type: 'value'
+          }
+          ],
+          series: [{
+            label: {
+              normal: {
+                show: false
+              }
+            },
+            itemStyle: {
+              opacity: 0
+            },
+            stack: "consumption",
+            data: data.classinfo.consumptionStatisticsList.map(x => CommonFunction.roundvalue(x.min)),
+            type: 'bar'
+          },
+          {
+            label: {
+              normal: {
+                show: false
+              }
+            },
+            itemStyle: {
+              opacity: 1
+            },
+            stack: "consumption",
+            data: data.classinfo.consumptionStatisticsList.map(x => CommonFunction.roundvalue(x.max - x.min)),
+            type: 'bar'
+          },
+          {
+            label: {
+              normal: {
+                show: false
+              }
+            },
+            itemStyle: {
+              color: '#c23531',
+              opacity: 1
+            },
+            data: data.classinfo.consumptionStatisticsList.map(x => CommonFunction.roundvalue(x.avg)),
+            type: 'line',
+            yAxisIndex: 1,
+            markPoint: {
+              data: [
+                { type: 'max', name: '最大值' },
+                { type: 'min', name: '最小值' }
+              ]
+            },
+            markLine: {
+              data: [
+                { type: 'average', name: '平均值' }
+              ]
+            },
+          }]
+        };
+
+        if (this.ConsumptionEchartsInstance != undefined) {
+          this.ConsumptionEchartsInstance.setOption(this.ConsumptionOption);
+        }
+
+
+        this.ConsumptionTotalOption = {
+          xAxis: {
+            type: 'category',
+            data: data.classinfo.consumptionStatisticsList.map(x => x.name)
+          },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+              type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            },
+            formatter: (items) => {
+              let rtn = items[0].name + "<br />"
+              rtn += "消费金额：" + items[0].value + "<br />" + "消费人数：" + items[1].value
+              return rtn;
+            }
+          },
+          title: {
+            text: this.ClassName + "每日全体消费统计"
+          },
+          toolbox: ToolboxForBar,
+          yAxis: [{
+            name: '金额',
+            type: 'value'
+          },
+          {
+            name: '人数',
+            type: 'value'
+          }
+          ],
+          series: [{
+            label: {
+              normal: {
+                show: false
+              }
+            },
+            stack: "consumption",
+            data: data.classinfo.consumptionStatisticsList.map(x => CommonFunction.roundvalue(x.sum)),
+            type: 'bar',
+            itemStyle: {
+              color: '#2f4554',
+              opacity: 1
+            },
+            markPoint: {
+              data: [
+                { type: 'max', name: '最大值' },
+                { type: 'min', name: '最小值' }
+              ]
+            },
+            markLine: {
+              data: [
+                { type: 'average', name: '平均值' }
+              ]
+            },
+          },
+          {
+            label: {
+              normal: {
+                show: false
+              }
+            },
+            itemStyle: {
+              color: '#c23531',
+              opacity: 1
+            },
+            data: data.classinfo.consumptionStatisticsList.map(x => CommonFunction.roundvalue(x.cnt)),
+            type: 'line',
+            yAxisIndex: 1,
+          }]
+        };
+
+        if (this.ConsumptionTotalEchartsInstance != undefined) {
+          this.ConsumptionTotalEchartsInstance.setOption(this.ConsumptionTotalOption);
+        }
+
       });
   }
 

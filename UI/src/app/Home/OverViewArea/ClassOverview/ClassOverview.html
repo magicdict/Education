@@ -53,15 +53,14 @@
     </div>
   </p-tabPanel>
   <p-tabPanel header="考勤和消费" style="width:1140px;">
-    <div *ngIf="IsShowKaoqinGraph" class="box box-primary box-solid" style="width: 100%;margin-top: 10px;">
-      <div class="box-header with-border">
-        <h3 class="box-title">考勤</h3>
-      </div>
-      <div class="box-body">
-        <div (chartInit)="onKaoqinChartInit($event)" echarts [options]="KaoqinOpt"
-          style="width:300px;height:260px;"></div>
-      </div>
+    <div (chartInit)="onConsumptionChartInit($event)" echarts [options]="ConsumptionOption"
+      style="width:1140px;height:400px;">
     </div>
+    <div (chartInit)="onConsumptionTotalChartInit($event)" echarts [options]="ConsumptionTotalOption"
+      style="width:1140px;height:400px;">
+    </div> 
+    <div *ngIf="IsShowKaoqinGraph" (chartInit)="onKaoqinChartInit($event)" echarts [options]="KaoqinOpt"
+      style="width:300px;height:260px;"></div>
   </p-tabPanel>
   <p-tabPanel header="学生列表" style="width:1140px;">
     <div class="container">
