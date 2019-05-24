@@ -472,7 +472,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
   IsFirst = true;
   handleChange(e) {
     var index = e.index;
-    if (index !== 2) return;
+    if (index !== 3) return;
     if (this.IsFirst) {
       this.IsFirst = false;
       this.classExamList.ResetScroll();

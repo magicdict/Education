@@ -3,65 +3,69 @@
   {{this.ClassName}} 人数：{{this.StudentCnt}}
 </div>
 <p-tabView *ngIf="this.StudentsInfo !==undefined" (onChange)="handleChange($event)">
+  
   <p-tabPanel header="概要" style="width:1140px;">
-    <div class="row">
-      <div class="col-8">
-        <app-map [NativePlace]="this.StudentsInfo.nativePlace" [StyleHeight]="'600px'" [StyleWidth]="'600px'"
-          [NativePlaceZheJiang]="this.StudentsInfo.nativePlaceZheJiang" [ViusalZheJiangMax]="5" [ViusalChinaMax]="5"
-          [Title]="this.ClassName">
-        </app-map>
-      </div>
-      <div class="col-4">
-        <div class="box box-primary box-solid" style="width: 100%;">
-          <div class="box-header with-border">
-            <h3 class="box-title">性别比例</h3>
-          </div>
-          <div class="box-body">
-            <div echarts (chartInit)="onSexRateChartInit($event)" [options]="mSexRate"
-              style="width:320px;height: 250px;"></div>
-          </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-8">
+          <app-map [NativePlace]="this.StudentsInfo.nativePlace" [StyleHeight]="'600px'" [StyleWidth]="'600px'"
+            [NativePlaceZheJiang]="this.StudentsInfo.nativePlaceZheJiang" [ViusalZheJiangMax]="5" [ViusalChinaMax]="5"
+            [Title]="this.ClassName">
+          </app-map>
         </div>
-        <div class="box box-primary  box-solid" style="width: 100%;">
-          <div class="box-header with-border">
-            <h3 class="box-title">民族</h3>
-          </div>
-          <div class="box-body">
-            <div style="margin: 5px 0px 5px 0px">
-              <button *ngFor="let x of StudentsInfo.nation" type="button" class="btn btn-primary"
-                style="cursor: default;margin-left: 10px">
-                {{x.name}}
-                <span class="badge badge-light">{{x.value}}</span>
-              </button>
+        <div class="col-4">
+          <div class="box box-primary box-solid" style="width: 100%;">
+            <div class="box-header with-border">
+              <h3 class="box-title">性别比例</h3>
+            </div>
+            <div class="box-body">
+              <div echarts (chartInit)="onSexRateChartInit($event)" [options]="mSexRate"
+                style="width:320px;height: 250px;"></div>
             </div>
           </div>
-        </div>
-        <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
-          <div class="box-header with-border">
-            <h3 class="box-title">政治面貌</h3>
+          <div class="box box-primary  box-solid" style="width: 100%;">
+            <div class="box-header with-border">
+              <h3 class="box-title">民族</h3>
+            </div>
+            <div class="box-body">
+              <div style="margin: 5px 0px 5px 0px">
+                <button *ngFor="let x of StudentsInfo.nation" type="button" class="btn btn-primary"
+                  style="cursor: default;margin-left: 10px">
+                  {{x.name}}
+                  <span class="badge badge-light">{{x.value}}</span>
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="box-body">
-            <div style="margin: 5px 0px 5px 0px">
-              <button *ngFor="let x of StudentsInfo.policy" type="button" class="btn btn-danger"
-                style="cursor: default;margin-left: 10px">
-                {{x.name}}
-                <span class="badge badge-light">{{x.value}}</span>
-              </button>
+          <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+            <div class="box-header with-border">
+              <h3 class="box-title">政治面貌</h3>
+            </div>
+            <div class="box-body">
+              <div style="margin: 5px 0px 5px 0px">
+                <button *ngFor="let x of StudentsInfo.policy" type="button" class="btn btn-danger"
+                  style="cursor: default;margin-left: 10px">
+                  {{x.name}}
+                  <span class="badge badge-light">{{x.value}}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="IsShowKaoqinGraph" class="box box-primary box-solid" style="width: 100%;">
+            <div class="box-header with-border">
+              <h3 class="box-title">性别比例</h3>
+            </div>
+            <div class="box-body">
+              <div (chartInit)="onKaoqinChartInit($event)" echarts [options]="KaoqinOpt"
+                style="width:300px;height:260px;">
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </p-tabPanel>
-  <p-tabPanel header="考勤和消费" style="width:1140px;">
-    <div (chartInit)="onConsumptionChartInit($event)" echarts [options]="ConsumptionOption"
-      style="width:1140px;height:400px;">
-    </div>
-    <div (chartInit)="onConsumptionTotalChartInit($event)" echarts [options]="ConsumptionTotalOption"
-      style="width:1140px;height:400px;">
-    </div> 
-    <div *ngIf="IsShowKaoqinGraph" (chartInit)="onKaoqinChartInit($event)" echarts [options]="KaoqinOpt"
-      style="width:300px;height:260px;"></div>
-  </p-tabPanel>
+
   <p-tabPanel header="学生列表" style="width:1140px;">
     <div class="container">
       <div class="row">
@@ -131,6 +135,16 @@
       </ng-template>
     </p-table>
   </p-tabPanel>
+
+  <p-tabPanel header="消费" style="width:1140px;">
+    <div (chartInit)="onConsumptionChartInit($event)" echarts [options]="ConsumptionOption"
+      style="width:1140px;height:400px;">
+    </div>
+    <div (chartInit)="onConsumptionTotalChartInit($event)" echarts [options]="ConsumptionTotalOption"
+      style="width:1140px;height:400px;">
+    </div>
+  </p-tabPanel>
+
   <p-tabPanel header="成绩" style="width:1140px;">
     <div class="container" style="padding: 0px ">
       <div class="row">
