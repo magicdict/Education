@@ -120,6 +120,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
     onSideCourseChartInit(event: any) {
         this.SideCourseInstance = event;
     }
+    mSidePointCnt = 0;
     mSideCourseOption = {
         title: {
             text: '',
@@ -142,6 +143,17 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         series: [{
             symbolSize: 20,
             data: [],
+            itemStyle:{
+                color:(items)=>{
+                    let diff = Math.abs(items.value[0] - items.value[1]);
+                    let stardart = this.mSidePointCnt / 2;
+                    if (diff > stardart){
+                        return "#c23531";
+                    } else{
+                        return "#2f4554";
+                    }
+                }
+            },
             type: 'scatter'
         }]
     };
@@ -308,11 +320,6 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
             }
         }
-        //偏科分析
-        this.mSideCourseOption.series[0].data = r.top50.map(x => [x.gradeRank, x.gradeRank]);
-        if (this.SideCourseInstance !== undefined) {
-            this.SideCourseInstance.setOption(this.mSideCourseOption);
-        }
     }
 
     JumpToExam(number: string, subName: string, Grade: string) {
@@ -336,6 +343,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
             r => {
                 this.mSideCourseOption.xAxis.name = this.SelectSubName;
                 this.mSideCourseOption.yAxis.name = this.SelectSideSubName;
+                this.mSidePointCnt = r.length;
                 this.mSideCourseOption.series[0].data = r;
                 if (this.SideCourseInstance !== undefined) {
                     this.SideCourseInstance.setOption(this.mSideCourseOption);

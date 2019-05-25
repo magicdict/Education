@@ -17,15 +17,16 @@ public class Kaoqin
     /// </summary>
     /// <value></value>
     public string RecDateTime { get; set; }
-
-
     public string RecDateTimeYear { get; set; }
-
-
     public string RecDateTimeMonth { get; set; }
-
-
     public string RecDateTimeDay { get; set; }
+    public string RecDateTimeYearMonthDay
+    {
+        get
+        {
+            return RecDateTimeYear + RecDateTimeMonth + RecDateTimeDay;
+        }
+    }
 
     public string RecDateTimeHour { get; set; }
 

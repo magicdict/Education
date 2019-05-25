@@ -31,6 +31,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
   KaoqinOpt: ISimpleBar;
   ConsumptionOption: any;
   ConsumptionTotalOption: any;
+  KaoqinDialyOption: any;
   IsShowKaoqinGraph: boolean;
 
   StudentsInfo: IStudentGroupProperty;
@@ -64,6 +65,10 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
   ConsumptionTotalEchartsInstance: any;
   onConsumptionTotalChartInit(event: any) {
     this.ConsumptionTotalEchartsInstance = event;
+  }
+  KaoqinDialyInstance: any;
+  onKaoqinDialyChartInit(event: any) {
+    this.KaoqinDialyInstance = event;
   }
 
   SaveSexRateImage() {
@@ -104,7 +109,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
         this.mSexRate.title['show'] = false;
         this.mSexRate.series[0].data[0].value = data.classinfo.property.sexRate.posCnt * 100 / data.classinfo.property.studentCnt;
         this.mSexRate.series[0].data[1].value = data.classinfo.property.sexRate.negCnt * 100 / data.classinfo.property.studentCnt;
-        this.mSexRate.series[0].label.normal['formatter'] = param => (param.value).toFixed(2) + '%';
+        this.mSexRate.series[0].label.normal['formatter'] = (param: { value: any; }) => (param.value).toFixed(2) + '%';
         if (this.SexRateEchartsInstance !== undefined) {
           this.SexRateEchartsInstance.clear();  //不写的话label居然不更新
           this.SexRateEchartsInstance.setOption(this.mSexRate, true);
@@ -182,7 +187,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
             axisPointer: {            // 坐标轴指示器，坐标轴触发有效
               type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
             },
-            formatter: (items) => {
+            formatter: (items: any) => {
               let rtn = items[0].name + "<br />"
               rtn += "最小值：" + items[0].value + "<br />"
               rtn += "最大值：" + CommonFunction.roundvalue((items[0].value + items[1].value)) + "<br />"
@@ -268,7 +273,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
             axisPointer: {            // 坐标轴指示器，坐标轴触发有效
               type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
             },
-            formatter: (items) => {
+            formatter: (items: any) => {
               let rtn = items[0].name + "<br />"
               rtn += "消费金额：" + items[0].value + "<br />" + "消费人数：" + items[1].value
               return rtn;
@@ -332,7 +337,111 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
           this.ConsumptionTotalEchartsInstance.setOption(this.ConsumptionTotalOption);
         }
 
+        this.KaoqinDialyOption = {
+          xAxis: {
+            type: 'category',
+            data: data.classinfo.kaoqingStatisticsList.map(x => x.name)
+          },
+          title: {
+            text: this.ClassName + "每日考勤统计"
+          },
+          toolbox: ToolboxForBar,
+          yAxis: [{
+            name: '次数',
+            type: 'value'
+          }],
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+              type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            },
+            formatter: (items: any) => {
+              let rtn = items[0].name + "<br />";
+              rtn += "迟到" + items[0].value + "<br />";
+              rtn += "校服" + items[1].value + "<br />";
+              rtn += "早退" + items[2].value + "<br />";
+              rtn += "离校" + items[3].value + "<br />";
+              rtn += "进校" + items[4].value + "<br />";
+              return rtn;
+            }
+          },
+          legend: {
+            show: true,
+            data: ["迟到", "校服", "早退", "离校", "进校"]
+          },
+          series: [
+            {
+              label: {
+                normal: {
+                  show: false
+                }
+              },
+              stack: "kaoqin",
+              data: data.classinfo.kaoqingStatisticsList.map(x => this.getkaoqingStatisticsData("迟到", x)),
+              type: 'bar', name: "迟到"
+            },
+            {
+              label: {
+                normal: {
+                  show: false
+                }
+              },
+              stack: "kaoqin",
+              data: data.classinfo.kaoqingStatisticsList.map(x => this.getkaoqingStatisticsData("校服", x)),
+              type: 'bar', name: "校服"
+            },
+            {
+              label: {
+                normal: {
+                  show: false
+                }
+              },
+              stack: "kaoqin",
+              data: data.classinfo.kaoqingStatisticsList.map(x => this.getkaoqingStatisticsData("早退", x)),
+              type: 'bar', name: "早退"
+            },
+            {
+              label: {
+                normal: {
+                  show: false
+                }
+              },
+              stack: "kaoqin",
+              data: data.classinfo.kaoqingStatisticsList.map(x => this.getkaoqingStatisticsData("离校", x)),
+              type: 'bar', name: "离校"
+            },
+            {
+              label: {
+                normal: {
+                  show: false
+                }
+              },
+              stack: "kaoqin",
+              data: data.classinfo.kaoqingStatisticsList.map(x => this.getkaoqingStatisticsData("进校", x)),
+              type: 'bar', name: "进校"
+            }
+
+          ]
+        };
+
+        if (this.KaoqinDialyInstance != undefined) {
+          try {
+            this.KaoqinDialyInstance.setOption(this.KaoqinDialyOption);
+          } catch (error) {
+
+          }
+        }
+
+
       });
+  }
+
+  getkaoqingStatisticsData(detailId: string, data: { name: string, value: { name: string, value: number }[] }): number {
+    let n = 0;
+    data.value.forEach(element => {
+      if (element.name === detailId) n = element.value;
+    });
+    return n;
   }
 
   subNameList = ['语文', '数学', '英语', '历史', '政治', '生物', '物理', '化学', '地理'];
@@ -470,7 +579,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
 
   //Panel里面带滚动条表格的修复
   IsFirst = true;
-  handleChange(e) {
+  handleChange(e: { index: any; }) {
     var index = e.index;
     if (index !== 3) return;
     if (this.IsFirst) {

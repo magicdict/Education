@@ -24,7 +24,7 @@ export class ConsumptionOverviewComponent implements OnInit {
     { field: 'name', header: "姓名" },
     { field: 'className', header: "班级" },
     { field: 'sex', header: "性别" },
-    { field: 'liveAtSchool', header: "是否住校" },
+    { field: 'liveAtSchool', header: "住校" },
     { field: 'month', header: "月度" },
     { field: 'amount', header: "金额" },
   ];

@@ -3,7 +3,7 @@
   {{this.ClassName}} 人数：{{this.StudentCnt}}
 </div>
 <p-tabView *ngIf="this.StudentsInfo !==undefined" (onChange)="handleChange($event)">
-  
+
   <p-tabPanel header="概要" style="width:1140px;">
     <div class="container">
       <div class="row">
@@ -53,7 +53,7 @@
           </div>
           <div *ngIf="IsShowKaoqinGraph" class="box box-primary box-solid" style="width: 100%;">
             <div class="box-header with-border">
-              <h3 class="box-title">性别比例</h3>
+              <h3 class="box-title">考勤次数</h3>
             </div>
             <div class="box-body">
               <div (chartInit)="onKaoqinChartInit($event)" echarts [options]="KaoqinOpt"
@@ -136,13 +136,16 @@
     </p-table>
   </p-tabPanel>
 
-  <p-tabPanel header="消费" style="width:1140px;">
+  <p-tabPanel header="消费和考勤" style="width:1140px;">
     <div (chartInit)="onConsumptionChartInit($event)" echarts [options]="ConsumptionOption"
       style="width:1140px;height:400px;">
     </div>
     <div (chartInit)="onConsumptionTotalChartInit($event)" echarts [options]="ConsumptionTotalOption"
       style="width:1140px;height:400px;">
     </div>
+    <div *ngIf="IsShowKaoqinGraph" (chartInit)="onKaoqinDialyChartInit($event)" echarts [options]="KaoqinDialyOption"
+      style="width:1140px;height:400px;">
+    </div> 
   </p-tabPanel>
 
   <p-tabPanel header="成绩" style="width:1140px;">

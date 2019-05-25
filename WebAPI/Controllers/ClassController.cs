@@ -57,6 +57,8 @@ namespace Education.Controllers
             public List<NameValueSet> WeeklyConsumption { get; set; }
 
             public List<statistics> ConsumptionStatisticsList { get; set; }
+
+            public List<statisticsKaoqin> KaoqingStatisticsList { get; set; }
         }
 
         public class statistics
@@ -67,8 +69,14 @@ namespace Education.Controllers
             public float avg { get; set; }
             public float sum { get; set; }
             public float cnt { get; set; }
-
         }
+
+        public class statisticsKaoqin
+        {
+            public string name { get; set; }
+            public List<NameValueSet> value { get; set; }
+        }
+
 
 
         /// <summary>
@@ -100,14 +108,14 @@ namespace Education.Controllers
 
             //班级考勤信息
             overview.Kaoqing = new List<NameValueSet>();
-            foreach (var key in Dataset.KaoqinTypeDic.Keys)
+            foreach (var key in Dataset.KaoqinTypeDic2018.Keys)
             {
                 var cnt = Dataset.KaoqinList.Count(x => x.ClassId == ClassId && x.DetailId == key);
                 if (cnt > 0)
                 {
                     overview.Kaoqing.Add(new NameValueSet()
                     {
-                        name = Dataset.KaoqinTypeDic[key].control_task_name,
+                        name = Dataset.KaoqinTypeDic2018[key].control_task_name,
                         value = cnt
                     });
                 }
@@ -129,6 +137,26 @@ namespace Education.Controllers
                }
             ).ToList();
             overview.ConsumptionStatisticsList.Sort((x, y) => { return x.name.CompareTo(y.name); });
+
+            var ClassKaoqin = Dataset.KaoqinList.Where(x => x.ClassId == ClassId && x.ControllerID.StartsWith("9"));
+             
+            overview.KaoqingStatisticsList = ClassKaoqin.GroupBy(x => x.RecDateTimeYearMonthDay).Select(x =>
+            {
+                var KaoqinGroup = x.GroupBy(z => z.DetailId);
+                var Controllerlist = KaoqinGroup.Select(n =>
+                {
+                    return new NameValueSet()
+                    {
+                        name = Dataset.KaoqinTypeDic[n.Key].control_task_name,
+                        value = n.Count()
+                    };
+                });
+                return new statisticsKaoqin()
+                {
+                    name = x.Key,
+                    value = Controllerlist.ToList()
+                };
+            }).ToList();
             return overview;
         }
     }

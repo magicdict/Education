@@ -118,9 +118,9 @@ export interface IConsumption {
   perSex: string;
   weather: IWeather;
   dayOfWeek: number;
-  classId:string;
-  grade:string;
-  liveAtSchool:boolean;
+  classId: string;
+  grade: string;
+  liveAtSchool: boolean;
 }
 
 export interface IStudentMonthlyConsumption {
@@ -269,7 +269,8 @@ export interface IClassInfo {
   kaoqing: { name: string, value: number }[];
   monthlyConsumption: { name: string, value: number }[];
   weeklyConsumption: { name: string, value: number }[];
-  consumptionStatisticsList : IStatistics[];
+  consumptionStatisticsList: IStatistics[];
+  kaoqingStatisticsList: { name: string, value: { name: string, value: number }[] }[];
 }
 
 export interface IStatistics {
