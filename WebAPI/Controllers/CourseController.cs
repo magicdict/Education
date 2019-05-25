@@ -151,6 +151,26 @@ namespace Education.Controllers
             Result.Top50ForClassName.Sort((x, y) => { return x.name.CompareTo(y.name); });
             return Result;
         }
+        [HttpGet("GetGradeRankInfo")]
+        public ActionResult<List<int[]>> GetGradeRankInfo(string Number, string SubName1, string SubName2, string Grade)
+        {
+            SubName1 = System.Web.HttpUtility.UrlDecode(SubName1);
+            SubName2 = System.Web.HttpUtility.UrlDecode(SubName2);
+            Grade = System.Web.HttpUtility.UrlDecode(Grade);
+            var All1 = Dataset.ChengjiList.Where(x => x.SubName == SubName1 && x.Number == Number && x.Grade == Grade).ToList();
+            var All2 = Dataset.ChengjiList.Where(x => x.SubName == SubName2 && x.Number == Number && x.Grade == Grade).ToList();
+            var rtn = new List<int[]>();
+            foreach (var item in All1)
+            {
+                var StudentID = item.StudentID;
+                var item2 = All2.Find(x => x.StudentID == StudentID);
+                if (item2 != null)
+                {
+                    rtn.Add(new int[] { item.GradeRank, item2.GradeRank });
+                }
+            }
+            return rtn;
+        }
 
         /// <summary>
         /// 获得班级某科目成绩信息

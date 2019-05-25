@@ -102,6 +102,13 @@
                         style="width:1100px;height: 650px;border: 2px solid lightgray;padding: 5px;margin: 5px;"
                         (chartInit)="onFunnelChartInit($event)"></div>
                 </p-tabPanel>
+                <p-tabPanel [header]="'偏科分析'">
+                    <p-dropdown [options]="SideSubNameList" [(ngModel)]="SelectSideSubName" (onChange)="SideSubNameChanged()">
+                    </p-dropdown>
+                    <div echarts [options]="mSideCourseOption"  
+                        style="width:1100px;height: 650px;border: 2px solid lightgray;padding: 5px;margin: 5px;"
+                        (chartInit)="onSideCourseChartInit($event)"></div>
+                </p-tabPanel>
             </p-tabView>
         </div>
     </div>

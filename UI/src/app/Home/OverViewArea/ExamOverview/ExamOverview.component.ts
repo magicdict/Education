@@ -40,12 +40,16 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
     SubNameList: string[];
     SelectSubName = '';
+    SideSubNameList = [];
+    SelectSideSubName = '';
 
     ExamChange() {
         let m = this.GradeExamList.find(x => x.name == this.SelectGrade).value;
         let n = m.find(x => x.number == this.SelectExamNumber);
         this.SelectExamName = n.numberName;
         this.SubNameList = n.subNameList;
+        this.SideSubNameList = this.SubNameList.map(x => { return { 'label': x, 'value': x } });
+        this.SelectSideSubName = n.subNameList[0];
         this.JumpToExam(this.SelectExamNumber, this.SubNameList[0], this.SelectGrade);
     }
 
@@ -78,12 +82,16 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
             this.SelectSubName = this.Exams[0].record.subName;
             this.Examlist = m.map(x => { return { 'label': x.numberName, 'value': x.number } });
             this.SubNameList = n.subNameList;
+            this.SideSubNameList = this.SubNameList.map(x => { return { 'label': x, 'value': x } });
+            this.SelectSideSubName = this.SubName;
+            this.SideSubNameChanged();
         } else {
             //默认
             this.SelectGrade = this.GradeExamList[0].name;
             this.GradeChange();
             this.SelectExamNumber = this.GradeExamList[0].value[0].number;
             this.SubNameList = this.GradeExamList[0].value[0].subNameList;
+            this.SideSubNameList = this.SubNameList.map(x => { return { 'label': x, 'value': x } });
             this.JumpToExam(this.GradeExamList[0].value[0].number,
                 this.GradeExamList[0].value[0].subNameList[0], this.GradeExamList[0].name);
         }
@@ -107,6 +115,37 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         this.FunnelechartsInstance = event;
     }
     mScoreFunnelOption = CommonFunction.clone(ScoreFunnelOption);
+
+    SideCourseInstance: any;
+    onSideCourseChartInit(event: any) {
+        this.SideCourseInstance = event;
+    }
+    mSideCourseOption = {
+        title: {
+            text: '',
+        },
+        tooltip: {
+            formatter:(items)=>{
+                let rtn = this.SelectSubName + ":" + items.value[0] + "</br>";
+                rtn += this.SelectSideSubName + ":" + items.value[1];                
+                return rtn;
+            }
+        },
+        xAxis: {
+            type: 'value',
+            name:'',
+        },
+        yAxis: {
+            type: 'value',
+            name:''
+        },
+        series: [{
+            symbolSize: 20,
+            data: [],
+            type: 'scatter'
+        }]
+    };
+
 
     RadarechartsInstance: any;
     onRadarChartInit(event: any) {
@@ -154,7 +193,7 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
         title: {
             text: 'TOP50各班级排名分布情况',
         },
-        tooltip:{},
+        tooltip: {},
         xAxis: {
             type: 'category',
             data: [],
@@ -262,7 +301,6 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
         this.mTop50ScatterOption.xAxis.data = this.mTop50ClassOption.xAxis.data;
         this.mTop50ScatterOption.series[0].data = SeriesData;
-
         if (this.Top50ScatterChartInstance !== undefined) {
             try {
                 this.Top50ScatterChartInstance.setOption(this.mTop50ScatterOption);
@@ -270,15 +308,38 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
             }
         }
+        //偏科分析
+        this.mSideCourseOption.series[0].data = r.top50.map(x => [x.gradeRank, x.gradeRank]);
+        if (this.SideCourseInstance !== undefined) {
+            this.SideCourseInstance.setOption(this.mSideCourseOption);
+        }
     }
 
     JumpToExam(number: string, subName: string, Grade: string) {
         var request = "course/GetExamInfoByNumberAndSubName?number=" + number + "&subName=" + escape(subName) + "&Grade=" + escape(Grade);
         this.SelectSubName = subName;
+        this.SelectSideSubName = subName;
         this.commonFunction.httpRequest<IExamInfoForNumberAndSubName>(request).then(
             r => {
                 this.service.CurrentExam = r;
                 this.CreateEntity(r);
+                this.SideSubNameChanged();
+            }
+        );
+    }
+
+    //偏科选择切换
+    SideSubNameChanged() {
+        var request = "course/GetGradeRankInfo?number=" + this.SelectExamNumber + "&subName1=" + escape(this.SelectSubName) + 
+        "&subName2=" + escape(this.SelectSideSubName) + "&Grade=" + escape(this.SelectGrade);
+        this.commonFunction.httpRequest<[][]>(request).then(
+            r => {
+                this.mSideCourseOption.xAxis.name = this.SelectSubName;
+                this.mSideCourseOption.yAxis.name = this.SelectSideSubName;
+                this.mSideCourseOption.series[0].data = r;
+                if (this.SideCourseInstance !== undefined) {
+                    this.SideCourseInstance.setOption(this.mSideCourseOption);
+                }
             }
         );
     }
