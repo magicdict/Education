@@ -234,7 +234,12 @@ export const CourseSelectCntOption = {
         }
       },
       data: [],
-      type: 'bar'
+      type: 'bar',
+      markLine: {
+        data: [
+          { type: 'average', name: '平均值' }
+        ]
+      },
     }
   ]
 };

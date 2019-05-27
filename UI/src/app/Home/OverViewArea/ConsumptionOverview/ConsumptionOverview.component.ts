@@ -310,12 +310,14 @@ export class ConsumptionOverviewComponent implements OnInit {
     this.route.data
       .subscribe((data: { consumptionInfo: ISchoolConsumptionInfo }) => {
         this.dailyOpt.visualMap[0].max = 50000;
+        this.dailycntOpt.title.text = "每日消费金额";
         this.dailyOpt.series[0].symbolSize = this.symbolSize;
         this.dailyOpt.series[1].symbolSize = this.symbolSize;
         this.dailyOpt.series[0].data = data.consumptionInfo.dailyConsumption.map(x => { return [x.name, x.value * -1]; });
         this.dailyOpt.series[1].data = data.consumptionInfo.dailyConsumption.map(x => { return [x.name, x.value * -1]; });
 
         this.dailycntOpt.visualMap[0].max = 1700;
+        this.dailycntOpt.title.text = "每日消费人数";
         this.dailycntOpt.series[0].symbolSize = this.symbolSizeCnt;
         this.dailycntOpt.series[1].symbolSize = this.symbolSizeCnt;
         this.dailycntOpt.series[0].data = data.consumptionInfo.dailyConsumptionStudentCnt.map(x => { return [x.name, x.value]; });
@@ -504,9 +506,6 @@ export class ConsumptionOverviewComponent implements OnInit {
   MinuteFrom6 = CommonFunction.clone(this.HourMinuteOption);
   MinuteFrom11 = CommonFunction.clone(this.HourMinuteOption);
   MinuteFrom16 = CommonFunction.clone(this.HourMinuteOption);
-
-
-
 
   WeekTimeOption3DChartInstance: any;
   onWeekTimeOption3DChartInit(event: any) {

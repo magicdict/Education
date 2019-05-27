@@ -163,16 +163,16 @@ export const MonthlyCompumptionBarOptionTotal = {
             type: 'bar',
             markPoint: {
                 data: [
-                  { type: 'max', name: '最大值' },
-                  { type: 'min', name: '最小值' }
+                    { type: 'max', name: '最大值' },
+                    { type: 'min', name: '最小值' }
                 ]
-              },
-              markLine: {
+            },
+            markLine: {
                 data: [
-                  { type: 'average', name: '平均值' }
+                    { type: 'average', name: '平均值' }
                 ]
-              },
-        
+            },
+
         }
     ]
 };
@@ -236,7 +236,7 @@ export const MonthlyCompumptionBarOption = {
 export const DairyCanlendarOption = {
     title: {
         text: '每日消费额',
-        show: false
+        show: true
     },
     tooltip: {
         position: 'top',

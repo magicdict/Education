@@ -2,17 +2,19 @@
 
 <p-tabView>
     <p-tabPanel header="单门课程" style="width:1140px;">
-        <div class="container" style="width:1140px;">
+        <p-overlayPanel #op1 [showCloseIcon]="true" [dismissable]="true">
+            选课人数最多和最少的课程，相差了3倍，课程有明显的热门和冷门。男生和女生的选课倾向也是不同的。
+        </p-overlayPanel>
+        <div class="container" style="width:1100px;">
             <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="alert alert-warning">
-                    选课人数最多和最少的课程，相差了3倍，课程有明显的热门和冷门。男生和女生的选课倾向也是不同的。
-                </div>
-            </div>
-            <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="col">
-                    <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div class="box box-primary  box-solid" style="width: 100%;margin: 5px 0px; ">
                         <div class="box-header with-border">
                             <h3 class="box-title">单课程百分比(全体)</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-info" style="height: 30px;"
+                                    (click)="op1.show($event)"><i class="fas fa-question"></i></button>
+                            </div>
                         </div>
                         <div class="box-body">
                             <div style="margin: 5px 0px 5px 0px">
@@ -27,29 +29,34 @@
                 </div>
             </div>
             <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="col">
-                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div style="border: 2px solid lightgray;padding: 0px;margin: 0px 5px 0px 0px">
                         <div echarts [options]="mCourseSelectRadarGraphOption"
-                            (chartInit)="onCourseSelectRadarGraphChartInit($event)" style="width:450px;"></div>
+                            (chartInit)="onCourseSelectRadarGraphChartInit($event)" style="width:500px;"></div>
                     </div>
                 </div>
-                <div class="col">
-                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div style="border: 2px solid lightgray;padding: 0px;margin: 0px 0px 0px 5px">
                         <div echarts [options]="mCourseSelectCntOption" (chartInit)="onCourseSelectCntChartInit($event)"
-                            style="width:450px;"></div>
+                            style="width:500px;"></div>
                     </div>
                 </div>
             </div>
+
+            <p-overlayPanel #op2 [showCloseIcon]="true" [dismissable]="true">
+                选课人数最多和最少的课程，相差了8倍，物理基本上是男生最爱的课程，政治则是男生最不喜欢的课程。
+            </p-overlayPanel>
+
             <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="alert alert-warning">
-                    选课人数最多和最少的课程，相差了8倍，物理基本上是男生最爱的课程。
-                </div>
-            </div>
-            <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="col">
-                    <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div class="box box-primary  box-solid" style="width: 100%;margin: 5px 0px; ">
                         <div class="box-header with-border">
                             <h3 class="box-title">单课程百分比(男生)</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-info" style="height: 30px;"
+                                    (click)="op2.show($event)"><i class="fas fa-question"></i></button>
+                            </div>
+
                         </div>
                         <div class="box-body">
                             <div style="margin: 5px 0px 5px 0px">
@@ -64,29 +71,33 @@
                 </div>
             </div>
             <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="col">
-                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div style="border: 2px solid lightgray;padding: 0px;margin: 0px 5px 0px 0px">
                         <div echarts [options]="mMaleCourseSelectRadarGraphOption"
-                            (chartInit)="onMaleCourseSelectRadarGraphChartInit($event)" style="width:450px;"></div>
+                            (chartInit)="onMaleCourseSelectRadarGraphChartInit($event)" style="width:500px;"></div>
                     </div>
                 </div>
-                <div class="col">
-                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div style="border: 2px solid lightgray;padding: 0px;margin: 0px 0px 0px 5px">
                         <div echarts [options]="mMaleCourseSelectCntOption"
-                            (chartInit)="onMaleCourseSelectCntChartInit($event)" style="width:450px;"></div>
+                            (chartInit)="onMaleCourseSelectCntChartInit($event)" style="width:500px;"></div>
                     </div>
                 </div>
             </div>
+
+            <p-overlayPanel #op3 [showCloseIcon]="true" [dismissable]="true">
+                选课人数最多和最少的课程，相差了3倍，相对男生来说，选课比较平均，没有十分悬殊的差距。
+            </p-overlayPanel>
+
             <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="alert alert-warning">
-                    选课人数最多和最少的课程，相差了3倍，相对男生来说比较平均。
-                </div>
-            </div>
-            <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="col">
-                    <div class="box box-primary  box-solid" style="width: 100%;margin-top: 10px;">
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div class="box box-primary  box-solid" style="width: 100%;margin: 5px 0px; ">
                         <div class="box-header with-border">
                             <h3 class="box-title">单课程百分比(女生)</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-info" style="height: 30px;"
+                                    (click)="op3.show($event)"><i class="fas fa-question"></i></button>
+                            </div>
                         </div>
                         <div class="box-body">
                             <div style="margin: 5px 0px 5px 0px">
@@ -102,16 +113,16 @@
                 </div>
             </div>
             <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="col">
-                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div style="border: 2px solid lightgray;padding: 0px;margin: 0px 5px 0px 0px">
                         <div echarts [options]="mFeMaleCourseSelectRadarGraphOption"
-                            (chartInit)="onFeMaleCourseSelectRadarGraphChartInit($event)" style="width:450px;"></div>
+                            (chartInit)="onFeMaleCourseSelectRadarGraphChartInit($event)" style="width:500px;"></div>
                     </div>
                 </div>
-                <div class="col">
-                    <div style="border: 2px solid lightgray;padding: 5px;margin: 5px">
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div style="border: 2px solid lightgray;padding: 0px;margin: 0px 0px 0px 5px">
                         <div echarts [options]="mFeMaleCourseSelectCntOption"
-                            (chartInit)="onFeMaleCourseSelectCntChartInit($event)" style="width:450px;"></div>
+                            (chartInit)="onFeMaleCourseSelectCntChartInit($event)" style="width:500px;"></div>
                     </div>
                 </div>
             </div>
@@ -119,9 +130,13 @@
     </p-tabPanel>
     <p-tabPanel header="两门课程" style="width:100%;">
         <div class="container" style="width:1140px;">
-            <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="alert alert-warning">
-                    由于单科有冷门和热门课程，两门课程的最多组合和最少组合，相差了15倍
+            <p-overlayPanel #op11 [showCloseIcon]="true" [dismissable]="true">
+                由于单科有冷门和热门课程，两门课程的最多组合和最少组合，相差了15倍
+            </p-overlayPanel>
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-info" style="height: 30px;float:right;margin: 5px;"
+                        (click)="op11.show($event)"><i class="fas fa-question"></i></button>
                 </div>
             </div>
             <div class="row">
@@ -138,11 +153,10 @@
                         style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
                 </div>
             </div>
-            <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="alert alert-warning">
-                    通过堆叠可以看到不同组合对于男女生来说倾向性明显，历史/生物 组合女生高于男生，技术/物理组合男生高于女生
-                </div>
-            </div>
+
+            <p-overlayPanel #op12 [showCloseIcon]="true" [dismissable]="true">
+                通过堆叠可以看到不同组合对于男女生来说倾向性明显，历史/生物 组合女生高于男生，技术/物理组合男生高于女生
+            </p-overlayPanel>
             <div class="row" style="padding: 5px;margin: 5px;">
                 <div class="col" style="padding: 0px;margin: 0px;">
                     <div class="box box-primary box-solid" style="width: 1080px;">
@@ -152,6 +166,8 @@
                                 <button type="button" class="btn btn-box-tool" (click)="SaveTwoCourseOption3DImage()">
                                     <i class="fas fa-file-download"></i>保存为图片
                                 </button>
+                                <button type="button" class="btn btn-info" style="height: 30px;"
+                                    (click)="op12.show($event)"><i class="fas fa-question"></i></button>
                             </div>
                         </div>
                         <div class="box-body">
@@ -167,11 +183,16 @@
     </p-tabPanel>
     <p-tabPanel header="三门课程" style="width:1140x;">
         <div class="container" style="width:1140px;">
-            <div class="row" style="padding: 5px;margin: 5px;">
-                <div class="alert alert-warning">
-                    3门课程的组合有更加明显的聚集效应，前2种组合占了25%
+            <p-overlayPanel #op21 [showCloseIcon]="true" [dismissable]="true">
+                3门课程的组合有更加明显的聚集效应，前2种组合占了25%
+            </p-overlayPanel>
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-info" style="height: 30px;float:right;margin: 5px;"
+                        (click)="op21.show($event)"><i class="fas fa-question"></i></button>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col">
                     <div echarts [options]="mCourseSelectThreeCntOption"

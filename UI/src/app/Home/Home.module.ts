@@ -14,6 +14,7 @@ import { ButtonModule } from 'primeng/button';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CardModule } from 'primeng/card';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -126,6 +127,7 @@ import { DataViewComponent } from './ReportCenter/DataView';
     CardModule,
     CheckboxModule,
     ButtonModule,
+    OverlayPanelModule,
     SelectButtonModule,
     BrowserAnimationsModule,
     DropdownModule,
