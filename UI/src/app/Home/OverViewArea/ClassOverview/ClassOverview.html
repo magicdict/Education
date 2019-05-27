@@ -138,13 +138,13 @@
 
   <p-tabPanel header="消费和考勤" style="width:1140px;">
     <div (chartInit)="onConsumptionChartInit($event)" echarts [options]="ConsumptionOption"
-      style="width:1140px;height:400px;">
+      style="width:1080px;height:400px;">
     </div>
     <div (chartInit)="onConsumptionTotalChartInit($event)" echarts [options]="ConsumptionTotalOption"
-      style="width:1140px;height:400px;">
+      style="width:1080px;height:400px;">
     </div>
     <div *ngIf="IsShowKaoqinGraph" (chartInit)="onKaoqinDialyChartInit($event)" echarts [options]="KaoqinDialyOption"
-      style="width:1140px;height:400px;">
+      style="width:1080px;height:400px;">
     </div> 
   </p-tabPanel>
 

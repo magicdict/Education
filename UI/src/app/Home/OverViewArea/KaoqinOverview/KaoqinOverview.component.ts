@@ -221,27 +221,30 @@ export class KaoqinOverviewComponent implements OnInit {
                 this.LiveAtSchoolCntOption.series[1].data = data.kaoqinInfo.kaoqingNotLiveAtSchool;
 
                 //Minute
-                this.MinuteFrom6.angleAxis.data = data.kaoqinInfo.minuteList.slice(360,480);
-                this.MinuteFrom6.series[0].data = data.kaoqinInfo.timePolar0099001.map(x=>x.value).slice(360,480);
-                this.MinuteFrom6.series[1].data = data.kaoqinInfo.timePolar0099002.map(x=>x.value).slice(360,480);
-                this.MinuteFrom6.series[2].data = data.kaoqinInfo.timePolar0099003.map(x=>x.value).slice(360,480);
-                this.MinuteFrom6.series[3].data = data.kaoqinInfo.timePolar0099004.map(x=>x.value).slice(360,480);
-                this.MinuteFrom6.series[4].data = data.kaoqinInfo.timePolar0099005.map(x=>x.value).slice(360,480);
+                this.MinuteFrom6.angleAxis.data = data.kaoqinInfo.minuteList.slice(360, 480);
+                this.MinuteFrom6.title.text = "早高峰考勤";
+                this.MinuteFrom6.series[0].data = data.kaoqinInfo.timePolar0099001.map(x => x.value).slice(360, 480);
+                this.MinuteFrom6.series[1].data = data.kaoqinInfo.timePolar0099002.map(x => x.value).slice(360, 480);
+                this.MinuteFrom6.series[2].data = data.kaoqinInfo.timePolar0099003.map(x => x.value).slice(360, 480);
+                this.MinuteFrom6.series[3].data = data.kaoqinInfo.timePolar0099004.map(x => x.value).slice(360, 480);
+                this.MinuteFrom6.series[4].data = data.kaoqinInfo.timePolar0099005.map(x => x.value).slice(360, 480);
 
 
-                this.MinuteFrom11.angleAxis.data = data.kaoqinInfo.minuteList.slice(660,780);
-                this.MinuteFrom11.series[0].data = data.kaoqinInfo.timePolar0099001.map(x=>x.value).slice(660,780);
-                this.MinuteFrom11.series[1].data = data.kaoqinInfo.timePolar0099002.map(x=>x.value).slice(660,780);
-                this.MinuteFrom11.series[2].data = data.kaoqinInfo.timePolar0099003.map(x=>x.value).slice(660,780);
-                this.MinuteFrom11.series[3].data = data.kaoqinInfo.timePolar0099004.map(x=>x.value).slice(660,780);
-                this.MinuteFrom11.series[4].data = data.kaoqinInfo.timePolar0099005.map(x=>x.value).slice(660,780);
+                this.MinuteFrom11.angleAxis.data = data.kaoqinInfo.minuteList.slice(660, 780);
+                this.MinuteFrom11.title.text = "午高峰考勤";
+                this.MinuteFrom11.series[0].data = data.kaoqinInfo.timePolar0099001.map(x => x.value).slice(660, 780);
+                this.MinuteFrom11.series[1].data = data.kaoqinInfo.timePolar0099002.map(x => x.value).slice(660, 780);
+                this.MinuteFrom11.series[2].data = data.kaoqinInfo.timePolar0099003.map(x => x.value).slice(660, 780);
+                this.MinuteFrom11.series[3].data = data.kaoqinInfo.timePolar0099004.map(x => x.value).slice(660, 780);
+                this.MinuteFrom11.series[4].data = data.kaoqinInfo.timePolar0099005.map(x => x.value).slice(660, 780);
 
-                this.MinuteFrom16.angleAxis.data = data.kaoqinInfo.minuteList.slice(960,1080);
-                this.MinuteFrom16.series[0].data = data.kaoqinInfo.timePolar0099001.map(x=>x.value).slice(960,1080);
-                this.MinuteFrom16.series[1].data = data.kaoqinInfo.timePolar0099002.map(x=>x.value).slice(960,1080);
-                this.MinuteFrom16.series[2].data = data.kaoqinInfo.timePolar0099003.map(x=>x.value).slice(960,1080);
-                this.MinuteFrom16.series[3].data = data.kaoqinInfo.timePolar0099004.map(x=>x.value).slice(960,1080);
-                this.MinuteFrom16.series[4].data = data.kaoqinInfo.timePolar0099005.map(x=>x.value).slice(960,1080);
+                this.MinuteFrom16.angleAxis.data = data.kaoqinInfo.minuteList.slice(960, 1080);
+                this.MinuteFrom16.title.text = "晚高峰考勤";
+                this.MinuteFrom16.series[0].data = data.kaoqinInfo.timePolar0099001.map(x => x.value).slice(960, 1080);
+                this.MinuteFrom16.series[1].data = data.kaoqinInfo.timePolar0099002.map(x => x.value).slice(960, 1080);
+                this.MinuteFrom16.series[2].data = data.kaoqinInfo.timePolar0099003.map(x => x.value).slice(960, 1080);
+                this.MinuteFrom16.series[3].data = data.kaoqinInfo.timePolar0099004.map(x => x.value).slice(960, 1080);
+                this.MinuteFrom16.series[4].data = data.kaoqinInfo.timePolar0099005.map(x => x.value).slice(960, 1080);
 
 
                 //TimeLine设定 201401 - 201901
@@ -462,7 +465,11 @@ export class KaoqinOverviewComponent implements OnInit {
             z: 10,
             interval: 50
         },
-        tooltip:{},
+        title: {
+            text: ""
+        },
+        toolbox: ToolboxSaveImageOnly,
+        tooltip: {},
         radiusAxis: {
         },
         polar: {
@@ -500,7 +507,8 @@ export class KaoqinOverviewComponent implements OnInit {
         }],
         legend: {
             show: true,
-            data: ['迟到', '校服', '早退',"离校","进校"]
+            top: 30,
+            data: ['迟到', '校服', '早退', "离校", "进校"]
         }
     };
 

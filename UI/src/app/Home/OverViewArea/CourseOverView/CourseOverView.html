@@ -143,9 +143,9 @@
                     通过堆叠可以看到不同组合对于男女生来说倾向性明显，历史/生物 组合女生高于男生，技术/物理组合男生高于女生
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="box box-primary box-solid" style="width: 100%;">
+            <div class="row" style="padding: 5px;margin: 5px;">
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div class="box box-primary box-solid" style="width: 1080px;">
                         <div class="box-header with-border">
                             <h3 class="box-title">两门课程选课人数（性别堆叠图）</h3>
                             <div class="box-tools pull-right">
@@ -157,7 +157,7 @@
                         <div class="box-body">
                             <div echarts [options]="mTwoCourseOption3D"
                                 (chartInit)="onCourseSelectTwoCnt3DChartInit($event)"
-                                style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;">
+                                style="width:1040px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;">
                             </div>
                         </div>
                     </div>
@@ -179,10 +179,10 @@
                         style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;"></div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="box box-primary box-solid" style="width: 100%;">
-                        <div class="box-header with-border"> 
+            <div class="row" style="padding: 5px;margin: 5px;">
+                <div class="col" style="padding: 0px;margin: 0px;">
+                    <div class="box box-primary box-solid" style="width: 1080px;">
+                        <div class="box-header with-border">
                             <h3 class="box-title">三门课程选课人数</h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" (click)="SaveThreeCourseOption3DImage()">
@@ -193,7 +193,7 @@
                         <div class="box-body">
                             <div echarts [options]="mThreeCourseOption3D"
                                 (chartInit)="onCourseSelectThree3DChartInit($event)"
-                                style="width:1080px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;">
+                                style="width:1000px;height: 450px;border: 2px solid lightgray;padding: 5px;margin: 5px;">
                             </div>
                         </div>
                     </div>

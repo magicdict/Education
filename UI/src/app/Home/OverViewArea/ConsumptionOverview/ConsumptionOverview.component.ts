@@ -446,13 +446,15 @@ export class ConsumptionOverviewComponent implements OnInit {
 
         //Polar:
         //Minute
+        this.MinuteFrom6.title.text = "早高峰消费情况";
         this.MinuteFrom6.angleAxis.data = data.consumptionInfo.minuteList.slice(360, 480);
         this.MinuteFrom6.series[0].data = data.consumptionInfo.timePolar00000.map(x => x.value).slice(360, 480);
 
-
+        this.MinuteFrom11.title.text = "午高峰消费情况";
         this.MinuteFrom11.angleAxis.data = data.consumptionInfo.minuteList.slice(660, 780);
         this.MinuteFrom11.series[0].data = data.consumptionInfo.timePolar00000.map(x => x.value).slice(660, 780);
 
+        this.MinuteFrom16.title.text = "晚高峰消费情况";
         this.MinuteFrom16.angleAxis.data = data.consumptionInfo.minuteList.slice(1020, 1140);
         this.MinuteFrom16.series[0].data = data.consumptionInfo.timePolar00000.map(x => x.value).slice(1020, 1140);
 
@@ -477,6 +479,9 @@ export class ConsumptionOverviewComponent implements OnInit {
 
 
   HourMinuteOption = {
+    title: {
+      text: ""
+    },
     angleAxis: {
       type: 'category',
       data: [],
@@ -484,6 +489,7 @@ export class ConsumptionOverviewComponent implements OnInit {
       interval: 50
     },
     tooltip: {},
+    toolbox: ToolboxSaveImageOnly,
     radiusAxis: {
     },
     polar: {
