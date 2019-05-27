@@ -331,6 +331,7 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.monthlyOpt.xAxis.data = data.consumptionInfo.monthlyConsumption.map(x => x.name);
         this.monthlyOpt.series[0].data = data.consumptionInfo.monthlyConsumptionLiveAtSchool;
         this.monthlyOpt.series[1].data = data.consumptionInfo.monthlyConsumptionNotLiveAtSchool;
+        this.monthlyOpt.toolbox.feature.magicType.type = ['line', 'bar', 'stack', 'tiled'];
 
         this.weekdayTotalOpt.title.text = "整体周别消费金额";
         this.weekdayTotalOpt.xAxis.data = data.consumptionInfo.weekDayConsumption.map(x => x.name);
@@ -340,6 +341,7 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.weekdayOpt.xAxis.data = data.consumptionInfo.weekDayConsumption.map(x => x.name);
         this.weekdayOpt.series[0].data = data.consumptionInfo.weekDayConsumptionLiveAtSchool;
         this.weekdayOpt.series[1].data = data.consumptionInfo.weekDayConsumptionNotLiveAtSchool;
+        this.weekdayOpt.toolbox.feature.magicType.type = ['line', 'bar', 'stack', 'tiled'];
 
         this.highestRec = data.consumptionInfo.highestRec;
         this.highestRecLiveAtSchool = data.consumptionInfo.highestRecLiveAtSchool;

@@ -247,6 +247,7 @@ export class CourseOverViewComponent implements OnInit {
 
 
         this.mCourseSelectCntOption.xAxis.data = data.courseInfo[0].selectionCourseCnt.map(x => x.name);
+        this.mCourseSelectCntOption.toolbox.feature.magicType.type = ['line', 'bar', 'stack', 'tiled'];
         this.mCourseSelectCntOption.series[0] = {
           label: {
             normal: {
@@ -254,6 +255,7 @@ export class CourseOverViewComponent implements OnInit {
               formatter: '{b}\n{c}'
             }
           },
+          markLine:null,
           stack: '选课人数',
           name: "男生",
           data: data.courseInfo[1].selectionCourseCnt.map(x => x.value),
@@ -267,6 +269,7 @@ export class CourseOverViewComponent implements OnInit {
               formatter: '{b}\n{c}'
             }
           },
+          markLine:null,
           stack: '选课人数',
           name: "女生",
           data: data.courseInfo[2].selectionCourseCnt.map(x => x.value),

@@ -213,12 +213,14 @@ export class KaoqinOverviewComponent implements OnInit {
                 this.SexCntOption.series[0].name = "男";
                 this.SexCntOption.series[1].data = data.kaoqinInfo.kaoqingFeMale;
                 this.SexCntOption.series[1].name = "女";
+                this.SexCntOption.toolbox.feature.magicType.type = ['line', 'bar', 'stack', 'tiled'];
 
                 this.LiveAtSchoolCntOption.title.text = "考勤住校比";
                 this.LiveAtSchoolCntOption.legend.data = ["住校", "非住校"];
                 this.LiveAtSchoolCntOption.xAxis.data = data.kaoqinInfo.kaoqingMale.map(x => x.name);
                 this.LiveAtSchoolCntOption.series[0].data = data.kaoqinInfo.kaoqingLiveAtSchool;
                 this.LiveAtSchoolCntOption.series[1].data = data.kaoqinInfo.kaoqingNotLiveAtSchool;
+                this.LiveAtSchoolCntOption.toolbox.feature.magicType.type = ['line', 'bar', 'stack', 'tiled'];
 
                 //Minute
                 this.MinuteFrom6.angleAxis.data = data.kaoqinInfo.minuteList.slice(360, 480);
@@ -323,7 +325,7 @@ export class KaoqinOverviewComponent implements OnInit {
         }
 
         let KaoqinMonthOption = {
-            toolbox: ToolboxForBar,
+            toolbox: CommonFunction.clone(ToolboxForBar),
             title: {
                 text: StackName,
             },
@@ -360,7 +362,7 @@ export class KaoqinOverviewComponent implements OnInit {
         if (Monthlist !== undefined) {
             KaoqinMonthOption.xAxis.data = Monthlist;
         }
-
+        KaoqinMonthOption.toolbox.feature.magicType.type = ['line', 'bar', 'stack', 'tiled'];
         return KaoqinMonthOption;
     }
 
