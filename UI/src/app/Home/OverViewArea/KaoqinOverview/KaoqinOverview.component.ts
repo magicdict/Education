@@ -330,7 +330,8 @@ export class KaoqinOverviewComponent implements OnInit {
                 text: StackName,
             },
             legend: {
-                data: NameArray
+                data: NameArray,
+                top:25
             },
             tooltip: {
                 //默认的就往往就是是最好的！
