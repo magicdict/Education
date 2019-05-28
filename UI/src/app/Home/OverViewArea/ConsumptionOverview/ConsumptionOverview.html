@@ -79,17 +79,30 @@
             </div>
         </div>
     </p-tabPanel>
-    <p-tabPanel header="消费日历(金额)" style="width:1140px;">
+    <p-tabPanel header="消费日历(金额和人数)" style="width:1140px;">
+        <p-overlayPanel #op11 [showCloseIcon]="true" [dismissable]="true">
+            从这个日历上看，金额和人数大体上是比较匹配的，每人消费金额总体上很平均。
+        </p-overlayPanel>
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-info" style="height: 30px;float:right;margin: 5px;"
+                    (click)="op11.show($event)"><i class="fas fa-question"></i></button>
+            </div>
+        </div>
         <div echarts [options]="dailyOpt"
             style="width:1100px;height:740px;border: 2px solid lightgray;padding: 5px;margin: 5px">
         </div>
     </p-tabPanel>
-    <p-tabPanel header="消费日历(人数)" style="width:1140px;">
-        <div echarts [options]="dailycntOpt"
-            style="width:1100px;height:740px;border: 2px solid lightgray;padding: 5px;margin: 5px">
-        </div>
-    </p-tabPanel>
     <p-tabPanel header="时段周别统计" style="width:1140px;">
+        <p-overlayPanel #op21 [showCloseIcon]="true" [dismissable]="true">
+            周一到周五学生在学校用餐，周五晚上住校生回家吃饭。周六周日大部分学生不在学校。
+        </p-overlayPanel>
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-info" style="height: 30px;float:right;margin: 5px;"
+                    (click)="op21.show($event)"><i class="fas fa-question"></i></button>
+            </div>
+        </div>
         <div echarts [options]="WeekTimeOption"
             style="width:1100px;height:640px;border: 2px solid lightgray;padding: 5px;margin: 5px">
         </div>

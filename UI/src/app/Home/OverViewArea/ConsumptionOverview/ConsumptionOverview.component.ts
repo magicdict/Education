@@ -30,7 +30,6 @@ export class ConsumptionOverviewComponent implements OnInit {
   ];
 
   dailyOpt = CommonFunction.clone(DairyCanlendarOption);
-  dailycntOpt = CommonFunction.clone(DairyCanlendarOption);
   monthlyOpt = CommonFunction.clone(MonthlyCompumptionBarOption);
   weekdayOpt = CommonFunction.clone(MonthlyCompumptionBarOption);
 
@@ -309,19 +308,39 @@ export class ConsumptionOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.route.data
       .subscribe((data: { consumptionInfo: ISchoolConsumptionInfo }) => {
-        this.dailyOpt.visualMap[0].max = 50000;
-        this.dailycntOpt.title.text = "每日消费金额";
-        this.dailyOpt.series[0].symbolSize = this.symbolSize;
-        this.dailyOpt.series[1].symbolSize = this.symbolSize;
-        this.dailyOpt.series[0].data = data.consumptionInfo.dailyConsumption.map(x => { return [x.name, x.value * -1]; });
-        this.dailyOpt.series[1].data = data.consumptionInfo.dailyConsumption.map(x => { return [x.name, x.value * -1]; });
 
-        this.dailycntOpt.visualMap[0].max = 1700;
-        this.dailycntOpt.title.text = "每日消费人数";
-        this.dailycntOpt.series[0].symbolSize = this.symbolSizeCnt;
-        this.dailycntOpt.series[1].symbolSize = this.symbolSizeCnt;
-        this.dailycntOpt.series[0].data = data.consumptionInfo.dailyConsumptionStudentCnt.map(x => { return [x.name, x.value]; });
-        this.dailycntOpt.series[1].data = data.consumptionInfo.dailyConsumptionStudentCnt.map(x => { return [x.name, x.value]; });
+        //画面表示的时候 dailyOpt 被重置，push不会造成无限增长的情况
+        this.dailyOpt['legend'] = {
+          data: ["金额", '人数'],
+          selectedMode: "single",
+          show: true
+        };
+        this.dailyOpt.visualMap[0].max = 50000;
+        this.dailyOpt.visualMap[0]['seriesIndex'] = [0, 1];
+        this.dailyOpt.visualMap.push(CommonFunction.clone(this.dailyOpt.visualMap[0]));
+        this.dailyOpt.visualMap[1].max = 1700;
+        this.dailyOpt.visualMap[1]['seriesIndex'] = [2, 3];
+        this.dailyOpt.visualMap[1]['color'] = ["#516b91","#59c4e6",'#a5e7f0'];
+        this.dailyOpt.visualMap[0].left -= 200;
+        this.dailyOpt.visualMap[1].left += 200;
+
+        this.dailyOpt.title.text = "每日统计";
+        this.dailyOpt.series[0].symbolSize = this.symbolSize;
+        this.dailyOpt.series[0].data = data.consumptionInfo.dailyConsumption.map(x => { return [x.name, x.value * -1]; });
+        this.dailyOpt.series[0]['name'] = "金额";
+        this.dailyOpt.series[1].symbolSize = this.symbolSize;
+        this.dailyOpt.series[1].data = data.consumptionInfo.dailyConsumption.map(x => { return [x.name, x.value * -1]; });
+        this.dailyOpt.series[1]['name'] = "金额";
+        this.dailyOpt.series.push(CommonFunction.clone(this.dailyOpt.series[0]));
+        this.dailyOpt.series.push(CommonFunction.clone(this.dailyOpt.series[1]));
+        this.dailyOpt.series[2].symbolSize = this.symbolSizeCnt;
+        this.dailyOpt.series[2].data = data.consumptionInfo.dailyConsumptionStudentCnt.map(x => { return [x.name, x.value]; });
+        this.dailyOpt.series[2]['name'] = "人数";
+        this.dailyOpt.series[3].symbolSize = this.symbolSizeCnt;
+        this.dailyOpt.series[3].data = data.consumptionInfo.dailyConsumptionStudentCnt.map(x => { return [x.name, x.value]; });
+        this.dailyOpt.series[3]['name'] = "人数";
+
+
 
         this.monthlyTotalOpt.title.text = "整体月消费金额";
         this.monthlyTotalOpt.xAxis.data = data.consumptionInfo.monthlyConsumption.map(x => x.name);

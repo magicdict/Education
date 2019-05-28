@@ -106,13 +106,23 @@
                         (chartInit)="onScorePercentBarChartInit($event)"></div>
                 </p-tabPanel>
                 <p-tabPanel [header]="'偏科分析'">
-                    <p-dropdown [options]="SideSubNameList" [(ngModel)]="SelectSideSubName"
-                        (onChange)="SideSubNameChanged()">
-                    </p-dropdown>
-                    <b>&nbsp;&nbsp;对角线点表示排名平均，红色点的同时表示偏科，其中靠近坐标轴的表示其中一门课程特别好</b>
-                    <div echarts [options]="mSideCourseOption"
-                        style="width:1100px;height: 650px;border: 2px solid lightgray;padding: 5px;margin: 5px;"
-                        (chartInit)="onSideCourseChartInit($event)"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <p-dropdown [options]="SideSubNameList" [(ngModel)]="SelectSideSubName"
+                                    (onChange)="SideSubNameChanged()">
+                                </p-dropdown>
+                            </div>
+                            <div class="col">
+                                <b>对角线点表示排名平均，红色点的同时表示偏科，其中靠近坐标轴的表示其中一门课程特别好</b>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div echarts [options]="mSideCourseOption"
+                                style="width:1100px;height: 650px;border: 2px solid lightgray;padding: 5px;margin: 5px;"
+                                (chartInit)="onSideCourseChartInit($event)"></div>
+                        </div>
+                    </div>
                 </p-tabPanel>
             </p-tabView>
         </div>

@@ -1,9 +1,15 @@
 <app-nav></app-nav>
 <p-tabView>
     <p-tabPanel header="概要" style="width:1140px;">
+        <p-overlayPanel #op01 [showCloseIcon]="true" [dismissable]="true">
+            从历史数据来看，由于学校的设备更新原因，每种设备都发现明显的使用结束月份。每种考勤记录数也差距非常的。
+        </p-overlayPanel>
         <div class="container">
-            <div class="alert alert-warning">
-                从历史数据来看，由于学校的设备更新原因，每种设备都发现明显的使用结束月份。每种考勤记录数也差距非常的。
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-info" style="height: 30px;float:right;margin: 5px;"
+                        (click)="op01.show($event)"><i class="fas fa-question"></i></button>
+                </div>
             </div>
             <div class="row">
                 <div class="col-8">
@@ -22,10 +28,16 @@
         </div>
     </p-tabPanel>
     <p-tabPanel header="本学期学生" style="width:1140px;">
-        <div class="alert alert-warning" role="alert">
+        <p-overlayPanel #op11 [showCloseIcon]="true" [dismissable]="true">
             男生和女生在考勤上没有很大区别，住校生基本上不会发生迟到早退和校服问题。
-        </div>
+        </p-overlayPanel>
         <div class="container">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-info" style="height: 30px;float:right;margin: 5px;"
+                        (click)="op11.show($event)"><i class="fas fa-question"></i></button>
+                </div>
+            </div>
             <div class="row" style="margin-top:10px;">
                 <div class="col" style="padding: 0px;margin: 0px;">
                     <div style="border: 2px solid lightgray;padding: 0px;margin: 0px;width: 540px;">
@@ -63,7 +75,13 @@
         <div class="alert alert-warning" role="alert">
             每个月考勤数据变化
         </div>
-        <div echarts [options]="TimeLineOption" style="width:1080px;height:800px;"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <div echarts [options]="TimeLineOption" style="width:540px;height:800px;"></div>
+                </div>
+            </div>
+        </div>
     </p-tabPanel>
     <p-tabPanel header="迟到_晚到" style="width:1140px;">
         <div class="alert alert-warning" role="alert">
