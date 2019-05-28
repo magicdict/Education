@@ -104,6 +104,7 @@ export interface IExamInfoForNumberAndSubName {
   low10: IScore[];
   gradeInfo: IClassExam;
   teacherExamInfoList: IClassExam[];
+  scorePercentList: { [key: string]: number[] },
 }
 
 export interface IConsumption {
@@ -149,6 +150,7 @@ export interface IScore {
   id: string;
   idForClass: string;
   className: string;
+  classID:string;
   grade: string;
   number: string;
   numberName: string;

@@ -126,36 +126,71 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
             text: '',
         },
         tooltip: {
-            formatter:(items)=>{
+            formatter: (items: any) => {
                 let rtn = this.SelectSubName + ":" + items.value[0] + "</br>";
-                rtn += this.SelectSideSubName + ":" + items.value[1];                
+                rtn += this.SelectSideSubName + ":" + items.value[1];
                 return rtn;
             }
         },
         xAxis: {
             type: 'value',
-            name:'',
+            name: '',
         },
         yAxis: {
             type: 'value',
-            name:''
+            name: ''
         },
         series: [{
             symbolSize: 20,
             data: [],
-            itemStyle:{
-                color:(items)=>{
+            itemStyle: {
+                color: (items: any) => {
                     let diff = Math.abs(items.value[0] - items.value[1]);
                     let stardart = this.mSidePointCnt / 2;
-                    if (diff > stardart){
+                    if (diff > stardart) {
                         return "#c23531";
-                    } else{
+                    } else {
                         return "#2f4554";
                     }
                 }
             },
             type: 'scatter'
         }]
+    };
+
+    ScorePercentInstance: any;
+    onScorePercentBarChartInit(event: any) {
+        this.ScorePercentInstance = event;
+    }
+
+    ScorePercentBarOption = {
+        title: {
+            text: '各班得分率',
+        },
+        legend: {
+            show: true,
+            top: 25
+        },
+        toolbox: CommonFunction.clone(ToolboxForBar),
+        grid: {
+            left: 100
+        },
+        tooltip: {
+        },
+        xAxis: {
+            type: 'category',
+            data: [],
+            axisLabel: {
+                interval: 0,
+                rotate: 40
+            }
+        },
+        yAxis: {
+            type: 'value',
+        },
+        series: [
+
+        ]
     };
 
 
@@ -320,6 +355,41 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
             }
         }
+
+        this.ScorePercentBarOption.toolbox.feature.magicType.type = ['line', 'bar', 'stack', 'tiled'];
+        this.ScorePercentBarOption.series = [];
+        let Classnamelist = [];
+        for (const classname in r.scorePercentList) {
+            if (r.scorePercentList.hasOwnProperty(classname)) {
+                Classnamelist.push(classname);
+            }
+        };
+        this.ScorePercentBarOption.xAxis.data = Classnamelist;
+        let namelist = ['10%以下', '10%-20%', '20%-30%', '30%-40%', '40%-50%', '50%-60%', '60%-70%', '70%-80%', '80%-90%', '90%-100%'];
+        for (let index = 0; index < 10; index++) {
+            let data = [];
+            for (const classname in r.scorePercentList) {
+                if (r.scorePercentList.hasOwnProperty(classname)) {
+                    data.push(r.scorePercentList[classname][index]);
+                }
+            };
+            let serie = {
+                label: {
+                    normal: {
+                        show: true
+                    }
+                },
+                name: namelist[index],
+                stack: '得分率',
+                data: data,
+                type: 'bar'
+            }
+            this.ScorePercentBarOption.series.push(serie);
+        }
+
+        if (this.ScorePercentInstance !== undefined) {
+            this.ScorePercentInstance.setOption(this.ScorePercentBarOption);
+        }
     }
 
     JumpToExam(number: string, subName: string, Grade: string) {
@@ -337,8 +407,8 @@ export class ExamOverViewComponent implements OnInit, AfterViewInit {
 
     //偏科选择切换
     SideSubNameChanged() {
-        var request = "course/GetGradeRankInfo?number=" + this.SelectExamNumber + "&subName1=" + escape(this.SelectSubName) + 
-        "&subName2=" + escape(this.SelectSideSubName) + "&Grade=" + escape(this.SelectGrade);
+        var request = "course/GetGradeRankInfo?number=" + this.SelectExamNumber + "&subName1=" + escape(this.SelectSubName) +
+            "&subName2=" + escape(this.SelectSideSubName) + "&Grade=" + escape(this.SelectGrade);
         this.commonFunction.httpRequest<[][]>(request).then(
             r => {
                 this.mSideCourseOption.xAxis.name = this.SelectSubName;

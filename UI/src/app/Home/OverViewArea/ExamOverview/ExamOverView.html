@@ -101,12 +101,16 @@
                     <div echarts [options]="mScoreFunnelOption"
                         style="width:1100px;height: 650px;border: 2px solid lightgray;padding: 5px;margin: 5px;"
                         (chartInit)="onFunnelChartInit($event)"></div>
+                    <div echarts [options]="ScorePercentBarOption"
+                        style="width:1100px;height: 650px;border: 2px solid lightgray;padding: 5px;margin: 5px;"
+                        (chartInit)="onScorePercentBarChartInit($event)"></div> 
                 </p-tabPanel>
                 <p-tabPanel [header]="'偏科分析'">
-                    <p-dropdown [options]="SideSubNameList" [(ngModel)]="SelectSideSubName" (onChange)="SideSubNameChanged()">
+                    <p-dropdown [options]="SideSubNameList" [(ngModel)]="SelectSideSubName"
+                        (onChange)="SideSubNameChanged()">
                     </p-dropdown>
                     <b>&nbsp;&nbsp;对角线点表示排名平均，红色点的同时表示偏科，其中靠近坐标轴的表示其中一门课程特别好</b>
-                    <div echarts [options]="mSideCourseOption"  
+                    <div echarts [options]="mSideCourseOption"
                         style="width:1100px;height: 650px;border: 2px solid lightgray;padding: 5px;margin: 5px;"
                         (chartInit)="onSideCourseChartInit($event)"></div>
                 </p-tabPanel>

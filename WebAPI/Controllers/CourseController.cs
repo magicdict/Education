@@ -82,6 +82,9 @@ namespace Education.Controllers
             /// </summary>
             /// <value></value>
             public List<NameValueSet> Top50ForClassName { set; get; }
+
+            public Dictionary<string, List<int>> ScorePercentList { set; get; }
+
         }
         /// <summary>
         /// 某个年级的某次考试的某个科目的班级单位的信息列表
@@ -115,6 +118,7 @@ namespace Education.Controllers
             {
                 //高三的ClassId混乱,所以按照ClassName再排序
                 r.Sort((x, y) => { return x.Record.ClassName.CompareTo(y.Record.ClassName); });
+                classidlist = r.Select(x => x.Record.ClassID).ToList();
             }
 
             //由于总人数的问题，这个必须先做，不然总人数会出现问题
@@ -149,6 +153,22 @@ namespace Education.Controllers
             Result.Top50ForClassName = Top50.GroupBy(x => x.ClassName)
                                             .Select(x => new NameValueSet() { name = x.Key, value = x.Count() }).ToList();
             Result.Top50ForClassName.Sort((x, y) => { return x.name.CompareTo(y.name); });
+
+            //以10分为单位，计算得分率
+            Result.ScorePercentList = new Dictionary<string, List<int>>();
+            foreach (var classid in classidlist)
+            {
+                var list = new List<int>();
+                var chengjis = dic[classid];
+                for (int i = 0; i < 10; i++)
+                {
+                    var min = i * 10;   //下限，开区间
+                    var max = (i + 1) * 10;   //上限，闭区间
+                    list.Add(chengjis.Count(x => x.ScorePercent > min && x.ScorePercent <= max));
+                }
+                //输出用ClassName，Dictionary在TS端无法保证顺序
+                Result.ScorePercentList.Add(Result.ClassExamInfoList.Where(x => x.Record.ClassID == classid).First().Record.ClassName, list);
+            }
             return Result;
         }
         [HttpGet("GetGradeRankInfo")]
