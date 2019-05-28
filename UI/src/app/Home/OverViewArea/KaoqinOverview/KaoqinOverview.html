@@ -52,18 +52,19 @@
                     </div>
                 </div>
             </div>
+            <hr style="border:1px dashed #000; height:1px;width: 95%">
             <div class="row" style="margin-top:10px;">
-                <div style="border: 0px solid lightgray;padding: 0px;margin: 0px;width: 370px;">
+                <div style="border-right: 2px dashed lightgray;padding: 0px;margin: 0px;width: 370px;">
                     <div class="col" style="padding: 0px;margin: 0px;">
                         <div echarts [options]="MinuteFrom6" style="width:365px;height:450px;"></div>
                     </div>
                 </div>
-                <div style="border: 0px solid lightgray;padding: 0px;margin: 0px;width: 370px;">
+                <div style="border: 0px dashed lightgray;padding: 0px;margin: 0px;width: 370px;">
                     <div class="col" style="padding: 0px;margin: 0px;">
                         <div echarts [options]="MinuteFrom11" style="width:365px;height:450px;"></div>
                     </div>
                 </div>
-                <div style="border: 0px solid lightgray;padding: 0px;margin: 0px;width: 370px;">
+                <div style="border-left: 2px dashed lightgray;padding: 0px;margin: 0px;width: 370px;">
                     <div class="col" style="padding: 0px;margin: 0px;">
                         <div echarts [options]="MinuteFrom16" style="width:365px;height:450px;"></div>
                     </div>
@@ -87,12 +88,14 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <div echarts [options]="TimeLineOption" style="width:540px;height:560px;"></div>
+                    <div echarts [options]="TimeLineOption" style="width:540px;height:620px;"></div>
                 </div>
                 <div class="col-6">
                     <div echarts [options]="Kaoqin10MonthOption" style="width:540px;height:300px;"></div>
+                    <hr style="border:1px dashed #000; height:1px;width: 95%">
                     <div echarts [options]="Kaoqin20MonthOption" style="width:540px;height:300px;"></div>
                 </div>
+                <hr style="border:1px dashed #000; height:1px;width: 95%">
                 <div class="row">
                     <div class="col-6">
                         <div echarts [options]="Kaoqin30MonthOption" style="width:540px;height:300px;"></div>

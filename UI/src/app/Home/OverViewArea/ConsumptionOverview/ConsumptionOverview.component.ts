@@ -280,7 +280,7 @@ export class ConsumptionOverviewComponent implements OnInit {
     });
   }
 
-  SetWeekTimeLineOption(WeekTimeLineOptionInstance: any, dataItems: number[][]) {
+  SetWeekTimeLineOption(title:string, WeekTimeLineOptionInstance: any, dataItems: number[][]) {
 
     WeekTimeLineOptionInstance.baseOption.series[0].symbolSize = (dataItem: number[]) => {
       return dataItem[1] / 4000;
@@ -289,6 +289,7 @@ export class ConsumptionOverviewComponent implements OnInit {
     //dataItem[1] 时间下标
     //dataItem[2] 金额
     for (let idx = 0; idx < 7; idx++) {
+      WeekTimeLineOptionInstance.options[idx].title.text += title; 
       WeekTimeLineOptionInstance.options[idx].series[0].data = [];
     }
     dataItems.forEach(dataItem => {
@@ -382,13 +383,13 @@ export class ConsumptionOverviewComponent implements OnInit {
           .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
 
         //时间线  
-        this.SetWeekTimeLineOption(this.WeekTimeLineOption, data.consumptionInfo.weekTimeConsumption
+        this.SetWeekTimeLineOption("(全体)",this.WeekTimeLineOption, data.consumptionInfo.weekTimeConsumption
           .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
 
-        this.SetWeekTimeLineOption(this.WeekTimeLineLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionLiveAtSchool
+        this.SetWeekTimeLineOption("(住校)",this.WeekTimeLineLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionLiveAtSchool
           .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
 
-        this.SetWeekTimeLineOption(this.WeekTimeLineNotLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionNotLiveAtSchool
+        this.SetWeekTimeLineOption("(非住校)",this.WeekTimeLineNotLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionNotLiveAtSchool
           .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
 
         //三维图形
