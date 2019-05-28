@@ -211,12 +211,12 @@ export class CourseOverViewComponent implements OnInit {
   }
 
 
-  SaveTwoCourseOption3DImage(){
-    CommonFunction.SaveChartImage(this.CourseSelectTwoCnt3DChar,"两门课程选课人数（性别堆叠图）");
+  SaveTwoCourseOption3DImage() {
+    CommonFunction.SaveChartImage(this.CourseSelectTwoCnt3DChar, "两门课程选课人数（性别堆叠图）");
   }
 
-  SaveThreeCourseOption3DImage(){
-    CommonFunction.SaveChartImage(this.CourseSelectThree3DChart,"三门课程选课人数");
+  SaveThreeCourseOption3DImage() {
+    CommonFunction.SaveChartImage(this.CourseSelectThree3DChart, "三门课程选课人数");
   }
 
   ngOnInit(): void {
@@ -255,7 +255,7 @@ export class CourseOverViewComponent implements OnInit {
               formatter: '{b}\n{c}'
             }
           },
-          markLine:null,
+          markLine: null,
           stack: '选课人数',
           name: "男生",
           data: data.courseInfo[1].selectionCourseCnt.map(x => x.value),
@@ -269,7 +269,7 @@ export class CourseOverViewComponent implements OnInit {
               formatter: '{b}\n{c}'
             }
           },
-          markLine:null,
+          markLine: null,
           stack: '选课人数',
           name: "女生",
           data: data.courseInfo[2].selectionCourseCnt.map(x => x.value),

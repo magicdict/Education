@@ -26,9 +26,9 @@ export const ExamSubNameOption = {
   xAxis: {
     type: 'category',
     boundaryGap: true,
-    axisLabel:{
+    axisLabel: {
       interval: 0
-    },  
+    },
     data: []
   },
   yAxis: {
@@ -214,7 +214,7 @@ export const CourseSelectCntOption = {
   title: {
     text: '高考七选三(单科)',
   },
-  tooltip:{},
+  tooltip: {},
   toolbox: ToolboxForBar,
   xAxis: {
     type: 'category',
@@ -225,8 +225,8 @@ export const CourseSelectCntOption = {
   },
   series: [
     {
-      stack:'',
-      name:'',
+      stack: '',
+      name: '',
       label: {
         normal: {
           show: true,
@@ -357,20 +357,19 @@ export const ScoreFunnelOption =
   title: {
     text: '分数段人数',
     show: true,
-    top: 70
   },
   toolbox: {
     'show': true,
     'feature': {
       'saveAsImage': {}
     },
-    top: 70
   },
   tooltip: {
     trigger: 'item',
     formatter: "{b} : {c}"
   },
   legend: {
+    top: 25,
     data: []
   },
   calculable: true,
@@ -379,11 +378,9 @@ export const ScoreFunnelOption =
       name: '漏斗图',
       type: 'funnel',
       left: '10%',
-      top: 60,
-      //x2: 80,
-      bottom: 60,
       width: '80%',
-      // height: {totalHeight} - y - y2,
+      bottom:0,
+      top:100,
       min: 0,
       max: 50,
       minSize: '0%',
