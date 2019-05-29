@@ -79,6 +79,26 @@ export class DataFilterComponent implements OnInit {
                 if (grade.label === "高三") this.FullClassThree.push(classname);
             });
         });
+        //不能和{}比较！
+        if (this.service.parmFirst.Sex !== undefined) {
+            this.selectedSex = this.service.parmFirst.Sex;
+            this.IsLiveAtSchool = this.service.parmFirst.IsLiveAtSchool;
+            this.IsNativeZhejiang = this.service.parmFirst.IsNativeZhejiang;
+            this.BornDate = this.service.parmFirst.BornDate;
+            this.SelectClassGradeOne = this.service.parmFirst.SelectClassGradeOne;
+            this.SelectClassGradeTwo = this.service.parmFirst.SelectClassGradeTwo;
+            this.SelectClassGradeThree = this.service.parmFirst.SelectClassGradeThree;
+        }
+
+        if (this.service.parmSecond.Sex !== undefined) {
+            this.selectedSex_2 = this.service.parmSecond.Sex;
+            this.IsLiveAtSchool_2 = this.service.parmSecond.IsLiveAtSchool;
+            this.IsNativeZhejiang_2 = this.service.parmSecond.IsNativeZhejiang;
+            this.BornDate_2 = this.service.parmSecond.BornDate;
+            this.SelectClassGradeOne_2 = this.service.parmSecond.SelectClassGradeOne_2;
+            this.SelectClassGradeTwo_2 = this.service.parmSecond.SelectClassGradeTwo_2;
+            this.SelectClassGradeThree_2 = this.service.parmSecond.SelectClassGradeThree_2;
+        }
     }
     RunSearch() {
         let ClassIds = this.SelectClassGradeOne.concat(this.SelectClassGradeTwo).concat(this.SelectClassGradeThree);
@@ -88,6 +108,9 @@ export class DataFilterComponent implements OnInit {
         }
         this.parmFirst = {
             'Sex': this.selectedSex,
+            'SelectClassGradeOne': this.SelectClassGradeOne,
+            'SelectClassGradeTwo': this.SelectClassGradeTwo,
+            'SelectClassGradeThree': this.SelectClassGradeThree,
             'IsNativeZhejiang': this.IsNativeZhejiang,
             'ClassIds': ClassIds.map(x => x.value),
             'IsLiveAtSchool': this.IsLiveAtSchool,
@@ -106,6 +129,9 @@ export class DataFilterComponent implements OnInit {
                     }
                     this.parmSecond = {
                         'Sex': this.selectedSex_2,
+                        'SelectClassGradeOne_2': this.SelectClassGradeOne_2,
+                        'SelectClassGradeTwo_2': this.SelectClassGradeTwo_2,
+                        'SelectClassGradeThree_2': this.SelectClassGradeThree_2,
                         'IsNativeZhejiang': this.IsNativeZhejiang_2,
                         'ClassIds': ClassIds_2.map(x => x.value),
                         'IsLiveAtSchool': this.IsLiveAtSchool_2,

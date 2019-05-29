@@ -90,11 +90,11 @@
                     <div echarts [options]="mScoreRadarOption"
                         style="width:1100px;height: 650px;border: 0px solid lightgray;padding: 5px;margin: 5px;"
                         (chartInit)="onRadarChartInit($event)"></div>
-                    <hr *ngIf="SubName !=='7选3'" style="border:1px dashed #000; height:1px;width: 95%">
+                    <hr *ngIf="SubName !=='7选3'" style="border:1px dashed lightgray; height:1px;width: 95%">
                     <div *ngIf="SubName !=='7选3'" echarts [options]="mTop50ClassOption"
                         style="width:1100px;height: 650px;border: 0px solid lightgray;padding: 5px;margin: 5px;"
                         (chartInit)="onTop50ClassChartInit($event)"></div>
-                    <hr *ngIf="SubName !=='7选3'" style="border:1px dashed #000; height:1px;width: 95%">
+                    <hr *ngIf="SubName !=='7选3'" style="border:1px dashed lightgray; height:1px;width: 95%">
                     <div *ngIf="SubName !=='7选3'" echarts [options]="mTop50ScatterOption"
                         style="width:1100px;height: 650px;border: 0px solid lightgray;padding: 5px;margin: 5px;"
                         (chartInit)="onTop50ScatterChartInit($event)"></div>
@@ -103,7 +103,7 @@
                     <div echarts [options]="mScoreFunnelOption"
                         style="width:1100px;height: 650px;border: 0px solid lightgray;padding: 5px;margin: 5px;"
                         (chartInit)="onFunnelChartInit($event)"></div>
-                    <hr style="border:1px dashed #000; height:1px;width: 95%">
+                    <hr style="border:1px dashed lightgray; height:1px;width: 95%">
                     <div echarts [options]="ScorePercentBarOption"
                         style="width:1100px;height: 650px;border: 0px solid lightgray;padding: 5px;margin: 5px;"
                         (chartInit)="onScorePercentBarChartInit($event)"></div>
