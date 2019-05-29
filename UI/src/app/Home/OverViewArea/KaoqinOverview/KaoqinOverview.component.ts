@@ -219,7 +219,9 @@ export class KaoqinOverviewComponent implements OnInit {
                 this.LiveAtSchoolCntOption.legend.data = ["住校", "非住校"];
                 this.LiveAtSchoolCntOption.xAxis.data = data.kaoqinInfo.kaoqingMale.map(x => x.name);
                 this.LiveAtSchoolCntOption.series[0].data = data.kaoqinInfo.kaoqingLiveAtSchool;
+                this.LiveAtSchoolCntOption.series[0].name = "住校";
                 this.LiveAtSchoolCntOption.series[1].data = data.kaoqinInfo.kaoqingNotLiveAtSchool;
+                this.LiveAtSchoolCntOption.series[1].name = "非住校";
                 this.LiveAtSchoolCntOption.toolbox.feature.magicType.type = ['line', 'bar', 'stack', 'tiled'];
 
                 //Minute
@@ -331,10 +333,13 @@ export class KaoqinOverviewComponent implements OnInit {
             },
             legend: {
                 data: NameArray,
-                top:25
+                top: 25
             },
             tooltip: {
-                //默认的就往往就是是最好的！
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
             },
             label: {
                 formatter: function (a) {

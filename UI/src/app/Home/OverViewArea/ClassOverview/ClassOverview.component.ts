@@ -354,15 +354,6 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
             trigger: 'axis',
             axisPointer: {            // 坐标轴指示器，坐标轴触发有效
               type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            },
-            formatter: (items: any) => {
-              let rtn = items[0].name + "<br />";
-              rtn += "迟到" + items[0].value + "<br />";
-              rtn += "校服" + items[1].value + "<br />";
-              rtn += "早退" + items[2].value + "<br />";
-              rtn += "离校" + items[3].value + "<br />";
-              rtn += "进校" + items[4].value + "<br />";
-              return rtn;
             }
           },
           legend: {
