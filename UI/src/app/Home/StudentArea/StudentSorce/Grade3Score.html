@@ -72,7 +72,67 @@
                         </div>
                     </div>
                 </p-tabPanel>
-
+                <p-tabPanel [header]="'AI预测（探索性质）'">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <table-function [Table]="dt" [FrameStyle]="{'float':'right'}"></table-function>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p-table #dt [columns]="cols"
+                                    [exportFilename]="CurrentStudent.name + '(' + CurrentStudent.id + ')AI预测等第'"
+                                    [value]="AIFeatures" selectionMode="multiple" [scrollable]="true"
+                                    scrollHeight="570px">
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th style="width: 70px" [pSortableColumn]="'subName'">科目
+                                                <p-sortIcon [field]="'subName'">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th style="width: 70px" [pSortableColumn]="'lastDengdi'">前一次等第
+                                                <p-sortIcon [field]="'lastDengdi'">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th style="width: 70px" [pSortableColumn]="'lastDengdiMean'">等第均值
+                                                <p-sortIcon [field]="'lastDengdiMean'">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th style="width: 70px" [pSortableColumn]="'lastDiff'">等第趋势
+                                                <p-sortIcon [field]="'lastDiff'">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th style="width: 70px" [pSortableColumn]="'actDengdi'">实际等第
+                                                <p-sortIcon [field]="'actDengdi'">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th style="width: 70px" [pSortableColumn]="'predDengdi'">预测等第
+                                                <p-sortIcon [field]="'predDengdi'">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th style="width: 70px" [pSortableColumn]="'loss'">误差
+                                                <p-sortIcon [field]="'loss'">
+                                                </p-sortIcon>
+                                            </th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-itemData>
+                                        <tr [pSelectableRow]="itemData">
+                                            <td style="width: 70px;text-align: center;">{{itemData.subName}}</td>
+                                            <td style="width: 70px;text-align: right;">{{itemData.lastDengdi}}</td>
+                                            <td style="width: 70px;text-align: right;">{{itemData.lastDengdiMean}}</td>
+                                            <td style="width: 70px;text-align: right;">{{itemData.lastDiff}}</td>
+                                            <td style="width: 70px;text-align: right;">{{itemData.actDengdi}}</td>
+                                            <td style="width: 70px;text-align: right;">{{itemData.predDengdi}}</td>
+                                            <td style="width: 70px;text-align: right;">{{itemData.loss}}</td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
             </p-tabView>
         </div>
     </div>

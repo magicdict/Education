@@ -21,6 +21,8 @@ public static class Dataset
 
     public static List<Weather> WeatherList = new List<Weather>();
 
+    public static List<AIFeature> AIFeatureList = new List<AIFeature>();
+
     public static List<Teacher> TeacherList = new List<Teacher>();
 
     public static List<Student> StudentList = new List<Student>();
@@ -79,6 +81,21 @@ public static class Dataset
         sr.Close();
         Console.WriteLine("读取教师信息件数：" + TeacherList.Count);
         Console.WriteLine(timer.Elapsed.ToString());
+
+        //导入教师信息 5_chengji.csv
+        fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "pred_dengdi.csv";
+        sr = new StreamReader(fullfilepath);
+        sr.ReadLine();  //读取标题栏
+        AIFeatureList.Clear();
+        while (!sr.EndOfStream)
+        {
+            var line = sr.ReadLine();
+            AIFeatureList.Add(new AIFeature(line));
+        }
+        sr.Close();
+        Console.WriteLine("读取ML信息件数：" + AIFeatureList.Count);
+        Console.WriteLine(timer.Elapsed.ToString());
+
 
         //导入天气基本信息 宁波历史天气数据.csv
         fullfilepath = fullpath + System.IO.Path.DirectorySeparatorChar + "宁波历史天气数据.csv";

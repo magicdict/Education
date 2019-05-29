@@ -26,6 +26,8 @@ public class StudentInfo
     /// <value></value>
     public List<Chengji> Chengjis { get; set; }
 
+    public List<AIFeature> AIFeatures { get; set; }
+
     /// <summary>
     /// 成绩信息件数
     /// </summary>

@@ -339,6 +339,9 @@ namespace Education.Controllers
                 );
                 //成绩件数
                 info.ChengjiCnt = info.Chengjis.Count;
+
+                info.AIFeatures = Dataset.AIFeatureList.Where(x=>x.StudentID == info.BaseInfo.ID).ToList();
+
                 //消费记录
                 info.Consumptions = Dataset.ConsumptionList.Where(x => x.StudentID == info.BaseInfo.ID).ToList();
                 info.Consumptions.Sort(

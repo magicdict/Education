@@ -48,6 +48,7 @@ export interface IStudentInfo {
   monthlyConsumptions: IStudentMonthlyConsumption[];
   kaoqins: IKaoqin[];
   chengjis: IScore[];
+  aiFeatures:IAIFeature[];
   consumptionCnt: number;
   chengjiCnt: number;
   teachers: ITeacher[];
@@ -150,7 +151,7 @@ export interface IScore {
   id: string;
   idForClass: string;
   className: string;
-  classID:string;
+  classID: string;
   grade: string;
   number: string;
   numberName: string;
@@ -322,4 +323,15 @@ export interface IWeather {
   high: number;
   low: number;
   type: string;
+}
+
+export interface IAIFeature {
+  studentID: string;
+  subName: string;
+  lastDengdi: number;
+  lastDengdiMean: number;
+  lastDiff: number;
+  actDengdi: number
+  predDengdi: number
+  loss: number
 }

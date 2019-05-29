@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../Common/Home.service';
-import { IStudent, ITeacher, IScore } from 'src/app/Home/Common/Education.model';
+import { IStudent, ITeacher, IScore, IAIFeature } from 'src/app/Home/Common/Education.model';
 import { Router } from '@angular/router';
 import { ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
 import { CommonFunction } from '../../Common/common';
@@ -18,7 +18,8 @@ export class Grade2ScoreComponent implements OnInit {
     public CurrentStudent: IStudent;
     public Teachers: ITeacher[];
     public Scores: IScore[];
-
+    public AIFeatures: IAIFeature[];
+    
     public subNameList = ['语文', '数学', '英语', '历史', '政治', '生物', '物理', '化学', '地理'];
     public LineGraphOption:
         {
@@ -26,6 +27,16 @@ export class Grade2ScoreComponent implements OnInit {
             yAxis: { type: string },
             series: { data: any[], type: string }[]
         }[] = [];
+
+        cols = [
+            { field: 'subName', header: "科目" },
+            { field: 'lastDengdi', header: "前一次等第" },
+            { field: 'lastDengdiMean', header: "等第均值" },
+            { field: 'lastDiff', header: "等第趋势" },
+            { field: 'actDengdi', header: "实际等第" },
+            { field: 'predDengdi', header: "预测等第" },
+            { field: 'loss', header: "误差" }
+        ];
 
     ngOnInit(): void {
         if (this.service.CurrentStudentInfo === undefined) {
@@ -35,6 +46,7 @@ export class Grade2ScoreComponent implements OnInit {
         this.CurrentStudent = this.service.CurrentStudentInfo.baseInfo;
         this.Teachers = this.service.CurrentStudentInfo.teachers;
         this.Scores = this.service.CurrentStudentInfo.chengjis.filter(x => x.subId !== "99");   //99表示总分
+        this.AIFeatures = this.service.CurrentStudentInfo.aiFeatures;
         //按照考试科目进行分组
         //语数外
         //历史政治生物 
