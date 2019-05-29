@@ -21,6 +21,8 @@ public class AIFeature
 
     public float Loss { get; set; }
 
+    public string Message { get; set; }
+
     public AIFeature(string RawData)
     {
         var Items = RawData.Split(",").Select(x => x.Trim(Dataset.QMark)).ToArray();
@@ -32,5 +34,9 @@ public class AIFeature
         ActDengdi = string.IsNullOrEmpty(Items[9]) ? 0 : float.Parse(Items[9]);
         PredDengdi = string.IsNullOrEmpty(Items[10]) ? 0 : float.Parse(Items[10]);
         Loss = string.IsNullOrEmpty(Items[11]) ? 0 : float.Parse(Items[11]);
+        if (Items.Length > 12)
+        {
+            Message = Items[12];
+        }
     }
 }

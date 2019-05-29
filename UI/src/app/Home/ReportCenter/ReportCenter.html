@@ -3,4 +3,4 @@
 </p-steps>
 <data-filter *ngIf="activeIndex == 0" (GotoNextPage)="activeIndex = 1"></data-filter>
 <data-view *ngIf="activeIndex == 1" (GotoNextPage)="activeIndex = 2" (GotoPreviousPage)="activeIndex = 0"></data-view>
-<visual-factory *ngIf="activeIndex == 2" (GotoNextPage)="activeIndex = 3" (GotoPreviousPage)="activeIndex = 1"></visual-factory>
+<visual-factory *ngIf="activeIndex == 2" (GotoPreviousPage)="activeIndex = 0"></visual-factory>

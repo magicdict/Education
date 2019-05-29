@@ -48,7 +48,7 @@ export interface IStudentInfo {
   monthlyConsumptions: IStudentMonthlyConsumption[];
   kaoqins: IKaoqin[];
   chengjis: IScore[];
-  aiFeatures:IAIFeature[];
+  aiFeatures: IAIFeature[];
   consumptionCnt: number;
   chengjiCnt: number;
   teachers: ITeacher[];
@@ -331,7 +331,8 @@ export interface IAIFeature {
   lastDengdi: number;
   lastDengdiMean: number;
   lastDiff: number;
-  actDengdi: number
-  predDengdi: number
-  loss: number
+  actDengdi: number;
+  predDengdi: number;
+  loss: number;
+  message: string;
 }

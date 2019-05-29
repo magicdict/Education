@@ -115,6 +115,10 @@
                                                 <p-sortIcon [field]="'loss'">
                                                 </p-sortIcon>
                                             </th>
+                                            <th style="width: 200px" [pSortableColumn]="'message'">风险提示
+                                                <p-sortIcon [field]="'message'">
+                                                </p-sortIcon>
+                                            </th>
                                         </tr>
                                     </ng-template>
                                     <ng-template pTemplate="body" let-itemData>
@@ -126,6 +130,7 @@
                                             <td style="width: 70px;text-align: right;">{{itemData.actDengdi}}</td>
                                             <td style="width: 70px;text-align: right;">{{itemData.predDengdi}}</td>
                                             <td style="width: 70px;text-align: right;">{{itemData.loss}}</td>
+                                            <td style="width: 200px;text-align: right;">{{itemData.message}}</td>
                                         </tr>
                                     </ng-template>
                                 </p-table>

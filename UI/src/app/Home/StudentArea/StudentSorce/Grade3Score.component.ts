@@ -36,7 +36,8 @@ export class Grade3ScoreComponent implements OnInit {
         { field: 'lastDiff', header: "等第趋势" },
         { field: 'actDengdi', header: "实际等第" },
         { field: 'predDengdi', header: "预测等第" },
-        { field: 'loss', header: "误差" }
+        { field: 'loss', header: "误差" },
+        { field: 'message', header: "风险提示" }
     ];
     
     ngOnInit(): void {
