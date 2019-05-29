@@ -1,3 +1,4 @@
 *.zip
 .DS_Store
 *.docx
+!模型方案说明.docx
