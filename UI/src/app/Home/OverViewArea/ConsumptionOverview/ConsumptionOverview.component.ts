@@ -280,7 +280,7 @@ export class ConsumptionOverviewComponent implements OnInit {
     });
   }
 
-  SetWeekTimeLineOption(title:string, WeekTimeLineOptionInstance: any, dataItems: number[][]) {
+  SetWeekTimeLineOption(title: string, WeekTimeLineOptionInstance: any, dataItems: number[][]) {
 
     WeekTimeLineOptionInstance.baseOption.series[0].symbolSize = (dataItem: number[]) => {
       return dataItem[1] / 4000;
@@ -289,7 +289,7 @@ export class ConsumptionOverviewComponent implements OnInit {
     //dataItem[1] 时间下标
     //dataItem[2] 金额
     for (let idx = 0; idx < 7; idx++) {
-      WeekTimeLineOptionInstance.options[idx].title.text += title; 
+      WeekTimeLineOptionInstance.options[idx].title.text += title;
       WeekTimeLineOptionInstance.options[idx].series[0].data = [];
     }
     dataItems.forEach(dataItem => {
@@ -321,7 +321,7 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.dailyOpt.visualMap.push(CommonFunction.clone(this.dailyOpt.visualMap[0]));
         this.dailyOpt.visualMap[1].max = 1700;
         this.dailyOpt.visualMap[1]['seriesIndex'] = [2, 3];
-        this.dailyOpt.visualMap[1]['color'] = ["#516b91","#59c4e6",'#a5e7f0'];
+        this.dailyOpt.visualMap[1]['color'] = ["#516b91", "#59c4e6", '#a5e7f0'];
         this.dailyOpt.visualMap[0].left -= 200;
         this.dailyOpt.visualMap[1].left += 200;
 
@@ -383,13 +383,13 @@ export class ConsumptionOverviewComponent implements OnInit {
           .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
 
         //时间线  
-        this.SetWeekTimeLineOption("(全体)",this.WeekTimeLineOption, data.consumptionInfo.weekTimeConsumption
+        this.SetWeekTimeLineOption("(全体)", this.WeekTimeLineOption, data.consumptionInfo.weekTimeConsumption
           .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
 
-        this.SetWeekTimeLineOption("(住校)",this.WeekTimeLineLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionLiveAtSchool
+        this.SetWeekTimeLineOption("(住校)", this.WeekTimeLineLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionLiveAtSchool
           .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
 
-        this.SetWeekTimeLineOption("(非住校)",this.WeekTimeLineNotLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionNotLiveAtSchool
+        this.SetWeekTimeLineOption("(非住校)", this.WeekTimeLineNotLiveAtSchoolOption, data.consumptionInfo.weekTimeConsumptionNotLiveAtSchool
           .map(x => { return [Number.parseInt(x.name.split('-')[0]), Number.parseInt(x.name.split('-')[1]), x.value]; }));
 
         //三维图形
@@ -512,7 +512,7 @@ export class ConsumptionOverviewComponent implements OnInit {
       z: 10,
       interval: 50
     },
-    tooltip: {},
+    tooltip: { trigger: 'axis' },
     toolbox: ToolboxSaveImageOnly,
     radiusAxis: {
     },
