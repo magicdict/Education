@@ -5,7 +5,7 @@
             <student-item [Sex]="FirstStudent.sex" [StudentId]="FirstStudent.id" [Title]="FirstStudent.name"
                 [SubTitle]="FirstStudent.className"></student-item>
         </div>
-        <div class="col-4" style="margin: 10px 0px">
+        <div class="col-4" style="margin: 10px 0px;padding: 0px">
             <button *ngFor="let x of this.subResult" [ngStyle]="GetResultStyle(x)">
                 {{x.name}}
             </button>
