@@ -69,6 +69,7 @@ import { ReportCenterComponent } from './ReportCenter/ReportCenter';
 import { DataFilterComponent } from './ReportCenter/DataFilter';
 import { VisualFactoryComponent } from './ReportCenter/VisualFactory';
 import { DataViewComponent } from './ReportCenter/DataView';
+import { ImageMessageDialogComponent } from './Common/error-message-dialog/image-message-dialog.component';
 
 
 @NgModule({
@@ -102,6 +103,7 @@ import { DataViewComponent } from './ReportCenter/DataView';
     //共通
     NavigationComponent,
     ErrorMessageDialogComponent,
+    ImageMessageDialogComponent,
     ClassExamListComponent,
     ExamListComponent,
     TeacherPickerComponent,

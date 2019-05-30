@@ -117,7 +117,8 @@
                                 </p-dropdown>
                             </div>
                             <div class="col">
-                                <b>对角线点表示排名平均，红色点的同时表示偏科，其中靠近坐标轴的表示其中一门课程特别好</b>
+                                <button type="button" class="btn btn-info" style="height: 30px;float:right;margin: 5px;"
+                                    (click)="op21.show($event)"><i class="fas fa-question"></i>&nbsp;说明</button>
                             </div>
                         </div>
                         <div class="row">
@@ -131,3 +132,6 @@
         </div>
     </div>
 </div>
+<app-image-message-dialog  #op21 [ImageURL]="'assets/image/ExamDes.png'"
+    [MsgContent]="'对角线点表示排名平均，红色点的同时表示偏科，其中靠近坐标轴的表示其中一门课程特别好'">
+</app-image-message-dialog>

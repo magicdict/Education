@@ -1,6 +1,7 @@
 <p-dialog header="数智教育" [(visible)]="display" modal="modal"  [responsive]="true" [style.width]="'460px'">
   <p>{{errorMsgContent}}</p>
   <p-footer>
-    <button type="button" pButton icon="fa fa-close" (click)="hide()" label="确定"></button>
+      <button type="button" class="btn btn-info" style="height: 30px;"
+      (click)="hide($event)"><i class="fas fa-check"></i>&nbsp;确定</button>
   </p-footer>
 </p-dialog>

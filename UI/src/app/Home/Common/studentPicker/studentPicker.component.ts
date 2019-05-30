@@ -128,6 +128,10 @@ export class StudentPickerComponent {
     this.Students = [];
   }
   QueryByStudentId() {
+    if (this.StudentId === "") {
+      this.errMsgDialog.show("请输入需要检索学生的学号");
+      return;
+    }
     this.service.QueryByStudentId(this.StudentId).then(
       result => {
         if (result === null) {
