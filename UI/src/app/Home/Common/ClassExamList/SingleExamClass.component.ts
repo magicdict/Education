@@ -24,8 +24,11 @@ export class SingleExamClassComponent implements OnInit {
             type: 'value'
         },
         toolbox: ToolboxSaveImageOnly,
+        title: {
+            text: "",
+            show: false
+        },
         series:
-
             [{
                 type: 'line',
                 label: {
@@ -74,6 +77,7 @@ export class SingleExamClassComponent implements OnInit {
             data.singleExam.sort(IScoreSortMethod);
             this.mRankOption.xAxis.data = data.singleExam.map(x => x.classRank);
             this.mRankOption.series[0].data = data.singleExam.map(x => x.gradeRank);
+            this.mRankOption.title.text = this.Title + this.subTitle + "年级排名";
         });
     }
     constructor(
