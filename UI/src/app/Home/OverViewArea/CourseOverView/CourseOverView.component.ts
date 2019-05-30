@@ -4,7 +4,7 @@ import { ICourse } from 'src/app/Home/Common/Education.model';
 import { CommonFunction } from '../../Common/common'
 import {
   CourseSelectCntOption, CourseSelectTwoCntOption, CourseSelectThreeCntOption,
-  CourseSelectRadarGraphOption, SelectCourseSankeyOption
+  CourseSelectRadarGraphOption, SelectCourseSankeyOption, ScoreRadarGraphOption
 } from '../../GraphOption/ScoreOption'
 import { ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
 
@@ -120,7 +120,7 @@ export class CourseOverViewComponent implements OnInit {
 
 
   //单科图
-  mCourseSelectRadarGraphOption = CommonFunction.clone(CourseSelectRadarGraphOption);
+  mCourseSelectRadarGraphOption = CommonFunction.clone(ScoreRadarGraphOption);
   mMaleCourseSelectRadarGraphOption = CommonFunction.clone(CourseSelectRadarGraphOption);
   mFeMaleCourseSelectRadarGraphOption = CommonFunction.clone(CourseSelectRadarGraphOption);
 
@@ -278,8 +278,12 @@ export class CourseOverViewComponent implements OnInit {
         this.mCourseSelectCntOption["legend"] = { show: true, data: ["男生", "女生"] };
 
         this.mCourseSelectRadarGraphOption.radar.indicator =
-          data.courseInfo[0].selectionCourseCnt.map(x => { return { 'name': x.name, 'max': data.courseInfo[0].studentCnt } });
-        this.mCourseSelectRadarGraphOption.series[0].data[0].value = data.courseInfo[0].selectionCourseCnt.map(x => x.value);
+          data.courseInfo[0].selectionCourseCnt.map(x => { return { 'name': x.name, 'max': 160 } });
+        this.mCourseSelectRadarGraphOption.series[0].data[0].value = data.courseInfo[1].selectionCourseCnt.map(x => x.value);
+        this.mCourseSelectRadarGraphOption.series[0].data[0].name = "男生";
+        this.mCourseSelectRadarGraphOption.series[0].data[1].value = data.courseInfo[2].selectionCourseCnt.map(x => x.value);
+        this.mCourseSelectRadarGraphOption.series[0].data[1].name = "女生";
+        this.mCourseSelectRadarGraphOption.legend.data = ["男生", "女生"];
 
 
         this.mMaleCourseSelectCntOption.xAxis.data = data.courseInfo[1].selectionCourseCnt.map(x => x.name);
@@ -350,7 +354,7 @@ export class CourseOverViewComponent implements OnInit {
         //三门课程
         data.courseInfo[0].selectionThreeCourseCnt.sort((x, y) => { return y.value - x.value; });
         this.mCourseSelectThreeCntOption.xAxis.data = data.courseInfo[0].selectionThreeCourseCnt.map(
-          x =>  { let names = x.name.split("/") ; return names[0] + "\n" + names[1] + "\n" + names[2]}
+          x => { let names = x.name.split("/"); return names[0] + "\n" + names[1] + "\n" + names[2] }
         );
         this.mCourseSelectThreeCntOption.series[0].data = data.courseInfo[0].selectionThreeCourseCnt.map(x => x.value);
         this.ThreeCoursePercent = data.courseInfo[0].selectionThreeCourseCnt.map(x => {
