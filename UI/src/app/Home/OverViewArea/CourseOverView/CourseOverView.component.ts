@@ -349,7 +349,9 @@ export class CourseOverViewComponent implements OnInit {
 
         //三门课程
         data.courseInfo[0].selectionThreeCourseCnt.sort((x, y) => { return y.value - x.value; });
-        this.mCourseSelectThreeCntOption.xAxis.data = data.courseInfo[0].selectionThreeCourseCnt.map(x => x.name);
+        this.mCourseSelectThreeCntOption.xAxis.data = data.courseInfo[0].selectionThreeCourseCnt.map(
+          x =>  { let names = x.name.split("/") ; return names[0] + "\n" + names[1] + "\n" + names[2]}
+        );
         this.mCourseSelectThreeCntOption.series[0].data = data.courseInfo[0].selectionThreeCourseCnt.map(x => x.value);
         this.ThreeCoursePercent = data.courseInfo[0].selectionThreeCourseCnt.map(x => {
           return { 'name': x.name, 'value': CommonFunction.roundvalue(x.value * 100 / data.courseInfo[0].studentCnt) }

@@ -15,7 +15,7 @@
                     <button type="button" class="btn btn-primary" style="cursor: default">
                         非住校生 <span class="badge badge-light">{{notLiveAtSchool}}</span>
                     </button>
-                    <button type="button" class="btn btn-info" style="height: 30px;float:right;margin: 5px;"
+                    <button type="button" class="btn btn-info" style="height: 30px;float:right;margin-right:20px"
                         (click)="op01.show($event)"><i class="fas fa-question"></i>&nbsp;说明</button>
                 </div>
             </div>
@@ -38,7 +38,7 @@
             </p-overlayPanel>
             <div class="row">
                 <div class="col">
-                    <button type="button" class="btn btn-info" style="height: 30px;float:right;margin: 5px;"
+                    <button type="button" class="btn btn-info" style="height: 30px;float:right;margin-right:20px"
                         (click)="op02.show($event)"><i class="fas fa-question"></i>&nbsp;说明</button>
                 </div>
             </div>
@@ -61,7 +61,7 @@
             </p-overlayPanel>
             <div class="row">
                 <div class="col">
-                    <button type="button" class="btn btn-info" style="height: 30px;float:right;margin: 5px;"
+                    <button type="button" class="btn btn-info" style="height: 30px;float:right;margin-right:20px"
                         (click)="op03.show($event)"><i class="fas fa-question"></i>&nbsp;说明</button>
                 </div>
             </div>
@@ -112,8 +112,8 @@
             <div class="box-header with-border">
                 <h3 class="box-title">时段周别统计（3D）</h3>
                 <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" (click)="SaveWeekTimeOption3DChartImage()">
-                        <i class="fas fa-file-download"></i>保存为图片
+                    <button type="button" class="btn btn-info" style="height: 30px;" (click)="SaveWeekTimeOption3DChartImage()">
+                        <i class="fas fa-file-download"></i>&nbsp;保存为图片
                     </button>
                 </div>
             </div>
@@ -130,15 +130,15 @@
         <div echarts [options]="WeekTimeLineOption"
             style="width:1100px;height:200px;border: 0px solid lightgray;padding: 5px;margin: 5px">
         </div>
-        <hr style="border:1px dashed #000; height:1px">
+        <hr style="border:1px dashed lightgray; height:1px;width: 95%">
         <div echarts [options]="WeekTimeLineLiveAtSchoolOption"
             style="width:1100px;height:200px;border: 0px solid lightgray;padding: 5px;margin: 5px">
         </div>
-        <hr style="border:1px dashed #000; height:1px">
+        <hr style="border:1px dashed lightgray; height:1px;width: 95%">
         <div echarts [options]="WeekTimeLineNotLiveAtSchoolOption"
             style="width:1100px;height:200px;border: 0px solid lightgray;padding: 5px;margin: 5px">
         </div>
-        <hr style="border:1px dashed #000; height:1px">
+        <hr style="border:1px dashed lightgray; height:1px;width: 95%">
         <div class="container">
             <div class="row" style="margin-top:10px;">
                 <div style="border-right: 2px dashed lightgray;padding: 0px;margin: 0px;width: 370px;">

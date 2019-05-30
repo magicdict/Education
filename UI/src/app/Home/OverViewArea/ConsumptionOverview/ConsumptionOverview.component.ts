@@ -344,6 +344,7 @@ export class ConsumptionOverviewComponent implements OnInit {
 
 
         this.monthlyTotalOpt.title.text = "整体月消费金额";
+        this.monthlyTotalOpt.series[0].type = "line";
         this.monthlyTotalOpt.xAxis.data = data.consumptionInfo.monthlyConsumption.map(x => x.name);
         this.monthlyTotalOpt.series[0].data = data.consumptionInfo.monthlyConsumption;
 
@@ -354,6 +355,7 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.monthlyOpt.toolbox.feature.magicType.type = ['line', 'bar', 'stack', 'tiled'];
 
         this.weekdayTotalOpt.title.text = "整体周别消费金额";
+        this.weekdayTotalOpt.series[0].type = "line";
         this.weekdayTotalOpt.xAxis.data = data.consumptionInfo.weekDayConsumption.map(x => x.name);
         this.weekdayTotalOpt.series[0].data = data.consumptionInfo.weekDayConsumption;
 

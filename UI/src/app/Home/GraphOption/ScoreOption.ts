@@ -311,14 +311,14 @@ export const CourseSelectThreeCntOption = {
     formatter: '{b}\n{c}'
   },
   grid: {
+    left:0,right:0,
     bottom: 100
   },
   xAxis: {
     type: 'category',
     data: [],
     axisLabel: {
-      interval: 0,
-      rotate: 90
+      interval: 0
     }
   },
   yAxis: {
