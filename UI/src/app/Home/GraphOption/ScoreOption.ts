@@ -311,7 +311,7 @@ export const CourseSelectThreeCntOption = {
     formatter: '{b}\n{c}'
   },
   grid: {
-    left:0,right:0,
+    left:30,right:0,
     bottom: 100
   },
   xAxis: {

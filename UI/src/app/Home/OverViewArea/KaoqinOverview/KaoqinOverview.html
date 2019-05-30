@@ -108,8 +108,14 @@
         </div>
     </p-tabPanel>
     <p-tabPanel header="违规行为" style="width:1140px;">
-        <div class="alert alert-warning" role="alert">
+        <p-overlayPanel #op31 [showCloseIcon]="true" [dismissable]="true">
             迟到和晚到是一个意思，不同老师的录入风格不同。
+        </p-overlayPanel>        
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-info" style="height: 30px;float:right;margin: 5px;"
+                    (click)="op31.show($event)"><i class="fas fa-question"></i>&nbsp;说明</button>
+            </div>
         </div>
         <div echarts [options]="KaoqinAbnormalMonthOption" style="width:1080px;height:800px;"></div>
     </p-tabPanel>
