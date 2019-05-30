@@ -481,6 +481,7 @@ export class KaoqinOverviewComponent implements OnInit {
         radiusAxis: {
         },
         polar: {
+            radius:'70%'
         },
         series: [{
             type: 'bar',
