@@ -386,8 +386,8 @@ export class KaoqinOverviewComponent implements OnInit {
                 autoPlay: true,
                 inverse: true,
                 playInterval: 2000,
-                left: null,
-                right: 0,
+                left: 0,
+                right: null,
                 top: 20,
                 bottom: 20,
                 width: 55,
@@ -396,20 +396,22 @@ export class KaoqinOverviewComponent implements OnInit {
                     normal: {
                         textStyle: {
                             color: '#999'
-                        }
+                        },
+                        position: "left"
                     },
                     emphasis: {
                         textStyle: {
                             color: '#fff'
-                        }
+                        },
+                        position: "left"
                     }
                 },
                 symbol: 'none',
                 lineStyle: {
-                    color: '#555'
+                    color: 'lightgray'
                 },
                 checkpointStyle: {
-                    color: '#bbb',
+                    color: 'red',
                     borderColor: '#777',
                     borderWidth: 2
                 },
@@ -442,8 +444,7 @@ export class KaoqinOverviewComponent implements OnInit {
             grid: {
                 top: 100,
                 containLabel: true,
-                left: 30,
-                right: '110'
+                left: 80,
             },
             xAxis: {
                 type: 'category',
@@ -481,7 +482,7 @@ export class KaoqinOverviewComponent implements OnInit {
         radiusAxis: {
         },
         polar: {
-            radius:'70%'
+            radius: '70%'
         },
         series: [{
             type: 'bar',
