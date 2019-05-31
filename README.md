@@ -7,6 +7,11 @@
 - Linux CentOS 7.4
 - DotNet Core v3.0.0-preview5
 - Angular 8.0.0
+- echarts 4.2.1
+- primaryNG 7.1.3
+- 其他第三方组件
+
+目录构成
 
 - UI ： Angular代码
 - WebAPI：WebAPI代码
@@ -40,6 +45,12 @@ let webapiurl = "http://39.105.206.6:8080/api/"
 
 - 4.systemctl restart education.service (远程执行)
 - ssh root@39.105.206.6 (Mac Login via SSH)
+
+团队主要成员
+
+- 胡八一：主程序
+- 穆扬：美工
+- 林有夕：机器学习
 
 界面示意图：
 
