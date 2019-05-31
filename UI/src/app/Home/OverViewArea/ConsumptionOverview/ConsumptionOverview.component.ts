@@ -514,12 +514,17 @@ export class ConsumptionOverviewComponent implements OnInit {
       z: 10,
       interval: 50
     },
-    tooltip: { trigger: 'axis' },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'cross'
+      }
+    },
     toolbox: ToolboxSaveImageOnly,
     radiusAxis: {
     },
     polar: {
-      radius:'70%'
+      radius: '70%'
     },
     series: [{
       type: 'bar',
@@ -549,7 +554,7 @@ export class ConsumptionOverviewComponent implements OnInit {
     this.router.navigate(['student/overview', studentId]);
   }
 
-  @ViewChild(StudentPickerComponent, {static: false})
+  @ViewChild(StudentPickerComponent, { static: false })
   private studentpicker: StudentPickerComponent;
   // 订阅句柄
   private pickhandler: any;

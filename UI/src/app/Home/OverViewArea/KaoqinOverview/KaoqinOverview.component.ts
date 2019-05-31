@@ -478,7 +478,12 @@ export class KaoqinOverviewComponent implements OnInit {
             text: ""
         },
         toolbox: ToolboxSaveImageOnly,
-        tooltip: { trigger: 'axis' },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross'
+            }
+        },
         radiusAxis: {
         },
         polar: {
