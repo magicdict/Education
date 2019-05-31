@@ -565,7 +565,7 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
     this.router.navigate(['teacher/overview', teacherid]);
   }
 
-  @ViewChild("classExamList")
+  @ViewChild("classExamList", {static: false})
   classExamList: ClassExamListComponent;
 
   //Panel里面带滚动条表格的修复

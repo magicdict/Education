@@ -8,7 +8,7 @@ import { ErrorMessageDialogComponent } from '../error-message-dialog/error-messa
   templateUrl: './teacherPicker.component.html'
 })
 export class TeacherPickerComponent {
-  @ViewChild(ErrorMessageDialogComponent)
+  @ViewChild(ErrorMessageDialogComponent, {static: false})
   private errMsgDialog: ErrorMessageDialogComponent;
 
   @Output() pick: EventEmitter<any> = new EventEmitter();

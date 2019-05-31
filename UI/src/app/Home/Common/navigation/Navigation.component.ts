@@ -23,7 +23,7 @@ export class NavigationComponent implements OnInit {
 
   }
 
-  @ViewChild("confirm") confirm : ConfirmDialog;
+  @ViewChild("confirm", {static: false}) confirm : ConfirmDialog;
 
   /**全屏模式 */
   fullScreen() {
@@ -67,11 +67,11 @@ export class NavigationComponent implements OnInit {
     //console.log(ua);
   }
 
-  @ViewChild(TeacherPickerComponent)
+  @ViewChild(TeacherPickerComponent, {static: false})
   private teacherpicker: TeacherPickerComponent;
-  @ViewChild(StudentPickerComponent)
+  @ViewChild(StudentPickerComponent, {static: false})
   private studentpicker: StudentPickerComponent;
-  @ViewChild(ClassPickerComponent)
+  @ViewChild(ClassPickerComponent, {static: false})
   private classpicker: ClassPickerComponent;
 
 

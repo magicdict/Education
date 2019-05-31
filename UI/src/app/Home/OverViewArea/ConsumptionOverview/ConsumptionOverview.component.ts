@@ -549,7 +549,7 @@ export class ConsumptionOverviewComponent implements OnInit {
     this.router.navigate(['student/overview', studentId]);
   }
 
-  @ViewChild(StudentPickerComponent)
+  @ViewChild(StudentPickerComponent, {static: false})
   private studentpicker: StudentPickerComponent;
   // 订阅句柄
   private pickhandler: any;
