@@ -9,7 +9,7 @@ import { HomeService } from '../Home.service';
 })
 export class StudentPickerComponent {
 
-  @ViewChild(ErrorMessageDialogComponent, {static: false})
+  @ViewChild(ErrorMessageDialogComponent, { static: false })
   private errMsgDialog: ErrorMessageDialogComponent;
 
   @Output() pick: EventEmitter<any> = new EventEmitter();

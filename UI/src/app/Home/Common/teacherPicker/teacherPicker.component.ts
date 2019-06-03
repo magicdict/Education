@@ -8,7 +8,7 @@ import { ErrorMessageDialogComponent } from '../error-message-dialog/error-messa
   templateUrl: './teacherPicker.component.html'
 })
 export class TeacherPickerComponent {
-  @ViewChild(ErrorMessageDialogComponent, {static: false})
+  @ViewChild(ErrorMessageDialogComponent, { static: false })
   private errMsgDialog: ErrorMessageDialogComponent;
 
   @Output() pick: EventEmitter<any> = new EventEmitter();
@@ -76,7 +76,7 @@ export class TeacherPickerComponent {
 
   query() {
 
-    if (this.SelectSub === "" && this.SelectGrade ==="") {
+    if (this.SelectSub === "" && this.SelectGrade === "") {
       this.errMsgDialog.show("请选择一种科目或者一个年级！");
       return;
     }

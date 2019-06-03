@@ -16,7 +16,7 @@ export class DataFilterComponent implements OnInit {
 
     }
 
-    @ViewChild(ErrorMessageDialogComponent, {static: false})
+    @ViewChild(ErrorMessageDialogComponent, { static: false })
     private errMsgDialog: ErrorMessageDialogComponent;
     @Output() GotoNextPage = new EventEmitter();
     FullClassOne: SelectItem[] = [];

@@ -23,7 +23,7 @@ export class NavigationComponent implements OnInit {
 
   }
 
-  @ViewChild("confirm", {static: false}) confirm : ConfirmDialog;
+  @ViewChild("confirm", { static: false }) confirm: ConfirmDialog;
 
   /**全屏模式 */
   fullScreen() {
@@ -36,10 +36,10 @@ export class NavigationComponent implements OnInit {
   }
 
   // 订阅句柄
-  private pickhandler: any;  
+  private pickhandler: any;
 
   ngOnInit(): void {
-    if (this.service.SchoolOverview === undefined){
+    if (this.service.SchoolOverview === undefined) {
       //页面被强制刷新的时候，回到Home页面
       //第一次HOME页面进入的时候应该有数据，所以不会命中
       this.Home();
@@ -67,11 +67,11 @@ export class NavigationComponent implements OnInit {
     //console.log(ua);
   }
 
-  @ViewChild(TeacherPickerComponent, {static: false})
+  @ViewChild(TeacherPickerComponent, { static: false })
   private teacherpicker: TeacherPickerComponent;
-  @ViewChild(StudentPickerComponent, {static: false})
+  @ViewChild(StudentPickerComponent, { static: false })
   private studentpicker: StudentPickerComponent;
-  @ViewChild(ClassPickerComponent, {static: false})
+  @ViewChild(ClassPickerComponent, { static: false })
   private classpicker: ClassPickerComponent;
 
 

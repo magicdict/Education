@@ -39,7 +39,7 @@ export class Grade3ScoreComponent implements OnInit {
         { field: 'loss', header: "误差" },
         { field: 'message', header: "风险提示" }
     ];
-    
+
     ngOnInit(): void {
         if (this.service.CurrentStudentInfo === undefined) {
             this.router.navigate(['home/school']);

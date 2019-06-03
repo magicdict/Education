@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ViewChild } from '
 import { Router, ActivatedRoute } from '@angular/router';
 import { IStudent, IClassInfo, ITeacher, IClassExam, IStudentGroupProperty } from '../../Common/Education.model';
 import { HomeService } from '../../Common/Home.service';
-import { SexRatePieOption } from '../../GraphOption/StudentGraphOption'
 import { ISimpleBar, ToolboxForBar } from '../../GraphOption/KaoqinOption';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';

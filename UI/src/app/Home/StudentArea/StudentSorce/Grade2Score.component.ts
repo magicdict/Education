@@ -19,7 +19,7 @@ export class Grade2ScoreComponent implements OnInit {
     public Teachers: ITeacher[];
     public Scores: IScore[];
     public AIFeatures: IAIFeature[];
-    
+
     public subNameList = ['语文', '数学', '英语', '历史', '政治', '生物', '物理', '化学', '地理'];
     public LineGraphOption:
         {
@@ -28,16 +28,16 @@ export class Grade2ScoreComponent implements OnInit {
             series: { data: any[], type: string }[]
         }[] = [];
 
-        cols = [
-            { field: 'subName', header: "科目" },
-            { field: 'lastDengdi', header: "前一次等第" },
-            { field: 'lastDengdiMean', header: "等第均值" },
-            { field: 'lastDiff', header: "等第趋势" },
-            { field: 'actDengdi', header: "实际等第" },
-            { field: 'predDengdi', header: "预测等第" },
-            { field: 'loss', header: "误差" },
-            { field: 'message', header: "风险提示" }
-        ];
+    cols = [
+        { field: 'subName', header: "科目" },
+        { field: 'lastDengdi', header: "前一次等第" },
+        { field: 'lastDengdiMean', header: "等第均值" },
+        { field: 'lastDiff', header: "等第趋势" },
+        { field: 'actDengdi', header: "实际等第" },
+        { field: 'predDengdi', header: "预测等第" },
+        { field: 'loss', header: "误差" },
+        { field: 'message', header: "风险提示" }
+    ];
 
     ngOnInit(): void {
         if (this.service.CurrentStudentInfo === undefined) {

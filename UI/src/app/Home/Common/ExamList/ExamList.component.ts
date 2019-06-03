@@ -59,9 +59,9 @@ export class ExamListComponent implements OnChanges {
 
     subName: { label: string, value: string }[] = [];
 
-    @ViewChild("dt", {static: false}) dt: Table;
+    @ViewChild("dt", { static: false }) dt: Table;
 
-    @ViewChild("subnamelist", {static: false}) subnamelist: Dropdown;
+    @ViewChild("subnamelist", { static: false }) subnamelist: Dropdown;
 
     roundvalue = CommonFunction.roundvalue;
 

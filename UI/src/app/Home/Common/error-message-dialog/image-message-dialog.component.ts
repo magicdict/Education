@@ -16,7 +16,7 @@ export class ImageMessageDialogComponent implements OnInit {
 
   private _display = false;
   @Input() ImageURL: string;
-  @Input() MsgContent: string; 
+  @Input() MsgContent: string;
 
   /** 由于无法阻止代码的执行，所以这里使用回掉进行后续处理 */
   public callbackMethod: any;

@@ -93,10 +93,10 @@ export class StudentOverviewComponent implements OnInit {
     )
   }
 
-  @ViewChild(ErrorMessageDialogComponent, {static: false})
+  @ViewChild(ErrorMessageDialogComponent, { static: false })
   private errMsgDialog: ErrorMessageDialogComponent;
 
-  @ViewChild(StudentPickerComponent, {static: false})
+  @ViewChild(StudentPickerComponent, { static: false })
   private studentpicker: StudentPickerComponent;
   pickhandler: any;
 

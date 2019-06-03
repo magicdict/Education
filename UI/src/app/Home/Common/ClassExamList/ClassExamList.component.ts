@@ -17,15 +17,15 @@ export class ClassExamListComponent implements OnChanges {
 
     @Input() FunRowSelect: (event: { data: IClassExam; }) => void;
 
-    @ViewChild("dt", {static: false}) dt: Table;
+    @ViewChild("dt", { static: false }) dt: Table;
 
-    @ViewChild("subnamelist", {static: false}) subnamelist: Dropdown;
+    @ViewChild("subnamelist", { static: false }) subnamelist: Dropdown;
 
     @Input() IsShowExamName: boolean = true;
 
     @Input() IsShowClassName: boolean = true;
 
-    @Input() IsShowTeacher : boolean  = true;
+    @Input() IsShowTeacher: boolean = true;
 
     /**统计条目 */
     @Input() Footer: IClassExam = null;

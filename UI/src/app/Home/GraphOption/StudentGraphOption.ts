@@ -146,7 +146,7 @@ export const SexRateSunburstOption = {
     text: '性别比例',
     left: 10
   },
-  tooltip:{},
+  tooltip: {},
   toolbox: ToolboxSaveImageOnly,
   label: {
     formatter: "{b}\n{c}"

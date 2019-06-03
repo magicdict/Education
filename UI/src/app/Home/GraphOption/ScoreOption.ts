@@ -311,7 +311,7 @@ export const CourseSelectThreeCntOption = {
     formatter: '{b}\n{c}'
   },
   grid: {
-    left:30,right:0,
+    left: 30, right: 0,
     bottom: 100
   },
   xAxis: {
@@ -379,8 +379,8 @@ export const ScoreFunnelOption =
       type: 'funnel',
       left: '10%',
       width: '80%',
-      bottom:0,
-      top:100,
+      bottom: 0,
+      top: 100,
       min: 0,
       max: 50,
       minSize: '0%',

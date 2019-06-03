@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 })
 export class StudentItemComponent {
     @Input() Sex: string;
-    @Input() StudentId:string;
-    @Input() Title : string;
-    @Input() SubTitle : string;
+    @Input() StudentId: string;
+    @Input() Title: string;
+    @Input() SubTitle: string;
     constructor(
         private router: Router,
     ) { }

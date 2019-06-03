@@ -5,7 +5,7 @@ export interface ISunburstOption {
         text: string,
         left: number
     },
-    tooltip:{
+    tooltip: {
 
     }
     label: {

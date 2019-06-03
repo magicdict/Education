@@ -6,7 +6,6 @@ import {
   CourseSelectCntOption, CourseSelectTwoCntOption, CourseSelectThreeCntOption,
   CourseSelectRadarGraphOption, SelectCourseSankeyOption, ScoreRadarGraphOption
 } from '../../GraphOption/ScoreOption'
-import { ToolboxSaveImageOnly } from '../../GraphOption/KaoqinOption';
 
 @Component({
   templateUrl: 'CourseOverView.html',

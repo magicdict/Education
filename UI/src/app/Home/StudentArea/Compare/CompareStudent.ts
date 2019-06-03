@@ -28,7 +28,7 @@ export class CompareStudentComponent implements OnInit {
     subResult: { name: string, value: number }[] = [];
 
     subName: { label: string, value: string }[] = [];
-    @ViewChild("dt", {static: false}) dt: Table;
+    @ViewChild("dt", { static: false }) dt: Table;
 
     ngOnInit(): void {
         this.route.data
