@@ -2,7 +2,7 @@
 <div class="alert alert-info" style="font-size: 18px;font-weight: 500;">
   {{this.ClassName}} 人数：{{this.StudentCnt}}
 </div>
-<p-tabView *ngIf="this.StudentsInfo !==undefined" (onChange)="handleChange($event)">
+<p-tabView *ngIf="this.StudentsInfo !==undefined" (onChange)="handleChange($event)" [activeIndex]="index">
 
   <p-tabPanel header="概要" style="width:1140px;">
     <div class="container">
@@ -215,9 +215,20 @@
                 </div>
               </div>
             </p-tabPanel>
+            <p-tabPanel [header]="'七选三'" *ngIf="ClassName.indexOf('高三') !==-1">
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <div echarts [options]="mCourseSelectRadarGraphOption"
+                      (chartInit)="onCourseSelectRadarChartInit($event)" style="width:1000px;height:350px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </p-tabPanel>
           </p-tabView>
         </div>
       </div>
     </div>
   </p-tabPanel>
-</p-tabView>
+</p-tabView> 

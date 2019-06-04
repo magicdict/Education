@@ -274,6 +274,7 @@ export interface IClassInfo {
   weeklyConsumption: { name: string, value: number }[];
   consumptionStatisticsList: IStatistics[];
   kaoqingStatisticsList: { name: string, value: { name: string, value: number }[] }[];
+  courseSelect: { name: string, value: number }[];
 }
 
 export interface IStatistics {

@@ -250,7 +250,7 @@ namespace Education.Controllers
             return rtn;
         }
 
-        public PickCourseOverview GetPickCourseOverview(List<Student> PickStudentList, string ExamType)
+        public static PickCourseOverview GetPickCourseOverview(List<Student> PickStudentList, string ExamType)
         {
             if (ExamType == "6")
             {

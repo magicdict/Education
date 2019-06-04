@@ -7,7 +7,7 @@ import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { CommonFunction } from '../../Common/common';
 import { ClassExamListComponent } from '../../Common/ClassExamList/ClassExamList.component';
-import { ExamSubNameOption } from '../../GraphOption/ScoreOption';
+import { ExamSubNameOption, CourseSelectRadarGraphOption } from '../../GraphOption/ScoreOption';
 import { SexRateChartOption } from '../../GraphOption/SexRateChart';
 
 @Component({
@@ -76,6 +76,12 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
 
   SaveKaoqinImage() {
     CommonFunction.SaveChartImage(this.KaoqinEchartsInstance, this.ClassName + "考勤统计");
+  }
+
+  mCourseSelectRadarGraphOption = CommonFunction.clone(CourseSelectRadarGraphOption);
+  CourseSelectRadarInstance: any;
+  onCourseSelectRadarChartInit(event: any) {
+    this.CourseSelectRadarInstance = event;
   }
 
   cols = [
@@ -422,6 +428,25 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
           }
         }
 
+        //七选三
+        if (this.ClassName.indexOf('高三') !== -1) {
+          data.classinfo.courseSelect.sort((x, y) => {
+            return CommonFunction.NumberSortMethod(x.value, y.value);
+          })
+          this.mCourseSelectRadarGraphOption.radar.indicator =
+            data.classinfo.courseSelect.map(x => { return { 'name': x.name, 'max': this.StudentCnt } });
+          this.mCourseSelectRadarGraphOption.series[0].data[0].value = data.classinfo.courseSelect.map(x => x.value);
+          if (this.CourseSelectRadarInstance !== undefined) {
+
+            try {
+              this.CourseSelectRadarInstance.setOption(this.mCourseSelectRadarGraphOption);
+            } catch (error) {
+
+            }
+          }
+        }
+
+        this.index = 0;
 
       });
   }
@@ -564,11 +589,12 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
     this.router.navigate(['teacher/overview', teacherid]);
   }
 
-  @ViewChild("classExamList", {static: false})
+  @ViewChild("classExamList", { static: false })
   classExamList: ClassExamListComponent;
 
   //Panel里面带滚动条表格的修复
   IsFirst = true;
+  index = 0;
   handleChange(e: { index: any; }) {
     var index = e.index;
     if (index !== 3) return;

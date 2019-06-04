@@ -33,6 +33,8 @@ namespace Education.Controllers
         /// </summary>
         public class ClassOverview
         {
+            public string className { get; set; }
+
             public StudentGroupProperty Property { get; set; }
 
             /// <summary>
@@ -55,6 +57,8 @@ namespace Education.Controllers
             public List<NameValueSet> MonthlyConsumption { get; set; }
 
             public List<NameValueSet> WeeklyConsumption { get; set; }
+
+            public List<NameValueSet> CourseSelect { get; set; }
 
             public List<statistics> ConsumptionStatisticsList { get; set; }
 
@@ -87,10 +91,12 @@ namespace Education.Controllers
         public ActionResult<ClassOverview> GetClassOverview(string ClassId)
         {
             var overview = new ClassOverview();
-            overview.Property = new StudentGroupProperty(Dataset.StudentList.Where(x => x.ClassId == ClassId).ToList());
+            var studentlist = Dataset.StudentList.Where(x => x.ClassId == ClassId).ToList();
+            overview.Property = new StudentGroupProperty(studentlist);
             //教师记录
             overview.Teachers = Dataset.TeacherList.Where(x => x.ClassId == ClassId).ToList();
             var All = Dataset.ChengjiList.Where(x => x.ClassID == ClassId).ToList();
+            overview.className = studentlist.First().ClassName;
             var dic = new Dictionary<string, List<Chengji>>();
             foreach (var chengjiRec in All)
             {
@@ -139,7 +145,7 @@ namespace Education.Controllers
             overview.ConsumptionStatisticsList.Sort((x, y) => { return x.name.CompareTo(y.name); });
 
             var ClassKaoqin = Dataset.KaoqinList.Where(x => x.ClassId == ClassId && x.ControllerID.StartsWith("9"));
-             
+
             overview.KaoqingStatisticsList = ClassKaoqin.GroupBy(x => x.RecDateTimeYearMonthDay).Select(x =>
             {
                 var KaoqinGroup = x.GroupBy(z => z.DetailId);
@@ -157,6 +163,13 @@ namespace Education.Controllers
                     value = Controllerlist.ToList()
                 };
             }).ToList();
+
+            //高三七选三
+            if (overview.className.Contains("高三"))
+            {
+                //五校联考
+                overview.CourseSelect = CourseController.GetPickCourseOverview(studentlist, "6").selectionCourseCnt;
+            }
             return overview;
         }
     }

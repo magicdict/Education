@@ -81,7 +81,9 @@ export class ClassExamListComponent implements OnChanges {
                 }
             }
         );
-        this.dt.filter("", 'record.subName', 'equals')
+        if (this.dt !== undefined) {
+            this.dt.filter("", 'record.subName', 'equals')
+        }
         if (this.subnamelist !== undefined) {
             this.subnamelist.value = null;
         }

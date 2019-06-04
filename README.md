@@ -46,6 +46,10 @@ let webapiurl = "http://39.105.206.6:8080/api/"
 - 4.systemctl restart education.service (远程执行)
 - ssh root@39.105.206.6 (Mac Login via SSH)
 
+NetCore 错误及其处理方法:
+Unable to configure HTTPS endpoint. No server certificate was specified, and the default developer certificate could not be found.
+http://www.waynethompson.com.au/blog/dotnet-dev-certs-https/
+
 团队主要成员
 
 - 胡八一：主程序
