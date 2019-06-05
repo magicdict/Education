@@ -348,7 +348,7 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.monthlyTotalOpt.xAxis.data = data.consumptionInfo.monthlyConsumption.map(x => x.name);
         this.monthlyTotalOpt.series[0].data = data.consumptionInfo.monthlyConsumption;
 
-        this.monthlyOpt.title.text = "整体月消费金额";
+        this.monthlyOpt.title.text = "住校别月消费金额";
         this.monthlyOpt.xAxis.data = data.consumptionInfo.monthlyConsumption.map(x => x.name);
         this.monthlyOpt.series[0].data = data.consumptionInfo.monthlyConsumptionLiveAtSchool;
         this.monthlyOpt.series[1].data = data.consumptionInfo.monthlyConsumptionNotLiveAtSchool;
@@ -359,7 +359,7 @@ export class ConsumptionOverviewComponent implements OnInit {
         this.weekdayTotalOpt.xAxis.data = data.consumptionInfo.weekDayConsumption.map(x => x.name);
         this.weekdayTotalOpt.series[0].data = data.consumptionInfo.weekDayConsumption;
 
-        this.weekdayOpt.title.text = "整体周别消费金额";
+        this.weekdayOpt.title.text = "住校别周别消费金额";
         this.weekdayOpt.xAxis.data = data.consumptionInfo.weekDayConsumption.map(x => x.name);
         this.weekdayOpt.series[0].data = data.consumptionInfo.weekDayConsumptionLiveAtSchool;
         this.weekdayOpt.series[1].data = data.consumptionInfo.weekDayConsumptionNotLiveAtSchool;

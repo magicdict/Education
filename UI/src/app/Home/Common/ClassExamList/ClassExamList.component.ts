@@ -17,7 +17,7 @@ export class ClassExamListComponent implements OnChanges {
 
     @Input() FunRowSelect: (event: { data: IClassExam; }) => void;
 
-    @ViewChild("dt", { static: false }) dt: Table;
+    @ViewChild("dt", { static: true }) dt: Table;
 
     @ViewChild("subnamelist", { static: false }) subnamelist: Dropdown;
 

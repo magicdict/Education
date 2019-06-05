@@ -10,7 +10,6 @@
                             </div>
                         </div>
                     </div>
-                    <b>符合条件学生人数:{{FilterResult.length}}</b>
                     <p-table #dt [columns]="cols" [value]="FilterResult" [paginator]="true" [rows]="15"
                         selectionMode="multiple" [style]="{'width':'100%'}" [exportFilename]="'学生列表'">
                         <ng-template pTemplate="header">
@@ -64,9 +63,10 @@
                             </tr>
                         </ng-template>
                     </p-table>
+                    <b>{{Description1}}</b>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-6" *ngIf="FilterResult_2.length !==0">
                 <div style="width: 100%;height: 300px;background: white;">
                     <div class="container">
                         <div class="row">
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <b>符合条件学生人数:{{FilterResult_2.length}}</b>
+
                     <p-table #dt2 [columns]="cols" [value]="FilterResult_2" [paginator]="true" [rows]="15"
                         selectionMode="multiple" [style]="{'width':'100%'}" [exportFilename]="'学生列表'">
                         <ng-template pTemplate="header">
@@ -129,6 +129,7 @@
                             </tr>
                         </ng-template>
                     </p-table>
+                    <b>{{Description2}}</b>
                 </div>
             </div>
         </div>
@@ -139,7 +140,6 @@
     <button class="btn btn-lg btn-info" (click)="GoToVisualFactory()"
         style="float: right;margin-top: 20px;margin-right: 20px;">
         <i class="fas fa-arrow-right"></i>&nbsp;可视化</button>
-    <button class="btn btn-lg btn-info" (click)="GoToFilter()"
-        style="float: right;margin-top: 20px;margin-left: 20px;">
+    <button class="btn btn-lg btn-info" (click)="GoToFilter()" style="float: right;margin-top: 20px;margin-left: 20px;">
         <i class="fas fa-arrow-left"></i>&nbsp;比较器设定</button>
 </div>

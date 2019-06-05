@@ -245,6 +245,38 @@ export class CourseOverViewComponent implements OnInit {
         this.mFeMaleCourseSelectCntOption.title.text = "女生柱状图";
 
 
+        let MaleData = [];
+        let FemaleDate = [];
+        data.courseInfo[0].selectionCourseCnt.forEach(stardard => {
+
+          data.courseInfo[1].selectionCourseCnt.forEach(
+            male => {
+              if (male.name == stardard.name) {
+                MaleData.push(male.value);
+              }
+            }
+          );
+
+          data.courseInfo[2].selectionCourseCnt.forEach(
+            female => {
+              if (female.name == stardard.name) {
+                FemaleDate.push(female.value);
+              }
+            }
+          );
+        });
+
+
+
+        this.mCourseSelectRadarGraphOption.radar.indicator =
+          data.courseInfo[0].selectionCourseCnt.map(x => { return { 'name': x.name, 'max': 160 } });
+        this.mCourseSelectRadarGraphOption.series[0].data[0].value = MaleData;
+        this.mCourseSelectRadarGraphOption.series[0].data[0].name = "男生";
+
+        this.mCourseSelectRadarGraphOption.series[0].data[1].value = FemaleDate;
+        this.mCourseSelectRadarGraphOption.series[0].data[1].name = "女生";
+        this.mCourseSelectRadarGraphOption.legend.data = ["男生", "女生"];
+
         this.mCourseSelectCntOption.xAxis.data = data.courseInfo[0].selectionCourseCnt.map(x => x.name);
         this.mCourseSelectCntOption.toolbox.feature.magicType.type = ['line', 'bar', 'stack', 'tiled'];
         this.mCourseSelectCntOption.series[0] = {
@@ -257,10 +289,9 @@ export class CourseOverViewComponent implements OnInit {
           markLine: null,
           stack: '选课人数',
           name: "男生",
-          data: data.courseInfo[1].selectionCourseCnt.map(x => x.value),
+          data: MaleData,
           type: 'bar'
         };
-
         this.mCourseSelectCntOption.series[1] = {
           label: {
             normal: {
@@ -271,18 +302,10 @@ export class CourseOverViewComponent implements OnInit {
           markLine: null,
           stack: '选课人数',
           name: "女生",
-          data: data.courseInfo[2].selectionCourseCnt.map(x => x.value),
+          data: FemaleDate,
           type: 'bar'
         }
         this.mCourseSelectCntOption["legend"] = { show: true, data: ["男生", "女生"] };
-
-        this.mCourseSelectRadarGraphOption.radar.indicator =
-          data.courseInfo[0].selectionCourseCnt.map(x => { return { 'name': x.name, 'max': 160 } });
-        this.mCourseSelectRadarGraphOption.series[0].data[0].value = data.courseInfo[1].selectionCourseCnt.map(x => x.value);
-        this.mCourseSelectRadarGraphOption.series[0].data[0].name = "男生";
-        this.mCourseSelectRadarGraphOption.series[0].data[1].value = data.courseInfo[2].selectionCourseCnt.map(x => x.value);
-        this.mCourseSelectRadarGraphOption.series[0].data[1].name = "女生";
-        this.mCourseSelectRadarGraphOption.legend.data = ["男生", "女生"];
 
 
         this.mMaleCourseSelectCntOption.xAxis.data = data.courseInfo[1].selectionCourseCnt.map(x => x.name);

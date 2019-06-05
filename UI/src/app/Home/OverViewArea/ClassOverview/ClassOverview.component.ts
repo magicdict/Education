@@ -445,9 +445,6 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
             }
           }
         }
-
-        this.index = 0;
-
       });
   }
 
@@ -594,7 +591,6 @@ export class ClassOverviewComponent implements OnInit, AfterViewInit {
 
   //Panel里面带滚动条表格的修复
   IsFirst = true;
-  index = 0;
   handleChange(e: { index: any; }) {
     var index = e.index;
     if (index !== 3) return;

@@ -2,7 +2,7 @@
 <div class="alert alert-info" style="font-size: 18px;font-weight: 500;">
   {{this.ClassName}} 人数：{{this.StudentCnt}}
 </div>
-<p-tabView *ngIf="this.StudentsInfo !==undefined" (onChange)="handleChange($event)" [activeIndex]="index">
+<p-tabView *ngIf="this.StudentsInfo !==undefined" (onChange)="handleChange($event)" >
 
   <p-tabPanel header="概要" style="width:1140px;">
     <div class="container">

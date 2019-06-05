@@ -29,6 +29,8 @@ export class DataViewComponent implements OnInit {
     parmSecond: any = {};
     @Output() GotoNextPage = new EventEmitter();
     @Output() GotoPreviousPage = new EventEmitter();
+    Description1 = "";
+    Description2 = "";
 
 
     ngOnInit(): void {
@@ -38,13 +40,47 @@ export class DataViewComponent implements OnInit {
         this.common.httpRequestPost<IStudent[]>("Student/QueryByFilter", this.parmFirst).then(
             r => {
                 this.FilterResult = r;
+                this.Description1 = this.GetDescription(this.service.parmFirst, r.length);
             }
         )
         this.common.httpRequestPost<IStudent[]>("Student/QueryByFilter", this.parmSecond).then(
             r => {
                 this.FilterResult_2 = r;
+                if (r.length !== 0){
+                    this.Description2 = this.GetDescription(this.service.parmSecond, r.length);
+                }
             }
         )
+    }
+    GetDescription(parm: any, cnt: number): string {
+        let description = "";
+        if (parm.Sex !== "") {
+            description += "性别：" + parm.Sex + " ";
+        } else {
+            description += "性别：不限 ";
+        }
+        if (parm.IsNativeZhejiang !== "") {
+            if (parm.IsNativeZhejiang === "是") {
+                description += "出生地：浙江省 ";
+            } else {
+                description += "出生地：非浙江省 ";
+            }
+        } else {
+            description += "出生地：不限 ";
+        }
+        if (parm.IsLiveAtSchool !== "") {
+            description += "住校：" + parm.IsLiveAtSchool + " ";
+        } else {
+            description += "住校：不限 ";
+        }
+        if (parm.BornDate !== "") {
+            description += "出生年：" + parm.BornDate + " ";
+        } else {
+            description += "出生年：不限 ";
+        }
+        description += "班级数：" + parm.ClassIds.length;
+        description += " 人数：" + cnt;
+        return description;
     }
     GoToFilter() {
         this.GotoPreviousPage.emit();
