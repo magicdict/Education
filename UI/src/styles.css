@@ -91,6 +91,13 @@ body .ui-toast .ui-toast-message.ui-toast-message-success {
   border: 0 none;
   color: #212121;
 }
+
 body .ui-toast .ui-toast-message.ui-toast-message-success .ui-toast-close-icon {
   color: #212121;
+}
+
+/* 主题切换之后的调整 omega->rhea */
+
+body .ui-listbox {
+  min-width: 10em;
 }

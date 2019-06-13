@@ -2,13 +2,17 @@
 
 "数智教育"数据可视化创新大赛
 
+注意：由于PrimeNg 8.0 中omega主题变为收费，源代码中改为rhea主题。
+<http://39.105.206.6> 展示的任然是omega主题，PrimeNg版本也为7.1.3
+机器学习，使用手册，答辩PPT等由于体积较大，并未上传到Github，如果需要请提Issue。
+
 运行环境
 
 - Linux CentOS 7.4
-- DotNet Core v3.0.0-preview5
+- DotNet Core v3.0.0-preview6
 - Angular 8.0.0
 - echarts 4.2.1
-- primaryNG 7.1.3
+- primaryNG 8.0.0（源代码，展示网站为7.1.3）
 - 其他第三方组件
 
 目录构成
@@ -48,7 +52,7 @@ let webapiurl = "http://39.105.206.6:8080/api/"
 
 NetCore 错误及其处理方法:
 Unable to configure HTTPS endpoint. No server certificate was specified, and the default developer certificate could not be found.
-http://www.waynethompson.com.au/blog/dotnet-dev-certs-https/
+<http://www.waynethompson.com.au/blog/dotnet-dev-certs-https/>
 
 团队主要成员
 
