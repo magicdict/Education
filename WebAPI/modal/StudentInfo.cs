@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using static Utility;
 
 public class StudentInfo
 {
